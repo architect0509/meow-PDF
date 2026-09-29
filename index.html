@@ -3,45 +3,45 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>PDF 편집기</title>
+<title>Meow-PDF</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;700&family=Nanum+Gothic:wght@400;700&family=Nanum+Myeongjo:wght@400;700&family=Nanum+Pen+Script&family=Nanum+Gothic+Coding:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root, :root[data-theme="dark"]{
   color-scheme: dark;
   --font: "Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo","Segoe UI",system-ui,sans-serif;
-  --view:#282a2d;
-  --bar:#35363a;
-  --bar2:#2d2e31;
-  --side:#2d2e31;
-  --text:#e8eaed;
-  --muted:#9aa0a6;
-  --border:#494c50;
-  --hover:rgba(255,255,255,.09);
-  --accent:#8ab4f8;
-  --accent-bg:rgba(138,180,248,.2);
-  --on-accent:#0b2a57;
+  --view:#2a2722;
+  --bar:#37332c;
+  --bar2:#2f2c26;
+  --side:#2f2c26;
+  --text:#f1ebde;
+  --muted:#aaa08c;
+  --border:#4f493e;
+  --hover:rgba(255,236,200,.09);
+  --accent:#ffc247;
+  --accent-bg:rgba(255,194,71,.19);
+  --on-accent:#2d1f00;
   --danger:#f28b82;
-  --dialog:#3c3d41;
+  --dialog:#403b33;
   --shadow:0 2px 10px rgba(0,0,0,.45);
 }
 :root[data-theme="light"]{
   color-scheme: light;
-  --view:#e4e7eb;
-  --bar:#ffffff;
-  --bar2:#f3f4f6;
-  --side:#f3f4f6;
-  --text:#202124;
-  --muted:#5f6368;
-  --border:#d5d8dc;
-  --hover:rgba(0,0,0,.07);
-  --accent:#1a66d6;
-  --accent-bg:rgba(26,102,214,.13);
+  --view:#ece4d1;
+  --bar:#fffdf7;
+  --bar2:#f7f1e2;
+  --side:#f7f1e2;
+  --text:#2b2417;
+  --muted:#6f6553;
+  --border:#ddd2b8;
+  --hover:rgba(80,55,0,.08);
+  --accent:#b36b00;
+  --accent-bg:rgba(200,125,0,.15);
   --on-accent:#ffffff;
   --danger:#d93025;
-  --dialog:#ffffff;
-  --shadow:0 2px 10px rgba(0,0,0,.18);
+  --dialog:#fffdf7;
+  --shadow:0 2px 10px rgba(60,40,0,.2);
 }
 :root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
@@ -138,15 +138,16 @@ svg{width:20px;height:20px;flex:none;display:block}
 .page{position:relative;flex:none;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.45),0 6px 20px rgba(0,0,0,.3)}
 .page canvas{position:absolute;inset:0;width:100%;height:100%}
 .page .over{touch-action:pan-y}
-.tool-pen .page .over,.tool-highlight .page .over,.tool-shape .page .over,.tool-eraser .page .over{touch-action:none}
-.tool-pen .over,.tool-highlight .over,.tool-shape .over{cursor:crosshair}
+.tool-pen .page .over,.tool-line .page .over,.tool-highlight .page .over,.tool-shape .page .over,.tool-eraser .page .over{touch-action:none}
+.tool-shape .over{cursor:crosshair}
+.tool-pen .over,.tool-line .over,.tool-highlight .over{cursor:var(--brush-cursor,crosshair)}
 .tool-text .over{cursor:text}
 .tool-eraser .over{cursor:var(--eraser-cursor,crosshair)}
 .text-editor{position:absolute;margin:0;padding:0;border:0;outline:1.5px dashed var(--accent);outline-offset:2px;background:rgba(255,255,255,.55);resize:none;overflow:hidden;white-space:pre;font-family:var(--font);line-height:1.25;z-index:5;min-width:20px}
 
 .textLayer{position:absolute;inset:0;overflow:hidden;line-height:1;transform-origin:0 0;pointer-events:none;-webkit-user-select:none;user-select:none}
 .textLayer span,.textLayer br{color:transparent;position:absolute;white-space:pre;transform-origin:0 0}
-.textLayer ::selection{background:rgba(58,124,255,.38)}
+.textLayer ::selection{background:rgba(255,178,30,.42)}
 .tool-textselect .textLayer{pointer-events:auto;-webkit-user-select:text;user-select:text}
 .tool-textselect .textLayer span{cursor:text}
 .tool-textselect .page .over{pointer-events:none}
@@ -174,6 +175,16 @@ svg{width:20px;height:20px;flex:none;display:block}
 .layer.drop-before::before{top:-3px}
 .layer.drop-after::after{bottom:-3px}
 .layer-empty{padding:18px 14px;color:var(--muted);font-size:12.5px;line-height:1.7}
+.tool{position:relative}
+.tool kbd{position:absolute;top:3px;right:5px;font:inherit;font-size:9.5px;line-height:1;color:var(--muted);text-transform:uppercase;pointer-events:none}
+.tool.active kbd{color:var(--accent)}
+.tool.primary kbd{color:inherit}
+.brand{display:grid;place-items:center;width:34px;height:34px;color:var(--accent);margin-right:14px;flex:none}
+.brand svg{width:27px;height:27px}
+.optbar select{height:30px;max-width:170px;padding:0 8px;border-radius:8px;border:1px solid var(--border);background:var(--bar);color:var(--text);font:inherit}
+.fmt{width:30px;height:30px;border-radius:8px;border:1px solid var(--border);color:var(--text);font-size:14px;line-height:1}
+.fmt:hover{background:var(--hover)}
+.fmt.on{background:var(--accent-bg);color:var(--accent);border-color:var(--accent)}
 .zoombar{position:absolute;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:2px;background:var(--bar);border:1px solid var(--border);border-radius:999px;padding:4px;box-shadow:var(--shadow);z-index:20}
 .zoombar .zl{min-width:52px;text-align:center;font-variant-numeric:tabular-nums;height:30px;border-radius:999px;font-size:13px}
 .zoombar .zl:hover{background:var(--hover)}
@@ -189,16 +200,6 @@ svg{width:20px;height:20px;flex:none;display:block}
 .btn.primary:hover{filter:brightness(1.08);background:var(--accent)}
 .btn svg{width:18px;height:18px}
 .stage.dragover::after{content:'PDF 또는 이미지를 여기에 놓으세요';position:absolute;inset:14px;display:grid;place-items:center;border:2px dashed var(--accent);border-radius:16px;background:var(--accent-bg);color:var(--accent);font-size:18px;font-weight:500;z-index:40;pointer-events:none}
-
-/* ── 자 ── */
-#ruler{position:absolute;left:0;top:0;transform-origin:0 0;z-index:12;background:rgba(246,214,96,.86);border:1px solid rgba(90,70,0,.55);border-radius:4px;box-shadow:0 3px 14px rgba(0,0,0,.4);cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
-#ruler:active{cursor:grabbing}
-#ruler canvas{position:absolute;left:0;top:0;pointer-events:none}
-.ruler-close{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:24px;height:24px;border-radius:50%;background:rgba(60,45,0,.75);color:#fff;display:grid;place-items:center}
-.ruler-close svg{width:14px;height:14px}
-.ruler-handle{position:absolute;right:8px;top:50%;width:26px;height:26px;margin-top:-13px;border-radius:50%;background:rgba(60,45,0,.8);border:2px solid #fff3b8;cursor:alias;touch-action:none;display:grid;place-items:center;color:#fff3b8}
-.ruler-handle svg{width:15px;height:15px}
-.ruler-readout{position:absolute;left:50%;top:-30px;transform:translateX(-50%);padding:2px 8px;border-radius:6px;background:rgba(0,0,0,.75);color:#fff;font-size:12px;pointer-events:none}
 
 /* ── 다이얼로그 / 토스트 / 로딩 ── */
 .modal{position:fixed;inset:0;z-index:90;display:grid;place-items:center;background:rgba(0,0,0,.5);padding:16px}
@@ -221,7 +222,7 @@ svg{width:20px;height:20px;flex:none;display:block}
 @media (prefers-reduced-motion:reduce){.spinner{animation-duration:2.4s}#toast{transition:none}}
 
 @media (max-width:760px){
-  .tool span{display:none}
+  .tool span,.tool kbd{display:none}
   .tool{min-width:44px;height:44px}
   .doc-name{max-width:28vw}
   #sidebar{position:absolute;left:0;top:0;bottom:0;box-shadow:var(--shadow)}
@@ -236,8 +237,9 @@ svg{width:20px;height:20px;flex:none;display:block}
 <div id="app" class="no-doc sidebar-off layers-off">
 
   <header class="titlebar">
+    <span class="brand" title="Meow-PDF" aria-label="Meow-PDF"><i data-i="cat"></i></span>
     <button class="icon-btn" id="sidebarBtn" title="페이지 패널" aria-label="페이지 패널 열기/닫기"><i data-i="panel"></i></button>
-    <div class="doc-name" id="docName">PDF 편집기</div>
+    <div class="doc-name" id="docName">Meow-PDF</div>
     <div class="pager needs-doc"><input id="pageInput" type="number" min="1" value="1" aria-label="현재 페이지"><span>/</span><span id="pageTotal">0</span></div>
     <div class="spacer"></div>
     <button class="text-btn" id="newBtn" title="빈 문서 만들기"><i data-i="filePlus"></i><span>새 문서</span></button>
@@ -247,21 +249,22 @@ svg{width:20px;height:20px;flex:none;display:block}
   </header>
 
   <div class="toolbar needs-doc" role="toolbar" aria-label="편집 도구">
-    <button class="tool" data-tool="textselect" title="PDF 글자 선택 · 복사"><i data-i="textcursor"></i><span>글자 선택</span></button>
-    <button class="tool" data-tool="select" title="개체 선택 · 이동 · 크기 조절"><i data-i="cursor"></i><span>개체</span></button>
+    <button class="tool" data-tool="textselect" title="PDF 글자 선택 · 복사 (1)"><i data-i="textcursor"></i><span>글자 선택</span><kbd>1</kbd></button>
+    <button class="tool" data-tool="select" title="개체 선택 · 이동 · 크기 조절 (2)"><i data-i="cursor"></i><span>개체</span><kbd>2</kbd></button>
     <div class="sep"></div>
-    <button class="tool" data-tool="highlight" title="강조표시"><i data-i="highlighter"></i><span>강조표시</span></button>
-    <button class="tool" data-tool="pen" title="그리기"><i data-i="pen"></i><span>그리기</span></button>
-    <button class="tool" id="rulerBtn" title="자 (모서리를 따라 직선 그리기)"><i data-i="ruler"></i><span>자</span></button>
-    <button class="tool" data-tool="shape" title="도형 삽입"><i data-i="shapes"></i><span>도형</span></button>
-    <button class="tool" data-tool="eraser" title="지우개"><i data-i="eraser"></i><span>지우개</span></button>
-    <button class="tool" data-tool="text" title="텍스트 삽입"><i data-i="type"></i><span>텍스트</span></button>
+    <button class="tool" data-tool="highlight" title="강조표시 (Q)"><i data-i="highlighter"></i><span>강조표시</span><kbd>Q</kbd></button>
+    <button class="tool" data-tool="pen" title="그리기 (W)"><i data-i="pen"></i><span>그리기</span><kbd>W</kbd></button>
+    <button class="tool" data-tool="line" title="직선 그리기 (E)"><i data-i="line"></i><span>직선</span><kbd>E</kbd></button>
     <div class="sep"></div>
-    <button class="tool" id="pasteBtn" title="클립보드 붙여넣기 (Ctrl+V)"><i data-i="clip"></i><span>붙여넣기</span></button>
-    <button class="tool" id="imageBtn" title="이미지 삽입"><i data-i="image"></i><span>이미지</span></button>
+    <button class="tool" data-tool="shape" title="도형 삽입 (A)"><i data-i="shapes"></i><span>도형</span><kbd>A</kbd></button>
+    <button class="tool" data-tool="eraser" title="지우개 (S)"><i data-i="eraser"></i><span>지우개</span><kbd>S</kbd></button>
+    <button class="tool" data-tool="text" title="텍스트 삽입 (D)"><i data-i="type"></i><span>텍스트</span><kbd>D</kbd></button>
+    <div class="sep"></div>
+    <button class="tool" id="pasteBtn" title="클립보드 붙여넣기 (Z / Ctrl+V)"><i data-i="clip"></i><span>붙여넣기</span><kbd>Z</kbd></button>
+    <button class="tool" id="imageBtn" title="이미지 삽입 (X)"><i data-i="image"></i><span>이미지</span><kbd>X</kbd></button>
     <div class="sep"></div>
     <button class="tool" id="undoBtn" title="실행 취소 (Ctrl+Z)"><i data-i="undo"></i><span>실행 취소</span></button>
-    <button class="tool" id="redoBtn" title="다시 실행 (Ctrl+Shift+Z)"><i data-i="redo"></i><span>다시 실행</span></button>
+    <button class="tool" id="redoBtn" title="다시 실행 (Ctrl+Y)"><i data-i="redo"></i><span>다시 실행</span></button>
     <div class="spacer" style="min-width:12px"></div>
     <button class="tool primary" id="saveBtn" title="저장 (Ctrl+S)"><i data-i="save"></i><span>저장</span></button>
     <button class="tool" id="saveAsBtn" title="다른 이름으로 저장 (Ctrl+Shift+S)"><i data-i="download"></i><span>다른 이름으로 저장</span></button>
@@ -279,22 +282,17 @@ svg{width:20px;height:20px;flex:none;display:block}
     <section class="stage" id="stage">
       <div class="viewer" id="viewer"><div id="pages"></div></div>
 
-      <div id="ruler" hidden>
-        <canvas></canvas>
-        <button class="ruler-close" title="자 닫기" aria-label="자 닫기"><i data-i="x"></i></button>
-        <div class="ruler-handle" title="드래그해서 회전 (Shift: 15° 단위)"><i data-i="rotate"></i></div>
-        <div class="ruler-readout" hidden></div>
-      </div>
-
       <div class="zoombar needs-doc">
         <button class="icon-btn" id="spreadBtn" title="두 쪽씩 보기" aria-label="두 쪽씩 보기" aria-pressed="false"><i data-i="spread"></i></button><span class="zsep"></span>
         <button class="icon-btn" id="zoomOut" title="축소" aria-label="축소"><i data-i="minus"></i></button>
         <button class="zl" id="zoomLabel" title="너비에 맞춤">100%</button>
-        <button class="icon-btn" id="zoomIn" title="확대" aria-label="확대"><i data-i="plus"></i></button>
+        <button class="icon-btn" id="zoomIn" title="확대" aria-label="확대"><i data-i="plus"></i></button><span class="zsep"></span>
+        <button class="icon-btn" id="fitWidthBtn" title="너비에 맞춤" aria-label="너비에 맞춤"><i data-i="fitw"></i></button>
+        <button class="icon-btn" id="fitPageBtn" title="페이지에 맞춤 (화면 맞춤)" aria-label="페이지에 맞춤"><i data-i="fitp"></i></button>
       </div>
 
       <div id="empty">
-        <h1>PDF 편집기</h1>
+        <h1>Meow-PDF</h1>
         <p>PDF 파일을 열거나 여기로 끌어다 놓으면 바로 편집할 수 있어요.</p>
         <div class="row">
           <button class="btn primary" id="emptyOpen"><i data-i="folder"></i>PDF 열기</button>
@@ -332,6 +330,17 @@ const RULER_T = 58;
 const FONT = '"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo","Segoe UI",sans-serif';
 const PALETTE = ['#111111','#e53935','#fb8c00','#fdd835','#43a047','#1e88e5','#8e24aa','#ffffff'];
 const HL_PALETTE = ['#ffeb3b','#a5ff5c','#ff80ab','#64d8ff','#ffb74d','#c39bff'];
+const PASTEL = ['#ffb3c7','#ffd0a6','#fff2a8','#bff0c9','#b5e3ff','#d3c2ff','#f5c6ea','#c9f2e9'];
+const FONTS = {
+  sans:      { name: '고딕 (Noto Sans)',   css: '"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-serif' },
+  serif:     { name: '명조 (Noto Serif)',  css: '"Noto Serif KR","Batang","AppleMyungjo",serif' },
+  ngothic:   { name: '나눔고딕',           css: '"Nanum Gothic","Malgun Gothic",sans-serif' },
+  nmyeongjo: { name: '나눔명조',           css: '"Nanum Myeongjo","Batang",serif' },
+  pen:       { name: '나눔손글씨 펜',      css: '"Nanum Pen Script","Comic Sans MS",cursive' },
+  mono:      { name: '나눔고딕코딩',       css: '"Nanum Gothic Coding","Consolas","Courier New",monospace' }
+};
+const fontCss = o => (FONTS[o.font] || FONTS.sans).css;
+const fontStr = (o, size) => `${o.italic ? 'italic ' : ''}${o.bold ? '700 ' : '400 '}${size == null ? o.size : size}px ${fontCss(o)}`;
 
 const $ = (s, r = document) => r.querySelector(s);
 let idn = 0;
@@ -372,7 +381,10 @@ const ICONS = {
   eye:'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
   eyeOff:'<path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-6.5 0-10-7-10-7a18.5 18.5 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.1 9.1 0 0 1 12 5c6.5 0 10 7 10 7a18.5 18.5 0 0 1-2.16 3.19"/><path d="M14.12 14.12a3 3 0 1 1-4.24-4.24"/><path d="m1 1 22 22"/>',
   textcursor:'<path d="M17 22h-1a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4h1"/><path d="M7 22h1a4 4 0 0 0 4-4v-1"/><path d="M7 2h1a4 4 0 0 1 4 4v1"/>',
-  spread:'<rect x="3" y="4" width="8" height="16" rx="1"/><rect x="13" y="4" width="8" height="16" rx="1"/>'
+  spread:'<rect x="3" y="4" width="8" height="16" rx="1"/><rect x="13" y="4" width="8" height="16" rx="1"/>',
+  cat:'<path d="M12 5c.67 0 1.35.09 2 .26 1.78-2 5.03-2.84 6.42-2.26 1.4.58-.42 7-.42 7 .57 1.07 1 2.24 1 3.44C21 17.9 16.97 21 12 21s-9-3-9-7.56c0-1.25.5-2.4 1-3.44 0 0-1.89-6.42-.5-7 1.39-.58 4.72.23 6.5 2.23A9.04 9.04 0 0 1 12 5Z"/><path d="M8 14v.5"/><path d="M16 14v.5"/><path d="M11.25 16.25h1.5L12 17l-.75-.75Z"/>',
+  fitw:'<path d="M3 12h18"/><path d="m7 8-4 4 4 4"/><path d="m17 8 4 4-4 4"/>',
+  fitp:'<path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/>'
 };
 const svg = n => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n] || ''}</svg>`;
 document.querySelectorAll('[data-i]').forEach(el => { el.outerHTML = svg(el.dataset.i); });
@@ -394,14 +406,14 @@ const state = {
   editingId: null,
   fileName: '새 문서.pdf',
   fileHandle: null,
-  dirty: false,
-  ruler: false
+  dirty: false
 };
 const settings = {
   pen:       { color: '#e53935', width: 3, alpha: 100 },
-  highlight: { color: '#ffeb3b', width: 16 },
+  line:      { color: '#111111', width: 3, alpha: 100, arrow: false },
+  highlight: { color: '#ffeb3b', width: 16, style: 'brush' },
   shape:     { kind: 'rect', color: '#1e88e5', width: 3 },
-  text:      { color: '#111111', size: 16 },
+  text:      { color: '#111111', size: 16, font: 'sans', bold: false, italic: false },
   eraser:    { mode: 'stroke', size: 14 }
 };
 const views = new Map();        // pageId -> view
@@ -480,15 +492,15 @@ function setDirty(d) {
 function updateTitle() {
   const n = $('#docName');
   n.innerHTML = '';
-  n.append(document.createTextNode(state.pages.length ? state.fileName : 'PDF 편집기'));
+  n.append(document.createTextNode(state.pages.length ? state.fileName : 'Meow-PDF'));
   if (state.dirty) { const s = document.createElement('span'); s.className = 'dirty-dot'; s.title = '저장하지 않은 변경 사항'; n.appendChild(s); }
-  document.title = (state.dirty ? '• ' : '') + (state.pages.length ? state.fileName + ' – ' : '') + 'PDF 편집기';
+  document.title = (state.dirty ? '• ' : '') + (state.pages.length ? state.fileName + ' – ' : '') + 'Meow-PDF';
 }
 
 /* ════════════ 도형 · 좌표 헬퍼 ════════════ */
 const mctx = document.createElement('canvas').getContext('2d');
 function textMetrics(o) {
-  mctx.font = `${o.size}px ${FONT}`;
+  mctx.font = fontStr(o);
   const lines = String(o.text).split('\n');
   let w = 0; for (const l of lines) w = Math.max(w, mctx.measureText(l).width);
   return { w: Math.max(w, o.size * 0.5), h: lines.length * o.size * LH };
@@ -563,11 +575,12 @@ function resizeFromOrig(o, orig, dx, dy) {
 const scratch = document.createElement('canvas');
 const fontTried = new Set();
 function ensureFont(o) {
-  if (fontTried.has(o.text)) return;
+  const key = fontStr(o, 16) + '|' + o.text;
+  if (fontTried.has(key)) return;
   try {
-    const f = `${Math.max(8, o.size)}px ${FONT}`;
+    const f = fontStr(o, Math.max(8, o.size));
     if (!document.fonts.check(f, o.text)) {
-      fontTried.add(o.text);
+      fontTried.add(key);
       document.fonts.load(f, o.text).then(() => redrawAll(), () => {});
     }
   } catch (e) { /* ignore */ }
@@ -599,10 +612,10 @@ function drawObj(ctx, o, s) {
   switch (o.type) {
     case 'pen': case 'line': drawStroke(ctx, o, s); break;
     case 'arrow': {
-      drawStroke(ctx, o, s);
       const a = o.pts[0], b = o.pts[1], ang = Math.atan2(b[1] - a[1], b[0] - a[0]), hl = Math.max(10, o.width * 4);
       ctx.save(); ctx.strokeStyle = o.color; ctx.lineWidth = o.width * s; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-      ctx.beginPath();
+      if (o.alpha != null && o.alpha < 1) ctx.globalAlpha = o.alpha;
+      ctx.beginPath(); ctx.moveTo(a[0] * s, a[1] * s); ctx.lineTo(b[0] * s, b[1] * s);
       for (const sg of [-1, 1]) {
         ctx.moveTo(b[0] * s, b[1] * s);
         ctx.lineTo((b[0] - hl * Math.cos(ang + sg * 0.5)) * s, (b[1] - hl * Math.sin(ang + sg * 0.5)) * s);
@@ -618,7 +631,7 @@ function drawObj(ctx, o, s) {
       ctx.stroke(); ctx.restore(); break;
     case 'text': {
       ensureFont(o);
-      ctx.save(); ctx.fillStyle = o.color; ctx.font = `${o.size * s}px ${FONT}`; ctx.textBaseline = 'middle';
+      ctx.save(); ctx.fillStyle = o.color; ctx.font = fontStr(o, o.size * s); ctx.textBaseline = 'middle';
       String(o.text).split('\n').forEach((ln, i) => ctx.fillText(ln, o.x * s, (o.y + (i + 0.5) * o.size * LH) * s));
       ctx.restore(); break;
     }
@@ -857,7 +870,7 @@ function scheduleThumb(id) {
 function drawSelection(ctx, o, s, q) {
   const b = bbox(o);
   ctx.save();
-  ctx.strokeStyle = '#4c8dff'; ctx.lineWidth = 1.5 * q; ctx.setLineDash([6 * q, 4 * q]);
+  ctx.strokeStyle = '#ffb300'; ctx.lineWidth = 1.5 * q; ctx.setLineDash([6 * q, 4 * q]);
   ctx.strokeRect(b.x * s - 3 * q, b.y * s - 3 * q, b.w * s + 6 * q, b.h * s + 6 * q);
   ctx.setLineDash([]);
   const hx = (b.x + b.w) * s + 3 * q, hy = (b.y + b.h) * s + 3 * q, hs = 5 * q;
@@ -932,8 +945,7 @@ function setZoom(z) {
   state.pages.forEach(sizeView);
   viewer.scrollTop = ratio * viewer.scrollHeight - viewer.clientHeight / 2;
   $('#zoomLabel').textContent = Math.round(z * 100) + '%';
-  updateEraserCursor();
-  layoutRuler();
+  updateEraserCursor(); updateBrushCursor();
 }
 function fitWidth(maxZoom = 3) {
   if (!state.pages.length) return;
@@ -959,14 +971,10 @@ $('#pageInput').addEventListener('keydown', e => {
 $('#pageInput').addEventListener('blur', updatePageInfo);
 
 /* ════════════ 포인터 조작 ════════════ */
-function pagePoint(e, over, edge) {
-  let cx = e.clientX, cy = e.clientY;
-  if (edge) [cx, cy] = snapToRuler(cx, cy, edge);
+function pagePoint(e, over) {
   const r = over.getBoundingClientRect();
-  return [(cx - r.left) / state.scale, (cy - r.top) / state.scale];
+  return [(e.clientX - r.left) / state.scale, (e.clientY - r.top) / state.scale];
 }
-const usesRuler = () => state.ruler && (state.tool === 'pen' || state.tool === 'highlight' ||
-  (state.tool === 'shape' && (settings.shape.kind === 'line' || settings.shape.kind === 'arrow')));
 
 function onDown(e, id) {
   if (e.pointerType === 'mouse' && e.button !== 0) return;
@@ -1005,21 +1013,27 @@ function onDown(e, id) {
     v.over.setPointerCapture(e.pointerId);
     const ept = pagePoint(e, v.over); eraseWith(id, null, ept); drag.last = ept; return;
   }
-  if (t === 'pen' || t === 'highlight' || t === 'shape') {
+  if (t === 'pen' || t === 'highlight' || t === 'line' || t === 'shape') {
     e.preventDefault();
-    const edge = usesRuler() ? snapEdgeAt(e.clientX, e.clientY) : 0;
-    const pt = pagePoint(e, v.over, edge);
-    let draft;
-    if (t === 'pen' || t === 'highlight') {
-      const st = settings[t];
-      draft = { id: uid('o'), type: t, color: st.color, width: st.width, pts: [pt] };
-      if (t === 'pen' && st.alpha < 100) draft.alpha = st.alpha / 100;
+    const pt = pagePoint(e, v.over);
+    let draft, straight = false;
+    if (t === 'pen') {
+      const st = settings.pen;
+      draft = { id: uid('o'), type: 'pen', color: st.color, width: st.width, pts: [pt] };
+      if (st.alpha < 100) draft.alpha = st.alpha / 100;
+    } else if (t === 'highlight') {
+      const st = settings.highlight;
+      straight = st.style === 'line';
+      draft = { id: uid('o'), type: 'highlight', color: st.color, width: st.width, pts: straight ? [pt, pt] : [pt] };
+    } else if (t === 'line') {
+      const st = settings.line; straight = true;
+      draft = { id: uid('o'), type: st.arrow ? 'arrow' : 'line', color: st.color, width: st.width, pts: [pt, pt] };
+      if (st.alpha < 100) draft.alpha = st.alpha / 100;
     } else {
       const st = settings.shape;
-      if (st.kind === 'line' || st.kind === 'arrow') draft = { id: uid('o'), type: st.kind, color: st.color, width: st.width, pts: [pt, pt] };
-      else draft = { id: uid('o'), type: st.kind, color: st.color, width: st.width, x: pt[0], y: pt[1], w: 0, h: 0 };
+      draft = { id: uid('o'), type: st.kind, color: st.color, width: st.width, x: pt[0], y: pt[1], w: 0, h: 0 };
     }
-    drag = { kind: 'draw', id, draft, start: pt, edge };
+    drag = { kind: 'draw', id, draft, start: pt, straight };
     v.over.setPointerCapture(e.pointerId);
     drawOverlay(id, draft);
   }
@@ -1103,18 +1117,18 @@ function onMove(e, id) {
     const evs = (e.getCoalescedEvents && e.getCoalescedEvents().length) ? e.getCoalescedEvents() : [e];
     const o = d.draft;
     for (const ev of evs) {
-      const pt = pagePoint(ev, v.over, d.edge);
-      if (o.type === 'pen' || o.type === 'highlight') {
-        const last = o.pts[o.pts.length - 1];
-        if (Math.hypot(pt[0] - last[0], pt[1] - last[1]) * state.scale >= 1.2) o.pts.push(pt);
-      } else if (o.type === 'line' || o.type === 'arrow') {
+      const pt = pagePoint(ev, v.over);
+      if (d.straight) {
         let q = pt;
-        if (ev.shiftKey && !d.edge) {
-          const dx = pt[0] - d.start[0], dy = pt[1] - d.start[1], len = Math.hypot(dx, dy);
+        const dx = pt[0] - d.start[0], dy = pt[1] - d.start[1], len = Math.hypot(dx, dy);
+        if (ev.shiftKey) {
           const a = Math.round(Math.atan2(dy, dx) / (Math.PI / 12)) * (Math.PI / 12);
           q = [d.start[0] + len * Math.cos(a), d.start[1] + len * Math.sin(a)];
-        }
+        } else if (o.type === 'highlight' && len > 0 && Math.abs(dy) < len * 0.05) q = [pt[0], d.start[1]];
         o.pts[1] = q;
+      } else if (o.type === 'pen' || o.type === 'highlight') {
+        const last = o.pts[o.pts.length - 1];
+        if (Math.hypot(pt[0] - last[0], pt[1] - last[1]) * state.scale >= 1.2) o.pts.push(pt);
       } else {
         let w = pt[0] - d.start[0], h = pt[1] - d.start[1];
         if (ev.shiftKey) { const m = Math.max(Math.abs(w), Math.abs(h)); w = Math.sign(w || 1) * m; h = Math.sign(h || 1) * m; }
@@ -1142,7 +1156,7 @@ function onUp(e, id) {
   if (d.kind === 'draw') {
     const o = d.draft;
     let ok = true;
-    if (o.type === 'highlight') ok = o.pts.length >= 2;
+    if (o.type === 'highlight') ok = o.pts.length >= 2 && (!d.straight || Math.hypot(o.pts[1][0] - o.pts[0][0], o.pts[1][1] - o.pts[0][1]) > 2);
     else if (o.type === 'pen') ok = true;
     else if (o.type === 'line' || o.type === 'arrow') ok = Math.hypot(o.pts[1][0] - o.pts[0][0], o.pts[1][1] - o.pts[0][1]) > 2;
     else ok = o.w > 2 || o.h > 2;
@@ -1211,18 +1225,18 @@ function deleteSelected() {
 function openTextEditor(id, x, y, obj) {
   finishEditor();
   const v = views.get(id), p = pageById(id); if (!v || !p) return;
-  const size = obj ? obj.size : settings.text.size, color = obj ? obj.color : settings.text.color;
+  const src = obj || settings.text;
   const ta = document.createElement('textarea');
   ta.className = 'text-editor'; ta.spellcheck = false; ta.rows = 1; ta.value = obj ? obj.text : '';
-  const s = state.scale;
-  ta.style.left = x * s + 'px'; ta.style.top = y * s + 'px';
-  ta.style.fontSize = size * s + 'px'; ta.style.color = color;
+  ta.style.left = x * state.scale + 'px'; ta.style.top = y * state.scale + 'px';
+  ta.style.color = src.color;
   ta.setAttribute('aria-label', '텍스트 입력');
   const fit = () => {
-    const sz = editor ? editor.size : size;
-    ta.style.fontSize = sz * state.scale + 'px';
-    const m = textMetrics({ text: ta.value || ' ', size: sz });
-    ta.style.width = Math.max(sz * state.scale * 3, (m.w + sz * 0.6) * state.scale) + 'px';
+    const e = editor; if (!e) return;
+    ta.style.fontFamily = fontCss(e); ta.style.fontWeight = e.bold ? '700' : '400'; ta.style.fontStyle = e.italic ? 'italic' : 'normal';
+    ta.style.fontSize = e.size * state.scale + 'px';
+    const m = textMetrics({ text: ta.value || ' ', size: e.size, font: e.font, bold: e.bold, italic: e.italic });
+    ta.style.width = Math.max(e.size * state.scale * 3, (m.w + e.size * 0.6) * state.scale) + 'px';
     ta.style.height = (m.h * state.scale + 2) + 'px';
   };
   ta.addEventListener('input', fit);
@@ -1230,9 +1244,12 @@ function openTextEditor(id, x, y, obj) {
     if (ev.key === 'Escape' || (ev.key === 'Enter' && (ev.ctrlKey || ev.metaKey))) { ev.preventDefault(); finishEditor(); }
     if (!(ev.ctrlKey || ev.metaKey)) ev.stopPropagation();
   });
-  ta.addEventListener('blur', () => { if (editor && editor.ta === ta) finishEditor(); });
+  ta.addEventListener('blur', ev => {
+    if (ev.relatedTarget && optbar.contains(ev.relatedTarget)) return;
+    if (editor && editor.ta === ta) finishEditor();
+  });
   v.el.appendChild(ta);
-  editor = { id, ta, obj, x, y, size, color, fit };
+  editor = { id, ta, obj, x: obj ? obj.x : x, y: obj ? obj.y : y, size: src.size, color: src.color, font: src.font || 'sans', bold: !!src.bold, italic: !!src.italic, fit };
   state.editingId = obj ? obj.id : null;
   fit(); drawOverlay(id);
   ta.focus(); ta.setSelectionRange(ta.value.length, ta.value.length);
@@ -1246,138 +1263,32 @@ function finishEditor() {
   if (e.obj) {
     const o = e.obj;
     if (!text.trim()) { p.annots = p.annots.filter(a => a.id !== o.id); if (state.selected && state.selected.objId === o.id) state.selected = null; }
-    else { o.text = text; o.size = e.size; o.color = e.color; }
+    else { o.text = text; o.size = e.size; o.color = e.color; o.font = e.font; o.bold = e.bold; o.italic = e.italic; }
     commit();
   } else if (text.trim()) {
-    p.annots.push({ id: uid('o'), type: 'text', x: e.x, y: e.y, text, size: e.size, color: e.color });
+    p.annots.push({ id: uid('o'), type: 'text', x: e.x, y: e.y, text, size: e.size, color: e.color, font: e.font, bold: e.bold, italic: e.italic });
     commit();
   }
   touch(e.id);
 }
 
-/* ════════════ 자 (Ruler) ════════════ */
-const rulerEl = $('#ruler'), rulerCanvas = $('canvas', rulerEl), rulerReadout = $('.ruler-readout', rulerEl);
-const ruler = { cx: 0, cy: 0, ang: 0, mm: 200, len: 0, placed: false, tickKey: '' };
-let rDrag = null;
-const pxPerMm = () => MMPT * state.scale;
-
-function layoutRuler() {
-  if (!state.ruler) return;
-  const sr = stage.getBoundingClientRect();
-  const pmm = pxPerMm();
-  const maxMm = Math.max(50, Math.floor((sr.width - 60) / pmm / 10) * 10);
-  ruler.mm = Math.min(200, maxMm);
-  ruler.len = ruler.mm * pmm;
-  if (!ruler.placed) { ruler.cx = sr.width / 2; ruler.cy = sr.height / 2; ruler.placed = true; }
-  ruler.cx = clamp(ruler.cx, 20, sr.width - 20); ruler.cy = clamp(ruler.cy, 20, sr.height - 20);
-  rulerEl.style.width = ruler.len + 'px'; rulerEl.style.height = RULER_T + 'px';
-  rulerEl.style.transform = `translate(${ruler.cx}px,${ruler.cy}px) rotate(${ruler.ang}rad) translate(${-ruler.len / 2}px,${-RULER_T / 2}px)`;
-  const key = ruler.len.toFixed(2) + ':' + pmm.toFixed(3) + ':' + (window.devicePixelRatio || 1);
-  if (key !== ruler.tickKey) { ruler.tickKey = key; drawRulerTicks(); }
-}
-function drawRulerTicks() {
-  const len = ruler.len, T = RULER_T, pmm = pxPerMm();
-  const dpr = Math.min(2, window.devicePixelRatio || 1);
-  rulerCanvas.width = Math.round(len * dpr); rulerCanvas.height = Math.round(T * dpr);
-  rulerCanvas.style.width = len + 'px'; rulerCanvas.style.height = T + 'px';
-  const c = rulerCanvas.getContext('2d');
-  c.setTransform(dpr, 0, 0, dpr, 0, 0);
-  c.strokeStyle = c.fillStyle = '#3a2f00'; c.lineWidth = 1; c.font = `11px ${FONT}`; c.textAlign = 'center';
-  const mm = Math.floor(len / pmm);
-  for (let i = 0; i <= mm; i++) {
-    const big = i % 10 === 0, mid = i % 5 === 0;
-    if (pmm < 2.4 && !mid) continue;
-    const x = i * pmm + 0.5, l = big ? 17 : mid ? 12 : 7;
-    c.beginPath(); c.moveTo(x, 0); c.lineTo(x, l); c.stroke();
-    if (big && i > 0) c.fillText(String(i / 10), x, l + 11);
-  }
-  c.fillText('cm', 16, 32);
-  const pin = pmm * 25.4, steps = Math.floor(len / pin * 8);
-  for (let k = 0; k <= steps; k++) {
-    const x = k * pin / 8 + 0.5, big = k % 8 === 0, mid = k % 4 === 0;
-    if (pin / 8 < 3 && !mid) continue;
-    const l = big ? 17 : mid ? 12 : 7;
-    c.beginPath(); c.moveTo(x, T); c.lineTo(x, T - l); c.stroke();
-    if (big && k > 0) c.fillText(String(k / 8), x, T - l - 4);
-  }
-  c.fillText('in', 16, T - 22);
-}
-function setRuler(on) {
-  state.ruler = on;
-  rulerEl.hidden = !on;
-  $('#rulerBtn').classList.toggle('active', on);
-  if (on) { ruler.tickKey = ''; layoutRuler(); }
-  renderOptions();
-}
-$('#rulerBtn').onclick = () => setRuler(!state.ruler);
-$('.ruler-close', rulerEl).onclick = () => setRuler(false);
-rulerEl.addEventListener('pointerdown', e => {
-  if (e.target.closest('.ruler-close') || e.target.closest('.ruler-handle')) return;
-  e.preventDefault();
-  const sr = stage.getBoundingClientRect();
-  rDrag = { mode: 'move', ox: e.clientX - sr.left - ruler.cx, oy: e.clientY - sr.top - ruler.cy };
-  rulerEl.setPointerCapture(e.pointerId);
-});
-$('.ruler-handle', rulerEl).addEventListener('pointerdown', e => {
-  e.preventDefault(); e.stopPropagation();
-  rDrag = { mode: 'rot' };
-  e.target.closest('.ruler-handle').setPointerCapture(e.pointerId);
-  rulerReadout.hidden = false;
-});
-function rulerMove(e) {
-  if (!rDrag) return;
-  const sr = stage.getBoundingClientRect(), x = e.clientX - sr.left, y = e.clientY - sr.top;
-  if (rDrag.mode === 'move') { ruler.cx = x - rDrag.ox; ruler.cy = y - rDrag.oy; }
-  else {
-    let a = Math.atan2(y - ruler.cy, x - ruler.cx);
-    if (e.shiftKey) a = Math.round(a / (Math.PI / 12)) * (Math.PI / 12);
-    ruler.ang = a;
-    let deg = a * 180 / Math.PI; if (deg < 0) deg += 360;
-    rulerReadout.textContent = deg.toFixed(1) + '°';
-  }
-  layoutRuler();
-}
-function rulerEnd() { rDrag = null; rulerReadout.hidden = true; }
-rulerEl.addEventListener('pointermove', rulerMove);
-rulerEl.addEventListener('pointerup', rulerEnd);
-rulerEl.addEventListener('pointercancel', rulerEnd);
-$('.ruler-handle', rulerEl).addEventListener('dblclick', () => { ruler.ang = 0; layoutRuler(); });
-
-function snapEdgeAt(cx, cy) {
-  if (!state.ruler) return 0;
-  const sr = stage.getBoundingClientRect();
-  const dx = cx - sr.left - ruler.cx, dy = cy - sr.top - ruler.cy;
-  const c = Math.cos(ruler.ang), s = Math.sin(ruler.ang);
-  const u = dx * c + dy * s, v = -dx * s + dy * c;
-  if (Math.abs(u) > ruler.len / 2 + 28) return 0;
-  const av = Math.abs(v);
-  if (av < RULER_T / 2 - 6 || av > RULER_T / 2 + 30) return 0;
-  return v < 0 ? -1 : 1;
-}
-function snapToRuler(cx, cy, edge) {
-  const sr = stage.getBoundingClientRect();
-  const dx = cx - sr.left - ruler.cx, dy = cy - sr.top - ruler.cy;
-  const c = Math.cos(ruler.ang), s = Math.sin(ruler.ang);
-  const u = clamp(dx * c + dy * s, -ruler.len / 2, ruler.len / 2), v = edge * RULER_T / 2;
-  return [sr.left + ruler.cx + u * c - v * s, sr.top + ruler.cy + u * s + v * c];
-}
-
-/* ════════════ 도구 · 옵션 바 ════════════ */
+/* ════════════ 도구 · 옵션 바 ════════════ *//* ════════════ 도구 · 옵션 바 ════════════ */
 function setTool(t) {
   finishEditor();
   state.tool = t;
   document.querySelectorAll('.tool[data-tool]').forEach(b => b.classList.toggle('active', b.dataset.tool === t));
   if (t !== 'textselect') { const sel = window.getSelection(); if (sel) sel.removeAllRanges(); }
-  ['textselect', 'select', 'highlight', 'pen', 'shape', 'eraser', 'text'].forEach(n => stage.classList.toggle('tool-' + n, n === t));
+  ['textselect', 'select', 'highlight', 'pen', 'line', 'shape', 'eraser', 'text'].forEach(n => stage.classList.toggle('tool-' + n, n === t));
   if (t !== 'select' && state.selected) selectObj(null);
-  updateEraserCursor();
+  updateEraserCursor(); updateBrushCursor();
   renderOptions();
 }
 document.querySelectorAll('.tool[data-tool]').forEach(b => b.addEventListener('click', () => setTool(b.dataset.tool)));
 
-const SHAPES = [['rect', '사각형'], ['ellipse', '원'], ['line', '직선'], ['arrow', '화살표']];
-function swatchHtml(colors, cur) {
-  return colors.map(c => `<button class="swatch${c.toLowerCase() === String(cur).toLowerCase() ? ' on' : ''}" data-color="${c}" style="--c:${c}" title="${c}" aria-label="색상 ${c}"></button>`).join('') +
+const SHAPES = [['rect', '사각형'], ['ellipse', '원']];
+function swatchHtml(colors, cur, extra) {
+  const mk = c => `<button class="swatch${c.toLowerCase() === String(cur).toLowerCase() ? ' on' : ''}" data-color="${c}" style="--c:${c}" title="${c}" aria-label="색상 ${c}"></button>`;
+  return colors.map(mk).join('') + (extra ? '<span class="zsep"></span>' + extra.map(mk).join('') : '') +
     `<input type="color" value="${/^#[0-9a-f]{6}$/i.test(cur) ? cur : '#000000'}" data-custom title="사용자 지정 색상" aria-label="사용자 지정 색상">`;
 }
 function selectedObj() {
@@ -1385,74 +1296,115 @@ function selectedObj() {
   const p = pageById(state.selected.pageId);
   return p ? p.annots.find(a => a.id === state.selected.objId) || null : null;
 }
+function currentTextProps() {
+  if (state.tool === 'text') return settings.text;
+  const o = selectedObj();
+  return o && o.type === 'text' ? o : null;
+}
+function fontCtl(o) {
+  return `<div class="grp"><label>글꼴</label><select data-font aria-label="글꼴">${Object.entries(FONTS).map(([k, f]) => `<option value="${k}"${(o.font || 'sans') === k ? ' selected' : ''}>${f.name}</option>`).join('')}</select>` +
+    `<button class="fmt${o.bold ? ' on' : ''}" data-fmt="bold" title="굵게" aria-label="굵게" aria-pressed="${!!o.bold}"><b>B</b></button>` +
+    `<button class="fmt${o.italic ? ' on' : ''}" data-fmt="italic" title="기울임꼴" aria-label="기울임꼴" aria-pressed="${!!o.italic}"><i>I</i></button></div>`;
+}
+function setTextProp(prop, val) {
+  if (state.tool === 'text') {
+    settings.text[prop] = val;
+    if (editor) { editor[prop] = val; editor.fit(); }
+    renderOptions();
+  } else if (state.tool === 'select') {
+    const o = selectedObj(); if (!o || o.type !== 'text') return;
+    o[prop] = val; commit(); touch(state.selected.pageId); renderOptions();
+  }
+}
 function renderOptions() {
   const t = state.tool; let h = '';
   const range = (label, key, min, max, val, unit) =>
     `<div class="grp"><label>${label}</label><input type="range" aria-label="${label}" min="${min}" max="${max}" step="1" value="${val}" data-range="${key}" data-unit="${unit}"><span class="val">${val}${unit}</span></div>`;
-  if (t === 'pen') h = `<div class="grp"><label>색상</label>${swatchHtml(PALETTE, settings.pen.color)}</div>${range('굵기', 'pen.width', 1, 24, settings.pen.width, 'pt')}${range('불투명도', 'pen.alpha', 10, 100, settings.pen.alpha, '%')}`;
-  else if (t === 'highlight') h = `<div class="grp"><label>색상</label>${swatchHtml(HL_PALETTE, settings.highlight.color)}</div>${range('굵기', 'highlight.width', 6, 44, settings.highlight.width, 'pt')}`;
-  else if (t === 'shape') {
+  const colorGrp = (colors, cur, extra) => `<div class="grp"><label>색상</label>${swatchHtml(colors, cur, extra)}</div>`;
+  const seg = (attr, items, cur, label) => `<div class="seg" role="group" aria-label="${label}">${items.map(([k, n]) => `<button ${attr}="${k}" class="${cur === k ? 'on' : ''}">${n}</button>`).join('')}</div>`;
+  if (t === 'pen') {
+    h = colorGrp(PALETTE, settings.pen.color, PASTEL) + range('굵기', 'pen.width', 1, 24, settings.pen.width, 'pt') +
+      range('불투명도', 'pen.alpha', 10, 100, settings.pen.alpha, '%') + '<span>커서의 원이 붓 굵기예요.</span>';
+  } else if (t === 'line') {
+    h = seg('data-lstyle', [['line', '직선'], ['arrow', '화살표']], settings.line.arrow ? 'arrow' : 'line', '선 종류') +
+      colorGrp(PALETTE, settings.line.color, PASTEL) + range('굵기', 'line.width', 1, 24, settings.line.width, 'pt') +
+      range('불투명도', 'line.alpha', 10, 100, settings.line.alpha, '%') + '<span>드래그해서 직선을 그려요 · Shift: 15° 단위</span>';
+  } else if (t === 'highlight') {
+    h = seg('data-hstyle', [['brush', '붓형'], ['line', '직선형']], settings.highlight.style, '강조 방식') +
+      colorGrp(HL_PALETTE, settings.highlight.color) + range('굵기', 'highlight.width', 6, 44, settings.highlight.width, 'pt') +
+      `<span>${settings.highlight.style === 'line' ? '드래그한 구간을 곧은 띠로 칠해요 (거의 수평이면 자동으로 반듯하게)' : '자유롭게 붓으로 칠해요.'}</span>`;
+  } else if (t === 'shape') {
     h = `<div class="seg" role="group" aria-label="도형 종류">${SHAPES.map(([k, n]) => `<button data-shape="${k}" class="${settings.shape.kind === k ? 'on' : ''}">${svg(k)}${n}</button>`).join('')}</div>` +
-      `<div class="grp"><label>색상</label>${swatchHtml(PALETTE, settings.shape.color)}</div>${range('선 굵기', 'shape.width', 1, 20, settings.shape.width, 'pt')}`;
-  } else if (t === 'text') h = `<div class="grp"><label>색상</label>${swatchHtml(PALETTE, settings.text.color)}</div>${range('글자 크기', 'text.size', 8, 96, settings.text.size, 'pt')}<span>페이지를 클릭해 입력 · Esc 또는 바깥 클릭으로 완료</span>`;
-  else if (t === 'textselect') h = '<span>PDF 글자를 드래그해 선택하고 Ctrl+C로 복사하세요.</span><button class="opt-btn" data-copy>선택한 글자 복사</button>';
-  else if (t === 'eraser') {
+      colorGrp(PALETTE, settings.shape.color) + range('선 굵기', 'shape.width', 1, 20, settings.shape.width, 'pt') + '<span>Shift: 정사각형 · 정원</span>';
+  } else if (t === 'text') {
+    h = fontCtl(settings.text) + colorGrp(PALETTE, settings.text.color) + range('글자 크기', 'text.size', 8, 96, settings.text.size, 'pt') +
+      '<span>페이지를 클릭해 입력 · Esc 또는 바깥 클릭으로 완료</span>';
+  } else if (t === 'textselect') {
+    h = '<span>PDF 글자를 드래그해 선택하고 Ctrl+C로 복사하세요.</span><button class="opt-btn" data-copy>선택한 글자 복사</button>';
+  } else if (t === 'eraser') {
     const am = settings.eraser.mode === 'area';
-    h = `<div class="seg" role="group" aria-label="지우개 방식"><button data-emode="stroke" class="${am ? '' : 'on'}">획 지우개</button><button data-emode="area" class="${am ? 'on' : ''}">영역 지우개</button></div>` +
+    h = seg('data-emode', [['stroke', '획 지우개'], ['area', '영역 지우개']], am ? 'area' : 'stroke', '지우개 방식') +
       (am ? range('지우개 크기', 'eraser.size', 4, 80, settings.eraser.size, 'pt') + '<span>그림·도형을 부분적으로 지워요. 텍스트·이미지는 획 지우개로 지우세요.</span>'
           : '<span>클릭하거나 드래그한 개체(그림·도형·텍스트·이미지)를 통째로 지워요.</span>');
-  }
-  else {
+  } else {
     const o = selectedObj();
     if (o) {
-      if (o.color) h += `<div class="grp"><label>색상</label>${swatchHtml(PALETTE.concat(o.type === 'highlight' ? HL_PALETTE : []), o.color)}</div>`;
-      if (o.type === 'pen') h += range('불투명도', 'sel.alpha', 10, 100, Math.round((o.alpha == null ? 1 : o.alpha) * 100), '%');
+      const strokeLike = o.type === 'pen' || o.type === 'line' || o.type === 'arrow';
+      if (o.type === 'text') h += fontCtl(o) + range('글자 크기', 'sel.size', 8, 96, Math.round(o.size), 'pt');
+      if (o.color) h += colorGrp(PALETTE.concat(o.type === 'highlight' ? HL_PALETTE : []), o.color, strokeLike ? PASTEL : null);
+      if (strokeLike) h += range('불투명도', 'sel.alpha', 10, 100, Math.round((o.alpha == null ? 1 : o.alpha) * 100), '%');
       h += `<button class="danger-btn" data-del>${svg('trash')}삭제</button><span>모서리 핸들로 크기 조절 · 텍스트는 더블클릭으로 수정</span>`;
     } else h = '<span>개체를 클릭해 선택하고 드래그해서 이동하세요. Delete 키로 삭제합니다.</span>';
   }
-  if (state.ruler && (t === 'pen' || t === 'highlight' || t === 'shape')) h += '<span class="chip">자 켜짐 · 자의 위·아래 모서리 근처에서 그리면 직선이 됩니다</span>';
-  else if (state.ruler) h += '<span class="chip">자 켜짐</span>';
   optbar.innerHTML = h;
 }
+optbar.addEventListener('mousedown', e => { if (editor && e.target.closest('button')) e.preventDefault(); });
 optbar.addEventListener('click', e => {
-  const em = e.target.closest('[data-emode]');
-  if (em) { settings.eraser.mode = em.dataset.emode; renderOptions(); updateEraserCursor(); return; }
-  if (e.target.closest('[data-copy]')) { copySelection(); return; }
-  const sw = e.target.closest('.swatch');
-  if (sw) return applyColor(sw.dataset.color);
-  const sh = e.target.closest('[data-shape]');
-  if (sh) { settings.shape.kind = sh.dataset.shape; renderOptions(); return; }
-  if (e.target.closest('[data-del]')) deleteSelected();
+  const q = sel => e.target.closest(sel); let el;
+  if ((el = q('[data-emode]'))) { settings.eraser.mode = el.dataset.emode; renderOptions(); updateEraserCursor(); return; }
+  if (q('[data-copy]')) { copySelection(); return; }
+  if ((el = q('[data-lstyle]'))) { settings.line.arrow = el.dataset.lstyle === 'arrow'; renderOptions(); return; }
+  if ((el = q('[data-hstyle]'))) { settings.highlight.style = el.dataset.hstyle; renderOptions(); return; }
+  if ((el = q('[data-fmt]'))) { const cur = currentTextProps(); if (cur) setTextProp(el.dataset.fmt, !cur[el.dataset.fmt]); return; }
+  if ((el = q('.swatch'))) return applyColor(el.dataset.color);
+  if ((el = q('[data-shape]'))) { settings.shape.kind = el.dataset.shape; renderOptions(); return; }
+  if (q('[data-del]')) deleteSelected();
 });
 optbar.addEventListener('input', e => {
   if (e.target.matches('input[type=color]')) return applyColor(e.target.value, true);
-  if (e.target.matches('[data-range]')) {
-    const [k, f] = e.target.dataset.range.split('.'), val = +e.target.value;
-    e.target.nextElementSibling.textContent = val + (e.target.dataset.unit || '');
-    if (k === 'sel') {
-      const o = selectedObj();
-      if (o) { if (val >= 100) delete o.alpha; else o.alpha = val / 100; touch(state.selected.pageId); }
-      return;
+  if (!e.target.matches('[data-range]')) return;
+  const [k, f] = e.target.dataset.range.split('.'), val = +e.target.value;
+  e.target.nextElementSibling.textContent = val + (e.target.dataset.unit || '');
+  if (k === 'sel') {
+    const o = selectedObj();
+    if (o) {
+      if (f === 'alpha') { if (val >= 100) delete o.alpha; else o.alpha = val / 100; }
+      else if (f === 'size') o.size = val;
+      touch(state.selected.pageId);
     }
-    settings[k][f] = val;
-    if (k === 'text' && editor) { editor.size = val; editor.fit(); }
-    if (k === 'eraser') updateEraserCursor();
+    return;
   }
+  settings[k][f] = val;
+  if (k === 'text' && editor) { editor.size = val; editor.fit(); }
+  if (k === 'eraser') updateEraserCursor(); else updateBrushCursor();
 });
 optbar.addEventListener('change', e => {
   if (e.target.matches('input[type=color]')) applyColor(e.target.value);
   else if (e.target.matches('[data-range^="sel"]')) commit();
+  else if (e.target.matches('select[data-font]')) setTextProp('font', e.target.value);
+  if (editor) editor.ta.focus();
 });
 function applyColor(c, live) {
   const t = state.tool;
   if (t === 'select') {
     const o = selectedObj(); if (!o) return;
     o.color = c; touch(state.selected.pageId);
-    if (!live) commit();
+    if (!live) { commit(); renderOptions(); }
     return;
   }
   if (settings[t]) settings[t].color = c;
   if (t === 'text' && editor) { editor.color = c; editor.ta.style.color = c; }
+  updateBrushCursor();
   if (!live) renderOptions();
 }
 
@@ -1514,7 +1466,7 @@ async function insertImageBlob(blob) {
 function insertTextAtCenter(text) {
   if (!state.pages.length || !text.trim()) return;
   const pid = state.currentId || state.pages[0].id, p = pageById(pid), c = placementCenter(pid);
-  const o = { id: uid('o'), type: 'text', x: 40, y: Math.max(20, c.y - 10), text: text.replace(/\s+$/, ''), size: settings.text.size, color: settings.text.color };
+  const o = { id: uid('o'), type: 'text', x: 40, y: Math.max(20, c.y - 10), text: text.replace(/\s+$/, ''), size: settings.text.size, color: settings.text.color, font: settings.text.font, bold: settings.text.bold, italic: settings.text.italic };
   p.annots.push(o); commit();
   setTool('select'); selectObj(pid, o.id); touch(pid);
 }
@@ -1570,7 +1522,7 @@ function afterLoad(name) {
   setCurrent(state.pages[0].id);
   requestAnimationFrame(() => { fitWidth(1.5); viewer.scrollTop = 0; });
 }
-async function openPdfFile(file) {
+async function openPdfFile(file, handle) {
   if (!await confirmDiscard()) return;
   showLoading('PDF를 불러오는 중…');
   try {
@@ -1584,6 +1536,7 @@ async function openPdfFile(file) {
     resetDocument();
     state.docs.set(docId, { pdf, bytes });
     state.pages = pages;
+    state.fileHandle = handle || null;
     afterLoad(file.name);
   } catch (err) {
     console.error(err);
@@ -1596,22 +1549,40 @@ async function newBlank() {
   state.pages = [{ id: uid('p'), src: null, w: 595.28, h: 841.89, annots: [] }];
   afterLoad('새 문서.pdf');
 }
-async function handleFiles(files) {
+async function handleFiles(files, handle) {
   const f = files && files[0]; if (!f) return;
-  if (f.type === 'application/pdf' || /\.pdf$/i.test(f.name)) return openPdfFile(f);
+  if (f.type === 'application/pdf' || /\.pdf$/i.test(f.name)) return openPdfFile(f, handle);
   if (f.type.startsWith('image/')) {
     if (!state.pages.length) { toast('먼저 PDF를 열거나 새 문서를 만들어 주세요.'); return; }
     return insertImageBlob(f);
   }
   toast('PDF 또는 이미지 파일만 사용할 수 있어요.');
 }
-const openDialog = () => $('#fileInput').click();
+async function openDialog() {
+  if (window.showOpenFilePicker) {
+    try {
+      const [h] = await window.showOpenFilePicker({ types: [{ description: 'PDF 문서', accept: { 'application/pdf': ['.pdf'] } }] });
+      await openPdfFile(await h.getFile(), h);
+      return;
+    } catch (err) { if (err && err.name === 'AbortError') return; }
+  }
+  $('#fileInput').click();
+}
 $('#openBtn').onclick = openDialog; $('#emptyOpen').onclick = openDialog;
 $('#newBtn').onclick = newBlank; $('#emptyNew').onclick = newBlank;
 $('#fileInput').addEventListener('change', e => { const f = e.target.files; handleFiles(f).finally(() => { e.target.value = ''; }); });
 stage.addEventListener('dragover', e => { if (e.dataTransfer && [...e.dataTransfer.types].includes('Files')) { e.preventDefault(); stage.classList.add('dragover'); } });
 stage.addEventListener('dragleave', e => { if (e.target === stage) stage.classList.remove('dragover'); });
-stage.addEventListener('drop', e => { stage.classList.remove('dragover'); if (e.dataTransfer.files.length) { e.preventDefault(); handleFiles(e.dataTransfer.files); } });
+stage.addEventListener('drop', async e => {
+  stage.classList.remove('dragover');
+  if (!e.dataTransfer.files.length) return;
+  e.preventDefault();
+  const files = e.dataTransfer.files, it = e.dataTransfer.items && e.dataTransfer.items[0];
+  const hp = it && it.getAsFileSystemHandle ? it.getAsFileSystemHandle() : null;
+  let h = null;
+  if (hp) { try { h = await hp; if (!h || h.kind !== 'file') h = null; } catch (er) { h = null; } }
+  handleFiles(files, h);
+});
 window.addEventListener('dragend', () => stage.classList.remove('dragover'));
 
 /* ════════════ 저장 (PDF 내보내기) ════════════ */
@@ -1628,7 +1599,7 @@ async function buildPdf() {
   const { PDFDocument, degrees } = PDFLib;
   const texts = [];
   state.pages.forEach(p => p.annots.forEach(a => { if (a.type === 'text') texts.push(a); }));
-  await Promise.all(texts.map(t => document.fonts.load(`${t.size}px ${FONT}`, t.text).catch(() => {})));
+  await Promise.all(texts.map(t => document.fonts.load(fontStr(t), t.text).catch(() => {})));
   const out = await PDFDocument.create(), srcs = new Map();
   for (const p of state.pages) {
     let page, R = 0;
@@ -1660,6 +1631,13 @@ function downloadBytes(bytes, name) {
   document.body.appendChild(a); a.click(); a.remove();
   setTimeout(() => URL.revokeObjectURL(url), 4000);
 }
+async function ensureWrite(h) {
+  try {
+    if (!h.queryPermission) return true;
+    if ((await h.queryPermission({ mode: 'readwrite' })) === 'granted') return true;
+    return (await h.requestPermission({ mode: 'readwrite' })) === 'granted';
+  } catch (err) { return false; }
+}
 async function writeHandle(h, bytes) { const w = await h.createWritable(); await w.write(bytes); await w.close(); }
 const pickerOpts = name => ({ suggestedName: name, types: [{ description: 'PDF 문서', accept: { 'application/pdf': ['.pdf'] } }] });
 function markSaved(name) { if (name) state.fileName = name; setDirty(false); toast('저장했어요.'); }
@@ -1667,6 +1645,7 @@ function markSaved(name) { if (name) state.fileName = name; setDirty(false); toa
 async function saveDoc(asNew) {
   if (!state.pages.length) return;
   let handle = asNew ? null : state.fileHandle;
+  if (handle && !(await ensureWrite(handle))) { toast('원본 파일에 쓸 권한이 없어요. 저장할 위치를 다시 골라 주세요.'); handle = null; }
   if (!handle && window.showSaveFilePicker) {
     try { handle = await window.showSaveFilePicker(pickerOpts(asNew ? baseName(state.fileName) + ' (사본).pdf' : state.fileName)); }
     catch (err) { if (err && err.name === 'AbortError') return; handle = null; }
@@ -1713,6 +1692,16 @@ function setSpread(on) {
   requestAnimationFrame(() => { const v = views.get(cur); if (v) viewer.scrollTop = Math.max(0, v.el.offsetTop - 16); });
 }
 $('#spreadBtn').onclick = () => setSpread(!state.spread);
+function fitPage() {
+  if (!state.pages.length) return;
+  const maxW = Math.max(...state.pages.map(p => p.w)), maxH = Math.max(...state.pages.map(p => p.h));
+  const cols = state.spread ? 2 : 1;
+  setZoom(Math.min((viewer.clientWidth - 48 - (cols - 1) * 16) / (maxW * PT * cols), (viewer.clientHeight - 48) / (maxH * PT)));
+  const v = views.get(state.currentId);
+  if (v) requestAnimationFrame(() => { viewer.scrollTop = Math.max(0, v.el.offsetTop - 16); });
+}
+$('#fitWidthBtn').onclick = () => fitWidth();
+$('#fitPageBtn').onclick = fitPage;
 
 /* ════════════ 글자 복사 · 지우개 커서 ════════════ */
 async function copySelection() {
@@ -1728,6 +1717,16 @@ function updateEraserCursor() {
   const d = st.mode === 'area' ? clamp(Math.round(st.size * state.scale), 10, 120) : 22, box = d + 6, c = box / 2;
   const svgc = `<svg xmlns="http://www.w3.org/2000/svg" width="${box}" height="${box}"><circle cx="${c}" cy="${c}" r="${d / 2}" fill="rgba(255,255,255,.3)" stroke="#222" stroke-width="1.5"/><circle cx="${c}" cy="${c}" r="1.5" fill="#222"/></svg>`;
   stage.style.setProperty('--eraser-cursor', `url("data:image/svg+xml,${encodeURIComponent(svgc)}") ${c} ${c}, crosshair`);
+}
+
+function updateBrushCursor() {
+  const t = state.tool;
+  if (t !== 'pen' && t !== 'line' && t !== 'highlight') return;
+  const st = settings[t];
+  const d = clamp(Math.round(st.width * state.scale), 6, 120), box = d + 6, c = box / 2;
+  const op = t === 'highlight' ? HL_ALPHA : clamp((st.alpha == null ? 100 : st.alpha) / 100, 0.3, 1);
+  const svgc = `<svg xmlns="http://www.w3.org/2000/svg" width="${box}" height="${box}"><circle cx="${c}" cy="${c}" r="${d / 2}" fill="${st.color}" fill-opacity="${op}" stroke="#fff" stroke-width="2"/><circle cx="${c}" cy="${c}" r="${d / 2}" fill="none" stroke="#222" stroke-width="1"/></svg>`;
+  stage.style.setProperty('--brush-cursor', `url("data:image/svg+xml,${encodeURIComponent(svgc)}") ${c} ${c}, crosshair`);
 }
 
 /* ════════════ 레이어 패널 ════════════ */
@@ -1827,12 +1826,15 @@ document.addEventListener('keydown', e => {
   if (mod && k === 'z') { e.preventDefault(); e.shiftKey ? redo() : undo(); return; }
   if (mod && k === 'y') { e.preventDefault(); redo(); return; }
   if (!mod && !e.altKey && !e.shiftKey && (e.key === 'ArrowLeft' || e.key === 'ArrowRight') && state.pages.length) { e.preventDefault(); stepPage(e.key === 'ArrowRight' ? 1 : -1); return; }
+  if (!mod && !e.altKey && !e.shiftKey && !e.repeat && state.pages.length) {
+    const map = { Digit1: 'textselect', Digit2: 'select', Numpad1: 'textselect', Numpad2: 'select', KeyQ: 'highlight', KeyW: 'pen', KeyE: 'line', KeyA: 'shape', KeyS: 'eraser', KeyD: 'text', KeyZ: '#pasteBtn', KeyX: '#imageBtn' };
+    const act = map[e.code];
+    if (act) { e.preventDefault(); if (act[0] === '#') $(act).click(); else setTool(act); return; }
+  }
   if ((e.key === 'Delete' || e.key === 'Backspace') && state.selected) { e.preventDefault(); deleteSelected(); return; }
   if (e.key === 'Escape') { if (state.selected) selectObj(null); }
 });
 window.addEventListener('beforeunload', e => { if (state.dirty) { e.preventDefault(); e.returnValue = ''; } });
-window.addEventListener('resize', () => layoutRuler());
-new ResizeObserver(() => layoutRuler()).observe(stage);
 
 function applyTheme(t) {
   document.documentElement.dataset.theme = t;
