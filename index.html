@@ -87,16 +87,18 @@ svg{width:20px;height:20px;flex:none;display:block}
 .no-doc .needs-doc{opacity:.38;pointer-events:none}
 
 /* ── 옵션 바 ── */
-.optbar{display:flex;align-items:center;gap:14px;min-height:44px;padding:6px 16px;background:var(--bar2);border-bottom:1px solid var(--border);font-size:12.5px;color:var(--muted);overflow-x:auto;white-space:nowrap;flex:none}
-.optbar .grp{display:flex;align-items:center;gap:8px}
+.optbar{display:flex;align-items:center;flex-wrap:wrap;gap:6px 14px;min-height:44px;padding:5px 12px;background:var(--bar2);border-bottom:1px solid var(--border);font-size:12.5px;color:var(--muted);flex:none}
+.optbar .grp{display:flex;align-items:center;gap:6px}
 .optbar label{color:var(--muted)}
 .optbar .val{min-width:28px;color:var(--text);font-variant-numeric:tabular-nums}
-.swatch{width:22px;height:22px;border-radius:50%;background:var(--c);border:2px solid var(--border);flex:none}
+.swatch{width:18px;height:18px;border-radius:50%;background:var(--c);border:2px solid var(--border);flex:none}
 .swatch.on{outline:2px solid var(--accent);outline-offset:2px}
 .optbar input[type=color]{width:26px;height:26px;padding:0;border:2px solid var(--border);border-radius:50%;background:none;cursor:pointer;overflow:hidden}
 .optbar input[type=color]::-webkit-color-swatch-wrapper{padding:0}
 .optbar input[type=color]::-webkit-color-swatch{border:0;border-radius:50%}
-.optbar input[type=range]{width:120px;accent-color:var(--accent)}
+.optbar input[type=range]{width:84px;accent-color:var(--accent)}
+.optbar .val{min-width:34px;text-align:right}
+.optbar .rg{gap:5px}
 .seg{display:flex;gap:2px;padding:2px;background:var(--bar);border:1px solid var(--border);border-radius:10px}
 .seg button{display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:8px;color:var(--text);font-size:12.5px}
 .seg button svg{width:16px;height:16px}
@@ -152,9 +154,9 @@ svg{width:20px;height:20px;flex:none;display:block}
 .textLayer{position:absolute;inset:0;overflow:hidden;line-height:1;transform-origin:0 0;pointer-events:none;-webkit-user-select:none;user-select:none}
 .textLayer span,.textLayer br{color:transparent;position:absolute;white-space:pre;transform-origin:0 0}
 .textLayer ::selection{background:rgba(219,190,67,.45)}
-.tool-textselect .textLayer{pointer-events:auto;-webkit-user-select:text;user-select:text}
-.tool-textselect .textLayer span{cursor:text}
-.tool-textselect .page .over{pointer-events:none}
+.tool-select .textLayer{pointer-events:auto;-webkit-user-select:text;user-select:text}
+.tool-select .textLayer span{cursor:text}
+.tool-select .page .over{pointer-events:none}
 .spread-on #pages{display:grid;grid-template-columns:repeat(2,max-content);justify-content:center;align-items:center;gap:16px}
 .opt-btn{display:flex;align-items:center;gap:6px;padding:4px 12px;border-radius:8px;border:1px solid var(--border);color:var(--text)}
 .opt-btn:hover{background:var(--hover)}
@@ -203,12 +205,16 @@ svg{width:20px;height:20px;flex:none;display:block}
 .menu button span{font-size:12px;color:var(--muted)}
 .swatch.none{position:relative;background:repeating-conic-gradient(#bbb 0 25%,#fff 0 50%) 0 0/10px 10px}
 .swatch.none::after{content:'';position:absolute;inset:-2px;border-radius:50%;background:linear-gradient(135deg,transparent calc(50% - 1px),#e53935 calc(50% - 1px) calc(50% + 1px),transparent calc(50% + 1px))}
-.grp.top{align-items:flex-start}
-.grp.top>label{padding-top:9px}
-.colorbox{display:flex;flex-direction:column;gap:7px}
-.crow{display:flex;align-items:center;gap:8px}
-.optbar input[type=color].bigcolor{width:38px;height:38px;border-radius:50%}
-.eyedrop{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;border:1px solid var(--border);color:var(--text);flex:none}
+.colorbox{display:flex;align-items:center;gap:8px}
+.cgrid{display:flex;flex-direction:column;gap:5px}
+.crow{display:flex;align-items:center;gap:5px}
+.crow.rec{padding-top:5px;border-top:1px dashed var(--border)}
+.swatch.ghost{background:transparent;border-style:dashed;opacity:.45}
+.optbar input[type=color].bigcolor{width:46px;height:46px;border-radius:10px;border-width:1px}
+.optbar input[type=color].bigcolor::-webkit-color-swatch{border-radius:9px}
+.optbar input[type=color].bigcolor::-moz-color-swatch{border-radius:9px;border:0}
+.hint{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;border:1px solid var(--border);font-size:11px;color:var(--muted);cursor:help;flex:none}
+.eyedrop{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;border:1px solid var(--border);color:var(--text);flex:none}
 .eyedrop:hover{background:var(--hover)}
 .eyedrop svg{width:18px;height:18px}
 .thumb.msel:not(.active) .thumb-page{outline-color:var(--accent);outline-style:dashed}
@@ -362,6 +368,58 @@ svg{width:20px;height:20px;flex:none;display:block}
 .layer.msel{background:var(--accent-bg)}
 .dialog textarea{width:100%;min-height:120px;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:var(--bar2);color:var(--text);font:inherit;margin-bottom:14px;resize:vertical;line-height:1.5}
 #printRoot{display:none}
+
+/* ── 문서 탭 ── */
+.tabbar{display:flex;align-items:flex-end;gap:2px;padding:6px 10px 0;background:var(--bar2);border-bottom:1px solid var(--border);flex:none;min-height:37px}
+.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;min-width:0;flex:0 1 auto}
+.tab{display:flex;align-items:center;gap:6px;max-width:210px;min-width:96px;height:30px;padding:0 4px 0 12px;border-radius:9px 9px 0 0;color:var(--muted);border:1px solid transparent;border-bottom:0;cursor:pointer;flex:none;font-size:12.5px}
+.tab:hover{background:var(--hover)}
+.tab.on{background:var(--bar);color:var(--text);border-color:var(--border);height:31px;margin-bottom:-1px}
+.tab-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tab-x{display:grid;place-items:center;width:20px;height:20px;border-radius:5px;color:var(--muted);flex:none}
+.tab-x:hover{background:var(--hover);color:var(--text)}
+.tab-x svg{width:13px;height:13px}
+.dirty-dot.sm{width:6px;height:6px;margin:0;flex:none}
+.tab-add,.tab-open{height:26px;margin-bottom:3px;padding:0 10px;border-radius:8px;color:var(--muted);font-size:12.5px;white-space:nowrap;flex:none}
+.tab-add{width:28px;padding:0;font-size:18px;line-height:1}
+.tab-add:hover,.tab-open:hover{background:var(--hover);color:var(--text)}
+.no-doc .tabbar,.presenting .tabbar{display:none!important}
+/* ── 레이어 / 노트 탭 ── */
+.ptabs{display:flex;align-items:center;gap:2px;padding:8px 8px 0;border-bottom:1px solid var(--border);font-size:12.5px;color:var(--muted);flex:none}
+.ptab{padding:6px 12px;border-radius:8px 8px 0 0;color:var(--muted)}
+.ptab:hover{background:var(--hover)}
+.ptab.on{color:var(--accent);box-shadow:inset 0 -2px 0 var(--accent)}
+.ptabs #layerCount{margin-left:auto;padding-right:6px}
+#layers[data-ptab="notes"] .layer-list,#layers[data-ptab="notes"] .layer-foot,#layers[data-ptab="notes"] #layerCount{display:none}
+.notes-pane{display:none;flex:1;min-height:0;flex-direction:column;gap:8px;padding:10px}
+#layers[data-ptab="notes"] .notes-pane{display:flex}
+.note-tabs{display:flex;flex-wrap:wrap;gap:4px;flex:none}
+.nchip{min-width:28px;height:26px;padding:0 8px;border-radius:7px;border:1px solid var(--border);color:var(--muted);font-size:12px}
+.nchip:hover{background:var(--hover)}
+.nchip.on{background:var(--accent-bg);color:var(--accent);border-color:var(--accent)}
+.nchip.add{font-size:15px;line-height:1}
+.note-title,.notes-pane textarea{width:100%;border-radius:8px;border:1px solid var(--border);background:var(--bar2);color:var(--text);font:inherit;padding:7px 9px}
+.note-title{flex:none}
+.notes-pane textarea{flex:1;min-height:90px;resize:none;line-height:1.55}
+.note-foot{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:12px;color:var(--muted);flex:none}
+.note-foot button{padding:4px 9px;border-radius:7px;border:1px solid var(--border);color:var(--text)}
+.note-foot button:hover{background:var(--hover)}
+.note-foot .stat{flex:1 1 100%}
+/* ── 세로 모드 (UI를 위아래로 배치) ── */
+.vmode .main{flex-direction:column}
+.vmode .stage{order:1;flex:1;min-height:140px}
+.vmode #sidebar{order:2;width:auto;height:196px;flex-direction:row;border-right:0;border-top:1px solid var(--border)}
+.vmode #sidebar .side-head{flex-direction:column;justify-content:flex-start;align-items:flex-start;gap:6px;padding:10px;width:84px;flex:none}
+.vmode .thumbs{flex-direction:row;overflow-x:auto;overflow-y:hidden;align-items:flex-start;padding:10px 12px}
+.vmode .thumb{margin-left:0;margin-right:2px;zoom:.78}
+.vmode .ghead{margin-left:0;min-width:130px;align-self:center}
+.vmode .side-foot{flex-direction:column;border-top:0;border-left:1px solid var(--border);width:150px;justify-content:center;flex:none}
+.vmode #layers{order:3;width:auto;height:220px;border-left:0;border-top:1px solid var(--border)}
+.vmode .toolbar{flex-wrap:wrap;overflow-x:visible}
+.vmode #listBtn{display:none}
+.vmode .thumb.drop-before::before,.vmode .thumb.drop-after::after{top:0;bottom:0;width:3px;height:auto}
+.vmode .thumb.drop-before::before{left:-8px;right:auto}
+.vmode .thumb.drop-after::after{right:-8px;left:auto}
 @media (max-width:760px){.bright input{width:56px}}
 @media print{
   html{filter:none!important}
@@ -385,16 +443,22 @@ svg{width:20px;height:20px;flex:none;display:block}
     <div class="spacer"></div>
     <button class="text-btn" id="newBtn" title="빈 문서 만들기"><i data-i="filePlus"></i><span>새 문서</span></button>
     <button class="text-btn" id="openBtn" title="PDF 열기 (Ctrl+O)"><i data-i="folder"></i><span>열기</span></button>
-    <button class="icon-btn" id="layersBtn" title="레이어 패널" aria-label="레이어 패널 열기/닫기"><i data-i="layers"></i></button>
+    <button class="icon-btn" id="vmodeBtn" title="세로 모드 — 패널을 위아래로 배치" aria-label="세로 모드 전환" aria-pressed="false"><i data-i="rows"></i></button>
+    <button class="icon-btn" id="layersBtn" title="레이어 · 노트 패널" aria-label="레이어 · 노트 패널 열기/닫기"><i data-i="layers"></i></button>
     <label class="bright" title="화면 밝기 (더블클릭: 기본값)"><i data-i="sun"></i><input type="range" id="brightRange" min="40" max="130" step="1" value="100" aria-label="화면 밝기"></label>
     <span class="clock" id="clock" title="현재 시각" aria-label="현재 시각"></span>
     <button class="icon-btn" id="themeBtn" title="테마 전환" aria-label="라이트/다크 전환"><i data-i="moon"></i></button>
     <a class="gh-link" href="https://github.com/architect0509/meow-PDF" target="_blank" rel="noopener noreferrer" title="GitHub · architect0509/meow-PDF" aria-label="GitHub 저장소 열기"><i data-i="github"></i></a>
   </header>
 
+  <div class="tabbar" id="tabbar" aria-label="문서 탭">
+    <div class="tabs" id="tabList" role="tablist"></div>
+    <button class="tab-add" id="tabAdd" title="새 탭에 빈 문서 추가" aria-label="새 탭 추가">+</button>
+    <button class="tab-open" id="tabOpen" title="새 탭에서 파일 불러오기">불러오기</button>
+  </div>
+
   <div class="toolbar needs-doc" role="toolbar" aria-label="편집 도구">
-    <button class="tool" data-tool="textselect" title="PDF 글자 선택 · 복사 (1)"><i data-i="textcursor"></i><span>글자 선택</span><kbd>1</kbd></button>
-    <button class="tool" data-tool="select" title="개체 선택 · 이동 · 크기 조절 (2)"><i data-i="cursor"></i><span>개체</span><kbd>2</kbd></button>
+    <button class="tool" data-tool="select" title="선택 — 글자 드래그(복사) · 글자 클릭(바로 수정) · 개체 선택/이동/크기 조절 (1 · 2)"><i data-i="cursor"></i><span>선택</span><kbd>1</kbd></button>
     <div class="sep"></div>
     <button class="tool" data-tool="highlight" title="강조표시 (Q)"><i data-i="highlighter"></i><span>강조표시</span><kbd>Q</kbd></button>
     <button class="tool" data-tool="pen" title="그리기 (W)"><i data-i="pen"></i><span>그리기</span><kbd>W</kbd></button>
@@ -457,9 +521,15 @@ svg{width:20px;height:20px;flex:none;display:block}
     </section>
 
     <aside id="layers" aria-label="레이어">
-      <div class="side-head"><span>레이어</span><span id="layerCount"></span></div>
+      <div class="ptabs" role="tablist"><button class="ptab on" data-ptab="layers" role="tab">레이어</button><button class="ptab" data-ptab="notes" role="tab">노트</button><span id="layerCount"></span></div>
       <div class="layer-list" id="layerList"></div>
       <div class="layer-foot"><button id="mergeSelBtn" title="Ctrl/Shift+클릭으로 여러 레이어를 선택하세요" disabled><i data-i="merge"></i><span>선택 병합</span></button><button id="mergeAllBtn" title="보이는 레이어를 모두 하나로 합쳐요" disabled><i data-i="merge"></i><span>모두 병합</span></button></div>
+      <div class="notes-pane" id="notesPane">
+        <div class="note-tabs" id="noteTabs" role="tablist" aria-label="노트 페이지"></div>
+        <input class="note-title" id="noteTitle" placeholder="노트 제목 (선택)" aria-label="노트 제목" maxlength="80">
+        <textarea id="noteText" placeholder="여기에 노트를 작성하세요…" aria-label="노트 내용" spellcheck="false"></textarea>
+        <div class="note-foot"><span class="stat" id="noteStat"></span><button id="noteDel" title="이 노트 페이지 삭제">삭제</button><button id="noteExportOne" title="현재 노트 페이지를 .txt로 내보내기">현재 .txt</button><button id="noteExportAll" title="모든 노트 페이지를 .txt 하나로 내보내기">전체 .txt</button></div>
+      </div>
     </aside>
   </div>
 </div>
@@ -582,6 +652,7 @@ Object.assign(ICONS, {
   grid:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
   printer:'<path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/>',
   merge:'<path d="m8 6 4-4 4 4"/><path d="M12 2v10.3a4 4 0 0 1-1.17 2.87L4 22"/><path d="m20 22-5-5"/>',
+  rows:'<rect x="3" y="3" width="18" height="7" rx="1.5"/><rect x="3" y="14" width="18" height="7" rx="1.5"/>',
   github:'<path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/>'
 });
 document.querySelectorAll('[data-i]').forEach(el => { el.outerHTML = svg(el.dataset.i); });
@@ -595,7 +666,7 @@ const state = {
   pages: [],            // {id, src:{doc,index}|null, w, h, annots:[]}
   docs: new Map(),      // docId -> {pdf, bytes}
   images: new Map(),    // imgId -> {img, dataUrl}
-  tool: 'textselect',
+  tool: 'select',
   spread: false,
   zoom: 1, scale: PT,
   currentId: null,
@@ -609,6 +680,7 @@ const state = {
   pageSel: new Set(),
   layerSel: new Set(),
   listView: false,
+  notes: [{ id: 'n0', title: '', text: '' }], noteIdx: 0,
   pageAnchor: null,
   present: false,
   laser: false,
@@ -626,6 +698,7 @@ const views = new Map();        // pageId -> view
 const visible = new Set();
 const pageCache = new Map();
 let drag = null, editor = null;
+const tabs = []; let activeTab = null;
 
 const pageById = id => state.pages.find(p => p.id === id);
 const idxOf = id => state.pages.findIndex(p => p.id === id);
@@ -707,6 +780,7 @@ function updateTitle() {
   n.innerHTML = '';
   n.append(document.createTextNode(state.pages.length ? state.fileName : 'Meow-PDF'));
   if (state.dirty) { const s = document.createElement('span'); s.className = 'dirty-dot'; s.title = '저장하지 않은 변경 사항'; n.appendChild(s); }
+  renderTabs();
   document.title = (state.dirty ? '• ' : '') + (state.pages.length ? state.fileName + ' – ' : '') + 'Meow-PDF';
 }
 
@@ -923,6 +997,27 @@ function createView(p) {
   over.addEventListener('pointerup', e => onUp(e, p.id));
   over.addEventListener('pointercancel', () => cancelDrag(p.id));
   over.addEventListener('dblclick', e => onDbl(e, p.id));
+  // 선택 도구: 개체 위에서는 개체 조작, 그 밖에서는 PDF 글자 선택/클릭 편집으로 이벤트를 넘긴다.
+  el.addEventListener('pointermove', e => {
+    if (state.tool !== 'select' || drag || e.buttons) return;
+    const pp = pageById(p.id); if (!pp) return;
+    over.style.pointerEvents = annotHitAt(pp, pagePoint(e, over)) ? 'auto' : 'none';
+  });
+  let tdown = null;
+  tl.addEventListener('pointerdown', e => {
+    if ((e.pointerType === 'mouse' && e.button !== 0) || state.tool !== 'select') { tdown = null; return; }
+    tdown = { x: e.clientX, y: e.clientY, span: e.target.closest ? e.target.closest('span') : null };
+    if (state.currentId !== p.id) setCurrent(p.id);
+    if (state.selected) selectObj(null);
+  });
+  tl.addEventListener('pointerup', e => {
+    const d = tdown; tdown = null;
+    if (!d || !d.span || state.tool !== 'select') return;
+    if (Math.hypot(e.clientX - d.x, e.clientY - d.y) > 5) return;
+    const sel = window.getSelection();
+    if (sel && !sel.isCollapsed) return;
+    editPdfText(p.id, d.span);
+  });
 
   tEl.addEventListener('click', e => {
     if (e.target.closest('.thumb-actions')) return;
@@ -947,13 +1042,13 @@ function createView(p) {
   tEl.addEventListener('dragover', e => {
     if ((!thumbDrag && !groupDrag) || thumbDrag === p.id) return;
     e.preventDefault(); e.dataTransfer.dropEffect = 'move';
-    const r = tEl.getBoundingClientRect(), after = e.clientY > r.top + r.height / 2;
+    const r = tEl.getBoundingClientRect(), after = app.classList.contains('vmode') ? e.clientX > r.left + r.width / 2 : e.clientY > r.top + r.height / 2;
     clearDropMarks(); tEl.classList.add(after ? 'drop-after' : 'drop-before');
   });
   tEl.addEventListener('drop', e => {
     if (!thumbDrag && !groupDrag) return;
     e.preventDefault();
-    const r = tEl.getBoundingClientRect(), after = e.clientY > r.top + r.height / 2;
+    const r = tEl.getBoundingClientRect(), after = app.classList.contains('vmode') ? e.clientX > r.left + r.width / 2 : e.clientY > r.top + r.height / 2;
     clearDropMarks();
     if (groupDrag) { const gd = groupDrag; groupDrag = null; moveGroup(gd, p.id, after); return; }
     const from = thumbDrag; thumbDrag = null;
@@ -1144,7 +1239,7 @@ function setCurrent(id) {
   if (v) {
     v.tEl.classList.add('active');
     const tr = thumbsEl.getBoundingClientRect(), r = v.tEl.getBoundingClientRect();
-    if (r.top < tr.top || r.bottom > tr.bottom) v.tEl.scrollIntoView({ block: 'nearest' });
+    if (r.top < tr.top || r.bottom > tr.bottom || r.left < tr.left || r.right > tr.right) v.tEl.scrollIntoView({ block: 'nearest', inline: 'nearest' });
   }
   updatePageInfo(); scheduleLayers(); markGroupHeads();
 }
@@ -1421,6 +1516,7 @@ function onUp(e, id) {
   } else if (d.kind === 'move' || d.kind === 'resize') {
     if (d.moved) commit();
     touch(id);
+    if (!d.moved && d.kind === 'move' && d.obj.type === 'text') { selectObj(null); openTextEditor(id, d.obj.x, d.obj.y, d.obj); }
   } else if (d.kind === 'erase') {
     if (d.any) commit();
   } else if (d.kind === 'text') {
@@ -1447,6 +1543,50 @@ function onDbl(e, id) {
     const o = p.annots[i];
     if (o.type === 'text' && hit(o, x, y, tol)) { selectObj(null); openTextEditor(id, o.x, o.y, o); return; }
   }
+}
+function annotHitAt(p, pt) {
+  const s = state.scale;
+  const sel = state.selected && state.selected.pageId === p.id ? p.annots.find(a => a.id === state.selected.objId) : null;
+  if (sel) {
+    const b = bbox(sel);
+    if (Math.hypot(pt[0] - (b.x + b.w + 3 / s), pt[1] - (b.y + b.h + 3 / s)) <= 12 / s) return true;
+  }
+  for (let i = p.annots.length - 1; i >= 0; i--) if (hit(p.annots[i], pt[0], pt[1], 6 / s)) return true;
+  return false;
+}
+// PDF 안의 글자 조각을 클릭하면: 원본 글자를 같은 색으로 덮고 그 위에 수정 가능한 텍스트 개체를 만든다.
+function editPdfText(id, span) {
+  const p = pageById(id), v = views.get(id); if (!p || !v) return;
+  const text = span.textContent || ''; if (!text.trim()) return;
+  const s = state.scale, orr = v.over.getBoundingClientRect(), r = span.getBoundingClientRect();
+  const x = (r.left - orr.left) / s, y = (r.top - orr.top) / s, w = r.width / s, h = r.height / s;
+  if (!(w > 0 && h > 0)) return;
+  const size = clamp(Math.round(h * 10) / 10, 6, 96);
+  let bg = '#ffffff', fg = '#000000';
+  try {
+    const c = v.base, k = c.width / (orr.width || 1);
+    const sx = clamp(Math.floor((r.left - orr.left) * k), 0, c.width - 1), sy = clamp(Math.floor((r.top - orr.top) * k), 0, c.height - 1);
+    const sw = Math.max(1, Math.min(c.width - sx, Math.ceil(r.width * k))), sh = Math.max(1, Math.min(c.height - sy, Math.ceil(r.height * k)));
+    const d = c.getContext('2d').getImageData(sx, sy, sw, sh).data;
+    const buckets = new Map();
+    for (let i = 0; i < d.length; i += 4) {
+      const key = ((d[i] >> 4) << 8) | ((d[i + 1] >> 4) << 4) | (d[i + 2] >> 4);
+      const b = buckets.get(key) || [0, 0, 0, 0]; b[0] += d[i]; b[1] += d[i + 1]; b[2] += d[i + 2]; b[3]++; buckets.set(key, b);
+    }
+    let top = null; for (const b of buckets.values()) if (!top || b[3] > top[3]) top = b;
+    if (top) {
+      const m = [top[0] / top[3], top[1] / top[3], top[2] / top[3]];
+      bg = '#' + m.map(n => Math.round(n).toString(16).padStart(2, '0')).join('');
+      let far = 0, fc = null;
+      for (let i = 0; i < d.length; i += 4) { const dd = (d[i] - m[0]) ** 2 + (d[i + 1] - m[1]) ** 2 + (d[i + 2] - m[2]) ** 2; if (dd > far) { far = dd; fc = [d[i], d[i + 1], d[i + 2]]; } }
+      if (fc && far > 60 * 60) fg = '#' + fc.map(n => n.toString(16).padStart(2, '0')).join('');
+      else fg = (m[0] * 0.3 + m[1] * 0.59 + m[2] * 0.11) > 140 ? '#000000' : '#ffffff';
+    }
+  } catch (err) { /* 샘플링 실패 → 흰 배경 / 검정 글자 */ }
+  const ff = (span.style.fontFamily || '').toLowerCase();
+  const font = /mono|courier/.test(ff) ? 'mono' : (/serif/.test(ff) && !/sans/.test(ff)) ? 'serif' : 'sans';
+  const pad = size * 0.1;
+  openTextEditor(id, x, y - (LH - 1) * size / 2, null, { text, size, color: fg, font, cover: { x: x - pad, y: y - pad, w: w + pad * 2, h: h + pad * 2, fill: bg } });
 }
 function hoverCursor(e, id) {
   const p = pageById(id), v = views.get(id); if (!p || !v) return;
@@ -1479,12 +1619,12 @@ function deleteSelected() {
 }
 
 /* ════════════ 텍스트 편집기 ════════════ */
-function openTextEditor(id, x, y, obj) {
+function openTextEditor(id, x, y, obj, init) {
   finishEditor();
   const v = views.get(id), p = pageById(id); if (!v || !p) return;
-  const src = obj || settings.text;
+  const src = obj || init || settings.text;
   const ta = document.createElement('textarea');
-  ta.className = 'text-editor'; ta.spellcheck = false; ta.rows = 1; ta.value = obj ? obj.text : '';
+  ta.className = 'text-editor'; ta.spellcheck = false; ta.rows = 1; ta.value = obj ? obj.text : (init ? init.text : '');
   ta.style.left = x * state.scale + 'px'; ta.style.top = y * state.scale + 'px';
   ta.style.color = src.color;
   ta.setAttribute('aria-label', '텍스트 입력');
@@ -1492,7 +1632,7 @@ function openTextEditor(id, x, y, obj) {
     const e = editor; if (!e) return;
     ta.style.fontFamily = fontCss(e); ta.style.fontWeight = e.bold ? '700' : '400'; ta.style.fontStyle = e.italic ? 'italic' : 'normal';
     ta.style.fontSize = e.size * state.scale + 'px';
-    ta.style.background = e.fill || 'rgba(255,255,255,.55)';
+    ta.style.background = e.fill || (e.init && e.init.cover.fill) || 'rgba(255,255,255,.55)';
     const m = textMetrics({ text: ta.value || ' ', size: e.size, font: e.font, bold: e.bold, italic: e.italic });
     ta.style.width = Math.max(e.size * state.scale * 3, (m.w + e.size * 0.6) * state.scale) + 'px';
     ta.style.height = (m.h * state.scale + 2) + 'px';
@@ -1507,10 +1647,11 @@ function openTextEditor(id, x, y, obj) {
     if (editor && editor.ta === ta) finishEditor();
   });
   v.el.appendChild(ta);
-  editor = { id, ta, obj, x: obj ? obj.x : x, y: obj ? obj.y : y, size: src.size, color: src.color, font: src.font || 'sans', bold: !!src.bold, italic: !!src.italic, fill: src.fill || null, fit };
+  editor = { id, ta, obj, x: obj ? obj.x : x, y: obj ? obj.y : y, size: src.size, color: src.color, font: src.font || 'sans', bold: !!src.bold, italic: !!src.italic, fill: src.fill || null, fit, init: init || null };
   state.editingId = obj ? obj.id : null;
   fit(); drawOverlay(id);
   ta.focus(); ta.setSelectionRange(ta.value.length, ta.value.length);
+  if (state.tool === 'select') renderOptions();
 }
 function finishEditor() {
   if (!editor) return;
@@ -1523,20 +1664,30 @@ function finishEditor() {
     if (!text.trim()) { p.annots = p.annots.filter(a => a.id !== o.id); if (state.selected && state.selected.objId === o.id) state.selected = null; }
     else { o.text = text; o.size = e.size; o.color = e.color; o.font = e.font; o.bold = e.bold; o.italic = e.italic; o.fill = e.fill; }
     commit();
+  } else if (e.init) {
+    const i = e.init, changed = text !== i.text.replace(/\s+$/, '') || e.size !== i.size || e.color !== i.color || e.font !== i.font || e.bold || e.italic;
+    if (changed) {
+      const c = i.cover;
+      p.annots.push({ id: uid('o'), type: 'rect', x: c.x, y: c.y, w: c.w, h: c.h, color: c.fill, width: 0, fill: c.fill, fillAlpha: 1, cover: true });
+      if (text.trim()) p.annots.push({ id: uid('o'), type: 'text', x: e.x, y: e.y, text, size: e.size, color: e.color, font: e.font, bold: e.bold, italic: e.italic, fill: null });
+      commit();
+    }
   } else if (text.trim()) {
     p.annots.push({ id: uid('o'), type: 'text', x: e.x, y: e.y, text, size: e.size, color: e.color, font: e.font, bold: e.bold, italic: e.italic, fill: e.fill });
     commit();
   }
   touch(e.id);
+  if (state.tool === 'select') renderOptions();
 }
 
 /* ════════════ 도구 · 옵션 바 ════════════ */
 function setTool(t) {
   finishEditor();
   state.tool = t;
+  document.querySelectorAll('.page .over').forEach(o => { o.style.pointerEvents = ''; });
   document.querySelectorAll('.tool[data-tool]').forEach(b => b.classList.toggle('active', b.dataset.tool === t));
-  if (t !== 'textselect') { const sel = window.getSelection(); if (sel) sel.removeAllRanges(); }
-  ['textselect', 'select', 'highlight', 'pen', 'line', 'shape', 'eraser', 'text'].forEach(n => stage.classList.toggle('tool-' + n, n === t));
+  if (t !== 'select') { const sel = window.getSelection(); if (sel) sel.removeAllRanges(); }
+  ['select', 'highlight', 'pen', 'line', 'shape', 'eraser', 'text'].forEach(n => stage.classList.toggle('tool-' + n, n === t));
   if (t !== 'select' && state.selected) selectObj(null);
   updateEraserCursor(); updateBrushCursor();
   renderOptions();
@@ -1544,18 +1695,32 @@ function setTool(t) {
 document.querySelectorAll('.tool[data-tool]').forEach(b => b.addEventListener('click', () => setTool(b.dataset.tool)));
 
 const SHAPES = [['rect', '사각형'], ['ellipse', '원']];
+const QUICK = ['#111111', '#e53935', '#fdd835', '#43a047', '#1e88e5'];
+const HL_QUICK = ['#ffeb3b', '#a5ff5c', '#ff80ab', '#64d8ff', '#ffb74d'];
+const HEX6 = /^#[0-9a-f]{6}$/i;
+function loadRecent() {
+  try { const a = JSON.parse(localStorage.getItem('meowRecent') || '[]'); return Array.isArray(a) ? a.filter(c => HEX6.test(c)).slice(0, 5) : []; } catch (e) { return []; }
+}
+settings.recent = loadRecent();
+function pushRecent(c) {
+  if (!HEX6.test(c || '')) return;
+  c = c.toLowerCase();
+  settings.recent = [c, ...settings.recent.filter(x => x !== c)].slice(0, 5);
+  try { localStorage.setItem('meowRecent', JSON.stringify(settings.recent)); } catch (e) { /* ignore */ }
+}
 const swMk = (c, cur, attr) => `<button class="swatch${String(cur || '').toLowerCase() === c.toLowerCase() ? ' on' : ''}" ${attr}="${c}" style="--c:${c}" title="${c}" aria-label="색상 ${c}"></button>`;
-function colorBox(kind, colors, cur, extra, withNone) {
+function colorBox(kind, quick, cur, withNone) {
   const attr = kind === 'fill' ? 'data-fill' : 'data-color', custom = kind === 'fill' ? 'data-fillcustom' : 'data-custom';
   const none = withNone ? `<button class="swatch none${cur ? '' : ' on'}" data-fill="none" title="투명" aria-label="투명"></button>` : '';
-  const val = /^#[0-9a-f]{6}$/i.test(cur || '') ? cur : '#ffffff';
-  return `<div class="colorbox"><div class="crow">${none}${colors.map(c => swMk(c, cur, attr)).join('')}` +
-    `<input type="color" class="bigcolor" value="${val}" ${custom} title="사용자 지정 색상" aria-label="사용자 지정 색상">` +
-    `<button class="eyedrop" data-eyedrop="${kind}" title="스포이드 — 화면에서 색 추출" aria-label="스포이드">${svg('pipette')}</button></div>` +
-    (extra ? `<div class="crow">${extra.map(c => swMk(c, cur, attr)).join('')}</div>` : '') + '</div>';
+  const val = HEX6.test(cur || '') ? cur : '#ffffff';
+  const rec = Array.from({ length: 5 }, (_, i) => settings.recent[i] ? swMk(settings.recent[i], cur, attr) : '<span class="swatch ghost" aria-hidden="true"></span>').join('');
+  return `<div class="colorbox"><div class="cgrid"><div class="crow">${none}${quick.slice(0, withNone ? 4 : 5).map(c => swMk(c, cur, attr)).join('')}</div>` +
+    `<div class="crow rec" title="최근에 사용한 색상">${rec}</div></div>` +
+    `<input type="color" class="bigcolor" value="${val}" ${custom} title="색상 팔레트 · 사용자 지정" aria-label="색상 팔레트">` +
+    `<button class="eyedrop" data-eyedrop="${kind}" title="스포이드 — 화면에서 색 추출" aria-label="스포이드">${svg('pipette')}</button></div>`;
 }
-const colorGrp = (colors, cur, extra) => `<div class="grp top"><label>색상</label>${colorBox('color', colors, cur, extra, false)}</div>`;
-const fillGrp = (cur, label) => `<div class="grp top"><label>${label || '채우기'}</label>${colorBox('fill', PALETTE, cur, PASTEL, true)}</div>`;
+const colorGrp = (colors, cur) => `<div class="grp"><label>색상</label>${colorBox('color', colors === HL_PALETTE ? HL_QUICK : QUICK, cur, false)}</div>`;
+const fillGrp = (cur, label) => `<div class="grp"><label>${label || '채우기'}</label>${colorBox('fill', QUICK, cur, true)}</div>`;
 function selectedObj() {
   if (!state.selected) return null;
   const p = pageById(state.selected.pageId);
@@ -1572,6 +1737,7 @@ function fontCtl(o) {
     `<button class="fmt${o.italic ? ' on' : ''}" data-fmt="italic" title="기울임꼴" aria-label="기울임꼴" aria-pressed="${!!o.italic}"><i>I</i></button></div>`;
 }
 function setTextProp(prop, val) {
+  if (editor && state.tool === 'select') { editor[prop] = val; editor.fit(); renderOptions(); return; }
   if (state.tool === 'text') {
     settings.text[prop] = val;
     if (editor) { editor[prop] = val; editor.fit(); }
@@ -1584,46 +1750,46 @@ function setTextProp(prop, val) {
 function renderOptions() {
   const t = state.tool; let h = '';
   const range = (label, key, min, max, val, unit) =>
-    `<div class="grp"><label>${label}</label><input type="range" aria-label="${label}" min="${min}" max="${max}" step="1" value="${val}" data-range="${key}" data-unit="${unit}"><span class="val">${val}${unit}</span></div>`;
+    `<div class="grp rg"><label>${label}</label><input type="range" aria-label="${label}" min="${min}" max="${max}" step="1" value="${val}" data-range="${key}" data-unit="${unit}"><span class="val">${val}${unit}</span></div>`;
   const seg = (attr, items, cur, label) => `<div class="seg" role="group" aria-label="${label}">${items.map(([k, n]) => `<button ${attr}="${k}" class="${cur === k ? 'on' : ''}">${n}</button>`).join('')}</div>`;
+  const hint = x => `<span class="hint" tabindex="0" title="${x}" aria-label="${x}">?</span>`;
   if (t === 'pen') {
-    h = colorGrp(PALETTE, settings.pen.color, PASTEL) + range('굵기', 'pen.width', 1, 24, settings.pen.width, 'pt') +
-      range('불투명도', 'pen.alpha', 10, 100, settings.pen.alpha, '%') + '<span>커서의 원이 붓 굵기예요.</span>';
+    h = colorGrp(PALETTE, settings.pen.color) + range('굵기', 'pen.width', 1, 24, settings.pen.width, 'pt') +
+      range('불투명', 'pen.alpha', 10, 100, settings.pen.alpha, '%') + hint('커서의 원이 붓 굵기예요.');
   } else if (t === 'line') {
     h = seg('data-lstyle', [['line', '직선'], ['arrow', '화살표']], settings.line.arrow ? 'arrow' : 'line', '선 종류') +
-      colorGrp(PALETTE, settings.line.color, PASTEL) + range('굵기', 'line.width', 1, 24, settings.line.width, 'pt') +
-      range('불투명도', 'line.alpha', 10, 100, settings.line.alpha, '%') + '<span>드래그해서 직선을 그려요 · Shift: 15° 단위</span>';
+      colorGrp(PALETTE, settings.line.color) + range('굵기', 'line.width', 1, 24, settings.line.width, 'pt') +
+      range('불투명', 'line.alpha', 10, 100, settings.line.alpha, '%') + hint('드래그해서 직선을 그려요 · Shift: 15° 단위');
   } else if (t === 'highlight') {
     h = seg('data-hstyle', [['brush', '붓형'], ['line', '직선형']], settings.highlight.style, '강조 방식') +
       colorGrp(HL_PALETTE, settings.highlight.color) + range('굵기', 'highlight.width', 6, 44, settings.highlight.width, 'pt') +
-      `<span>${settings.highlight.style === 'line' ? '드래그한 구간을 곧은 띠로 칠해요 (거의 수평이면 자동으로 반듯하게)' : '자유롭게 붓으로 칠해요.'}</span>`;
+      hint(settings.highlight.style === 'line' ? '드래그한 구간을 곧은 띠로 칠해요 (거의 수평이면 자동으로 반듯하게)' : '자유롭게 붓으로 칠해요.');
   } else if (t === 'shape') {
     h = `<div class="seg" role="group" aria-label="도형 종류">${SHAPES.map(([k, n]) => `<button data-shape="${k}" class="${settings.shape.kind === k ? 'on' : ''}">${svg(k)}${n}</button>`).join('')}</div>` +
-      colorGrp(PALETTE, settings.shape.color, PASTEL) + fillGrp(settings.shape.fill) +
-      range('채우기 투명도', 'shape.fillAlpha', 10, 100, settings.shape.fillAlpha, '%') +
-      range('선 굵기 (0=없음)', 'shape.width', 0, 20, settings.shape.width, 'pt') + '<span>Shift: 정사각형 · 정원</span>';
+      colorGrp(PALETTE, settings.shape.color) + fillGrp(settings.shape.fill) +
+      range('채움 투명도', 'shape.fillAlpha', 10, 100, settings.shape.fillAlpha, '%') +
+      range('선 굵기', 'shape.width', 0, 20, settings.shape.width, 'pt') + hint('선 굵기 0 = 선 없음 · Shift: 정사각형 · 정원');
   } else if (t === 'text') {
-    h = fontCtl(settings.text) + colorGrp(PALETTE, settings.text.color, PASTEL) + fillGrp(settings.text.fill, '글자 배경') +
-      range('글자 크기', 'text.size', 8, 96, settings.text.size, 'pt') +
-      '<span>페이지를 클릭해 입력 · Esc 또는 바깥 클릭으로 완료</span>';
-  } else if (t === 'textselect') {
-    h = '<span>PDF 글자를 드래그해 선택하고 Ctrl+C로 복사하세요.</span><button class="opt-btn" data-copy>선택한 글자 복사</button>';
+    h = fontCtl(settings.text) + colorGrp(PALETTE, settings.text.color) + fillGrp(settings.text.fill, '글자 배경') +
+      range('크기', 'text.size', 8, 96, settings.text.size, 'pt') + hint('페이지를 클릭해 입력 · Esc 또는 바깥 클릭으로 완료');
   } else if (t === 'eraser') {
     const am = settings.eraser.mode === 'area';
     h = seg('data-emode', [['stroke', '획 지우개'], ['area', '영역 지우개']], am ? 'area' : 'stroke', '지우개 방식') +
-      (am ? range('지우개 크기', 'eraser.size', 4, 80, settings.eraser.size, 'pt') + '<span>그림·도형을 부분적으로 지워요. 텍스트·이미지·채운 도형은 획 지우개로 지우세요.</span>'
-          : '<span>클릭하거나 드래그한 개체(그림·도형·텍스트·이미지)를 통째로 지워요.</span>');
+      (am ? range('크기', 'eraser.size', 4, 80, settings.eraser.size, 'pt') + hint('그림·도형을 부분적으로 지워요. 텍스트·이미지·채운 도형은 획 지우개로 지우세요.')
+          : hint('클릭하거나 드래그한 개체(그림·도형·텍스트·이미지)를 통째로 지워요.'));
   } else {
     const o = selectedObj();
-    if (o) {
+    if (editor) {
+      h = fontCtl(editor) + colorGrp(PALETTE, editor.color) + range('글자 크기', 'edit.size', 8, 96, Math.round(editor.size), 'pt') + hint('Esc 또는 바깥 클릭으로 완료');
+    } else if (o) {
       const strokeLike = o.type === 'pen' || o.type === 'line' || o.type === 'arrow';
       if (o.type === 'text') h += fontCtl(o) + range('글자 크기', 'sel.size', 8, 96, Math.round(o.size), 'pt');
-      if (o.color && !(o.type !== 'text' && o.width === 0 && (o.type === 'rect' || o.type === 'ellipse') && false)) h += colorGrp(PALETTE.concat(o.type === 'highlight' ? HL_PALETTE : []), o.color, o.type === 'highlight' ? null : PASTEL);
+      if (o.color) h += colorGrp(o.type === 'highlight' ? HL_PALETTE : PALETTE, o.color);
       if (o.type === 'text' || o.type === 'rect' || o.type === 'ellipse') h += fillGrp(o.fill, o.type === 'text' ? '글자 배경' : '채우기');
-      if (o.type === 'rect' || o.type === 'ellipse') h += range('채우기 투명도', 'sel.fillAlpha', 10, 100, Math.round((o.fillAlpha == null ? 1 : o.fillAlpha) * 100), '%');
-      if (strokeLike) h += range('불투명도', 'sel.alpha', 10, 100, Math.round((o.alpha == null ? 1 : o.alpha) * 100), '%');
-      h += `<button class="danger-btn" data-del>${svg('trash')}삭제</button><span>모서리 핸들로 크기 조절 · 텍스트는 더블클릭으로 수정</span>`;
-    } else h = '<span>개체를 클릭해 선택하고 드래그해서 이동하세요. Delete 키로 삭제합니다.</span>';
+      if (o.type === 'rect' || o.type === 'ellipse') h += range('채움 투명도', 'sel.fillAlpha', 10, 100, Math.round((o.fillAlpha == null ? 1 : o.fillAlpha) * 100), '%');
+      if (strokeLike) h += range('불투명', 'sel.alpha', 10, 100, Math.round((o.alpha == null ? 1 : o.alpha) * 100), '%');
+      h += `<button class="danger-btn" data-del>${svg('trash')}삭제</button>` + hint('모서리 핸들로 크기 조절 · 글자 개체는 클릭하면 바로 수정');
+    } else h = '<span>개체를 클릭해 선택 · 드래그해서 이동 · PDF 글자는 드래그하면 복사, 클릭하면 바로 수정할 수 있어요.</span><button class="opt-btn" data-copy>선택한 글자 복사</button>';
   }
   optbar.innerHTML = h;
 }
@@ -1646,6 +1812,7 @@ optbar.addEventListener('input', e => {
   if (!e.target.matches('[data-range]')) return;
   const [k, f] = e.target.dataset.range.split('.'), val = +e.target.value;
   e.target.nextElementSibling.textContent = val + (e.target.dataset.unit || '');
+  if (k === 'edit') { if (editor) { editor.size = val; editor.fit(); } return; }
   if (k === 'sel') {
     const o = selectedObj();
     if (o) {
@@ -1668,6 +1835,8 @@ optbar.addEventListener('change', e => {
 });
 function applyColor(c, live) {
   const t = state.tool;
+  if (!live) pushRecent(c);
+  if (editor && t === 'select') { editor.color = c; editor.ta.style.color = c; if (!live) renderOptions(); return; }
   if (t === 'select') {
     const o = selectedObj(); if (!o) return;
     o.color = c; touch(state.selected.pageId);
@@ -1681,6 +1850,7 @@ function applyColor(c, live) {
 }
 function applyFill(c, live) {
   const val = c === 'none' ? null : c, t = state.tool;
+  if (!live && val) pushRecent(val);
   if (t === 'select') {
     const o = selectedObj();
     if (!o || !(o.type === 'text' || o.type === 'rect' || o.type === 'ellipse')) return;
@@ -1798,23 +1968,98 @@ document.addEventListener('paste', async e => {
 });
 
 /* ════════════ 파일 열기 ════════════ */
-async function confirmDiscard() {
-  if (!state.dirty) return true;
-  return modal({ title: '변경 사항이 저장되지 않았어요', message: '저장하지 않고 계속하면 지금까지 편집한 내용이 사라져요.', ok: '계속', cancel: '취소' });
+async function confirmDiscard() { return true; }   // 열기/새 문서는 새 탭에서 열리므로 현재 문서는 사라지지 않는다
+const newNote = () => ({ id: uid('n'), title: '', text: '' });
+function destroyDocs(map) { for (const d of map.values()) { try { d.pdf.destroy(); } catch (e) { /* ignore */ } } }
+function liveSnap() {
+  return { pages: state.pages, docs: state.docs, images: state.images, groups: state.groups, gCollapsed: state.gCollapsed, handles: state.handles,
+    saveFormat: state.saveFormat, fileName: state.fileName, dirty: state.dirty, hist: { stack: hist.stack, idx: hist.idx }, currentId: state.currentId,
+    zoom: state.zoom, scroll: [viewer.scrollLeft, viewer.scrollTop], notes: state.notes, noteIdx: state.noteIdx };
+}
+function clearLive() {
+  finishEditor();
+  for (const id of [...views.keys()]) removeView(id);
+  state.docs = new Map(); state.images = new Map();
+  state.pages = []; state.selected = null; state.currentId = null; state.editingId = null;
+  state.handles = { pdf: null, mpdf: null }; state.groups = []; state.gCollapsed = new Set(); state.pageSel = new Set(); state.pageAnchor = null; state.layerSel = new Set();
+  state.notes = [newNote()]; state.noteIdx = 0;
+  hist.stack = []; hist.idx = -1;
 }
 function resetDocument() {
   finishEditor();
-  for (const id of [...views.keys()]) removeView(id);
-  for (const d of state.docs.values()) { try { d.pdf.destroy(); } catch (e) { /* ignore */ } }
-  state.docs.clear(); state.images.clear(); pageCache.clear(); textCache.clear();
-  state.pages = []; state.selected = null; state.currentId = null;
-  state.handles = { pdf: null, mpdf: null }; state.groups = []; state.gCollapsed = new Set(); state.pageSel = new Set(); state.pageAnchor = null; state.layerSel = new Set();
+  const prev = activeTab;
+  if (prev) prev.snap = liveSnap();
+  clearLive();
+  activeTab = { id: uid('t'), snap: null };
+  tabs.splice(prev ? tabs.indexOf(prev) + 1 : tabs.length, 0, activeTab);
+  renderTabs();
 }
+function applySnap(sn) {
+  state.pages = sn.pages; state.docs = sn.docs; state.images = sn.images; state.groups = sn.groups; state.gCollapsed = sn.gCollapsed;
+  state.handles = sn.handles; state.fileName = sn.fileName; state.notes = sn.notes; state.noteIdx = sn.noteIdx;
+  hist.stack = sn.hist.stack; hist.idx = sn.hist.idx;
+  app.classList.remove('no-doc');
+  setSaveFormat(sn.saveFormat);
+  syncDOM(); setDirty(sn.dirty); updateHistoryButtons();
+  setCurrent(pageById(sn.currentId) ? sn.currentId : state.pages[0].id);
+  setZoom(sn.zoom);
+  redrawAll(); renderOptions(); renderLayers(); renderNotes();
+  requestAnimationFrame(() => { viewer.scrollLeft = sn.scroll[0]; viewer.scrollTop = sn.scroll[1]; });
+}
+function switchTab(id) {
+  const t = tabs.find(x => x.id === id);
+  if (!t || t === activeTab || !t.snap || state.present) return;
+  finishEditor();
+  activeTab.snap = liveSnap();
+  clearLive();
+  activeTab = t; const sn = t.snap; t.snap = null;
+  applySnap(sn);
+  renderTabs();
+}
+async function closeTab(id) {
+  const t = tabs.find(x => x.id === id); if (!t) return;
+  const live = t === activeTab, name = live ? state.fileName : t.snap.fileName;
+  if ((live ? state.dirty : t.snap.dirty) && !await modal({ title: '탭을 닫을까요?', message: `“${name}”의 저장하지 않은 변경 사항이 사라져요.`, ok: '닫기' })) return;
+  const i = tabs.indexOf(t);
+  if (!live) { destroyDocs(t.snap.docs); tabs.splice(i, 1); renderTabs(); return; }
+  finishEditor();
+  const old = state.docs;
+  tabs.splice(i, 1);
+  const next = tabs[i] || tabs[i - 1] || null;
+  clearLive();
+  if (next) { activeTab = next; const sn = next.snap; next.snap = null; applySnap(sn); }
+  else {
+    activeTab = null; app.classList.add('no-doc'); state.fileName = '새 문서.pdf';
+    setSaveFormat('pdf'); syncDOM(); setDirty(false); updateHistoryButtons(); renderLayers(); renderNotes();
+  }
+  destroyDocs(old);
+  renderTabs();
+}
+function renderTabs() {
+  const box = $('#tabList'); if (!box) return;
+  box.innerHTML = '';
+  for (const t of tabs) {
+    const live = t === activeTab, name = live ? state.fileName : t.snap.fileName, dirty = live ? state.dirty : t.snap.dirty;
+    const el = document.createElement('div');
+    el.className = 'tab' + (live ? ' on' : ''); el.dataset.tid = t.id; el.setAttribute('role', 'tab'); el.setAttribute('aria-selected', String(live)); el.title = name;
+    el.innerHTML = `<span class="tab-name"></span>${dirty ? '<span class="dirty-dot sm" title="저장하지 않은 변경 사항"></span>' : ''}<button class="tab-x" title="탭 닫기" aria-label="탭 닫기">${svg('x')}</button>`;
+    el.querySelector('.tab-name').textContent = name;
+    box.appendChild(el);
+  }
+  const on = box.querySelector('.tab.on'); if (on && on.scrollIntoView) on.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+}
+$('#tabList').addEventListener('click', e => {
+  const el = e.target.closest('.tab'); if (!el) return;
+  if (e.target.closest('.tab-x')) closeTab(el.dataset.tid); else switchTab(el.dataset.tid);
+});
+$('#tabList').addEventListener('auxclick', e => { const el = e.target.closest('.tab'); if (el && e.button === 1) { e.preventDefault(); closeTab(el.dataset.tid); } });
+$('#tabAdd').onclick = () => newBlank();
+$('#tabOpen').onclick = () => openDialog();
 function afterLoad(name) {
   state.fileName = name;
   app.classList.remove('no-doc');
   syncDOM(); resetHistory(); setDirty(false);
-  setTool('textselect');
+  setTool('select'); renderNotes();
   setCurrent(state.pages[0].id);
   requestAnimationFrame(() => { fitWidth(1.5); viewer.scrollTop = 0; });
 }
@@ -1991,7 +2236,7 @@ async function buildProject() {
   zip.file('project.json', JSON.stringify({
     format: 'meow-pdf', version: 1, fileName: state.fileName, docs: [...usedDocs], images: imgMeta,
     pages: state.pages.map(p => ({ id: p.id, src: p.src, w: p.w, h: p.h, annots: p.annots, memos: p.memos || [], group: p.group || null, name: p.name || null, note: p.note || null })),
-    groups: state.groups, collapsed: [...state.gCollapsed]
+    groups: state.groups, collapsed: [...state.gCollapsed], notes: state.notes, noteIdx: state.noteIdx
   }));
   return zip.generateAsync({ type: 'uint8array', compression: 'DEFLATE', compressionOptions: { level: 6 } });
 }
@@ -2020,6 +2265,7 @@ async function openProject(file, handle) {
     docs.forEach((v, k) => state.docs.set(k, v)); images.forEach((v, k) => state.images.set(k, v));
     state.pages = pages; state.groups = pj.groups || []; state.gCollapsed = new Set(pj.collapsed || []);
     state.handles = { pdf: null, mpdf: handle || null };
+    if (Array.isArray(pj.notes) && pj.notes.length) { state.notes = pj.notes.map(n => ({ id: uid('n'), title: String(n.title || ''), text: String(n.text || '') })); state.noteIdx = clamp(pj.noteIdx | 0, 0, state.notes.length - 1); }
     setSaveFormat('mpdf');
     afterLoad(file.name);
   } catch (err) { console.error(err); toast('프로젝트(.mpdf) 파일을 열 수 없어요.'); }
@@ -2581,7 +2827,7 @@ async function enterPresentation() {
   finishEditor(); selectObj(null);
   fmtMenu.hidden = true;
   pres.prev = { zoom: state.zoom, spread: state.spread, tool: state.tool };
-  setTool('textselect');
+  setTool('select');
   state.present = true; state.spread = false;
   app.classList.remove('spread-on');
   document.body.classList.add('presenting');
@@ -2596,7 +2842,7 @@ function exitPresentation() {
   setLaser(false);
   document.body.classList.remove('presenting', 'pres-draw');
   presOpts.hidden = true;
-  setTool((pres.prev && pres.prev.tool) || 'textselect');
+  setTool((pres.prev && pres.prev.tool) || 'select');
   presBar.hidden = true; $('#presentBtn').classList.remove('active');
   for (const v of views.values()) v.el.classList.remove('pres-cur');
   if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(() => {});
@@ -2610,7 +2856,7 @@ function exitPresentation() {
 const togglePresentation = () => (state.present ? exitPresentation() : enterPresentation());
 function setLaser(on) {
   if (on && !state.present) return;
-  if (on && PRES_TOOLS.includes(state.tool)) { setTool('textselect'); syncPresTools(); }
+  if (on && PRES_TOOLS.includes(state.tool)) { setTool('select'); syncPresTools(); }
   state.laser = on; laserEl.hidden = !on;
   document.body.classList.toggle('laser-on', on);
   const b = $('#presLaser'); b.classList.toggle('on', on); b.setAttribute('aria-pressed', String(on));
@@ -2619,7 +2865,7 @@ function setLaser(on) {
 function presSetTool(t) {
   if (!state.present) return;
   if (state.laser) setLaser(false);
-  setTool(state.tool === t ? 'textselect' : t);
+  setTool(state.tool === t ? 'select' : t);
   syncPresTools();
 }
 function syncPresTools() {
@@ -3169,14 +3415,92 @@ document.addEventListener('keydown', e => {
   if (plain && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) { e.preventDefault(); stepPage(e.key === 'ArrowRight' ? 1 : -1); return; }
   if (plain && (e.key === 'PageUp' || e.key === 'PageDown')) { e.preventDefault(); stepPage(e.key === 'PageDown' ? 1 : -1); return; }
   if (plain && !e.repeat) {
-    const map = { Digit1: 'textselect', Digit2: 'select', Numpad1: 'textselect', Numpad2: 'select', KeyQ: 'highlight', KeyW: 'pen', KeyE: 'line', KeyA: 'shape', KeyS: 'eraser', KeyD: 'text', KeyZ: '#pasteBtn', KeyX: '#imageBtn', KeyC: '#memoBtn' };
+    const map = { Digit1: 'select', Digit2: 'select', Numpad1: 'select', Numpad2: 'select', KeyQ: 'highlight', KeyW: 'pen', KeyE: 'line', KeyA: 'shape', KeyS: 'eraser', KeyD: 'text', KeyZ: '#pasteBtn', KeyX: '#imageBtn', KeyC: '#memoBtn' };
     const act = map[e.code];
     if (act) { e.preventDefault(); if (act[0] === '#') $(act).click(); else setTool(act); return; }
   }
   if ((e.key === 'Delete' || e.key === 'Backspace') && state.selected) { e.preventDefault(); deleteSelected(); return; }
   if (e.key === 'Escape') { if (state.selected) selectObj(null); }
 });
-window.addEventListener('beforeunload', e => { if (state.dirty) { e.preventDefault(); e.returnValue = ''; } });
+window.addEventListener('beforeunload', e => { if (state.dirty || tabs.some(t => t.snap && t.snap.dirty)) { e.preventDefault(); e.returnValue = ''; } });
+
+/* ════════════ 노트 (레이어 패널의 탭) · 세로 모드 ════════════ */
+const noteTitleEl = $('#noteTitle'), noteTextEl = $('#noteText');
+const curNote = () => state.notes[state.noteIdx] || state.notes[0];
+function noteName(n, i) { return (n.title || '').trim() || '노트 ' + (i + 1); }
+function renderNotes() {
+  const box = $('#noteTabs'); if (!box) return;
+  box.innerHTML = '';
+  state.notes.forEach((n, i) => {
+    const b = document.createElement('button');
+    b.className = 'nchip' + (i === state.noteIdx ? ' on' : ''); b.dataset.n = i; b.textContent = i + 1; b.title = noteName(n, i); b.setAttribute('role', 'tab');
+    box.appendChild(b);
+  });
+  const add = document.createElement('button'); add.className = 'nchip add'; add.dataset.add = '1'; add.textContent = '+'; add.title = '새 노트 페이지'; box.appendChild(add);
+  const n = curNote();
+  if (document.activeElement !== noteTitleEl) noteTitleEl.value = n.title;
+  if (document.activeElement !== noteTextEl) noteTextEl.value = n.text;
+  updateNoteStat();
+}
+function updateNoteStat() {
+  const n = curNote();
+  $('#noteStat').textContent = `${state.noteIdx + 1} / ${state.notes.length} 페이지 · ${n.text.length}자`;
+}
+function noteEdited() { if (!state.dirty && state.pages.length) setDirty(true); updateNoteStat(); }
+noteTextEl.addEventListener('input', () => { curNote().text = noteTextEl.value; noteEdited(); });
+noteTitleEl.addEventListener('input', () => {
+  const n = curNote(); n.title = noteTitleEl.value; noteEdited();
+  const chip = $('#noteTabs').querySelector(`.nchip[data-n="${state.noteIdx}"]`); if (chip) chip.title = noteName(n, state.noteIdx);
+});
+$('#noteTabs').addEventListener('click', e => {
+  const b = e.target.closest('.nchip'); if (!b) return;
+  if (b.dataset.add) { state.notes.push(newNote()); state.noteIdx = state.notes.length - 1; if (state.pages.length) setDirty(true); }
+  else state.noteIdx = +b.dataset.n;
+  renderNotes(); noteTextEl.focus();
+});
+$('#noteDel').onclick = async () => {
+  const n = curNote();
+  if ((n.text || n.title) && !await modal({ title: '노트 페이지 삭제', message: `“${noteName(n, state.noteIdx)}”을(를) 삭제할까요?`, ok: '삭제' })) return;
+  if (state.notes.length <= 1) state.notes = [newNote()]; else state.notes.splice(state.noteIdx, 1);
+  state.noteIdx = clamp(state.noteIdx, 0, state.notes.length - 1);
+  if (state.pages.length) setDirty(true);
+  renderNotes();
+};
+async function exportNotes(all) {
+  const list = all ? state.notes : [curNote()];
+  const text = list.map(n => { const i = state.notes.indexOf(n); const t = `[${i + 1}/${state.notes.length}] ${noteName(n, i)}`; return `${t}\n${'='.repeat(Math.min(40, t.length * 2))}\n${n.text}`; }).join('\n\n\n') + '\n';
+  if (!list.some(n => n.text.trim() || n.title.trim())) { toast('내보낼 노트 내용이 없어요.'); return; }
+  const base = baseName(state.fileName) + ' 노트';
+  const name = (all ? base : base + ' - ' + noteName(curNote(), state.noteIdx).replace(/[\\/:*?"<>|]+/g, '_')) + '.txt';
+  try {
+    const out = await deliverFile(new TextEncoder().encode('﻿' + text), name, 'text/plain;charset=utf-8');
+    if (out) toast('노트를 내보냈어요: ' + out);
+  } catch (err) { console.error(err); toast('노트를 내보내지 못했어요.'); }
+}
+$('#noteExportOne').onclick = () => exportNotes(false);
+$('#noteExportAll').onclick = () => exportNotes(true);
+function setPanelTab(t) {
+  $('#layers').dataset.ptab = t;
+  document.querySelectorAll('.ptab').forEach(b => { const on = b.dataset.ptab === t; b.classList.toggle('on', on); b.setAttribute('aria-selected', String(on)); });
+  if (t === 'notes') { renderNotes(); }
+}
+document.querySelectorAll('.ptab').forEach(b => b.addEventListener('click', () => setPanelTab(b.dataset.ptab)));
+setPanelTab('layers');
+
+function setVMode(on) {
+  app.classList.toggle('vmode', on);
+  const b = $('#vmodeBtn'); b.classList.toggle('on', on); b.setAttribute('aria-pressed', String(on));
+  if (on && state.listView) setListView(false);
+  try { localStorage.setItem('meowVMode', on ? '1' : '0'); } catch (e) { /* ignore */ }
+  if (state.pages.length) requestAnimationFrame(() => fitWidth(1.5));
+}
+$('#vmodeBtn').onclick = () => setVMode(!app.classList.contains('vmode'));
+thumbsEl.addEventListener('wheel', e => {
+  if (e.defaultPrevented || !app.classList.contains('vmode') || e.ctrlKey) return;
+  const d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+  if (!d) return;
+  e.preventDefault(); thumbsEl.scrollLeft += d;
+}, { passive: false });
 
 function applyTheme(t) {
   document.documentElement.dataset.theme = t;
@@ -3193,10 +3517,11 @@ applyTheme(savedTheme === 'light' ? 'light' : 'dark');
 
 if (window.innerWidth > 760) app.classList.remove('sidebar-off');
 if (window.innerWidth > 1000) app.classList.remove('layers-off');
-syncPanelBtns(); renderLayers(); setListView(false);
+syncPanelBtns(); renderLayers(); setListView(false); renderNotes(); renderTabs();
+try { if (localStorage.getItem('meowVMode') === '1') setVMode(true); } catch (e) { /* ignore */ }
 tickClock(); setInterval(tickClock, 5000); setSaveFormat('pdf');
 document.fonts && document.fonts.load('16px "Noto Sans KR"', '가나다ABC').then(() => redrawAll(), () => {});
-setTool('textselect');
+setTool('select');
 updateHistoryButtons();
 updateTitle();
 })();
