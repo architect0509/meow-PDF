@@ -466,6 +466,18 @@ body.rszing,body.rszing *{user-select:none!important}
 .wact{position:sticky;top:0;z-index:2;display:flex;gap:6px;flex-wrap:wrap;padding:6px 8px;background:var(--bar2);border-bottom:1px solid var(--border)}
 .wact button{padding:3px 10px;border-radius:7px;border:1px solid var(--border);color:var(--text);font-size:12px}
 .wact button:hover{background:var(--hover)}
+.recp{position:fixed;left:50%;bottom:76px;transform:translateX(-50%);z-index:70;display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;max-width:calc(100vw - 24px);padding:10px 14px;background:var(--dialog);border:1px solid var(--border);border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.5);font-size:13px}
+.recp[hidden]{display:none}
+.recp .dot{width:12px;height:12px;border-radius:50%;background:#e53935;flex:none}
+.recp.on .dot{animation:recp 1s infinite}
+@keyframes recp{50%{opacity:.25}}
+.recp .tm{font-variant-numeric:tabular-nums;min-width:44px}
+.recp button{padding:6px 12px;border-radius:8px;border:1px solid var(--border);color:var(--text)}
+.recp button:hover{background:var(--hover)}
+.recp button.pri{background:var(--accent);color:#000;border-color:transparent;font-weight:600}
+.recp audio{height:32px;max-width:250px}
+.recp .tip{color:var(--muted);font-size:12px}
+.optbar audio{height:30px;max-width:260px}
 .searchp{position:absolute;top:10px;right:18px;z-index:40;width:min(400px,calc(100% - 36px));display:flex;flex-direction:column;gap:6px;padding:8px;background:var(--dialog);border:1px solid var(--border);border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.45)}
 .searchp[hidden]{display:none}
 .sp-row{display:flex;gap:4px;align-items:center}
@@ -597,6 +609,7 @@ body.rszing,body.rszing *{user-select:none!important}
     <button class="tool" id="pasteBtn" title="클립보드 붙여넣기 (Z / Ctrl+V)"><i data-i="clip"></i><span>붙여넣기</span><kbd>Z</kbd></button>
     <div class="splitbtn"><button class="tool" id="imageBtn" title="이미지 삽입 (X)"><i data-i="image"></i><span>이미지</span><kbd>X</kbd></button><button class="caret" data-menu="image" title="이미지 · 검은 고양이 스티커 · 스프라이트시트 전환" aria-label="이미지 삽입 방식 전환"><i data-i="chevD"></i></button></div>
     <button class="tool" id="memoBtn" title="메모 추가 (C)"><i data-i="memo"></i><span>메모</span><kbd>C</kbd></button>
+    <button class="tool" id="micBtn" title="음성 녹음해서 넣기 (V)"><i data-i="mic"></i><span>음성</span><kbd>V</kbd></button>
     <div class="sep"></div>
     <button class="tool" id="undoBtn" title="실행 취소 (Ctrl+Z)"><i data-i="undo"></i><span>실행 취소</span></button>
     <button class="tool" id="redoBtn" title="다시 실행 (Ctrl+Y)"><i data-i="redo"></i><span>다시 실행</span></button>
@@ -691,6 +704,7 @@ body.rszing,body.rszing *{user-select:none!important}
 </div>
 <div id="laser" hidden></div>
 <div class="menu" id="fmtMenu" hidden></div>
+<div class="recp" id="recP" hidden role="dialog" aria-label="음성 녹음"></div>
 <div class="modal" id="modal" hidden><div class="dialog" role="dialog" aria-modal="true"><h3 id="mTitle"></h3><div id="mBody"></div><div class="actions" id="mActions"></div></div></div>
 <div id="toast" role="status" aria-live="polite"></div>
 <div id="printRoot" aria-hidden="true"></div>
@@ -788,6 +802,7 @@ const ICONS = {
 };
 ICONS.search = '<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>';
 ICONS.bookmark = '<path d="M6 3h12v18l-6-4.5L6 21z"/>';
+ICONS.mic = '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/>';
 const svg = n => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n] || ''}</svg>`;
 Object.assign(ICONS, {
   note:'<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 8h8"/><path d="M8 12h5"/>',
@@ -811,6 +826,7 @@ const state = {
   pages: [],            // {id, src:{doc,index}|null, w, h, annots:[]}
   docs: new Map(),      // docId -> {pdf, bytes}
   images: new Map(),    // imgId -> {img, dataUrl}
+  audios: new Map(),    // audioId -> {blob, mime, dur, url}
   tool: 'select',
   spread: false,
   zoom: 1, scale: PT,
@@ -995,6 +1011,7 @@ function moveFromOrig(o, orig, dx, dy) {
 function resizeFromOrig(o, orig, dx, dy) {
   switch (o.type) {
     case 'rect': case 'ellipse': o.w = Math.max(4, orig.w + dx); o.h = Math.max(4, orig.h + dy); break;
+    case 'audio': break;
     case 'image': { const r = orig.h / orig.w; o.w = Math.max(10, orig.w + (dx + dy / r) / 2); o.h = o.w * r; break; }
     case 'text': { const b = bbox(orig); o.size = clamp(orig.size * (1 + (dx / b.w + dy / b.h) / 2), 6, 300); break; }
     default: {
@@ -1074,6 +1091,19 @@ function drawObj(ctx, o, s) {
       if (o.fill) { const m = textMetrics(o), pad = o.size * 0.2; ctx.fillStyle = o.fill; ctx.fillRect((o.x - pad) * s, (o.y - pad * 0.5) * s, (m.w + pad * 2) * s, (m.h + pad) * s); }
       ctx.fillStyle = o.color; ctx.font = fontStr(o, o.size * s); ctx.textBaseline = 'middle';
       String(o.text).split('\n').forEach((ln, i) => ctx.fillText(ln, o.x * s, (o.y + (i + 0.5) * o.size * LH) * s));
+      ctx.restore(); break;
+    }
+    case 'audio': {
+      ctx.save();
+      const x = o.x * s, y = o.y * s, w = o.w * s, h = o.h * s, r = h / 2;
+      ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r); ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+      ctx.fillStyle = '#dbbe43'; ctx.fill(); ctx.lineWidth = Math.max(1, s * 1); ctx.strokeStyle = 'rgba(0,0,0,.55)'; ctx.stroke();
+      const u = h / 24, cx = x + r, cy = y + h / 2;
+      ctx.fillStyle = '#1b1b1b'; ctx.strokeStyle = '#1b1b1b'; ctx.lineWidth = 1.6 * u; ctx.lineCap = 'round';
+      ctx.beginPath(); ctx.moveTo(cx - 6 * u, cy - 3 * u); ctx.lineTo(cx - 2.5 * u, cy - 3 * u); ctx.lineTo(cx + 2 * u, cy - 7 * u); ctx.lineTo(cx + 2 * u, cy + 7 * u); ctx.lineTo(cx - 2.5 * u, cy + 3 * u); ctx.lineTo(cx - 6 * u, cy + 3 * u); ctx.closePath(); ctx.fill();
+      ctx.beginPath(); ctx.arc(cx + 2 * u, cy, 4.5 * u, -0.9, 0.9); ctx.stroke();
+      const d = Math.round(o.dur || 0), t = Math.floor(d / 60) + ':' + String(d % 60).padStart(2, '0');
+      ctx.font = `600 ${11 * u}px sans-serif`; ctx.textBaseline = 'middle'; ctx.textAlign = 'left'; ctx.fillText(t, x + r * 2 + 1 * u, cy + 0.5 * u);
       ctx.restore(); break;
     }
     case 'image': {
@@ -1717,6 +1747,7 @@ function onDbl(e, id) {
   for (let i = p.annots.length - 1; i >= 0; i--) {
     const o = p.annots[i];
     if (o.type === 'text' && hit(o, x, y, tol)) { selectObj(null); openTextEditor(id, o.x, o.y, o); return; }
+    if (o.type === 'audio' && hit(o, x, y, tol)) { playAudio(o); return; }
   }
 }
 function annotHitAt(p, pt) {
@@ -1979,12 +2010,16 @@ function renderOptions() {
       h = fontCtl(editor) + colorGrp(PALETTE, editor.color) + range('글자 크기', 'edit.size', 8, 96, Math.round(editor.size), 'pt') + hint('Esc 또는 바깥 클릭으로 완료');
     } else if (o) {
       const strokeLike = o.type === 'pen' || o.type === 'line' || o.type === 'arrow';
+      if (o.type === 'audio') {
+        const au = state.audios.get(o.audioId);
+        h += au ? `<audio controls preload="metadata" src="${au.url}" aria-label="녹음 재생"></audio><span class="hint" style="cursor:default;white-space:nowrap;width:auto">${Math.round(o.dur || au.dur || 0)}초</span>` : '<span>음성 데이터를 찾을 수 없어요.</span>';
+      }
       if (o.type === 'text') h += fontCtl(o) + range('글자 크기', 'sel.size', 8, 96, Math.round(o.size), 'pt');
       if (o.color) h += colorGrp(o.type === 'highlight' ? HL_PALETTE : PALETTE, o.color);
       if (o.type === 'text' || o.type === 'rect' || o.type === 'ellipse') h += fillGrp(o.fill, o.type === 'text' ? '글자 배경' : '채우기');
       if (o.type === 'rect' || o.type === 'ellipse') h += range('채움 투명도', 'sel.fillAlpha', 10, 100, Math.round((o.fillAlpha == null ? 1 : o.fillAlpha) * 100), '%');
       if (strokeLike) h += range('불투명', 'sel.alpha', 10, 100, Math.round((o.alpha == null ? 1 : o.alpha) * 100), '%');
-      h += `<button class="danger-btn" data-del>${svg('trash')}삭제</button>` + hint('모서리 핸들로 크기 조절 · 글자 개체는 클릭하면 바로 수정');
+      h += `<button class="danger-btn" data-del>${svg('trash')}삭제</button>` + hint(o.type === 'audio' ? '드래그해서 위치 이동 · 더블클릭하면 바로 재생' : '모서리 핸들로 크기 조절 · 글자 개체는 클릭하면 바로 수정');
     } else h = '<span>개체를 클릭해 선택 · 드래그해서 이동 · PDF 글자는 드래그하면 복사, 클릭하면 바로 수정할 수 있어요.</span><button class="opt-btn" data-copy>선택한 글자 복사</button>';
   }
   optbar.innerHTML = h;
@@ -2335,14 +2370,14 @@ async function confirmDiscard() { return true; }   // 열기/새 문서는 새 �
 const newNote = () => ({ id: uid('n'), title: '', text: '' });
 function destroyDocs(map) { for (const d of map.values()) { try { d.pdf.destroy(); } catch (e) { /* ignore */ } } }
 function liveSnap() {
-  return { pages: state.pages, docs: state.docs, images: state.images, groups: state.groups, gCollapsed: state.gCollapsed, handles: state.handles,
+  return { pages: state.pages, docs: state.docs, images: state.images, audios: state.audios, groups: state.groups, gCollapsed: state.gCollapsed, handles: state.handles,
     saveFormat: state.saveFormat, fileName: state.fileName, dirty: state.dirty, hist: { stack: hist.stack, idx: hist.idx }, currentId: state.currentId,
     zoom: state.zoom, scroll: [viewer.scrollLeft, viewer.scrollTop], notes: state.notes, noteIdx: state.noteIdx };
 }
 function clearLive() {
   finishEditor();
   for (const id of [...views.keys()]) removeView(id);
-  state.docs = new Map(); state.images = new Map();
+  state.docs = new Map(); state.images = new Map(); state.audios = new Map();
   state.pages = []; state.selected = null; state.currentId = null; state.editingId = null;
   state.handles = { pdf: null, mpdf: null }; state.groups = []; state.gCollapsed = new Set(); state.pageSel = new Set(); state.pageAnchor = null; state.layerSel = new Set();
   state.notes = [newNote()]; state.noteIdx = 0;
@@ -2358,7 +2393,7 @@ function resetDocument() {
   renderTabs();
 }
 function applySnap(sn) {
-  state.pages = sn.pages; state.docs = sn.docs; state.images = sn.images; state.groups = sn.groups; state.gCollapsed = sn.gCollapsed;
+  state.pages = sn.pages; state.docs = sn.docs; state.images = sn.images; state.audios = sn.audios || new Map(); state.groups = sn.groups; state.gCollapsed = sn.gCollapsed;
   state.handles = sn.handles; state.fileName = sn.fileName; state.notes = sn.notes; state.noteIdx = sn.noteIdx;
   hist.stack = sn.hist.stack; hist.idx = sn.hist.idx;
   app.classList.remove('no-doc');
@@ -2698,6 +2733,84 @@ spList.addEventListener('click', e => { const b = e.target.closest('[data-hit]')
 $('#searchBtn').onclick = openSearch;
 $('#searchNav').onclick = () => { if (!spInput.value.trim()) { spInput.focus(); return; } clearTimeout(spTimer); if (searchP.hidden || sq.q !== spInput.value + $('#spCase').checked) runSearch(); else goHit(sq.cur + 1); };
 
+
+/* ════════════ 음성 녹음 ════════════ */
+const audExt = m => /mp4|aac/.test(m) ? 'm4a' : /ogg/.test(m) ? 'ogg' : /wav/.test(m) ? 'wav' : /mpeg|mp3/.test(m) ? 'mp3' : 'webm';
+function audioCount() { let n = 0; for (const p of state.pages) for (const a of p.annots) if (a.type === 'audio') n++; return n; }
+const recP = $('#recP'), rec = { mr: null, chunks: [], stream: null, t0: 0, timer: 0, blob: null, mime: '', dur: 0, url: '', pid: null, mode: 'idle' };
+const fmtT = sec => Math.floor(sec / 60) + ':' + String(Math.floor(sec % 60)).padStart(2, '0');
+function recStopStream() { if (rec.stream) { rec.stream.getTracks().forEach(t => t.stop()); rec.stream = null; } clearInterval(rec.timer); }
+function recDiscard() { if (rec.url) URL.revokeObjectURL(rec.url); rec.blob = null; rec.url = ''; rec.dur = 0; }
+function closeRecorder() {
+  if (rec.mr && rec.mr.state !== 'inactive') { rec.mr.onstop = null; try { rec.mr.stop(); } catch (e) { /* 무시 */ } }
+  rec.mr = null; recStopStream(); recDiscard(); rec.mode = 'idle'; recP.hidden = true;
+}
+function renderRec() {
+  recP.classList.toggle('on', rec.mode === 'rec');
+  if (rec.mode === 'idle') recP.innerHTML = '<span class="dot"></span><button class="pri" data-r="start">녹음 시작</button><span class="tip">마이크 권한을 허용해 주세요</span><button data-r="close">닫기</button>';
+  else if (rec.mode === 'rec') recP.innerHTML = '<span class="dot"></span><span class="tm" id="recTm">0:00</span><button class="pri" data-r="stop">정지</button><button data-r="cancel">취소</button>';
+  else recP.innerHTML = `<audio controls src="${rec.url}" aria-label="녹음 미리듣기"></audio><span class="tm">${fmtT(rec.dur)}</span><button class="pri" data-r="insert">페이지에 넣기</button><button data-r="again">다시 녹음</button><button data-r="close">취소</button>`;
+  recP.hidden = false;
+}
+function openRecorder() {
+  if (!state.pages.length) { toast('문서를 먼저 열어 주세요.'); return; }
+  if (!recP.hidden) { if (rec.mode === 'idle') closeRecorder(); return; }
+  finishEditor(); rec.pid = state.currentId || state.pages[0].id; rec.mode = 'idle'; renderRec();
+}
+async function startRec() {
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || typeof MediaRecorder === 'undefined') { toast('이 브라우저에서는 녹음을 쓸 수 없어요. Chrome이나 Edge로 열어 주세요.'); return; }
+  try { rec.stream = await navigator.mediaDevices.getUserMedia({ audio: true }); }
+  catch (err) {
+    console.warn(err);
+    toast(err && err.name === 'NotFoundError' ? '마이크를 찾지 못했어요.' : '마이크를 쓸 수 없어요. 주소창의 마이크 허용을 눌러 주세요. (미리보기 화면 안에서는 막힐 수 있어요 — 내려받은 HTML 파일로 열어 보세요)');
+    return;
+  }
+  const mime = ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4', 'audio/ogg;codecs=opus'].find(m => MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(m)) || '';
+  rec.chunks = []; rec.mime = mime;
+  try { rec.mr = mime ? new MediaRecorder(rec.stream, { mimeType: mime }) : new MediaRecorder(rec.stream); } catch (err) { recStopStream(); toast('녹음을 시작하지 못했어요.'); return; }
+  rec.mr.ondataavailable = e => { if (e.data && e.data.size) rec.chunks.push(e.data); };
+  rec.mr.onstop = () => {
+    const type = rec.mr && rec.mr.mimeType || rec.mime || 'audio/webm';
+    rec.dur = (Date.now() - rec.t0) / 1000; recStopStream();
+    rec.blob = new Blob(rec.chunks, { type }); rec.mime = type; rec.url = URL.createObjectURL(rec.blob);
+    rec.mode = 'done'; renderRec();
+  };
+  rec.mr.start(250); rec.t0 = Date.now(); rec.mode = 'rec'; renderRec();
+  rec.timer = setInterval(() => {
+    const t = (Date.now() - rec.t0) / 1000, el = $('#recTm'); if (el) el.textContent = fmtT(t);
+    if (t >= 600) { toast('최대 10분까지 녹음할 수 있어요.'); if (rec.mr && rec.mr.state === 'recording') rec.mr.stop(); }
+  }, 250);
+}
+function insertAudio() {
+  if (!rec.blob) return;
+  const pid = pageById(rec.pid) ? rec.pid : (state.currentId || state.pages[0].id), p = pageById(pid);
+  const id = uid('au'); state.audios.set(id, { blob: rec.blob, mime: rec.mime, dur: rec.dur, url: rec.url });
+  rec.blob = null; rec.url = '';   // 소유권 이전 (revoke 방지)
+  const c = placementCenter(pid), w = 58, h = 24;
+  const o = { id: uid('o'), type: 'audio', audioId: id, x: clamp(c.x - w / 2, 0, Math.max(0, p.w - w)), y: clamp(c.y - h / 2, 0, Math.max(0, p.h - h)), w, h, dur: Math.round(rec.dur * 10) / 10 };
+  p.annots.push(o); commit(); closeRecorder();
+  setTool('select'); selectObj(pid, o.id); touch(pid);
+  toast('음성을 넣었어요. 더블클릭하면 재생돼요. 저장은 MPDF를 권해요.');
+}
+recP.addEventListener('click', e => {
+  const b = e.target.closest('[data-r]'); if (!b) return;
+  const a = b.dataset.r;
+  if (a === 'start') startRec();
+  else if (a === 'stop') { if (rec.mr && rec.mr.state === 'recording') rec.mr.stop(); }
+  else if (a === 'cancel' || a === 'close') closeRecorder();
+  else if (a === 'again') { recDiscard(); rec.mode = 'idle'; renderRec(); startRec(); }
+  else if (a === 'insert') insertAudio();
+});
+let playing = null;
+function playAudio(o) {
+  const au = state.audios.get(o.audioId); if (!au) { toast('음성 데이터를 찾을 수 없어요.'); return; }
+  if (playing) { playing.pause(); const same = playing._id === o.audioId; playing = null; if (same) return; }
+  const a = new Audio(au.url); a._id = o.audioId; playing = a;
+  a.onended = () => { if (playing === a) playing = null; };
+  a.play().catch(() => toast('재생하지 못했어요.'));
+}
+$('#micBtn').onclick = openRecorder;
+
 /* ════════════ 저장 (PDF 내보내기) ════════════ */
 async function overlayPng(p) {
   const s = Math.min(3, 4000 / Math.max(p.w, p.h));
@@ -2735,6 +2848,12 @@ async function buildPdf() {
       page.drawImage(img, { x: ax, y: ay, width: p.w, height: p.h, rotate: degrees(R) });
     }
     await new Promise(r => setTimeout(r, 0));
+  }
+  let an = 0;
+  for (const p of state.pages) for (const a of p.annots) {
+    if (a.type !== 'audio') continue;
+    const au = state.audios.get(a.audioId); if (!au) continue;
+    try { await out.attach(new Uint8Array(await au.blob.arrayBuffer()), `음성${++an}_${idxOf(p.id) + 1}쪽.${audExt(au.mime)}`, { mimeType: String(au.mime).split(';')[0], description: `${idxOf(p.id) + 1}쪽 음성 녹음` }); } catch (e) { console.warn(e); }
   }
   return out.save();
 }
@@ -2789,8 +2908,13 @@ function markSaved(name) { if (name) state.fileName = name; setDirty(false); toa
 
 async function buildProject() {
   finishEditor();
-  const zip = new JSZip(), usedDocs = new Set(), usedImgs = new Set();
-  for (const p of state.pages) { if (p.src) usedDocs.add(p.src.doc); for (const a of p.annots) if (a.type === 'image') usedImgs.add(a.imgId); }
+  const zip = new JSZip(), usedDocs = new Set(), usedImgs = new Set(), usedAud = new Set();
+  for (const p of state.pages) { if (p.src) usedDocs.add(p.src.doc); for (const a of p.annots) { if (a.type === 'image') usedImgs.add(a.imgId); else if (a.type === 'audio') usedAud.add(a.audioId); } }
+  const audMeta = {};
+  for (const id of usedAud) {
+    const au = state.audios.get(id); if (!au) continue;
+    const ext = audExt(au.mime); zip.file(`audio/${id}.${ext}`, await au.blob.arrayBuffer()); audMeta[id] = { mime: au.mime, ext, dur: au.dur };
+  }
   for (const id of usedDocs) zip.file(`docs/${id}.pdf`, state.docs.get(id).bytes);
   const extOf = { 'image/png': 'png', 'image/jpeg': 'jpg', 'image/gif': 'gif', 'image/webp': 'webp', 'image/svg+xml': 'svg', 'image/bmp': 'bmp' }, imgMeta = {};
   for (const id of usedImgs) {
@@ -2800,7 +2924,7 @@ async function buildProject() {
     zip.file(`images/${id}.${ext}`, m[2], { base64: true }); imgMeta[id] = { mime: m[1], ext };
   }
   zip.file('project.json', JSON.stringify({
-    format: 'meow-pdf', version: 1, fileName: state.fileName, docs: [...usedDocs], images: imgMeta,
+    format: 'meow-pdf', version: 1, fileName: state.fileName, docs: [...usedDocs], images: imgMeta, audios: audMeta,
     pages: state.pages.map(p => ({ id: p.id, src: p.src, w: p.w, h: p.h, annots: p.annots, memos: p.memos || [], group: p.group || null, name: p.name || null, note: p.note || null, bookmark: p.bookmark || null })),
     groups: state.groups, collapsed: [...state.gCollapsed], notes: state.notes, noteIdx: state.noteIdx
   }));
@@ -2814,11 +2938,16 @@ async function openProject(file, handle) {
     const pf = zip.file('project.json'); if (!pf) throw new Error('project.json 없음');
     const pj = JSON.parse(await pf.async('string'));
     if (pj.format !== 'meow-pdf') throw new Error('형식 불일치');
-    const docs = new Map(), images = new Map();
+    const docs = new Map(), images = new Map(), audios = new Map();
     for (const id of pj.docs || []) {
       const f = zip.file(`docs/${id}.pdf`); if (!f) continue;
       const bytes = await f.async('uint8array');
       docs.set(id, { pdf: await pdfjsLib.getDocument({ data: bytes.slice(), isEvalSupported: false }).promise, bytes });
+    }
+    for (const [id, meta] of Object.entries(pj.audios || {})) {
+      const f = zip.file(`audio/${id}.${meta.ext}`); if (!f) continue;
+      const blob = new Blob([await f.async('uint8array')], { type: meta.mime });
+      audios.set(id, { blob, mime: meta.mime, dur: meta.dur || 0, url: URL.createObjectURL(blob) });
     }
     for (const [id, meta] of Object.entries(pj.images || {})) {
       const f = zip.file(`images/${id}.${meta.ext}`); if (!f) continue;
@@ -2828,7 +2957,7 @@ async function openProject(file, handle) {
     const pages = (pj.pages || []).filter(p => !p.src || docs.has(p.src.doc));
     if (!pages.length) throw new Error('페이지 없음');
     resetDocument();
-    docs.forEach((v, k) => state.docs.set(k, v)); images.forEach((v, k) => state.images.set(k, v));
+    docs.forEach((v, k) => state.docs.set(k, v)); images.forEach((v, k) => state.images.set(k, v)); audios.forEach((v, k) => state.audios.set(k, v));
     state.pages = pages; state.groups = pj.groups || []; state.gCollapsed = new Set(pj.collapsed || []);
     state.handles = { pdf: null, mpdf: handle || null };
     if (Array.isArray(pj.notes) && pj.notes.length) { state.notes = pj.notes.map(n => ({ id: uid('n'), title: String(n.title || ''), text: String(n.text || '') })); state.noteIdx = clamp(pj.noteIdx | 0, 0, state.notes.length - 1); }
@@ -2840,7 +2969,15 @@ async function openProject(file, handle) {
 
 async function saveDoc(opts = {}) {
   if (!state.pages.length) return;
-  const asNew = !!opts.asNew, fmt = opts.fmt || state.saveFormat, base = baseName(state.fileName);
+  const asNew = !!opts.asNew, base = baseName(state.fileName);
+  let fmt = opts.fmt || state.saveFormat;
+  const nAud = audioCount();
+  if (fmt === 'pdf' && nAud && state.audioAsked !== nAud) {
+    const c = await customModal({ title: '음성 녹음이 포함되어 있어요', build: b => { b.innerHTML = `<p>이 문서에는 음성 녹음 <b>${nAud}개</b>가 들어 있어요.</p><p style="color:var(--muted);font-size:13px;line-height:1.6">PDF로 저장하면 소리는 일반 PDF 화면에서 재생되지 않고, 위치 표시만 남아요. (음성 파일은 PDF 첨부파일로 따로 들어가요.)<br><b>MPDF</b>로 저장하면 음성과 편집 기록을 그대로 보존하고 다시 열어 바로 들을 수 있어요.</p>`; },
+      buttons: [{ label: '취소', value: null }, { label: 'PDF로 저장', value: 'pdf' }, { label: 'MPDF로 저장 (권장)', value: 'mpdf', ok: true }] });
+    if (!c) return;
+    if (c === 'mpdf') { fmt = 'mpdf'; opts = { ...opts, fmt: 'mpdf' }; } else state.audioAsked = nAud;
+  }
   let handle = asNew ? null : state.handles[fmt];
   if (handle && !(await ensureWrite(handle))) { toast('원본 파일에 쓸 권한이 없어요. 저장할 위치를 다시 골라 주세요.'); handle = null; }
   if (!handle && window.showSaveFilePicker) {
@@ -2941,8 +3078,8 @@ function updateBrushCursor() {
 }
 
 /* ════════════ 레이어 패널 ════════════ */
-const LAYER_NAMES = { pen: '그리기', highlight: '강조표시', rect: '사각형', ellipse: '원', line: '직선', arrow: '화살표', text: '텍스트', image: '이미지' };
-const LAYER_ICONS = { pen: 'pen', highlight: 'highlighter', rect: 'rect', ellipse: 'circle', line: 'line', arrow: 'arrow', text: 'type', image: 'image' };
+const LAYER_NAMES = { pen: '그리기', highlight: '강조표시', rect: '사각형', ellipse: '원', line: '직선', arrow: '화살표', text: '텍스트', image: '이미지', audio: '음성' };
+const LAYER_ICONS = { pen: 'pen', highlight: 'highlighter', rect: 'rect', ellipse: 'circle', line: 'line', arrow: 'arrow', text: 'type', image: 'image', audio: 'mic' };
 const layerList = $('#layerList');
 let layersRaf = 0, layerDrag = null;
 function scheduleLayers() {
@@ -3011,7 +3148,7 @@ function updateMergeBtns(p) {
 }
 async function mergeLayers(ids) {
   const p = pageById(state.currentId); if (!p) return;
-  const sel = p.annots.filter(a => ids.has(a.id) && !a.hidden);
+  const sel = p.annots.filter(a => ids.has(a.id) && !a.hidden && a.type !== 'audio');
   if (sel.length < 2) { toast('병합할 레이어를 2개 이상 선택하세요.'); return; }
   finishEditor();
   let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
@@ -3980,7 +4117,7 @@ document.addEventListener('keydown', e => {
   if (plain && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) { e.preventDefault(); stepPage(e.key === 'ArrowRight' ? 1 : -1); return; }
   if (plain && (e.key === 'PageUp' || e.key === 'PageDown')) { e.preventDefault(); stepPage(e.key === 'PageDown' ? 1 : -1); return; }
   if (plain && !e.repeat) {
-    const map = { Digit1: 'select', Digit2: 'select', Numpad1: 'select', Numpad2: 'select', KeyQ: 'highlight', KeyW: 'pen', KeyE: 'line', KeyA: 'shape', KeyS: 'eraser', KeyD: 'text', KeyZ: '#pasteBtn', KeyX: '#imageBtn', KeyC: '#memoBtn' };
+    const map = { Digit1: 'select', Digit2: 'select', Numpad1: 'select', Numpad2: 'select', KeyQ: 'highlight', KeyW: 'pen', KeyE: 'line', KeyA: 'shape', KeyS: 'eraser', KeyD: 'text', KeyZ: '#pasteBtn', KeyX: '#imageBtn', KeyC: '#memoBtn', KeyV: '#micBtn' };
     const act = map[e.code];
     if (act) { e.preventDefault(); if (act[0] === '#') $(act).click(); else setTool(act); return; }
   }
