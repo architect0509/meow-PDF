@@ -532,6 +532,7 @@ body.rszing,body.rszing *{user-select:none!important}
 .wblock .bt button:hover{filter:brightness(1.12)}
 .wblock .lnk{font-size:12px;color:var(--accent);text-decoration:underline}
 .wframe[hidden]{display:none}
+.wurl button.dim,.wblock .bt button.dim,.whint button.dim{opacity:.55}
 .wframe{flex:1;min-height:0;width:100%;border:0;background:#fff}
 .whint{flex:none;padding:4px 8px;font-size:11.5px;color:var(--muted);background:var(--bar2);border-top:1px solid var(--border)}
 .whint a,.whint button{color:var(--accent);text-decoration:underline}
@@ -540,6 +541,8 @@ body.rszing,body.rszing *{user-select:none!important}
 .wrecent{display:flex;flex-direction:column;gap:4px;max-width:100%}
 .wrecent button{max-width:210px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--accent);font-size:12px}
 .wrecent button:hover{text-decoration:underline}
+.wdef button{max-width:260px;padding:7px 14px;border:1px solid var(--border);border-radius:9px;background:var(--bar);color:var(--text);font-size:13px;text-decoration:none!important}
+.wdef button:hover{background:var(--hover)}
 .wimg img{max-width:100%;height:auto;background:repeating-conic-gradient(#8884 0 25%,transparent 0 50%) 0 0/16px 16px}
 .wtext{margin:0;padding:12px;white-space:pre-wrap;word-break:break-word;font:13px/1.65 var(--font);color:var(--text);user-select:text;-webkit-user-select:text}
 /* ── 이미지 방식 메뉴 · 스프라이트 ── */
@@ -4666,14 +4669,35 @@ async function promptWeb() {
   if (v && v.trim() && v.trim() !== 'https://') openWeb(v);
 }
 const EMBED_BLOCKED = /(^|\.)(naver\.com|google\.[a-z.]+|daum\.net|kakao\.com|youtube\.com|facebook\.com|instagram\.com|x\.com|twitter\.com|linkedin\.com|github\.com|netflix\.com|amazon\.[a-z.]+|coupang\.com|reddit\.com|openai\.com|chatgpt\.com|claude\.ai|apple\.com|microsoft\.com|tiktok\.com|zoom\.us|paypal\.com)$/i;
+let webPop = null, popEver = false;
+/* 일부 사이트(COOP)는 열린 창과의 연결을 끊어서 closed가 true로 보이므로, closed만 믿지 않는다 */
+function openWebPopup(url, first) {
+  const iw = Math.min(520, Math.max(360, Math.round(screen.availWidth * 0.32))), ih = Math.max(480, screen.availHeight - 80);
+  const l = (window.screenX || 0) + (window.outerWidth || screen.availWidth) - iw - 8, t = (window.screenY || 0) + 30;
+  const w = window.open(url, 'meowweb', `popup=yes,width=${iw},height=${ih},left=${Math.max(0, l)},top=${Math.max(0, t)}`);
+  if (!w) { toast('팝업이 차단됐어요. 주소창의 팝업 허용을 눌러 주세요.'); return; }
+  try { w.opener = null; } catch (er) { /* 무시 */ }
+  webPop = w; popEver = true; try { w.focus(); } catch (er) { /* 무시 */ }
+  syncPopBtns();
+  toast(first ? '작은 창이 PDF 창 뒤로 가면 "작은 창 앞으로" 버튼을 누르세요.' : '작은 창을 앞으로 가져왔어요.');
+}
+function syncPopBtns() {
+  document.querySelectorAll('[data-wfront]').forEach(b => { b.hidden = false; b.classList.toggle('dim', !popEver); });
+}
+setInterval(syncPopBtns, 1500);
+wBody.addEventListener('pointerdown', e => {
+  if (!webPop || webPop.closed || !wBody.classList.contains('webmode') || e.target.closest('input')) return;
+  try { webPop.focus(); } catch (er) { /* 무시 */ }
+});
 function applyWebFrame(f) {
   const fr = wBody.querySelector('iframe'); if (!fr) return;
+  setTimeout(syncPopBtns, 0);
   const old = wBody.querySelector('.wblock'); if (old) old.remove();
   let host = ''; try { host = new URL(f.url).hostname; } catch (e) { /* 무시 */ }
   if (!f.forced && EMBED_BLOCKED.test(host)) {
     fr.hidden = true; fr.removeAttribute('src');
     const d = document.createElement('div'); d.className = 'wblock';
-    d.innerHTML = `<b>${escH(host.replace(/^www\./, ''))}은(는) 이 화면 안에 열 수 없어요</b><div>이 사이트는 다른 페이지 안에 삽입되는 것을 막고 있어요.<br>아래 방법으로 열어 보세요.</div><div class="bt"><button class="pri" data-wpop>작은 창으로 열기</button><button data-wext>새 탭에서 열기</button></div><button class="lnk" data-wforce>그래도 여기서 시도하기</button>`;
+    d.innerHTML = `<b>${escH(host.replace(/^www\./, ''))}은(는) 이 화면 안에 열 수 없어요</b><div>이 사이트는 다른 페이지 안에 삽입되는 것을 막고 있어요.<br>아래 방법으로 열어 보세요.</div><div class="bt"><button class="pri" data-wpop>작은 창으로 열기</button><button data-wfront title="뒤로 간 작은 팝업 창을 맨 앞으로 가져오기">작은 창 앞으로</button><button data-wext>새 탭에서 열기</button></div><button class="lnk" data-wforce>그래도 여기서 시도하기</button>`;
     fr.after(d);
   } else { fr.hidden = false; fr.src = f.url; }
 }
@@ -4692,6 +4716,7 @@ function openWorkMenu(anchor) {
   m.innerHTML = '<div class="menu-h">멀티작업에서 열기</div>' +
     `<button class="mi" data-wk="file"><span class="mthumb">${svg('folder')}</span><span class="mtxt"><b>파일</b><span>PDF · 이미지 · 텍스트 · HWP · PPTX</span></span></button>` +
     `<button class="mi" data-wk="web"><span class="mthumb">${svg('globe')}</span><span class="mtxt"><b>웹페이지</b><span>주소 또는 검색어 입력</span></span></button>` +
+    `<button class="mi" data-wk="url:https://onecompiler.com"><span class="mthumb">${svg('globe')}</span><span class="mtxt"><b>OneCompiler</b><span>온라인 컴파일러 · 코드 바로 실행</span></span></button>` +
     `<button class="mi" data-wk="url:https://ko.wikipedia.org"><span class="mthumb">${svg('globe')}</span><span class="mtxt"><b>위키백과</b><span>삽입이 허용되는 사이트</span></span></button>` +
     rc.map(u => `<button class="mi" data-wk="url:${u.replace(/"/g, '&quot;')}"><span class="mthumb">${svg('rotate')}</span><span class="mtxt"><b>최근</b><span>${hostOf(u)}</span></span></button>`).join('');
   const r = anchor.getBoundingClientRect();
@@ -4759,15 +4784,16 @@ function renderWork() {
   if (!f) {
     const rc = loadWebRecent();
     wBody.innerHTML = `<div class="wempty"><div class="wopens"><button class="wopen" id="wOpen" title="파일 탐색기 열기" aria-label="파일 탐색기 열기">${svg('folder')}</button><button class="wopen" id="wWeb" title="웹페이지 열기" aria-label="웹페이지 열기">${svg('globe')}</button></div><div><b>멀티작업</b><br>왼쪽: 파일 · 오른쪽: 웹페이지<br>PDF · 이미지 · 텍스트 · HWP · PPTX · DOCX · 웹을<br>이 패널에 가득 채워 보면서 작업할 수 있어요.</div>` +
+      '<div class="wrecent wdef"><button data-wurl="https://onecompiler.com" title="https://onecompiler.com">💻 OneCompiler</button></div>' +
       (rc.length ? '<div class="wrecent">' + rc.map(u => `<button data-wurl="${u.replace(/"/g, '&quot;')}" title="${u.replace(/"/g, '&quot;')}">${u.replace(/^https?:\/\//, '').replace(/</g, '&lt;')}</button>`).join('') + '</div>' : '') + '</div>';
     wBody.classList.remove('webmode');
     return;
   }
   f.builtW = wBody.clientWidth;
   if (f.kind === 'web') {
-    wBody.innerHTML = `<div class="wurl"><input id="wUrl" type="text" spellcheck="false" aria-label="주소 입력" placeholder="주소 또는 검색어 입력 후 Enter"><button data-wgo title="이동">이동</button><button data-wreload title="새로고침" aria-label="새로고침">${svg('rotate')}</button><button data-wpop title="작은 팝업 창으로 열기 (편집기 옆에 나란히)">작은 창</button><button data-wext title="새 브라우저 탭에서 열기" aria-label="새 브라우저 탭에서 열기">↗</button><button data-wnote title="이 주소를 현재 노트에 추가">노트+</button></div>` +
+    wBody.innerHTML = `<div class="wurl"><input id="wUrl" type="text" spellcheck="false" aria-label="주소 입력" placeholder="주소 또는 검색어 입력 후 Enter"><button data-wgo title="이동">이동</button><button data-wreload title="새로고침" aria-label="새로고침">${svg('rotate')}</button><button data-wpop title="작은 팝업 창으로 열기 (편집기 옆에 나란히)">작은 창</button><button data-wfront title="뒤로 간 작은 팝업 창을 맨 앞으로 가져오기">작은 창 앞으로</button><button data-wext title="새 브라우저 탭에서 열기" aria-label="새 브라우저 탭에서 열기">↗</button><button data-wnote title="이 주소를 현재 노트에 추가">노트+</button></div>` +
       '<iframe class="wframe" title="웹페이지" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads" referrerpolicy="no-referrer" allow="clipboard-write"></iframe>' +
-      '<div class="whint">화면이 비어 있거나 "연결을 거부했습니다"로 보이면 그 사이트가 삽입을 막은 거예요 → <button data-wpop>작은 창으로 열기</button> <button data-wext>새 탭에서 열기</button></div>';
+      '<div class="whint">화면이 비어 있거나 "연결을 거부했습니다"로 보이면 그 사이트가 삽입을 막은 거예요 → <button data-wpop>작은 창으로 열기</button> <button data-wfront title="뒤로 간 작은 팝업 창을 맨 앞으로 가져오기">작은 창 앞으로</button> <button data-wext>새 탭에서 열기</button></div>';
     wBody.querySelector('#wUrl').value = f.url; applyWebFrame(f);
     return;
   }
@@ -4801,11 +4827,10 @@ wBody.addEventListener('click', e => {
     if (e.target.closest('[data-wgo]')) navWeb(f, wBody.querySelector('#wUrl').value);
     else if (e.target.closest('[data-wreload]')) applyWebFrame(f);
     else if (e.target.closest('[data-wforce]')) { f.forced = true; applyWebFrame(f); }
-    else if (e.target.closest('[data-wpop]')) {
-      const iw = Math.min(520, Math.max(360, Math.round(screen.availWidth * 0.32))), ih = Math.max(480, screen.availHeight - 80);
-      const l = (window.screenX || 0) + (window.outerWidth || screen.availWidth) - iw - 8, t = (window.screenY || 0) + 30;
-      const w = window.open(f.url, 'meowweb', `popup=yes,width=${iw},height=${ih},left=${Math.max(0, l)},top=${Math.max(0, t)}`);
-      if (!w) toast('팝업이 차단됐어요. 주소창의 팝업 허용을 눌러 주세요.'); else { try { w.opener = null; } catch (er) { /* 무시 */ } w.focus(); }
+    else if (e.target.closest('[data-wpop]')) openWebPopup(f.url, true);
+    else if (e.target.closest('[data-wfront]')) {
+      if (webPop && !webPop.closed) { try { webPop.focus(); } catch (er) { /* 무시 */ } }
+      else openWebPopup(f.url, false);
     }
     else if (e.target.closest('[data-wext]')) window.open(f.url, '_blank', 'noopener,noreferrer');
     else if (e.target.closest('[data-wnote]')) { const n = curNote(); n.text += (n.text && !n.text.endsWith('\n') ? '\n' : '') + f.name + ' ' + f.url + '\n'; if (state.pages.length) setDirty(true); renderNotes(); toast('현재 노트에 주소를 추가했어요.'); }
