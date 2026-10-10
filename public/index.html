@@ -636,11 +636,11 @@ em.pro,.menu b em.pro{font-style:normal;font-size:10.5px;margin-left:8px;padding
 .keyout code{flex:1;min-width:0;padding:9px 10px;border-radius:8px;background:var(--bar2);border:1px solid var(--accent);color:var(--accent);font-size:13px;letter-spacing:1px;user-select:all;overflow-wrap:anywhere}
 .keyout .b{width:auto;padding:0 14px;flex:none;margin:0}
 .keynote{margin:8px 0 0;font-size:12.5px;color:var(--muted);line-height:1.5}
-.keytbl{display:flex;flex-direction:column;gap:4px;margin-top:6px;max-height:190px;overflow:auto}
-.keyrow{display:grid;grid-template-columns:auto 1fr auto;gap:2px 8px;align-items:center;padding:6px 8px;border-radius:8px;background:var(--bar2);font-size:12.5px}
-.keyrow.off{opacity:.55}.keyrow .kh{font-family:ui-monospace,Consolas,monospace;color:var(--accent)}
-.keyrow .kn{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.keyrow .kd{grid-column:1/3;color:var(--muted);font-size:12px}
-.keyrow .lnk{grid-column:3;grid-row:1/3;color:var(--danger)}
+.keytbl{display:flex;flex-direction:column;gap:4px;margin-top:6px;max-height:240px;overflow:auto}
+.keyrow{display:grid;grid-template-columns:1fr auto;gap:3px 8px;align-items:center;padding:7px 9px;border-radius:8px;background:var(--bar2);font-size:12.5px}
+.keyrow.off{opacity:.55}.keyrow .kh{font-family:ui-monospace,Consolas,monospace;color:var(--accent);letter-spacing:.5px;user-select:all;word-break:break-all}
+.keyrow .kb{display:flex;gap:10px}.keyrow .kd{grid-column:1/3;color:var(--muted);font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.keyrow .lnk.bad{color:var(--danger)}
 #pgmgr{position:fixed;inset:0;z-index:80;background:var(--view);display:flex;flex-direction:column}
 #pgmgr[hidden]{display:none}
 body.pm-open{overflow:hidden}
@@ -3317,7 +3317,7 @@ async function exportAudio(o) {
 const SB_URL = 'https://zlulpyfiiutqpywyjbbi.supabase.co';
 const SB_KEY = 'sb_publishable_16WKhcpLorKuoTTA_SoZbQ_Oyxl-7sv';   // 공개용(publishable) 키 — 브라우저에 두어도 되는 키
 const SB_SRC = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js';
-const PAY_SERVER = '';   // 결제 서버(meow-pdf-server) 주소. 비우면 같은 주소(서버에서 이 앱을 열었을 때) 또는 http://localhost:3000 을 써요. 배포 시 https://... 로 지정하세요.
+const PAY_SERVER = 'https://meow-pdf.onrender.com';   // 결제 서버(meow-pdf-server) 주소. 비우면 같은 주소(서버에서 이 앱을 열었을 때) 또는 http://localhost:3000 을 써요. 배포 시 https://... 로 지정하세요.
 const PAY_PRICE = 3900;
 let payFound = '';
 const payCands = () => [...new Set([PAY_SERVER, /^https?:$/.test(location.protocol) ? location.origin : '', 'http://localhost:3000', 'http://127.0.0.1:3000'].filter(Boolean).map(x => x.replace(/\/$/, '')))];
@@ -3327,7 +3327,7 @@ async function findPayServer() {
   if (payFound) return payFound;
   for (const c of payCands()) {
     try {
-      const ct = new AbortController(), t = setTimeout(() => ct.abort(), 2500);
+      const ct = new AbortController(), t = setTimeout(() => ct.abort(), PAY_SERVER && c === PAY_SERVER.replace(/\/$/, '') ? 70000 : 2500);   // 무료 호스팅은 잠들었다 깨는 데 오래 걸려요
       const r = await fetch(c + '/health', { signal: ct.signal }); clearTimeout(t);
       const j = await r.json(); if (j && typeof j.ok !== 'undefined' && 'ready' in j) { payFound = c; return c; }
     } catch (e) { /* 다음 후보 */ }
@@ -3443,9 +3443,9 @@ async function openAccount(note) {
       const keyHtml = v => `<div class="box"><b>이용 키</b><br>발급받은 키가 있다면 입력해 주세요. 키의 사용 기간 동안 프리미엄이 적용됩니다.<input id="acKey" type="text" placeholder="MEOW-XXXX-XXXX-XXXX-XXXX" autocomplete="off" spellcheck="false" style="margin-top:8px;letter-spacing:1px" value="${qa(v || '')}"><button class="b pri" data-a="redeem" style="width:100%"${busy ? ' disabled' : ''}>키 적용</button></div>`;
       const devHtml = n => {
         let t = `<div class="box"><b>개발자 도구 · 이용 키 발급</b><br>발급일로부터 3개월간 유효한 키를 발급합니다. 키를 입력한 사용자는 만료일까지 프리미엄을 이용할 수 있습니다.<input id="acNote" type="text" maxlength="60" placeholder="메모 (선택)" style="margin-top:8px" value="${qa(n || '')}"><button class="b pri" data-a="issue" style="width:100%"${busy ? ' disabled' : ''}>키 발급</button>`;
-        if (issued) t += `<div class="keyout"><code>${escH(issued.key)}</code><button class="b" data-a="copykey">복사</button></div><p class="keynote">만료일 ${escH(issued.expiresAt.slice(0, 10))} · 이 키는 지금만 전체가 표시됩니다. 안전한 곳에 보관해 주세요.</p>`;
+        if (issued) t += `<div class="keyout"><code>${escH(issued.key)}</code><button class="b" data-a="copykey">복사</button></div><p class="keynote">만료일 ${escH(issued.expiresAt.slice(0, 10))} · 발급 내역에서 언제든 다시 확인할 수 있습니다.</p>`;
         t += `<button class="lnk" data-a="listkeys" style="margin-top:6px">발급 내역 ${keyList ? '새로고침' : '보기'}</button>`;
-        if (keyList) t += keyList.length ? `<div class="keytbl">${keyList.map(k => { const ex = new Date(k.expires_at) <= new Date(), st = k.revoked ? '폐기됨' : ex ? '만료' : '사용 가능'; return `<div class="keyrow${k.revoked || ex ? ' off' : ''}"><span class="kh">…${escH(k.hint || '')}</span><span class="kn">${escH(k.note || '')}</span><span class="kd">~${escH(String(k.expires_at).slice(0, 10))} · ${k.uses}명 · ${st}</span>${k.revoked || ex ? '' : `<button class="lnk" data-a="revoke" data-id="${escH(k.id)}">폐기</button>`}</div>`; }).join('')}</div>` : '<p class="keynote">발급한 키가 없습니다.</p>';
+        if (keyList) t += keyList.length ? `<div class="keytbl">${keyList.map((k, i) => { const ex = new Date(k.expires_at) <= new Date(), st = k.revoked ? '폐기됨' : ex ? '만료' : '사용 가능'; return `<div class="keyrow${k.revoked || ex ? ' off' : ''}"><span class="kh">${k.key ? escH(k.key) : '…' + escH(k.hint || '') + ' (전체 보기 불가)'}</span><span class="kb">${k.key ? `<button class="lnk" data-a="copyrow" data-i="${i}">복사</button>` : ''}${k.revoked || ex ? '' : `<button class="lnk bad" data-a="revoke" data-id="${escH(k.id)}">폐기</button>`}</span><span class="kd">${escH(k.note || '메모 없음')} · ~${escH(String(k.expires_at).slice(0, 10))} · ${k.uses}명 · ${st}</span></div>`; }).join('')}</div>` : '<p class="keynote">발급한 키가 없습니다.</p>';
         return t + '</div>';
       };
       const payHtml = () => `<div class="box"><b>일반 사용자</b><br>학교 이메일이 없는 경우, ${PAY_PRICE.toLocaleString('ko-KR')}원으로 프리미엄을 이용하실 수 있습니다.${PLAN.user ? `<button class="b pri" data-a="pay" style="width:100%;margin-top:8px"${busy ? ' disabled' : ''}>일반 사용자 결제 (${PAY_PRICE.toLocaleString('ko-KR')}원)</button><button class="lnk" data-a="refresh" style="margin-top:6px">결제 후 반영되지 않았다면 상태 새로고침</button>` : '<br><span style="color:var(--muted);font-size:12.5px">결제를 진행하려면 먼저 이메일로 로그인해 주세요.</span>'}</div>`;
@@ -3456,7 +3456,8 @@ async function openAccount(note) {
         if (!sb) { msg = '서버에 연결할 수 없습니다. 인터넷 연결을 확인한 후 다시 시도해 주세요.'; err = true; draw(); return; }
         if (act === 'refresh') { msg = '확인하는 중…'; err = false; draw(); await loadPlan(); msg = PLAN.premium ? '프리미엄이 적용되어 있습니다.' : '아직 결제 내역이 확인되지 않았습니다.'; err = !PLAN.premium; draw(); return; }
         if (act === 'pay') { await startPayment(sb, m => { msg = m.t; err = !!m.err; busy = !!m.busy; draw(); }); return; }
-        if (act === 'redeem' || act === 'issue' || act === 'listkeys' || act === 'revoke' || act === 'copykey') {
+        if (act === 'redeem' || act === 'issue' || act === 'listkeys' || act === 'revoke' || act === 'copykey' || act === 'copyrow') {
+          if (act === 'copyrow') { const kk = keyList && keyList[+a.dataset.i]; try { await navigator.clipboard.writeText(kk.key); msg = '키를 복사했습니다.'; err = false; } catch (er) { msg = '복사하지 못했습니다. 키를 직접 선택해 복사해 주세요.'; err = true; } draw(); return; }
           if (act === 'copykey') { try { await navigator.clipboard.writeText(issued.key); msg = '키를 복사했습니다.'; err = false; } catch (er) { msg = '복사하지 못했습니다. 키를 직접 선택해 복사해 주세요.'; err = true; } draw(); return; }
           const api = (path, method, data) => keyApi(sb, path, method, data);
           if (act === 'redeem') {

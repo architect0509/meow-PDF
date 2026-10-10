@@ -65,3 +65,7 @@ create table if not exists public.key_redemptions (
 -- 정책을 만들지 않으므로 브라우저(앱)에서는 접근할 수 없고, 서버(service_role)만 읽고 쓸 수 있어요.
 alter table public.access_keys enable row level security;
 alter table public.key_redemptions enable row level security;
+
+-- 발급한 키를 개발자가 다시 볼 수 있도록 (서버가 암호화해서 저장해요. 원문은 DB에 그대로 저장되지 않아요)
+alter table public.access_keys add column if not exists key_enc text;
+notify pgrst, 'reload schema';

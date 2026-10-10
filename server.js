@@ -184,6 +184,10 @@ const DEV_EMAIL = (process.env.DEV_EMAIL || 'architect05092@gmail.com').trim().t
 const KEY_MONTHS = 3;
 const KEY_CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';   // 헷갈리는 글자(0 O 1 I) 제외
 const isDev = u => !!(u && u.email && String(u.email).toLowerCase() === DEV_EMAIL && u.email_confirmed_at);
+// 발급한 키를 개발자가 나중에 다시 볼 수 있도록 서버 비밀값으로 암호화(AES-256-GCM)해 저장해요. (입력 검증에는 해시만 써요)
+const ENC_KEY = crypto.createHash('sha256').update('meow-keyenc:' + (process.env.KEY_ENC_SECRET || SUPABASE_SERVICE_KEY || ORDER_SECRET)).digest();
+function encKey(plain) { const iv = crypto.randomBytes(12), c = crypto.createCipheriv('aes-256-gcm', ENC_KEY, iv); const ct = Buffer.concat([c.update(plain, 'utf8'), c.final()]); return [iv, c.getAuthTag(), ct].map(b => b.toString('base64')).join('.'); }
+function decKey(enc) { try { const [iv, tag, ct] = String(enc).split('.').map(x => Buffer.from(x, 'base64')); const d = crypto.createDecipheriv('aes-256-gcm', ENC_KEY, iv); d.setAuthTag(tag); return Buffer.concat([d.update(ct), d.final()]).toString('utf8'); } catch (e) { return null; } }
 const normKey = k => String(k || '').toUpperCase().replace(/[^A-Z0-9]/g, '').replace(/^MEOW/, '');
 const hashKey = k => crypto.createHash('sha256').update('meow-key:' + normKey(k)).digest('hex');
 function makeKey() {
@@ -207,7 +211,14 @@ async function authed(req, res, devOnly) {
   if (!token) { res.status(401).json({ success: false, message: '로그인이 필요합니다.' }); return null; }
   let user;
   try { user = await userFromToken(token); }
-  catch (e) { res.status(401).json({ success: false, message: '로그인이 만료되었습니다. 로그아웃 후 다시 로그인해 주세요.' }); return null; }
+  catch (e) {
+    const st = e.response && e.response.status;
+    console.error('[로그인 확인 실패] status=' + (st || e.code || '-') + ' ' + JSON.stringify((e.response && e.response.data) || e.message) + ' | SUPABASE_URL=' + SUPABASE_URL);
+    const why = !st ? '서버가 Supabase에 연결하지 못했습니다. 잠시 후 다시 시도해 주세요.'
+      : (st === 401 || st === 403) ? '로그인이 만료되었습니다. 로그아웃 후 다시 로그인해 주세요.'
+      : '로그인 확인에 실패했습니다. (Supabase ' + st + ') 서버의 SUPABASE_URL / SUPABASE_PUBLISHABLE_KEY 설정을 확인해 주세요.';
+    res.status(401).json({ success: false, message: why }); return null;
+  }
   if (!user || !user.id || !user.email_confirmed_at) { res.status(401).json({ success: false, message: '이메일 인증이 완료된 계정만 사용할 수 있습니다.' }); return null; }
   if (devOnly && !isDev(user)) { res.status(403).json({ success: false, message: '개발자 계정만 사용할 수 있습니다.' }); return null; }
   return user;
@@ -220,8 +231,10 @@ app.post('/api/dev/issue-key', limiter, async (req, res) => {
   const key = makeKey(), now = new Date(), exp = new Date(now); exp.setMonth(exp.getMonth() + KEY_MONTHS);
   const note = String((req.body && req.body.note) || '').trim().slice(0, 60) || null;
   try {
-    await axios.post(rest('access_keys'), { key_hash: hashKey(key), hint: key.slice(-4), note, issued_by: user.id, issued_at: now.toISOString(), expires_at: exp.toISOString() },
-      { headers: { ...sbJson, Prefer: 'return=minimal' }, timeout: 8000 });
+    const row = { key_hash: hashKey(key), hint: key.slice(-4), note, issued_by: user.id, issued_at: now.toISOString(), expires_at: exp.toISOString() };
+    const post = b => axios.post(rest('access_keys'), b, { headers: { ...sbJson, Prefer: 'return=minimal' }, timeout: 8000 });
+    try { await post({ ...row, key_enc: encKey(key) }); }
+    catch (e) { const c = e.response && e.response.data && e.response.data.code; if (c === 'PGRST204' || c === '42703') { console.warn('[안내] access_keys.key_enc 컬럼이 없어 키 원문 보관 없이 발급합니다. supabase.sql 을 다시 실행하세요.'); await post(row); } else throw e; }
   } catch (e) { return dbErr(res, e, '키 발급 실패'); }
   res.json({ success: true, key, issuedAt: now.toISOString(), expiresAt: exp.toISOString() });
 });
@@ -229,10 +242,12 @@ app.post('/api/dev/issue-key', limiter, async (req, res) => {
 app.get('/api/dev/keys', limiter, async (req, res) => {
   const user = await authed(req, res, true); if (!user) return;
   try {
-    const k = await axios.get(rest('access_keys?select=id,hint,note,issued_at,expires_at,revoked&order=issued_at.desc&limit=100'), { headers: sbAdmin, timeout: 8000 });
+    const q = cols => axios.get(rest('access_keys?select=' + cols + '&order=issued_at.desc&limit=100'), { headers: sbAdmin, timeout: 8000 });
+    let k; try { k = await q('id,hint,note,issued_at,expires_at,revoked,key_enc'); }
+    catch (e) { const c = e.response && e.response.data && e.response.data.code; if (c === '42703' || c === 'PGRST204') k = await q('id,hint,note,issued_at,expires_at,revoked'); else throw e; }
     const r = await axios.get(rest('key_redemptions?select=key_id&limit=5000'), { headers: sbAdmin, timeout: 8000 });
     const cnt = {}; (r.data || []).forEach(x => { cnt[x.key_id] = (cnt[x.key_id] || 0) + 1; });
-    res.json({ success: true, keys: (k.data || []).map(x => ({ ...x, uses: cnt[x.id] || 0 })) });
+    res.json({ success: true, keys: (k.data || []).map(({ key_enc, ...x }) => ({ ...x, key: key_enc ? decKey(key_enc) : null, uses: cnt[x.id] || 0 })) });
   } catch (e) { dbErr(res, e, '키 목록 실패'); }
 });
 // 개발자: 키 폐기 (이미 적용된 사용자의 기간은 유지돼요)
