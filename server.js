@@ -11,7 +11,9 @@
  *  4) 성공 페이지: POST /api/confirm-payment → 토스 승인 API → Supabase 권한 부여
  *  5) 앱: 팝업의 postMessage / 창 포커스 시 계정 상태를 다시 읽어 프리미엄 반영
  */
-require('dotenv').config();
+const _envPath = require('path').join(__dirname, '.env');
+const _envRes = require('dotenv').config({ path: _envPath });   // 실행 위치와 상관없이 server.js 옆의 .env 를 읽어요
+console.log(_envRes.error ? '⚠ .env 파일을 찾지 못했어요: ' + _envPath + '  (이름이 .env.txt 가 아닌지 확인하세요)' : '• .env 로드됨: ' + _envPath);
 const express = require('express');
 const axios = require('axios');
 const crypto = require('crypto');
@@ -198,6 +200,7 @@ app.get('/pay', (req, res) => {
   const msg = document.getElementById('msg'), btn = document.getElementById('payment-button');
   const order = new URLSearchParams(location.search).get('order');
   try {
+    if (typeof PaymentWidget !== 'function') { msg.textContent = '토스 결제 스크립트(js.tosspayments.com)를 불러오지 못했어요. 광고/보안 차단 확장 프로그램이나 네트워크를 확인하고 새로고침해 주세요.'; return; }
     const info = await (await fetch('/api/order-info?order=' + encodeURIComponent(order))).json();
     if (!info.success) { msg.textContent = info.message; return; }
     const paymentWidget = PaymentWidget(info.clientKey, info.customerKey);              // 결제위젯 초기화
@@ -214,7 +217,7 @@ app.get('/pay', (req, res) => {
         });
       } catch (e) { console.error('결제 에러:', e); if (e && e.code !== 'USER_CANCEL') msg.textContent = e.message || '결제를 시작하지 못했어요.'; btn.disabled = false; }
     });
-  } catch (e) { msg.textContent = '결제 정보를 불러오지 못했어요. 인터넷 연결을 확인해 주세요.'; }
+  } catch (e) { console.error(e); msg.textContent = '결제 정보를 불러오지 못했어요: ' + (e && e.message ? e.message : e) + ' (F12 콘솔도 확인해 주세요)'; }
 })();
 </script>`));
 });
@@ -251,6 +254,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.listen(PORT, () => {
   console.log(`Meow-PDF 결제 서버 실행 중: ${PUBLIC_BASE_URL}`);
   if (TOSS_SECRET_KEY.startsWith('test_')) console.log('• 토스페이먼츠 테스트 키 사용 중 (실제 결제 안 됨)');
-  if (!ready()) console.warn('⚠ SUPABASE_SERVICE_ROLE_KEY 가 없어서 결제를 시작할 수 없어요. .env 를 확인하세요.');
+  if (!ready()) console.warn('⚠ SUPABASE_SERVICE_ROLE_KEY 가 비어 있어서 결제를 시작할 수 없어요. .env 를 확인하세요.');
   if (!process.env.ORDER_SECRET) console.warn('⚠ ORDER_SECRET 을 .env 에 정해 두세요. (없으면 서버 재시작 시 진행 중이던 주문이 무효가 돼요)');
 });
