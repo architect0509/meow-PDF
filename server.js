@@ -122,11 +122,15 @@ app.post('/api/create-order', limiter, async (req, res) => {
   if (!token) return res.status(401).json({ success: false, message: '먼저 로그인해 주세요.' });
   try {
     const user = await userFromToken(token);
-    if (!user || !user.id || !user.email_confirmed_at) return res.status(401).json({ success: false, message: '이메일 인증이 끝난 계정만 결제할 수 있어요.' });
+    if (!user || !user.id || !user.email_confirmed_at) { console.error('[결제 거부] 이메일 미인증 계정:', user && user.email); return res.status(401).json({ success: false, message: '이메일 인증이 끝난 계정만 결제할 수 있어요.' }); }
     const orderId = makeOrderId(user.id);
     res.json({ success: true, orderId, payUrl: `${PUBLIC_BASE_URL}/pay?order=${encodeURIComponent(orderId)}` });
   } catch (e) {
-    res.status(401).json({ success: false, message: '로그인 확인에 실패했어요. 다시 로그인해 주세요.' });
+    const st = e.response && e.response.status, d = e.response && e.response.data;
+    console.error('[로그인 확인 실패] status=' + (st || e.code || '-') + ' ' + JSON.stringify(d || e.message));
+    const why = st === 401 || st === 403 ? '로그인이 만료됐어요. 앱에서 로그아웃 후 다시 로그인해 주세요.'
+      : (!st ? '서버가 Supabase에 연결하지 못했어요. 인터넷/방화벽을 확인하세요.' : '로그인 확인에 실패했어요. (Supabase ' + st + ') .env 의 SUPABASE_URL / SUPABASE_PUBLISHABLE_KEY 가 앱과 같은 프로젝트인지 확인하세요.');
+    res.status(401).json({ success: false, message: why });
   }
 });
 
@@ -204,7 +208,8 @@ app.get('/pay', (req, res) => {
     const info = await (await fetch('/api/order-info?order=' + encodeURIComponent(order))).json();
     if (!info.success) { msg.textContent = info.message; return; }
     const paymentWidget = PaymentWidget(info.clientKey, info.customerKey);              // 결제위젯 초기화
-    paymentWidget.renderPaymentWidget('#payment-widget', { value: info.amount });        // 결제 UI
+    // v1 SDK 의 결제 UI 렌더 함수는 renderPaymentMethods 예요. (예전 이름 renderPaymentWidget 이 있으면 그걸로 대체)
+    (paymentWidget.renderPaymentMethods || paymentWidget.renderPaymentWidget).call(paymentWidget, '#payment-widget', { value: info.amount }, { variantKey: 'DEFAULT' });
     paymentWidget.renderAgreement('#agreement-widget');                                  // 이용약관 UI
     btn.disabled = false;
     btn.addEventListener('click', async () => {

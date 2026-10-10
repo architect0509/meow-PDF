@@ -1,3 +1,4 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <!DOCTYPE html>
 <html lang="ko" data-theme="dark">
 <head>
@@ -3248,10 +3249,23 @@ function loadPlan() {
   planBusy = loadPlanNow().finally(() => { planBusy = null; if (planAgain) { planAgain = false; loadPlan(); } });
   return planBusy;
 }
+// 로그아웃: 서버가 세션을 이미 지웠어도(session_not_found) 이 브라우저의 로그인 정보는 반드시 지워요
+async function hardSignOut(sb) {
+  try { await sb.auth.signOut({ scope: 'local' }); } catch (e) { /* 무시 */ }
+  try { Object.keys(localStorage).filter(k => /^sb-.*-auth-token/.test(k) || k === 'meowPlan').forEach(k => localStorage.removeItem(k)); } catch (e) { /* 무시 */ }
+  try { Object.keys(sessionStorage).filter(k => /^sb-/.test(k)).forEach(k => sessionStorage.removeItem(k)); } catch (e) { /* 무시 */ }
+}
 async function loadPlanNow() {
   const sb = await getSb(); if (!sb) { PLAN.ready = true; syncPlanUI(); return; }
   let u = null;
   try { const { data } = await sb.auth.getSession(); u = data && data.session && data.session.user || null; } catch (e) { /* 무시 */ }
+  if (u) {   // 서버에서 세션이 사라졌는지(만료·삭제) 확인 — 네트워크 오류일 때는 그대로 둬요
+    try {
+      const g = await sb.auth.getUser();
+      const st = g && g.error && (g.error.status || 0), cd = g && g.error && g.error.code;
+      if (g && g.error && (st === 401 || st === 403 || st === 404 || cd === 'session_not_found' || cd === 'user_not_found' || /AuthSessionMissing/.test(g.error.name || ''))) { await hardSignOut(sb); u = null; }
+    } catch (e) { /* 무시 */ }
+  }
   if (!u) { Object.assign(PLAN, { user: null, premium: false, student: false, paid: false, verifiedAt: null, ready: true }); try { localStorage.removeItem('meowPlan'); } catch (e) { /* 무시 */ } syncPlanUI(); return; }
   let row = null;
   try { const r = await sb.from('users_profile').select('is_student,is_paid,student_verified_at').eq('id', u.id).maybeSingle(); row = r && r.data || null; } catch (e) { /* 무시 */ }
@@ -3305,7 +3319,7 @@ async function openAccount(note) {
         if (act === 'refresh') { msg = '확인하는 중…'; err = false; draw(); await loadPlan(); msg = PLAN.premium ? '🎉 프리미엄이 적용돼 있어요!' : '아직 결제 내역이 확인되지 않았어요.'; err = !PLAN.premium; draw(); return; }
         if (act === 'pay') { await startPayment(sb, m => { msg = m.t; err = !!m.err; busy = !!m.busy; draw(); }); return; }
         if (act === 'back') { step = 'email'; msg = ''; err = false; draw(); return; }
-        if (act === 'out') { try { await sb.auth.signOut(); } catch (er) { /* 무시 */ } step = 'email'; msg = '로그아웃했어요.'; err = false; await loadPlan(); return; }
+        if (act === 'out') { await hardSignOut(sb); step = 'email'; msg = '로그아웃했어요.'; err = false; await loadPlan(); return; }
         if (act === 'send' || act === 'resend') {
           const v = act === 'send' ? String(body.querySelector('#acEmail').value || '').trim().toLowerCase() : email;
           if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) { msg = '올바른 이메일 주소를 입력해 주세요.'; err = true; draw(); return; }
@@ -4649,7 +4663,7 @@ document.addEventListener('keydown', e => {
   const textual = tag === 'TEXTAREA' || (tag === 'INPUT' && !['range', 'color', 'checkbox', 'radio', 'button', 'file'].includes(itype));
   const typing = textual || tag === 'INPUT' || tag === 'SELECT';
   const mod = e.ctrlKey || e.metaKey;
-  const k = e.code === 'KeyS' ? 's' : e.code === 'KeyO' ? 'o' : e.code === 'KeyP' ? 'p' : e.code === 'KeyZ' ? 'z' : e.code === 'KeyY' ? 'y' : e.key.toLowerCase();
+  const k = e.code === 'KeyS' ? 's' : e.code === 'KeyO' ? 'o' : e.code === 'KeyP' ? 'p' : e.code === 'KeyZ' ? 'z' : e.code === 'KeyY' ? 'y' : String(e.key || '').toLowerCase();
   if (mod && e.code === 'KeyF' && !e.shiftKey && !e.altKey) { e.preventDefault(); if (state.pages.length) openSearch(); return; }
   if (mod && k === 's') { e.preventDefault(); saveDoc({ asNew: e.shiftKey }); return; }
   if (mod && k === 'o') { e.preventDefault(); openDialog(); return; }
@@ -5266,3 +5280,5 @@ updateTitle();
 </script>
 </body>
 </html>
+
+</body></html>
