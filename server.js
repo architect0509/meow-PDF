@@ -220,7 +220,7 @@ app.post('/api/dev/issue-key', limiter, async (req, res) => {
   const key = makeKey(), now = new Date(), exp = new Date(now); exp.setMonth(exp.getMonth() + KEY_MONTHS);
   const note = String((req.body && req.body.note) || '').trim().slice(0, 60) || null;
   try {
-    await axios.post(rest('access_keys'), { key_hash: hashKey(key), hint: key.slice(-4), note, issued_by: user.email, issued_at: now.toISOString(), expires_at: exp.toISOString() },
+    await axios.post(rest('access_keys'), { key_hash: hashKey(key), hint: key.slice(-4), note, issued_by: user.id, issued_at: now.toISOString(), expires_at: exp.toISOString() },
       { headers: { ...sbJson, Prefer: 'return=minimal' }, timeout: 8000 });
   } catch (e) { return dbErr(res, e, '키 발급 실패'); }
   res.json({ success: true, key, issuedAt: now.toISOString(), expiresAt: exp.toISOString() });
