@@ -41,3 +41,27 @@ end $$;
 drop trigger if exists on_auth_user_student on auth.users;
 create trigger on_auth_user_student after insert or update of email_confirmed_at, email on auth.users
   for each row execute function public.sync_student_profile();
+
+-- 4) 이용 키 (개발자 계정이 서버를 통해 발급 → 발급일로부터 3개월간 프리미엄)
+alter table public.users_profile add column if not exists premium_until timestamptz;
+
+create table if not exists public.access_keys (
+  id uuid primary key default gen_random_uuid(),
+  key_hash text unique not null,          -- 키 원문은 저장하지 않고 해시만 저장해요
+  hint text,                              -- 키 끝 4자리 (목록 확인용)
+  note text,
+  issued_by text,
+  issued_at timestamptz not null default now(),
+  expires_at timestamptz not null,
+  revoked boolean not null default false
+);
+create table if not exists public.key_redemptions (
+  id uuid primary key default gen_random_uuid(),
+  key_id uuid not null references public.access_keys(id) on delete cascade,
+  user_id uuid not null references auth.users(id) on delete cascade,
+  redeemed_at timestamptz not null default now(),
+  unique (key_id, user_id)
+);
+-- 정책을 만들지 않으므로 브라우저(앱)에서는 접근할 수 없고, 서버(service_role)만 읽고 쓸 수 있어요.
+alter table public.access_keys enable row level security;
+alter table public.key_redemptions enable row level security;

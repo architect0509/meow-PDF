@@ -3,15 +3,11 @@
   "version": "1.0.0",
   "description": "Meow-PDF 결제 서버 (토스페이먼츠 + Supabase)",
   "main": "server.js",
-  "scripts": {
-    "start": "node server.js"
-  },
-  "engines": {
-    "node": ">=18"
-  },
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=18" },
   "dependencies": {
     "axios": "^1.7.7",
-    "dotenv": "^16.6.1",
+    "dotenv": "^16.4.5",
     "express": "^4.21.1"
   }
 }
