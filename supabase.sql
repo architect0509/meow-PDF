@@ -68,4 +68,23 @@ alter table public.key_redemptions enable row level security;
 
 -- 발급한 키를 개발자가 다시 볼 수 있도록 (서버가 암호화해서 저장해요. 원문은 DB에 그대로 저장되지 않아요)
 alter table public.access_keys add column if not exists key_enc text;
+
+-- 고객센터: 불편사항 · 의견 접수 (서버만 읽고 쓰며, 개발자 계정이 설정 창에서 조회/관리해요)
+create table if not exists public.feedback (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  category text not null default '기타',
+  title text,
+  message text not null,
+  contact text,
+  user_id uuid,
+  user_email text,
+  app_version text,
+  env text,
+  status text not null default 'new' check (status in ('new','doing','done')),
+  memo text
+);
+create index if not exists feedback_created_idx on public.feedback (created_at desc);
+alter table public.feedback enable row level security;
+
 notify pgrst, 'reload schema';

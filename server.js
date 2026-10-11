@@ -55,7 +55,7 @@ app.use((req, res, next) => {
     res.setHeader('Vary', 'Origin');
   }
   res.setHeader('Access-Control-Allow-Headers', 'Authorization, Content-Type');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
   if (req.method === 'OPTIONS') return res.sendStatus(204);
   next();
 });
@@ -258,6 +258,69 @@ app.post('/api/dev/revoke-key', limiter, async (req, res) => {
   try { await axios.patch(rest(`access_keys?id=eq.${id}`), { revoked: true }, { headers: { ...sbJson, Prefer: 'return=minimal' }, timeout: 8000 }); res.json({ success: true }); }
   catch (e) { dbErr(res, e, '키 폐기 실패'); }
 });
+/* ─────────── 고객센터 (불편사항 · 의견 접수) ───────────
+   - 누구나(로그인 없이도) 접수할 수 있고, 로그인한 경우 계정이 함께 기록돼요.
+   - 조회 · 상태 변경 · 삭제는 개발자 계정만 가능해요. */
+const FB_CATS = ['불편사항', '오류 신고', '기능 제안', '기타'];
+const FB_STATUS = ['new', 'doing', 'done'];
+const fbHits = new Map();
+setInterval(() => fbHits.clear(), 10 * 60 * 1000).unref();
+const fbLimiter = (req, res, next) => {   // IP당 10분에 5건
+  const ip = req.ip || 'x', n = (fbHits.get(ip) || 0) + 1; fbHits.set(ip, n);
+  if (n > 5) return res.status(429).json({ success: false, message: '접수 횟수가 너무 많습니다. 잠시 후 다시 시도해 주세요.' });
+  next();
+};
+app.post('/api/feedback', fbLimiter, async (req, res) => {
+  if (!ready()) return res.status(503).json({ success: false, message: '서버 설정이 완료되지 않았습니다.' });
+  const b = req.body || {};
+  const category = FB_CATS.includes(b.category) ? b.category : '기타';
+  const title = String(b.title || '').trim().slice(0, 80);
+  const message = String(b.message || '').trim().slice(0, 4000);
+  let contact = String(b.contact || '').trim().slice(0, 120);
+  const env = String(b.env || '').trim().slice(0, 600);
+  const appVersion = String(b.appVersion || '').trim().slice(0, 30);
+  if (message.length < 5) return res.status(400).json({ success: false, message: '내용을 5자 이상 입력해 주세요.' });
+  if (contact && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact)) return res.status(400).json({ success: false, message: '회신받을 이메일 형식이 올바르지 않습니다.' });
+  let uid = null, email = null;
+  const token = (req.headers.authorization || '').replace(/^Bearer\s+/i, '');
+  if (token) { try { const u = await userFromToken(token); if (u && u.id) { uid = u.id; email = u.email || null; } } catch (e) { /* 로그인 정보 없이 접수 */ } }
+  try {
+    await axios.post(rest('feedback'), { category, title: title || null, message, contact: contact || null, user_id: uid, user_email: email, app_version: appVersion || null, env: env || null },
+      { headers: { ...sbJson, Prefer: 'return=minimal' }, timeout: 8000 });
+  } catch (e) { return dbErr(res, e, '피드백 접수 실패'); }
+  res.json({ success: true });
+});
+// 개발자: 접수 목록 (?status=new|doing|done, 최신순 200건)
+app.get('/api/dev/feedback', limiter, async (req, res) => {
+  const user = await authed(req, res, true); if (!user) return;
+  const st = FB_STATUS.includes(req.query.status) ? '&status=eq.' + req.query.status : '';
+  try {
+    const r = await axios.get(rest('feedback?select=id,created_at,category,title,message,contact,user_email,app_version,env,status,memo&order=created_at.desc&limit=200' + st), { headers: sbAdmin, timeout: 8000 });
+    const c = await axios.get(rest('feedback?select=status&limit=5000'), { headers: sbAdmin, timeout: 8000 });
+    const counts = { new: 0, doing: 0, done: 0 }; (c.data || []).forEach(x => { if (counts[x.status] !== undefined) counts[x.status]++; });
+    res.json({ success: true, items: r.data || [], counts });
+  } catch (e) { dbErr(res, e, '피드백 목록 실패'); }
+});
+// 개발자: 상태 · 메모 변경
+app.post('/api/dev/feedback-update', limiter, async (req, res) => {
+  const user = await authed(req, res, true); if (!user) return;
+  const b = req.body || {}, id = String(b.id || '');
+  if (!/^[0-9a-f-]{36}$/i.test(id)) return res.status(400).json({ success: false, message: '잘못된 요청입니다.' });
+  const patch = {};
+  if (b.status !== undefined) { if (!FB_STATUS.includes(b.status)) return res.status(400).json({ success: false, message: '잘못된 상태입니다.' }); patch.status = b.status; }
+  if (b.memo !== undefined) patch.memo = String(b.memo).slice(0, 1000);
+  if (!Object.keys(patch).length) return res.status(400).json({ success: false, message: '변경할 내용이 없습니다.' });
+  try { await axios.patch(rest(`feedback?id=eq.${id}`), patch, { headers: { ...sbJson, Prefer: 'return=minimal' }, timeout: 8000 }); res.json({ success: true }); }
+  catch (e) { dbErr(res, e, '피드백 변경 실패'); }
+});
+// 개발자: 삭제
+app.post('/api/dev/feedback-delete', limiter, async (req, res) => {
+  const user = await authed(req, res, true); if (!user) return;
+  const id = String((req.body && req.body.id) || '');
+  if (!/^[0-9a-f-]{36}$/i.test(id)) return res.status(400).json({ success: false, message: '잘못된 요청입니다.' });
+  try { await axios.delete(rest(`feedback?id=eq.${id}`), { headers: sbAdmin, timeout: 8000 }); res.json({ success: true }); }
+  catch (e) { dbErr(res, e, '피드백 삭제 실패'); }
+});
 // 사용자: 키 입력 → 키의 만료일(발급일 + 3개월)까지 프리미엄
 app.post('/api/redeem-key', keyLimiter, async (req, res) => {
   const user = await authed(req, res, false); if (!user) return;
@@ -296,6 +359,7 @@ app.get('/pay', (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   res.send(page('Meow-PDF 결제', `
 <h1>Meow-PDF 프리미엄 결제</h1><p>${ORDER_NAME} · ${PRICE.toLocaleString('ko-KR')}원</p>
+<p style="color:#b8860b;font-weight:600">최초 1회만 결제하면 계속 이용할 수 있습니다. 추가 결제는 없습니다.</p>
 <div id="msg" class="err"></div>
 <div id="payment-widget"></div><div id="agreement-widget"></div>
 <button id="payment-button" disabled>${PRICE.toLocaleString('ko-KR')}원 결제하고 프리미엄 시작하기</button>`, `

@@ -1,76 +1,71 @@
-# Meow-PDF
+# Meow-PDF 결제 서버
 
-브라우저에서 바로 쓰는 PDF 편집기입니다. 파일 하나(`pdf-editor.html`)로 동작하며, 설치 없이 열어서 PDF 텍스트를 고치고, 그리고, 합치고, 내보낼 수 있습니다. 한국어 UI, 다크 모드 기본, 앰버(`#dbbe43`) 포인트 컬러를 사용합니다.
+토스페이먼츠 결제위젯(팝업) + 승인 API + Supabase 권한 부여.
+**시크릿 키는 이 서버(`server.js`/`.env`)에만 있어요. 앱(HTML)에는 두지 않아요.**
 
-> 라이브: https://meow-pdf.onrender.com
+## 1. 준비
+1. Node.js 18 이상
+2. `npm install`
+3. `.env.example` 을 `.env` 로 복사하고 채우기
+   - `SUPABASE_SERVICE_ROLE_KEY` (필수): Supabase → Project Settings → API → *service_role* 키
+   - `ORDER_SECRET`: 아무 긴 무작위 문자열
+   - 토스 키는 비워 두면 공식 문서용 **테스트 키**가 쓰여요.
+4. Supabase SQL Editor 에서 `supabase.sql` 실행 (is_paid / is_student 를 서버만 쓰게 잠가요)
+5. `npm start`
 
-## 주요 기능
+## 2. 앱 연결
+- 앱(`pdf-editor.html`)을 이 서버에서 같이 열려면 `public/index.html` 로 복사 → `http://localhost:3000`
+- 다른 곳에서 열면(파일로 열기, GitHub Pages 등) 앱 코드의 `PAY_SERVER` 에 서버 주소를 넣어 주세요.
 
-**편집**
-- 선택 · 텍스트 · 펜 · 형광펜 · 선 · 도형 · 지우개 · 이미지 삽입
-- PDF 안의 기존 글자를 눌러 바로 수정 (글꼴, 크기, 굵게/기울임, 글자색, 배경색)
-- 음성 녹음을 페이지에 넣기
-- 실행 취소 / 다시 실행, 단축키 지원
+## 3. 결제 흐름
+앱 → `POST /api/create-order`(로그인 토큰) → 결제 팝업 `/pay` (토스 결제위젯) → `/payment/success`
+→ `POST /api/confirm-payment`(금액 3,900원 검증 → 토스 승인 → `users_profile.is_paid=true`) → 앱이 상태 새로고침.
+- 가격(3,900원)은 서버가 정해요. 금액 위변조는 승인 전에 거절돼요.
+- 권한 부여에 실패하면 결제를 자동 취소해요.
+- 주문번호에 사용자 ID 와 서명이 들어 있어서, 남의 계정으로 위조할 수 없어요.
 
-**문서 관리**
-- 여러 문서를 탭으로 열기, 멀티작업 패널(PDF · 이미지 · 텍스트 · HWP · PPTX · DOCX 보기)
-- 페이지 썸네일 사이드바, 전체 페이지 관리(순서 변경 · 삭제 · 회전)
-- PDF 병합, 압축
-- 내 PDF 안에서 검색, 책갈피, 페이지 주석 · 목록 보기, 인쇄
-- 열기: PDF · MPDF · PPTX · HWP · 이미지 / 내보내기: PDF, MPDF(편집 가능 상태 유지), PPTX(페이지당 슬라이드 한 장)
+## 4. 테스트 결제
+테스트 키로는 실제 돈이 빠지지 않아요. 결제창에서 카드번호는 토스 테스트 안내를 따르세요.
 
-**모바일 (화면 폭에 따라 자동 전환)**
-- 한 화면에 한 페이지, 최소한의 도구만 표시. 레이어 · 노트 · 멀티작업은 숨김
-- 상단에 편집 도구, 하단에 페이지 썸네일 패널과 페이지 이동 막대
-- PDF 글자를 한 번 눌러 바로 수정. 옵션바는 페이지를 가리지 않게 아래에 떠 있고, 도구를 바꿔도 페이지 크기가 변하지 않음
-- 두 손가락으로 확대 · 축소 · 이동 (모든 도구), 맞춤 크기에 가까워지면 자동으로 맞춤
-- 한 손가락으로 끌어 페이지 넘기기(옆 페이지가 따라옴), 그리기 도구에서는 두 손가락 가로 스와이프
+## 5. 실서비스 체크리스트
+- [ ] 토스 **라이브 키**로 교체(`TOSS_CLIENT_KEY`, `TOSS_SECRET_KEY`) — 사업자 심사 필요
+- [ ] HTTPS 로 배포하고 `PUBLIC_BASE_URL`, `ALLOWED_ORIGINS` 설정
+- [ ] `ORDER_SECRET` 고정, `.env` 는 git 에 올리지 않기
+- [ ] 환불/이용약관/사업자 정보 고지 (전자상거래법)
+- [ ] (권장) 토스 웹훅으로 취소/환불 시 `is_paid=false` 처리
 
-## 프리미엄
+## 이메일로 링크가 오고 인증번호가 안 올 때
 
-다음 중 하나에 해당하면 프리미엄 기능(전체 페이지 관리, 압축, PPTX 내보내기, 음성 녹음 등)을 쓸 수 있습니다.
+앱은 인증번호(OTP)를 요청하지만, 메일에 숫자가 들어가는지는 **Supabase 메일 템플릿**이 정합니다.
+기본 템플릿은 `{{ .ConfirmationURL }}`(로그인 링크)만 담고 있어서 링크가 옵니다.
 
-1. 인증된 대학 이메일(`.ac.kr` / `.edu`)로 로그인
-2. 결제 (토스페이먼츠, 서버가 금액을 검증)
-3. 개발자가 발급한 **이용 키** 입력 (발급일로부터 3개월, 한 키를 여러 명이 사용 가능)
-4. 개발자 계정
+1. Supabase 대시보드 → Authentication → Emails(Email Templates)
+2. **Magic Link**와 **Confirm signup** 두 템플릿을 모두 열어 Subject를 `Meow-PDF 인증번호`로, Body를 `email-templates/otp.html` 내용으로 교체 후 저장
+   (핵심은 `{{ .Token }}`이 들어 있고 `{{ .ConfirmationURL }}`은 없다는 점)
+3. Authentication → Providers → Email에서 OTP 길이(기본 6자리)·만료 시간 확인
+4. 기본 메일 발송은 시간당 발송 한도가 낮으니, 실서비스에서는 SMTP를 연결하세요.
 
-## 구성
+## 이용 키 (개발자 발급 프리미엄)
 
-| 구분 | 내용 |
-| --- | --- |
-| 앱 | 단일 HTML 파일, 순수 JS. pdf.js, pdf-lib, JSZip, lamejs(인라인), supabase-js · PptxGenJS(필요할 때 로드) |
-| 서버 | Express (`meow-pdf-server/`). 결제, 이용 키 발급 · 조회 · 폐기, 키 입력 처리 |
-| 계정 / DB | Supabase (이메일 인증번호 로그인, `users_profile`, `access_keys`, `key_redemptions`) |
-| 배포 | Render (서버가 앱 `public/index.html` 도 함께 제공) |
+개발자 계정(`DEV_EMAIL`, 기본 architect05092@gmail.com)이 키를 발급하면, 키를 입력한 사용자는 **발급일로부터 3개월** 동안 프리미엄을 이용할 수 있습니다.
 
-민감한 정보(서비스 키, 토스 시크릿 등)는 서버의 `.env` 에만 있고 앱 HTML에는 들어 있지 않습니다.
+1. Supabase SQL Editor에서 `supabase.sql`을 다시 실행합니다. (`users_profile.premium_until`, `access_keys`, `key_redemptions` 추가)
+2. `.env`에 `DEV_EMAIL`을 확인하고 서버를 재시작합니다. (`node server.js`)
+3. 개발자 계정으로 로그인 → 계정 창 → "키 발급". 키는 발급 직후 한 번만 전체가 표시됩니다.
+4. 사용자는 계정 창의 "이용 키"에 입력합니다. 한 키를 여러 사용자가 사용할 수 있습니다.
+5. 만료일은 발급일 + 3개월이며, 늦게 입력하면 남은 기간만 적용됩니다.
+6. 폐기하면 새로 입력하는 것만 막고, 이미 적용된 사용자의 기간은 유지됩니다.
 
-## 실행
+보안: 서버에는 키의 해시와 끝 4자리만 저장하며, 입력 시도는 IP당 분당 8회로 제한됩니다. 발급·조회·폐기는 서버가 로그인 토큰의 이메일(인증 완료)을 검증해 개발자 계정만 허용합니다.
 
-```bash
-cd meow-pdf-server
-npm install
-cp .env.example .env     # 값 채우기
-npm start                # http://localhost:3000
-```
+발급 내역에서 키 전체를 다시 볼 수 있습니다. 키는 서버가 `SUPABASE_SERVICE_ROLE_KEY`(또는 `KEY_ENC_SECRET`)로 암호화해 `access_keys.key_enc`에 저장하며, 이 값이 바뀌면 이전 키 원문은 복호화되지 않습니다. 이 기능을 넣기 전에 발급한 키는 끝 4자리만 보입니다.
 
-1. Supabase SQL Editor에서 `supabase.sql` 실행
-2. 앱을 서버에서 열려면 `pdf-editor.html` 을 `public/index.html` 로 복사
-3. 다른 곳에서 앱을 열 때는 앱 코드의 `PAY_SERVER` 에 서버 주소 입력
+## 고객센터 (불편사항 · 의견 접수)
 
-환경 변수: `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `ORDER_SECRET`, `DEV_EMAIL`, `KEY_ENC_SECRET`(선택), `PUBLIC_BASE_URL`, `ALLOWED_ORIGINS`, `TOSS_CLIENT_KEY`, `TOSS_SECRET_KEY`
+앱의 설정 창(톱니바퀴) → "정보 · 고객센터"에서 누구나 접수할 수 있고, 로그인한 경우 계정 이메일이 함께 기록됩니다.
 
-자세한 서버 설정, 결제 흐름, 이용 키 사용법은 `meow-pdf-server/README.md` 를 참고하세요.
+1. Supabase SQL Editor에서 `supabase.sql`을 다시 실행합니다. (`feedback` 테이블 추가)
+2. 서버를 재배포합니다.
+3. 개발자 계정으로 로그인하면 설정 창에 "고객 문의 관리" 메뉴가 나타납니다. 상태(신규 / 처리 중 / 완료) 변경, 메모, 삭제, 검색, CSV 내보내기를 할 수 있습니다.
 
-## 이용 키 사용 흐름
-
-1. 개발자 계정으로 로그인 → 계정 창 → 키 발급 (`MEOW-XXXX-XXXX-XXXX-XXXX`)
-2. 사용자가 계정 창의 "이용 키"에 입력
-3. 만료일은 발급일 + 3개월. 폐기하면 새 입력만 막고 이미 적용된 기간은 유지
-
-## 참고
-
-- Render 무료 플랜은 한동안 접속이 없으면 서버가 잠들어, 첫 요청에 수십 초가 걸릴 수 있습니다.
-- 암호가 걸린 PDF와 배포용 HWP는 열 수 없습니다. 예전 `.ppt` 형식은 `.pptx` 로 저장한 뒤 사용하세요.
-- 서버는 서비스 키와 `ORDER_SECRET` 을 외부에 노출하지 마세요. `.env` 는 git 에 올리지 않습니다.
+API: `POST /api/feedback`(공개, IP당 10분에 5건), `GET /api/dev/feedback`, `POST /api/dev/feedback-update`, `POST /api/dev/feedback-delete`(개발자 전용). DB 테이블은 정책 없이 RLS만 켜 두어 서버(service_role)만 접근합니다.

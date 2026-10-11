@@ -775,6 +775,191 @@ body.pm-open{overflow:hidden}
 .pm-name{text-align:center;font-size:12.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.pm-name.empty{color:var(--muted);opacity:.6}
 .pm-hint{padding:8px 16px;font-size:12px;color:var(--muted);border-top:1px solid var(--border);background:var(--bar)}
 .pm-ghost{position:fixed;left:-300px;top:0;padding:6px 12px;background:var(--accent);color:var(--on-accent);border-radius:8px;font-weight:700}
+
+/* ════════════ 설정 창 (VS Code 스타일) ════════════ */
+.setw{position:fixed;inset:0;z-index:85;display:grid;place-items:center;background:rgba(0,0,0,.52);padding:16px}
+.setdlg{display:grid;grid-template-columns:224px minmax(0,1fr);width:min(1000px,100%);height:min(700px,100%);background:var(--dialog);border:1px solid var(--border);border-radius:14px;box-shadow:0 18px 60px rgba(0,0,0,.55);overflow:hidden}
+.setnav{display:flex;flex-direction:column;gap:10px;padding:14px 10px;background:var(--bar2);border-right:1px solid var(--border);min-height:0}
+.setsearch{position:relative}
+.setsearch input{width:100%;box-sizing:border-box;height:34px;padding:0 10px 0 32px;border-radius:8px;border:1px solid var(--border);background:var(--bar);color:var(--text);font:inherit;font-size:13px}
+.setsearch input:focus{outline:2px solid var(--accent);outline-offset:-1px}
+.setsearch svg{position:absolute;left:9px;top:9px;width:16px;height:16px;color:var(--muted);pointer-events:none}
+#setNav{display:flex;flex-direction:column;gap:2px;overflow:auto}
+.setnav-i{position:relative;display:flex;align-items:center;gap:10px;height:38px;padding:0 12px;border-radius:8px;color:var(--text);font-size:13.5px;text-align:left;white-space:nowrap}
+.setnav-i svg{width:18px;height:18px;color:var(--muted)}
+.setnav-i:hover{background:var(--hover)}
+.setnav-i.on{background:var(--accent-bg);color:var(--accent);font-weight:600}
+.setnav-i.on svg{color:var(--accent)}
+.setnav-i.on::before{content:'';position:absolute;left:-10px;top:8px;bottom:8px;width:3px;border-radius:0 3px 3px 0;background:var(--accent)}
+.setver{margin-top:auto;padding:8px 12px;font-size:11.5px;color:var(--muted)}
+.setmain{display:flex;flex-direction:column;min-width:0;min-height:0}
+.sethead{display:flex;align-items:center;gap:10px;padding:14px 18px 12px 24px;border-bottom:1px solid var(--border);flex:none}
+.sethead h2{margin:0;flex:1;font-size:17px;font-weight:700}
+.setbody{flex:1;overflow:auto;padding:18px 24px 28px;font-size:13.5px;line-height:1.55;scrollbar-width:thin}
+.setg{padding:0 0 18px;margin:0 0 18px;border-bottom:1px solid var(--border)}
+.setg:last-child{border-bottom:0;margin-bottom:0}
+.setg h3{margin:0 0 4px;font-size:14.5px}
+.setd{margin:0 0 12px;color:var(--muted);font-size:12.5px}
+.setbody .sb{display:inline-flex;align-items:center;justify-content:center;height:34px;padding:0 14px;border-radius:8px;border:1px solid var(--border);color:var(--text);font-size:13px;font-weight:600}
+.setbody .sb:hover{background:var(--hover)}
+.setbody .sb.pri{background:var(--accent);color:#000;border-color:transparent}
+.setbody .sb.pri:hover{filter:brightness(1.08);background:var(--accent)}
+.setbody .sb.bad{color:#ef5350}
+.setbody .sb:disabled{opacity:.5;cursor:default}
+.optcards{display:flex;gap:12px;flex-wrap:wrap}
+.optcard{display:flex;flex-direction:column;gap:8px;width:168px;padding:10px;border-radius:12px;border:1.5px solid var(--border);background:var(--bar);text-align:left;color:var(--text)}
+.optcard:hover{background:var(--hover)}
+.optcard.on{border-color:var(--accent);background:var(--accent-bg)}
+.optcard b{font-size:13px}
+.optcard span.sub{font-size:11.5px;color:var(--muted)}
+.pv{position:relative;display:grid;height:74px;border-radius:7px;border:1px solid var(--border);background:var(--view);overflow:hidden;gap:2px;padding:2px}
+.pv i{display:block;border-radius:3px;background:var(--border)}
+.pv .pv-t{background:var(--bar2)}
+.pv .pv-tool{background:var(--accent);opacity:.75}
+.pv .pv-main{background:var(--bar)}
+.pv.top{grid-template-rows:9px 11px 1fr}
+.pv.top .pv-t{grid-row:1}.pv.top .pv-tool{grid-row:2}.pv.top .pv-main{grid-row:3}
+.pv.left{grid-template-columns:13px 1fr;grid-template-rows:9px 1fr}
+.pv.left .pv-t{grid-column:1/-1;grid-row:1}.pv.left .pv-tool{grid-column:1;grid-row:2}.pv.left .pv-main{grid-column:2;grid-row:2}
+.segs{display:inline-flex;gap:2px;padding:3px;border-radius:10px;background:var(--bar);border:1px solid var(--border)}
+.segs button{height:30px;padding:0 16px;border-radius:7px;font-size:13px;color:var(--text)}
+.segs button.on{background:var(--accent-bg);color:var(--accent);font-weight:600}
+.sktop{display:flex;align-items:center;gap:10px;margin:0 0 12px;flex-wrap:wrap}
+.sktop p{flex:1;margin:0;color:var(--muted);font-size:12.5px}
+.skgrp{margin:0 0 16px}
+.skgrp>h4{margin:0 0 6px;padding:0 4px;font-size:11.5px;letter-spacing:.04em;color:var(--muted);font-weight:600}
+.skrow{display:flex;align-items:center;gap:8px;min-height:44px;padding:4px 10px;border-radius:9px;flex-wrap:wrap}
+.skrow:hover{background:var(--hover)}
+.skl{flex:1;min-width:140px;display:flex;flex-direction:column}
+.skl b{font-weight:500}.skl span{font-size:11.5px;color:var(--muted)}
+.skchip{display:inline-flex;align-items:center;gap:4px;min-width:112px;height:32px;padding:0 10px;justify-content:center;border-radius:8px;border:1px solid var(--border);background:var(--bar);color:var(--text);font-size:12.5px}
+.skchip:hover{border-color:var(--accent)}
+.skchip.rec{border-color:var(--accent);background:var(--accent-bg);color:var(--accent);animation:skp 1.1s ease-in-out infinite}
+@keyframes skp{50%{box-shadow:0 0 0 3px var(--accent-bg)}}
+.skchip.none{color:var(--muted);border-style:dashed}
+.skchip kbd,.skpv kbd{font:inherit;font-size:11.5px;padding:1px 6px;border-radius:5px;border:1px solid var(--border);border-bottom-width:2px;background:var(--bar2);color:var(--text)}
+.skmini{display:grid;place-items:center;width:28px;height:28px;border-radius:7px;color:var(--muted)}
+.skmini:hover{background:var(--hover);color:var(--text)}
+.skmini svg{width:15px;height:15px}
+.skmini.ph{visibility:hidden;pointer-events:none}
+.skwarn{flex-basis:100%;display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 10px;border-radius:8px;background:rgba(239,83,80,.12);color:var(--text);font-size:12.5px}
+.sk-empty{padding:30px 0;text-align:center;color:var(--muted)}
+.aboutcard{display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid var(--border);border-radius:12px;background:var(--bar2)}
+.aboutcard .lg{display:grid;place-items:center;width:46px;height:46px;border-radius:12px;background:var(--accent-bg);color:var(--accent)}
+.aboutcard .lg svg{width:28px;height:28px}
+.aboutcard b{font-size:16px}.aboutcard .meta{color:var(--muted);font-size:12.5px}
+.chlog details{border:1px solid var(--border);border-radius:10px;margin:0 0 8px;background:var(--bar2)}
+.chlog summary{cursor:pointer;padding:9px 14px;font-weight:600;list-style:none;display:flex;align-items:center;gap:8px}
+.chlog summary::-webkit-details-marker{display:none}
+.chlog summary::before{content:'›';display:inline-block;transition:transform .15s;color:var(--muted)}
+.chlog details[open]>summary::before{transform:rotate(90deg)}
+.chlog .cur{font-size:11px;padding:1px 8px;border-radius:999px;background:var(--accent-bg);color:var(--accent);font-weight:600}
+.chlog ul{margin:0;padding:0 16px 12px 34px;color:var(--text)}
+.chlog li{margin:3px 0;color:var(--muted)}
+.fbform{display:flex;flex-direction:column;gap:10px}
+.fbform label.l{font-size:12px;color:var(--muted);margin-bottom:-4px}
+.fbform input[type=text],.fbform input[type=email],.fbform textarea,.adsearch{width:100%;box-sizing:border-box;border-radius:8px;border:1px solid var(--border);background:var(--bar);color:var(--text);font:inherit;padding:8px 11px}
+.fbform input[type=text],.fbform input[type=email]{height:38px;padding:0 11px}
+.fbform textarea{min-height:130px;resize:vertical;line-height:1.5}
+.fbform input:focus,.fbform textarea:focus,.adsearch:focus{outline:2px solid var(--accent);outline-offset:-1px}
+.catchips{display:flex;gap:6px;flex-wrap:wrap}
+.catchips button{height:30px;padding:0 13px;border-radius:999px;border:1px solid var(--border);font-size:12.5px;color:var(--text)}
+.catchips button.on{background:var(--accent-bg);border-color:var(--accent);color:var(--accent);font-weight:600}
+.fbform .chk{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12.5px}
+.fbrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.fbnote{font-size:12.5px;color:var(--accent);min-height:18px}.fbnote.err{color:#ef5350}
+.fbcount{margin-left:auto;font-size:11.5px;color:var(--muted)}
+.adtop{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 12px}
+.adtop .adsearch{flex:1;min-width:140px;height:34px;padding:0 11px}
+.fbitem{border:1px solid var(--border);border-radius:11px;background:var(--bar2);margin:0 0 8px;overflow:hidden}
+.fbhead{display:flex;align-items:center;gap:8px;width:100%;padding:10px 12px;text-align:left;color:var(--text)}
+.fbhead:hover{background:var(--hover)}
+.fbtag{flex:none;font-size:11px;padding:1px 8px;border-radius:999px;border:1px solid var(--border);color:var(--muted)}
+.fbst{flex:none;font-size:11px;padding:1px 8px;border-radius:999px;font-weight:600}
+.fbst.new{background:rgba(239,83,80,.16);color:#ef5350}.fbst.doing{background:var(--accent-bg);color:var(--accent)}.fbst.done{background:rgba(5,150,105,.18);color:#34d399}
+.fbtt{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fbdt{flex:none;font-size:11.5px;color:var(--muted)}
+.fbbody{padding:2px 14px 14px;border-top:1px solid var(--border)}
+.fbmsg{white-space:pre-wrap;word-break:break-word;margin:10px 0}
+.fbmeta{font-size:11.5px;color:var(--muted);word-break:break-all;margin:0 0 8px}
+.fbbody textarea{width:100%;box-sizing:border-box;min-height:54px;border-radius:8px;border:1px solid var(--border);background:var(--bar);color:var(--text);font:inherit;padding:7px 10px;margin:4px 0 8px;resize:vertical}
+@media (max-width:760px){
+  .setw{padding:0}
+  .setdlg{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);height:100%;border-radius:0;border:0}
+  .setnav{min-width:0;flex-direction:column;padding:8px 8px 4px;border-right:0;border-bottom:1px solid var(--border);gap:6px}
+  #setNav{flex-direction:row;overflow-x:auto;scrollbar-width:none}
+  .setnav-i{height:34px;padding:0 12px}.setnav-i.on::before{display:none}
+  .setver{display:none}
+  .setbody{padding:14px 14px 28px}.sethead{padding:10px 12px 10px 16px}
+  .optcard{width:calc(50% - 6px)}
+}
+body.mobile #setBtn{display:none}
+
+/* ════════════ 도구 모음 좌측 정렬 ════════════ */
+#app.tb-left{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto auto minmax(0,1fr) auto;grid-template-areas:"title title" "tabs tabs" "tool opt" "tool main" "pager pager"}
+#app.tb-left>.titlebar{grid-area:title}
+#app.tb-left>.tabbar{grid-area:tabs}
+#app.tb-left>.toolbar{grid-area:tool}
+#app.tb-left>.optbar{grid-area:opt;min-width:0}
+#app.tb-left>.main{grid-area:main;min-width:0;min-height:0}
+#app.tb-left>.mpager{grid-area:pager}
+#app.tb-left>.toolbar{flex-direction:column;align-items:stretch;gap:2px;width:62px;padding:8px 6px;border-bottom:0;border-right:1px solid var(--border);overflow-x:hidden;overflow-y:auto}
+#app.tb-left>.toolbar .tool{min-width:0;width:100%;height:46px;padding:0;gap:0}
+#app.tb-left>.toolbar .tool span{display:none}
+#app.tb-left>.toolbar .tool svg{width:21px;height:21px}
+#app.tb-left>.toolbar .sep{width:28px;height:1px;margin:5px auto}
+#app.tb-left>.toolbar .spacer{flex:1 1 auto;min-width:0!important;min-height:10px}
+#app.tb-left>.toolbar .splitbtn{flex-direction:column}
+#app.tb-left>.toolbar .splitbtn .tool{border-radius:10px 10px 0 0}
+#app.tb-left>.toolbar .caret{width:100%;height:16px;border-radius:0 0 10px 10px}
+#app.tb-left>.toolbar .tool kbd{top:2px;right:4px;font-size:9px}
+
+/* ════════════ 모바일 가로보기: 페이지 패널을 왼쪽으로 ════════════ */
+@media (orientation:landscape){
+  body.mobile .titlebar{height:42px}
+  body.mobile .main{flex-direction:row}
+  body.mobile .stage{order:1;min-width:0;min-height:0}
+  body.mobile #sidebar{order:0;flex:none;width:var(--mlw,116px);height:auto;border-top:0;border-right:1px solid var(--border);padding-left:env(safe-area-inset-left,0px)}
+  body.mobile #sidebar>.thumbs{flex-direction:column;align-items:center;overflow-x:hidden;overflow-y:auto;padding:8px 6px 12px;gap:10px;scrollbar-width:thin}
+  body.mobile #sidebar .thumb{width:76px}
+  body.mobile .ghead{min-width:0;width:100%;align-self:stretch}
+  body.mobile .mpager{padding-top:2px;padding-bottom:calc(2px + env(safe-area-inset-bottom,0px))}
+  body.mobile .mpager .micon{height:34px}
+  body.mobile .toolbar{padding-top:2px;padding-bottom:2px}
+  body.mobile .optbar{max-height:78%}
+}
+
+/* ════════════ 헤더로 올린 저장 버튼 · 결제 안내 · 옵션바 고정 높이 ════════════ */
+.titlebar .splitbtn{align-items:center;flex:none}
+.titlebar .splitbtn .tool{flex-direction:row;height:34px;min-width:0;padding:0 13px;gap:6px;border-radius:999px 0 0 999px;font-size:13px}
+.titlebar .splitbtn .tool svg{width:18px;height:18px}
+.titlebar .splitbtn .tool kbd{position:static;margin-left:1px;font-size:10px;opacity:.75;text-transform:none}
+.titlebar .splitbtn .caret{height:34px;width:22px;border-radius:0 999px 999px 0}
+.titlebar .splitbtn .tool.primary+.caret{background:var(--main);color:var(--on-main);border-left:1px solid rgba(0,0,0,.22)}
+.titlebar .splitbtn .tool.primary+.caret:hover{filter:brightness(1.08);background:var(--main)}
+#saveAsBtn span{display:none}
+#saveAsBtn{padding:0 11px!important}
+body.mobile .titlebar .caret,body.mobile .titlebar .splitbtn:has(#saveAsBtn),body.mobile .titlebar .splitbtn:not(:has(.tool)){display:none}
+body.mobile .titlebar .splitbtn .tool{border-radius:50%}
+.setbody input[type=range]{accent-color:var(--accent);width:240px;max-width:100%}
+.acp .paybox{display:flex;flex-direction:column;gap:8px;border-color:color-mix(in srgb,var(--accent) 55%,var(--border))}
+.acp .payhd{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.acp .paytag{font-size:11.5px;font-weight:700;padding:2px 10px;border-radius:999px;background:var(--accent-bg);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 50%,transparent)}
+.acp .payprice{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.acp .payprice strong{font-size:24px;letter-spacing:-.02em;color:var(--text)}
+.acp .payprice span{font-size:12.5px;color:var(--accent);font-weight:600}
+.acp .paylist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:3px;font-size:12.5px;color:var(--muted)}
+.acp .paylist li{position:relative;padding-left:14px}
+.acp .paylist li::before{content:'';position:absolute;left:2px;top:.62em;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+.acp .paynote{font-size:12.5px;color:var(--muted)}
+/* 옵션바: 높이를 고정해서 도구를 바꿔도 화면(페이지)이 다시 맞춰지지 않아요. 넘치면 가로로 스크롤돼요 */
+.optbar{height:52px;min-height:52px;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;box-sizing:border-box}
+.optbar>*{flex:none}
+.optbar::-webkit-scrollbar{height:6px}
+body.mobile .optbar{height:auto;min-height:0;flex-wrap:wrap;overflow-x:hidden;overflow-y:auto}
+body.mobile .optbar>*{flex:0 1 auto}
+@media (min-width:761px) and (max-width:1180px){.titlebar .text-btn span,.titlebar .clock{display:none}.titlebar .text-btn{padding:0 9px}.titlebar{gap:6px}.sbox input{width:130px}}
+@media (min-width:761px) and (max-width:920px){.titlebar .sbox,.titlebar .pager+.sbox{display:none}.doc-name{max-width:22vw}}
 </style>
 </head>
 <body>
@@ -793,12 +978,19 @@ body.pm-open{overflow:hidden}
     <button class="text-btn" id="openBtn" title="PDF 열기 (Ctrl+O)"><i data-i="folder"></i><span>열기</span></button>
     <button class="icon-btn" id="vmodeBtn" title="세로 모드 — 패널을 위아래로 배치" aria-label="세로 모드 전환" aria-pressed="false"><i data-i="rows"></i></button>
     <button class="icon-btn" id="layersBtn" title="작업 사이드바 (레이어 · 노트 · 멀티작업)" aria-label="작업 사이드바 열기/닫기"><i data-i="panelR"></i></button>
-    <label class="bright" title="화면 밝기 (더블클릭: 기본값)"><i data-i="sun"></i><input type="range" id="brightRange" min="40" max="130" step="1" value="100" aria-label="화면 밝기"></label>
+    <div class="splitbtn needs-doc">
+      <button class="tool primary" id="saveBtn" title="저장 — 열었던 파일에 덮어쓰기 (Ctrl+S)"><i data-i="save"></i><span>저장</span><kbd id="saveFmt">PDF</kbd></button>
+      <button class="caret" data-menu="save" title="저장 형식 선택 (PDF / MPDF)" aria-label="저장 형식 선택"><i data-i="chevD"></i></button>
+    </div>
+    <div class="splitbtn needs-doc">
+      <button class="tool" id="saveAsBtn" title="다른 이름으로 저장 (Ctrl+Shift+S)"><i data-i="download"></i><span>다른 이름으로 저장</span></button>
+      <button class="caret" data-menu="saveas" title="형식 선택 (PDF / MPDF)" aria-label="다른 이름으로 저장 형식 선택"><i data-i="chevD"></i></button>
+    </div>
     <button class="acct" id="acctBtn" title="계정 · 대학생 인증" aria-label="계정 및 대학생 인증"><i data-i="user"></i><span id="acctLbl">로그인</span></button>
     <span class="clock" id="clock" title="현재 시각" aria-label="현재 시각"></span>
     <button class="icon-btn mbtn" id="mMoreBtn" title="더보기" aria-label="더보기"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.9"/><circle cx="12" cy="12" r="1.9"/><circle cx="12" cy="19" r="1.9"/></svg></button>
-    <button class="icon-btn" id="themeBtn" title="테마 전환" aria-label="라이트/다크 전환"><i data-i="moon"></i></button>
-    <a class="gh-link" href="https://github.com/architect0509/meow-PDF" target="_blank" rel="noopener noreferrer" title="GitHub · architect0509/meow-PDF" aria-label="GitHub 저장소 열기"><i data-i="github"></i></a>
+    <button class="icon-btn" id="setBtn" title="설정 (Ctrl+,)" aria-label="설정"><i data-i="settings"></i></button>
+    <button class="icon-btn" id="themeBtn" hidden title="테마 전환" aria-label="라이트/다크 전환"><i data-i="moon"></i></button>
   </header>
 
   <div class="tabbar" id="tabbar" aria-label="문서 탭">
@@ -829,15 +1021,6 @@ body.pm-open{overflow:hidden}
     <button class="tool" id="captureBtn" title="현재 화면 캡처 (PNG 저장 + 클립보드 복사)"><i data-i="camera"></i><span>캡처</span></button>
     <button class="tool" id="printBtn" title="인쇄 (Ctrl+P)"><i data-i="printer"></i><span>인쇄</span></button>
     <button class="tool" id="presentBtn" title="발표 모드 (P)"><i data-i="present"></i><span>발표</span><kbd>P</kbd></button>
-    <div class="sep"></div>
-    <div class="splitbtn">
-      <button class="tool primary" id="saveBtn" title="저장 — 열었던 파일에 덮어쓰기 (Ctrl+S)"><i data-i="save"></i><span>저장</span><kbd id="saveFmt">PDF</kbd></button>
-      <button class="caret" data-menu="save" title="저장 형식 선택 (PDF / MPDF)" aria-label="저장 형식 선택"><i data-i="chevD"></i></button>
-    </div>
-    <div class="splitbtn">
-      <button class="tool" id="saveAsBtn" title="다른 이름으로 저장 (Ctrl+Shift+S)"><i data-i="download"></i><span>다른 이름으로 저장</span></button>
-      <button class="caret" data-menu="saveas" title="형식 선택 (PDF / MPDF)" aria-label="다른 이름으로 저장 형식 선택"><i data-i="chevD"></i></button>
-    </div>
   </div>
 
   <div class="optbar" id="optbar"></div>
@@ -926,6 +1109,10 @@ body.pm-open{overflow:hidden}
 <div id="laser" hidden></div>
 <div class="menu" id="fmtMenu" hidden></div>
 <div class="recp" id="recP" hidden role="dialog" aria-label="음성 녹음"></div>
+<div class="setw" id="setw" hidden><div class="setdlg" role="dialog" aria-modal="true" aria-labelledby="setTitle">
+  <aside class="setnav"><div class="setsearch"><i data-i="search"></i><input id="setQ" type="search" placeholder="단축키 검색" aria-label="단축키 검색" autocomplete="off" spellcheck="false"></div><nav id="setNav" role="tablist" aria-label="설정 분류"></nav><div class="setver" id="setVer"></div></aside>
+  <section class="setmain"><header class="sethead"><h2 id="setTitle"></h2><button class="icon-btn" id="setClose" title="닫기 (Esc)" aria-label="설정 닫기"><i data-i="x"></i></button></header><div class="setbody" id="setBody"></div></section>
+</div></div>
 <div class="modal" id="modal" hidden><div class="dialog" role="dialog" aria-modal="true"><h3 id="mTitle"></h3><div id="mBody"></div><div class="actions" id="mActions"></div></div></div>
 <div id="toast" role="status" aria-live="polite"></div>
 <div id="printRoot" aria-hidden="true"></div>
@@ -1288,6 +1475,11 @@ const clone = o => JSON.parse(JSON.stringify(o));
 
 /* ════════════ 아이콘 ════════════ */
 const ICONS = {
+  settings:'<path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>',
+  keyboard:'<rect width="20" height="14" x="2" y="5" rx="2"/><path d="M6 9h.01M10 9h.01M14 9h.01M18 9h.01M7 13h10"/>',
+  layout:'<rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M9 21V9"/>',
+  info:'<circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>',
+  inbox:'<path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>',
   panel:'<rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/>',
   folder:'<path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"/>',
   filePlus:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M12 18v-6"/><path d="M9 15h6"/>',
@@ -2789,7 +2981,7 @@ function openImgMenu(anchor) {
     `<button class="mi${m === 'sprite' ? ' on' : ''}" data-img="sprite"><span class="mthumb">${svg('grid')}</span><span class="mtxt"><b>스프라이트시트</b><span>프레임을 나눠 선택 삽입 · 편집</span></span></button>`;
   const r = anchor.getBoundingClientRect();
   fmtMenu.style.top = r.bottom + 6 + 'px'; fmtMenu.style.right = 'auto'; fmtMenu.style.left = Math.max(8, Math.min(r.left, window.innerWidth - 270)) + 'px';
-  fmtMenu.hidden = false;
+  fmtMenu.hidden = false; placeSide(r);
 }
 $('#fmtMenu').addEventListener('click', e => {
   const b = e.target.closest('[data-img]'); if (!b) return;
@@ -3464,7 +3656,7 @@ function getSb() {
   });
   return sbPromise;
 }
-let acctRender = null;
+let acctRender = null, setwRefresh = null;
 function syncPlanUI() {
   const pro = PLAN.premium;
   const b = $('#acctBtn'); b.classList.toggle('pro', pro);
@@ -3476,6 +3668,7 @@ function syncPlanUI() {
   const mb = $('#manageBtn'); if (mb) mb.classList.toggle('locked', !pro);
   const ec = $('#emptyCompress'); if (ec) ec.classList.toggle('locked', !pro);
   if (acctRender) acctRender();
+  if (setwRefresh) setwRefresh();
 }
 let planBusy = null, planAgain = false;
 function loadPlan() {
@@ -3560,7 +3753,7 @@ async function openAccount(note) {
         if (keyList) t += keyList.length ? `<div class="keytbl">${keyList.map((k, i) => { const ex = new Date(k.expires_at) <= new Date(), st = k.revoked ? '폐기됨' : ex ? '만료' : '사용 가능'; return `<div class="keyrow${k.revoked || ex ? ' off' : ''}"><span class="kh">${k.key ? escH(k.key) : '…' + escH(k.hint || '') + ' (전체 보기 불가)'}</span><span class="kb">${k.key ? `<button class="lnk" data-a="copyrow" data-i="${i}">복사</button>` : ''}${k.revoked || ex ? '' : `<button class="lnk bad" data-a="revoke" data-id="${escH(k.id)}">폐기</button>`}</span><span class="kd">${escH(k.note || '메모 없음')} · ~${escH(String(k.expires_at).slice(0, 10))} · ${k.uses}명 · ${st}</span></div>`; }).join('')}</div>` : '<p class="keynote">발급한 키가 없습니다.</p>';
         return t + '</div>';
       };
-      const payHtml = () => `<div class="box"><b>일반 사용자</b><br>학교 이메일이 없는 경우, ${PAY_PRICE.toLocaleString('ko-KR')}원으로 프리미엄을 이용하실 수 있습니다.${PLAN.user ? `<button class="b pri" data-a="pay" style="width:100%;margin-top:8px"${busy ? ' disabled' : ''}>일반 사용자 결제 (${PAY_PRICE.toLocaleString('ko-KR')}원)</button><button class="lnk" data-a="refresh" style="margin-top:6px">결제 후 반영되지 않았다면 상태 새로고침</button>` : '<br><span style="color:var(--muted);font-size:12.5px">결제를 진행하려면 먼저 이메일로 로그인해 주세요.</span>'}</div>`;
+      const payHtml = () => `<div class="box paybox"><div class="payhd"><b>일반 사용자</b><span class="paytag">최초 1회 결제</span></div><div class="payprice"><strong>${PAY_PRICE.toLocaleString('ko-KR')}원</strong><span>한 번만 결제하면 계속 이용할 수 있습니다</span></div><ul class="paylist"><li>월 · 연 단위 추가 결제가 없습니다</li><li>학교 이메일이 없어도 모든 프리미엄 기능을 이용합니다</li></ul>${PLAN.user ? `<button class="b pri" data-a="pay" style="width:100%"${busy ? ' disabled' : ''}>${PAY_PRICE.toLocaleString('ko-KR')}원 결제하기 (1회)</button><button class="lnk" data-a="refresh" style="margin-top:6px">결제 후 반영되지 않았다면 상태 새로고침</button>` : '<span class="paynote">결제를 진행하려면 먼저 이메일로 로그인해 주세요.</span>'}</div>`;
       acctRender = draw;
       body.addEventListener('click', async e => {
         const a = e.target.closest('[data-a]'); if (!a || a.disabled) return;
@@ -3881,7 +4074,7 @@ function openFmtMenu(kind, anchor) {
     ['pdf', 'mpdf'].map(f => `<button data-fmt-choice="${f}" class="${!asNew && state.saveFormat === f ? 'on' : ''}"><b>${f === 'pdf' ? 'PDF' : 'MPDF'}${!asNew && state.saveFormat === f ? ' ✓' : ''}</b><span>${f === 'pdf' ? '일반 PDF 문서 (.pdf)' : '편집을 이어갈 수 있는 프로젝트 (.mpdf)'}</span></button>`).join('') + exportMenuHtml();
   const r = anchor.getBoundingClientRect();
   fmtMenu.style.top = r.bottom + 6 + 'px'; fmtMenu.style.left = 'auto'; fmtMenu.style.right = Math.max(8, window.innerWidth - r.right) + 'px';
-  fmtMenu.hidden = false;
+  fmtMenu.hidden = false; placeSide(r);
 }
 document.querySelectorAll('.caret').forEach(b => b.addEventListener('click', e => { e.stopPropagation(); openFmtMenu(b.dataset.menu, b); }));
 fmtMenu.addEventListener('click', e => {
@@ -4865,15 +5058,14 @@ thumbsEl.addEventListener('mouseout', e => {
 });
 
 /* ════════════ 화면 밝기 ════════════ */
-const brightEl = $('#brightRange');
+let brightV = 100;
 function applyBright(v) {
-  v = clamp(+v || 100, 40, 130);
+  v = clamp(+v || 100, 40, 130); brightV = v;
   document.documentElement.style.filter = v === 100 ? '' : `brightness(${v / 100})`;
-  brightEl.value = v; brightEl.title = `화면 밝기 ${v}%`;
+  const r = document.getElementById('setBright'); if (r) r.value = v;
+  const t = document.getElementById('setBrightV'); if (t) t.textContent = v + '%';
   try { localStorage.setItem('meowBright', String(v)); } catch (e) { /* ignore */ }
 }
-brightEl.addEventListener('input', () => applyBright(brightEl.value));
-brightEl.addEventListener('dblclick', () => applyBright(100));
 let savedBright = 100;
 try { savedBright = +localStorage.getItem('meowBright') || 100; } catch (e) { /* ignore */ }
 applyBright(savedBright);
@@ -5474,44 +5666,351 @@ function pmClose() {
 }
 $('#manageBtn').onclick = openPageManager;
 
+/* ════════════ 설정 창 · 단축키 사용자 지정 · 도구 모음 위치 ════════════ */
+const APP_VERSION = 'v0.4.3';
+const CHANGELOG = [{"v": "v0.4.3", "items": ["VS Code 스타일의 UI 기반 설정 창을 열 수 있는 버튼 아이콘을 상단 레이아웃에 추가, 해당 설정 창 내에서 애플리케이션 버전 정보 확인과 고객센터 피드백 제출이 가능하도록 구현", "이때 접수된 불편사항은 개발자 계정의 관리자 대시보드나 DB로 수집되어 일괄 조회 및 관리가 가능", "사용자가 주요 기능의 단축키를 직접 매핑하고 변경할 수 있는 커스터마이징 기능과 함께 기존 상단에 고정되어 있던 도구 툴바 배치를 좌측 정렬 또는 상단 정렬로 선택할 수 있는 레이아웃 옵션을 제공", "반응형 UX 개선을 위해 모바일 환경에서 가로보기(Landscape) 모드로 전환될 경우, 페이지 패널이 자동으로 화면 좌측에 정렬되도록 미디어 쿼리 및 Flex/Grid 레이아웃 구조를 보완"]}, {"v": "v0.4.2", "items": ["모바일 화면 크기에 맞춰 반응형 뷰포트 및 레이아웃 적용", "모바일 환경에서 레이어, 노트, 멀티작업 등 부가 기능 숨기고 최소한의 핵심 기능만 남기도록 개선", "모바일 화면에서 스와이프 및 드래그로 페이지 넘기기 기능 추가 (두 손가락 확대/축소 가능)", "모바일에서 페이지 패널을 화면 하단으로 배치", "상단 편집 버튼들을 깔끔하게 재배치하고, 계정 버튼을 저장 버튼 왼쪽으로 이동", "텍스트 직접 수정 기능 유지", "텍스트 선택 시 뜨는 옵션바(optbar)가 화면 밖으로 나가지 않도록 두 줄로 예쁘게 배치하고, 옵션바 표시 여부에 따라 화면 페이지가 밀리거나 재조정되지 않도록 수정"]}, {"v": "v0.4.1", "items": ["모바일 화면 크기에 맞춰 반응형 뷰포트 및 레이아웃 적용", "모바일 환경에서 레이어, 노트, 멀티작업 등 부가 기능 숨기고 최소한의 핵심 기능만 남기도록 개선", "모바일 화면에서 스와이프 및 드래그로 페이지 넘기기 기능 추가 (두 손가락 확대/축소 가능)", "모바일에서 페이지 패널을 화면 하단으로 배치", "상단 편집 버튼들을 깔끔하게 재배치하고, 계정 버튼을 저장 버튼 왼쪽으로 이동", "텍스트 직접 수정 기능 유지", "텍스트 선택 시 뜨는 옵션바(optbar)가 화면 밖으로 나가지 않도록 두 줄로 예쁘게 배치하고, 옵션바 표시 여부에 따라 화면 페이지가 밀리거나 재조정되지 않도록 수정"]}, {"v": "v0.3.3", "items": ["키 발급 관련 일부 로직 수정"]}, {"v": "v0.3.2", "items": ["키 발급 관련 서버 연결 문제 해결"]}, {"v": "v0.3.1", "items": ["파일이 없는 화면에서 파일 열기, 빈 문서로 시작 옆에 파일 병합, 파일 압축 기능을 배치", "파일이 없는 화면에서 안내 텍스트를 최소화하여 UI 깔끔하게 수정", "저장 버튼에 파일 압축해서 내보내기(10%, 20%, 40%)옵션 추가 - 프리미엄 사용자 한정, PPTX파일로 내보내기 옵션 추가", "화면에 다른 PDF를 드래그해서 넣으면 멀티 탭으로 넣기, 현재 파일에 병합하기 옵션이 나타나도록 기능 추가 (병합하기 시 두 파일의 병합순서 드래그로 결정 가능)", "페이지 패널에 전체 페이지 관리하기 버튼 추가-프리미엄", "전체 페이지 관리하기 시 그리드형태로(크기조절 가능) 각 페이지가 화면에 가득 차게 나타나며 드래그하여 페이지 순서를 바꿀 수도 있도 여러 페이지를 삭제하거나 이름을 바꾸거나 계층구조 수정 가능하도록 기능 추가", "페이지 패널의 버튼 UI 전반적으로 깔끔하게 수정", "헤더에 있는 PDF제목 클릭하여 직접 수정 가능하도록 개선"]}, {"v": "v0.2.2", "items": ["로그인시스템 및 결제 시스템 문제 해결"]}, {"v": "v0.2.1", "items": ["일부 기능 유료화 도입"]}, {"v": "v0.1.3", "items": ["온라인 컴파일러 프로그램 원컴파일러(OneCompiler) 바로가기가 멀티작업에서 제공되도록 개선"]}, {"v": "v0.1.2", "items": ["음성 이름 편집 및 음성 내보내기 기능 추가"]}, {"v": "v0.1.1", "items": ["음성녹음 및 재생 기능 추가", "음성녹음 MPDF에 삽입 기능 추가 (따로 내보내기 가능, MPDF 확장자 파일에 삽입된 상태로 저장 가능)"]}, {"v": "v0.0.1", "items": ["멀티작업에서 웹페이지를 열 수 있도록 편의 향상", "화면맞춤 상태에서 PDF내 텍스트상자 클릭 시 텍스트 수정이 진행되지 않는 문제 해결", "멀티작업 화면에 파일 드래그 시 일반 편집기 화면에 파일이 닿으면 파일 드롭 안내가 사라지지 않는 문제 해결", "페이지 패널의 크기 조절 시 썸네일로 보기의 각 썸네일 크기도 패널의 크기에 맞게 조절되도록 개선", "페이지 북마크기능 추가, 페이지 패널 상단에 북마크 바로가기 드롭다운 리스트 버튼 추가", "텍스트의 글꼴 드롭다운 버튼에서 각 버튼의 글꼴 모양을 이름과 함께 미리보기 제공", "PDF전체에서 특정 글자 빠르게 찾는 검색기능 제공", "PDF 내에서 기존에 있는 텍스트를 수정하는 로직 개편 (기존에 비해 많은 양의 텍스트를 한 번에 수정 가능하도록)", "Meow-PDF 파비콘 추가"]}, {"v": "beta 0.0.5", "items": ["세로모드 시 페이지, 레이어, 노트를 모두 하단 사이드바에서 전환 가능한 형태로 변경", "모든 사이드바를 테두리 마우스 드래그를 통해 크기 조절 가능하도록 변경 (기본 좌우, 세로모드는 상하)", "페이지 맞춤 시 사이드바를 고려하여 페이지가 화면에 모두 들어오게 조절되도록 개선 (화면 비율이 작은 경우)", "검은 고양이 스티커를 넣는 기능을 추가 (이미지 버튼을 전환 가능)", "레이어/노트 패널에 탭전환 방식으로 멀티작업 탭 추가 (파일탐색기를 여는 버튼이 중앙에 있으며 누르면 파일을 불러옴, 불러온 파일은 해당 패널에 가득 차도록 띄워지며 PDF를 보며 작업 가능), 멀티작업 패널은 또한 내부에서 멀티테스킹탭으로 관리 가능", "레이어/노트/멀티작업 여닫기 패널 버튼을 작업 사이드바 버튼으로 이미지 변경", "PDF 업로드 전 나타나는 화면 문구에서 PDF뿐만 아니라 PPTX파일도 수정 가능하다고 명시", "스프라이트시트, HWP 파일도 삽입/편집 가능하도록 제공"]}, {"v": "beta 0.0.4", "items": ["페이지 계층관리 시 페이지를 끈 상태에서 마우스 휠을 굴리면 페이지가 올라갔다 내려갔다 하게 되도록 변경", "도형을 그리고 Ctrl+Z를 누르면 간혹 기능이 먹히지 않는 문제 해결", "화면 밝기 조절 바 시간 표시 부분 왼쪽에 추가", "페이지에 주석달기 기능 추가 (주석을 달면 그 페이지는 눈에 잘 띄도록 변경)", "페이지 목록으로보기 기능 추가 (기본적으로 페이지1 ... 로 표시되며 페이지이름 변경 가능)", "인쇄기능 추가", "레이어 병합 기능 추가", "편집화면 및 프리젠테이션 화면에서 Ctrl+스크롤 하면 마우스 커서를 중심으로 화면이 줌아웃되도록 변경", "작게 https://github.com/architect0509/meow-PDF페이지로 이동되는 버튼을 방해되지 않도록 배치", "텍스트나 도형 그리기에서 상단 optbar가 가로로 너무 길어지는 문제 색상 팔레트의 크기를 줄이고 슬라이더들을 정리하여 화면 내에 기능이 모두 들어오도록 개선", "글자선택을 개체와 통일시키고 PDF내 모든 텍스트상자를 클릭만으로 수정 가능하도록 개선", "색상 버튼의 개수를 5개로 줄이고 우측에 색상 팔레트를 크게 배치하며 5개의 작은 색상 버튼 아래에는 최근에 사용한 색상 5개가 나타나게 되도록 개선", "UI의 배치가 전부 상하로 이동하는 세로모드 변환 기능을 제공", "멀티테스킹탭 기능을 지원 (툴바 위에 삭제 및 불러오기, 추가 가능한 형식으로)", "레이어가 있는 위치에 탭전환 방식으로 노트를 작성할 수 있도록 기능 추가(노트는 다중 페이지로 관리 가능하며 .txt확장자 파일로 내보낼 수 있음)"]}, {"v": "beta 0.0.3", "items": ["현재화면 캡쳐기능 제공(버튼의 위치는 저장버튼 좌측)", "상단 레이어버튼 옆에 현재시간,분 표시", "저장버튼 좌측 프리젠테이션모드 버튼 추가 -단축키 여닫기 p(프리젠테이션 내에는 마찬가지로 강조표시, 그리기, 직선, 도형, 지우개, 텍스트툴, 그리고 레이저를 사용가능한 마우스로 끌어서 옮길 수 있는 조작 도구창이 존재)", "레이저는 프리젠테이션중에만 사용 가능하며 L키로 생성/제거 가능", "이미지 버튼 우측에 C단축키로 메모 생성기능", "메모는 위치이동 및 크기조절 가능, 다중줄 글쓰기 가능, 접기 가능, 글씨 크기조절 가능", "ppt를 pdf로 가져오기 가능하도록 개선", "페이지 그룹화를 통한 계층관리 가능하도록 개선", "편집기록을 가진 프로젝트 파일인 mpdf확장자로 내보내기&불러오기 기능 추가", "(저장 및 다른이름으로 저장에 옵션 표시- pdf of mpdf) 확장자가 달라도 일반 저장의 기본옵션은 덮어쓰기", "텍스트에 채우기 옵션 추가 (기본 투명), 도형에 채우기 옵션 추가 (기본 투명, 투명도 조절 가능)", "페이지 넘기기 단축키에 Pg Up 과 Pg Down도 추가", "각 도구의 색깔은 그림판 팔레트 UI처럼 줄바꿈 이용, 사용자 지정 색상은 크기 증가, 스포이드버튼도 추가", "프로그램 내의 황색은 #dbbe43로, 배경의 어두운 색은 좀 더 무채색에 가깝게 변경"]}, {"v": "beta 0.0.2", "items": ["전반적인 테마를 변경하였으며 개선된 항목은 다음과 같습니다. 글자의 폰트 및 굵기, 기울임꼴 추가,", "화면맞춤 버튼 하단에 추가", "처음 저장버튼 누를때 파일을 불러온 경로에 자동 덮어씌우기 개선", "프로그램 테마색깔 황색으로 변경", "페이지 패널 버튼 좌측에 아이콘 추가, 패널 버튼과 거리 두기", "자 툴을 직선 그리기 툴로 변경", "펜 및 직선 그리기 툴 사용 시 붓 영역 화면 내에 표시", "펜 및 직선 그리기 툴 팔레트에 파스텔톤의 색상 추가", "강조표시는 직선형, 붓형 선택 가능하게 개선", "상단 툴을 분리 ( 글자선택과 개체 | 강조표시, 그리기, 직선 | 도형, 지우개, 텍스트 | 붙여넣기, 이미지 )", "각각의 버튼에 단축키 부여 ( 1, 2 | q, w, e | a, s, d | z, x )"]}];
+const setw = $('#setw');
+
+/* ── 단축키 정의: 키 조합은 "Ctrl+Shift+KeyS" 형식(물리 키 기준이라 한글 입력 상태에서도 동작) ── */
+const toolRun = t => () => { if (state.present) { if (PRES_TOOLS.includes(t)) presSetTool(t); } else setTool(t); };
+const clickRun = sel => () => { $(sel).click(); };
+const SC_LIST = [
+  { id: 'tool.select', label: '선택', group: '도구', def: 'Digit1', doc: 1, run: toolRun('select') },
+  { id: 'tool.highlight', label: '강조표시', group: '도구', def: 'KeyQ', doc: 1, pres: 1, run: toolRun('highlight') },
+  { id: 'tool.pen', label: '그리기', group: '도구', def: 'KeyW', doc: 1, pres: 1, run: toolRun('pen') },
+  { id: 'tool.line', label: '직선 그리기', group: '도구', def: 'KeyE', doc: 1, pres: 1, run: toolRun('line') },
+  { id: 'tool.shape', label: '도형 삽입', group: '도구', def: 'KeyA', doc: 1, pres: 1, run: toolRun('shape') },
+  { id: 'tool.eraser', label: '지우개', group: '도구', def: 'KeyS', doc: 1, pres: 1, run: toolRun('eraser') },
+  { id: 'tool.text', label: '텍스트 삽입', group: '도구', def: 'KeyD', doc: 1, pres: 1, run: toolRun('text') },
+  { id: 'ins.paste', label: '클립보드 붙여넣기', group: '삽입', def: 'KeyZ', doc: 1, run: clickRun('#pasteBtn') },
+  { id: 'ins.image', label: '이미지 삽입', group: '삽입', def: 'KeyX', doc: 1, run: clickRun('#imageBtn') },
+  { id: 'ins.memo', label: '메모 추가', group: '삽입', def: 'KeyC', doc: 1, run: clickRun('#memoBtn') },
+  { id: 'ins.mic', label: '음성 녹음', group: '삽입', def: 'KeyV', doc: 1, run: clickRun('#micBtn') },
+  { id: 'edit.undo', label: '실행 취소', group: '편집', def: 'Ctrl+KeyZ', pres: 1, rep: 1, run: () => undo() },
+  { id: 'edit.redo', label: '다시 실행', group: '편집', def: 'Ctrl+KeyY', pres: 1, rep: 1, run: () => redo() },
+  { id: 'edit.delete', label: '선택한 개체 삭제', group: '편집', def: 'Delete', doc: 1, rep: 1, run: () => { if (!state.selected) return false; deleteSelected(); } },
+  { id: 'file.open', label: '파일 열기', group: '파일', def: 'Ctrl+KeyO', run: () => openDialog() },
+  { id: 'file.save', label: '저장', group: '파일', def: 'Ctrl+KeyS', run: () => saveDoc({}) },
+  { id: 'file.saveas', label: '다른 이름으로 저장', group: '파일', def: 'Ctrl+Shift+KeyS', run: () => saveDoc({ asNew: true }) },
+  { id: 'file.print', label: '인쇄', group: '파일', def: 'Ctrl+KeyP', doc: 1, run: () => printDocument() },
+  { id: 'view.search', label: 'PDF 전체에서 찾기', group: '보기', def: 'Ctrl+KeyF', doc: 1, run: () => openSearch() },
+  { id: 'view.present', label: '발표 모드 열기 / 닫기', group: '보기', def: 'KeyP', doc: 1, pres: 1, run: () => togglePresentation() },
+  { id: 'view.laser', label: '레이저 포인터 (발표 중)', group: '보기', def: 'KeyL', doc: 1, pres: 1, run: () => { if (!state.present) return false; setLaser(!state.laser); } },
+  { id: 'page.next', label: '다음 페이지', group: '보기', def: 'ArrowRight', doc: 1, pres: 1, rep: 1, run: () => stepPage(1) },
+  { id: 'page.prev', label: '이전 페이지', group: '보기', def: 'ArrowLeft', doc: 1, pres: 1, rep: 1, run: () => stepPage(-1) },
+  { id: 'view.panel', label: '페이지 패널 열기 / 닫기', group: '보기', def: 'Ctrl+KeyB', run: () => { if (!mMode) $('#sidebarBtn').click(); else return false; } },
+  { id: 'view.theme', label: '밝은 / 어두운 테마 전환', group: '보기', def: '', run: clickRun('#themeBtn') },
+  { id: 'view.settings', label: '설정 열기', group: '보기', def: 'Ctrl+Comma', run: () => { if (setw.hidden) openSettings(); else closeSettings(); } }
+];
+const SC = {}; SC_LIST.forEach(d => { SC[d.id] = d; });
+let userKeys = {};
+try { userKeys = JSON.parse(safeStore.getItem('meowKeys') || '{}') || {}; } catch (e) { userKeys = {}; }
+const keyOf = id => (id in userKeys) ? userKeys[id] : SC[id].def;
+let bindMap = {};
+function rebuildBinds() { bindMap = {}; for (const d of SC_LIST) { const k = keyOf(d.id); if (k) bindMap[k] = d.id; } }
+rebuildBinds();
+const saveKeys = () => safeStore.setItem('meowKeys', JSON.stringify(userKeys));
+const KN = { ArrowRight: '→', ArrowLeft: '←', ArrowUp: '↑', ArrowDown: '↓', Delete: 'Del', Backspace: '⌫', Comma: ',', Period: '.', Slash: '/', Backslash: '\\', BracketLeft: '[', BracketRight: ']', Minus: '-', Equal: '=', Semicolon: ';', Quote: "'", Backquote: '`', Space: 'Space', PageUp: 'PgUp', PageDown: 'PgDn', Insert: 'Ins' };
+const prettyCode = c => KN[c] || (/^Key[A-Z]$/.test(c) ? c.slice(3) : /^Digit\d$/.test(c) ? c.slice(5) : c);
+const keyParts = k => k.split('+').map(p => /^(Ctrl|Alt|Shift)$/.test(p) ? p : prettyCode(p));
+const prettyKey = k => k ? keyParts(k).join('+') : '';
+function comboOf(e) {
+  let c = e.code || '';
+  if (!c || /^(Control|Shift|Alt|Meta|OS)(Left|Right)?$/.test(c) || c === 'AltGraph' || c === 'Process' || c === 'Unidentified') return null;
+  if (/^Numpad\d$/.test(c)) c = 'Digit' + c.slice(6);
+  const m = []; if (e.ctrlKey || e.metaKey) m.push('Ctrl'); if (e.altKey) m.push('Alt'); if (e.shiftKey) m.push('Shift');
+  return m.concat(c).join('+');
+}
+const BLOCKED_KEYS = new Set(['Escape', 'Tab', 'Enter', 'Backspace', 'Ctrl+KeyC', 'Ctrl+KeyV', 'Ctrl+KeyX', 'Ctrl+KeyA', 'Ctrl+KeyW', 'Ctrl+KeyT', 'Ctrl+KeyN', 'Ctrl+KeyR', 'Ctrl+KeyQ', 'Ctrl+Shift+KeyI', 'Alt+F4', 'F5', 'F11', 'F12']);
+
+/* 버튼의 툴팁과 단축키 표시를 현재 설정에 맞춰 갱신 */
+const HINT_BTNS = [['.tool[data-tool="select"]', 'tool.select'], ['.tool[data-tool="highlight"]', 'tool.highlight'], ['.tool[data-tool="pen"]', 'tool.pen'], ['.tool[data-tool="line"]', 'tool.line'], ['.tool[data-tool="shape"]', 'tool.shape'], ['.tool[data-tool="eraser"]', 'tool.eraser'], ['.tool[data-tool="text"]', 'tool.text'],
+  ['#pasteBtn', 'ins.paste'], ['#imageBtn', 'ins.image'], ['#memoBtn', 'ins.memo'], ['#micBtn', 'ins.mic'], ['#undoBtn', 'edit.undo'], ['#redoBtn', 'edit.redo'], ['#printBtn', 'file.print'], ['#openBtn', 'file.open'], ['#saveBtn', 'file.save'], ['#saveAsBtn', 'file.saveas'], ['#presentBtn', 'view.present'], ['#setBtn', 'view.settings'], ['#sidebarBtn', 'view.panel'], ['#themeBtn', 'view.theme']];
+function applyHints() {
+  for (const [sel, id] of HINT_BTNS) {
+    const el = $(sel); if (!el) continue;
+    if (el.dataset.t0 === undefined) el.dataset.t0 = (el.getAttribute('title') || '').replace(/\s*\([^()]*\)\s*$/, '');
+    const pk = prettyKey(keyOf(id)), kb = el.querySelector('kbd:not(#saveFmt)');
+    el.title = pk ? el.dataset.t0 + ' (' + pk + (id === 'ins.paste' ? ' / Ctrl+V' : '') + ')' : el.dataset.t0 + (id === 'ins.paste' ? ' (Ctrl+V)' : '');
+    if (kb) { kb.textContent = pk.length <= 3 ? pk : ''; kb.style.display = pk && pk.length <= 3 ? '' : 'none'; }
+  }
+}
+
+/* ── 도구 모음 위치 (상단 / 좌측) ── */
+const layoutPos = () => safeStore.getItem('meowToolbar') === 'left' ? 'left' : 'top';
+function applyLayout() {
+  const left = layoutPos() === 'left' && !mMode && !vmodeOn(), was = app.classList.contains('tb-left');
+  app.classList.toggle('tb-left', left);
+  if (was !== left && state.pages.length) requestAnimationFrame(() => { if (fitMode) refit(); });
+}
+function placeSide(r) {   // 좌측 도구 모음의 메뉴는 버튼 오른쪽에 띄워요
+  if (!app.classList.contains('tb-left') || r.left > 140) return;
+  fmtMenu.style.right = 'auto'; fmtMenu.style.left = r.right + 8 + 'px';
+  fmtMenu.style.top = Math.max(8, Math.min(r.top, window.innerHeight - fmtMenu.offsetHeight - 8)) + 'px';
+}
+
+/* ── 설정 창 ── */
+let setSec = 'layout', setRec = null, setPend = null, setQ = '';
+const SEC_LABEL = { layout: '화면 · 레이아웃', keys: '단축키', about: '정보 · 고객센터', admin: '고객 문의 관리' };
+const SEC_ICON = { layout: 'layout', keys: 'keyboard', about: 'info', admin: 'inbox' };
+const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const fbDef = () => ({ cat: '불편사항', title: '', msg: '', contact: '', env: true, busy: false, note: '', err: false, mail: false });
+let fb = fbDef();
+const ad = { items: null, counts: null, filter: 'all', q: '', open: null, busy: false, note: '', err: false };
+function openSettings(sec) {
+  if (sec) setSec = sec;
+  if (!$('#modal').hidden) return;
+  setw.hidden = false; renderSettings();
+  setTimeout(() => { const b = $('#setNav .on'); if (b) b.focus(); }, 30);
+}
+function closeSettings() { setRec = null; setPend = null; setw.hidden = true; }
+setwRefresh = () => { if (!setw.hidden) renderSettings(); };
+function renderSettings() {
+  const secs = ['layout', 'keys', 'about'].concat(PLAN.dev ? ['admin'] : []);
+  if (!secs.includes(setSec)) setSec = 'about';
+  $('#setNav').innerHTML = secs.map(id => `<button class="setnav-i${id === setSec ? ' on' : ''}" data-sec="${id}" role="tab" aria-selected="${id === setSec}">${svg(SEC_ICON[id])}<span>${SEC_LABEL[id]}</span></button>`).join('');
+  $('#setTitle').textContent = SEC_LABEL[setSec];
+  $('#setVer').textContent = 'Meow-PDF ' + APP_VERSION;
+  const b = $('#setBody'), top = b.scrollTop;
+  ({ layout: drawLayout, keys: drawKeys, about: drawAbout, admin: drawAdmin })[setSec](b);
+  b.scrollTop = top;
+}
+function drawLayout(b) {
+  const pos = layoutPos(), light = document.documentElement.dataset.theme === 'light';
+  const card = (v, t, sub) => `<button class="optcard${pos === v ? ' on' : ''}" data-a="pos" data-v="${v}" aria-pressed="${pos === v}"><div class="pv ${v}"><i class="pv-t"></i><i class="pv-tool"></i><i class="pv-main"></i></div><b>${t}</b><span class="sub">${sub}</span></button>`;
+  b.innerHTML = `<div class="setg"><h3>도구 모음 위치</h3><p class="setd">편집 도구 줄을 화면 위쪽 또는 왼쪽에 둡니다. 휴대폰 화면과 세로 모드에서는 항상 위쪽에 표시됩니다.</p><div class="optcards">${card('top', '상단 정렬', '글자와 함께 보이는 기본 배치')}${card('left', '좌측 정렬', '아이콘만 세로로 정렬해 화면을 넓게 사용')}</div></div>
+  <div class="setg"><h3>테마</h3><p class="setd">화면 색상을 어둡게 또는 밝게 바꿉니다.</p><div class="segs" role="group"><button data-a="theme" data-v="dark" class="${light ? '' : 'on'}">어두운 테마</button><button data-a="theme" data-v="light" class="${light ? 'on' : ''}">밝은 테마</button></div></div>
+  <div class="setg"><h3>화면 밝기</h3><p class="setd">화면 전체의 밝기를 조절합니다. 기본값은 100%입니다.</p><div class="fbrow"><input type="range" id="setBright" min="40" max="130" step="1" value="${brightV}" aria-label="화면 밝기"><span id="setBrightV" style="min-width:44px">${brightV}%</span><button class="sb" data-a="brightreset">기본값</button></div></div>
+  <div class="setg"><h3>설정 초기화</h3><p class="setd">단축키, 도구 모음 위치, 화면 밝기를 처음 상태로 되돌립니다.</p><button class="sb" data-a="resetall">모든 설정 초기화</button></div>`;
+}
+function drawKeys(b) {
+  const q = setQ.trim().toLowerCase(), groups = {};
+  for (const d of SC_LIST) {
+    const k = keyOf(d.id);
+    if (q && !(d.label.toLowerCase().includes(q) || d.group.includes(q) || prettyKey(k).toLowerCase().includes(q))) continue;
+    (groups[d.group] = groups[d.group] || []).push(d);
+  }
+  let h = `<div class="sktop"><p>키 칸을 누른 뒤 원하는 키(조합)를 누르면 변경됩니다. <b>Esc</b>로 취소합니다.</p><button class="sb" data-a="rstkeys">모두 기본값으로</button></div>`;
+  const names = Object.keys(groups);
+  if (!names.length) h += '<div class="sk-empty">검색 결과가 없습니다.</div>';
+  for (const g of names) {
+    h += `<div class="skgrp"><h4>${g}</h4>`;
+    for (const d of groups[g]) {
+      const k = keyOf(d.id), rec = setRec === d.id, mod = (d.id in userKeys) && userKeys[d.id] !== d.def;
+      const chip = rec ? '키를 누르세요…' : k ? keyParts(k).map(p => `<kbd>${escH(p)}</kbd>`).join('+') : '지정 안 함';
+      h += `<div class="skrow"><div class="skl"><b>${d.label}</b><span>${mod ? '기본값: ' + (d.def ? prettyKey(d.def) : '지정 안 함') : ''}</span></div>` +
+        `<button class="skchip${rec ? ' rec' : ''}${!k && !rec ? ' none' : ''}" data-a="rec" data-id="${d.id}" aria-label="${d.label} 단축키 변경">${chip}</button>` +
+        `<button class="skmini${k ? '' : ' ph'}" data-a="clr" data-id="${d.id}" title="지정 해제" aria-label="지정 해제">${svg('x')}</button>` +
+        `<button class="skmini${mod ? '' : ' ph'}" data-a="rst" data-id="${d.id}" title="기본값으로" aria-label="기본값으로">${svg('undo')}</button>`;
+      if (setPend && setPend.id === d.id) h += `<div class="skwarn"><span><b>${prettyKey(setPend.ck)}</b>는 이미 ‘${SC[setPend.other].label}’에 지정되어 있습니다.</span><button class="sb pri" data-a="swap">이 키로 바꾸기</button><button class="sb" data-a="cancel">취소</button></div>`;
+      h += '</div>';
+    }
+    h += '</div>';
+  }
+  b.innerHTML = h;
+}
+function setKey(id, ck) { if (ck === SC[id].def) delete userKeys[id]; else userKeys[id] = ck; saveKeys(); rebuildBinds(); applyHints(); }
+function tryAssign(id, ck) {
+  setRec = null;
+  if (BLOCKED_KEYS.has(ck)) { toast('이 키는 브라우저나 입력창에서 사용하므로 지정할 수 없습니다.'); renderSettings(); return; }
+  const other = bindMap[ck];
+  if (other && other !== id) { setPend = { id, ck, other }; renderSettings(); return; }
+  setPend = null; setKey(id, ck); renderSettings();
+}
+function resetKey(id) {
+  const d = SC[id].def, holder = d && bindMap[d];
+  if (holder && holder !== id) userKeys[holder] = '';
+  delete userKeys[id]; saveKeys(); rebuildBinds(); applyHints();
+  if (holder && holder !== id) toast(`‘${SC[holder].label}’의 단축키 지정이 해제되었습니다.`);
+}
+const envStr = () => `${APP_VERSION} | ${navigator.userAgent.slice(0, 220)} | ${window.innerWidth}x${window.innerHeight} | ${mMode ? '모바일' : '데스크톱'} | ${PLAN.user ? '로그인' : '비로그인'}`;
+function drawAbout(b) {
+  if (!fb.contact && PLAN.user && PLAN.user.email) fb.contact = PLAN.user.email;
+  const cats = ['불편사항', '오류 신고', '기능 제안', '기타'];
+  b.innerHTML = `<div class="setg"><div class="aboutcard"><div class="lg">${svg('cat')}</div><div><b>Meow-PDF</b> <span class="chlog"><span class="cur">${APP_VERSION}</span></span><div class="meta">브라우저에서 바로 쓰는 PDF 편집기 · <a href="https://github.com/architect0509/meow-PDF" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">GitHub</a></div></div></div></div>
+  <div class="setg"><h3>고객센터</h3><p class="setd">불편한 점, 오류, 바라는 기능을 알려 주세요. 접수된 내용은 개발자가 확인합니다.</p>
+  <div class="fbform">
+    <label class="l">분류</label><div class="catchips">${cats.map(c => `<button data-a="cat" data-v="${c}" class="${fb.cat === c ? 'on' : ''}">${c}</button>`).join('')}</div>
+    <label class="l" for="fbTitle">제목 (선택)</label><input type="text" id="fbTitle" maxlength="80" value="${qa(fb.title)}" placeholder="한 줄로 요약해 주세요">
+    <label class="l" for="fbMsg">내용</label><textarea id="fbMsg" maxlength="2000" placeholder="어떤 상황에서 어떤 문제가 있었는지 적어 주세요.">${escH(fb.msg)}</textarea>
+    <label class="l" for="fbContact">회신받을 이메일 (선택)</label><input type="email" id="fbContact" maxlength="120" value="${qa(fb.contact)}" placeholder="name@example.com" autocomplete="email">
+    <label class="chk"><input type="checkbox" id="fbEnv"${fb.env ? ' checked' : ''}>사용 환경 정보(앱 버전, 브라우저, 화면 크기)를 함께 보냅니다</label>
+    <div class="fbrow"><button class="sb pri" data-a="send"${fb.busy ? ' disabled' : ''}>접수하기</button>${fb.mail ? `<a class="sb" style="display:inline-grid;place-items:center;text-decoration:none" href="mailto:${DEV_EMAIL}?subject=${encodeURIComponent('[Meow-PDF ' + fb.cat + '] ' + fb.title)}&body=${encodeURIComponent(fb.msg + '\n\n' + (fb.env ? envStr() : ''))}">메일로 보내기</a>` : ''}<span class="fbcount" id="fbCount">${fb.msg.length} / 2000</span></div>
+    <div class="fbnote${fb.err ? ' err' : ''}" role="status">${escH(fb.note)}</div>
+  </div></div>
+  <div class="setg"><h3>업데이트 내역</h3><div class="chlog">${CHANGELOG.map((v, i) => `<details${i === 0 ? ' open' : ''}><summary>${escH(v.v)}${i === 0 ? '<span class="cur">현재 버전</span>' : ''}</summary><ul>${v.items.map(x => `<li>${escH(x)}</li>`).join('')}</ul></details>`).join('')}</div></div>`;
+}
+async function sendFeedback() {
+  if (fb.busy) return;
+  const msg = fb.msg.trim();
+  if (msg.length < 5) { fb.note = '내용을 5자 이상 입력해 주세요.'; fb.err = true; fb.mail = false; renderSettings(); return; }
+  if (fb.contact.trim() && !emailRe.test(fb.contact.trim())) { fb.note = '회신받을 이메일 형식이 올바르지 않습니다.'; fb.err = true; renderSettings(); return; }
+  fb.busy = true; fb.note = '접수하는 중…'; fb.err = false; fb.mail = false; renderSettings();
+  let token = null;
+  try { if (Object.keys(localStorage).some(k => /^sb-.*-auth-token/.test(k))) { const sb = await getSb(); if (sb) { const { data } = await sb.auth.getSession(); token = data && data.session && data.session.access_token; } } } catch (e) { /* 로그인 없이 접수 */ }
+  let j;
+  if (!await findPayServer()) j = { success: false, message: '서버에 연결할 수 없습니다. 잠시 후 다시 시도하거나 아래 메일로 보내 주세요.' };
+  else {
+    try {
+      const r = await fetch(payBase() + '/api/feedback', { method: 'POST', headers: Object.assign({ 'Content-Type': 'application/json' }, token ? { Authorization: 'Bearer ' + token } : {}), body: JSON.stringify({ category: fb.cat, title: fb.title.trim(), message: msg, contact: fb.contact.trim(), appVersion: APP_VERSION, env: fb.env ? envStr() : '' }) });
+      j = await r.json();
+    } catch (e) { j = { success: false, message: '서버에 연결할 수 없습니다. 잠시 후 다시 시도하거나 아래 메일로 보내 주세요.' }; }
+  }
+  if (j && j.success) { const c = fb.contact; fb = fbDef(); fb.contact = c; fb.note = '접수되었습니다. 소중한 의견 감사합니다.'; }
+  else { fb.busy = false; fb.note = (j && j.message) || '접수하지 못했습니다.'; fb.err = true; fb.mail = true; }
+  if (!setw.hidden && setSec === 'about') renderSettings();
+}
+
+/* ── 개발자: 접수된 문의 관리 ── */
+const ST_LABEL = { new: '신규', doing: '처리 중', done: '완료' };
+const fmtDt = s => { try { return new Date(s).toLocaleString('ko-KR', { year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false }); } catch (e) { return String(s).slice(0, 16); } };
+function adVisible() {
+  const q = ad.q.trim().toLowerCase();
+  return (ad.items || []).filter(x => !q || [x.title, x.message, x.user_email, x.contact, x.category].some(v => String(v || '').toLowerCase().includes(q)));
+}
+function drawAdmin(b) {
+  if (!ad.items && !ad.busy) { loadAdmin(); }
+  const c = ad.counts || { new: 0, doing: 0, done: 0 }, tot = c.new + c.doing + c.done;
+  const fl = [['all', '전체 ' + tot], ['new', '신규 ' + c.new], ['doing', '처리 중 ' + c.doing], ['done', '완료 ' + c.done]];
+  let h = `<div class="adtop"><div class="segs">${fl.map(([v, t]) => `<button data-a="adf" data-v="${v}" class="${ad.filter === v ? 'on' : ''}">${t}</button>`).join('')}</div><input class="adsearch" id="adQ" type="search" placeholder="제목 · 내용 · 이메일 검색" value="${qa(ad.q)}"><button class="sb" data-a="adref">새로고침</button><button class="sb" data-a="adcsv"${ad.items && ad.items.length ? '' : ' disabled'}>CSV</button></div>`;
+  if (ad.note) h += `<div class="fbnote${ad.err ? ' err' : ''}" style="margin:0 0 10px" role="status">${escH(ad.note)}</div>`;
+  const list = adVisible();
+  if (ad.busy && !ad.items) h += '<div class="sk-empty">불러오는 중…</div>';
+  else if (!list.length) h += '<div class="sk-empty">접수된 문의가 없습니다.</div>';
+  for (const x of list) {
+    const open = ad.open === x.id, who = x.user_email || x.contact || '익명';
+    h += `<div class="fbitem"><button class="fbhead" data-a="adopen" data-id="${x.id}" aria-expanded="${open}"><span class="fbst ${x.status}">${ST_LABEL[x.status] || x.status}</span><span class="fbtag">${escH(x.category)}</span><span class="fbtt">${escH(x.title || String(x.message).split('\n')[0])}</span><span class="fbdt">${fmtDt(x.created_at)}</span></button>`;
+    if (open) {
+      const to = x.contact || x.user_email;
+      h += `<div class="fbbody"><div class="fbmsg">${escH(x.message)}</div><p class="fbmeta">보낸 사람: ${escH(who)}${x.contact && x.user_email && x.contact !== x.user_email ? ' · 회신: ' + escH(x.contact) : ''} · 버전 ${escH(x.app_version || '-')}${x.env ? '<br>' + escH(x.env) : ''}</p>` +
+        `<textarea id="adMemo" placeholder="처리 메모 (개발자만 볼 수 있음)">${escH(x.memo || '')}</textarea><div class="fbrow"><div class="segs">${['new', 'doing', 'done'].map(s => `<button data-a="adst" data-id="${x.id}" data-v="${s}" class="${x.status === s ? 'on' : ''}">${ST_LABEL[s]}</button>`).join('')}</div><button class="sb" data-a="admemo" data-id="${x.id}">메모 저장</button>${to ? `<a class="sb" style="display:inline-grid;place-items:center;text-decoration:none" href="mailto:${qa(to)}?subject=${encodeURIComponent('[Meow-PDF] 문의 답변')}">답장 메일</a>` : ''}<button class="sb bad" data-a="addel" data-id="${x.id}" style="margin-left:auto">삭제</button></div></div>`;
+    }
+    h += '</div>';
+  }
+  b.innerHTML = h;
+}
+async function adCall(path, method, data) { const sb = await getSb(); if (!sb) return { success: false, message: '서버에 연결할 수 없습니다.' }; return keyApi(sb, path, method, data); }
+async function loadAdmin() {
+  ad.busy = true; ad.note = '';
+  const j = await adCall('/api/dev/feedback' + (ad.filter !== 'all' ? '?status=' + ad.filter : ''), 'GET');
+  ad.busy = false;
+  if (j && j.success) { ad.items = j.items; ad.counts = j.counts; ad.err = false; ad.note = ''; }
+  else { ad.items = ad.items || []; ad.note = (j && j.message) || '목록을 불러오지 못했습니다. (supabase.sql 의 feedback 테이블 생성 여부를 확인해 주세요)'; ad.err = true; }
+  if (!setw.hidden && setSec === 'admin') renderSettings();
+}
+function adCsv() {
+  const cell = v => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
+  const rows = [['접수일', '분류', '상태', '제목', '내용', '계정', '회신 이메일', '버전', '메모']].concat(adVisible().map(x => [x.created_at, x.category, ST_LABEL[x.status] || x.status, x.title, x.message, x.user_email, x.contact, x.app_version, x.memo]));
+  return rows.map(r => r.map(cell).join(',')).join('\r\n');
+}
+
+setw.addEventListener('click', async e => {
+  if (e.target === setw) { closeSettings(); return; }
+  if (e.target.closest('#setClose')) { closeSettings(); return; }
+  const sec = e.target.closest('[data-sec]');
+  if (sec) { setSec = sec.dataset.sec; setRec = null; setPend = null; renderSettings(); $('#setBody').scrollTop = 0; return; }
+  const a = e.target.closest('[data-a]'); if (!a || a.disabled) return;
+  const act = a.dataset.a, id = a.dataset.id, v = a.dataset.v;
+  if (act === 'pos') { safeStore.setItem('meowToolbar', v); applyLayout(); renderSettings(); }
+  else if (act === 'theme') { if ((document.documentElement.dataset.theme === 'light') !== (v === 'light')) $('#themeBtn').click(); renderSettings(); }
+  else if (act === 'resetall') {
+    if (!await modal({ title: '설정 초기화', message: '단축키, 도구 모음 위치, 화면 밝기를 처음 상태로 되돌릴까요?', ok: '초기화' })) return;
+    userKeys = {}; saveKeys(); rebuildBinds(); safeStore.removeItem('meowToolbar'); applyBright(100); applyHints(); applyLayout(); renderSettings(); toast('설정을 초기화했습니다.');
+  }
+  else if (act === 'brightreset') applyBright(100);
+  else if (act === 'rec') { setPend = null; setRec = setRec === id ? null : id; renderSettings(); }
+  else if (act === 'clr') { userKeys[id] = ''; if (SC[id].def === '') delete userKeys[id]; saveKeys(); rebuildBinds(); applyHints(); setPend = null; renderSettings(); }
+  else if (act === 'rst') { resetKey(id); setPend = null; renderSettings(); }
+  else if (act === 'rstkeys') {
+    if (!await modal({ title: '단축키 초기화', message: '모든 단축키를 기본값으로 되돌릴까요?', ok: '초기화' })) return;
+    userKeys = {}; saveKeys(); rebuildBinds(); applyHints(); setPend = null; setRec = null; renderSettings(); toast('단축키를 기본값으로 되돌렸습니다.');
+  }
+  else if (act === 'swap' && setPend) { userKeys[setPend.other] = ''; setKey(setPend.id, setPend.ck); toast(`‘${SC[setPend.other].label}’의 단축키 지정이 해제되었습니다.`); setPend = null; renderSettings(); }
+  else if (act === 'cancel') { setPend = null; renderSettings(); }
+  else if (act === 'cat') { fb.cat = v; renderSettings(); }
+  else if (act === 'send') sendFeedback();
+  else if (act === 'adf') { ad.filter = v; ad.items = null; ad.open = null; renderSettings(); }
+  else if (act === 'adref') { ad.items = null; renderSettings(); }
+  else if (act === 'adopen') { ad.open = ad.open === id ? null : id; renderSettings(); }
+  else if (act === 'adst' || act === 'admemo') {
+    const it = ad.items.find(x => x.id === id); if (!it) return;
+    const body = { id }; if (act === 'adst') body.status = v; else body.memo = ($('#adMemo') || {}).value || '';
+    const j = await adCall('/api/dev/feedback-update', 'POST', body);
+    if (j && j.success) { if (act === 'adst') { if (ad.counts) { ad.counts[it.status]--; ad.counts[v]++; } it.status = v; if (ad.filter !== 'all' && ad.filter !== v) { ad.items = ad.items.filter(x => x.id !== id); ad.open = null; } } else it.memo = body.memo; ad.note = act === 'adst' ? '상태를 변경했습니다.' : '메모를 저장했습니다.'; ad.err = false; }
+    else { ad.note = (j && j.message) || '변경하지 못했습니다.'; ad.err = true; }
+    renderSettings();
+  }
+  else if (act === 'addel') {
+    if (!await modal({ title: '문의 삭제', message: '이 문의를 삭제할까요? 삭제하면 되돌릴 수 없습니다.', ok: '삭제' })) return;
+    const j = await adCall('/api/dev/feedback-delete', 'POST', { id });
+    if (j && j.success) { const it = ad.items.find(x => x.id === id); if (it && ad.counts) ad.counts[it.status]--; ad.items = ad.items.filter(x => x.id !== id); ad.open = null; ad.note = '삭제했습니다.'; ad.err = false; }
+    else { ad.note = (j && j.message) || '삭제하지 못했습니다.'; ad.err = true; }
+    renderSettings();
+  }
+  else if (act === 'adcsv') {
+    try { const out = await deliverFile(new TextEncoder().encode('﻿' + adCsv()), 'meow-pdf-문의-' + new Date().toISOString().slice(0, 10) + '.csv', 'text/csv;charset=utf-8'); if (out) toast('CSV를 내보냈습니다: ' + out); } catch (er) { toast('CSV를 내보내지 못했습니다.'); }
+  }
+});
+setw.addEventListener('input', e => {
+  const t = e.target;
+  if (t.id === 'fbTitle') fb.title = t.value;
+  else if (t.id === 'fbMsg') { fb.msg = t.value; const c = $('#fbCount'); if (c) c.textContent = fb.msg.length + ' / 2000'; }
+  else if (t.id === 'fbContact') fb.contact = t.value;
+  else if (t.id === 'fbEnv') fb.env = t.checked;
+  else if (t.id === 'setBright') applyBright(t.value);
+  else if (t.id === 'adQ') { ad.q = t.value; const pos = t.selectionStart; renderSettings(); const n = $('#adQ'); if (n) { n.focus(); try { n.setSelectionRange(pos, pos); } catch (er) { /* 무시 */ } } }
+});
+$('#setQ').addEventListener('input', e => { setQ = e.target.value; if (setQ && setSec !== 'keys') { setSec = 'keys'; setRec = null; } renderSettings(); });
+document.addEventListener('keydown', e => {
+  if (setw.hidden || !$('#modal').hidden) return;
+  if (setRec) {
+    e.preventDefault(); e.stopPropagation();
+    if (e.key === 'Escape') { setRec = null; renderSettings(); return; }
+    const ck = comboOf(e); if (ck) tryAssign(setRec, ck);
+    return;
+  }
+  if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); closeSettings(); }
+}, true);
+$('#setBtn').onclick = () => openSettings();
+applyHints();
+
 /* ════════════ 단축키 · 테마 · 초기화 ════════════ */
 document.addEventListener('keydown', e => {
+  if (!setw.hidden) return;
   const tag = (document.activeElement && document.activeElement.tagName || '').toUpperCase();
   const itype = String(document.activeElement && document.activeElement.type || '').toLowerCase();
   const textual = tag === 'TEXTAREA' || (tag === 'INPUT' && !['range', 'color', 'checkbox', 'radio', 'button', 'file'].includes(itype));
   const typing = textual || tag === 'INPUT' || tag === 'SELECT';
   const mod = e.ctrlKey || e.metaKey;
-  const k = e.code === 'KeyS' ? 's' : e.code === 'KeyO' ? 'o' : e.code === 'KeyP' ? 'p' : e.code === 'KeyZ' ? 'z' : e.code === 'KeyY' ? 'y' : String(e.key || '').toLowerCase();
-  if (mod && e.code === 'KeyF' && !e.shiftKey && !e.altKey) { e.preventDefault(); if (state.pages.length) openSearch(); return; }
-  if (mod && k === 's') { e.preventDefault(); saveDoc({ asNew: e.shiftKey }); return; }
-  if (mod && k === 'o') { e.preventDefault(); openDialog(); return; }
-  if (mod && k === 'p') { e.preventDefault(); if (state.pages.length && $('#modal').hidden) printDocument(); return; }
+  const ck = comboOf(e), id = ck && bindMap[ck];
+  if (id) {
+    const A = SC[id], glob = ck.startsWith('Ctrl+');
+    if (!$('#modal').hidden) return;
+    if (textual && (id === 'edit.undo' || id === 'edit.redo')) return;
+    if (typing && !glob) return;
+    if (A.doc && !state.pages.length) { if (glob) e.preventDefault(); return; }
+    if (state.present && !glob && !A.pres) return;
+    if (e.repeat && !A.rep) { e.preventDefault(); return; }
+    e.preventDefault();
+    A.run(e);
+    return;
+  }
   if (!$('#modal').hidden) return;
-  if (!textual && mod && k === 'z') { e.preventDefault(); e.shiftKey ? redo() : undo(); return; }
-  if (!textual && mod && k === 'y') { e.preventDefault(); redo(); return; }
+  if (!textual && mod && e.code === 'KeyZ' && e.shiftKey) { e.preventDefault(); redo(); return; }
   if (typing) return;
   if (!state.pages.length) return;
   const plain = !mod && !e.altKey && !e.shiftKey;
-  if (plain && e.code === 'KeyP' && !e.repeat) { e.preventDefault(); togglePresentation(); return; }
   if (state.present) {
-    if (plain && e.code === 'KeyL' && !e.repeat) { e.preventDefault(); setLaser(!state.laser); return; }
-    const ptk = { KeyQ: 'highlight', KeyW: 'pen', KeyE: 'line', KeyA: 'shape', KeyS: 'eraser', KeyD: 'text' }[e.code];
-    if (plain && ptk && !e.repeat) { e.preventDefault(); presSetTool(ptk); return; }
-    if (plain && ['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); stepPage(1); return; }
-    if (plain && ['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); stepPage(-1); return; }
+    if (plain && ['ArrowDown', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); stepPage(1); return; }
+    if (plain && ['ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); stepPage(-1); return; }
     if (plain && e.key === 'Home') { e.preventDefault(); presShow(state.pages[0].id); return; }
     if (plain && e.key === 'End') { e.preventDefault(); presShow(state.pages[state.pages.length - 1].id); return; }
     if (e.key === 'Escape') exitPresentation();
     return;
   }
-  if (plain && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) { e.preventDefault(); stepPage(e.key === 'ArrowRight' ? 1 : -1); return; }
   if (plain && (e.key === 'PageUp' || e.key === 'PageDown')) { e.preventDefault(); stepPage(e.key === 'PageDown' ? 1 : -1); return; }
-  if (plain && !e.repeat) {
-    const map = { Digit1: 'select', Digit2: 'select', Numpad1: 'select', Numpad2: 'select', KeyQ: 'highlight', KeyW: 'pen', KeyE: 'line', KeyA: 'shape', KeyS: 'eraser', KeyD: 'text', KeyZ: '#pasteBtn', KeyX: '#imageBtn', KeyC: '#memoBtn', KeyV: '#micBtn' };
-    const act = map[e.code];
-    if (act) { e.preventDefault(); if (act[0] === '#') $(act).click(); else setTool(act); return; }
-  }
-  if ((e.key === 'Delete' || e.key === 'Backspace') && state.selected) { e.preventDefault(); deleteSelected(); return; }
+  if (plain && !e.repeat && (e.code === 'Digit2' || e.code === 'Numpad2')) { e.preventDefault(); setTool('select'); return; }
+  if (e.key === 'Backspace' && state.selected) { e.preventDefault(); deleteSelected(); return; }
   if (e.key === 'Escape') { if (state.selected) selectObj(null); }
 });
 window.addEventListener('beforeunload', e => { if (state.dirty || tabs.some(t => t.snap && t.snap.dirty)) { e.preventDefault(); e.returnValue = ''; } });
@@ -5615,7 +6114,7 @@ function setVMode(on) {
   const b = $('#vmodeBtn'); b.classList.toggle('on', on); b.setAttribute('aria-pressed', String(on));
   if (on && state.listView) setListView(false);
   try { localStorage.setItem('meowVMode', on ? '1' : '0'); } catch (e) { /* ignore */ }
-  syncPtabs(); syncPanelBtns();
+  syncPtabs(); syncPanelBtns(); applyLayout();
   if (state.pages.length) requestAnimationFrame(() => { if (fitMode) refit(); else fitWidth(1.5); });
 }
 $('#vmodeBtn').onclick = () => setVMode(!vmodeOn());
@@ -6087,6 +6586,7 @@ applyTheme(savedTheme === 'light' ? 'light' : 'dark');
 
 
 /* ════════════ 모바일 화면: 한 장씩 보기 · 스와이프 · 핀치 · 상단 도구 ════════════ */
+const mLand = window.matchMedia('(orientation: landscape)');
 const mMq = window.matchMedia('(max-width: 760px), (max-height: 480px) and (pointer: coarse)');
 const mMoved = [];
 function mPlace(el, parent, before) {
@@ -6252,7 +6752,7 @@ function mOpenMenu() {
     ['folder', '파일 열기', '#openBtn'], ['filePlus', '새 문서', '#newBtn'],
     ['download', '다른 이름으로 저장', '#saveAsBtn', 1], ['search', 'PDF 전체에서 찾기', '#searchBtn', 1],
     ['bookmark', '북마크 목록', '#bmNav', 1], ['printer', '인쇄', '#printBtn', 1],
-    ['moon', '테마 전환', '#themeBtn']
+    ['settings', '설정', '#setBtn'], ['moon', '테마 전환', '#themeBtn']
   ].filter(x => !(x[3] && nodoc));
   const m = $('#mMenu');
   m.innerHTML = '<div class="msheet" role="menu"><div class="mgrab"></div>' + it.map((x, i) => `<button class="mitem" data-i="${i}" role="menuitem">${svg(x[0])}<span>${x[1]}</span></button>`).join('') + '</div>';
@@ -6274,6 +6774,7 @@ function mApply(force) {
   if (on === mMode && !force) return;
   mMode = on;
   document.body.classList.toggle('mobile', on);
+  applyLayout();
   try { renderOptions(); } catch (e) { /* 무시 */ }
   if (on) {
     if (state.present) exitPresentation();
@@ -6283,7 +6784,7 @@ function mApply(force) {
     ['#undoBtn', '#redoBtn', '#acctBtn', '#saveBtn'].forEach(sel => { const el = $(sel); if (el) { if (sel !== '#acctBtn') el.classList.add('needs-doc'); mPlace(el, tb, more); } });
     const pg = $('.pager'); if (pg) { pg.classList.add('in-mpager'); mPlace(pg, $('#mPagerMid')); }
     mPlace($('#optbar'), $('#stage'));
-    app.classList.add('sidebar-off', 'layers-off');
+    app.classList.add('layers-off'); app.classList.toggle('sidebar-off', !mLand.matches);
     mLast = null; fitMode = 'page';
     if (state.pages.length) { if (!state.currentId) setCurrent(state.pages[0].id); else mSync(); mFit(); }
     updateTitle();
@@ -6299,12 +6800,14 @@ function mApply(force) {
   }
 }
 mMq.addEventListener('change', () => mApply());
+mLand.addEventListener('change', () => { if (mMode) { app.classList.toggle('sidebar-off', !mLand.matches); syncPanelBtns(); mLast = null; if (state.pages.length) requestAnimationFrame(() => { mSync(); mFit(); }); } });
 new MutationObserver(() => { if (mMode) { mLast = null; mSync(); } }).observe($('#pages'), { childList: true });
 
 if (window.innerWidth > 760) app.classList.remove('sidebar-off');
 if (window.innerWidth > 1000) app.classList.remove('layers-off');
 syncPanelBtns(); renderLayers(); setListView(false); renderNotes(); renderTabs(); renderWork(); syncImageBtn();
 try { if (localStorage.getItem('meowVMode') === '1') setVMode(true); } catch (e) { /* ignore */ }
+applyLayout();
 tickClock(); setInterval(tickClock, 5000); setSaveFormat('pdf');
 document.fonts && document.fonts.load('16px "Noto Sans KR"', '가나다ABC').then(() => redrawAll(), () => {});
 setTool('select');
