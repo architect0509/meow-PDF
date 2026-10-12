@@ -308,13 +308,19 @@ const DEEPL_MAP = { en: 'EN-US', pt: 'PT-BR', zh: 'ZH', 'zh-Hant': 'ZH-HANT' };
 const MM_EMAIL = (process.env.MYMEMORY_EMAIL || process.env.DEV_EMAIL || '').trim();
 const MM_LANG = { zh: 'zh-CN', 'zh-Hant': 'zh-TW', pt: 'pt-BR' };
 const decodeEnt = s => String(s).replace(/&#(\d+);/g, (m, n) => String.fromCharCode(+n)).replace(/&quot;/g, '"').replace(/&apos;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
-function mmChunks(text, max = 450) {
-  const parts = text.split(/(?<=[.!?。！？])\s+/), out = []; let cur = '';
+const bl = s => Buffer.byteLength(s, 'utf8');
+function mmCut(p, max) {            // 글자(코드포인트) 단위로 자르되 UTF-8 바이트 수가 max 를 넘지 않게
+  const out = []; let cur = '', b = 0;
+  for (const ch of p) { const n = bl(ch); if (b + n > max) { out.push(cur); cur = ''; b = 0; } cur += ch; b += n; }
+  if (cur) out.push(cur); return out;
+}
+function mmChunks(text, max = 380) {   // MyMemory 는 한 번에 500바이트까지 (한글은 글자당 3바이트)
+  const parts = text.split(/(?<=[.!?])\s+|(?<=[。！？])/).filter(Boolean), out = []; let cur = '';
   const push = () => { if (cur) { out.push(cur); cur = ''; } };
-  for (let p of parts) {
-    while (p.length > max) { push(); out.push(p.slice(0, max)); p = p.slice(max); }
-    if ((cur + ' ' + p).trim().length > max) push();
-    cur = (cur ? cur + ' ' : '') + p;
+  for (const p of parts) {
+    if (bl(p) > max) { push(); out.push(...mmCut(p, max)); continue; }
+    if (cur && bl(cur + ' ' + p) > max) push();
+    cur = cur ? cur + ' ' + p : p;
   }
   push(); return out;
 }
@@ -361,7 +367,7 @@ app.post('/api/translate', trLimiter, async (req, res) => {
     res.json({ success: true, texts: out });
   } catch (e) {
     console.error('[번역 실패]', e.response ? e.response.status + ' ' + JSON.stringify(e.response.data).slice(0, 200) : e.message);
-    res.status(502).json({ success: false, message: e.quota ? '무료 번역의 하루 사용량을 넘었습니다. 내일 다시 시도하거나 DeepL / Google 번역 키를 서버에 설정해 주세요.' : '번역 엔진 호출에 실패했습니다.' });
+    res.status(502).json({ success: false, message: e.quota ? '무료 번역의 하루 사용량을 넘었습니다. 내일 다시 시도하거나 DeepL / Google 번역 키를 서버에 설정해 주세요.' : '번역 엔진 호출에 실패했습니다.', detail: e.quota ? undefined : String((e.response && (e.response.status + ' ' + JSON.stringify(e.response.data).slice(0, 80))) || e.message || '').slice(0, 140) });
   }
 });
 // 개발자: 접수 목록 (?status=new|doing|done, 최신순 200건)
