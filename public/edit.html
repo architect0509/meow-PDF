@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Meow-PDF</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%23dbbe43%22/%3E%3Cg transform=%22translate(4 4) scale(1)%22 fill=%22none%22 stroke=%22%231b1b1b%22 stroke-width=%221.9%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M12 5c.67 0 1.35.09 2 .26 1.78-2 5.03-2.84 6.42-2.26 1.4.58-.42 7-.42 7 .57 1.07 1 2.24 1 3.44C21 17.9 16.97 21 12 21s-9-3-9-7.56c0-1.25.5-2.4 1-3.44 0 0-1.89-6.42-.5-7 1.39-.58 4.72.23 6.5 2.23A9.04 9.04 0 0 1 12 5Z%22/%3E%3Cpath d=%22M8 14v.5%22/%3E%3Cpath d=%22M16 14v.5%22/%3E%3Cpath d=%22M11.25 16.25h1.5L12 17l-.75-.75Z%22/%3E%3C/g%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23dbbe43' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 5c.67 0 1.35.09 2 .26 1.78-2 5.03-2.84 6.42-2.26 1.4.58-.42 7-.42 7 .57 1.07 1 2.24 1 3.44C21 17.9 16.97 21 12 21s-9-3-9-7.56c0-1.25.5-2.4 1-3.44 0 0-1.89-6.42-.5-7 1.39-.58 4.72.23 6.5 2.23A9.04 9.04 0 0 1 12 5Z'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;700&family=Nanum+Gothic:wght@400;700&family=Nanum+Myeongjo:wght@400;700&family=Nanum+Pen+Script&family=Nanum+Gothic+Coding:wght@400;700&display=swap" rel="stylesheet">
@@ -1011,6 +1011,29 @@ body.mobile .optbar{height:auto;min-height:0}
 body.mobile .optbar .swatch,body.mobile .crow .swatch{width:18px;height:18px}
 body.mobile .optbar input[type=color].bigcolor{width:28px;height:28px}
 body.mobile .optbar .grp.rg input[type=range]{width:56px}
+
+/* v0.5.3 페이지 번역 */
+.trl{position:absolute;left:0;top:0;transform-origin:0 0;pointer-events:none;overflow:hidden}
+.trl .trb{position:absolute;box-sizing:border-box;overflow:hidden;line-height:1.25;word-break:keep-all;overflow-wrap:anywhere;font-family:"Noto Sans KR","Pretendard","Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif}
+.trl .trhl{position:absolute;border:1.5px solid var(--accent);background:rgba(219,190,67,.18);border-radius:3px}
+.trpop{position:fixed;z-index:120;display:flex;flex-direction:column;gap:10px;padding:12px;background:var(--bar);color:var(--text);border:1px solid var(--border);border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.45);font-size:13px}
+.trpop[hidden]{display:none}
+.trhd{display:flex;align-items:center;justify-content:space-between}
+.trti{display:flex;align-items:center;gap:8px;font-size:14px}
+.trti svg{width:18px;height:18px;color:var(--accent)}
+.trti em{font-style:normal;color:var(--muted);font-size:12px}
+.trx{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;color:var(--muted)}
+.trx:hover{background:var(--hover);color:var(--text)}
+.trx svg{width:16px;height:16px}
+.trlang{display:flex;align-items:center;gap:8px}
+.trlang select{flex:1;min-width:0;height:34px;border-radius:8px;border:1px solid var(--border);background:var(--bar2);color:var(--text);padding:0 8px;font:inherit}
+.trmode{display:flex}
+.trmode button{flex:1;justify-content:center;padding:6px 4px;white-space:nowrap}
+.trst{min-height:18px;display:flex;align-items:center;gap:6px;font-size:12px;line-height:1.45;color:var(--muted)}
+.trsp{flex:none;width:12px;height:12px;border-radius:50%;border:2px solid var(--border);border-top-color:var(--accent);animation:spin .8s linear infinite}
+.trtip{position:fixed;z-index:130;max-width:min(380px,calc(100vw - 16px));padding:9px 12px;border-radius:10px;background:#1b1b1f;color:#f4f4f5;border:1px solid rgba(255,255,255,.18);box-shadow:0 8px 24px rgba(0,0,0,.4);font-size:13.5px;line-height:1.55;white-space:pre-wrap;pointer-events:none;font-family:"Noto Sans KR","Pretendard","Malgun Gothic",system-ui,sans-serif}
+.trtip[hidden]{display:none}
+.presenting .trpop,.presenting .trtip{display:none!important}
 </style>
 </head>
 <body>
@@ -1072,6 +1095,8 @@ body.mobile .optbar .grp.rg input[type=range]{width:56px}
     <button class="tool needs-doc" id="captureBtn" title="현재 화면 캡처 (PNG 저장 + 클립보드 복사)"><i data-i="camera"></i><span>캡처</span></button>
     <button class="tool needs-doc" id="printBtn" title="인쇄 (Ctrl+P)"><i data-i="printer"></i><span>인쇄</span></button>
     <button class="tool needs-doc" id="presentBtn" title="발표 모드 (P)"><i data-i="present"></i><span>발표</span><kbd>P</kbd></button>
+    <div class="spacer"></div>
+    <button class="tool needs-doc" id="trBtn" title="이 페이지 번역" aria-haspopup="dialog" aria-pressed="false"><i data-i="translate"></i><span>번역</span></button>
   </div>
 
   <div class="optbar" id="optbar"></div>
@@ -1573,6 +1598,7 @@ const ICONS = {
   alL:'<path d="M3 6h18M3 12h11M3 18h15"/>',
   alC:'<path d="M3 6h18M7 12h10M5 18h14"/>',
   alR:'<path d="M3 6h18M10 12h11M6 18h15"/>',
+  translate:'<path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/>',
   present:'<path d="M2 3h20"/><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3"/><path d="m7 21 5-5 5 5"/>',
   chevD:'<path d="m6 9 6 6 6-6"/>',
   chevR:'<path d="m9 6 6 6-6 6"/>',
@@ -1991,7 +2017,8 @@ function createView(p) {
   const el = document.createElement('div'); el.className = 'page'; el.dataset.id = p.id;
   const base = document.createElement('canvas'), over = document.createElement('canvas'); over.className = 'over';
   const tl = document.createElement('div'); tl.className = 'textLayer';
-  el.append(base, tl, over);
+  const trl = document.createElement('div'); trl.className = 'trl';
+  el.append(base, tl, trl, over);
 
   const tEl = document.createElement('div'); tEl.className = 'thumb'; tEl.dataset.id = p.id; tEl.draggable = true;
   tEl.innerHTML = `<div class="thumb-page"><canvas class="tbase"></canvas><canvas class="tover"></canvas><span class="thumb-flag" hidden>${svg('note')}</span></div>
@@ -2005,7 +2032,7 @@ function createView(p) {
       <button class="del" title="페이지 삭제" aria-label="페이지 삭제">${svg('trash')}</button>
     </div>`;
   const v = {
-    id: p.id, el, base, tl, tlTask: null, over, q: 1, rendered: null, token: 0, task: null,
+    id: p.id, el, base, tl, trl, tlTask: null, over, q: 1, rendered: null, token: 0, task: null,
     tEl, tPage: tEl.querySelector('.thumb-page'), tBase: tEl.querySelector('.tbase'), tOver: tEl.querySelector('.tover'),
     tNum: tEl.querySelector('.thumb-num'), tKey: null,
     tNameText: tEl.querySelector('.tn-text'), tFlagL: tEl.querySelector('.tn-flag'), tFlagG: tEl.querySelector('.thumb-flag')
@@ -2096,6 +2123,7 @@ function sizeView(p) {
   v.el.style.width = p.w * state.scale + 'px';
   v.el.style.height = p.h * state.scale + 'px';
   v.tPage.style.width = '100%'; v.tPage.style.height = 'auto'; v.tPage.style.aspectRatio = p.w + ' / ' + p.h;
+  v.trl.style.width = p.w + 'px'; v.trl.style.height = p.h + 'px'; v.trl.style.transform = 'scale(' + state.scale + ')';
   syncMemos(p);
   if (visible.has(p.id)) renderView(p.id);
 }
@@ -2263,6 +2291,7 @@ function setCurrent(id) {
   }
   updatePageInfo(); scheduleLayers(); markGroupHeads();
   if (mMode) mSync();
+  if (trS) trRefresh();
 }
 function updatePageInfo() {
   $('#pageTotal').textContent = state.pages.length;
@@ -5752,8 +5781,8 @@ function pmClose() {
 $('#manageBtn').onclick = openPageManager;
 
 /* ════════════ 설정 창 · 단축키 사용자 지정 · 도구 모음 위치 ════════════ */
-const APP_VERSION = 'v0.5.2';
-const CHANGELOG = [{"v": "v0.5.2", "items": ["편집 화면 상단의 고양이 아이콘을 누르면 소개 페이지로 돌아가도록 변경"]}, {"v": "v0.5.1", "items": ["서비스 소개 페이지(meow-pdf.com)를 새로 만들고, 기존 편집 화면은 /edit 주소로 이동", "소개 페이지 하단에 사업자 정보(Thaniya project, 사업자 등록번호) 표기", "옵션바의 색상 영역이 밖으로 튀어나오거나 잘리던 문제를 수정", "텍스트 정렬의 기본값을 왼쪽 정렬로 변경", "도형에 별 추가", "도형의 원 버튼에 그래픽이 비어 있던 문제를 수정"]}, {"v": "v0.4.5", "items": ["시작 화면의 버튼(파일 열기, 빈 문서로 시작, 파일 병합, 파일 압축)을 모서리가 둥근 정사각형 타일 형태로 변경", "텍스트 왼쪽 정렬 / 가운데 정렬(기본) / 오른쪽 정렬 설정 추가 (새 텍스트, 편집 중, 선택한 텍스트에 적용)", "도구 모음을 좌측에 배치했을 때 도구 버튼 크기를 줄임", "캡처, 인쇄, 프레젠테이션 버튼을 다시 도구 모음으로 이동"]}, {"v": "v0.4.4", "items": ["헤더의 테마 변경 버튼과 GitHub 버튼을 제거하고, 화면 밝기 조절을 설정의 화면 · 레이아웃 항목으로 이동", "도구 툴바의 저장 관련 버튼(저장, 다른 이름으로 저장)을 헤더로 이동", "헤더의 새 문서, 열기 버튼을 제거하고 실행 취소, 다시 실행, 캡처, 인쇄, 발표 버튼을 헤더로 이동", "결제 안내에 최초 1회만 결제하면 계속 이용할 수 있다는 내용을 깔끔한 카드 UI로 명시", "옵션바의 크기(내용)에 따라 화면이 재조정되지 않도록 옵션바 높이를 고정"]}, {"v": "v0.4.3", "items": ["사이드 메뉴 방식의 UI 기반 설정 창을 열 수 있는 버튼 아이콘을 상단 레이아웃에 추가, 해당 설정 창 내에서 애플리케이션 버전 정보 확인과 고객센터 피드백 제출이 가능하도록 구현", "이때 접수된 불편사항은 개발자 계정의 관리자 대시보드나 DB로 수집되어 일괄 조회 및 관리가 가능", "사용자가 주요 기능의 단축키를 직접 매핑하고 변경할 수 있는 커스터마이징 기능과 함께 기존 상단에 고정되어 있던 도구 툴바 배치를 좌측 정렬 또는 상단 정렬로 선택할 수 있는 레이아웃 옵션을 제공", "반응형 UX 개선을 위해 모바일 환경에서 가로보기(Landscape) 모드로 전환될 경우, 페이지 패널이 자동으로 화면 좌측에 정렬되도록 미디어 쿼리 및 Flex/Grid 레이아웃 구조를 보완"]}, {"v": "v0.4.2", "items": ["모바일 화면 크기에 맞춰 반응형 뷰포트 및 레이아웃 적용", "모바일 환경에서 레이어, 노트, 멀티작업 등 부가 기능 숨기고 최소한의 핵심 기능만 남기도록 개선", "모바일 화면에서 스와이프 및 드래그로 페이지 넘기기 기능 추가 (두 손가락 확대/축소 가능)", "모바일에서 페이지 패널을 화면 하단으로 배치", "상단 편집 버튼들을 깔끔하게 재배치하고, 계정 버튼을 저장 버튼 왼쪽으로 이동", "텍스트 직접 수정 기능 유지", "텍스트 선택 시 뜨는 옵션바(optbar)가 화면 밖으로 나가지 않도록 두 줄로 예쁘게 배치하고, 옵션바 표시 여부에 따라 화면 페이지가 밀리거나 재조정되지 않도록 수정"]}, {"v": "v0.4.1", "items": ["모바일 화면 크기에 맞춰 반응형 뷰포트 및 레이아웃 적용", "모바일 환경에서 레이어, 노트, 멀티작업 등 부가 기능 숨기고 최소한의 핵심 기능만 남기도록 개선", "모바일 화면에서 스와이프 및 드래그로 페이지 넘기기 기능 추가 (두 손가락 확대/축소 가능)", "모바일에서 페이지 패널을 화면 하단으로 배치", "상단 편집 버튼들을 깔끔하게 재배치하고, 계정 버튼을 저장 버튼 왼쪽으로 이동", "텍스트 직접 수정 기능 유지", "텍스트 선택 시 뜨는 옵션바(optbar)가 화면 밖으로 나가지 않도록 두 줄로 예쁘게 배치하고, 옵션바 표시 여부에 따라 화면 페이지가 밀리거나 재조정되지 않도록 수정"]}, {"v": "v0.3.3", "items": ["키 발급 관련 일부 로직 수정"]}, {"v": "v0.3.2", "items": ["키 발급 관련 서버 연결 문제 해결"]}, {"v": "v0.3.1", "items": ["파일이 없는 화면에서 파일 열기, 빈 문서로 시작 옆에 파일 병합, 파일 압축 기능을 배치", "파일이 없는 화면에서 안내 텍스트를 최소화하여 UI 깔끔하게 수정", "저장 버튼에 파일 압축해서 내보내기(10%, 20%, 40%)옵션 추가 - 프리미엄 사용자 한정, PPTX파일로 내보내기 옵션 추가", "화면에 다른 PDF를 드래그해서 넣으면 멀티 탭으로 넣기, 현재 파일에 병합하기 옵션이 나타나도록 기능 추가 (병합하기 시 두 파일의 병합순서 드래그로 결정 가능)", "페이지 패널에 전체 페이지 관리하기 버튼 추가-프리미엄", "전체 페이지 관리하기 시 그리드형태로(크기조절 가능) 각 페이지가 화면에 가득 차게 나타나며 드래그하여 페이지 순서를 바꿀 수도 있도 여러 페이지를 삭제하거나 이름을 바꾸거나 계층구조 수정 가능하도록 기능 추가", "페이지 패널의 버튼 UI 전반적으로 깔끔하게 수정", "헤더에 있는 PDF제목 클릭하여 직접 수정 가능하도록 개선"]}, {"v": "v0.2.2", "items": ["로그인시스템 및 결제 시스템 문제 해결"]}, {"v": "v0.2.1", "items": ["일부 기능 유료화 도입"]}, {"v": "v0.1.3", "items": ["온라인 컴파일러 프로그램 원컴파일러(OneCompiler) 바로가기가 멀티작업에서 제공되도록 개선"]}, {"v": "v0.1.2", "items": ["음성 이름 편집 및 음성 내보내기 기능 추가"]}, {"v": "v0.1.1", "items": ["음성녹음 및 재생 기능 추가", "음성녹음 MPDF에 삽입 기능 추가 (따로 내보내기 가능, MPDF 확장자 파일에 삽입된 상태로 저장 가능)"]}, {"v": "v0.0.1", "items": ["멀티작업에서 웹페이지를 열 수 있도록 편의 향상", "화면맞춤 상태에서 PDF내 텍스트상자 클릭 시 텍스트 수정이 진행되지 않는 문제 해결", "멀티작업 화면에 파일 드래그 시 일반 편집기 화면에 파일이 닿으면 파일 드롭 안내가 사라지지 않는 문제 해결", "페이지 패널의 크기 조절 시 썸네일로 보기의 각 썸네일 크기도 패널의 크기에 맞게 조절되도록 개선", "페이지 북마크기능 추가, 페이지 패널 상단에 북마크 바로가기 드롭다운 리스트 버튼 추가", "텍스트의 글꼴 드롭다운 버튼에서 각 버튼의 글꼴 모양을 이름과 함께 미리보기 제공", "PDF전체에서 특정 글자 빠르게 찾는 검색기능 제공", "PDF 내에서 기존에 있는 텍스트를 수정하는 로직 개편 (기존에 비해 많은 양의 텍스트를 한 번에 수정 가능하도록)", "Meow-PDF 파비콘 추가"]}, {"v": "beta 0.0.5", "items": ["세로모드 시 페이지, 레이어, 노트를 모두 하단 사이드바에서 전환 가능한 형태로 변경", "모든 사이드바를 테두리 마우스 드래그를 통해 크기 조절 가능하도록 변경 (기본 좌우, 세로모드는 상하)", "페이지 맞춤 시 사이드바를 고려하여 페이지가 화면에 모두 들어오게 조절되도록 개선 (화면 비율이 작은 경우)", "검은 고양이 스티커를 넣는 기능을 추가 (이미지 버튼을 전환 가능)", "레이어/노트 패널에 탭전환 방식으로 멀티작업 탭 추가 (파일탐색기를 여는 버튼이 중앙에 있으며 누르면 파일을 불러옴, 불러온 파일은 해당 패널에 가득 차도록 띄워지며 PDF를 보며 작업 가능), 멀티작업 패널은 또한 내부에서 멀티테스킹탭으로 관리 가능", "레이어/노트/멀티작업 여닫기 패널 버튼을 작업 사이드바 버튼으로 이미지 변경", "PDF 업로드 전 나타나는 화면 문구에서 PDF뿐만 아니라 PPTX파일도 수정 가능하다고 명시", "스프라이트시트, HWP 파일도 삽입/편집 가능하도록 제공"]}, {"v": "beta 0.0.4", "items": ["페이지 계층관리 시 페이지를 끈 상태에서 마우스 휠을 굴리면 페이지가 올라갔다 내려갔다 하게 되도록 변경", "도형을 그리고 Ctrl+Z를 누르면 간혹 기능이 먹히지 않는 문제 해결", "화면 밝기 조절 바 시간 표시 부분 왼쪽에 추가", "페이지에 주석달기 기능 추가 (주석을 달면 그 페이지는 눈에 잘 띄도록 변경)", "페이지 목록으로보기 기능 추가 (기본적으로 페이지1 ... 로 표시되며 페이지이름 변경 가능)", "인쇄기능 추가", "레이어 병합 기능 추가", "편집화면 및 프리젠테이션 화면에서 Ctrl+스크롤 하면 마우스 커서를 중심으로 화면이 줌아웃되도록 변경", "작게 https://github.com/architect0509/meow-PDF페이지로 이동되는 버튼을 방해되지 않도록 배치", "텍스트나 도형 그리기에서 상단 optbar가 가로로 너무 길어지는 문제 색상 팔레트의 크기를 줄이고 슬라이더들을 정리하여 화면 내에 기능이 모두 들어오도록 개선", "글자선택을 개체와 통일시키고 PDF내 모든 텍스트상자를 클릭만으로 수정 가능하도록 개선", "색상 버튼의 개수를 5개로 줄이고 우측에 색상 팔레트를 크게 배치하며 5개의 작은 색상 버튼 아래에는 최근에 사용한 색상 5개가 나타나게 되도록 개선", "UI의 배치가 전부 상하로 이동하는 세로모드 변환 기능을 제공", "멀티테스킹탭 기능을 지원 (툴바 위에 삭제 및 불러오기, 추가 가능한 형식으로)", "레이어가 있는 위치에 탭전환 방식으로 노트를 작성할 수 있도록 기능 추가(노트는 다중 페이지로 관리 가능하며 .txt확장자 파일로 내보낼 수 있음)"]}, {"v": "beta 0.0.3", "items": ["현재화면 캡쳐기능 제공(버튼의 위치는 저장버튼 좌측)", "상단 레이어버튼 옆에 현재시간,분 표시", "저장버튼 좌측 프리젠테이션모드 버튼 추가 -단축키 여닫기 p(프리젠테이션 내에는 마찬가지로 강조표시, 그리기, 직선, 도형, 지우개, 텍스트툴, 그리고 레이저를 사용가능한 마우스로 끌어서 옮길 수 있는 조작 도구창이 존재)", "레이저는 프리젠테이션중에만 사용 가능하며 L키로 생성/제거 가능", "이미지 버튼 우측에 C단축키로 메모 생성기능", "메모는 위치이동 및 크기조절 가능, 다중줄 글쓰기 가능, 접기 가능, 글씨 크기조절 가능", "ppt를 pdf로 가져오기 가능하도록 개선", "페이지 그룹화를 통한 계층관리 가능하도록 개선", "편집기록을 가진 프로젝트 파일인 mpdf확장자로 내보내기&불러오기 기능 추가", "(저장 및 다른이름으로 저장에 옵션 표시- pdf of mpdf) 확장자가 달라도 일반 저장의 기본옵션은 덮어쓰기", "텍스트에 채우기 옵션 추가 (기본 투명), 도형에 채우기 옵션 추가 (기본 투명, 투명도 조절 가능)", "페이지 넘기기 단축키에 Pg Up 과 Pg Down도 추가", "각 도구의 색깔은 그림판 팔레트 UI처럼 줄바꿈 이용, 사용자 지정 색상은 크기 증가, 스포이드버튼도 추가", "프로그램 내의 황색은 #dbbe43로, 배경의 어두운 색은 좀 더 무채색에 가깝게 변경"]}, {"v": "beta 0.0.2", "items": ["전반적인 테마를 변경하였으며 개선된 항목은 다음과 같습니다. 글자의 폰트 및 굵기, 기울임꼴 추가,", "화면맞춤 버튼 하단에 추가", "처음 저장버튼 누를때 파일을 불러온 경로에 자동 덮어씌우기 개선", "프로그램 테마색깔 황색으로 변경", "페이지 패널 버튼 좌측에 아이콘 추가, 패널 버튼과 거리 두기", "자 툴을 직선 그리기 툴로 변경", "펜 및 직선 그리기 툴 사용 시 붓 영역 화면 내에 표시", "펜 및 직선 그리기 툴 팔레트에 파스텔톤의 색상 추가", "강조표시는 직선형, 붓형 선택 가능하게 개선", "상단 툴을 분리 ( 글자선택과 개체 | 강조표시, 그리기, 직선 | 도형, 지우개, 텍스트 | 붙여넣기, 이미지 )", "각각의 버튼에 단축키 부여 ( 1, 2 | q, w, e | a, s, d | z, x )"]}];
+const APP_VERSION = 'v0.5.3';
+const CHANGELOG = [{"v": "v0.5.3", "items": ["소개 페이지(index)와 편집기의 파비콘을 같은 고양이 아이콘으로 통일", "페이지 번역 추가: 도구 모음 가장 오른쪽의 번역 버튼으로 현재 보고 있는 페이지만 번역", "번역 방식 선택: 원문 / 전체 번역 / 마우스 오버 번역(글자에 마우스를 올리면 그 문단만 번역)", "원본 언어 자동 감지, 번역할 언어 선택(기본 한국어). 크롬 내장 번역을 우선 사용하고, 없으면 서버 번역(키 없이도 쓰는 무료 엔진 포함)으로 대체", "번역에 실패하면 원인(서버 미배포, 사용량 초과, Chrome 내장 번역 사용 불가 사유)을 안내"]}, {"v": "v0.5.2", "items": ["편집 화면 상단의 고양이 아이콘을 누르면 소개 페이지로 돌아가도록 변경"]}, {"v": "v0.5.1", "items": ["서비스 소개 페이지(meow-pdf.com)를 새로 만들고, 기존 편집 화면은 /edit 주소로 이동", "소개 페이지 하단에 사업자 정보(Thaniya project, 사업자 등록번호) 표기", "옵션바의 색상 영역이 밖으로 튀어나오거나 잘리던 문제를 수정", "텍스트 정렬의 기본값을 왼쪽 정렬로 변경", "도형에 별 추가", "도형의 원 버튼에 그래픽이 비어 있던 문제를 수정"]}, {"v": "v0.4.5", "items": ["시작 화면의 버튼(파일 열기, 빈 문서로 시작, 파일 병합, 파일 압축)을 모서리가 둥근 정사각형 타일 형태로 변경", "텍스트 왼쪽 정렬 / 가운데 정렬(기본) / 오른쪽 정렬 설정 추가 (새 텍스트, 편집 중, 선택한 텍스트에 적용)", "도구 모음을 좌측에 배치했을 때 도구 버튼 크기를 줄임", "캡처, 인쇄, 프레젠테이션 버튼을 다시 도구 모음으로 이동"]}, {"v": "v0.4.4", "items": ["헤더의 테마 변경 버튼과 GitHub 버튼을 제거하고, 화면 밝기 조절을 설정의 화면 · 레이아웃 항목으로 이동", "도구 툴바의 저장 관련 버튼(저장, 다른 이름으로 저장)을 헤더로 이동", "헤더의 새 문서, 열기 버튼을 제거하고 실행 취소, 다시 실행, 캡처, 인쇄, 발표 버튼을 헤더로 이동", "결제 안내에 최초 1회만 결제하면 계속 이용할 수 있다는 내용을 깔끔한 카드 UI로 명시", "옵션바의 크기(내용)에 따라 화면이 재조정되지 않도록 옵션바 높이를 고정"]}, {"v": "v0.4.3", "items": ["사이드 메뉴 방식의 UI 기반 설정 창을 열 수 있는 버튼 아이콘을 상단 레이아웃에 추가, 해당 설정 창 내에서 애플리케이션 버전 정보 확인과 고객센터 피드백 제출이 가능하도록 구현", "이때 접수된 불편사항은 개발자 계정의 관리자 대시보드나 DB로 수집되어 일괄 조회 및 관리가 가능", "사용자가 주요 기능의 단축키를 직접 매핑하고 변경할 수 있는 커스터마이징 기능과 함께 기존 상단에 고정되어 있던 도구 툴바 배치를 좌측 정렬 또는 상단 정렬로 선택할 수 있는 레이아웃 옵션을 제공", "반응형 UX 개선을 위해 모바일 환경에서 가로보기(Landscape) 모드로 전환될 경우, 페이지 패널이 자동으로 화면 좌측에 정렬되도록 미디어 쿼리 및 Flex/Grid 레이아웃 구조를 보완"]}, {"v": "v0.4.2", "items": ["모바일 화면 크기에 맞춰 반응형 뷰포트 및 레이아웃 적용", "모바일 환경에서 레이어, 노트, 멀티작업 등 부가 기능 숨기고 최소한의 핵심 기능만 남기도록 개선", "모바일 화면에서 스와이프 및 드래그로 페이지 넘기기 기능 추가 (두 손가락 확대/축소 가능)", "모바일에서 페이지 패널을 화면 하단으로 배치", "상단 편집 버튼들을 깔끔하게 재배치하고, 계정 버튼을 저장 버튼 왼쪽으로 이동", "텍스트 직접 수정 기능 유지", "텍스트 선택 시 뜨는 옵션바(optbar)가 화면 밖으로 나가지 않도록 두 줄로 예쁘게 배치하고, 옵션바 표시 여부에 따라 화면 페이지가 밀리거나 재조정되지 않도록 수정"]}, {"v": "v0.4.1", "items": ["모바일 화면 크기에 맞춰 반응형 뷰포트 및 레이아웃 적용", "모바일 환경에서 레이어, 노트, 멀티작업 등 부가 기능 숨기고 최소한의 핵심 기능만 남기도록 개선", "모바일 화면에서 스와이프 및 드래그로 페이지 넘기기 기능 추가 (두 손가락 확대/축소 가능)", "모바일에서 페이지 패널을 화면 하단으로 배치", "상단 편집 버튼들을 깔끔하게 재배치하고, 계정 버튼을 저장 버튼 왼쪽으로 이동", "텍스트 직접 수정 기능 유지", "텍스트 선택 시 뜨는 옵션바(optbar)가 화면 밖으로 나가지 않도록 두 줄로 예쁘게 배치하고, 옵션바 표시 여부에 따라 화면 페이지가 밀리거나 재조정되지 않도록 수정"]}, {"v": "v0.3.3", "items": ["키 발급 관련 일부 로직 수정"]}, {"v": "v0.3.2", "items": ["키 발급 관련 서버 연결 문제 해결"]}, {"v": "v0.3.1", "items": ["파일이 없는 화면에서 파일 열기, 빈 문서로 시작 옆에 파일 병합, 파일 압축 기능을 배치", "파일이 없는 화면에서 안내 텍스트를 최소화하여 UI 깔끔하게 수정", "저장 버튼에 파일 압축해서 내보내기(10%, 20%, 40%)옵션 추가 - 프리미엄 사용자 한정, PPTX파일로 내보내기 옵션 추가", "화면에 다른 PDF를 드래그해서 넣으면 멀티 탭으로 넣기, 현재 파일에 병합하기 옵션이 나타나도록 기능 추가 (병합하기 시 두 파일의 병합순서 드래그로 결정 가능)", "페이지 패널에 전체 페이지 관리하기 버튼 추가-프리미엄", "전체 페이지 관리하기 시 그리드형태로(크기조절 가능) 각 페이지가 화면에 가득 차게 나타나며 드래그하여 페이지 순서를 바꿀 수도 있도 여러 페이지를 삭제하거나 이름을 바꾸거나 계층구조 수정 가능하도록 기능 추가", "페이지 패널의 버튼 UI 전반적으로 깔끔하게 수정", "헤더에 있는 PDF제목 클릭하여 직접 수정 가능하도록 개선"]}, {"v": "v0.2.2", "items": ["로그인시스템 및 결제 시스템 문제 해결"]}, {"v": "v0.2.1", "items": ["일부 기능 유료화 도입"]}, {"v": "v0.1.3", "items": ["온라인 컴파일러 프로그램 원컴파일러(OneCompiler) 바로가기가 멀티작업에서 제공되도록 개선"]}, {"v": "v0.1.2", "items": ["음성 이름 편집 및 음성 내보내기 기능 추가"]}, {"v": "v0.1.1", "items": ["음성녹음 및 재생 기능 추가", "음성녹음 MPDF에 삽입 기능 추가 (따로 내보내기 가능, MPDF 확장자 파일에 삽입된 상태로 저장 가능)"]}, {"v": "v0.0.1", "items": ["멀티작업에서 웹페이지를 열 수 있도록 편의 향상", "화면맞춤 상태에서 PDF내 텍스트상자 클릭 시 텍스트 수정이 진행되지 않는 문제 해결", "멀티작업 화면에 파일 드래그 시 일반 편집기 화면에 파일이 닿으면 파일 드롭 안내가 사라지지 않는 문제 해결", "페이지 패널의 크기 조절 시 썸네일로 보기의 각 썸네일 크기도 패널의 크기에 맞게 조절되도록 개선", "페이지 북마크기능 추가, 페이지 패널 상단에 북마크 바로가기 드롭다운 리스트 버튼 추가", "텍스트의 글꼴 드롭다운 버튼에서 각 버튼의 글꼴 모양을 이름과 함께 미리보기 제공", "PDF전체에서 특정 글자 빠르게 찾는 검색기능 제공", "PDF 내에서 기존에 있는 텍스트를 수정하는 로직 개편 (기존에 비해 많은 양의 텍스트를 한 번에 수정 가능하도록)", "Meow-PDF 파비콘 추가"]}, {"v": "beta 0.0.5", "items": ["세로모드 시 페이지, 레이어, 노트를 모두 하단 사이드바에서 전환 가능한 형태로 변경", "모든 사이드바를 테두리 마우스 드래그를 통해 크기 조절 가능하도록 변경 (기본 좌우, 세로모드는 상하)", "페이지 맞춤 시 사이드바를 고려하여 페이지가 화면에 모두 들어오게 조절되도록 개선 (화면 비율이 작은 경우)", "검은 고양이 스티커를 넣는 기능을 추가 (이미지 버튼을 전환 가능)", "레이어/노트 패널에 탭전환 방식으로 멀티작업 탭 추가 (파일탐색기를 여는 버튼이 중앙에 있으며 누르면 파일을 불러옴, 불러온 파일은 해당 패널에 가득 차도록 띄워지며 PDF를 보며 작업 가능), 멀티작업 패널은 또한 내부에서 멀티테스킹탭으로 관리 가능", "레이어/노트/멀티작업 여닫기 패널 버튼을 작업 사이드바 버튼으로 이미지 변경", "PDF 업로드 전 나타나는 화면 문구에서 PDF뿐만 아니라 PPTX파일도 수정 가능하다고 명시", "스프라이트시트, HWP 파일도 삽입/편집 가능하도록 제공"]}, {"v": "beta 0.0.4", "items": ["페이지 계층관리 시 페이지를 끈 상태에서 마우스 휠을 굴리면 페이지가 올라갔다 내려갔다 하게 되도록 변경", "도형을 그리고 Ctrl+Z를 누르면 간혹 기능이 먹히지 않는 문제 해결", "화면 밝기 조절 바 시간 표시 부분 왼쪽에 추가", "페이지에 주석달기 기능 추가 (주석을 달면 그 페이지는 눈에 잘 띄도록 변경)", "페이지 목록으로보기 기능 추가 (기본적으로 페이지1 ... 로 표시되며 페이지이름 변경 가능)", "인쇄기능 추가", "레이어 병합 기능 추가", "편집화면 및 프리젠테이션 화면에서 Ctrl+스크롤 하면 마우스 커서를 중심으로 화면이 줌아웃되도록 변경", "작게 https://github.com/architect0509/meow-PDF페이지로 이동되는 버튼을 방해되지 않도록 배치", "텍스트나 도형 그리기에서 상단 optbar가 가로로 너무 길어지는 문제 색상 팔레트의 크기를 줄이고 슬라이더들을 정리하여 화면 내에 기능이 모두 들어오도록 개선", "글자선택을 개체와 통일시키고 PDF내 모든 텍스트상자를 클릭만으로 수정 가능하도록 개선", "색상 버튼의 개수를 5개로 줄이고 우측에 색상 팔레트를 크게 배치하며 5개의 작은 색상 버튼 아래에는 최근에 사용한 색상 5개가 나타나게 되도록 개선", "UI의 배치가 전부 상하로 이동하는 세로모드 변환 기능을 제공", "멀티테스킹탭 기능을 지원 (툴바 위에 삭제 및 불러오기, 추가 가능한 형식으로)", "레이어가 있는 위치에 탭전환 방식으로 노트를 작성할 수 있도록 기능 추가(노트는 다중 페이지로 관리 가능하며 .txt확장자 파일로 내보낼 수 있음)"]}, {"v": "beta 0.0.3", "items": ["현재화면 캡쳐기능 제공(버튼의 위치는 저장버튼 좌측)", "상단 레이어버튼 옆에 현재시간,분 표시", "저장버튼 좌측 프리젠테이션모드 버튼 추가 -단축키 여닫기 p(프리젠테이션 내에는 마찬가지로 강조표시, 그리기, 직선, 도형, 지우개, 텍스트툴, 그리고 레이저를 사용가능한 마우스로 끌어서 옮길 수 있는 조작 도구창이 존재)", "레이저는 프리젠테이션중에만 사용 가능하며 L키로 생성/제거 가능", "이미지 버튼 우측에 C단축키로 메모 생성기능", "메모는 위치이동 및 크기조절 가능, 다중줄 글쓰기 가능, 접기 가능, 글씨 크기조절 가능", "ppt를 pdf로 가져오기 가능하도록 개선", "페이지 그룹화를 통한 계층관리 가능하도록 개선", "편집기록을 가진 프로젝트 파일인 mpdf확장자로 내보내기&불러오기 기능 추가", "(저장 및 다른이름으로 저장에 옵션 표시- pdf of mpdf) 확장자가 달라도 일반 저장의 기본옵션은 덮어쓰기", "텍스트에 채우기 옵션 추가 (기본 투명), 도형에 채우기 옵션 추가 (기본 투명, 투명도 조절 가능)", "페이지 넘기기 단축키에 Pg Up 과 Pg Down도 추가", "각 도구의 색깔은 그림판 팔레트 UI처럼 줄바꿈 이용, 사용자 지정 색상은 크기 증가, 스포이드버튼도 추가", "프로그램 내의 황색은 #dbbe43로, 배경의 어두운 색은 좀 더 무채색에 가깝게 변경"]}, {"v": "beta 0.0.2", "items": ["전반적인 테마를 변경하였으며 개선된 항목은 다음과 같습니다. 글자의 폰트 및 굵기, 기울임꼴 추가,", "화면맞춤 버튼 하단에 추가", "처음 저장버튼 누를때 파일을 불러온 경로에 자동 덮어씌우기 개선", "프로그램 테마색깔 황색으로 변경", "페이지 패널 버튼 좌측에 아이콘 추가, 패널 버튼과 거리 두기", "자 툴을 직선 그리기 툴로 변경", "펜 및 직선 그리기 툴 사용 시 붓 영역 화면 내에 표시", "펜 및 직선 그리기 툴 팔레트에 파스텔톤의 색상 추가", "강조표시는 직선형, 붓형 선택 가능하게 개선", "상단 툴을 분리 ( 글자선택과 개체 | 강조표시, 그리기, 직선 | 도형, 지우개, 텍스트 | 붙여넣기, 이미지 )", "각각의 버튼에 단축키 부여 ( 1, 2 | q, w, e | a, s, d | z, x )"]}];
 const setw = $('#setw');
 
 /* ── 단축키 정의: 키 조합은 "Ctrl+Shift+KeyS" 형식(물리 키 기준이라 한글 입력 상태에서도 동작) ── */
@@ -6098,6 +6127,380 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Backspace' && state.selected) { e.preventDefault(); deleteSelected(); return; }
   if (e.key === 'Escape') { if (state.selected) selectObj(null); }
 });
+/* ════════════ 페이지 번역 (원문 / 전체 번역 / 마우스 오버 번역) ════════════ */
+var trS = null;
+const TR_LANGS = [['ko', '한국어'], ['en', '영어'], ['ja', '일본어'], ['zh', '중국어(간체)'], ['es', '스페인어'], ['fr', '프랑스어'], ['de', '독일어'], ['ru', '러시아어'], ['pt', '포르투갈어'], ['it', '이탈리아어'], ['vi', '베트남어'], ['th', '태국어'], ['id', '인도네시아어'], ['ar', '아랍어'], ['tr', '튀르키예어'], ['hi', '힌디어']];
+const trName = c => (TR_LANGS.find(l => l[0] === c) || [c, c])[1];
+const TR_CJK = /[぀-ヿ㐀-鿿가-힣]/;
+trS = { pages: new Map(), src: 'auto', tgt: (safeStore.getItem('meowTrTgt') || 'ko'), cache: new Map(), engines: new Map(), open: false, label: '', pop: null, tip: null };
+if (!TR_LANGS.some(l => l[0] === trS.tgt)) trS.tgt = 'ko';
+
+function trGuess(text) {
+  const c = { ko: 0, ja: 0, zh: 0, ru: 0, ar: 0, th: 0, hi: 0, en: 0 };
+  for (const ch of text) {
+    const n = ch.codePointAt(0);
+    if ((n >= 0xAC00 && n <= 0xD7A3) || (n >= 0x1100 && n <= 0x11FF) || (n >= 0x3130 && n <= 0x318F)) c.ko++;
+    else if (n >= 0x3040 && n <= 0x30FF) c.ja++;
+    else if (n >= 0x4E00 && n <= 0x9FFF) c.zh++;
+    else if (n >= 0x400 && n <= 0x4FF) c.ru++;
+    else if (n >= 0x600 && n <= 0x6FF) c.ar++;
+    else if (n >= 0xE00 && n <= 0xE7F) c.th++;
+    else if (n >= 0x900 && n <= 0x97F) c.hi++;
+    else if ((n >= 65 && n <= 90) || (n >= 97 && n <= 122) || (n >= 0xC0 && n <= 0x24F)) c.en++;
+  }
+  if (c.ja > 0 && c.ja >= c.zh * 0.15) return 'ja';
+  let best = 'en', max = -1; for (const k in c) if (c[k] > max) { max = c[k]; best = k; }
+  return best;
+}
+const trWait = (pr, ms) => Promise.race([pr, new Promise(res => setTimeout(() => res(null), ms))]);
+async function trDetect(text) {
+  const sample = text.slice(0, 1500);
+  try {
+    if ('LanguageDetector' in self) {
+      const r = await trWait((async () => { const d = await self.LanguageDetector.create(); return d.detect(sample); })(), 3500), top = r && r[0] && r[0].detectedLanguage;
+      if (top && top !== 'und') { const base = /^zh/.test(top) ? 'zh' : top.split('-')[0]; if (TR_LANGS.some(l => l[0] === base)) return base; }
+    }
+  } catch (e) { /* 아래 간이 판별 사용 */ }
+  return trGuess(sample);
+}
+
+/* 번역 엔진: ① 크롬 내장 번역(Translator API, 기기에서 처리) ② 서버 번역(/api/translate) */
+async function trServer(list, src, tgt, say, prog) {
+  say('번역 서버에 연결하는 중…');
+  const base = await findPayServer();
+  if (!base) throw new Error('이 브라우저에서는 번역을 사용할 수 없습니다. 최신 Chrome에서 열어 주세요. (번역 서버에도 연결하지 못했습니다)');
+  const out = []; let i = 0;
+  while (i < list.length) {
+    let n = 0, chars = 0;
+    while (i + n < list.length && n < 60 && chars + list[i + n].length < 8000) { chars += list[i + n].length; n++; }
+    n = Math.max(n, 1);
+    let r;
+    try { r = await fetch(base + '/api/translate', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ texts: list.slice(i, i + n), source: src, target: tgt }) }); }
+    catch (e) { throw new Error('번역 서버에 연결하지 못했습니다.'); }
+    let j = null; try { j = await r.json(); } catch (e) { /* JSON 이 아님 */ }
+    if (!j) throw new Error(r.status === 404 || r.status === 405 ? '서버에 번역 기능이 없습니다. 서버(server.js)를 최신 버전으로 다시 배포해 주세요.' : '번역 서버의 응답을 읽지 못했습니다. (' + r.status + ')');
+    if (!j.success) throw new Error(j.message || '번역에 실패했습니다.');
+    out.push(...j.texts); i += n; prog(Math.min(i, list.length), list.length);
+  }
+  return out;
+}
+async function trEngine(src, tgt, say) {
+  const key = src + '>' + tgt;
+  if (trS.engines.has(key)) return trS.engines.get(key);
+  let fn = null; trS.why = '';
+  if (!('Translator' in self)) trS.why = '이 브라우저는 Chrome 내장 번역(Chrome 138 이상 데스크톱)을 지원하지 않습니다';
+  else {
+    try {
+      const av = await trWait(self.Translator.availability({ sourceLanguage: src, targetLanguage: tgt }), 4000);
+      if (av && av !== 'unavailable') {
+        // 모델 내려받기가 멈추면(진행 없이 20초) 서버 번역으로 대체
+        const t = await new Promise((res, rej) => {
+          let tm = setTimeout(() => rej(new Error('번역 모델 준비 시간 초과')), av === 'available' ? 8000 : 20000);
+          const bump = () => { clearTimeout(tm); tm = setTimeout(() => rej(new Error('번역 모델 준비 시간 초과')), 20000); };
+          if (av !== 'available') say('번역 모델을 준비하는 중…');
+          self.Translator.create({ sourceLanguage: src, targetLanguage: tgt, monitor(m) { m.addEventListener('downloadprogress', e => { bump(); say('번역 모델을 내려받는 중… ' + Math.round(e.loaded * 100) + '%'); }); } })
+            .then(x => { clearTimeout(tm); res(x); }, e => { clearTimeout(tm); rej(e); });
+        });
+        fn = async (list, prog) => { const out = []; for (const s of list) { out.push(await t.translate(s)); prog(out.length, list.length); } return out; };
+        fn.label = 'Chrome 내장 번역';
+      } else trS.why = av ? '이 언어 조합은 지원되지 않습니다' : '번역 모델 상태를 확인하지 못했습니다';
+    } catch (e) { fn = null; trS.why = (e && (e.message || e.name)) || '알 수 없는 오류'; }
+  }
+  if (!fn) { fn = (list, prog) => trServer(list, src, tgt, say, prog); fn.label = '서버 번역'; }
+  trS.engines.set(key, fn);
+  return fn;
+}
+async function trTranslate(texts, src, tgt, say) {
+  const key = t => src + '>' + tgt + '\n' + t;
+  const need = [...new Set(texts.filter(t => !trS.cache.has(key(t))))];
+  if (need.length) {
+    const prog = (d, n) => say('번역 중… ' + d + '/' + n);
+    let eng = await trEngine(src, tgt, say), out;
+    const why = e => { const m = (e && e.message) || '번역에 실패했습니다.'; return trS.why ? m + ' (Chrome 내장 번역을 쓸 수 없는 이유: ' + trS.why + ')' : m; };
+    try { out = await eng(need, prog); trS.label = eng.label; }
+    catch (e) {
+      if (eng.label === '서버 번역') throw new Error(why(e));
+      trS.engines.delete(src + '>' + tgt); trS.why = (e && e.message) || trS.why;
+      try { out = await trServer(need, src, tgt, say, prog); } catch (e2) { throw new Error(why(e2)); }
+      trS.label = '서버 번역';
+    }
+    need.forEach((t, i) => trS.cache.set(key(t), out[i] == null ? t : String(out[i])));
+  }
+  return texts.map(t => trS.cache.get(key(t)));
+}
+
+/* 페이지 글자 → 문단 블록 (위치는 페이지 좌표 pt) */
+async function trExtract(p) {
+  if (!p.src) return [];
+  const pg = await getPdfPage(p.src), tc = await getTextContent(p.src, pg), vp = pg.getViewport({ scale: 1 });
+  const its = [];
+  for (const it of tc.items) {
+    if (!it.str || !it.str.trim()) continue;
+    const t = pdfjsLib.Util.transform(vp.transform, it.transform), fs = Math.hypot(t[0], t[1]);
+    if (!(fs > 0.5) || Math.abs(t[1]) > fs * 0.12) continue;      // 세로·기울어진 글자는 제외
+    its.push({ s: it.str, x: t[4], yb: t[5], w: it.width * vp.scale, fs });
+  }
+  its.sort((a, b) => a.yb - b.yb || a.x - b.x);
+  const rows = [];
+  for (const it of its) {
+    const r = rows[rows.length - 1];
+    if (r && Math.abs(it.yb - r.yb) <= Math.max(r.fs, it.fs) * 0.4) r.items.push(it); else rows.push({ yb: it.yb, fs: it.fs, items: [it] });
+  }
+  const segs = [];
+  for (const r of rows) {
+    r.items.sort((a, b) => a.x - b.x);
+    let cur = null;
+    for (const it of r.items) {
+      if (cur && it.x - cur.xr <= Math.max(cur.fs, it.fs) * 2.2) {
+        const gap = it.x - cur.xr;
+        cur.text += (gap > it.fs * 0.15 && !/\s$/.test(cur.text) && !/^\s/.test(it.s) ? ' ' : '') + it.s;
+        cur.xr = Math.max(cur.xr, it.x + it.w); cur.fs = Math.max(cur.fs, it.fs); cur.yb = Math.max(cur.yb, it.yb);
+      } else { cur = { text: it.s, x: it.x, xr: it.x + it.w, yb: it.yb, fs: it.fs }; segs.push(cur); }
+    }
+  }
+  segs.forEach(s => { s.top = s.yb - s.fs * 0.88; s.bottom = s.yb + s.fs * 0.25; });
+  segs.sort((a, b) => a.yb - b.yb || a.x - b.x);
+  const paras = [];
+  for (const s of segs) {
+    let best = null, bd = Infinity;
+    for (const P of paras) {
+      const L = P.lines[P.lines.length - 1];
+      if (s.yb < L.yb + s.fs * 0.5) continue;                       // 같은 줄은 합치지 않음
+      if (Math.abs(s.fs / P.fs - 1) > 0.2) continue;
+      const dy = s.top - L.bottom; if (dy > s.fs * 0.9 || dy < -s.fs * 0.35) continue;
+      const aligned = Math.abs(s.x - L.x) < s.fs * 1.3 || Math.abs((s.x + s.xr) / 2 - (L.x + L.xr) / 2) < s.fs * 1.3 || Math.abs(s.xr - L.xr) < s.fs * 1.3;
+      if (!aligned) continue;
+      if (P.lines.length > 1 && L.xr < P.xr - s.fs * 3) continue;   // 앞 줄이 일찍 끝났으면 새 문단
+      if (dy < bd) { bd = dy; best = P; }
+    }
+    if (best) { best.lines.push(s); best.xr = Math.max(best.xr, s.xr); best.x = Math.min(best.x, s.x); }
+    else paras.push({ lines: [s], x: s.x, xr: s.xr, fs: s.fs });
+  }
+  const blocks = [];
+  for (const P of paras) {
+    let text = '';
+    P.lines.forEach((l, i) => {
+      const t = l.text.trim(); if (!t) return;
+      if (!text) { text = t; return; }
+      if (/[A-Za-z]-$/.test(text) && /^[a-z]/.test(t)) text = text.slice(0, -1) + t;
+      else if (TR_CJK.test(text.slice(-1)) || TR_CJK.test(t[0])) text += t;
+      else text += ' ' + t;
+    });
+    if (!/\p{L}/u.test(text)) continue;
+    const L0 = P.lines[0], Ln = P.lines[P.lines.length - 1];
+    blocks.push({ text, x: P.x, r: P.xr, top: L0.top, bottom: Ln.bottom, fs: P.fs, lines: P.lines.length });
+  }
+  return blocks.slice(0, 300);
+}
+function trColors(v, p, b) {
+  let bg = '#ffffff', fg = '#000000';
+  try {
+    const c = v.base; if (c.width < 8) return { bg, fg };
+    const k = c.width / p.w;
+    const sx = clamp(Math.floor(b.x * k), 0, c.width - 1), sy = clamp(Math.floor(b.top * k), 0, c.height - 1);
+    const sw = Math.max(1, Math.min(c.width - sx, Math.ceil((b.r - b.x) * k))), sh = Math.max(1, Math.min(c.height - sy, Math.ceil((b.bottom - b.top) * k)));
+    const d = c.getContext('2d').getImageData(sx, sy, sw, sh).data, buckets = new Map();
+    for (let i = 0; i < d.length; i += 4) {
+      const key = ((d[i] >> 4) << 8) | ((d[i + 1] >> 4) << 4) | (d[i + 2] >> 4);
+      const bk = buckets.get(key) || [0, 0, 0, 0]; bk[0] += d[i]; bk[1] += d[i + 1]; bk[2] += d[i + 2]; bk[3]++; buckets.set(key, bk);
+    }
+    let top = null; for (const bk of buckets.values()) if (!top || bk[3] > top[3]) top = bk;
+    if (top) {
+      const m = [top[0] / top[3], top[1] / top[3], top[2] / top[3]];
+      bg = '#' + m.map(n => Math.round(n).toString(16).padStart(2, '0')).join('');
+      let far = 0, fc = null;
+      for (let i = 0; i < d.length; i += 4) { const dd = (d[i] - m[0]) ** 2 + (d[i + 1] - m[1]) ** 2 + (d[i + 2] - m[2]) ** 2; if (dd > far) { far = dd; fc = [d[i], d[i + 1], d[i + 2]]; } }
+      if (fc && far > 60 * 60) fg = '#' + fc.map(n => n.toString(16).padStart(2, '0')).join('');
+      else fg = (m[0] * 0.3 + m[1] * 0.59 + m[2] * 0.11) > 140 ? '#000000' : '#ffffff';
+    }
+  } catch (e) { /* 흰 배경 / 검정 글자 */ }
+  return { bg, fg };
+}
+function trRender(id, ps, out) {
+  const p = pageById(id), v = views.get(id); if (!p || !v) return;
+  v.trl.replaceChildren();
+  const frag = document.createDocumentFragment(), made = [];
+  ps.blocks.forEach((b, i) => {
+    const pad = b.fs * 0.12, col = trColors(v, p, b);
+    const el = document.createElement('div'); el.className = 'trb';
+    el.textContent = out[i];
+    el.style.cssText = `left:${b.x - pad}px;top:${b.top - pad * 0.5}px;width:${(b.r - b.x) + pad * 2}px;height:${(b.bottom - b.top) + pad}px;padding:0 ${pad}px;background:${col.bg};color:${col.fg};font-size:${b.fs}px`;
+    frag.appendChild(el); made.push([el, b]);
+  });
+  v.trl.appendChild(frag);
+  for (const [el, b] of made) {           // 번역문이 칸을 넘치면 글자 크기를 줄여 맞춤
+    let fs = b.fs; const lim = (b.bottom - b.top) + b.fs * 0.12 + 0.5;
+    for (let k = 0; k < 14 && el.scrollHeight > lim && fs > 5; k++) { fs *= 0.92; el.style.fontSize = fs + 'px'; }
+  }
+}
+
+/* 마우스 오버 번역 */
+function trTipEl() {
+  if (!trS.tip) { const t = document.createElement('div'); t.className = 'trtip'; t.hidden = true; t.setAttribute('role', 'tooltip'); document.body.appendChild(t); trS.tip = t; }
+  return trS.tip;
+}
+function trTipHide(id) {
+  const ps = trS.pages.get(id), v = views.get(id);
+  if (ps) ps.hov = -1;
+  if (v) { const h = v.trl.querySelector('.trhl'); if (h) h.remove(); }
+  if (trS.tip) trS.tip.hidden = true;
+}
+function trTipPlace(id, b) {
+  const v = views.get(id), t = trTipEl(); if (!v || t.hidden) return;
+  const r = v.el.getBoundingClientRect(), s = state.scale, m = 8;
+  const bl = r.left + b.x * s, bt = r.top + b.top * s, bb = r.top + b.bottom * s;
+  const w = t.offsetWidth, h = t.offsetHeight;
+  let left = clamp(bl, m, Math.max(m, window.innerWidth - w - m)), top = bb + 8;
+  if (top + h > window.innerHeight - m) top = Math.max(m, bt - h - 8);
+  t.style.left = left + 'px'; t.style.top = top + 'px';
+}
+function trHover(id, e) {
+  const ps = trS.pages.get(id), v = views.get(id);
+  if (!ps || !v || ps.mode !== 'hover' || !ps.blocks) return;
+  if (e.type === 'pointermove' && e.buttons) { trTipHide(id); return; }
+  const r = v.el.getBoundingClientRect(), px = (e.clientX - r.left) / state.scale, py = (e.clientY - r.top) / state.scale;
+  let hit = -1;
+  for (let i = 0; i < ps.blocks.length; i++) { const b = ps.blocks[i]; if (px >= b.x - 2 && px <= b.r + 2 && py >= b.top - 2 && py <= b.bottom + 2) { hit = i; break; } }
+  if (hit < 0) { trTipHide(id); return; }
+  if (ps.hov === hit) return;
+  const b = ps.blocks[hit], t = trTipEl(), src = ps.src;
+  trTipHide(id); ps.hov = hit;
+  const hl = document.createElement('div'); hl.className = 'trhl';
+  hl.style.cssText = `left:${b.x - 2}px;top:${b.top - 2}px;width:${(b.r - b.x) + 4}px;height:${(b.bottom - b.top) + 4}px`;
+  v.trl.appendChild(hl);
+  const cached = trS.cache.get(src + '>' + trS.tgt + '\n' + b.text);
+  t.textContent = cached != null ? cached : '번역 중…'; t.hidden = false; trTipPlace(id, b);
+  if (cached == null) {
+    trTranslate([b.text], src, trS.tgt, () => { }).then(o => {
+      if (ps.hov === hit && ps.mode === 'hover') { t.textContent = o[0]; trTipPlace(id, b); }
+    }).catch(err => { if (ps.hov === hit) { t.textContent = err.message || '번역에 실패했습니다.'; trTipPlace(id, b); } });
+  }
+}
+function trHoverUnbind(ps) {
+  if (ps.hb) { ps.hb.el.removeEventListener('pointermove', ps.hb.h); ps.hb.el.removeEventListener('pointerdown', ps.hb.h); ps.hb.el.removeEventListener('pointerleave', ps.hb.lv); ps.hb = null; }
+}
+function trHoverBind(id, ps) {
+  const v = views.get(id); if (!v) return;
+  trHoverUnbind(ps);
+  const h = e => trHover(id, e), lv = e => { if (e.pointerType !== 'touch') trTipHide(id); };
+  v.el.addEventListener('pointermove', h); v.el.addEventListener('pointerdown', h); v.el.addEventListener('pointerleave', lv);
+  ps.hb = { el: v.el, h, lv };
+}
+
+/* 모드 전환 · 상태 */
+function trPS(id) {
+  let ps = trS.pages.get(id);
+  if (!ps) { ps = { mode: 'orig', blocks: null, det: '', src: '', run: 0, hov: -1, hb: null, status: '', busy: false, applied: '' }; trS.pages.set(id, ps); }
+  return ps;
+}
+function trSay(id, msg, busy) {
+  const ps = trPS(id); ps.status = msg || ''; ps.busy = !!busy;
+  if (id === state.currentId) trUI();
+}
+function trUI() {
+  const pop = trS.pop; if (!pop) return;
+  const ps = state.currentId ? trPS(state.currentId) : null;
+  pop.querySelectorAll('[data-trmode]').forEach(b => { const on = !!ps && b.dataset.trmode === ps.mode; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); });
+  const ss = pop.querySelector('#trSrc'), ts = pop.querySelector('#trTgt');
+  ss.options[0].textContent = '감지된 언어' + (ps && ps.det ? ' (' + trName(ps.det) + ')' : '');
+  ss.value = trS.src; ts.value = trS.tgt;
+  const i = idxOf(state.currentId); pop.querySelector('.trpg').textContent = i >= 0 ? (i + 1) + '쪽' : '';
+  const st = pop.querySelector('.trst');
+  st.replaceChildren();
+  if (ps && ps.busy) { const sp = document.createElement('i'); sp.className = 'trsp'; st.appendChild(sp); }
+  st.appendChild(document.createTextNode(ps ? ps.status : ''));
+}
+async function trSetMode(id, mode) {
+  const p = pageById(id), v = views.get(id); if (!p || !v) return;
+  const ps = trPS(id), run = ++ps.run; ps.mode = mode; ps.applied = '';
+  trHoverUnbind(ps); trTipHide(id); v.trl.replaceChildren();
+  if (mode === 'orig') { trSay(id, ''); return; }
+  const say = (m, b) => { if (run === ps.run) trSay(id, m, b !== false); };
+  try {
+    say('글자를 읽는 중…');
+    if (!ps.blocks) ps.blocks = await trExtract(p);
+    if (run !== ps.run) return;
+    if (!ps.blocks.length) { ps.mode = 'orig'; trSay(id, '이 페이지에서 번역할 글자를 찾지 못했습니다. (스캔한 이미지 속 글자는 지원하지 않습니다)'); return; }
+    let src = trS.src;
+    if (src === 'auto') { if (!ps.det) { ps.det = await trDetect(ps.blocks.map(b => b.text).join('\n')); } src = ps.det; }
+    if (run !== ps.run) return;
+    ps.src = src;
+    if (src === trS.tgt) { ps.mode = 'orig'; trSay(id, '원문과 번역할 언어가 같습니다. 번역할 언어를 바꿔 주세요.'); return; }
+    const key = trS.src + '|' + trS.tgt;
+    if (mode === 'hover') {
+      trHoverBind(id, ps); ps.applied = key;
+      trSay(id, matchMedia('(pointer:coarse)').matches ? '번역할 글자를 눌러 보세요.' : '번역할 글자 위에 마우스를 올려 보세요.');
+      return;
+    }
+    const out = await trTranslate(ps.blocks.map(b => b.text), src, trS.tgt, m => say(m));
+    if (run !== ps.run) return;
+    trRender(id, ps, out); ps.applied = key;
+    trSay(id, trName(src) + ' → ' + trName(trS.tgt) + ' 번역 완료' + (trS.label ? ' · ' + trS.label : ''));
+  } catch (e) {
+    if (run === ps.run) { ps.mode = 'orig'; trHoverUnbind(ps); v.trl.replaceChildren(); trSay(id, (e && e.message) || '번역에 실패했습니다.'); }
+  }
+}
+function trRefresh() {
+  if (!trS || !state.currentId) return;
+  const id = state.currentId, v = views.get(id), ps = trS.pages.get(id);
+  if (trS.tip) trS.tip.hidden = true;
+  if (ps && v && ps.mode !== 'orig' && !ps.busy) {
+    const key = trS.src + '|' + trS.tgt;
+    const stale = ps.mode === 'full' ? (!v.trl.childElementCount || ps.applied !== key) : (!ps.hb || ps.hb.el !== v.el || ps.applied !== key);
+    if (stale) trSetMode(id, ps.mode);
+  }
+  if (trS.pop) trUI();
+}
+
+/* 팝업 (크롬 번역 창과 비슷한 구성) */
+function trBuild() {
+  const pop = document.createElement('div'); pop.className = 'trpop'; pop.hidden = true;
+  pop.setAttribute('role', 'dialog'); pop.setAttribute('aria-label', '페이지 번역');
+  pop.innerHTML = `<div class="trhd"><span class="trti">${svg('translate')}<b>번역</b><em class="trpg"></em></span><button class="trx" data-tr="close" title="닫기 (Esc)" aria-label="닫기">${svg('x')}</button></div>
+    <div class="trlang"><select id="trSrc" aria-label="원본 언어"><option value="auto">감지된 언어</option>${TR_LANGS.map(l => `<option value="${l[0]}">${l[1]}</option>`).join('')}</select><span aria-hidden="true">→</span><select id="trTgt" aria-label="번역할 언어">${TR_LANGS.map(l => `<option value="${l[0]}">${l[1]}</option>`).join('')}</select></div>
+    <div class="seg trmode" role="group" aria-label="번역 방식"><button data-trmode="orig">원문</button><button data-trmode="full">전체 번역</button><button data-trmode="hover">마우스 오버 번역</button></div>
+    <div class="trst" aria-live="polite"></div>`;
+  document.body.appendChild(pop); trS.pop = pop;
+  pop.addEventListener('click', e => {
+    const m = e.target.closest('[data-trmode]'); if (m && state.currentId) { trSetMode(state.currentId, m.dataset.trmode); return; }
+    if (e.target.closest('[data-tr=close]')) trClose();
+  });
+  pop.addEventListener('keydown', e => { if (e.key === 'Escape') { e.stopPropagation(); trClose(); $('#trBtn').focus(); } });
+  pop.querySelector('#trSrc').addEventListener('change', e => { trS.src = e.target.value; trReapply(); });
+  pop.querySelector('#trTgt').addEventListener('change', e => { trS.tgt = e.target.value; safeStore.setItem('meowTrTgt', trS.tgt); trReapply(); });
+  window.addEventListener('resize', () => { if (trS.open) trPlace(); });
+}
+function trReapply() {
+  const id = state.currentId, ps = id && trS.pages.get(id);
+  if (ps && ps.mode !== 'orig') trSetMode(id, ps.mode); else trUI();
+}
+function trPlace() {
+  const pop = trS.pop, btn = $('#trBtn'); if (!pop || !btn) return;
+  const r = btn.getBoundingClientRect(), m = 8, W = Math.min(344, window.innerWidth - m * 2);
+  pop.style.width = W + 'px';
+  const h = pop.offsetHeight; let left, top;
+  if (mMode) { left = m; top = window.innerHeight - h - 74; }          // 모바일: 아래쪽 (페이지가 가려지지 않게)
+  else if (app.classList.contains('tb-left')) { left = r.right + m; top = r.bottom - h; }
+  else { left = r.right - W; top = r.bottom + m; }
+  pop.style.left = clamp(left, m, Math.max(m, window.innerWidth - W - m)) + 'px';
+  pop.style.top = clamp(top, m, Math.max(m, window.innerHeight - h - m)) + 'px';
+}
+function trOpen() {
+  if (!state.pages.length || !state.currentId) return;
+  if (!trS.pop) trBuild();
+  trS.open = true; trS.pop.hidden = false; $('#trBtn').classList.add('active'); $('#trBtn').setAttribute('aria-pressed', 'true');
+  trUI(); trPlace();
+  const id = state.currentId;
+  const ps0 = trS.pages.get(id);
+  if (!ps0 || !ps0.run) trSetMode(id, 'full');      // 처음 누르면 크롬처럼 바로 번역
+  requestAnimationFrame(trPlace);
+}
+function trClose() {
+  trS.open = false; if (trS.pop) trS.pop.hidden = true;
+  const b = $('#trBtn'); if (b) { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); }
+}
+$('#trBtn').onclick = () => { if (trS.open) trClose(); else trOpen(); };
+
 /* 상단 고양이 아이콘 → 소개 페이지(index)로 이동 (사이트에서 열었을 때만) */
 (() => {
   const el = document.querySelector('.titlebar .brand'); if (!el) return;
@@ -6849,7 +7252,7 @@ function mOpenMenu() {
   const it = [
     ['folder', '파일 열기', '#openBtn'], ['filePlus', '새 문서', '#newBtn'],
     ['download', '다른 이름으로 저장', '#saveAsBtn', 1], ['search', 'PDF 전체에서 찾기', '#searchBtn', 1],
-    ['bookmark', '북마크 목록', '#bmNav', 1], ['printer', '인쇄', '#printBtn', 1],
+    ['bookmark', '북마크 목록', '#bmNav', 1], ['translate', '페이지 번역', '#trBtn', 1], ['printer', '인쇄', '#printBtn', 1],
     ['settings', '설정', '#setBtn'], ['moon', '테마 전환', '#themeBtn']
   ].filter(x => !(x[3] && nodoc));
   const m = $('#mMenu');

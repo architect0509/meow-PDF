@@ -87,3 +87,13 @@ API: `POST /api/feedback`(공개, IP당 10분에 5건), `GET /api/dev/feedback`,
 - 이 폴더(`public`)의 파일은 정적 파일이라 Vercel 에도 올릴 수 있습니다. `/edit` 주소가 `edit.html` 로 연결되려면 `vercel.json` 의 `"cleanUrls": true` 설정이 필요합니다.
 - 프로젝트의 Root Directory 를 `public` 으로 두었다면 `public/vercel.json` 을, 이 폴더 전체를 올렸다면 바로 위 `vercel.json` 을 사용하세요. (Root 에 두는 파일은 `outputDirectory` 가 `public` 으로 지정되어 있습니다.)
 - 결제, 이용 키, 고객센터 같은 `/api` 기능은 Express 서버(`server.js`)가 필요하므로 Render 에서 계속 실행되어야 합니다. 편집기의 `PAY_SERVER` 값이 이미 Render 주소(`https://meow-pdf.onrender.com`)로 지정되어 있어서, 다른 도메인에서 열어도 그 서버로 연결됩니다.
+
+
+## 페이지 번역 (v0.5.3)
+
+- 편집기의 번역 버튼은 먼저 Chrome 내장 번역(Translator API, 기기에서 처리)을 사용합니다. 이 경우 서버 설정은 필요 없습니다.
+- Chrome 내장 번역을 쓸 수 없는 경우(Safari, Firefox, 모바일 Chrome, 지원하지 않는 언어 조합 등)에는 서버 번역으로 대체됩니다. **키를 설정하지 않아도** 무료 엔진(MyMemory, 익명 하루 약 5천 자, `MYMEMORY_EMAIL` 또는 `DEV_EMAIL` 을 보내면 약 5만 자)이 동작하지만 품질과 사용량에 한계가 있습니다. 더 좋은 품질이 필요하면 `.env` 에 아래 중 **하나**를 넣으세요. (키는 서버에만 보관하며 앱 HTML 에는 들어가지 않습니다.)
+  - `DEEPL_API_KEY` : DeepL API 키 (무료 키는 `:fx` 로 끝남)
+  - `GOOGLE_TRANSLATE_API_KEY` : Google Cloud Translation API 키
+- 엔드포인트: `POST /api/translate` — `{ texts: [...], source, target }`. IP당 분당 12회, 한 번에 120문장 · 2만 자까지로 제한됩니다. 서버가 이 기능이 없는 이전 버전이면 앱에 "서버를 최신 버전으로 다시 배포해 주세요"라는 안내가 표시됩니다.
+- 번역 API 는 사용량만큼 요금이 나올 수 있으니 공급자 콘솔에서 월 한도를 설정해 두세요.

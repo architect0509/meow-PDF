@@ -290,6 +290,80 @@ app.post('/api/feedback', fbLimiter, async (req, res) => {
   } catch (e) { return dbErr(res, e, '피드백 접수 실패'); }
   res.json({ success: true });
 });
+// ── 번역 (편집기의 "페이지 번역" 보조 엔진) ──
+// 크롬 내장 번역이 없는 브라우저에서 사용합니다. 번역 엔진 키는 서버(.env)에만 둡니다.
+//   DEEPL_API_KEY(무료 키는 ':fx' 로 끝남) 또는 GOOGLE_TRANSLATE_API_KEY 중 하나를 설정하세요. 둘 다 없으면 무료 엔진(MyMemory)을 사용합니다.
+const DEEPL_API_KEY = (process.env.DEEPL_API_KEY || '').trim();
+const GOOGLE_TRANSLATE_API_KEY = (process.env.GOOGLE_TRANSLATE_API_KEY || '').trim();
+const trHits = new Map();
+setInterval(() => trHits.clear(), 60 * 1000).unref();
+const trLimiter = (req, res, next) => {   // IP당 분당 12회
+  const ip = req.ip || 'x', n = (trHits.get(ip) || 0) + 1; trHits.set(ip, n);
+  if (n > 12) return res.status(429).json({ success: false, message: '번역 요청이 너무 많습니다. 잠시 후 다시 시도해 주세요.' });
+  next();
+};
+const LANG_RE = /^[a-z]{2,3}(-[A-Za-z]{2,4})?$/;
+const DEEPL_MAP = { en: 'EN-US', pt: 'PT-BR', zh: 'ZH', 'zh-Hant': 'ZH-HANT' };
+// 키가 없을 때 쓰는 무료 기본 엔진: MyMemory (공개 API, 익명 하루 약 5천 자 / 이메일을 붙이면 약 5만 자). 품질은 DeepL·Google 보다 낮을 수 있습니다.
+const MM_EMAIL = (process.env.MYMEMORY_EMAIL || process.env.DEV_EMAIL || '').trim();
+const MM_LANG = { zh: 'zh-CN', 'zh-Hant': 'zh-TW', pt: 'pt-BR' };
+const decodeEnt = s => String(s).replace(/&#(\d+);/g, (m, n) => String.fromCharCode(+n)).replace(/&quot;/g, '"').replace(/&apos;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+function mmChunks(text, max = 450) {
+  const parts = text.split(/(?<=[.!?。！？])\s+/), out = []; let cur = '';
+  const push = () => { if (cur) { out.push(cur); cur = ''; } };
+  for (let p of parts) {
+    while (p.length > max) { push(); out.push(p.slice(0, max)); p = p.slice(max); }
+    if ((cur + ' ' + p).trim().length > max) push();
+    cur = (cur ? cur + ' ' : '') + p;
+  }
+  push(); return out;
+}
+async function myMemoryOne(q, source, target) {
+  const pair = (source ? (MM_LANG[source] || source) : 'Autodetect') + '|' + (MM_LANG[target] || target);
+  const r = await axios.get('https://api.mymemory.translated.net/get', { params: { q, langpair: pair, ...(MM_EMAIL ? { de: MM_EMAIL } : {}) }, timeout: 15000 });
+  const d = r.data || {};
+  if (Number(d.responseStatus) !== 200 || !d.responseData || d.responseData.translatedText == null) {
+    const err = new Error('MyMemory ' + d.responseStatus + ' ' + (d.responseDetails || '')); err.quota = /QUOTA|LIMIT/i.test(String(d.responseDetails || '')) || Number(d.responseStatus) === 429; throw err;
+  }
+  return decodeEnt(d.responseData.translatedText);
+}
+async function myMemoryAll(texts, source, target) {
+  const glue = /^(ja|zh|th)/.test(target) ? '' : ' ';
+  const jobs = []; texts.forEach((t, i) => mmChunks(t).forEach((c, k) => jobs.push({ i, k, c })));
+  const res = texts.map(() => []); let next = 0;
+  const worker = async () => { while (next < jobs.length) { const j = jobs[next++]; res[j.i][j.k] = (/\p{L}/u.test(j.c)) ? await myMemoryOne(j.c, source, target) : j.c; } };
+  await Promise.all(Array.from({ length: Math.min(4, jobs.length) }, worker));
+  return res.map(r => r.join(glue));
+}
+app.post('/api/translate', trLimiter, async (req, res) => {
+  const b = req.body || {};
+  const texts = Array.isArray(b.texts) ? b.texts.map(t => String(t == null ? '' : t)) : null;
+  const target = String(b.target || ''), source = b.source ? String(b.source) : '';
+  if (!texts || !texts.length || texts.length > 120) return res.status(400).json({ success: false, message: '번역할 문장 수가 올바르지 않습니다.' });
+  if (texts.reduce((n, t) => n + t.length, 0) > 20000 || texts.some(t => t.length > 4000)) return res.status(400).json({ success: false, message: '번역할 글이 너무 깁니다.' });
+  if (!LANG_RE.test(target) || (source && !LANG_RE.test(source))) return res.status(400).json({ success: false, message: '언어 코드가 올바르지 않습니다.' });
+  try {
+    let out;
+    if (DEEPL_API_KEY) {
+      const host = DEEPL_API_KEY.endsWith(':fx') ? 'https://api-free.deepl.com' : 'https://api.deepl.com';
+      const body = { text: texts, target_lang: DEEPL_MAP[target] || target.toUpperCase() };
+      if (source) body.source_lang = (DEEPL_MAP[source] || source).split('-')[0].toUpperCase();
+      const r = await axios.post(host + '/v2/translate', body, { headers: { Authorization: 'DeepL-Auth-Key ' + DEEPL_API_KEY }, timeout: 20000 });
+      out = (r.data.translations || []).map(t => t.text);
+    } else if (GOOGLE_TRANSLATE_API_KEY) {
+      const body = { q: texts, target, format: 'text' }; if (source) body.source = source;
+      const r = await axios.post('https://translation.googleapis.com/language/translate/v2?key=' + encodeURIComponent(GOOGLE_TRANSLATE_API_KEY), body, { timeout: 20000 });
+      out = ((r.data.data || {}).translations || []).map(t => t.translatedText);
+    } else {
+      out = await myMemoryAll(texts, source, target);      // 키가 없을 때의 무료 기본 엔진
+    }
+    if (out.length !== texts.length) throw new Error('응답 개수 불일치');
+    res.json({ success: true, texts: out });
+  } catch (e) {
+    console.error('[번역 실패]', e.response ? e.response.status + ' ' + JSON.stringify(e.response.data).slice(0, 200) : e.message);
+    res.status(502).json({ success: false, message: e.quota ? '무료 번역의 하루 사용량을 넘었습니다. 내일 다시 시도하거나 DeepL / Google 번역 키를 서버에 설정해 주세요.' : '번역 엔진 호출에 실패했습니다.' });
+  }
+});
 // 개발자: 접수 목록 (?status=new|doing|done, 최신순 200건)
 app.get('/api/dev/feedback', limiter, async (req, res) => {
   const user = await authed(req, res, true); if (!user) return;
