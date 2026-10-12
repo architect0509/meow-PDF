@@ -71,7 +71,7 @@
 API: `POST /api/feedback`(공개, IP당 10분에 5건), `GET /api/dev/feedback`, `POST /api/dev/feedback-update`, `POST /api/dev/feedback-delete`(개발자 전용). DB 테이블은 정책 없이 RLS만 켜 두어 서버(service_role)만 접근합니다.
 
 
-## 화면 주소 구성 (v0.4.6)
+## 화면 주소 구성 (v0.5.1)
 
 | 주소 | 파일 | 설명 |
 | --- | --- | --- |
@@ -81,3 +81,9 @@ API: `POST /api/feedback`(공개, IP당 10분에 5건), `GET /api/dev/feedback`,
 
 - 편집기를 수정하면 `pdf-editor.html` 을 `public/edit.html` 로 복사하세요. (예전처럼 `index.html` 로 복사하면 소개 페이지가 덮어써집니다.)
 - `meow-pdf.com` 도메인은 Render 대시보드의 Settings → Custom Domains 에 추가하고, 도메인 업체의 DNS 에 Render 가 안내하는 레코드를 등록하세요. 연결 후 `PUBLIC_BASE_URL` 을 `https://meow-pdf.com` 으로 바꾸면 결제 안내 주소도 새 도메인을 씁니다.
+
+## Vercel 로 배포하는 경우
+
+- 이 폴더(`public`)의 파일은 정적 파일이라 Vercel 에도 올릴 수 있습니다. `/edit` 주소가 `edit.html` 로 연결되려면 `vercel.json` 의 `"cleanUrls": true` 설정이 필요합니다.
+- 프로젝트의 Root Directory 를 `public` 으로 두었다면 `public/vercel.json` 을, 이 폴더 전체를 올렸다면 바로 위 `vercel.json` 을 사용하세요. (Root 에 두는 파일은 `outputDirectory` 가 `public` 으로 지정되어 있습니다.)
+- 결제, 이용 키, 고객센터 같은 `/api` 기능은 Express 서버(`server.js`)가 필요하므로 Render 에서 계속 실행되어야 합니다. 편집기의 `PAY_SERVER` 값이 이미 Render 주소(`https://meow-pdf.onrender.com`)로 지정되어 있어서, 다른 도메인에서 열어도 그 서버로 연결됩니다.
