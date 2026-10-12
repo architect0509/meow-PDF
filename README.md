@@ -69,3 +69,15 @@
 3. 개발자 계정으로 로그인하면 설정 창에 "고객 문의 관리" 메뉴가 나타납니다. 상태(신규 / 처리 중 / 완료) 변경, 메모, 삭제, 검색, CSV 내보내기를 할 수 있습니다.
 
 API: `POST /api/feedback`(공개, IP당 10분에 5건), `GET /api/dev/feedback`, `POST /api/dev/feedback-update`, `POST /api/dev/feedback-delete`(개발자 전용). DB 테이블은 정책 없이 RLS만 켜 두어 서버(service_role)만 접근합니다.
+
+
+## 화면 주소 구성 (v0.4.6)
+
+| 주소 | 파일 | 설명 |
+| --- | --- | --- |
+| `/` | `public/index.html` | 서비스 소개 페이지 (`landing.html` 과 동일) |
+| `/edit` | `public/edit.html` | PDF 편집 화면 (`pdf-editor.html` 을 그대로 복사) |
+| `/assets/editor.webp` | `public/assets/` | 소개 페이지의 편집 화면 이미지 |
+
+- 편집기를 수정하면 `pdf-editor.html` 을 `public/edit.html` 로 복사하세요. (예전처럼 `index.html` 로 복사하면 소개 페이지가 덮어써집니다.)
+- `meow-pdf.com` 도메인은 Render 대시보드의 Settings → Custom Domains 에 추가하고, 도메인 업체의 DNS 에 Render 가 안내하는 레코드를 등록하세요. 연결 후 `PUBLIC_BASE_URL` 을 `https://meow-pdf.com` 으로 바꾸면 결제 안내 주소도 새 도메인을 씁니다.

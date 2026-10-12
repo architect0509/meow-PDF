@@ -418,7 +418,8 @@ app.get('/payment/fail', (req, res) => {
   res.send(page('결제 실패', `<h1 class="err">결제가 완료되지 않았습니다</h1><p>${esc(req.query.message) || '결제가 취소되었거나 실패했습니다.'}</p><p>${esc(req.query.code)}</p><button class="sub" onclick="window.close()">창 닫기</button>`, ''));
 });
 
-// (선택) 앱 HTML 을 같은 서버에서 제공하려면 public/index.html 에 pdf-editor.html 을 넣으세요.
+// 화면 구성: public/index.html = 소개 페이지(/), public/edit.html = 편집 페이지(/edit, pdf-editor.html 을 그대로 복사)
+app.get('/edit', (req, res) => res.sendFile(path.join(__dirname, 'public', 'edit.html')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(PORT, () => {
