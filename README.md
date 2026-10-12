@@ -47,7 +47,7 @@
 
 ## 이용 키 (개발자 발급 프리미엄)
 
-개발자 계정(`DEV_EMAIL`, 기본 architect05092@gmail.com)이 키를 발급하면, 키를 입력한 사용자는 **발급일로부터 3개월** 동안 프리미엄을 이용할 수 있습니다.
+개발자 계정(`DEV_EMAIL`)이 키를 발급하면, 키를 입력한 사용자는 **발급일로부터 3개월** 동안 프리미엄을 이용할 수 있습니다.
 
 1. Supabase SQL Editor에서 `supabase.sql`을 다시 실행합니다. (`users_profile.premium_until`, `access_keys`, `key_redemptions` 추가)
 2. `.env`에 `DEV_EMAIL`을 확인하고 서버를 재시작합니다. (`node server.js`)
