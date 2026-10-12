@@ -969,6 +969,27 @@ body.mobile .optbar>*{flex:0 1 auto}
 body.mobile .titlebar>.hsep,body.mobile #captureBtn,body.mobile #printBtn,body.mobile #presentBtn{display:none}
 @media (min-width:761px) and (max-width:920px){.titlebar .pager,.titlebar #captureBtn,.titlebar #noteBtn,.titlebar>.hsep{display:none}.titlebar{gap:4px}}
 @media (min-width:1181px){.titlebar .doc-name{min-width:120px;flex:0 1 auto}.titlebar .sbox{flex:0 1 150px;min-width:90px}}
+
+/* v0.4.5 시작 화면 타일 · 정렬 · 좌측 도구 모음 축소 */
+#empty .row{gap:16px;margin-top:4px}
+#empty .etile{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;width:128px;height:128px;padding:10px;border-radius:24px;border:1px solid var(--border);background:var(--panel,var(--bar));color:var(--text);font-size:13.5px;font-weight:600;line-height:1.3;white-space:normal;text-align:center;box-shadow:0 1px 2px rgba(0,0,0,.18);transition:transform .15s,box-shadow .15s,border-color .15s,background .15s}
+#empty .etile svg{width:34px;height:34px;stroke-width:1.6;flex:none}
+#empty .etile:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 8px 20px rgba(0,0,0,.28)}
+#empty .etile:active{transform:translateY(0)}
+#empty .etile.primary{background:var(--accent);border-color:var(--accent);color:#1a1500}
+#empty .etile.primary:hover{filter:brightness(1.07)}
+#empty .etile .pro{position:absolute;top:8px;right:8px;margin:0;padding:1px 7px;font-size:10.5px;line-height:1.5;border-radius:999px}
+#empty .etile.locked{opacity:.8}
+body.mobile #empty .row{grid-template-columns:1fr 1fr;gap:12px;width:min(300px,84vw)}
+body.mobile #empty .etile{width:100%;height:auto;aspect-ratio:1/1;min-height:0;font-size:13px;border-radius:20px;padding:8px}
+body.mobile #empty .etile svg{width:30px;height:30px}
+body.mobile #empty .etile .pro{top:6px;right:6px;font-size:10px;padding:1px 6px}
+.fmt svg{width:16px;height:16px;display:block;margin:auto}
+#app.tb-left>.toolbar{width:54px;padding:6px 5px;gap:1px}
+#app.tb-left>.toolbar .tool{height:40px}
+#app.tb-left>.toolbar .tool svg{width:18px;height:18px}
+#app.tb-left>.toolbar .sep{width:24px;margin:4px auto}
+#app.tb-left>.toolbar .caret{height:14px}
 </style>
 </head>
 <body>
@@ -990,9 +1011,6 @@ body.mobile .titlebar>.hsep,body.mobile #captureBtn,body.mobile #printBtn,body.m
     <div class="sep hsep needs-doc"></div>
     <button class="tool needs-doc" id="undoBtn" title="실행 취소 (Ctrl+Z)"><i data-i="undo"></i><span>실행 취소</span></button>
     <button class="tool needs-doc" id="redoBtn" title="다시 실행 (Ctrl+Y)"><i data-i="redo"></i><span>다시 실행</span></button>
-    <button class="tool needs-doc" id="captureBtn" title="현재 화면 캡처 (PNG 저장 + 클립보드 복사)"><i data-i="camera"></i><span>캡처</span></button>
-    <button class="tool needs-doc" id="printBtn" title="인쇄 (Ctrl+P)"><i data-i="printer"></i><span>인쇄</span></button>
-    <button class="tool needs-doc" id="presentBtn" title="발표 모드 (P)"><i data-i="present"></i><span>발표</span><kbd>P</kbd></button>
     <div class="splitbtn needs-doc">
       <button class="tool primary" id="saveBtn" title="저장 — 열었던 파일에 덮어쓰기 (Ctrl+S)"><i data-i="save"></i><span>저장</span><kbd id="saveFmt">PDF</kbd></button>
       <button class="caret" data-menu="save" title="저장 형식 선택 (PDF / MPDF)" aria-label="저장 형식 선택"><i data-i="chevD"></i></button>
@@ -1029,6 +1047,10 @@ body.mobile .titlebar>.hsep,body.mobile #captureBtn,body.mobile #printBtn,body.m
     <div class="splitbtn"><button class="tool" id="imageBtn" title="이미지 삽입 (X)"><i data-i="image"></i><span>이미지</span><kbd>X</kbd></button><button class="caret" data-menu="image" title="이미지 · 검은 고양이 스티커 · 스프라이트시트 전환" aria-label="이미지 삽입 방식 전환"><i data-i="chevD"></i></button></div>
     <button class="tool" id="memoBtn" title="메모 추가 (C)"><i data-i="memo"></i><span>메모</span><kbd>C</kbd></button>
     <button class="tool" id="micBtn" title="음성 녹음해서 넣기 (V)"><i data-i="mic"></i><span>음성</span><kbd>V</kbd></button>
+    <div class="sep"></div>
+    <button class="tool needs-doc" id="captureBtn" title="현재 화면 캡처 (PNG 저장 + 클립보드 복사)"><i data-i="camera"></i><span>캡처</span></button>
+    <button class="tool needs-doc" id="printBtn" title="인쇄 (Ctrl+P)"><i data-i="printer"></i><span>인쇄</span></button>
+    <button class="tool needs-doc" id="presentBtn" title="발표 모드 (P)"><i data-i="present"></i><span>발표</span><kbd>P</kbd></button>
   </div>
 
   <div class="optbar" id="optbar"></div>
@@ -1061,10 +1083,10 @@ body.mobile .titlebar>.hsep,body.mobile #captureBtn,body.mobile #printBtn,body.m
       <div id="empty">
         <h1>Meow-PDF</h1>
         <div class="row">
-          <button class="btn primary" id="emptyOpen"><i data-i="folder"></i>파일 열기</button>
-          <button class="btn" id="emptyNew"><i data-i="filePlus"></i>빈 문서로 시작</button>
-          <button class="btn" id="emptyMerge"><i data-i="merge"></i>파일 병합</button>
-          <button class="btn" id="emptyCompress"><i data-i="compress"></i>파일 압축<em class="pro">프리미엄</em></button>
+          <button class="btn primary etile" id="emptyOpen"><i data-i="folder"></i><span>파일 열기</span></button>
+          <button class="btn etile" id="emptyNew"><i data-i="filePlus"></i><span>빈 문서로 시작</span></button>
+          <button class="btn etile" id="emptyMerge"><i data-i="merge"></i><span>파일 병합</span></button>
+          <button class="btn etile" id="emptyCompress"><i data-i="compress"></i><span>파일 압축</span><em class="pro">프리미엄</em></button>
         </div>
         <span class="ehint">PDF · PPTX · HWP · MPDF 파일을 끌어다 놓을 수도 있습니다</span>
       </div>
@@ -1525,6 +1547,9 @@ const ICONS = {
   fitp:'<path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/>',
   memo:'<path d="M15.5 3H5a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V8.5L15.5 3Z"/><path d="M15 3v6h6"/><path d="M8 13h8"/><path d="M8 17h5"/>',
   camera:'<path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/>',
+  alL:'<path d="M3 6h18M3 12h11M3 18h15"/>',
+  alC:'<path d="M3 6h18M7 12h10M5 18h14"/>',
+  alR:'<path d="M3 6h18M10 12h11M6 18h15"/>',
   present:'<path d="M2 3h20"/><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3"/><path d="m7 21 5-5 5 5"/>',
   chevD:'<path d="m6 9 6 6 6-6"/>',
   chevR:'<path d="m9 6 6 6-6 6"/>',
@@ -1588,7 +1613,7 @@ const settings = {
   line:      { color: '#111111', width: 3, alpha: 100, arrow: false },
   highlight: { color: '#ffeb3b', width: 16, style: 'brush' },
   shape:     { kind: 'rect', color: '#1e88e5', width: 3, fill: null, fillAlpha: 100 },
-  text:      { color: '#111111', size: 16, font: 'sans', bold: false, italic: false, fill: null },
+  text:      { color: '#111111', size: 16, font: 'sans', bold: false, italic: false, fill: null, align: 'center' },
   eraser:    { mode: 'stroke', size: 14 }
 };
 const views = new Map();        // pageId -> view
@@ -1859,7 +1884,11 @@ function drawObj(ctx, o, s) {
       ctx.save();
       if (o.fill) { const m = textMetrics(o), pad = o.size * 0.2; ctx.fillStyle = o.fill; ctx.fillRect((o.x - pad) * s, (o.y - pad * 0.5) * s, (m.w + pad * 2) * s, (m.h + pad) * s); }
       ctx.fillStyle = o.color; ctx.font = fontStr(o, o.size * s); ctx.textBaseline = 'middle';
-      String(o.text).split('\n').forEach((ln, i) => ctx.fillText(ln, o.x * s, (o.y + (i + 0.5) * o.size * LH) * s));
+      { const al = o.align || 'left', bw = al === 'left' ? 0 : textMetrics(o).w;
+        String(o.text).split('\n').forEach((ln, i) => {
+          const lw = al === 'left' ? 0 : mctx.measureText(ln).width, dx = al === 'center' ? (bw - lw) / 2 : al === 'right' ? bw - lw : 0;
+          ctx.fillText(ln, (o.x + dx) * s, (o.y + (i + 0.5) * o.size * LH) * s);
+        }); }
       ctx.restore(); break;
     }
     case 'audio': {
@@ -2631,7 +2660,7 @@ function openTextEditor(id, x, y, obj, init) {
   const fit = () => {
     const e = editor; if (!e) return;
     ta.style.fontFamily = fontCss(e); ta.style.fontWeight = e.bold ? '700' : '400'; ta.style.fontStyle = e.italic ? 'italic' : 'normal';
-    ta.style.fontSize = e.size * state.scale + 'px';
+    ta.style.fontSize = e.size * state.scale + 'px'; ta.style.textAlign = e.align || 'left';
     ta.style.background = e.fill || (e.init && e.init.cover.fill) || 'rgba(255,255,255,.55)';
     const m = textMetrics({ text: ta.value || ' ', size: e.size, font: e.font, bold: e.bold, italic: e.italic });
     ta.style.width = Math.max(e.size * state.scale * 3, (m.w + e.size * 0.6) * state.scale) + 'px';
@@ -2647,7 +2676,7 @@ function openTextEditor(id, x, y, obj, init) {
     if (editor && editor.ta === ta) finishEditor();
   });
   v.el.appendChild(ta);
-  editor = { id, ta, obj, x: obj ? obj.x : x, y: obj ? obj.y : y, size: src.size, color: src.color, font: src.font || 'sans', bold: !!src.bold, italic: !!src.italic, fill: src.fill || null, fit, init: init || null };
+  editor = { id, ta, obj, x: obj ? obj.x : x, y: obj ? obj.y : y, size: src.size, color: src.color, font: src.font || 'sans', bold: !!src.bold, italic: !!src.italic, fill: src.fill || null, align: obj ? (obj.align || 'left') : init ? 'left' : (settings.text.align || 'center'), fit, init: init || null };
   state.editingId = obj ? obj.id : null;
   fit(); drawOverlay(id);
   ta.focus(); ta.setSelectionRange(ta.value.length, ta.value.length);
@@ -2662,18 +2691,18 @@ function finishEditor() {
   if (e.obj) {
     const o = e.obj;
     if (!text.trim()) { p.annots = p.annots.filter(a => a.id !== o.id); if (state.selected && state.selected.objId === o.id) state.selected = null; }
-    else { o.text = text; o.size = e.size; o.color = e.color; o.font = e.font; o.bold = e.bold; o.italic = e.italic; o.fill = e.fill; }
+    else { o.text = text; o.size = e.size; o.color = e.color; o.font = e.font; o.bold = e.bold; o.italic = e.italic; o.fill = e.fill; o.align = e.align; }
     commit();
   } else if (e.init) {
     const i = e.init, changed = text !== i.text.replace(/\s+$/, '') || e.size !== i.size || e.color !== i.color || e.font !== i.font || e.bold || e.italic;
     if (changed) {
       const c = i.cover;
       p.annots.push({ id: uid('o'), type: 'rect', x: c.x, y: c.y, w: c.w, h: c.h, color: c.fill, width: 0, fill: c.fill, fillAlpha: 1, cover: true });
-      if (text.trim()) p.annots.push({ id: uid('o'), type: 'text', x: e.x, y: e.y, text, size: e.size, color: e.color, font: e.font, bold: e.bold, italic: e.italic, fill: null });
+      if (text.trim()) p.annots.push({ id: uid('o'), type: 'text', x: e.x, y: e.y, text, size: e.size, color: e.color, font: e.font, bold: e.bold, italic: e.italic, fill: null, align: e.align });
       commit();
     }
   } else if (text.trim()) {
-    p.annots.push({ id: uid('o'), type: 'text', x: e.x, y: e.y, text, size: e.size, color: e.color, font: e.font, bold: e.bold, italic: e.italic, fill: e.fill });
+    p.annots.push({ id: uid('o'), type: 'text', x: e.x, y: e.y, text, size: e.size, color: e.color, font: e.font, bold: e.bold, italic: e.italic, fill: e.fill, align: e.align });
     commit();
   }
   touch(e.id);
@@ -2734,7 +2763,8 @@ function currentTextProps() {
 function fontCtl(o) {
   return `<div class="grp"><label>글꼴</label><button class="fontbtn" data-fontbtn aria-haspopup="listbox" title="글꼴 선택 (미리보기)" style="font-family:${qa(fontCss(o))}"><span>${(FONTS[o.font || 'sans'] || FONTS.sans).name}</span>▾</button>` +
     `<button class="fmt${o.bold ? ' on' : ''}" data-fmt="bold" title="굵게" aria-label="굵게" aria-pressed="${!!o.bold}"><b>B</b></button>` +
-    `<button class="fmt${o.italic ? ' on' : ''}" data-fmt="italic" title="기울임꼴" aria-label="기울임꼴" aria-pressed="${!!o.italic}"><i>I</i></button></div>`;
+    `<button class="fmt${o.italic ? ' on' : ''}" data-fmt="italic" title="기울임꼴" aria-label="기울임꼴" aria-pressed="${!!o.italic}"><i>I</i></button></div>` +
+    `<div class="grp"><label>정렬</label>${[['left', '왼쪽 정렬', 'alL'], ['center', '가운데 정렬', 'alC'], ['right', '오른쪽 정렬', 'alR']].map(([k, n, ic]) => `<button class="fmt${(o.align || 'left') === k ? ' on' : ''}" data-align="${k}" title="${n}" aria-label="${n}" aria-pressed="${(o.align || 'left') === k}">${svg(ic)}</button>`).join('')}</div>`;
 }
 function setTextProp(prop, val) {
   if (editor && state.tool === 'select') { editor[prop] = val; editor.fit(); renderOptions(); return; }
@@ -2804,6 +2834,7 @@ optbar.addEventListener('click', e => {
   if (q('[data-copy]')) { copySelection(); return; }
   if ((el = q('[data-lstyle]'))) { settings.line.arrow = el.dataset.lstyle === 'arrow'; renderOptions(); return; }
   if ((el = q('[data-hstyle]'))) { settings.highlight.style = el.dataset.hstyle; renderOptions(); return; }
+  if ((el = q('[data-align]'))) { setTextProp('align', el.dataset.align); return; }
   if ((el = q('[data-fmt]'))) { const cur = currentTextProps(); if (cur) setTextProp(el.dataset.fmt, !cur[el.dataset.fmt]); return; }
   if ((el = q('[data-eyedrop]'))) { pickScreenColor(el.dataset.eyedrop); return; }
   if ((el = q('.swatch[data-fill]'))) return applyFill(el.dataset.fill);
@@ -5675,8 +5706,8 @@ function pmClose() {
 $('#manageBtn').onclick = openPageManager;
 
 /* ════════════ 설정 창 · 단축키 사용자 지정 · 도구 모음 위치 ════════════ */
-const APP_VERSION = 'v0.4.4';
-const CHANGELOG = [{"v": "v0.4.4", "items": ["헤더의 테마 변경 버튼과 GitHub 버튼을 제거하고, 화면 밝기 조절을 설정의 화면 · 레이아웃 항목으로 이동", "도구 툴바의 저장 관련 버튼(저장, 다른 이름으로 저장)을 헤더로 이동", "헤더의 새 문서, 열기 버튼을 제거하고 실행 취소, 다시 실행, 캡처, 인쇄, 발표 버튼을 헤더로 이동", "결제 안내에 최초 1회만 결제하면 계속 이용할 수 있다는 내용을 깔끔한 카드 UI로 명시", "옵션바의 크기(내용)에 따라 화면이 재조정되지 않도록 옵션바 높이를 고정"]}, {"v": "v0.4.3", "items": ["사이드 메뉴 방식의 UI 기반 설정 창을 열 수 있는 버튼 아이콘을 상단 레이아웃에 추가, 해당 설정 창 내에서 애플리케이션 버전 정보 확인과 고객센터 피드백 제출이 가능하도록 구현", "이때 접수된 불편사항은 개발자 계정의 관리자 대시보드나 DB로 수집되어 일괄 조회 및 관리가 가능", "사용자가 주요 기능의 단축키를 직접 매핑하고 변경할 수 있는 커스터마이징 기능과 함께 기존 상단에 고정되어 있던 도구 툴바 배치를 좌측 정렬 또는 상단 정렬로 선택할 수 있는 레이아웃 옵션을 제공", "반응형 UX 개선을 위해 모바일 환경에서 가로보기(Landscape) 모드로 전환될 경우, 페이지 패널이 자동으로 화면 좌측에 정렬되도록 미디어 쿼리 및 Flex/Grid 레이아웃 구조를 보완"]}, {"v": "v0.4.2", "items": ["모바일 화면 크기에 맞춰 반응형 뷰포트 및 레이아웃 적용", "모바일 환경에서 레이어, 노트, 멀티작업 등 부가 기능 숨기고 최소한의 핵심 기능만 남기도록 개선", "모바일 화면에서 스와이프 및 드래그로 페이지 넘기기 기능 추가 (두 손가락 확대/축소 가능)", "모바일에서 페이지 패널을 화면 하단으로 배치", "상단 편집 버튼들을 깔끔하게 재배치하고, 계정 버튼을 저장 버튼 왼쪽으로 이동", "텍스트 직접 수정 기능 유지", "텍스트 선택 시 뜨는 옵션바(optbar)가 화면 밖으로 나가지 않도록 두 줄로 예쁘게 배치하고, 옵션바 표시 여부에 따라 화면 페이지가 밀리거나 재조정되지 않도록 수정"]}, {"v": "v0.4.1", "items": ["모바일 화면 크기에 맞춰 반응형 뷰포트 및 레이아웃 적용", "모바일 환경에서 레이어, 노트, 멀티작업 등 부가 기능 숨기고 최소한의 핵심 기능만 남기도록 개선", "모바일 화면에서 스와이프 및 드래그로 페이지 넘기기 기능 추가 (두 손가락 확대/축소 가능)", "모바일에서 페이지 패널을 화면 하단으로 배치", "상단 편집 버튼들을 깔끔하게 재배치하고, 계정 버튼을 저장 버튼 왼쪽으로 이동", "텍스트 직접 수정 기능 유지", "텍스트 선택 시 뜨는 옵션바(optbar)가 화면 밖으로 나가지 않도록 두 줄로 예쁘게 배치하고, 옵션바 표시 여부에 따라 화면 페이지가 밀리거나 재조정되지 않도록 수정"]}, {"v": "v0.3.3", "items": ["키 발급 관련 일부 로직 수정"]}, {"v": "v0.3.2", "items": ["키 발급 관련 서버 연결 문제 해결"]}, {"v": "v0.3.1", "items": ["파일이 없는 화면에서 파일 열기, 빈 문서로 시작 옆에 파일 병합, 파일 압축 기능을 배치", "파일이 없는 화면에서 안내 텍스트를 최소화하여 UI 깔끔하게 수정", "저장 버튼에 파일 압축해서 내보내기(10%, 20%, 40%)옵션 추가 - 프리미엄 사용자 한정, PPTX파일로 내보내기 옵션 추가", "화면에 다른 PDF를 드래그해서 넣으면 멀티 탭으로 넣기, 현재 파일에 병합하기 옵션이 나타나도록 기능 추가 (병합하기 시 두 파일의 병합순서 드래그로 결정 가능)", "페이지 패널에 전체 페이지 관리하기 버튼 추가-프리미엄", "전체 페이지 관리하기 시 그리드형태로(크기조절 가능) 각 페이지가 화면에 가득 차게 나타나며 드래그하여 페이지 순서를 바꿀 수도 있도 여러 페이지를 삭제하거나 이름을 바꾸거나 계층구조 수정 가능하도록 기능 추가", "페이지 패널의 버튼 UI 전반적으로 깔끔하게 수정", "헤더에 있는 PDF제목 클릭하여 직접 수정 가능하도록 개선"]}, {"v": "v0.2.2", "items": ["로그인시스템 및 결제 시스템 문제 해결"]}, {"v": "v0.2.1", "items": ["일부 기능 유료화 도입"]}, {"v": "v0.1.3", "items": ["온라인 컴파일러 프로그램 원컴파일러(OneCompiler) 바로가기가 멀티작업에서 제공되도록 개선"]}, {"v": "v0.1.2", "items": ["음성 이름 편집 및 음성 내보내기 기능 추가"]}, {"v": "v0.1.1", "items": ["음성녹음 및 재생 기능 추가", "음성녹음 MPDF에 삽입 기능 추가 (따로 내보내기 가능, MPDF 확장자 파일에 삽입된 상태로 저장 가능)"]}, {"v": "v0.0.1", "items": ["멀티작업에서 웹페이지를 열 수 있도록 편의 향상", "화면맞춤 상태에서 PDF내 텍스트상자 클릭 시 텍스트 수정이 진행되지 않는 문제 해결", "멀티작업 화면에 파일 드래그 시 일반 편집기 화면에 파일이 닿으면 파일 드롭 안내가 사라지지 않는 문제 해결", "페이지 패널의 크기 조절 시 썸네일로 보기의 각 썸네일 크기도 패널의 크기에 맞게 조절되도록 개선", "페이지 북마크기능 추가, 페이지 패널 상단에 북마크 바로가기 드롭다운 리스트 버튼 추가", "텍스트의 글꼴 드롭다운 버튼에서 각 버튼의 글꼴 모양을 이름과 함께 미리보기 제공", "PDF전체에서 특정 글자 빠르게 찾는 검색기능 제공", "PDF 내에서 기존에 있는 텍스트를 수정하는 로직 개편 (기존에 비해 많은 양의 텍스트를 한 번에 수정 가능하도록)", "Meow-PDF 파비콘 추가"]}, {"v": "beta 0.0.5", "items": ["세로모드 시 페이지, 레이어, 노트를 모두 하단 사이드바에서 전환 가능한 형태로 변경", "모든 사이드바를 테두리 마우스 드래그를 통해 크기 조절 가능하도록 변경 (기본 좌우, 세로모드는 상하)", "페이지 맞춤 시 사이드바를 고려하여 페이지가 화면에 모두 들어오게 조절되도록 개선 (화면 비율이 작은 경우)", "검은 고양이 스티커를 넣는 기능을 추가 (이미지 버튼을 전환 가능)", "레이어/노트 패널에 탭전환 방식으로 멀티작업 탭 추가 (파일탐색기를 여는 버튼이 중앙에 있으며 누르면 파일을 불러옴, 불러온 파일은 해당 패널에 가득 차도록 띄워지며 PDF를 보며 작업 가능), 멀티작업 패널은 또한 내부에서 멀티테스킹탭으로 관리 가능", "레이어/노트/멀티작업 여닫기 패널 버튼을 작업 사이드바 버튼으로 이미지 변경", "PDF 업로드 전 나타나는 화면 문구에서 PDF뿐만 아니라 PPTX파일도 수정 가능하다고 명시", "스프라이트시트, HWP 파일도 삽입/편집 가능하도록 제공"]}, {"v": "beta 0.0.4", "items": ["페이지 계층관리 시 페이지를 끈 상태에서 마우스 휠을 굴리면 페이지가 올라갔다 내려갔다 하게 되도록 변경", "도형을 그리고 Ctrl+Z를 누르면 간혹 기능이 먹히지 않는 문제 해결", "화면 밝기 조절 바 시간 표시 부분 왼쪽에 추가", "페이지에 주석달기 기능 추가 (주석을 달면 그 페이지는 눈에 잘 띄도록 변경)", "페이지 목록으로보기 기능 추가 (기본적으로 페이지1 ... 로 표시되며 페이지이름 변경 가능)", "인쇄기능 추가", "레이어 병합 기능 추가", "편집화면 및 프리젠테이션 화면에서 Ctrl+스크롤 하면 마우스 커서를 중심으로 화면이 줌아웃되도록 변경", "작게 https://github.com/architect0509/meow-PDF페이지로 이동되는 버튼을 방해되지 않도록 배치", "텍스트나 도형 그리기에서 상단 optbar가 가로로 너무 길어지는 문제 색상 팔레트의 크기를 줄이고 슬라이더들을 정리하여 화면 내에 기능이 모두 들어오도록 개선", "글자선택을 개체와 통일시키고 PDF내 모든 텍스트상자를 클릭만으로 수정 가능하도록 개선", "색상 버튼의 개수를 5개로 줄이고 우측에 색상 팔레트를 크게 배치하며 5개의 작은 색상 버튼 아래에는 최근에 사용한 색상 5개가 나타나게 되도록 개선", "UI의 배치가 전부 상하로 이동하는 세로모드 변환 기능을 제공", "멀티테스킹탭 기능을 지원 (툴바 위에 삭제 및 불러오기, 추가 가능한 형식으로)", "레이어가 있는 위치에 탭전환 방식으로 노트를 작성할 수 있도록 기능 추가(노트는 다중 페이지로 관리 가능하며 .txt확장자 파일로 내보낼 수 있음)"]}, {"v": "beta 0.0.3", "items": ["현재화면 캡쳐기능 제공(버튼의 위치는 저장버튼 좌측)", "상단 레이어버튼 옆에 현재시간,분 표시", "저장버튼 좌측 프리젠테이션모드 버튼 추가 -단축키 여닫기 p(프리젠테이션 내에는 마찬가지로 강조표시, 그리기, 직선, 도형, 지우개, 텍스트툴, 그리고 레이저를 사용가능한 마우스로 끌어서 옮길 수 있는 조작 도구창이 존재)", "레이저는 프리젠테이션중에만 사용 가능하며 L키로 생성/제거 가능", "이미지 버튼 우측에 C단축키로 메모 생성기능", "메모는 위치이동 및 크기조절 가능, 다중줄 글쓰기 가능, 접기 가능, 글씨 크기조절 가능", "ppt를 pdf로 가져오기 가능하도록 개선", "페이지 그룹화를 통한 계층관리 가능하도록 개선", "편집기록을 가진 프로젝트 파일인 mpdf확장자로 내보내기&불러오기 기능 추가", "(저장 및 다른이름으로 저장에 옵션 표시- pdf of mpdf) 확장자가 달라도 일반 저장의 기본옵션은 덮어쓰기", "텍스트에 채우기 옵션 추가 (기본 투명), 도형에 채우기 옵션 추가 (기본 투명, 투명도 조절 가능)", "페이지 넘기기 단축키에 Pg Up 과 Pg Down도 추가", "각 도구의 색깔은 그림판 팔레트 UI처럼 줄바꿈 이용, 사용자 지정 색상은 크기 증가, 스포이드버튼도 추가", "프로그램 내의 황색은 #dbbe43로, 배경의 어두운 색은 좀 더 무채색에 가깝게 변경"]}, {"v": "beta 0.0.2", "items": ["전반적인 테마를 변경하였으며 개선된 항목은 다음과 같습니다. 글자의 폰트 및 굵기, 기울임꼴 추가,", "화면맞춤 버튼 하단에 추가", "처음 저장버튼 누를때 파일을 불러온 경로에 자동 덮어씌우기 개선", "프로그램 테마색깔 황색으로 변경", "페이지 패널 버튼 좌측에 아이콘 추가, 패널 버튼과 거리 두기", "자 툴을 직선 그리기 툴로 변경", "펜 및 직선 그리기 툴 사용 시 붓 영역 화면 내에 표시", "펜 및 직선 그리기 툴 팔레트에 파스텔톤의 색상 추가", "강조표시는 직선형, 붓형 선택 가능하게 개선", "상단 툴을 분리 ( 글자선택과 개체 | 강조표시, 그리기, 직선 | 도형, 지우개, 텍스트 | 붙여넣기, 이미지 )", "각각의 버튼에 단축키 부여 ( 1, 2 | q, w, e | a, s, d | z, x )"]}];
+const APP_VERSION = 'v0.4.5';
+const CHANGELOG = [{"v": "v0.4.5", "items": ["시작 화면의 버튼(파일 열기, 빈 문서로 시작, 파일 병합, 파일 압축)을 모서리가 둥근 정사각형 타일 형태로 변경", "텍스트 왼쪽 정렬 / 가운데 정렬(기본) / 오른쪽 정렬 설정 추가 (새 텍스트, 편집 중, 선택한 텍스트에 적용)", "도구 모음을 좌측에 배치했을 때 도구 버튼 크기를 줄임", "캡처, 인쇄, 프레젠테이션 버튼을 다시 도구 모음으로 이동"]}, {"v": "v0.4.4", "items": ["헤더의 테마 변경 버튼과 GitHub 버튼을 제거하고, 화면 밝기 조절을 설정의 화면 · 레이아웃 항목으로 이동", "도구 툴바의 저장 관련 버튼(저장, 다른 이름으로 저장)을 헤더로 이동", "헤더의 새 문서, 열기 버튼을 제거하고 실행 취소, 다시 실행, 캡처, 인쇄, 발표 버튼을 헤더로 이동", "결제 안내에 최초 1회만 결제하면 계속 이용할 수 있다는 내용을 깔끔한 카드 UI로 명시", "옵션바의 크기(내용)에 따라 화면이 재조정되지 않도록 옵션바 높이를 고정"]}, {"v": "v0.4.3", "items": ["사이드 메뉴 방식의 UI 기반 설정 창을 열 수 있는 버튼 아이콘을 상단 레이아웃에 추가, 해당 설정 창 내에서 애플리케이션 버전 정보 확인과 고객센터 피드백 제출이 가능하도록 구현", "이때 접수된 불편사항은 개발자 계정의 관리자 대시보드나 DB로 수집되어 일괄 조회 및 관리가 가능", "사용자가 주요 기능의 단축키를 직접 매핑하고 변경할 수 있는 커스터마이징 기능과 함께 기존 상단에 고정되어 있던 도구 툴바 배치를 좌측 정렬 또는 상단 정렬로 선택할 수 있는 레이아웃 옵션을 제공", "반응형 UX 개선을 위해 모바일 환경에서 가로보기(Landscape) 모드로 전환될 경우, 페이지 패널이 자동으로 화면 좌측에 정렬되도록 미디어 쿼리 및 Flex/Grid 레이아웃 구조를 보완"]}, {"v": "v0.4.2", "items": ["모바일 화면 크기에 맞춰 반응형 뷰포트 및 레이아웃 적용", "모바일 환경에서 레이어, 노트, 멀티작업 등 부가 기능 숨기고 최소한의 핵심 기능만 남기도록 개선", "모바일 화면에서 스와이프 및 드래그로 페이지 넘기기 기능 추가 (두 손가락 확대/축소 가능)", "모바일에서 페이지 패널을 화면 하단으로 배치", "상단 편집 버튼들을 깔끔하게 재배치하고, 계정 버튼을 저장 버튼 왼쪽으로 이동", "텍스트 직접 수정 기능 유지", "텍스트 선택 시 뜨는 옵션바(optbar)가 화면 밖으로 나가지 않도록 두 줄로 예쁘게 배치하고, 옵션바 표시 여부에 따라 화면 페이지가 밀리거나 재조정되지 않도록 수정"]}, {"v": "v0.4.1", "items": ["모바일 화면 크기에 맞춰 반응형 뷰포트 및 레이아웃 적용", "모바일 환경에서 레이어, 노트, 멀티작업 등 부가 기능 숨기고 최소한의 핵심 기능만 남기도록 개선", "모바일 화면에서 스와이프 및 드래그로 페이지 넘기기 기능 추가 (두 손가락 확대/축소 가능)", "모바일에서 페이지 패널을 화면 하단으로 배치", "상단 편집 버튼들을 깔끔하게 재배치하고, 계정 버튼을 저장 버튼 왼쪽으로 이동", "텍스트 직접 수정 기능 유지", "텍스트 선택 시 뜨는 옵션바(optbar)가 화면 밖으로 나가지 않도록 두 줄로 예쁘게 배치하고, 옵션바 표시 여부에 따라 화면 페이지가 밀리거나 재조정되지 않도록 수정"]}, {"v": "v0.3.3", "items": ["키 발급 관련 일부 로직 수정"]}, {"v": "v0.3.2", "items": ["키 발급 관련 서버 연결 문제 해결"]}, {"v": "v0.3.1", "items": ["파일이 없는 화면에서 파일 열기, 빈 문서로 시작 옆에 파일 병합, 파일 압축 기능을 배치", "파일이 없는 화면에서 안내 텍스트를 최소화하여 UI 깔끔하게 수정", "저장 버튼에 파일 압축해서 내보내기(10%, 20%, 40%)옵션 추가 - 프리미엄 사용자 한정, PPTX파일로 내보내기 옵션 추가", "화면에 다른 PDF를 드래그해서 넣으면 멀티 탭으로 넣기, 현재 파일에 병합하기 옵션이 나타나도록 기능 추가 (병합하기 시 두 파일의 병합순서 드래그로 결정 가능)", "페이지 패널에 전체 페이지 관리하기 버튼 추가-프리미엄", "전체 페이지 관리하기 시 그리드형태로(크기조절 가능) 각 페이지가 화면에 가득 차게 나타나며 드래그하여 페이지 순서를 바꿀 수도 있도 여러 페이지를 삭제하거나 이름을 바꾸거나 계층구조 수정 가능하도록 기능 추가", "페이지 패널의 버튼 UI 전반적으로 깔끔하게 수정", "헤더에 있는 PDF제목 클릭하여 직접 수정 가능하도록 개선"]}, {"v": "v0.2.2", "items": ["로그인시스템 및 결제 시스템 문제 해결"]}, {"v": "v0.2.1", "items": ["일부 기능 유료화 도입"]}, {"v": "v0.1.3", "items": ["온라인 컴파일러 프로그램 원컴파일러(OneCompiler) 바로가기가 멀티작업에서 제공되도록 개선"]}, {"v": "v0.1.2", "items": ["음성 이름 편집 및 음성 내보내기 기능 추가"]}, {"v": "v0.1.1", "items": ["음성녹음 및 재생 기능 추가", "음성녹음 MPDF에 삽입 기능 추가 (따로 내보내기 가능, MPDF 확장자 파일에 삽입된 상태로 저장 가능)"]}, {"v": "v0.0.1", "items": ["멀티작업에서 웹페이지를 열 수 있도록 편의 향상", "화면맞춤 상태에서 PDF내 텍스트상자 클릭 시 텍스트 수정이 진행되지 않는 문제 해결", "멀티작업 화면에 파일 드래그 시 일반 편집기 화면에 파일이 닿으면 파일 드롭 안내가 사라지지 않는 문제 해결", "페이지 패널의 크기 조절 시 썸네일로 보기의 각 썸네일 크기도 패널의 크기에 맞게 조절되도록 개선", "페이지 북마크기능 추가, 페이지 패널 상단에 북마크 바로가기 드롭다운 리스트 버튼 추가", "텍스트의 글꼴 드롭다운 버튼에서 각 버튼의 글꼴 모양을 이름과 함께 미리보기 제공", "PDF전체에서 특정 글자 빠르게 찾는 검색기능 제공", "PDF 내에서 기존에 있는 텍스트를 수정하는 로직 개편 (기존에 비해 많은 양의 텍스트를 한 번에 수정 가능하도록)", "Meow-PDF 파비콘 추가"]}, {"v": "beta 0.0.5", "items": ["세로모드 시 페이지, 레이어, 노트를 모두 하단 사이드바에서 전환 가능한 형태로 변경", "모든 사이드바를 테두리 마우스 드래그를 통해 크기 조절 가능하도록 변경 (기본 좌우, 세로모드는 상하)", "페이지 맞춤 시 사이드바를 고려하여 페이지가 화면에 모두 들어오게 조절되도록 개선 (화면 비율이 작은 경우)", "검은 고양이 스티커를 넣는 기능을 추가 (이미지 버튼을 전환 가능)", "레이어/노트 패널에 탭전환 방식으로 멀티작업 탭 추가 (파일탐색기를 여는 버튼이 중앙에 있으며 누르면 파일을 불러옴, 불러온 파일은 해당 패널에 가득 차도록 띄워지며 PDF를 보며 작업 가능), 멀티작업 패널은 또한 내부에서 멀티테스킹탭으로 관리 가능", "레이어/노트/멀티작업 여닫기 패널 버튼을 작업 사이드바 버튼으로 이미지 변경", "PDF 업로드 전 나타나는 화면 문구에서 PDF뿐만 아니라 PPTX파일도 수정 가능하다고 명시", "스프라이트시트, HWP 파일도 삽입/편집 가능하도록 제공"]}, {"v": "beta 0.0.4", "items": ["페이지 계층관리 시 페이지를 끈 상태에서 마우스 휠을 굴리면 페이지가 올라갔다 내려갔다 하게 되도록 변경", "도형을 그리고 Ctrl+Z를 누르면 간혹 기능이 먹히지 않는 문제 해결", "화면 밝기 조절 바 시간 표시 부분 왼쪽에 추가", "페이지에 주석달기 기능 추가 (주석을 달면 그 페이지는 눈에 잘 띄도록 변경)", "페이지 목록으로보기 기능 추가 (기본적으로 페이지1 ... 로 표시되며 페이지이름 변경 가능)", "인쇄기능 추가", "레이어 병합 기능 추가", "편집화면 및 프리젠테이션 화면에서 Ctrl+스크롤 하면 마우스 커서를 중심으로 화면이 줌아웃되도록 변경", "작게 https://github.com/architect0509/meow-PDF페이지로 이동되는 버튼을 방해되지 않도록 배치", "텍스트나 도형 그리기에서 상단 optbar가 가로로 너무 길어지는 문제 색상 팔레트의 크기를 줄이고 슬라이더들을 정리하여 화면 내에 기능이 모두 들어오도록 개선", "글자선택을 개체와 통일시키고 PDF내 모든 텍스트상자를 클릭만으로 수정 가능하도록 개선", "색상 버튼의 개수를 5개로 줄이고 우측에 색상 팔레트를 크게 배치하며 5개의 작은 색상 버튼 아래에는 최근에 사용한 색상 5개가 나타나게 되도록 개선", "UI의 배치가 전부 상하로 이동하는 세로모드 변환 기능을 제공", "멀티테스킹탭 기능을 지원 (툴바 위에 삭제 및 불러오기, 추가 가능한 형식으로)", "레이어가 있는 위치에 탭전환 방식으로 노트를 작성할 수 있도록 기능 추가(노트는 다중 페이지로 관리 가능하며 .txt확장자 파일로 내보낼 수 있음)"]}, {"v": "beta 0.0.3", "items": ["현재화면 캡쳐기능 제공(버튼의 위치는 저장버튼 좌측)", "상단 레이어버튼 옆에 현재시간,분 표시", "저장버튼 좌측 프리젠테이션모드 버튼 추가 -단축키 여닫기 p(프리젠테이션 내에는 마찬가지로 강조표시, 그리기, 직선, 도형, 지우개, 텍스트툴, 그리고 레이저를 사용가능한 마우스로 끌어서 옮길 수 있는 조작 도구창이 존재)", "레이저는 프리젠테이션중에만 사용 가능하며 L키로 생성/제거 가능", "이미지 버튼 우측에 C단축키로 메모 생성기능", "메모는 위치이동 및 크기조절 가능, 다중줄 글쓰기 가능, 접기 가능, 글씨 크기조절 가능", "ppt를 pdf로 가져오기 가능하도록 개선", "페이지 그룹화를 통한 계층관리 가능하도록 개선", "편집기록을 가진 프로젝트 파일인 mpdf확장자로 내보내기&불러오기 기능 추가", "(저장 및 다른이름으로 저장에 옵션 표시- pdf of mpdf) 확장자가 달라도 일반 저장의 기본옵션은 덮어쓰기", "텍스트에 채우기 옵션 추가 (기본 투명), 도형에 채우기 옵션 추가 (기본 투명, 투명도 조절 가능)", "페이지 넘기기 단축키에 Pg Up 과 Pg Down도 추가", "각 도구의 색깔은 그림판 팔레트 UI처럼 줄바꿈 이용, 사용자 지정 색상은 크기 증가, 스포이드버튼도 추가", "프로그램 내의 황색은 #dbbe43로, 배경의 어두운 색은 좀 더 무채색에 가깝게 변경"]}, {"v": "beta 0.0.2", "items": ["전반적인 테마를 변경하였으며 개선된 항목은 다음과 같습니다. 글자의 폰트 및 굵기, 기울임꼴 추가,", "화면맞춤 버튼 하단에 추가", "처음 저장버튼 누를때 파일을 불러온 경로에 자동 덮어씌우기 개선", "프로그램 테마색깔 황색으로 변경", "페이지 패널 버튼 좌측에 아이콘 추가, 패널 버튼과 거리 두기", "자 툴을 직선 그리기 툴로 변경", "펜 및 직선 그리기 툴 사용 시 붓 영역 화면 내에 표시", "펜 및 직선 그리기 툴 팔레트에 파스텔톤의 색상 추가", "강조표시는 직선형, 붓형 선택 가능하게 개선", "상단 툴을 분리 ( 글자선택과 개체 | 강조표시, 그리기, 직선 | 도형, 지우개, 텍스트 | 붙여넣기, 이미지 )", "각각의 버튼에 단축키 부여 ( 1, 2 | q, w, e | a, s, d | z, x )"]}];
 const setw = $('#setw');
 
 /* ── 단축키 정의: 키 조합은 "Ctrl+Shift+KeyS" 형식(물리 키 기준이라 한글 입력 상태에서도 동작) ── */
