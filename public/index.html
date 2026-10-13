@@ -105,6 +105,12 @@ footer .brand{color:var(--text);font-weight:700;font-size:16px;margin-bottom:10p
 footer p{margin:2px 0}
 footer .links{display:flex;gap:22px;flex-wrap:wrap}
 footer .links a:hover{color:var(--text)}
+.pdd{width:min(560px,calc(100% - 28px));max-height:86vh;padding:0;border:1px solid var(--line);border-radius:16px;background:var(--bg);color:var(--text)}
+.pdd::backdrop{background:rgba(0,0,0,.5)}
+.pdd .pdh{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:var(--bg);border-bottom:1px solid var(--line)}
+.pdd h3{margin:0;font-size:18px}.pdd .pdx{font-size:24px;line-height:1;width:34px;height:34px;border-radius:50%;border:0;background:transparent;color:var(--muted);cursor:pointer}
+.pdd .pdb{padding:6px 20px 20px;font-size:14px}.pdd h4{margin:18px 0 6px;font-size:14px;color:var(--accent)}
+.pdd p{margin:4px 0}.pdd ul{margin:4px 0;padding-left:18px}.pdd li{margin:5px 0}.pdd a{text-decoration:underline}
 footer .refund{margin-top:22px;font-size:13px}
 footer .refund summary{cursor:pointer;color:var(--text);font-weight:600;width:max-content}
 footer .refund p{margin:6px 0 0}
@@ -177,11 +183,14 @@ footer .copy{margin-top:30px;padding-top:20px;border-top:1px solid var(--line);f
       <p class="lead">복잡한 설치도, 무거운 프로그램도 필요 없습니다. 열고, 고치고, 저장하면 끝입니다.</p>
       <div class="grid">
         <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg></div><h3>글자 바로 수정</h3><p>PDF 안의 글자를 눌러 고칩니다. 글꼴, 크기, 굵게, 기울임, 색, 배경색, 왼쪽 · 가운데 · 오른쪽 정렬을 지원합니다.</p></div>
-        <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></div><h3>그리기와 도형</h3><p>펜, 형광펜, 직선, 화살표, 사각형, 원, 별, 지우개로 문서에 표시하고 이미지와 메모, 음성 녹음도 넣을 수 있습니다.</p></div>
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></div><h3>그리기와 도형</h3><p>펜, 형광펜, 직선, 화살표, 사각형, 원, 별, 지우개로 문서에 표시하고 이미지와 메모, 음성 녹음도 넣을 수 있습니다. 형광펜은 글자를 가리지 않고 글줄에 맞춰 칠해집니다.</p></div>
         <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></div><h3>문서 관리</h3><p>여러 문서를 탭으로 열고, 페이지를 정리하고, PDF를 합치고, 용량을 줄입니다.</p></div>
-        <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 21h16"/></svg></div><h3>다양한 저장</h3><p>PDF, 편집 상태를 유지하는 MPDF, PPTX(페이지 한 장이 슬라이드 한 장)로 저장합니다.</p></div>
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 21h16"/></svg></div><h3>다양한 저장</h3><p>PDF와 편집 상태를 유지하는 MPDF로 저장하고, PPTX(페이지 한 장이 슬라이드 한 장), Word(.docx), PNG로 내보냅니다.</p></div>
         <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div><h3>휴대폰에서도</h3><p>화면이 작아지면 모바일 화면으로 바뀝니다. 두 손가락 확대 · 축소와 좌우 쓸어 넘기기를 지원합니다.</p></div>
-        <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 9h.01M11 9h.01M15 9h.01M7 13h10"/></svg></div><h3>내 방식대로 설정</h3><p>단축키를 직접 바꾸고, 도구 모음을 상단이나 좌측에 두고, 화면 밝기를 조절합니다.</p></div>
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 9h.01M11 9h.01M15 9h.01M7 13h10"/></svg></div><h3>내 방식대로 설정</h3><p>단축키를 직접 바꾸고, 도구 모음을 상단이나 좌측에 두고, 화면 밝기를 조절합니다. 어두운 · 밝은 · 프루티거 에어로 · 핑크세상 · 한국 · 일본 테마를 고를 수 있고, 개발자 콘솔(프리미엄)에서는 명령어로 빠르게 조작합니다.</p></div>
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" stroke-dasharray="4 3"/><path d="M9 9h6v6H9z"/></svg></div><h3>영역 지정과 레이어</h3><p>영역을 사각형이나 자유 형태로 지정해 그림과 도형의 일부를 오리고, 옮기고, 크기를 바꿉니다. 자동 레이어와 그림판식 수동 레이어를 고를 수 있고, 레이어는 끌어서 순서를 바꿉니다.</p></div>
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M15 4v16"/></svg></div><h3>멀티작업</h3><p>문서를 보면서 옆 패널에서 다른 파일, 웹페이지, 계산기, 번역 · 사전을 함께 엽니다. 빈 문서와 병합 문서도 멀티작업 탭으로 열리고, 탭은 끌어서 순서를 바꿉니다. (프리미엄)</p></div>
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg></div><h3>발표 모드</h3><p>전체 화면으로 발표하며 펜과 형광펜으로 표시합니다. 레이저 포인터는 지나간 자리에 잔상을 남기고, 페이지 이동 연출은 설정에서 켜고 끌 수 있습니다.</p></div>
       </div>
     </div>
   </section>
@@ -201,8 +210,8 @@ footer .copy{margin-top:30px;padding-top:20px;border-top:1px solid var(--line);f
   <section id="price" class="alt">
     <div class="wrap">
       <div class="eyebrow">요금</div>
-      <h2>기본 기능은 무료, 프리미엄은 최초 1회</h2>
-      <p class="lead">한 번 결제하면 추가 결제 없이 계속 이용할 수 있습니다.</p>
+      <h2>기본 기능은 무료, 프리미엄은 1년 이용권</h2>
+      <p class="lead">한 번 결제하면 결제일로부터 1년간 이용할 수 있습니다. 이용 키는 발급일로부터 3개월간 이용할 수 있습니다.</p>
       <div class="plans">
         <div class="plan">
           <h3>무료</h3>
@@ -216,13 +225,14 @@ footer .copy{margin-top:30px;padding-top:20px;border-top:1px solid var(--line);f
         </div>
         <div class="plan pro">
           <h3>프리미엄</h3>
-          <div class="price">3,900원<small>최초 1회</small></div>
+          <div class="price">3,900원<small>1년 이용</small></div>
           <ul>
             <li>전체 페이지 관리, 파일 압축</li>
-            <li>PPTX 내보내기, 음성 녹음</li>
+            <li>PPTX 내보내기, 음성 녹음, 멀티작업, 개발자 콘솔</li>
             <li>대학생 인증(.ac.kr, .edu) 또는 이용 키로도 이용 가능</li>
           </ul>
           <a class="btn" href="/edit">프리미엄 시작</a>
+          <button type="button" class="btn ghost" id="premDetailBtn" style="margin-top:8px;width:100%">상품 상세 · 환불 안내</button>
         </div>
       </div>
     </div>
@@ -237,12 +247,31 @@ footer .copy{margin-top:30px;padding-top:20px;border-top:1px solid var(--line);f
   </section>
 </main>
 
+<dialog id="premDetail" class="pdd"><form method="dialog"><div class="pdh"><h3>프리미엄 상품 상세</h3><button class="pdx" aria-label="닫기">×</button></div></form><div class="pdb"><h4>상품 정보</h4>
+<p>상품명: Meow-PDF 프리미엄 이용권 · 3,900원 (부가세 포함)</p>
+<h4>이용 기간</h4>
+<ul>
+<li><b>프리미엄 결제</b>: 결제 승인일로부터 <b>1년</b>간 이용할 수 있습니다. 이용 기간 중 다시 결제하시면 현재 만료일부터 1년이 추가됩니다.</li>
+<li><b>이용 키</b>: 발급일로부터 <b>3개월</b>간 이용할 수 있습니다. 키를 입력하면 키의 만료일까지 프리미엄이 적용됩니다.</li>
+<li><b>대학생 인증</b>: 학교 이메일(.ac.kr, .edu)로 인증한 계정은 인증이 유지되는 동안 이용할 수 있습니다.</li>
+<li>이용 기간이 끝나면 무료 기능으로 전환되며, 프리미엄 기능만 제한됩니다. 저장해 둔 파일에는 영향이 없습니다.</li>
+</ul>
+<h4>제공 기능</h4>
+<p>전체 페이지 관리, PDF 압축, PPTX · HWP 가져오기, PPTX 내보내기, 음성 녹음 및 MP3 내보내기, 메모, 멀티작업(계산기 · 번역 · 사전), 페이지 번역, 개발자 콘솔</p>
+<h4>환불 안내</h4>
+<ul>
+<li>환불 가능 기간은 결제일로부터 <b>7일</b>입니다.</li>
+<li><b>단순 변심</b>(사용 여부와 관계없이 마음이 바뀐 경우)은 환불되지 않습니다.</li>
+<li>다음의 경우에는 환불할 수 있습니다. ① 시스템 오류로 결제되었으나 프리미엄이 적용되지 않은 경우 ② 안내된 상품 또는 기능이 제공되지 않은 경우</li>
+<li>환불 요청: <a href="mailto:contact@meow-pdf.com">contact@meow-pdf.com</a> (결제한 이메일과 주문 내용을 적어 주세요.) 환불이 확정되면 결제 수단으로 취소 처리하며, 처리 시점은 결제 수단에 따라 다를 수 있습니다.</li>
+</ul></div></dialog>
 <footer id="contact">
   <div class="wrap">
     <div class="row">
       <div>
         <div class="brand">Meow-PDF</div>
         <p>상호: 타니아 (Thaniya project)</p>
+        <p>대표자명: 홍재현</p>
         <p>사업자 등록번호: 401-23-95257</p>
         <p>주소: 경기도 부천시 중동로 108</p>
         <p>문의: <a href="mailto:contact@meow-pdf.com">contact@meow-pdf.com</a></p>
@@ -258,8 +287,8 @@ footer .copy{margin-top:30px;padding-top:20px;border-top:1px solid var(--line);f
     </div>
     <details class="refund" id="refund">
       <summary>환불정책</summary>
-      <p>결제일로부터 3일 이내에 요청하시면 환불해 드립니다.</p>
-      <p>3일이 지난 뒤에는 환불이 어렵습니다.</p>
+      <p>환불 가능 기간은 결제일로부터 7일입니다.</p>
+      <p>단순 변심으로 인한 환불은 불가합니다. 시스템 오류 또는 상품 미제공 사유로는 환불이 가능합니다.</p>
       <p>환불 요청: <a href="mailto:contact@meow-pdf.com">contact@meow-pdf.com</a></p>
     </details>
     <div class="copy">© 2026 Thaniya project. All rights reserved.</div>
@@ -267,6 +296,7 @@ footer .copy{margin-top:30px;padding-top:20px;border-top:1px solid var(--line);f
 </footer>
 
 <script>
+  (function(){var b=document.getElementById('premDetailBtn'),d=document.getElementById('premDetail');if(b&&d&&d.showModal)b.addEventListener('click',function(){d.showModal();});if(d)d.addEventListener('click',function(e){if(e.target===d)d.close();});})();
   (function(){var l=document.getElementById('refundLink'),d=document.getElementById('refund');if(l&&d)l.addEventListener('click',function(){d.open=true;});})();
 (function(){
   /* 파일로 직접 열었을 때(file://)는 /edit 주소가 없으므로 같은 폴더의 편집기 파일로 연결 */

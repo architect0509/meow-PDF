@@ -2,7 +2,7 @@
 /**
  * Meow-PDF 결제 서버
  *  - 토스페이먼츠 결제위젯(팝업) 제공 + 결제 승인(시크릿 키는 이 서버에만 존재)
- *  - 승인 성공 시 Supabase users_profile.is_paid = true 로 프리미엄 권한 부여
+ *  - 승인 성공 시 Supabase users_profile.premium_until = 결제일 + 1년 으로 프리미엄 권한 부여
  *
  * 흐름
  *  1) 앱: POST /api/create-order  (Authorization: Bearer <Supabase 로그인 토큰>)  → { payUrl }
@@ -23,6 +23,7 @@ const path = require('path');
 const PORT = Number(process.env.PORT || 3000);
 const PUBLIC_BASE_URL = (process.env.PUBLIC_BASE_URL || `http://localhost:${PORT}`).replace(/\/$/, '');
 
+const PREMIUM_YEARS = 1;                              // 프리미엄 결제 이용 기간(년). 이용 키는 KEY_MONTHS(3개월).
 const PRICE = 3900;                                   // 가격은 서버가 정해요. 클라이언트가 보낸 금액은 믿지 않아요.
 const ORDER_NAME = 'Meow-PDF 프리미엄 이용권';
 
@@ -99,8 +100,16 @@ const sbAdmin = { apikey: SUPABASE_SERVICE_KEY, Authorization: `Bearer ${SUPABAS
 /** 프리미엄 권한 부여 — 서비스 키로만 가능 (is_paid 는 클라이언트가 못 바꿔요) */
 async function grantPremium(uid, orderId, paymentKey) {
   const au = await axios.get(`${SUPABASE_URL}/auth/v1/admin/users/${uid}`, { headers: sbAdmin, timeout: 8000 });
+  // 프리미엄 결제는 결제 승인일로부터 1년. 이용 기간 중 재결제하면 현재 만료일부터 1년 추가.
+  let base = new Date();
+  try {
+    const p = await axios.get(`${SUPABASE_URL}/rest/v1/users_profile?id=eq.${uid}&select=premium_until&limit=1`, { headers: sbAdmin, timeout: 8000 });
+    const cur = p.data && p.data[0] && p.data[0].premium_until ? new Date(p.data[0].premium_until) : null;
+    if (cur && cur > base) base = cur;
+  } catch (e) { /* 조회 실패 시 지금부터 1년 */ }
+  const until = new Date(base); until.setFullYear(until.getFullYear() + PREMIUM_YEARS);
   await axios.post(`${SUPABASE_URL}/rest/v1/users_profile?on_conflict=id`, {
-    id: uid, email: au.data.email, is_paid: true, paid_at: new Date().toISOString(), last_order_id: orderId, last_payment_key: paymentKey
+    id: uid, email: au.data.email, paid_at: new Date().toISOString(), premium_until: until.toISOString(), last_order_id: orderId, last_payment_key: paymentKey
   }, { headers: { ...sbAdmin, 'Content-Type': 'application/json', Prefer: 'resolution=merge-duplicates,return=minimal' }, timeout: 8000 });
 }
 
@@ -439,7 +448,7 @@ app.get('/pay', (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   res.send(page('Meow-PDF 결제', `
 <h1>Meow-PDF 프리미엄 결제</h1><p>${ORDER_NAME} · ${PRICE.toLocaleString('ko-KR')}원</p>
-<p style="color:#b8860b;font-weight:600">최초 1회만 결제하면 계속 이용할 수 있습니다. 추가 결제는 없습니다.</p>
+<p style="color:#b8860b;font-weight:600">결제일로부터 1년간 이용할 수 있습니다. 환불은 결제일로부터 7일 이내, 시스템 오류 또는 상품 미제공 사유에 한해 가능하며 단순 변심은 환불되지 않습니다.</p>
 <div id="msg" class="err"></div>
 <div id="payment-widget"></div><div id="agreement-widget"></div>
 <button id="payment-button" disabled>${PRICE.toLocaleString('ko-KR')}원 결제하고 프리미엄 시작하기</button>`, `

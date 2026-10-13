@@ -19,7 +19,7 @@
 
 ## 3. 결제 흐름
 앱 → `POST /api/create-order`(로그인 토큰) → 결제 팝업 `/pay` (토스 결제위젯) → `/payment/success`
-→ `POST /api/confirm-payment`(금액 3,900원 검증 → 토스 승인 → `users_profile.is_paid=true`) → 앱이 상태 새로고침.
+→ `POST /api/confirm-payment`(금액 3,900원 검증 → 토스 승인 → `users_profile.premium_until`(결제일 + 1년, 재결제 시 만료일부터 연장. 기존 `is_paid=true` 회원은 그대로 유지)) → 앱이 상태 새로고침.
 - 가격(3,900원)은 서버가 정해요. 금액 위변조는 승인 전에 거절돼요.
 - 권한 부여에 실패하면 결제를 자동 취소해요.
 - 주문번호에 사용자 ID 와 서명이 들어 있어서, 남의 계정으로 위조할 수 없어요.
