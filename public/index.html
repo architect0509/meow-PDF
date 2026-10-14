@@ -99,23 +99,25 @@ h2{margin:8px 0 0;font-size:clamp(28px,4.2vw,40px);line-height:1.25;letter-spaci
 .closing .btn{margin-top:30px}
 
 /* 푸터 */
-footer{border-top:1px solid var(--line);padding:44px 0 56px;color:var(--muted);font-size:14px}
-footer .row{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
-footer .brand{color:var(--text);font-weight:700;font-size:16px;margin-bottom:10px}
-footer p{margin:2px 0}
-footer .links{display:flex;gap:22px;flex-wrap:wrap}
+footer{border-top:1px solid var(--line);padding:44px 0 52px;color:var(--muted);font-size:14px;text-align:center}
+footer .brand{color:var(--text);font-weight:700;font-size:16px;margin-bottom:14px}
+footer .links{display:flex;justify-content:center;gap:8px 22px;flex-wrap:wrap;margin-bottom:18px}
 footer .links a:hover{color:var(--text)}
+footer .info{font-style:normal;line-height:1.95;max-width:760px;margin:0 auto}
+footer .info span{display:inline-block;white-space:nowrap}
+footer .info span:not(:last-child)::after{content:" | ";white-space:pre;opacity:.55;margin:0 .15em}
+footer .info a{text-decoration:underline;text-underline-offset:3px}
+footer .refund{margin-top:20px;font-size:13px}
+footer .refund summary{cursor:pointer;color:var(--text);font-weight:600;width:max-content;margin:0 auto}
+footer .refund p{margin:6px auto 0;max-width:560px}
+footer .refund a{text-decoration:underline}
+footer .copy{margin-top:28px;padding-top:20px;border-top:1px solid var(--line);font-size:13px}
 .pdd{width:min(560px,calc(100% - 28px));max-height:86vh;padding:0;border:1px solid var(--line);border-radius:16px;background:var(--bg);color:var(--text)}
 .pdd::backdrop{background:rgba(0,0,0,.5)}
 .pdd .pdh{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:var(--bg);border-bottom:1px solid var(--line)}
 .pdd h3{margin:0;font-size:18px}.pdd .pdx{font-size:24px;line-height:1;width:34px;height:34px;border-radius:50%;border:0;background:transparent;color:var(--muted);cursor:pointer}
 .pdd .pdb{padding:6px 20px 20px;font-size:14px}.pdd h4{margin:18px 0 6px;font-size:14px;color:var(--accent)}
 .pdd p{margin:4px 0}.pdd ul{margin:4px 0;padding-left:18px}.pdd li{margin:5px 0}.pdd a{text-decoration:underline}
-footer .refund{margin-top:22px;font-size:13px}
-footer .refund summary{cursor:pointer;color:var(--text);font-weight:600;width:max-content}
-footer .refund p{margin:6px 0 0}
-footer .refund a{text-decoration:underline}
-footer .copy{margin-top:30px;padding-top:20px;border-top:1px solid var(--line);font-size:13px}
 
 @media (max-width:900px){
   .nav{display:none}
@@ -267,24 +269,22 @@ footer .copy{margin-top:30px;padding-top:20px;border-top:1px solid var(--line);f
 </ul></div></dialog>
 <footer id="contact">
   <div class="wrap">
-    <div class="row">
-      <div>
-        <div class="brand">Meow-PDF</div>
-        <p>상호: 타니아 (Thaniya project)</p>
-        <p>대표자명: 홍재현</p>
-        <p>사업자 등록번호: 401-23-95257</p>
-        <p>주소: 경기도 부천시 중동로 108</p>
-        <p>문의: <a href="mailto:contact@meow-pdf.com">contact@meow-pdf.com</a></p>
-      </div>
-      <div class="links">
-        <a href="#features">기능</a>
-        <a href="#how">사용법</a>
-        <a href="#price">요금</a>
-        <a href="#refund" id="refundLink">환불정책</a>
-        <a href="https://github.com/architect0509/meow-PDF" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="/edit">편집 시작</a>
-      </div>
-    </div>
+    <div class="brand">Meow-PDF</div>
+    <nav class="links" aria-label="바로가기">
+      <a href="#features">기능</a>
+      <a href="#how">사용법</a>
+      <a href="#price">요금</a>
+      <a href="#refund" id="refundLink">환불정책</a>
+      <a href="https://github.com/architect0509/meow-PDF" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="/edit">편집 시작</a>
+    </nav>
+    <address class="info">
+      <span>상호: 타니아 (Thaniya project)</span>
+      <span>대표자명: 홍재현</span>
+      <span>사업자 등록번호: 401-23-95257</span>
+      <span>주소: 경기도 부천시 중동로 108</span>
+      <span>문의: <a href="mailto:contact@meow-pdf.com">contact@meow-pdf.com</a></span>
+    </address>
     <details class="refund" id="refund">
       <summary>환불정책</summary>
       <p>환불 가능 기간은 결제일로부터 7일입니다.</p>

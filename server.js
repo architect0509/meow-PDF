@@ -108,9 +108,20 @@ async function grantPremium(uid, orderId, paymentKey) {
     if (cur && cur > base) base = cur;
   } catch (e) { /* 조회 실패 시 지금부터 1년 */ }
   const until = new Date(base); until.setFullYear(until.getFullYear() + PREMIUM_YEARS);
-  await axios.post(`${SUPABASE_URL}/rest/v1/users_profile?on_conflict=id`, {
-    id: uid, email: au.data.email, paid_at: new Date().toISOString(), premium_until: until.toISOString(), last_order_id: orderId, last_payment_key: paymentKey
-  }, { headers: { ...sbAdmin, 'Content-Type': 'application/json', Prefer: 'resolution=merge-duplicates,return=minimal' }, timeout: 8000 });
+  await upsertProfile({
+    id: uid, email: au.data.email, paid_at: new Date().toISOString(), premium_until: until.toISOString(), last_order_id: orderId, last_payment_key: paymentKey, premium_source: 'paid'
+  });
+}
+/** users_profile 저장. premium_source 칸이 아직 없는 DB 에서는 그 칸만 빼고 다시 저장해요. */
+async function upsertProfile(body) {
+  const post = b => axios.post(`${SUPABASE_URL}/rest/v1/users_profile?on_conflict=id`, b,
+    { headers: { ...sbAdmin, 'Content-Type': 'application/json', Prefer: 'resolution=merge-duplicates,return=minimal' }, timeout: 8000 });
+  try { await post(body); }
+  catch (e) {
+    if (!('premium_source' in body)) throw e;
+    const { premium_source, ...rest } = body; void premium_source;
+    await post(rest);
+  }
 }
 
 async function cancelPayment(paymentKey, reason) {
@@ -423,8 +434,9 @@ app.post('/api/redeem-key', keyLimiter, async (req, res) => {
     const p = await axios.get(rest(`users_profile?id=eq.${user.id}&select=premium_until&limit=1`), { headers: sbAdmin, timeout: 8000 });
     const cur = p.data && p.data[0] && p.data[0].premium_until ? new Date(p.data[0].premium_until) : null;
     const until = cur && cur > new Date(k.expires_at) ? cur : new Date(k.expires_at);
-    await axios.post(rest('users_profile?on_conflict=id'), { id: user.id, email: user.email, premium_until: until.toISOString() },
-      { headers: { ...sbJson, Prefer: 'resolution=merge-duplicates,return=minimal' }, timeout: 8000 });
+    const body = { id: user.id, email: user.email, premium_until: until.toISOString() };
+    if (!(cur && cur > new Date(k.expires_at))) body.premium_source = 'key';   // 이 키로 기간이 더 늘어난 경우에만 '키'로 표시
+    await upsertProfile(body);
     await axios.post(rest('key_redemptions?on_conflict=key_id,user_id'), { key_id: k.id, user_id: user.id },
       { headers: { ...sbJson, Prefer: 'resolution=ignore-duplicates,return=minimal' }, timeout: 8000 });
     res.json({ success: true, until: until.toISOString() });

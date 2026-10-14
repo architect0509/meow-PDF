@@ -44,6 +44,8 @@ create trigger on_auth_user_student after insert or update of email_confirmed_at
 
 -- 4) 이용 키 (개발자 계정이 서버를 통해 발급 → 발급일로부터 3개월간 프리미엄)
 alter table public.users_profile add column if not exists premium_until timestamptz;
+-- 프리미엄을 받은 방식: 'paid'(결제) 또는 'key'(이용 키). 화면에 구분해서 보여줘요.
+alter table public.users_profile add column if not exists premium_source text;
 
 create table if not exists public.access_keys (
   id uuid primary key default gen_random_uuid(),
