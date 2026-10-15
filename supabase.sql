@@ -89,4 +89,40 @@ create table if not exists public.feedback (
 create index if not exists feedback_created_idx on public.feedback (created_at desc);
 alter table public.feedback enable row level security;
 
+-- ═══════════════════════════════════════════════════════════════
+-- 아이디 · 비밀번호 계정 (v0.8.3) — 아래를 SQL Editor 에서 실행하세요 (여러 번 실행해도 안전해요)
+-- ═══════════════════════════════════════════════════════════════
+-- 1) 프로필 칸: 아이디(중복 불가) · 닉네임 · 프로필 사진 주소
+alter table public.users_profile add column if not exists username text;
+alter table public.users_profile add column if not exists nickname text;
+alter table public.users_profile add column if not exists avatar_url text;
+
+-- 아이디 규칙: 영문 소문자로 시작, 영문 소문자 · 숫자 · _ 조합 4~20자 (대소문자 구분 없이 중복 불가)
+do $$ begin
+  alter table public.users_profile add constraint users_profile_username_fmt check (username is null or username ~ '^[a-z][a-z0-9_]{3,19}$');
+exception when duplicate_object then null; end $$;
+create unique index if not exists users_profile_username_key on public.users_profile (lower(username)) where username is not null;
+
+-- 2) 학생 인증 트리거 보완: 아이디 · 비밀번호로 가입한 계정은 이메일 소유 확인 전이라
+--    학교 이메일이어도 자동으로 학생이 되지 않아요. (인증번호 확인 후 서버가 is_student 를 기록)
+create or replace function public.sync_student_profile() returns trigger
+language plpgsql security definer set search_path = public as $$
+begin
+  if coalesce(new.raw_user_meta_data->>'signup_type', '') = 'password' then
+    return new;
+  end if;
+  if new.email_confirmed_at is not null and new.email ~* '\.(ac\.kr|edu)$' then
+    insert into public.users_profile (id, email, is_student, student_verified_at)
+    values (new.id, new.email, true, new.email_confirmed_at)
+    on conflict (id) do update set email = excluded.email, is_student = true,
+      student_verified_at = coalesce(public.users_profile.student_verified_at, excluded.student_verified_at);
+  end if;
+  return new;
+end $$;
+
+-- 3) 프로필 사진 저장소 (공개 읽기, 쓰기는 서버만)
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values ('avatars', 'avatars', true, 524288, array['image/png','image/jpeg','image/webp'])
+on conflict (id) do update set public = true, file_size_limit = 524288, allowed_mime_types = array['image/png','image/jpeg','image/webp'];
+
 notify pgrst, 'reload schema';

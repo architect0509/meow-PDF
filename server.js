@@ -46,7 +46,7 @@ const ready = () => !!SUPABASE_SERVICE_KEY;
 /* ─────────── 유틸 ─────────── */
 const app = express();
 app.disable('x-powered-by');
-app.use(express.json({ limit: '20kb' }));
+app.use(express.json({ limit: '700kb' }));   // 프로필 사진(작게 줄인 이미지) 업로드를 위해 여유를 둬요
 
 // CORS: 앱(HTML 파일 / 다른 주소)에서 호출할 수 있게. 쿠키를 쓰지 않고 Bearer 토큰만 쓰므로 안전해요.
 app.use((req, res, next) => {
@@ -56,7 +56,7 @@ app.use((req, res, next) => {
     res.setHeader('Vary', 'Origin');
   }
   res.setHeader('Access-Control-Allow-Headers', 'Authorization, Content-Type');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
   if (req.method === 'OPTIONS') return res.sendStatus(204);
   next();
 });
@@ -443,6 +443,187 @@ app.post('/api/redeem-key', keyLimiter, async (req, res) => {
   } catch (e) { dbErr(res, e, '키 적용 실패'); }
 });
 
+/* ─────────── 아이디 · 비밀번호 계정 (회원가입 / 로그인 / 비밀번호 변경 · 재설정 / 프로필 사진) ───────────
+ *  - 가입: 닉네임 · 아이디(중복 불가) · 비밀번호 · 이메일 → Supabase 사용자 + users_profile(username, nickname)
+ *  - 로그인: 아이디 + 비밀번호 → 서버가 아이디로 이메일을 찾아 Supabase 로그인 → 세션을 앱에 돌려줘요
+ *  - 비밀번호 재설정(로그인 전): 아이디 → 등록된 이메일로 인증번호(Supabase OTP 메일) → 번호 + 새 비밀번호
+ *  - 비밀번호 변경(로그인 후): 현재 비밀번호 확인 후 변경
+ *  - 프로필 사진: 앱에서 작게 줄인 이미지를 올리면 Storage(avatars)에 저장
+ */
+const authBase = `${SUPABASE_URL}/auth/v1`;
+const anonH = { apikey: SUPABASE_PUBLISHABLE_KEY, 'Content-Type': 'application/json' };
+const USER_RE = /^[a-z][a-z0-9_]{3,19}$/;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const SCHOOL_RE = /^[^\s@]+@[^\s@]+\.(ac\.kr|edu)$/i;
+const pwOk = p => typeof p === 'string' && p.length >= 8 && p.length <= 64 && /[A-Za-z]/.test(p) && /\d/.test(p);
+const PW_MSG = '비밀번호는 8~64자이며 영문과 숫자를 함께 포함해야 합니다.';
+const normUser = v => String(v || '').trim().toLowerCase();
+// 경로 · IP · 아이디별 시도 횟수 제한 (10분)
+const authHits = new Map();
+setInterval(() => authHits.clear(), 10 * 60 * 1000).unref();
+const hitKey = (k, max) => { const n = (authHits.get(k) || 0) + 1; authHits.set(k, n); return n > max; };
+const authLim = max => (req, res, next) => {
+  if (hitKey('ip:' + req.path + ':' + (req.ip || 'x'), max)) return res.status(429).json({ success: false, message: '시도 횟수가 너무 많습니다. 10분 뒤 다시 시도해 주세요.' });
+  next();
+};
+const needReady = res => { if (ready()) return true; res.status(503).json({ success: false, message: '서버 설정이 완료되지 않았습니다. (SUPABASE_SERVICE_ROLE_KEY)' }); return false; };
+async function profileByUsername(u) {
+  const r = await axios.get(rest(`users_profile?username=eq.${encodeURIComponent(u)}&select=id,email,nickname&limit=1`), { headers: sbAdmin, timeout: 8000 });
+  return r.data && r.data[0] || null;
+}
+const maskEmail = e => { const [a, d] = String(e).split('@'); return (a.length <= 2 ? a[0] + '*' : a.slice(0, 2) + '*'.repeat(Math.min(6, a.length - 2))) + '@' + d; };
+const dbCol = e => { const c = e.response && e.response.data && e.response.data.code; return c === 'PGRST204' || c === '42703' || c === '42P01' || c === 'PGRST205'; };
+const needSql = res => res.status(500).json({ success: false, message: '데이터베이스 설정이 끝나지 않았습니다. supabase.sql 의 "아이디 · 비밀번호 계정" 부분을 Supabase SQL Editor 에서 실행해 주세요.' });
+async function passwordLogin(email, password) {
+  const r = await axios.post(`${authBase}/token?grant_type=password`, { email, password }, { headers: anonH, timeout: 10000 });
+  return r.data;
+}
+async function setPassword(uid, password) {
+  await axios.put(`${authBase}/admin/users/${uid}`, { password }, { headers: sbJson, timeout: 10000 });
+}
+
+app.get('/api/auth/check-username', authLim(40), async (req, res) => {
+  if (!needReady(res)) return;
+  const u = normUser(req.query.u);
+  if (!USER_RE.test(u)) return res.json({ success: true, available: false, message: '아이디는 영문 소문자로 시작하는 4~20자(영문 소문자 · 숫자 · _)여야 합니다.' });
+  try { const row = await profileByUsername(u); res.json({ success: true, available: !row, message: row ? '이미 사용 중인 아이디입니다.' : '사용할 수 있는 아이디입니다.' }); }
+  catch (e) { if (dbCol(e)) return needSql(res); dbErr(res, e, '아이디 확인 실패'); }
+});
+
+app.post('/api/auth/signup', authLim(8), async (req, res) => {
+  if (!needReady(res)) return;
+  const b = req.body || {}, nickname = String(b.nickname || '').trim(), username = normUser(b.username), email = String(b.email || '').trim().toLowerCase(), password = b.password;
+  if (nickname.length < 2 || nickname.length > 16) return res.status(400).json({ success: false, message: '닉네임은 2~16자로 입력해 주세요.' });
+  if (!USER_RE.test(username)) return res.status(400).json({ success: false, message: '아이디는 영문 소문자로 시작하는 4~20자(영문 소문자 · 숫자 · _)여야 합니다.' });
+  if (!EMAIL_RE.test(email) || email.length > 120) return res.status(400).json({ success: false, message: '올바른 이메일 주소를 입력해 주세요.' });
+  if (!pwOk(password)) return res.status(400).json({ success: false, message: PW_MSG });
+  if (email === String(DEV_EMAIL).toLowerCase()) return res.status(400).json({ success: false, message: '사용할 수 없는 이메일입니다.' });   // 개발자 이메일은 이메일 인증번호 로그인으로만 사용
+  try {
+    if (await profileByUsername(username)) return res.status(409).json({ success: false, message: '이미 사용 중인 아이디입니다.' });
+  } catch (e) { if (dbCol(e)) return needSql(res); return dbErr(res, e, '가입 확인 실패'); }
+  let uid;
+  try {
+    // 이메일 소유 확인은 하지 않고(이메일은 비밀번호 재설정용) 가입해요. 학생 인증은 별도로 인증번호를 확인해야만 적용돼요.
+    const r = await axios.post(`${authBase}/admin/users`, { email, password, email_confirm: true, user_metadata: { nickname, username, signup_type: 'password' } }, { headers: sbJson, timeout: 10000 });
+    uid = r.data.id;
+  } catch (e) {
+    const d = e.response && e.response.data || {};
+    if (e.response && (e.response.status === 422 || e.response.status === 409) && /exist|registered/i.test(JSON.stringify(d))) return res.status(409).json({ success: false, message: '이미 가입된 이메일입니다. 아이디를 잊으셨다면 고객센터로 문의해 주세요.' });
+    console.error('[가입 실패]', d || e.message); return res.status(500).json({ success: false, message: '가입하지 못했습니다. 잠시 후 다시 시도해 주세요.' });
+  }
+  try { await upsertProfile({ id: uid, email, username, nickname }); }
+  catch (e) {
+    try { await axios.delete(`${authBase}/admin/users/${uid}`, { headers: sbAdmin, timeout: 8000 }); } catch (e2) { /* 되돌리기 실패 */ }
+    if (dbCol(e)) return needSql(res);
+    if (e.response && (e.response.data && e.response.data.code === '23505')) return res.status(409).json({ success: false, message: '이미 사용 중인 아이디입니다.' });
+    return dbErr(res, e, '가입 저장 실패');
+  }
+  res.json({ success: true });
+});
+
+const failHits = new Map();
+setInterval(() => failHits.clear(), 10 * 60 * 1000).unref();
+app.post('/api/auth/login', authLim(20), async (req, res) => {
+  if (!needReady(res)) return;
+  const username = normUser(req.body && req.body.username), password = String((req.body && req.body.password) || '');
+  const bad = () => res.status(401).json({ success: false, message: '아이디 또는 비밀번호가 올바르지 않습니다.' });
+  if (!USER_RE.test(username) || !password) return bad();
+  if ((failHits.get(username) || 0) >= 8) return res.status(429).json({ success: false, message: '로그인 실패가 많아 잠시 제한됐어요. 10분 뒤 다시 시도하거나 비밀번호를 재설정해 주세요.' });
+  try {
+    const row = await profileByUsername(username); if (!row || !row.email) { failHits.set(username, (failHits.get(username) || 0) + 1); return bad(); }
+    let t; try { t = await passwordLogin(row.email, password); } catch (e) { failHits.set(username, (failHits.get(username) || 0) + 1); return bad(); }
+    failHits.delete(username);
+    res.json({ success: true, session: { access_token: t.access_token, refresh_token: t.refresh_token } });
+  } catch (e) { if (dbCol(e)) return needSql(res); dbErr(res, e, '로그인 실패'); }
+});
+
+// 비밀번호 재설정 1단계: 등록된 이메일로 인증번호 발송
+app.post('/api/auth/reset/send', authLim(10), async (req, res) => {
+  if (!needReady(res)) return;
+  const username = normUser(req.body && req.body.username);
+  if (!USER_RE.test(username)) return res.status(400).json({ success: false, message: '아이디를 입력해 주세요.' });
+  if (hitKey('rs:' + username, 4)) return res.status(429).json({ success: false, message: '인증번호를 너무 자주 요청했어요. 10분 뒤 다시 시도해 주세요.' });
+  try {
+    const row = await profileByUsername(username);
+    if (row && row.email) {
+      try { await axios.post(`${authBase}/otp`, { email: row.email, create_user: false }, { headers: anonH, timeout: 15000 }); }
+      catch (e) { console.error('[인증메일 발송 실패]', e.response?.data || e.message); return res.status(502).json({ success: false, message: '인증 메일을 보내지 못했습니다. 잠시 후 다시 시도해 주세요.' }); }
+      return res.json({ success: true, message: `${maskEmail(row.email)} 로 인증번호를 보냈어요.` });
+    }
+    res.json({ success: true, message: '등록된 이메일로 인증번호를 보냈어요. (가입된 아이디일 때만 발송돼요)' });
+  } catch (e) { if (dbCol(e)) return needSql(res); dbErr(res, e, '재설정 메일 실패'); }
+});
+// 비밀번호 재설정 2단계: 인증번호 확인 + 새 비밀번호
+app.post('/api/auth/reset/confirm', authLim(15), async (req, res) => {
+  if (!needReady(res)) return;
+  const b = req.body || {}, username = normUser(b.username), code = String(b.code || '').trim(), password = b.password;
+  if (!USER_RE.test(username) || !/^\d{6,8}$/.test(code)) return res.status(400).json({ success: false, message: '아이디와 인증번호(숫자)를 확인해 주세요.' });
+  if (!pwOk(password)) return res.status(400).json({ success: false, message: PW_MSG });
+  if (hitKey('rc:' + username, 6)) return res.status(429).json({ success: false, message: '인증 시도가 너무 많아요. 10분 뒤 다시 시도해 주세요.' });
+  try {
+    const row = await profileByUsername(username);
+    if (!row || !row.email) return res.status(400).json({ success: false, message: '인증번호가 올바르지 않거나 만료되었습니다.' });
+    try { await axios.post(`${authBase}/verify`, { type: 'email', email: row.email, token: code }, { headers: anonH, timeout: 10000 }); }
+    catch (e) { return res.status(400).json({ success: false, message: '인증번호가 올바르지 않거나 만료되었습니다.' }); }
+    await setPassword(row.id, password);
+    res.json({ success: true });
+  } catch (e) { if (dbCol(e)) return needSql(res); dbErr(res, e, '비밀번호 재설정 실패'); }
+});
+// 로그인 후 비밀번호 변경
+app.post('/api/auth/password', authLim(10), async (req, res) => {
+  const user = await authed(req, res, false); if (!user) return;
+  const b = req.body || {};
+  if (!pwOk(b.password)) return res.status(400).json({ success: false, message: PW_MSG });
+  if (hitKey('pw:' + user.id, 6)) return res.status(429).json({ success: false, message: '시도 횟수가 너무 많습니다. 10분 뒤 다시 시도해 주세요.' });
+  try { await passwordLogin(user.email, String(b.current || '')); }
+  catch (e) { return res.status(401).json({ success: false, message: '현재 비밀번호가 올바르지 않습니다.' }); }
+  try { await setPassword(user.id, b.password); res.json({ success: true }); } catch (e) { dbErr(res, e, '비밀번호 변경 실패'); }
+});
+
+// 프로필: 닉네임 · 사진
+app.post('/api/profile/update', authLim(20), async (req, res) => {
+  const user = await authed(req, res, false); if (!user) return;
+  const nickname = String((req.body && req.body.nickname) || '').trim();
+  if (nickname.length < 2 || nickname.length > 16) return res.status(400).json({ success: false, message: '닉네임은 2~16자로 입력해 주세요.' });
+  try { await upsertProfile({ id: user.id, email: user.email, nickname }); res.json({ success: true }); }
+  catch (e) { if (dbCol(e)) return needSql(res); dbErr(res, e, '닉네임 저장 실패'); }
+});
+app.post('/api/profile/avatar', authLim(15), async (req, res) => {
+  const user = await authed(req, res, false); if (!user) return;
+  const m = /^data:(image\/(?:png|jpeg|webp));base64,([A-Za-z0-9+/=]+)$/.exec(String((req.body && req.body.dataUrl) || ''));
+  if (!m) return res.status(400).json({ success: false, message: '이미지(PNG · JPG · WEBP)만 올릴 수 있습니다.' });
+  const buf = Buffer.from(m[2], 'base64'); if (buf.length > 400 * 1024) return res.status(413).json({ success: false, message: '사진이 너무 큽니다.' });
+  try {
+    await axios.post(`${SUPABASE_URL}/storage/v1/object/avatars/${user.id}`, buf, { headers: { ...sbAdmin, 'Content-Type': m[1], 'x-upsert': 'true' }, timeout: 15000, maxBodyLength: Infinity });
+  } catch (e) { console.error('[사진 업로드 실패]', e.response?.data || e.message); return res.status(500).json({ success: false, message: '사진을 저장하지 못했습니다. Supabase Storage 에 avatars 버킷이 있는지 확인해 주세요. (supabase.sql 실행)' }); }
+  const url = `${SUPABASE_URL}/storage/v1/object/public/avatars/${user.id}?v=${Date.now().toString(36)}`;
+  try { await upsertProfile({ id: user.id, email: user.email, avatar_url: url }); res.json({ success: true, url }); }
+  catch (e) { if (dbCol(e)) return needSql(res); dbErr(res, e, '사진 주소 저장 실패'); }
+});
+app.post('/api/profile/avatar-delete', authLim(15), async (req, res) => {
+  const user = await authed(req, res, false); if (!user) return;
+  try { await axios.delete(`${SUPABASE_URL}/storage/v1/object/avatars/${user.id}`, { headers: sbAdmin, timeout: 10000 }); } catch (e) { /* 이미 없을 수 있어요 */ }
+  try { await axios.patch(rest(`users_profile?id=eq.${user.id}`), { avatar_url: null }, { headers: { ...sbJson, Prefer: 'return=minimal' }, timeout: 8000 }); res.json({ success: true }); }
+  catch (e) { if (dbCol(e)) return needSql(res); dbErr(res, e, '사진 삭제 실패'); }
+});
+
+// 학생 인증(아이디 · 비밀번호로 가입한 계정): 학교 이메일로 받은 인증번호를 확인해야 학생으로 인정돼요
+app.post('/api/student/send', authLim(8), async (req, res) => {
+  const user = await authed(req, res, false); if (!user) return;
+  if (!SCHOOL_RE.test(user.email || '')) return res.status(400).json({ success: false, message: '학교 이메일(.ac.kr · .edu)로 가입한 계정만 학생 인증을 할 수 있습니다.' });
+  try { await axios.post(`${authBase}/otp`, { email: user.email, create_user: false }, { headers: anonH, timeout: 15000 }); res.json({ success: true, message: `${maskEmail(user.email)} 로 인증번호를 보냈어요.` }); }
+  catch (e) { console.error('[학생 인증메일 실패]', e.response?.data || e.message); res.status(502).json({ success: false, message: '인증 메일을 보내지 못했습니다. 잠시 후 다시 시도해 주세요.' }); }
+});
+app.post('/api/student/verify', authLim(12), async (req, res) => {
+  const user = await authed(req, res, false); if (!user) return;
+  const code = String((req.body && req.body.code) || '').trim();
+  if (!SCHOOL_RE.test(user.email || '') || !/^\d{6,8}$/.test(code)) return res.status(400).json({ success: false, message: '인증번호(숫자)를 확인해 주세요.' });
+  try { await axios.post(`${authBase}/verify`, { type: 'email', email: user.email, token: code }, { headers: anonH, timeout: 10000 }); }
+  catch (e) { return res.status(400).json({ success: false, message: '인증번호가 올바르지 않거나 만료되었습니다.' }); }
+  try { await upsertProfile({ id: user.id, email: user.email, is_student: true, student_verified_at: new Date().toISOString() }); res.json({ success: true }); }
+  catch (e) { dbErr(res, e, '학생 인증 저장 실패'); }
+});
+
 /* ─────────── 결제 팝업 페이지들 ─────────── */
 const page = (title, body, script) => `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title}</title>
 <style>
@@ -460,7 +641,7 @@ app.get('/pay', (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   res.send(page('Meow-PDF 결제', `
 <h1>Meow-PDF 프리미엄 결제</h1><p>${ORDER_NAME} · ${PRICE.toLocaleString('ko-KR')}원</p>
-<p style="color:#b8860b;font-weight:600">결제일로부터 1년간 이용할 수 있습니다. 환불은 결제일로부터 7일 이내, 시스템 오류 또는 상품 미제공 사유에 한해 가능하며 단순 변심은 환불되지 않습니다.</p>
+<p style="color:#b8860b;font-weight:600">구독이 아닌 1년 결제권이며 자동결제는 되지 않습니다. 결제일로부터 1년간 이용할 수 있습니다. 환불은 결제일로부터 7일 이내, 시스템 오류 또는 상품 미제공 사유에 한해 가능하며 단순 변심은 환불되지 않습니다.</p>
 <div id="msg" class="err"></div>
 <div id="payment-widget"></div><div id="agreement-widget"></div>
 <button id="payment-button" disabled>${PRICE.toLocaleString('ko-KR')}원 결제하고 프리미엄 시작하기</button>`, `
@@ -521,6 +702,7 @@ app.get('/payment/fail', (req, res) => {
 
 // 화면 구성: public/index.html = 소개 페이지(/), public/edit.html = 편집 페이지(/edit, pdf-editor.html 을 그대로 복사)
 app.get('/edit', (req, res) => res.sendFile(path.join(__dirname, 'public', 'edit.html')));
+app.get('/business', (req, res) => res.sendFile(path.join(__dirname, 'public', 'business.html')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(PORT, () => {
