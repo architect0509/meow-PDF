@@ -7,7 +7,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23dbbe43' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 5c.67 0 1.35.09 2 .26 1.78-2 5.03-2.84 6.42-2.26 1.4.58-.42 7-.42 7 .57 1.07 1 2.24 1 3.44C21 17.9 16.97 21 12 21s-9-3-9-7.56c0-1.25.5-2.4 1-3.44 0 0-1.89-6.42-.5-7 1.39-.58 4.72.23 6.5 2.23A9.04 9.04 0 0 1 12 5Z'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;700&family=Nanum+Gothic:wght@400;700&family=Nanum+Myeongjo:wght@400;700&family=Nanum+Pen+Script&family=Nanum+Gothic+Coding:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;700&family=Nanum+Gothic:wght@400;700&family=Nanum+Myeongjo:wght@400;700&family=Nanum+Pen+Script&family=Nanum+Gothic+Coding:wght@400;700&family=Gothic+A1:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;700&family=Black+Han+Sans&family=Do+Hyeon&family=Jua&family=Gaegu:wght@400;700&family=Gamja+Flower&family=Hi+Melody&family=Single+Day&family=Sunflower:wght@300;700&family=Stylish&family=Yeon+Sung&family=Cute+Font&family=East+Sea+Dokdo&family=Song+Myung&family=Gugi&family=Dokdo&family=Poor+Story&family=Nanum+Brush+Script&family=Gowun+Dodum&family=Gowun+Batang&family=Hahmlet:wght@400;700&family=Roboto:wght@400;700&family=Open+Sans:wght@400;700&family=Montserrat:wght@400;700&family=Oswald:wght@400;700&family=Playfair+Display:wght@400;700&family=Merriweather:wght@400;700&family=Lora:wght@400;700&family=Source+Code+Pro:wght@400;700&family=Pacifico&family=Dancing+Script:wght@400;700&family=Caveat:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
 :root, :root[data-theme="dark"]{
   color-scheme: dark;
@@ -296,6 +296,7 @@ body.lyr-sorting,body.lyr-sorting *{cursor:grabbing!important}
 .pres-opts .seg button{color:#f1f1f1;padding:4px 9px}
 .pres-opts .seg button.on{background:var(--main);color:var(--on-main)}
 .pres-opts .val{min-width:34px;font-variant-numeric:tabular-nums}
+#presBar.fold .ptl,#presBar.fold #presOpts{display:none!important}
 #presBar{position:fixed;left:50%;bottom:calc(26px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:150;display:flex;align-items:center;gap:4px;padding:5px 9px;background:rgba(30,30,30,.93);color:#f1f1f1;border:1px solid rgba(255,255,255,.18);border-radius:999px;box-shadow:0 6px 24px rgba(0,0,0,.55);cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
 .pres-grip{display:grid;place-items:center;color:#9a9a9a;padding:0 2px}
 .pb{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;color:#f1f1f1}
@@ -852,8 +853,12 @@ body.rszing,body.rszing *{user-select:none!important}
 .whint a,.whint button{color:var(--accent);text-decoration:underline}
 .wempty{container-type:inline-size}
 .wopens{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;justify-items:center;width:100%;max-width:300px}
-@container (max-width:339px){.wopens{grid-template-columns:repeat(2,minmax(0,1fr));max-width:200px}}
-@container (max-width:169px){.wopens{grid-template-columns:minmax(0,1fr);max-width:92px}}
+/* v0.8.2: 멀티작업 버튼은 항상 3x3 — 패널이 좁아지면 버튼과 글자가 같이 작아짐 */
+.wopens{grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(3px,3cqw,10px)}
+.wempty{padding:clamp(6px,4cqw,16px)}
+.wopen{border-radius:clamp(8px,7cqw,22px);gap:clamp(1px,2cqw,8px);padding:0;min-width:0;overflow:hidden}
+.wopen svg{width:clamp(12px,8cqw,26px);height:clamp(12px,8cqw,26px)}
+.wopen span{font-size:clamp(8px,3.6cqw,12px);max-width:100%;overflow:hidden;text-overflow:clip;white-space:nowrap}
 .wopen.locked{opacity:.42;filter:saturate(.5)}
 .wchips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;max-width:100%;margin-top:8px}
 .wchips button{max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:5px 12px;border-radius:999px;border:1px solid var(--border);color:var(--muted);font-size:12px;transition:color .15s,border-color .15s}
@@ -1038,6 +1043,7 @@ body.pm-open{overflow:hidden}
 .chlog summary::-webkit-details-marker{display:none}
 .chlog summary::before{content:'›';display:inline-block;transition:transform .15s;color:var(--muted)}
 .chlog details[open]>summary::before{transform:rotate(90deg)}
+.chlog .chd{font-size:10.5px;font-weight:400;color:var(--muted);opacity:.6;letter-spacing:0}
 .chlog .cur{font-size:11px;padding:1px 8px;border-radius:999px;background:var(--accent-bg);color:var(--accent);font-weight:600}
 .chlog .chg>summary{font-size:14px}
 .chlog .chin{padding:0 10px 4px}
@@ -1328,7 +1334,15 @@ body.mobile .optbar .grp.rg input[type=range]{width:56px}
 .conhelp .cg{margin:14px 0 2px;padding-bottom:5px;font-weight:700;font-size:13px;color:var(--accent);border-bottom:2px solid var(--accent-bg)}
 
 /* v0.6.5 수동 레이어 · 페이지 보기 */
-.lmode{padding:8px 8px 0;flex:none}.lmode .seg{display:flex;width:100%}.lmode .seg button{flex:1;font-size:12px;padding:0 6px}
+.lmode{padding:8px 8px 0;flex:none;display:flex;align-items:center;gap:6px}
+.lmode .seg{display:flex;width:auto;flex:none;padding:1px;border-radius:8px;gap:1px}.lmode .seg button{flex:none;font-size:11px;padding:0 7px;height:22px;border-radius:6px}
+.lmode .lname-in{flex:1;min-width:0;height:26px;padding:0 8px;border-radius:7px;border:1px solid var(--border);background:var(--bar);color:var(--text);font-size:12px}
+.lmode .lname-in:disabled{opacity:.5}.lmode .lname-in:focus{outline:none;border-color:var(--accent)}
+.lmode .l-btn{width:26px;height:26px}
+.l-thumb{width:40px;height:40px;flex:none;border-radius:6px;background:repeating-conic-gradient(rgba(128,128,128,.22) 0 25%,transparent 0 50%) 0 0/10px 10px;border:1px solid var(--border)}
+#layers.lv-thumb .layer,#layers.lv-thumb .mlyr{height:54px}
+#layers:not(.lv-thumb) .layer{height:34px}#layers:not(.lv-thumb) .mlyr{height:36px}
+.mlyr .l-thumb{margin-left:2px}
 #layers:not(.lm-manual) .layer-foot2{display:none}#layers.lm-manual .layer-foot:not(.layer-foot2){display:none}
 .mlyr{position:relative;display:flex;align-items:center;gap:4px;height:42px;padding:0 4px 0 2px;border-radius:8px;cursor:pointer;border:1px solid transparent;flex:none}
 .mlyr:hover{background:var(--hover)}.mlyr.sel{background:var(--accent-bg);border-color:var(--accent)}
@@ -1602,6 +1616,7 @@ body.mv-simple .tool[data-tool="text"]{display:none!important}
     <div class="splitbtn"><button class="tool" data-tool="region" title="영역 지정 (R)"><i data-i="region"></i><span>영역</span><kbd>R</kbd></button><button class="caret" data-menu="region" title="사각형 · 자유 선택 전환" aria-label="영역 지정 방식 전환"><i data-i="chevD"></i></button></div>
     <div class="sep"></div>
     <button class="tool" id="pasteBtn" hidden style="display:none" title="클립보드 붙여넣기 (Ctrl+V)"><i data-i="clip"></i><span>붙여넣기</span><kbd>Z</kbd></button>
+    <div class="splitbtn needs-doc"><button class="tool needs-doc" id="digiBtn" title="디지털화 — 이미지 · 스캔 · PDF의 글자를 클릭해서 수정할 수 있는 글자 개체로 바꿔요"><i data-i="scan"></i><span id="digiLbl">디지털화</span></button><button class="caret needs-doc" data-menu="digi" title="현재 페이지 · 전체 페이지 전환" aria-label="디지털화 범위 전환"><i data-i="chevD"></i></button></div>
     <div class="splitbtn"><button class="tool" id="imageBtn" title="이미지 삽입 (X)"><i data-i="image"></i><span>이미지</span><kbd>X</kbd></button><button class="caret" data-menu="image" title="이미지 · 검은 고양이 스티커 · 스프라이트시트 전환" aria-label="이미지 삽입 방식 전환"><i data-i="chevD"></i></button></div>
     <button class="tool" id="tableBtn" title="표 삽입 (Z) · 프리미엄"><i data-i="table"></i><span>표</span><kbd>Z</kbd></button>
     <button class="tool" id="memoBtn" title="메모 추가 (C)"><i data-i="memo"></i><span>메모</span><kbd>C</kbd></button>
@@ -1656,7 +1671,7 @@ body.mv-simple .tool[data-tool="text"]{display:none!important}
 
     <aside id="layers" aria-label="레이어">
       <div class="ptabs" role="tablist"><button class="ptab vonly" data-ptab="pages" role="tab">페이지</button><button class="ptab on" data-ptab="layers" role="tab">레이어</button><button class="ptab" data-ptab="notes" role="tab">노트</button><button class="ptab" data-ptab="work" role="tab">멀티작업</button><span id="layerCount"></span></div>
-      <div class="lmode" id="layerMode"><div class="seg" role="group" aria-label="레이어 방식"><button data-lm="auto">자동</button><button data-lm="manual" title="그림판처럼 레이어를 직접 추가해 관리">수동</button></div></div>
+      <div class="lmode" id="layerMode"><input id="layerName" class="lname-in" type="text" maxlength="30" placeholder="레이어 이름" aria-label="레이어 이름 바꾸기" title="선택한 레이어의 이름 (Enter로 저장)" autocomplete="off" disabled><div class="seg sm" role="group" aria-label="레이어 방식"><button data-lm="auto">자동</button><button data-lm="manual" title="그림판처럼 레이어를 직접 추가해 관리">수동</button></div><button class="l-btn" id="layerViewBtn" title="레이어 보기 방식: 간단히 / 썸네일" aria-label="레이어 보기 방식 바꾸기"></button></div>
       <div class="layer-list" id="layerList"></div>
       <div class="layer-foot layer-foot2"><button id="layerAdd" title="현재 레이어 위에 새 레이어를 추가해요"><i data-i="plus"></i><span>새 레이어</span></button></div>
       <div class="layer-foot"><button id="mergeSelBtn" title="Ctrl/Shift+클릭으로 여러 레이어를 선택하세요" disabled><i data-i="merge"></i><span>선택 병합</span></button><button id="mergeAllBtn" title="보이는 레이어를 모두 하나로 합쳐요" disabled><i data-i="merge"></i><span>모두 병합</span></button></div>
@@ -1699,16 +1714,17 @@ body.mv-simple .tool[data-tool="text"]{display:none!important}
   <button class="pb" id="presPrev" title="이전 페이지 (←)" aria-label="이전 페이지"><i data-i="chevL"></i></button>
   <span id="presPage">1 / 1</span>
   <button class="pb" id="presNext" title="다음 페이지 (→)" aria-label="다음 페이지"><i data-i="chevR"></i></button>
-  <span class="pb-sep"></span>
-  <button class="pb" data-ptool="highlight" title="강조표시 (Q)" aria-label="강조표시"><i data-i="highlighter"></i></button>
-  <button class="pb" data-ptool="pen" title="그리기 (W)" aria-label="그리기"><i data-i="pen"></i></button>
-  <button class="pb" data-ptool="line" title="직선 (E)" aria-label="직선"><i data-i="line"></i></button>
-  <button class="pb" data-ptool="shape" title="도형 (A)" aria-label="도형"><i data-i="shapes"></i></button>
-  <button class="pb" data-ptool="eraser" title="지우개 (S)" aria-label="지우개"><i data-i="eraser"></i></button>
-  <button class="pb" data-ptool="text" title="텍스트 (D)" aria-label="텍스트"><i data-i="type"></i></button>
-  <span class="pb-sep"></span>
-  <button class="pb" id="presLaser" title="레이저 포인터 (L)" aria-label="레이저 포인터" aria-pressed="false"><i data-i="laser"></i></button>
-  <button class="pb" id="presUndo" title="실행 취소 (Ctrl+Z)" aria-label="실행 취소"><i data-i="undo"></i></button>
+  <span class="pb-sep ptl"></span>
+  <button class="pb ptl" data-ptool="highlight" title="강조표시 (Q)" aria-label="강조표시"><i data-i="highlighter"></i></button>
+  <button class="pb ptl" data-ptool="pen" title="그리기 (W)" aria-label="그리기"><i data-i="pen"></i></button>
+  <button class="pb ptl" data-ptool="line" title="직선 (E)" aria-label="직선"><i data-i="line"></i></button>
+  <button class="pb ptl" data-ptool="shape" title="도형 (A)" aria-label="도형"><i data-i="shapes"></i></button>
+  <button class="pb ptl" data-ptool="eraser" title="지우개 (S)" aria-label="지우개"><i data-i="eraser"></i></button>
+  <button class="pb ptl" data-ptool="text" title="텍스트 (D)" aria-label="텍스트"><i data-i="type"></i></button>
+  <span class="pb-sep ptl"></span>
+  <button class="pb ptl" id="presLaser" title="레이저 포인터 (L)" aria-label="레이저 포인터" aria-pressed="false"><i data-i="laser"></i></button>
+  <button class="pb ptl" id="presUndo" title="실행 취소 (Ctrl+Z)" aria-label="실행 취소"><i data-i="undo"></i></button>
+  <button class="pb" id="presFold" title="도구 접기 / 펼치기" aria-label="도구 접기" aria-expanded="true"><i data-i="chevL"></i></button>
   <button class="pb" id="presExit" title="발표 종료 (P · Esc)" aria-label="발표 종료"><i data-i="x"></i></button>
 </div>
 <div id="laser" hidden></div>
@@ -1776,6 +1792,12 @@ body.single-view.fit-pg #pages{padding:12px 24px 64px}
 :root[data-theme="minihompy"] ::-webkit-scrollbar-thumb{background:#9ccbe8;border-radius:6px}
 :root[data-theme="minihompy"] .tab.on{border-top:3px solid #ff9a3d}
 .tt[data-theme=minihompy]{background:linear-gradient(160deg,#e9f6ff,#b5e0fa);color:#1d5f95;border-color:#ff9a3d}
+.ctm{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;padding:12px;border:1px dashed var(--border);border-radius:14px;background:var(--bar2)}
+.ctm label{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text)}
+.ctm input[type=color]{width:42px;height:30px;padding:0;border:1px solid var(--border);border-radius:8px;background:none;cursor:pointer}
+.ctm select{max-width:210px;padding:5px 8px;border-radius:8px;background:var(--bar);color:var(--text);border:1px solid var(--border);font-size:13px}
+.ctm .cth{flex-basis:100%;font-size:11.5px;color:var(--muted)}
+.ctm.lock{opacity:.7}
 .tgh{margin:12px 2px 8px;font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.02em}
 .tgh:first-of-type{margin-top:2px}
 .tgh.prem{display:flex;align-items:center;gap:8px;color:#b8860b}
@@ -1783,7 +1805,14 @@ body.single-view.fit-pg #pages{padding:12px 24px 64px}
 .tgrid .tt.prem:not(.on){border-color:rgba(224,168,0,.75);border-style:dashed}
 .tgrid+.tgh.prem{margin-top:18px;padding-top:12px;border-top:1px dashed var(--border)}
 
-.wempty{justify-content:flex-start;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin}
+.wempty{justify-content:flex-start;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;container-type:size}
+/* 멀티작업 버튼 3x3 고정: 가로 · 세로 공간이 모자라면 버튼이 함께 작아져요 */
+.wopens{grid-template-columns:repeat(3,minmax(0,1fr))!important;container-type:inline-size;max-width:min(300px,100%,max(84px,calc(100cqh - 92px)))!important}
+.wopen{max-width:none!important;width:100%}
+.wopen svg{width:clamp(12px,22cqw,26px)!important;height:clamp(12px,22cqw,26px)!important}
+.wopen span{font-size:clamp(8px,9cqw,12px)!important}
+.wtitle{font-size:clamp(14px,min(9cqw,6cqh),30px);margin-bottom:0}
+.wempty{gap:clamp(4px,2cqh,12px)}
 .wempty>:first-child{margin-top:auto}.wempty>:last-child{margin-bottom:auto}
 
 .tt .tpro{font-size:0;width:22px;height:22px;padding:0;display:grid;place-items:center;left:8px;top:8px;border-radius:50%;background:rgba(0,0,0,.55);color:#ffe08a}
@@ -2129,7 +2158,40 @@ const FONTS = {
   ngothic:   { name: '나눔고딕',           css: '"Nanum Gothic","Malgun Gothic",sans-serif' },
   nmyeongjo: { name: '나눔명조',           css: '"Nanum Myeongjo","Batang",serif' },
   pen:       { name: '나눔손글씨 펜',      css: '"Nanum Pen Script","Comic Sans MS",cursive' },
-  mono:      { name: '나눔고딕코딩',       css: '"Nanum Gothic Coding","Consolas","Courier New",monospace' }
+  mono:      { name: '나눔고딕코딩',       css: '"Nanum Gothic Coding","Consolas","Courier New",monospace' },
+  gothica1: { name: '고딕 A1', css: '"Gothic A1","Noto Sans KR",sans-serif' },
+  plexkr: { name: 'IBM 플렉스 산스', css: '"IBM Plex Sans KR","Noto Sans KR",sans-serif' },
+  blackhan: { name: '블랙한산스 (굵은 제목)', css: '"Black Han Sans","Noto Sans KR",sans-serif' },
+  dohyeon: { name: '도현', css: '"Do Hyeon","Noto Sans KR",sans-serif' },
+  jua: { name: '주아', css: '"Jua","Noto Sans KR",sans-serif' },
+  gaegu: { name: '개구', css: '"Gaegu","Noto Sans KR",cursive' },
+  gamja: { name: '감자꽃', css: '"Gamja Flower","Noto Sans KR",cursive' },
+  himelody: { name: '하이멜로디', css: '"Hi Melody","Noto Sans KR",cursive' },
+  singleday: { name: '싱글데이', css: '"Single Day","Noto Sans KR",cursive' },
+  sunflower: { name: '해바라기', css: '"Sunflower","Noto Sans KR",sans-serif' },
+  stylish: { name: '스타일리시', css: '"Stylish","Noto Sans KR",sans-serif' },
+  yeonsung: { name: '연성', css: '"Yeon Sung","Noto Sans KR",cursive' },
+  cutefont: { name: '귀여운체', css: '"Cute Font","Noto Sans KR",cursive' },
+  dokdo: { name: '독도', css: '"Dokdo","Noto Sans KR",cursive' },
+  eastsea: { name: '동해 독도', css: '"East Sea Dokdo","Noto Sans KR",cursive' },
+  songmyung: { name: '송명', css: '"Song Myung","Noto Serif KR",serif' },
+  gugi: { name: '구기', css: '"Gugi","Noto Sans KR",sans-serif' },
+  poorstory: { name: '푸어스토리', css: '"Poor Story","Noto Sans KR",cursive' },
+  brush: { name: '나눔 붓글씨', css: '"Nanum Brush Script","Noto Sans KR",cursive' },
+  gowundodum: { name: '고운돋움', css: '"Gowun Dodum","Noto Sans KR",sans-serif' },
+  gowunbatang: { name: '고운바탕', css: '"Gowun Batang","Noto Serif KR",serif' },
+  hahmlet: { name: '함렛', css: '"Hahmlet","Noto Serif KR",serif' },
+  roboto: { name: 'Roboto', css: '"Roboto","Noto Sans KR",sans-serif' },
+  opensans: { name: 'Open Sans', css: '"Open Sans","Noto Sans KR",sans-serif' },
+  montserrat: { name: 'Montserrat', css: '"Montserrat","Noto Sans KR",sans-serif' },
+  oswald: { name: 'Oswald', css: '"Oswald","Noto Sans KR",sans-serif' },
+  playfair: { name: 'Playfair Display', css: '"Playfair Display","Noto Serif KR",serif' },
+  merriweather: { name: 'Merriweather', css: '"Merriweather","Noto Serif KR",serif' },
+  lora: { name: 'Lora', css: '"Lora","Noto Serif KR",serif' },
+  sourcecode: { name: 'Source Code Pro', css: '"Source Code Pro",monospace' },
+  pacifico: { name: 'Pacifico', css: '"Pacifico","Noto Sans KR",cursive' },
+  dancing: { name: 'Dancing Script', css: '"Dancing Script","Noto Sans KR",cursive' },
+  caveat: { name: 'Caveat', css: '"Caveat","Noto Sans KR",cursive' }
 };
 const qa = t => String(t).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 const escH = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -2194,6 +2256,7 @@ const ICONS = {
   line:'<path d="M5 19 19 5"/>',
   arrow:'<path d="M7 17 17 7"/><path d="M7 7h10v10"/>',
   layers:'<path d="m12 2 10 5-10 5L2 7z"/><path d="m2 12 10 5 10-5"/><path d="m2 17 10 5 10-5"/>',
+  scan:'<path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M7 8h10M7 12h10M7 16h6"/>',
   eye:'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
   eyeOff:'<path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-6.5 0-10-7-10-7a18.5 18.5 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.1 9.1 0 0 1 12 5c6.5 0 10 7 10 7a18.5 18.5 0 0 1-2.16 3.19"/><path d="M14.12 14.12a3 3 0 1 1-4.24-4.24"/><path d="m1 1 22 22"/>',
   textcursor:'<path d="M17 22h-1a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4h1"/><path d="M7 22h1a4 4 0 0 0 4-4v-1"/><path d="M7 2h1a4 4 0 0 1 4 4v1"/>',
@@ -4098,8 +4161,8 @@ function setTextProp(prop, val) {
 function renderOptions() {
   if (typeof syncRegionBtn === 'function') syncRegionBtn();
   const t = state.tool; let h = '';
-  const range = (label, key, min, max, val, unit) =>
-    `<div class="grp rg"><label class="scrub" title="${label} · 글자 위에서 좌우로 끌어 조절 (Shift: 미세)">${label}</label><input type="range" aria-label="${label}" min="${min}" max="${max}" step="1" value="${val}" data-range="${key}" data-unit="${unit}"><input type="number" class="num" inputmode="numeric" aria-label="${label} 값" min="${min}" max="${max}" step="1" value="${val}"><span class="unit">${unit}</span></div>`;
+  const range = (label, key, min, max, val, unit, step = 1) =>
+    `<div class="grp rg"><label class="scrub" title="${label} · 글자 위에서 좌우로 끌어 조절 (Shift: 미세)">${label}</label><input type="range" aria-label="${label}" min="${min}" max="${max}" step="${step}" value="${val}" data-range="${key}" data-unit="${unit}"><input type="number" class="num" inputmode="${step < 1 ? 'decimal' : 'numeric'}" aria-label="${label} 값" min="${min}" max="${max}" step="${step}" value="${val}"><span class="unit">${unit}</span></div>`;
   const seg = (attr, items, cur, label) => `<div class="seg" role="group" aria-label="${label}">${items.map(([k, n]) => `<button ${attr}="${k}" class="${cur === k ? 'on' : ''}">${n}</button>`).join('')}</div>`;
   const hint = x => `<span class="hint" tabindex="0" title="${x}" aria-label="${x}">?</span>`;
   if (t === 'pen') {
@@ -4121,7 +4184,7 @@ function renderOptions() {
       range('선 굵기', 'shape.width', 0, 20, settings.shape.width, 'pt') + hint('선 굵기 0 = 선 없음 · Shift: 정사각형 · 정원');
   } else if (t === 'text') {
     h = fontCtl(settings.text) + colorGrp(PALETTE, settings.text.color) + fillGrp(settings.text.fill, '글자 배경') +
-      range('크기', 'text.size', 8, 96, settings.text.size, 'pt') + range('자간', 'text.ls', -10, 50, settings.text.ls || 0, '%') + hint('페이지를 클릭해 입력 · Esc 또는 바깥 클릭으로 완료');
+      range('크기', 'text.size', 3, 120, +(+settings.text.size).toFixed(1), 'pt', 0.1) + range('자간', 'text.ls', -10, 50, settings.text.ls || 0, '%', 0.1) + hint('페이지를 클릭해 입력 · Esc 또는 바깥 클릭으로 완료');
   } else if (t === 'eraser') {
     const am = settings.eraser.mode === 'area';
     h = seg('data-emode', [['stroke', '획 지우개'], ['area', '영역 지우개']], am ? 'area' : 'stroke', '지우개 방식') +
@@ -4137,7 +4200,7 @@ function renderOptions() {
   } else {
     const o = selectedObj();
     if (editor) {
-      h = fontCtl(editor) + colorGrp(PALETTE, editor.color) + range('글자 크기', 'edit.size', 8, 96, Math.round(editor.size), 'pt') + range('자간', 'edit.ls', -10, 50, Math.round(editor.ls || 0), '%') + hint('Esc 또는 바깥 클릭으로 완료');
+      h = fontCtl(editor) + colorGrp(PALETTE, editor.color) + range('글자 크기', 'edit.size', 3, 120, +(+editor.size).toFixed(1), 'pt', 0.1) + range('자간', 'edit.ls', -10, 50, +(+(editor.ls || 0)).toFixed(1), '%', 0.1) + hint('Esc 또는 바깥 클릭으로 완료');
     } else if (o) {
       const strokeLike = o.type === 'pen' || o.type === 'line' || o.type === 'arrow';
       if (o.type === 'audio') {
@@ -4145,9 +4208,9 @@ function renderOptions() {
         h += au ? `<audio controls preload="metadata" src="${au.url}" aria-label="녹음 재생"></audio><input class="audname" type="text" data-audname maxlength="60" placeholder="${audioDefaultName(o)}" value="${qa(o.name || '')}" aria-label="음성 이름" title="음성 이름 (비우면 ${audioDefaultName(o)})"><button class="opt-btn" data-audexp title="이 음성만 MP3 파일로 내보내기">MP3 내보내기</button><span class="hint" style="cursor:default;white-space:nowrap;width:auto">${Math.round(o.dur || au.dur || 0)}초</span>` : '<span>음성 데이터를 찾을 수 없어요.</span>';
       }
       if (o.type === 'text' && multiTexts().length > 1) h += `<button class="fmt wide" data-multiedit title="선택한 글상자를 동시에 수정 (Enter)">${svg('type')}선택한 글상자 ${multiTexts().length}개 동시 수정</button>`;
-      if (o.type === 'text') h += fontCtl(o) + range('글자 크기', 'sel.size', 8, 96, Math.round(o.size), 'pt') + range('자간', 'sel.ls', -10, 50, Math.round(o.ls || 0), '%');
+      if (o.type === 'text') h += fontCtl(o) + range('글자 크기', 'sel.size', 3, 120, +(+o.size).toFixed(1), 'pt', 0.1) + range('자간', 'sel.ls', -10, 50, +(+(o.ls || 0)).toFixed(1), '%', 0.1);
       if (o.type === 'link') h += `<button class="opt-btn" data-linkgo title="Ctrl+클릭 · 더블클릭으로도 이동해요">${svg('link')}링크 열기</button><button class="opt-btn" data-linkedit>링크 편집</button><span class="hint-txt" style="font-size:12px;color:var(--muted);max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${qa(linkLabel(o))}">${escH(linkLabel(o))}</span>`;
-      if (o.type === 'table') h += `<button class="opt-btn" data-tbledit>${svg('table')}표 내용 편집</button>` + range('글자 크기', 'sel.size', 6, 48, Math.round(o.size), 'pt') + range('선 굵기', 'sel.width', 0, 6, Math.round(o.width == null ? 1 : o.width), 'pt');
+      if (o.type === 'table') h += `<button class="opt-btn" data-tbledit>${svg('table')}표 내용 편집</button>` + range('글자 크기', 'sel.size', 3, 48, +(+o.size).toFixed(1), 'pt', 0.1) + range('선 굵기', 'sel.width', 0, 6, Math.round(o.width == null ? 1 : o.width), 'pt');
       if (o.color) h += colorGrp(o.type === 'highlight' ? HL_PALETTE : PALETTE, o.color);
       if (o.type === 'text' || o.type === 'rect' || o.type === 'ellipse' || o.type === 'star' || o.type === 'table') h += fillGrp(o.fill, o.type === 'text' ? '글자 배경' : '채우기');
       if (o.type === 'rect' || o.type === 'ellipse' || o.type === 'star') h += range('채움 투명도', 'sel.fillAlpha', 10, 100, Math.round((o.fillAlpha == null ? 1 : o.fillAlpha) * 100), '%');
@@ -4202,17 +4265,18 @@ optbar.addEventListener('input', e => {
   if (k === 'eraser') updateEraserCursor(); else updateBrushCursor();
 });
 /* 숫자 입력칸 + 유니티식 끌어서 조절 (굵기 · 크기 · 불투명) */
+const stepV = (v, r) => { const st = +r.step || 1; return +(Math.round(v / st) * st).toFixed(2); };
 const numRange = n => { const g = n.closest('.grp.rg'); return g && g.querySelector('input[type=range]'); };
 optbar.addEventListener('input', e => {
   if (!e.target.matches('input.num')) return;
   const r = numRange(e.target); if (!r || e.target.value === '' || e.target.value === '-') return;
-  const v = clamp(Math.round(+e.target.value), +r.min, +r.max); if (!isFinite(v)) return;
+  const v = clamp(stepV(+e.target.value, r), +r.min, +r.max); if (!isFinite(v)) return;
   r.value = v; r.dispatchEvent(new Event('input', { bubbles: true }));
 });
 optbar.addEventListener('change', e => {
   if (!e.target.matches('input.num')) return;
   const r = numRange(e.target); if (!r) return;
-  const v = clamp(Math.round(+e.target.value || +r.value), +r.min, +r.max); e.target.value = v; r.value = v;
+  const v = clamp(stepV(+e.target.value || +r.value, r), +r.min, +r.max); e.target.value = v; r.value = v;
   r.dispatchEvent(new Event('input', { bubbles: true })); r.dispatchEvent(new Event('change', { bubbles: true }));
 }, true);
 optbar.addEventListener('pointerdown', e => {
@@ -4226,7 +4290,7 @@ optbar.addEventListener('pointerdown', e => {
     if (ev.pointerId !== pid) return;
     const dx = ev.clientX - x0; if (!moved && Math.abs(dx) < 2) return; moved = true;
     const per = (max - min) / (ev.shiftKey ? 600 : 150);   // px 당 값 (Shift: 미세 조절)
-    const v = clamp(Math.round(v0 + dx * per), min, max);
+    const v = clamp(stepV(v0 + dx * per, r), min, max);
     if (+r.value !== v) { r.value = v; if (n) n.value = v; r.dispatchEvent(new Event('input', { bubbles: true })); }
   };
   const done = ev => {
@@ -4419,6 +4483,176 @@ $('#fmtMenu').addEventListener('click', e => {
   const b = e.target.closest('[data-rgm]'); if (!b) return;
   fmtMenu.hidden = true; setRegionMode(b.dataset.rgm);
 });
+
+/* ════════════ 페이지 디지털화: 이미지 · 스캔 · PDF의 글자를 클릭해서 고칠 수 있는 글자 개체로 ════════════ */
+const digi = { mode: lsGet('meowDigiMode', 'cur') === 'all' ? 'all' : 'cur', lang: lsGet('meowDigiLang', 'kor') === 'eng' ? 'eng' : 'kor', busy: false };
+const TESS_SRC = 'https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js';
+const TESS_LANG = { kor: 'https://cdn.jsdelivr.net/npm/@tesseract.js-data/kor/4.0.0_best_int', eng: 'https://cdn.jsdelivr.net/npm/@tesseract.js-data/eng/4.0.0_best_int' };
+let tessLoading = null; const tessWorkers = {};
+function loadTess() {
+  if (window.Tesseract) return Promise.resolve();
+  return tessLoading || (tessLoading = new Promise((res, rej) => {
+    const sc = document.createElement('script'); sc.src = TESS_SRC; sc.onload = res;
+    sc.onerror = () => { tessLoading = null; rej(new Error('tess-lib')); };
+    document.head.appendChild(sc);
+  }));
+}
+async function getTessWorker(lang, logger) {
+  if (!tessWorkers[lang]) {
+    await loadTess();
+    const o = { langPath: TESS_LANG[lang], logger: m => { if (digi.log) digi.log(m); } };
+    if (window.__TESS_OPTS) Object.assign(o, window.__TESS_OPTS);
+    tessWorkers[lang] = await window.Tesseract.createWorker(lang, 1, o);
+  }
+  return tessWorkers[lang];
+}
+function syncDigiBtn() { const l = $('#digiLbl'); if (l) l.textContent = digi.mode === 'all' ? '전체 디지털화' : '디지털화'; const b = $('#digiBtn'); if (b) b.title = (digi.mode === 'all' ? '전체 페이지' : '현재 페이지') + ' 디지털화 — 이미지 · 스캔 · PDF의 글자를 클릭해서 수정할 수 있는 글자 개체로 바꿔요'; }
+function openDigiMenu(anchor) {
+  if (!fmtMenu.hidden && fmtMenu._kind === 'digi') { fmtMenu.hidden = true; return; }
+  fmtMenu._kind = 'digi';
+  fmtMenu.innerHTML = '<div class="menu-h">디지털화 범위</div>' +
+    `<button class="mi${digi.mode === 'cur' ? ' on' : ''}" data-digi="cur"><span class="mthumb">${svg('scan')}</span><span class="mtxt"><b>현재 페이지</b><span>보고 있는 페이지만</span></span></button>` +
+    `<button class="mi${digi.mode === 'all' ? ' on' : ''}" data-digi="all"><span class="mthumb">${svg('layout')}</span><span class="mtxt"><b>전체 페이지</b><span>문서 전체를 한 번에</span></span></button>` +
+    '<div class="menu-h">이미지 글자 인식 언어</div>' +
+    `<button class="mi${digi.lang === 'kor' ? ' on' : ''}" data-digilang="kor"><span class="mthumb">${svg('type')}</span><span class="mtxt"><b>한국어 (+영문 · 숫자)</b><span>한글 문서 · 스캔에 알맞아요</span></span></button>` +
+    `<button class="mi${digi.lang === 'eng' ? ' on' : ''}" data-digilang="eng"><span class="mthumb">${svg('type')}</span><span class="mtxt"><b>영어</b><span>영문 문서에 더 정확해요</span></span></button>` +
+    `<div class="menu-h" style="text-transform:none">글자가 있는 PDF는 인식 없이 바로 글자 개체로 바꿔요.</div>`;
+  const r = anchor.getBoundingClientRect();
+  fmtMenu.style.top = r.bottom + 6 + 'px'; fmtMenu.style.right = 'auto'; fmtMenu.style.left = Math.max(8, Math.min(r.left, window.innerWidth - 290)) + 'px';
+  fmtMenu.hidden = false; placeSide(r);
+}
+$('#fmtMenu').addEventListener('click', e => {
+  const b = e.target.closest('[data-digi],[data-digilang]'); if (!b) return;
+  if (b.dataset.digi) { digi.mode = b.dataset.digi; try { localStorage.setItem('meowDigiMode', digi.mode); } catch (x) { /* ignore */ } fmtMenu.hidden = true; syncDigiBtn(); runDigitize(); }
+  else { digi.lang = b.dataset.digilang; try { localStorage.setItem('meowDigiLang', digi.lang); } catch (x) { /* ignore */ } fmtMenu.hidden = true; toast(digi.lang === 'eng' ? '이미지 글자 인식: 영어' : '이미지 글자 인식: 한국어(+영문 · 숫자)'); }
+});
+const hex2 = v => Math.round(clamp(v, 0, 255)).toString(16).padStart(2, '0');
+/* 글자 상자 안의 배경색(가장 많은 색)과 글자색(배경에서 가장 먼 색)을 어림해요 */
+function digiColors(ctx, x0, y0, x1, y1) {
+  const W = ctx.canvas.width, H = ctx.canvas.height;
+  x0 = Math.max(0, Math.floor(x0) - 1); y0 = Math.max(0, Math.floor(y0) - 1); x1 = Math.min(W, Math.ceil(x1) + 1); y1 = Math.min(H, Math.ceil(y1) + 1);
+  const w = x1 - x0, h = y1 - y0; if (w < 2 || h < 2) return { bg: '#ffffff', fg: '#111111' };
+  const d = ctx.getImageData(x0, y0, w, h).data, hist = new Map(), step = Math.max(1, Math.floor(Math.sqrt(w * h / 6000)));
+  for (let y = 0; y < h; y += step) for (let x = 0; x < w; x += step) {
+    const i = (y * w + x) * 4, k = (d[i] >> 4) << 8 | (d[i + 1] >> 4) << 4 | (d[i + 2] >> 4), e = hist.get(k) || [0, 0, 0, 0];
+    e[0]++; e[1] += d[i]; e[2] += d[i + 1]; e[3] += d[i + 2]; hist.set(k, e);
+  }
+  let best = null; for (const e of hist.values()) if (!best || e[0] > best[0]) best = e;
+  const bg = [best[1] / best[0], best[2] / best[0], best[3] / best[0]], far = [];
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) { const i = (y * w + x) * 4, dd = Math.abs(d[i] - bg[0]) + Math.abs(d[i + 1] - bg[1]) + Math.abs(d[i + 2] - bg[2]); far.push([dd, d[i], d[i + 1], d[i + 2]]); }
+  far.sort((a, b) => b[0] - a[0]);
+  const n = Math.max(1, Math.floor(far.length * 0.05)); let fg;
+  if (far[0][0] < 70) { const l = (bg[0] * .3 + bg[1] * .59 + bg[2] * .11); fg = l > 140 ? [17, 17, 17] : [245, 245, 245]; }
+  else { fg = [0, 0, 0]; for (let i = 0; i < n; i++) { fg[0] += far[i][1]; fg[1] += far[i][2]; fg[2] += far[i][3]; } fg = fg.map(v => v / n); }
+  if (bg[0] > 243 && bg[1] > 243 && bg[2] > 243) { bg[0] = bg[1] = bg[2] = 255; }   // 거의 흰색이면 흰색으로 맞춰요
+  return { bg: '#' + bg.map(hex2).join(''), fg: '#' + fg.map(hex2).join('') };
+}
+/* 한 줄을 글자 개체로: 글자 크기는 소수점까지 쓰고, 폭은 자간으로 맞춰서 띄어쓰기가 사라지지 않아요 */
+function digiObj(text, x, cy, w, size, color, fill, font, bold, fit) {
+  size = Math.round(clamp(size, 3, 300) * 10) / 10;
+  const o = { id: uid('o'), type: 'text', x: Math.round(x * 100) / 100, y: 0, text, size, color, font: font || 'sans', bold: !!bold, italic: false, fill };
+  if (fit) { const m0 = textMetrics(o).w; if (m0 > 0 && w > 0) o.size = Math.round(clamp(size * w / m0, size * 0.88, size * 1.12) * 10) / 10; }
+  const m = textMetrics(o).w, n = [...text].length;
+  if (n > 1 && w > 0 && m > 0) { const ls = clamp(((w - m) / n) / size * 100, -8, 30); if (Math.abs(ls) >= 0.3) o.ls = Math.round(ls * 10) / 10; }
+  o.y = Math.round((cy - size * LH / 2) * 100) / 100;
+  return o;
+}
+async function digiRaster(p) {
+  const sc = Math.min(200 / 72, Math.sqrt(30e6 / (p.w * p.h))), c = newCanvas(p.w * sc, p.h * sc), ctx = c.getContext('2d', { willReadFrequently: true });
+  ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, c.width, c.height);
+  const k = c.width / p.w;
+  if (p.src) { const pg = await getPdfPage(p.src); await pg.render({ canvasContext: ctx, viewport: pvp(pg, p, k) }).promise; }
+  drawAnnots(ctx, p.annots.filter(a => a.type !== 'text'), k, { exp: true });
+  return { c, ctx, k };
+}
+async function digiNative(p, ctx, k) {
+  const pg = await getPdfPage(p.src), tc = await getTextContent(p.src, pg), vp = pvp(pg, p, 1), out = [];
+  let seg = null;
+  const flush = () => {
+    if (seg && seg.t.trim()) {
+      const top = seg.base - seg.size * 0.88, bot = seg.base + seg.size * 0.22, cc = digiColors(ctx, seg.x0 * k, top * k, seg.end * k, bot * k);
+      const o = digiObj(seg.t.replace(/\s+$/, ''), seg.x0, seg.base - seg.size * 0.36, seg.end - seg.x0, seg.size, cc.fg, cc.bg, seg.font, seg.bold);
+      out.push(o);
+    }
+    seg = null;
+  };
+  for (const it of tc.items) {
+    if (typeof it.str !== 'string') continue;
+    const t = it.transform, size = Math.hypot(t[2], t[3]);
+    if (!it.str) continue;
+    if (!(size > 1) || Math.abs(t[1]) > size * 0.02 || Math.abs(t[2]) > size * 0.02) { flush(); continue; }   // 세로 · 기울어진 글자는 건너뛰어요
+    const pt = vp.convertToViewportPoint(t[4], t[5]), x = pt[0], base = pt[1], w = it.width || 0;
+    const st = (tc.styles && tc.styles[it.fontName]) || {}, fam = (st.fontFamily || '') + ' ' + (it.fontName || '');
+    const serif = /serif/i.test(st.fontFamily || '') && !/sans/i.test(st.fontFamily || '') || /myeong|batang|명조|바탕|times/i.test(fam);
+    if (seg) {
+      const gap = x - seg.end;
+      if (Math.abs(base - seg.base) < size * 0.4 && gap > -size * 0.6 && gap < size * 2.2) {
+        seg.t += (gap > size * 0.15 && !/\s$/.test(seg.t) && !/^\s/.test(it.str) ? ' ' : '') + it.str; seg.end = Math.max(seg.end, x + w); seg.size = Math.max(seg.size, size); continue;
+      }
+      flush();
+    }
+    seg = { t: it.str, x0: x, end: x + w, base, size, font: serif ? 'serif' : 'sans', bold: /bold|black|heavy/i.test(fam) };
+  }
+  flush();
+  return out;
+}
+async function digiOcr(p, c, ctx, k, onProg) {
+  const w = await getTessWorker(digi.lang);
+  digi.log = m => { if (m && m.status === 'recognizing text' && onProg) onProg(m.progress || 0); };
+  const { data } = await w.recognize(c);
+  digi.log = null;
+  let lines = data.lines; if (!lines && data.blocks) { lines = []; for (const b of data.blocks) for (const pa of b.paragraphs || []) for (const l of pa.lines || []) lines.push(l); }
+  const out = [];
+  for (const l of lines || []) {
+    let t = String(l.text || '').replace(/\s+/g, ' ').trim(); const b = l.bbox; let cf = l.confidence == null ? 100 : l.confidence;
+    /* 한국어 모델이 잘 못 읽은 줄(영문 · 숫자 위주)은 영어 모델로 한 번 더 읽어요 */
+    if (digi.lang === 'kor' && b && cf < 60 && b.y1 - b.y0 >= 7) {
+      try {
+        const pad = 6, cw = Math.min(c.width, b.x1 + pad) - Math.max(0, b.x0 - pad), ch = Math.min(c.height, b.y1 + pad) - Math.max(0, b.y0 - pad), cc = newCanvas(cw, ch);
+        cc.getContext('2d').drawImage(c, Math.max(0, b.x0 - pad), Math.max(0, b.y0 - pad), cw, ch, 0, 0, cw, ch);
+        const ew = await getTessWorker('eng'); await ew.setParameters({ tessedit_pageseg_mode: '7' });
+        const r2 = await ew.recognize(cc); await ew.setParameters({ tessedit_pageseg_mode: '3' });
+        const t2 = String(r2.data.text || '').replace(/\s+/g, ' ').trim();
+        if (t2 && r2.data.confidence >= 55 && r2.data.confidence > cf + 10) { t = t2; cf = r2.data.confidence; }
+      } catch (err) { console.error(err); }
+    }
+    if (!t || !b || cf < 35) continue;
+    const bw = b.x1 - b.x0, bh = b.y1 - b.y0; if (bh < 7 || bw < 6) continue;
+    const hasLatinOnly = /^[\x00-\x7f]+$/.test(t), size = (bh / k) * (hasLatinOnly ? 0.9 : 1.04), cc = digiColors(ctx, b.x0, b.y0, b.x1, b.y1);
+    out.push(digiObj(t, b.x0 / k, (b.y0 + b.y1) / 2 / k, bw / k, size, cc.fg, cc.bg, 'sans', false, true));
+  }
+  return out;
+}
+async function runDigitize(mode) {
+  if (digi.busy || !state.pages.length) return;
+  finishEditor();
+  const pages = (mode || digi.mode) === 'all' ? state.pages.slice() : [pageById(state.currentId) || state.pages[0]];
+  digi.busy = true; showLoading('디지털화 준비 중…');
+  let made = 0, ocrPages = 0, natPages = 0, fail = null; const done = [];
+  try {
+    for (let i = 0; i < pages.length; i++) {
+      const p = pages[i], head = pages.length > 1 ? `디지털화 중… (${i + 1}/${pages.length}쪽)` : '디지털화 중…';
+      $('#loadingText').textContent = head;
+      const { c, ctx, k } = await digiRaster(p);
+      let objs = [];
+      if (p.src) { try { objs = await digiNative(p, ctx, k); } catch (err) { console.error(err); } }
+      if (objs.length) natPages++;
+      else {
+        try { objs = await digiOcr(p, c, ctx, k, pr => { $('#loadingText').textContent = head + ' 글자 인식 ' + Math.round(pr * 100) + '%'; }); ocrPages++; }
+        catch (err) { console.error(err); fail = err; break; }
+      }
+      c.width = c.height = 1;
+      if (objs.length) { p.annots.push(...objs); made += objs.length; done.push(p.id); }
+    }
+  } finally { hideLoading(); digi.busy = false; digi.log = null; }
+  if (made) { commit(); done.forEach(id => touch(id)); try { renderLayers(); } catch (e) { /* ignore */ } }
+  if (fail && !made) toast(/tess-lib/.test(fail.message || '') ? '글자 인식 모듈을 불러오지 못했어요. 인터넷 연결을 확인해 주세요.' : '글자를 인식하지 못했어요. 인터넷 연결(글자 인식 데이터)을 확인하고 다시 시도해 주세요.');
+  else if (!made) toast('수정할 수 있는 글자를 찾지 못했어요.');
+  else toast(`글자 ${made}줄을 수정 가능한 개체로 바꿨어요. 선택 도구로 글자를 클릭해 고치세요.` + (ocrPages ? ' (이미지는 인식 오차가 있을 수 있어요)' : '') + (fail ? ' 일부 페이지는 인식하지 못했어요.' : ''));
+  if (made && !state.selected) setTool('select');
+}
+$('#digiBtn').addEventListener('click', () => runDigitize());
+syncDigiBtn();
 function openImgMenu(anchor) {
   if (!fmtMenu.hidden && fmtMenu._kind === 'image') { fmtMenu.hidden = true; return; }
   fmtMenu._kind = 'image';
@@ -5670,6 +5904,7 @@ const fmtMenu = $('#fmtMenu');
 function openFmtMenu(kind, anchor) {
   if (kind === 'image') return openImgMenu(anchor);
   if (kind === 'region') return openRegionMenu(anchor);
+  if (kind === 'digi') return openDigiMenu(anchor);
   if (!fmtMenu.hidden && fmtMenu._kind === kind) { fmtMenu.hidden = true; return; }
   const asNew = kind === 'saveas';
   fmtMenu._kind = kind; fmtMenu._asNew = asNew;
@@ -5806,10 +6041,13 @@ function renderManualLayers(p) {
   for (let i = p.layers.length - 1; i >= 0; i--) {
     const L = p.layers[i], n = p.annots.filter(a => a.lid === L.id).length, row = document.createElement('div');
     row.className = 'mlyr' + (L.id === p.activeLayer ? ' sel' : '') + (L.hidden ? ' off' : ''); row.dataset.lid = L.id;
-    row.innerHTML = `<button class="l-btn" data-ml="vis" title="${L.hidden ? '보이기' : '숨기기'}" aria-label="${L.hidden ? '보이기' : '숨기기'}">${svg(L.hidden ? 'eyeOff' : 'eye')}</button><span class="l-name"></span><span class="l-cnt">${n}</span>` +
+    const thumbs = settings.layerView === 'thumb';
+    row.innerHTML = (thumbs ? '<canvas class="l-thumb" width="80" height="80"></canvas>' : '') + `<span class="l-name"></span><span class="l-cnt">${n}</span>` +
+      `<button class="l-btn" data-ml="vis" title="${L.hidden ? '보이기' : '숨기기'}" aria-label="${L.hidden ? '보이기' : '숨기기'}">${svg(L.hidden ? 'eyeOff' : 'eye')}</button>` +
       `<button class="l-btn${L.locked ? ' on' : ''}" data-ml="lock" title="${L.locked ? '잠금 해제' : '잠금'}" aria-label="${L.locked ? '잠금 해제' : '잠금'}">${svg(L.locked ? 'lock' : 'unlock')}</button><button class="l-btn" data-ml="more" title="더보기" aria-label="더보기">${svg('dots')}</button>`;
     row.querySelector('.l-name').textContent = L.name;
     layerList.appendChild(row);
+    if (thumbs) layerThumb(row.querySelector('.l-thumb'), p.annots.filter(a => a.lid === L.id));
   }
 }
 layerList.addEventListener('click', e => {
@@ -5821,14 +6059,34 @@ layerList.addEventListener('click', e => {
   if (act && act.dataset.ml === 'vis') { if (L.hidden) delete L.hidden; else L.hidden = true; layerSort(p); commit(); touch(p.id); renderLayers(); return; }
   if (act && act.dataset.ml === 'lock') { if (L.locked) delete L.locked; else L.locked = true; if (L.locked && state.selected && p.annots.some(a => a.id === state.selected.objId && a.lid === L.id)) selectObj(null); layerSort(p); commit(); renderOptions(); renderLayers(); return; }
   if (act && act.dataset.ml === 'more') { layerMenu(act, p, L); return; }
+  if (!act && layerDoubleTap(L.id)) { renameManualLayer(p, L); return; }
   p.activeLayer = L.id; renderLayers();
 });
-layerList.addEventListener('dblclick', async e => {
-  if (settings.layerMode !== 'manual') return;
-  const row = e.target.closest('.mlyr'); if (!row || e.target.closest('button')) return;
-  const p = pageById(state.currentId), L = p && p.layers.find(l => l.id === row.dataset.lid); if (!L) return;
-  const n = await modal({ title: '레이어 이름', message: '', input: L.name, ok: '확인' }); if (n && n.trim()) { L.name = n.trim().slice(0, 30); commit(); renderLayers(); }
-});
+/* 레이어 이름 바꾸기: 같은 레이어를 빠르게 두 번 누르면(더블클릭 · 더블탭) 이름 창이 떠요. (목록이 다시 그려져도 동작하도록 클릭 간격으로 판단) */
+async function renameAutoLayer(p, o) {
+  const cur = autoLayerNames(p).get(o.id);
+  const n2 = await modal({ title: '레이어 이름', message: '비워 두면 기본 이름으로 돌아가요.', input: o.lname || cur, ok: '확인' });
+  if (n2 != null) { const v = n2.trim().slice(0, 30); if (v) o.lname = v; else delete o.lname; commit(); renderLayers(); }
+}
+async function renameManualLayer(p, L) {
+  const n = await modal({ title: '레이어 이름', message: '', input: L.name, ok: '확인' });
+  if (n && n.trim()) { L.name = n.trim().slice(0, 30); commit(); renderLayers(); }
+}
+let lyTap = { id: null, t: 0 };
+function layerDoubleTap(id) { const now = Date.now(), hit = lyTap.id === id && now - lyTap.t < 450; lyTap = { id, t: hit ? 0 : now }; return hit; }
+(() => {
+  try { settings.layerView = localStorage.getItem('meowLayerView') === 'thumb' ? 'thumb' : 'list'; } catch (e) { settings.layerView = 'list'; }
+  const inp = $('#layerName');
+  const apply = () => { const t = layerTarget(); if (!t) return; const v = inp.value.trim().slice(0, 30); if (v === t.name) return; t.set(v); commit(); renderLayers(); };
+  inp.addEventListener('change', apply);
+  inp.addEventListener('keydown', e => { e.stopPropagation(); if (e.key === 'Enter') { inp.blur(); } else if (e.key === 'Escape') { const t = layerTarget(); inp.value = t ? t.name : ''; inp.blur(); } });
+  inp.addEventListener('blur', () => { setTimeout(syncLayerName, 0); });
+  $('#layerViewBtn').addEventListener('click', () => {
+    settings.layerView = settings.layerView === 'thumb' ? 'list' : 'thumb';
+    try { localStorage.setItem('meowLayerView', settings.layerView); } catch (e) { /* ignore */ }
+    renderLayers();
+  });
+})();
 $('#layerMode').addEventListener('click', e => { const b = e.target.closest('[data-lm]'); if (b) setLayerMode(b.dataset.lm); });
 $('#layerAdd').onclick = () => {
   const p = pageById(state.currentId); if (!p) return;
@@ -5842,7 +6100,43 @@ function syncLayerMode() {
   $('#layers').classList.toggle('lm-manual', man);
   $('#layerMode').querySelectorAll('[data-lm]').forEach(b => b.classList.toggle('on', (b.dataset.lm === 'manual') === man));
 }
-function renderLayers() {
+function autoLayerNames(p) {
+  const counts = {}, names = new Map();
+  for (const a of p.annots) {
+    counts[a.type] = (counts[a.type] || 0) + 1;
+    names.set(a.id, a.lname || (a.type === 'text' ? '텍스트: ' + String(a.text).replace(/\s+/g, ' ').slice(0, 12) : (a.type === 'audio' && a.name) ? '음성: ' + a.name.slice(0, 14) : (LAYER_NAMES[a.type] || a.type) + ' ' + counts[a.type]));
+  }
+  return names;
+}
+function layerThumb(cv, objs) {
+  try {
+    const ctx = cv.getContext('2d'), W = cv.width, H = cv.height; ctx.clearRect(0, 0, W, H);
+    let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+    for (const o of objs) { try { const b = bbox(o); x0 = Math.min(x0, b.x); y0 = Math.min(y0, b.y); x1 = Math.max(x1, b.x + b.w); y1 = Math.max(y1, b.y + b.h); } catch (e) { /* skip */ } }
+    if (!(x1 >= x0) || x0 > 1e8) return;
+    const bw = Math.max(1, x1 - x0), bh = Math.max(1, y1 - y0), pad = 4, k = Math.min((W - pad * 2) / bw, (H - pad * 2) / bh);
+    ctx.save(); ctx.translate((W - bw * k) / 2 - x0 * k, (H - bh * k) / 2 - y0 * k);
+    for (const o of objs) { try { ctx.globalAlpha = o.type === 'highlight' ? 0.45 : 1; drawObj(ctx, o, k); } catch (e) { /* skip */ } }
+    ctx.restore();
+  } catch (e) { /* ignore */ }
+}
+function layerTarget() {
+  const p = pageById(state.currentId); if (!p) return null;
+  if (settings.layerMode === 'manual') { layerEnsure(p); const L = p.layers.find(l => l.id === p.activeLayer); return L ? { name: L.name, set: v => { if (v) L.name = v; } } : null; }
+  const o = state.selected && state.selected.pageId === p.id && p.annots.find(a => a.id === state.selected.objId);
+  return o ? { name: autoLayerNames(p).get(o.id), set: v => { if (v) o.lname = v; else delete o.lname; } } : null;
+}
+function syncLayerName() {
+  const inp = $('#layerName'); if (!inp) return;
+  const t = layerTarget();
+  inp.disabled = !t; inp.placeholder = t ? '레이어 이름' : '레이어를 선택하세요';
+  if (document.activeElement !== inp) inp.value = t ? t.name : '';
+  const v = settings.layerView === 'thumb';
+  $('#layers').classList.toggle('lv-thumb', v);
+  const vb = $('#layerViewBtn'); vb.innerHTML = svg(v ? 'list' : 'grid'); vb.title = v ? '간단히 보기로 바꾸기' : '썸네일로 보기';
+}
+function renderLayers() { renderLayers0(); syncLayerName(); }
+function renderLayers0() {
   const p = pageById(state.currentId);
   syncLayerMode();
   if (settings.layerMode === 'manual') {
@@ -5856,11 +6150,7 @@ function renderLayers() {
     layerList.innerHTML = '<div class="layer-empty">이 페이지에는 추가한 개체가 없어요. 그리기, 도형, 텍스트, 이미지를 넣으면 레이어로 나타나요.</div>';
     return;
   }
-  const counts = {}, names = new Map();
-  for (const a of p.annots) {
-    counts[a.type] = (counts[a.type] || 0) + 1;
-    names.set(a.id, a.type === 'text' ? '텍스트: ' + String(a.text).replace(/\s+/g, ' ').slice(0, 12) : (a.type === 'audio' && a.name) ? '음성: ' + a.name.slice(0, 14) : (LAYER_NAMES[a.type] || a.type) + ' ' + counts[a.type]);
-  }
+  const names = autoLayerNames(p), thumbs = settings.layerView === 'thumb';
   layerList.innerHTML = '';
   for (let i = p.annots.length - 1; i >= 0; i--) {
     const a = p.annots[i];
@@ -5868,11 +6158,12 @@ function renderLayers() {
     const sel = state.selected && state.selected.objId === a.id;
     row.className = 'layer' + (sel ? ' sel' : '') + (state.layerSel.size > 1 && state.layerSel.has(a.id) ? ' msel' : '') + (a.hidden ? ' off' : '');
     row.dataset.id = a.id;
-    row.innerHTML = `<span class="l-ico">${svg(LAYER_ICONS[a.type] || 'pen')}</span>${a.color ? `<span class="l-dot" style="--c:${a.color}"></span>` : ''}<span class="l-name"></span>` +
+    row.innerHTML = (thumbs ? '<canvas class="l-thumb" width="80" height="80"></canvas>' : `<span class="l-ico">${svg(LAYER_ICONS[a.type] || 'pen')}</span>${a.color ? `<span class="l-dot" style="--c:${a.color}"></span>` : ''}`) + `<span class="l-name"></span>` +
       `<button class="l-btn" data-act="vis" title="${a.hidden ? '보이기' : '숨기기'}" aria-label="${a.hidden ? '보이기' : '숨기기'}">${svg(a.hidden ? 'eyeOff' : 'eye')}</button>` +
       `<button class="l-btn" data-act="del" title="삭제" aria-label="삭제">${svg('trash')}</button>`;
     row.querySelector('.l-name').textContent = names.get(a.id);
     layerList.appendChild(row);
+    if (thumbs) layerThumb(row.querySelector('.l-thumb'), [a]);
   }
 }
 layerList.addEventListener('click', e => {
@@ -5886,6 +6177,7 @@ layerList.addEventListener('click', e => {
     if (state.selected && state.selected.objId === o.id) state.selected = null;
     commit(); touch(p.id); renderOptions(); renderLayers(); return;
   }
+  if (!act && layerDoubleTap(o.id)) { renameAutoLayer(p, o); return; }
   if (o.hidden) return;
   if (e.ctrlKey || e.metaKey) {
     if (state.layerSel.has(o.id)) state.layerSel.delete(o.id); else state.layerSel.add(o.id);
@@ -6307,6 +6599,10 @@ function tickClock() {
 
 /* ════════════ 발표 모드 · 레이저 ════════════ */
 const presBar = $('#presBar'), laserEl = $('#laser');
+$('#presFold').addEventListener('click', () => {
+  const f = presBar.classList.toggle('fold'), b = $('#presFold');
+  b.innerHTML = svg(f ? 'chevR' : 'chevL'); b.setAttribute('aria-expanded', f ? 'false' : 'true'); b.title = f ? '도구 펼치기' : '도구 접기';
+});
 const pres = { prev: null };
 const presOpts = $('#presOpts');
 const PRES_TOOLS = ['highlight', 'pen', 'line', 'shape', 'eraser', 'text'];
@@ -6791,6 +7087,12 @@ async function editPageNote(id) {
   syncPageMeta(); commit();
   toast(t ? '주석을 달았어요. 이 페이지는 강조 표시돼요.' : '주석을 지웠어요.');
 }
+document.addEventListener('keydown', e => {
+  if (e.key !== 'F2' || e.ctrlKey || e.metaKey || e.altKey || e.isComposing) return;
+  const t = e.target; if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
+  if (!$('#modal').hidden || editor || state.present || !state.currentId) return;
+  e.preventDefault(); renamePage(state.currentId);
+});
 async function renamePage(id) {
   const p = pageById(id); if (!p) return;
   const val = await modal({ title: '페이지 이름', message: '비우면 기본 이름(페이지 N)으로 돌아가요.', input: p.name || pageLabel(p), ok: '확인' });
@@ -7263,6 +7565,26 @@ async function pageParas(p) {
   for (const a of p.annots) if (a.type === 'text' && a.text) for (const ln of String(a.text).split('\n')) if (ln.trim()) paras.push({ t: ln, size: a.size || med, color: a.color, bold: !!a.bold, annot: true });
   return paras;
 }
+/* docx: 글자 편집용은 "배경(이미지 · 도형 · 그림 · 색)은 쪽 크기 그림으로, 글자는 원래 자리에 있는 글상자로" 담아요 */
+const DOCX_FONT = f => { const d = FONTS[f] || FONTS.sans, c = d.css; return /monospace/.test(c) ? 'Consolas' : f === 'ngothic' ? 'NanumGothic' : f === 'nmyeongjo' ? 'NanumMyeongjo' : /serif\s*$/.test(c) && !/sans/.test(c) ? 'Batang' : 'Malgun Gothic'; };
+/* 한 쪽을 docx용으로: 글자(PDF 글자 + 글자 개체)는 따로 빼고, 나머지 모습은 그림으로 그려요 */
+async function docxPageData(p, withText) {
+  const sc = Math.min(2, 2000 / Math.max(p.w, p.h)), cv = newCanvas(p.w * sc, p.h * sc), ctx = cv.getContext('2d', { willReadFrequently: true });
+  ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, cv.width, cv.height);
+  const k = cv.width / p.w; let frames = [];
+  if (p.src) { const pg = await getPdfPage(p.src); await pg.render({ canvasContext: ctx, viewport: pvp(pg, p, k) }).promise; }
+  if (!withText) { drawAnnots(ctx, p.annots, k, { exp: true }); for (const m of p.memos || []) drawMemoCanvas(ctx, m, k, 20 * k); return { cv, frames }; }
+  let nat = []; if (p.src) { try { nat = await digiNative(p, ctx, k); } catch (err) { console.error(err); } }
+  const cover = (o, pad) => { const m = textMetrics(o); ctx.fillStyle = o.fill; ctx.fillRect((o.x - pad) * k, (o.y - pad * 0.5) * k, (m.w + pad * 2) * k, (m.h + pad) * k); };
+  for (const o of nat) { o.fill = o.fill || '#ffffff'; cover(o, o.size * 0.2); }      // PDF 글자는 배경색으로 덮고, 같은 자리에 글상자를 얹어요
+  for (const a of p.annots) {
+    if (a.type === 'text') { if (a.text && !a.hidden) { if (a.fill) cover(a, a.size * 0.2); frames.push(a); } }
+    else drawAnnots(ctx, [a], k, { exp: true });
+  }
+  for (const m of p.memos || []) drawMemoCanvas(ctx, m, k, 20 * k);
+  frames = nat.concat(frames);
+  return { cv, frames };
+}
 async function exportDocx(mode) {
   if (!state.pages.length) return;
   finishEditor();
@@ -7270,29 +7592,43 @@ async function exportDocx(mode) {
   try {
     const esc = t => String(t).replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c])).replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, '');
     const tw = pt => Math.round(pt * 20), zip = new JSZip(), body = [], rels = []; let imgN = 0;
-    const sect = (p, mar) => `<w:sectPr><w:pgSz w:w="${tw(p.w)}" w:h="${tw(p.h)}"/><w:pgMar w:top="${mar}" w:right="${mar}" w:bottom="${mar}" w:left="${mar}" w:header="0" w:footer="0" w:gutter="0"/></w:sectPr>`;
-    const imgPara = async (p, last) => {
-      const sc = Math.min(2, 2000 / Math.max(p.w, p.h)), cv = newCanvas(p.w * sc, p.h * sc); await drawFlat(p)(cv, sc);
+    /* 쪽 크기 · 가로/세로 방향을 쪽마다 그대로 맞춰요 (여백 0) */
+    const sect = p => `<w:sectPr><w:pgSz w:w="${tw(p.w)}" w:h="${tw(p.h)}"${p.w > p.h ? ' w:orient="landscape"' : ''}/><w:pgMar w:top="0" w:right="0" w:bottom="0" w:left="0" w:header="0" w:footer="0" w:gutter="0"/></w:sectPr>`;
+    const frameXml = (o, p) => {
+      const size = clamp(o.size, 2, 400), lines = String(o.text).split('\n'), lh = size * LH, m = textMetrics(o);
+      let w = Math.min(p.w, m.w * 1.12 + size * 0.6), x = o.x, y = o.y;
+      if (x + w > p.w) x = Math.max(0, p.w - w); if (y + lh * lines.length > p.h) y = Math.max(0, p.h - lh * lines.length);
+      const fnt = DOCX_FONT(o.font || 'sans'), sz = Math.max(2, Math.round(size * 2)), sp = Math.round((o.ls || 0) / 100 * size * 20);
+      const rcs = Array.isArray(o.rc) ? o.rc : [], colAt = i => { for (const r of rcs) if (i >= r[0] && i < r[1]) return r[2]; return o.color; };
+      const jc = o.align === 'center' ? 'center' : o.align === 'right' ? 'right' : 'left', shd = o.fill && /^#[0-9a-f]{6}$/i.test(o.fill) ? `<w:shd w:val="clear" w:color="auto" w:fill="${o.fill.slice(1)}"/>` : '';
+      const run = (t, col) => `<w:r><w:rPr><w:rFonts w:ascii="${fnt}" w:hAnsi="${fnt}" w:eastAsia="${fnt}" w:cs="${fnt}"/>${o.bold ? '<w:b/>' : ''}${o.italic ? '<w:i/>' : ''}${/^#[0-9a-f]{6}$/i.test(col || '') ? `<w:color w:val="${col.slice(1)}"/>` : ''}${sp ? `<w:spacing w:val="${sp}"/>` : ''}<w:sz w:val="${sz}"/><w:szCs w:val="${sz}"/></w:rPr><w:t xml:space="preserve">${esc(t)}</w:t></w:r>`;
+      let off = 0;
+      return lines.map((ln, li) => {
+        const runs = []; let cur = '', cc = null;
+        [...ln].forEach((ch, ci) => { const col = colAt(off + ci); if (cc !== null && col !== cc) { runs.push(run(cur, cc)); cur = ''; } cc = col; cur += ch; });
+        if (cur) runs.push(run(cur, cc)); off += ln.length + 1;
+        const fr = `<w:framePr w:w="${tw(w)}" w:hSpace="0" w:vSpace="0" w:wrap="around" w:vAnchor="page" w:hAnchor="page" w:x="${tw(x)}" w:y="${tw(y + li * lh)}"/>`;
+        return `<w:p><w:pPr>${fr}${shd}<w:spacing w:before="0" w:after="0" w:line="${Math.round(lh * 20)}" w:lineRule="exact"/><w:jc w:val="${jc}"/></w:pPr>${runs.join('') || run('', o.color)}</w:p>`;
+      }).join('');
+    };
+    const pagePara = (p, cv, last) => {
       const data = cv.toDataURL('image/jpeg', .9).split(',')[1]; cv.width = cv.height = 1;
       const n = ++imgN, name = `page${n}.jpeg`; zip.file('word/media/' + name, data, { base64: true });
       rels.push(`<Relationship Id="rIdImg${n}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/${name}"/>`);
-      const k = (p.h - 6) / p.h, cx = Math.round(p.w * k * 12700), cy = Math.round((p.h - 6) * 12700);
-      return `<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/>${last ? '' : sect(p, 0)}</w:pPr><w:r><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0"><wp:extent cx="${cx}" cy="${cy}"/><wp:docPr id="${n}" name="Picture ${n}"/><wp:cNvGraphicFramePr><a:graphicFrameLocks noChangeAspect="1"/></wp:cNvGraphicFramePr><a:graphic><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic><pic:nvPicPr><pic:cNvPr id="${n}" name="${name}"/><pic:cNvPicPr/></pic:nvPicPr><pic:blipFill><a:blip r:embed="rIdImg${n}"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill><pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="${cx}" cy="${cy}"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic></wp:inline></w:drawing></w:r></w:p>`;
+      const cx = Math.round(p.w * 12700), cy = Math.round(p.h * 12700);
+      /* 쪽 전체 크기의 그림을 글자 뒤에 고정(앵커)해서 쪽 밖으로 밀려나지 않아요 */
+      return `<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="20" w:lineRule="exact"/><w:rPr><w:sz w:val="2"/></w:rPr>${last ? '' : sect(p)}</w:pPr><w:r><w:rPr><w:sz w:val="2"/></w:rPr><w:drawing><wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" relativeHeight="${n}" behindDoc="1" locked="0" layoutInCell="1" allowOverlap="1"><wp:simplePos x="0" y="0"/><wp:positionH relativeFrom="page"><wp:posOffset>0</wp:posOffset></wp:positionH><wp:positionV relativeFrom="page"><wp:posOffset>0</wp:posOffset></wp:positionV><wp:extent cx="${cx}" cy="${cy}"/><wp:effectExtent l="0" t="0" r="0" b="0"/><wp:wrapNone/><wp:docPr id="${n}" name="Page ${n}"/><wp:cNvGraphicFramePr><a:graphicFrameLocks noChangeAspect="1"/></wp:cNvGraphicFramePr><a:graphic><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic><pic:nvPicPr><pic:cNvPr id="${n}" name="${name}"/><pic:cNvPicPr/></pic:nvPicPr><pic:blipFill><a:blip r:embed="rIdImg${n}"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill><pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="${cx}" cy="${cy}"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic></wp:anchor></w:drawing></w:r></w:p>`;
     };
-    let finalSect = '', noText = 0;
+    let finalSect = '', noText = 0, nFrames = 0;
     for (let i = 0; i < state.pages.length; i++) {
       const p = state.pages[i], last = i === state.pages.length - 1;
       showLoading(`docx 문서를 만드는 중… ${i + 1}/${state.pages.length}쪽`);
-      const mar = mode === 'image' ? 0 : 1134;
-      if (last) finalSect = sect(p, mar);
-      if (mode === 'image') { body.push(await imgPara(p, last)); await tick(); continue; }
-      const paras = await pageParas(p);
-      if (!paras.length) { noText++; body.push(await imgPara(p, last)); await tick(); continue; }
-      paras.forEach((q, j) => {
-        const sz = clamp(Math.round(q.size * 2), 16, 96), col = /^#[0-9a-f]{6}$/i.test(q.color || '') ? q.color.slice(1) : null;
-        body.push(`<w:p><w:pPr><w:spacing w:before="0" w:after="120"/>${j === paras.length - 1 && !last ? sect(p, mar) : ''}</w:pPr><w:r><w:rPr><w:rFonts w:ascii="Malgun Gothic" w:hAnsi="Malgun Gothic" w:eastAsia="Malgun Gothic" w:cs="Malgun Gothic"/>${q.bold ? '<w:b/>' : ''}${col ? `<w:color w:val="${col}"/>` : ''}<w:sz w:val="${sz}"/></w:rPr><w:t xml:space="preserve">${esc(q.t)}</w:t></w:r></w:p>`);
-      });
-      await tick();
+      if (last) finalSect = sect(p);
+      const { cv, frames } = await docxPageData(p, mode !== 'image');
+      if (mode !== 'image' && !frames.length) noText++;
+      nFrames += frames.length;
+      for (const o of frames) body.push(frameXml(o, p));
+      body.push(pagePara(p, cv, last)); await tick();
     }
     const NS = 'xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"';
     zip.file('[Content_Types].xml', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Default Extension="jpeg" ContentType="image/jpeg"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/></Types>');
@@ -7301,7 +7637,7 @@ async function exportDocx(mode) {
     zip.file('word/document.xml', `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document ${NS}><w:body>${body.join('')}${finalSect}</w:body></w:document>`);
     const data = await zip.generateAsync({ type: 'uint8array', compression: 'DEFLATE' }); hideLoading();
     const out = await deliverFile(data, baseName(state.fileName) + '.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
-    if (out) toast(mode === 'image' ? 'docx로 내보냈어요. 각 쪽이 이미지로 들어가요.' : 'docx로 내보냈어요. 글자만 편집할 수 있게 담겼고, 그림·도형은 빠져요.' + (noText ? ` (글자가 없는 ${noText}쪽은 이미지로 넣었어요)` : ''));
+    if (out) toast(mode === 'image' ? 'docx로 내보냈어요. 각 쪽이 쪽 크기 그대로 이미지로 들어가요.' : 'docx로 내보냈어요. 글자는 원래 자리의 글상자로, 이미지 · 도형 · 배경은 그대로 담겼어요.' + (noText ? ` (글자가 없는 ${noText}쪽은 이미지로만 들어가요)` : ''));
   } catch (err) { console.error(err); toast('docx로 내보내지 못했어요. 다시 시도해 주세요.'); }
   finally { hideLoading(); }
 }
@@ -7313,48 +7649,52 @@ async function exportHwpx() {
   try {
     const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])).replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, '');
     const NS = 'xmlns:ha="http://www.hancom.co.kr/hwpml/2011/app" xmlns:hp="http://www.hancom.co.kr/hwpml/2011/paragraph" xmlns:hp10="http://www.hancom.co.kr/hwpml/2016/paragraph" xmlns:hs="http://www.hancom.co.kr/hwpml/2011/section" xmlns:hc="http://www.hancom.co.kr/hwpml/2011/core" xmlns:hh="http://www.hancom.co.kr/hwpml/2011/head" xmlns:hhs="http://www.hancom.co.kr/hwpml/2011/history" xmlns:hm="http://www.hancom.co.kr/hwpml/2011/master-page" xmlns:hpf="http://www.hancom.co.kr/schema/2011/hpf" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf/" xmlns:ooxmlchart="http://www.hancom.co.kr/hwpml/2016/ooxmlchart" xmlns:hwpunitchar="http://www.hancom.co.kr/hwpml/2016/HwpUnitChar" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:config="urn:oasis:names:tc:opendocument:xmlns:config:1.0"';
-    const first = state.pages[0], PW = Math.round(first.w * 100), PH = Math.round(first.h * 100);
     const cps = new Map(), cpKey = (sz, b) => sz + (b ? 'b' : 'n'), cpId = (sz, b) => { const k = cpKey(sz, b); if (!cps.has(k)) cps.set(k, cps.size); return cps.get(k); };
     cpId(1000, false);
-    const secPr = `<hp:secPr id="" textDirection="HORIZONTAL" spaceColumns="1134" tabStop="8000" tabStopVal="4000" tabStopUnit="HWPUNIT" outlineShapeIDRef="0" memoShapeIDRef="0" textVerticalWidthHead="0" masterPageCnt="0"><hp:grid lineGrid="0" charGrid="0" wonggojiFormat="0"/><hp:startNum pageStartsOn="BOTH" page="0" pic="0" tbl="0" equation="0"/><hp:visibility hideFirstHeader="0" hideFirstFooter="0" hideFirstMasterPage="0" border="SHOW_ALL" fill="SHOW_ALL" hideFirstPageNum="0" hideFirstEmptyLine="0" showLineNumber="0"/><hp:lineNumberShape restartType="0" countBy="0" distance="0" startNumber="0"/><hp:pagePr landscape="WIDELY" width="${PW}" height="${PH}" gutterType="LEFT_ONLY"><hp:margin header="4252" footer="4252" gutter="0" left="8504" right="8504" top="5668" bottom="4252"/></hp:pagePr><hp:pageBorderFill type="BOTH" borderFillIDRef="1" textBorder="PAPER" headerInside="0" footerInside="0" fillArea="PAPER"><hp:offset left="1417" right="1417" top="1417" bottom="1417"/></hp:pageBorderFill><hp:pageBorderFill type="EVEN" borderFillIDRef="1" textBorder="PAPER" headerInside="0" footerInside="0" fillArea="PAPER"><hp:offset left="1417" right="1417" top="1417" bottom="1417"/></hp:pageBorderFill><hp:pageBorderFill type="ODD" borderFillIDRef="1" textBorder="PAPER" headerInside="0" footerInside="0" fillArea="PAPER"><hp:offset left="1417" right="1417" top="1417" bottom="1417"/></hp:pageBorderFill></hp:secPr>`;
-    const paras = []; let pid = 0, firstP = true, noText = 0;
+    const hmar = (PW, PH) => { const mx = Math.min(8504, Math.round(PW * 0.1)), my = Math.min(5668, Math.round(PH * 0.08)), mb = Math.min(4252, Math.round(PH * 0.06)); return `header="${Math.min(4252, mb)}" footer="${Math.min(4252, mb)}" gutter="0" left="${mx}" right="${mx}" top="${my}" bottom="${mb}"`; };
+    const secPrFor = (PW, PH) => `<hp:secPr id="" textDirection="HORIZONTAL" spaceColumns="1134" tabStop="8000" tabStopVal="4000" tabStopUnit="HWPUNIT" outlineShapeIDRef="0" memoShapeIDRef="0" textVerticalWidthHead="0" masterPageCnt="0"><hp:grid lineGrid="0" charGrid="0" wonggojiFormat="0"/><hp:startNum pageStartsOn="BOTH" page="0" pic="0" tbl="0" equation="0"/><hp:visibility hideFirstHeader="0" hideFirstFooter="0" hideFirstMasterPage="0" border="SHOW_ALL" fill="SHOW_ALL" hideFirstPageNum="0" hideFirstEmptyLine="0" showLineNumber="0"/><hp:lineNumberShape restartType="0" countBy="0" distance="0" startNumber="0"/><hp:pagePr landscape="${PW > PH ? 'NARROWLY' : 'WIDELY'}" width="${PW}" height="${PH}" gutterType="LEFT_ONLY"><hp:margin ${hmar(PW, PH)}/></hp:pagePr><hp:pageBorderFill type="BOTH" borderFillIDRef="1" textBorder="PAPER" headerInside="0" footerInside="0" fillArea="PAPER"><hp:offset left="1417" right="1417" top="1417" bottom="1417"/></hp:pageBorderFill><hp:pageBorderFill type="EVEN" borderFillIDRef="1" textBorder="PAPER" headerInside="0" footerInside="0" fillArea="PAPER"><hp:offset left="1417" right="1417" top="1417" bottom="1417"/></hp:pageBorderFill><hp:pageBorderFill type="ODD" borderFillIDRef="1" textBorder="PAPER" headerInside="0" footerInside="0" fillArea="PAPER"><hp:offset left="1417" right="1417" top="1417" bottom="1417"/></hp:pageBorderFill></hp:secPr>`;
+    const secs = []; let pid = 0, noText = 0;
     for (let i = 0; i < state.pages.length; i++) {
       showLoading(`HWPX 문서를 만드는 중… ${i + 1}/${state.pages.length}쪽`);
-      const qs = await pageParas(state.pages[i]);
+      const pg = state.pages[i], PW = Math.round(pg.w * 100), PH = Math.round(pg.h * 100);
+      /* 쪽 크기 · 가로/세로가 바뀌면 새 구역을 만들어서 쪽마다 원래 크기와 방향을 지켜요 */
+      let sec = secs[secs.length - 1];
+      if (!sec || sec.PW !== PW || sec.PH !== PH) { sec = { PW, PH, paras: [], first: true }; secs.push(sec); }
+      const qs = await pageParas(pg);
       if (!qs.length) { noText++; qs.push({ t: '', size: 10 }); }
       qs.forEach((q, j) => {
         const sz = clamp(Math.round((q.size || 10) * 100), 800, 4800), cp = cpId(sz, !!q.bold);
-        const brk = i > 0 && j === 0 ? 1 : 0;
-        paras.push(`<hp:p id="${pid++}" paraPrIDRef="0" styleIDRef="0" pageBreak="${brk}" columnBreak="0" merged="0">` +
-          (firstP ? `<hp:run charPrIDRef="${cp}">${secPr}<hp:ctrl><hp:colPr id="" type="NEWSPAPER" layout="LEFT" colCount="1" sameSz="1" sameGap="0"/></hp:ctrl></hp:run>` : '') +
+        const brk = !sec.first && j === 0 ? 1 : 0;
+        sec.paras.push(`<hp:p id="${pid++}" paraPrIDRef="0" styleIDRef="0" pageBreak="${brk}" columnBreak="0" merged="0">` +
+          (sec.first ? `<hp:run charPrIDRef="${cp}">${secPrFor(PW, PH)}<hp:ctrl><hp:colPr id="" type="NEWSPAPER" layout="LEFT" colCount="1" sameSz="1" sameGap="0"/></hp:ctrl></hp:run>` : '') +
           `<hp:run charPrIDRef="${cp}"><hp:t>${esc(q.t)}</hp:t></hp:run></hp:p>`);
-        firstP = false;
+        sec.first = false;
       });
       await tick();
     }
     const fontface = lang => `<hh:fontface lang="${lang}" fontCnt="1"><hh:font id="0" face="맑은 고딕" type="TTF" isEmbedded="0"/></hh:fontface>`;
     const bdr = n => `<hh:${n} type="NONE" width="0.1 mm" color="#000000"/>`;
     const charPr = ([k, id]) => { const sz = parseInt(k, 10), b = k.endsWith('b'); return `<hh:charPr id="${id}" height="${sz}" textColor="#000000" shadeColor="none" useFontSpace="0" useKerning="0" symMark="NONE" borderFillIDRef="1"><hh:fontRef hangul="0" latin="0" hanja="0" japanese="0" other="0" symbol="0" user="0"/><hh:ratio hangul="100" latin="100" hanja="100" japanese="100" other="100" symbol="100" user="100"/><hh:spacing hangul="0" latin="0" hanja="0" japanese="0" other="0" symbol="0" user="0"/><hh:relSz hangul="100" latin="100" hanja="100" japanese="100" other="100" symbol="100" user="100"/><hh:offset hangul="0" latin="0" hanja="0" japanese="0" other="0" symbol="0" user="0"/>${b ? '<hh:bold/>' : ''}<hh:underline type="NONE" shape="SOLID" color="#000000"/><hh:strikeout shape="NONE" color="#000000"/><hh:outline type="NONE"/><hh:shadow type="NONE" color="#C0C0C0" offsetX="10" offsetY="10"/></hh:charPr>`; };
-    const header = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><hh:head ${NS} version="1.4" secCnt="1"><hh:beginNum page="1" footnote="1" endnote="1" pic="1" tbl="1" equation="1"/><hh:refList>` +
+    const header = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><hh:head ${NS} version="1.4" secCnt="${secs.length}"><hh:beginNum page="1" footnote="1" endnote="1" pic="1" tbl="1" equation="1"/><hh:refList>` +
       `<hh:fontfaces itemCnt="7">${['HANGUL', 'LATIN', 'HANJA', 'JAPANESE', 'OTHER', 'SYMBOL', 'USER'].map(fontface).join('')}</hh:fontfaces>` +
       `<hh:borderFills itemCnt="1"><hh:borderFill id="1" threeD="0" shadow="0" centerLine="NONE" breakCellSeparateLine="0"><hh:slash type="NONE" Crooked="0" isCounter="0"/><hh:backSlash type="NONE" Crooked="0" isCounter="0"/>${bdr('leftBorder')}${bdr('rightBorder')}${bdr('topBorder')}${bdr('bottomBorder')}<hh:diagonal type="SOLID" width="0.1 mm" color="#000000"/></hh:borderFill></hh:borderFills>` +
       `<hh:charProperties itemCnt="${cps.size}">${[...cps].map(charPr).join('')}</hh:charProperties>` +
       `<hh:tabProperties itemCnt="1"><hh:tabPr id="0" autoTabLeft="0" autoTabRight="0"/></hh:tabProperties>` +
       `<hh:paraProperties itemCnt="1"><hh:paraPr id="0" tabPrIDRef="0" condense="0" fontLineHeight="0" snapToGrid="1" suppressLineNumbers="0" checked="0"><hh:align horizontal="LEFT" vertical="BASELINE"/><hh:heading type="NONE" idRef="0" level="0"/><hh:breakSetting breakLatinWord="KEEP_WORD" breakNonLatinWord="KEEP_WORD" widowOrphan="0" keepWithNext="0" keepLines="0" pageBreakBefore="0" lineWrap="BREAK"/><hh:autoSpacing eAsianEng="0" eAsianNum="0"/><hh:margin><hc:intent value="0" unit="HWPUNIT"/><hc:left value="0" unit="HWPUNIT"/><hc:right value="0" unit="HWPUNIT"/><hc:prev value="0" unit="HWPUNIT"/><hc:next value="0" unit="HWPUNIT"/></hh:margin><hh:lineSpacing type="PERCENT" value="160" unit="HWPUNIT"/><hh:border borderFillIDRef="1" offsetLeft="0" offsetRight="0" offsetTop="0" offsetBottom="0" connect="0" ignoreMargin="0"/></hh:paraPr></hh:paraProperties>` +
       `<hh:styles itemCnt="1"><hh:style id="0" type="PARA" name="바탕글" engName="Normal" paraPrIDRef="0" charPrIDRef="0" nextStyleIDRef="0" langID="1042" lockForm="0"/></hh:styles></hh:refList><hh:compatibleDocument targetProgram="HWP2018"><hh:layoutCompatibility/></hh:compatibleDocument></hh:head>`;
-    const section = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><hs:sec ${NS}>${paras.join('')}</hs:sec>`;
+    const sectionXml = sc => `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><hs:sec ${NS}>${sc.paras.join('')}</hs:sec>`;
     const title = esc(baseName(state.fileName));
-    const hpf = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><opf:package ${NS} version="" unique-identifier="" id=""><opf:metadata><opf:title>${title}</opf:title><opf:language>ko</opf:language></opf:metadata><opf:manifest><opf:item id="header" href="Contents/header.xml" media-type="application/xml"/><opf:item id="section0" href="Contents/section0.xml" media-type="application/xml"/></opf:manifest><opf:spine><opf:itemref idref="header" linear="yes"/><opf:itemref idref="section0" linear="yes"/></opf:spine></opf:package>`;
+    const hpf = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><opf:package ${NS} version="" unique-identifier="" id=""><opf:metadata><opf:title>${title}</opf:title><opf:language>ko</opf:language></opf:metadata><opf:manifest><opf:item id="header" href="Contents/header.xml" media-type="application/xml"/>${secs.map((_, n) => `<opf:item id="section${n}" href="Contents/section${n}.xml" media-type="application/xml"/>`).join('')}</opf:manifest><opf:spine><opf:itemref idref="header" linear="yes"/>${secs.map((_, n) => `<opf:itemref idref="section${n}" linear="yes"/>`).join('')}</opf:spine></opf:package>`;
     const zip = new JSZip();
     zip.file('mimetype', 'application/hwp+zip', { compression: 'STORE', createFolders: false });
     zip.file('version.xml', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><hv:HCFVersion xmlns:hv="http://www.hancom.co.kr/hwpml/2011/version" tagetApplication="WORDPROCESSOR" major="5" minor="0" micro="5" buildNumber="0" os="1" xmlVersion="1.4" application="Meow-PDF" appVersion="' + APP_VERSION + '"/>');
     zip.file('META-INF/container.xml', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><ocf:container xmlns:ocf="urn:oasis:names:tc:opendocument:xmlns:container" xmlns:hpf="http://www.hancom.co.kr/schema/2011/hpf"><ocf:rootfiles><ocf:rootfile full-path="Contents/content.hpf" media-type="application/hwpml-package+xml"/></ocf:rootfiles></ocf:container>', { createFolders: false });
     zip.file('META-INF/manifest.xml', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><odf:manifest xmlns:odf="urn:oasis:names:tc:opendocument:xmlns:manifest:1.0"/>', { createFolders: false });
     const nf = { createFolders: false };
-    zip.file('Contents/content.hpf', hpf, nf); zip.file('Contents/header.xml', header, nf); zip.file('Contents/section0.xml', section, nf);
+    zip.file('Contents/content.hpf', hpf, nf); zip.file('Contents/header.xml', header, nf); secs.forEach((sc, n) => zip.file(`Contents/section${n}.xml`, sectionXml(sc), nf));
     const data = await zip.generateAsync({ type: 'uint8array', compression: 'DEFLATE' }); hideLoading();
     const out = await deliverFile(data, baseName(state.fileName) + '.hwpx', 'application/hwp+zip');
-    if (out) toast('HWPX(한글)로 내보냈어요. 글자만 담기고 그림·도형은 빠져요.' + (noText ? ` (글자가 없는 ${noText}쪽은 빈 쪽으로 들어가요)` : '') + ' ' + out);
+    if (out) toast('HWPX(한글)로 내보냈어요. 쪽 크기 · 가로/세로 방향은 맞췄고, 글자만 담기고 그림·도형은 빠져요.' + (noText ? ` (글자가 없는 ${noText}쪽은 빈 쪽으로 들어가요)` : '') + ' ' + out);
   } catch (err) { console.error(err); toast('HWPX로 내보내지 못했어요. 다시 시도해 주세요.'); }
   finally { hideLoading(); }
 }
@@ -7632,8 +7972,8 @@ function pmClose() {
 $('#manageBtn').onclick = openPageManager;
 
 /* ════════════ 설정 창 · 단축키 사용자 지정 · 도구 모음 위치 ════════════ */
-const APP_VERSION = 'v0.8.1';
-const CHANGELOG = [{"v": "v0.8.1", "items": ["계정 · 프리미엄 창의 닫기 버튼을 오른쪽 위 X 버튼으로 변경", "테마 중 어두운 · 밝은 · 한국 · 일본 · 커피를 제외한 프루티거 에어로 · 핑크세상 · 드림코어 · 레트로게임 · 새싹은 프리미엄 전용 (선택 창에 표시, 프리미엄이 아니면 어두운 테마로 표시)", "개발자 콘솔에 game 명령어 추가 — 바로 타자연습으로 이동", "모바일에서 소개 페이지(index)는 항상 어두운 테마로 고정", "페이지 패널의 썸네일 좌우 여백을 줄이고 가운데 정렬", "상단 개발자 콘솔 버튼 또는 / 키로 여는 빠른 콘솔에 추천 명령어를 아래에 표시 (입력하면 이어지는 명령어와 인자를 추천, ↑↓ 선택 · Tab 채우기 · Enter 실행)", "개발자 계정의 키 발급 내역 보기에 진행 표시줄 추가 (불러오는 동안 진행 표시, 각 키의 남은 기간 막대)", "멀티작업 화면 위에 큰 \"멀티작업\" 제목을 넣고, 파일 버튼은 뷰어로, 빈 문서 버튼은 meow-pdf.com 편집기로 바꿈", "멀티작업 넓게 보기 버튼 추가 (탭 줄을 숨기고 패널을 넓혀요)", "전체 페이지 관리에 PDF 회전(왼쪽 · 오른쪽) 추가, 전체 페이지 관리는 이제 무료", "PPTX · HWP · MPDF 열기를 프리미엄에서 제외하고, PNG · DOCX 열기를 추가", "상단 탭의 \"불러오기\" 버튼을 없애고 + 버튼에서 새 탭 · 불러오기를 고르게 변경", "링크 도구 추가: 영역을 드래그해 웹 주소 또는 문서 안 페이지로 연결 (PDF에도 링크로 저장)", "왼쪽 도구 모음에서 모든 도구가 화면에 들어오도록 간격을 자동 조절", "한 페이지씩 보기에서 화면에 맞추면 오른쪽 스크롤바가 생기지 않도록 수정", "노트에 서식 도구 추가 (제목 · 목록 · 굵게 · 기울임 · 취소선 · 링크 · 표 · 서식 지우기), 서식을 쓰면 .md로 저장할지 물어봐요", "도구에 표 삽입 추가 (프리미엄) · 붙여넣기 버튼은 도구에서 제거 (Ctrl+V는 그대로)", "텍스트 일부만 다른 색으로 바꾸기: 글자를 선택하고 색을 고르면 그 부분만 바뀌고, 다시 수정할 때도 유지돼요", "새 테마 \"미니홈피\" 추가 (프리미엄) · 앞으로 추가되는 테마는 모두 프리미엄, 테마 창에서 무료 / 프리미엄을 나눠 표시", "내보내기에 HWP(HWPX) 추가, Word 이름을 docx로 변경"]}, {"v": "v0.7.5", "items": ["커피 테마 추가 (따뜻한 크림색 · 갈색 종이 느낌, 눈이 편한 밝은 테마, 콘솔: set theme 8)", "모바일에서 개체 · 글상자를 선택하거나 영역을 지정하면 오른쪽 위에 삭제 버튼 표시", "타자연습에 난이도 추가 (쉬움 · 보통 · 어려움, 난이도별 최고 점수와 점수 배율)", "타자연습에 아이템 추가 (얼음: 낱말 정지 · 폭탄: 화면 정리 · 느림: 속도 감소 · 두배: 점수 2배 · 금빛 냥: 목숨 +1)", "레트로게임 테마 추가 (픽셀 · 네온 · 스캔라인, 콘솔: set theme 9)", "새싹 테마 추가 (옛날 포털 사이트 느낌의 연두색 · 흰색 디자인, 콘솔: set theme 10)", "멀티작업에서 연 PDF · PPTX · HWP · 빈 문서 · 병합 문서를 'Meow-PDF로 편집하기' 버튼으로 바로 편집기로 가져와 수정 (콘솔: work edit)"]}, {"v": "v0.7.4", "items": ["결제 프리미엄과 이용 키 사용자를 구분해서 표시 (상단 버튼 · 계정 창 · 모바일 더보기), 이용 키 사용자도 남은 기간 표시", "프리미엄 남은 이용 기간 표시 — 상단 계정 버튼(예: 프리미엄 | 120일), 계정 창(만료일 · 남은 일수), 모바일 더보기. 만료 7일 전 안내, 30일 이내에는 계정 창에서 바로 연장 가능, 사용 중 기간이 끝나면 자동으로 해제", "모바일에서 파일을 불러올 때 전체화면이 풀리던 문제 개선 (선택이 끝나면 전체화면으로 복귀)", "멀티작업에 타자연습 게임 '타자 비' 추가 (떨어지는 낱말을 입력해 없애기 · 한글 / 영어 / 섞어서 · 최고 점수 저장, 콘솔: work type)", "숨은 재미 요소(이스터에그) 추가 — 찾아보세요", "개발자 콘솔에도 숨은 명령어 1개 추가"]}, {"v": "v0.7.3", "items": ["한국 · 일본 테마 추가 (태극기 · 일장기 색)", "드림코어 테마 추가 (파스텔 하늘 · 구름 · 별빛 · 필름 입자 분위기, 콘솔: set theme 7)", "테마를 별도 선택 창에서 둥근 정사각형 버튼으로 고름 (테마별 아이콘 포함, 콘솔: set theme 5 / 6 · theme picker)", "발표 모드 레이저에 잔상 추가", "멀티작업의 빈 문서 · 병합을 멀티작업 탭으로 열기", "개발자 콘솔에 화면 맞춤 명령어 추가 (fit · fit page)", "모바일 헤더 크기를 조금 키움", "모바일 더보기 바텀 시트를 아이콘 타일 형태로 정리", "소개 페이지(index)에 지금까지의 개선 사항 반영"]}, {"v": "v0.7.2", "items": ["영역 지정 도구에 드롭다운 추가 (사각형 / 자유 선택 전환)", "영역 위에 마우스를 올리면 이동 커서, 가장자리 8개 점으로 늘리기 · 크기 조정 (Shift: 비율 유지)", "설정에서 페이지 이동 연출 켜기 / 끄기 (콘솔: set pageanim off)", "개발자 콘솔 도움말을 다시 표시하고 설명을 보기 쉽게 정리", "레이어를 클릭-드래그해 순서를 바꿀 수 있음 (자동 · 수동 레이어 공통, 터치는 길게 누른 뒤)", "프리미엄 상품 상세 창 추가: 결제 1년 · 이용 키 3개월 · 환불 7일 규정 안내", "옵션바의 굵기 · 크기 · 불투명에 숫자 입력칸 추가, 글자 위에서 좌우로 끌어 조절 (유니티식)", "캡처 시 어두운 뷰어 배경을 빼고 페이지 영역만 캡처 (붙여넣었을 때 어둡게 보이던 문제)", "Ctrl+클릭으로 글상자를 여러 개 골라 동시에 수정"]}, {"v": "v0.7.1", "items": ["상단 탭과 멀티작업 탭을 마우스로 끌어서 순서를 바꿀 수 있음", "개발자 콘솔 추가 (설정 > 개발자 콘솔, 단축키 Ctrl+`) — 예: set theme darktheme · set theme 1 · tool pen · zoom 150 · export docx", "개발자 콘솔의 전체 명령어와 도움말을 설정의 새 탭에 정리 (대부분의 기능을 콘솔로 실행 가능)", "멀티작업의 최근 접속 사이트를 하나씩 또는 모두 삭제할 수 있음", "Word(.docx)와 PNG로 내보내기 추가 — Word는 글자 편집용 / 페이지 이미지용, PNG는 현재 쪽 / 전체(ZIP)", "내보내기 목록을 작고 보기 쉽게 정리", "상단 헤더에 개발자 콘솔 버튼 추가 (프리미엄 전용)", "모바일 설정창 상단 메뉴를 아이콘 위주로 정리해 잘리지 않게 개선", "개발자 콘솔 도움말을 ? 에 마우스를 올리면 표시되도록 개선", "핑크세상 테마 추가 (연한 핑크, 콘솔: set theme 4)", "상단 개발자 콘솔 버튼 또는 / 키로 작은 입력 칸을 열어 바로 명령 실행 (Enter 실행 · Esc 닫기)"]}, {"v": "v0.6.5", "items": ["레이어 방식 선택 추가 — 개체마다 자동으로 만드는 ‘자동’과, 그림판처럼 레이어를 직접 추가·이름 변경·순서 변경·숨김·잠금·병합하는 ‘수동’ 중에서 고를 수 있음", "PC에서는 연속 스크롤 / 한 페이지씩 보기, 모바일에서는 한 페이지씩 넘기기 / 세로로 넘기기를 설정에서 선택 가능", "한 페이지씩 보기에서는 방향키·PageUp/Down·마우스 휠(끝에서)·페이지 목록으로 페이지를 넘김"]}, {"v": "v0.6.4", "items": ["형광펜이 글자를 흐리게 하던 문제 개선 — 곱하기(multiply) 방식으로 칠해 글자가 선명하게 보이고(저장 PDF 포함), 글자 위에 칠하면 글자 줄에 맞는 깔끔한 띠로 자동 정리(‘글자 맞춤’, 끄면 자유롭게)", "헤더에 전체화면 / 해제 버튼 추가", "모바일 확대·축소(핀치) 중에는 이미지를 다시 그리지 않고 손을 뗀 뒤 한 번만 선명하게 그려 끊김을 줄임", "도구에 영역 지정 추가 — 사각형 또는 자유 선택으로 지정해 펜 그림·도형의 일부만 잘라 이동·복사·붙여넣기·삭제(그림판 방식), 영역 이미지 복사·저장·글자 복사 (단축키 R)", "업데이트 내역을 0.1.x · 0.2.x … 처럼 버전 두 번째 자리(y)별로 묶어 표시", "설정에서 버전 정보와 고객센터를 별도 메뉴로 분리", "모바일 상단 버튼 간격과 크기를 줄여 비좁게 보이던 문제를 완화(계정 버튼은 더보기 메뉴에도 추가)", "멀티작업의 8번째 버튼으로 계산기 추가 (키보드 입력 · 괄호 · % · 제곱근 · 기록 · 복사 · 노트 · 페이지 삽입)", "줌 바를 마우스로 끌어 옮길 수 있게 함. 위·아래 가장자리에서는 가로로, 왼쪽·오른쪽 가장자리에서는 세로로 자동 전환되고 위치는 저장됨", "고객센터 이메일 보내기 링크도 contact@meow-pdf.com으로 변경"]}, {"v": "v0.6.3", "items": ["멀티작업 첫 화면에 빈 문서 · 파일 병합 · 파일 압축 버튼을 추가하고, 버튼 줄은 패널 크기에 따라 한 줄에 1개 · 2개 · 4개로만 배치", "설정에 편집기 언어 변경 추가: 한국어 / English / 日本語 / 中文", "PDF 글자를 끌어서 옮길 때 뒤에 있는 원래 글자가 잠깐 보이던 문제를 수정", "업데이트 내역을 버전 묶음(beta / 0.0.1~0.5.3 / 0.6.1~)으로 나눠 계층형으로 표시", "설정의 테마에 프루티거 에어로 테마 추가(하늘색 · 연두색 유리 질감)"]}, {"v": "v0.6.2", "items": ["소개 페이지 푸터에 상호(타니아)와 주소(경기도 부천시 중동로 108)를 표기", "소개 페이지에 환불정책 추가: 결제일로부터 3일 이내에 요청하면 환불", "소개 페이지에 GitHub 링크 추가", "소개 페이지와 안내 문서의 문의 이메일을 contact@meow-pdf.com으로 변경", "메모와 번역 도구(페이지 번역, 멀티작업의 번역 · 사전)를 프리미엄 기능으로 전환", "프리미엄 전용 기능의 자물쇠 표시를 없애고, 대신 버튼을 흐리게(밝기를 낮춰) 표시"]}, {"v": "v0.6.1", "items": ["멀티작업에 번역 · 사전 도구 추가: 글을 붙여넣어 번역하고, 단어를 찾으면 뜻을 보여주며 원하는 언어로 함께 번역", "번역 · 사전 결과를 복사하거나 노트에 추가, 현재 페이지에 텍스트로 삽입. 파파고 · 구글 번역 · DeepL · 네이버 사전 바로가기 제공", "번역 창 문구를 줄이고 디자인을 새로 다듬음(언어 바꾸기 버튼, 둥근 선택 버튼, 부드러운 그림자)", "Chrome 번역 모델을 내려받는 동안 진행률(%)을 표시하고, 45초 넘게 진행이 없으면 멈춤 안내와 '서버 번역만 사용' 선택지 표시", "모바일에서 파일을 열 때 용도에 맞는 모드를 고를 수 있음: 보기(읽기 전용) / 간편 수정(글자 수정 제외) / 기본(모든 기능). 더보기 메뉴에서 언제든 바꿀 수 있음", "PDF 글자를 클릭해 수정할 때 원본 글자의 자간을 읽어와 같은 간격으로 반영", "텍스트 도구, 수정 중인 글자, 선택한 글자에서 자간(-10% ~ 50%)을 직접 설정할 수 있음. 저장 · 인쇄 · 내보내기에도 반영", "멀티작업 첫 화면을 새로 디자인: 글자를 최소화하고 둥근 타일 버튼(파일 · 웹 · 번역 · OneCompiler)과 간결한 바로가기 칩으로 정리", "개체나 텍스트를 선택하면 왼쪽 위에 이동 핸들이 나타나 끌어서 옮길 수 있음", "PDF 글자를 클릭해 수정할 때, 텍스트 도구로 입력할 때도 왼쪽 위에 이동 핸들이 나타나 글자 위치를 끌어서 옮길 수 있음"]}, {"v": "v0.5.3", "items": ["소개 페이지(index)와 편집기의 파비콘을 같은 고양이 아이콘으로 통일", "페이지 번역 추가: 도구 모음 가장 오른쪽의 번역 버튼으로 현재 보고 있는 페이지만 번역", "번역 방식 선택: 원문 / 전체 번역 / 마우스 오버 번역(글자에 마우스를 올리면 그 문단만 번역)", "원본 언어 자동 감지, 번역할 언어 선택(기본 한국어). 크롬 내장 번역을 우선 사용하고, 없으면 서버 번역(키 없이도 쓰는 무료 엔진 포함)으로 대체", "번역에 실패하면 원인(서버 미배포, 사용량 초과, Chrome 내장 번역 사용 불가 사유)을 안내", "Chrome 번역 모델 준비가 오래 걸리면 기다리지 않고 서버 번역으로 먼저 번역하고, 준비되면 다음부터 내장 번역 사용", "서버 번역: 한국어 등 긴 글이 무료 엔진의 글자 수(바이트) 제한에 걸려 실패하던 문제 수정", "HWP 파일이 열리지 않던 문제 수정(압축 해제 오류) — 실제 HWP 샘플 파일로 확인"]}, {"v": "v0.5.2", "items": ["편집 화면 상단의 고양이 아이콘을 누르면 소개 페이지로 돌아가도록 변경"]}, {"v": "v0.5.1", "items": ["서비스 소개 페이지(meow-pdf.com)를 새로 만들고, 기존 편집 화면은 /edit 주소로 이동", "소개 페이지 하단에 사업자 정보(Thaniya project, 사업자 등록번호) 표기", "옵션바의 색상 영역이 밖으로 튀어나오거나 잘리던 문제를 수정", "텍스트 정렬의 기본값을 왼쪽 정렬로 변경", "도형에 별 추가", "도형의 원 버튼에 그래픽이 비어 있던 문제를 수정"]}, {"v": "v0.4.5", "items": ["시작 화면의 버튼(파일 열기, 빈 문서로 시작, 파일 병합, 파일 압축)을 모서리가 둥근 정사각형 타일 형태로 변경", "텍스트 왼쪽 정렬 / 가운데 정렬(기본) / 오른쪽 정렬 설정 추가 (새 텍스트, 편집 중, 선택한 텍스트에 적용)", "도구 모음을 좌측에 배치했을 때 도구 버튼 크기를 줄임", "캡처, 인쇄, 프레젠테이션 버튼을 다시 도구 모음으로 이동"]}, {"v": "v0.4.4", "items": ["헤더의 테마 변경 버튼과 GitHub 버튼을 제거하고, 화면 밝기 조절을 설정의 화면 · 레이아웃 항목으로 이동", "도구 툴바의 저장 관련 버튼(저장, 다른 이름으로 저장)을 헤더로 이동", "헤더의 새 문서, 열기 버튼을 제거하고 실행 취소, 다시 실행, 캡처, 인쇄, 발표 버튼을 헤더로 이동", "결제 안내에 최초 1회만 결제하면 계속 이용할 수 있다는 내용을 깔끔한 카드 UI로 명시", "옵션바의 크기(내용)에 따라 화면이 재조정되지 않도록 옵션바 높이를 고정"]}, {"v": "v0.4.3", "items": ["사이드 메뉴 방식의 UI 기반 설정 창을 열 수 있는 버튼 아이콘을 상단 레이아웃에 추가, 해당 설정 창 내에서 애플리케이션 버전 정보 확인과 고객센터 피드백 제출이 가능하도록 구현", "이때 접수된 불편사항은 개발자 계정의 관리자 대시보드나 DB로 수집되어 일괄 조회 및 관리가 가능", "사용자가 주요 기능의 단축키를 직접 매핑하고 변경할 수 있는 커스터마이징 기능과 함께 기존 상단에 고정되어 있던 도구 툴바 배치를 좌측 정렬 또는 상단 정렬로 선택할 수 있는 레이아웃 옵션을 제공", "반응형 UX 개선을 위해 모바일 환경에서 가로보기(Landscape) 모드로 전환될 경우, 페이지 패널이 자동으로 화면 좌측에 정렬되도록 미디어 쿼리 및 Flex/Grid 레이아웃 구조를 보완"]}, {"v": "v0.4.2", "items": ["모바일 화면 크기에 맞춰 반응형 뷰포트 및 레이아웃 적용", "모바일 환경에서 레이어, 노트, 멀티작업 등 부가 기능 숨기고 최소한의 핵심 기능만 남기도록 개선", "모바일 화면에서 스와이프 및 드래그로 페이지 넘기기 기능 추가 (두 손가락 확대/축소 가능)", "모바일에서 페이지 패널을 화면 하단으로 배치", "상단 편집 버튼들을 깔끔하게 재배치하고, 계정 버튼을 저장 버튼 왼쪽으로 이동", "텍스트 직접 수정 기능 유지", "텍스트 선택 시 뜨는 옵션바(optbar)가 화면 밖으로 나가지 않도록 두 줄로 예쁘게 배치하고, 옵션바 표시 여부에 따라 화면 페이지가 밀리거나 재조정되지 않도록 수정"]}, {"v": "v0.4.1", "items": ["모바일 화면 크기에 맞춰 반응형 뷰포트 및 레이아웃 적용", "모바일 환경에서 레이어, 노트, 멀티작업 등 부가 기능 숨기고 최소한의 핵심 기능만 남기도록 개선", "모바일 화면에서 스와이프 및 드래그로 페이지 넘기기 기능 추가 (두 손가락 확대/축소 가능)", "모바일에서 페이지 패널을 화면 하단으로 배치", "상단 편집 버튼들을 깔끔하게 재배치하고, 계정 버튼을 저장 버튼 왼쪽으로 이동", "텍스트 직접 수정 기능 유지", "텍스트 선택 시 뜨는 옵션바(optbar)가 화면 밖으로 나가지 않도록 두 줄로 예쁘게 배치하고, 옵션바 표시 여부에 따라 화면 페이지가 밀리거나 재조정되지 않도록 수정"]}, {"v": "v0.3.3", "items": ["키 발급 관련 일부 로직 수정"]}, {"v": "v0.3.2", "items": ["키 발급 관련 서버 연결 문제 해결"]}, {"v": "v0.3.1", "items": ["파일이 없는 화면에서 파일 열기, 빈 문서로 시작 옆에 파일 병합, 파일 압축 기능을 배치", "파일이 없는 화면에서 안내 텍스트를 최소화하여 UI 깔끔하게 수정", "저장 버튼에 파일 압축해서 내보내기(10%, 20%, 40%)옵션 추가 - 프리미엄 사용자 한정, PPTX파일로 내보내기 옵션 추가", "화면에 다른 PDF를 드래그해서 넣으면 멀티 탭으로 넣기, 현재 파일에 병합하기 옵션이 나타나도록 기능 추가 (병합하기 시 두 파일의 병합순서 드래그로 결정 가능)", "페이지 패널에 전체 페이지 관리하기 버튼 추가-프리미엄", "전체 페이지 관리하기 시 그리드형태로(크기조절 가능) 각 페이지가 화면에 가득 차게 나타나며 드래그하여 페이지 순서를 바꿀 수도 있도 여러 페이지를 삭제하거나 이름을 바꾸거나 계층구조 수정 가능하도록 기능 추가", "페이지 패널의 버튼 UI 전반적으로 깔끔하게 수정", "헤더에 있는 PDF제목 클릭하여 직접 수정 가능하도록 개선"]}, {"v": "v0.2.2", "items": ["로그인시스템 및 결제 시스템 문제 해결"]}, {"v": "v0.2.1", "items": ["일부 기능 유료화 도입"]}, {"v": "v0.1.3", "items": ["온라인 컴파일러 프로그램 원컴파일러(OneCompiler) 바로가기가 멀티작업에서 제공되도록 개선"]}, {"v": "v0.1.2", "items": ["음성 이름 편집 및 음성 내보내기 기능 추가"]}, {"v": "v0.1.1", "items": ["음성녹음 및 재생 기능 추가", "음성녹음 MPDF에 삽입 기능 추가 (따로 내보내기 가능, MPDF 확장자 파일에 삽입된 상태로 저장 가능)"]}, {"v": "v0.0.1", "items": ["멀티작업에서 웹페이지를 열 수 있도록 편의 향상", "화면맞춤 상태에서 PDF내 텍스트상자 클릭 시 텍스트 수정이 진행되지 않는 문제 해결", "멀티작업 화면에 파일 드래그 시 일반 편집기 화면에 파일이 닿으면 파일 드롭 안내가 사라지지 않는 문제 해결", "페이지 패널의 크기 조절 시 썸네일로 보기의 각 썸네일 크기도 패널의 크기에 맞게 조절되도록 개선", "페이지 북마크기능 추가, 페이지 패널 상단에 북마크 바로가기 드롭다운 리스트 버튼 추가", "텍스트의 글꼴 드롭다운 버튼에서 각 버튼의 글꼴 모양을 이름과 함께 미리보기 제공", "PDF전체에서 특정 글자 빠르게 찾는 검색기능 제공", "PDF 내에서 기존에 있는 텍스트를 수정하는 로직 개편 (기존에 비해 많은 양의 텍스트를 한 번에 수정 가능하도록)", "Meow-PDF 파비콘 추가"]}, {"v": "beta 0.0.5", "items": ["세로모드 시 페이지, 레이어, 노트를 모두 하단 사이드바에서 전환 가능한 형태로 변경", "모든 사이드바를 테두리 마우스 드래그를 통해 크기 조절 가능하도록 변경 (기본 좌우, 세로모드는 상하)", "페이지 맞춤 시 사이드바를 고려하여 페이지가 화면에 모두 들어오게 조절되도록 개선 (화면 비율이 작은 경우)", "검은 고양이 스티커를 넣는 기능을 추가 (이미지 버튼을 전환 가능)", "레이어/노트 패널에 탭전환 방식으로 멀티작업 탭 추가 (파일탐색기를 여는 버튼이 중앙에 있으며 누르면 파일을 불러옴, 불러온 파일은 해당 패널에 가득 차도록 띄워지며 PDF를 보며 작업 가능), 멀티작업 패널은 또한 내부에서 멀티테스킹탭으로 관리 가능", "레이어/노트/멀티작업 여닫기 패널 버튼을 작업 사이드바 버튼으로 이미지 변경", "PDF 업로드 전 나타나는 화면 문구에서 PDF뿐만 아니라 PPTX파일도 수정 가능하다고 명시", "스프라이트시트, HWP 파일도 삽입/편집 가능하도록 제공"]}, {"v": "beta 0.0.4", "items": ["페이지 계층관리 시 페이지를 끈 상태에서 마우스 휠을 굴리면 페이지가 올라갔다 내려갔다 하게 되도록 변경", "도형을 그리고 Ctrl+Z를 누르면 간혹 기능이 먹히지 않는 문제 해결", "화면 밝기 조절 바 시간 표시 부분 왼쪽에 추가", "페이지에 주석달기 기능 추가 (주석을 달면 그 페이지는 눈에 잘 띄도록 변경)", "페이지 목록으로보기 기능 추가 (기본적으로 페이지1 ... 로 표시되며 페이지이름 변경 가능)", "인쇄기능 추가", "레이어 병합 기능 추가", "편집화면 및 프리젠테이션 화면에서 Ctrl+스크롤 하면 마우스 커서를 중심으로 화면이 줌아웃되도록 변경", "작게 https://github.com/architect0509/meow-PDF페이지로 이동되는 버튼을 방해되지 않도록 배치", "텍스트나 도형 그리기에서 상단 optbar가 가로로 너무 길어지는 문제 색상 팔레트의 크기를 줄이고 슬라이더들을 정리하여 화면 내에 기능이 모두 들어오도록 개선", "글자선택을 개체와 통일시키고 PDF내 모든 텍스트상자를 클릭만으로 수정 가능하도록 개선", "색상 버튼의 개수를 5개로 줄이고 우측에 색상 팔레트를 크게 배치하며 5개의 작은 색상 버튼 아래에는 최근에 사용한 색상 5개가 나타나게 되도록 개선", "UI의 배치가 전부 상하로 이동하는 세로모드 변환 기능을 제공", "멀티테스킹탭 기능을 지원 (툴바 위에 삭제 및 불러오기, 추가 가능한 형식으로)", "레이어가 있는 위치에 탭전환 방식으로 노트를 작성할 수 있도록 기능 추가(노트는 다중 페이지로 관리 가능하며 .txt확장자 파일로 내보낼 수 있음)"]}, {"v": "beta 0.0.3", "items": ["현재화면 캡쳐기능 제공(버튼의 위치는 저장버튼 좌측)", "상단 레이어버튼 옆에 현재시간,분 표시", "저장버튼 좌측 프리젠테이션모드 버튼 추가 -단축키 여닫기 p(프리젠테이션 내에는 마찬가지로 강조표시, 그리기, 직선, 도형, 지우개, 텍스트툴, 그리고 레이저를 사용가능한 마우스로 끌어서 옮길 수 있는 조작 도구창이 존재)", "레이저는 프리젠테이션중에만 사용 가능하며 L키로 생성/제거 가능", "이미지 버튼 우측에 C단축키로 메모 생성기능", "메모는 위치이동 및 크기조절 가능, 다중줄 글쓰기 가능, 접기 가능, 글씨 크기조절 가능", "ppt를 pdf로 가져오기 가능하도록 개선", "페이지 그룹화를 통한 계층관리 가능하도록 개선", "편집기록을 가진 프로젝트 파일인 mpdf확장자로 내보내기&불러오기 기능 추가", "(저장 및 다른이름으로 저장에 옵션 표시- pdf of mpdf) 확장자가 달라도 일반 저장의 기본옵션은 덮어쓰기", "텍스트에 채우기 옵션 추가 (기본 투명), 도형에 채우기 옵션 추가 (기본 투명, 투명도 조절 가능)", "페이지 넘기기 단축키에 Pg Up 과 Pg Down도 추가", "각 도구의 색깔은 그림판 팔레트 UI처럼 줄바꿈 이용, 사용자 지정 색상은 크기 증가, 스포이드버튼도 추가", "프로그램 내의 황색은 #dbbe43로, 배경의 어두운 색은 좀 더 무채색에 가깝게 변경"]}, {"v": "beta 0.0.2", "items": ["전반적인 테마를 변경하였으며 개선된 항목은 다음과 같습니다. 글자의 폰트 및 굵기, 기울임꼴 추가,", "화면맞춤 버튼 하단에 추가", "처음 저장버튼 누를때 파일을 불러온 경로에 자동 덮어씌우기 개선", "프로그램 테마색깔 황색으로 변경", "페이지 패널 버튼 좌측에 아이콘 추가, 패널 버튼과 거리 두기", "자 툴을 직선 그리기 툴로 변경", "펜 및 직선 그리기 툴 사용 시 붓 영역 화면 내에 표시", "펜 및 직선 그리기 툴 팔레트에 파스텔톤의 색상 추가", "강조표시는 직선형, 붓형 선택 가능하게 개선", "상단 툴을 분리 ( 글자선택과 개체 | 강조표시, 그리기, 직선 | 도형, 지우개, 텍스트 | 붙여넣기, 이미지 )", "각각의 버튼에 단축키 부여 ( 1, 2 | q, w, e | a, s, d | z, x )"]}];
+const APP_VERSION = 'v0.8.2';
+const CHANGELOG = [{"v": "v0.8.2", "d": "2026.10.15", "items": ["프리미엄 기능으로 커스텀 테마를 추가 — 배경색 · 보조색 · 글꼴을 직접 골라 나만의 테마를 만들 수 있고, 글자색과 밝기는 배경색에 맞춰 자동으로 정해짐", "글꼴을 6종에서 39종으로 확대 (고딕 A1 · IBM 플렉스 산스 · 블랙한산스 · 도현 · 주아 · 개구 · 고운바탕 · Roboto · Playfair Display 등) — 사이트와 텍스트 모두에 적용", "디지털화 도구 추가 — PNG 같은 이미지, 스캔 페이지, PDF의 글자를 클릭해서 수정할 수 있는 글자 개체로 바꿔줌 (글자가 있는 PDF는 인식 없이 바로, 이미지는 글자 인식으로 변환하며 원래 글자의 위치 · 크기 · 색 · 배경색을 맞춤)", "디지털화 도구 옆 드롭다운에서 ‘현재 페이지’와 ‘전체 페이지’ 범위를 바꿀 수 있고, 이미지 글자 인식 언어(한국어 · 영어)도 고를 수 있음", "글자 크기를 소수점(0.1 단위)까지 지정할 수 있고, 자간도 0.1% 단위로 조절 가능. 디지털화할 때 크기는 소수점으로, 폭은 자간으로 맞춰서 띄어쓰기가 사라지지 않음", "docx · HWP(HWPX) 내보내기에서 쪽 크기와 가로/세로 방향을 쪽마다 그대로 맞춰 내용이 쪽 밖으로 나가지 않게 개선", "docx ‘글자 편집용’ 내보내기가 이미지 · 도형 · 그림 · 배경색은 쪽 배경으로 그대로 보존하고, 글자는 원래 자리의 글상자로 담아 바로 수정할 수 있게 개선", "레이어 이름은 목록을 더블클릭(더블탭)해도 바꿀 수 있도록 수정 (자동 · 수동 모두)", "멀티작업 버튼을 3×3으로 고정하고, 화면이 작아지면 버튼이 가려지지 않고 함께 작아지도록 개선", "PNG 파일을 열면 빈 흰 페이지로 보이던 문제를 수정", "업데이트 내역의 버전마다 업데이트 날짜를 표시"]}, {"v": "v0.8.1", "items": ["계정 · 프리미엄 창의 닫기 버튼을 오른쪽 위 X 버튼으로 변경", "테마 중 어두운 · 밝은 · 한국 · 일본 · 커피를 제외한 프루티거 에어로 · 핑크세상 · 드림코어 · 레트로게임 · 새싹은 프리미엄 전용 (선택 창에 표시, 프리미엄이 아니면 어두운 테마로 표시)", "개발자 콘솔에 game 명령어 추가 — 바로 타자연습으로 이동", "모바일에서 소개 페이지(index)는 항상 어두운 테마로 고정", "페이지 패널의 썸네일 좌우 여백을 줄이고 가운데 정렬", "상단 개발자 콘솔 버튼 또는 / 키로 여는 빠른 콘솔에 추천 명령어를 아래에 표시 (입력하면 이어지는 명령어와 인자를 추천, ↑↓ 선택 · Tab 채우기 · Enter 실행)", "개발자 계정의 키 발급 내역 보기에 진행 표시줄 추가 (불러오는 동안 진행 표시, 각 키의 남은 기간 막대)", "멀티작업 화면 위에 큰 \"멀티작업\" 제목을 넣고, 파일 버튼은 뷰어로, 빈 문서 버튼은 meow-pdf.com 편집기로 바꿈", "멀티작업 넓게 보기 버튼 추가 (탭 줄을 숨기고 패널을 넓혀요)", "전체 페이지 관리에 PDF 회전(왼쪽 · 오른쪽) 추가, 전체 페이지 관리는 이제 무료", "PPTX · HWP · MPDF 열기를 프리미엄에서 제외하고, PNG · DOCX 열기를 추가", "상단 탭의 \"불러오기\" 버튼을 없애고 + 버튼에서 새 탭 · 불러오기를 고르게 변경", "링크 도구 추가: 영역을 드래그해 웹 주소 또는 문서 안 페이지로 연결 (PDF에도 링크로 저장)", "왼쪽 도구 모음에서 모든 도구가 화면에 들어오도록 간격을 자동 조절", "한 페이지씩 보기에서 화면에 맞추면 오른쪽 스크롤바가 생기지 않도록 수정", "노트에 서식 도구 추가 (제목 · 목록 · 굵게 · 기울임 · 취소선 · 링크 · 표 · 서식 지우기), 서식을 쓰면 .md로 저장할지 물어봐요", "도구에 표 삽입 추가 (프리미엄) · 붙여넣기 버튼은 도구에서 제거 (Ctrl+V는 그대로)", "텍스트 일부만 다른 색으로 바꾸기: 글자를 선택하고 색을 고르면 그 부분만 바뀌고, 다시 수정할 때도 유지돼요", "새 테마 \"미니홈피\" 추가 (프리미엄) · 앞으로 추가되는 테마는 모두 프리미엄, 테마 창에서 무료 / 프리미엄을 나눠 표시", "내보내기에 HWP(HWPX) 추가, Word 이름을 docx로 변경"], "d": "2026.10.15"}, {"v": "v0.7.5", "items": ["커피 테마 추가 (따뜻한 크림색 · 갈색 종이 느낌, 눈이 편한 밝은 테마, 콘솔: set theme 8)", "모바일에서 개체 · 글상자를 선택하거나 영역을 지정하면 오른쪽 위에 삭제 버튼 표시", "타자연습에 난이도 추가 (쉬움 · 보통 · 어려움, 난이도별 최고 점수와 점수 배율)", "타자연습에 아이템 추가 (얼음: 낱말 정지 · 폭탄: 화면 정리 · 느림: 속도 감소 · 두배: 점수 2배 · 금빛 냥: 목숨 +1)", "레트로게임 테마 추가 (픽셀 · 네온 · 스캔라인, 콘솔: set theme 9)", "새싹 테마 추가 (옛날 포털 사이트 느낌의 연두색 · 흰색 디자인, 콘솔: set theme 10)", "멀티작업에서 연 PDF · PPTX · HWP · 빈 문서 · 병합 문서를 'Meow-PDF로 편집하기' 버튼으로 바로 편집기로 가져와 수정 (콘솔: work edit)"], "d": "2026.10.14"}, {"v": "v0.7.4", "items": ["결제 프리미엄과 이용 키 사용자를 구분해서 표시 (상단 버튼 · 계정 창 · 모바일 더보기), 이용 키 사용자도 남은 기간 표시", "프리미엄 남은 이용 기간 표시 — 상단 계정 버튼(예: 프리미엄 | 120일), 계정 창(만료일 · 남은 일수), 모바일 더보기. 만료 7일 전 안내, 30일 이내에는 계정 창에서 바로 연장 가능, 사용 중 기간이 끝나면 자동으로 해제", "모바일에서 파일을 불러올 때 전체화면이 풀리던 문제 개선 (선택이 끝나면 전체화면으로 복귀)", "멀티작업에 타자연습 게임 '타자 비' 추가 (떨어지는 낱말을 입력해 없애기 · 한글 / 영어 / 섞어서 · 최고 점수 저장, 콘솔: work type)", "숨은 재미 요소(이스터에그) 추가 — 찾아보세요", "개발자 콘솔에도 숨은 명령어 1개 추가"], "d": "2026.10.14"}, {"v": "v0.7.3", "items": ["한국 · 일본 테마 추가 (태극기 · 일장기 색)", "드림코어 테마 추가 (파스텔 하늘 · 구름 · 별빛 · 필름 입자 분위기, 콘솔: set theme 7)", "테마를 별도 선택 창에서 둥근 정사각형 버튼으로 고름 (테마별 아이콘 포함, 콘솔: set theme 5 / 6 · theme picker)", "발표 모드 레이저에 잔상 추가", "멀티작업의 빈 문서 · 병합을 멀티작업 탭으로 열기", "개발자 콘솔에 화면 맞춤 명령어 추가 (fit · fit page)", "모바일 헤더 크기를 조금 키움", "모바일 더보기 바텀 시트를 아이콘 타일 형태로 정리", "소개 페이지(index)에 지금까지의 개선 사항 반영"], "d": "2026.10.14"}, {"v": "v0.7.2", "items": ["영역 지정 도구에 드롭다운 추가 (사각형 / 자유 선택 전환)", "영역 위에 마우스를 올리면 이동 커서, 가장자리 8개 점으로 늘리기 · 크기 조정 (Shift: 비율 유지)", "설정에서 페이지 이동 연출 켜기 / 끄기 (콘솔: set pageanim off)", "개발자 콘솔 도움말을 다시 표시하고 설명을 보기 쉽게 정리", "레이어를 클릭-드래그해 순서를 바꿀 수 있음 (자동 · 수동 레이어 공통, 터치는 길게 누른 뒤)", "프리미엄 상품 상세 창 추가: 결제 1년 · 이용 키 3개월 · 환불 7일 규정 안내", "옵션바의 굵기 · 크기 · 불투명에 숫자 입력칸 추가, 글자 위에서 좌우로 끌어 조절 (유니티식)", "캡처 시 어두운 뷰어 배경을 빼고 페이지 영역만 캡처 (붙여넣었을 때 어둡게 보이던 문제)", "Ctrl+클릭으로 글상자를 여러 개 골라 동시에 수정"], "d": "2026.10.13"}, {"v": "v0.7.1", "items": ["상단 탭과 멀티작업 탭을 마우스로 끌어서 순서를 바꿀 수 있음", "개발자 콘솔 추가 (설정 > 개발자 콘솔, 단축키 Ctrl+`) — 예: set theme darktheme · set theme 1 · tool pen · zoom 150 · export docx", "개발자 콘솔의 전체 명령어와 도움말을 설정의 새 탭에 정리 (대부분의 기능을 콘솔로 실행 가능)", "멀티작업의 최근 접속 사이트를 하나씩 또는 모두 삭제할 수 있음", "Word(.docx)와 PNG로 내보내기 추가 — Word는 글자 편집용 / 페이지 이미지용, PNG는 현재 쪽 / 전체(ZIP)", "내보내기 목록을 작고 보기 쉽게 정리", "상단 헤더에 개발자 콘솔 버튼 추가 (프리미엄 전용)", "모바일 설정창 상단 메뉴를 아이콘 위주로 정리해 잘리지 않게 개선", "개발자 콘솔 도움말을 ? 에 마우스를 올리면 표시되도록 개선", "핑크세상 테마 추가 (연한 핑크, 콘솔: set theme 4)", "상단 개발자 콘솔 버튼 또는 / 키로 작은 입력 칸을 열어 바로 명령 실행 (Enter 실행 · Esc 닫기)"], "d": "2026.10.13"}, {"v": "v0.6.5", "items": ["레이어 방식 선택 추가 — 개체마다 자동으로 만드는 ‘자동’과, 그림판처럼 레이어를 직접 추가·이름 변경·순서 변경·숨김·잠금·병합하는 ‘수동’ 중에서 고를 수 있음", "PC에서는 연속 스크롤 / 한 페이지씩 보기, 모바일에서는 한 페이지씩 넘기기 / 세로로 넘기기를 설정에서 선택 가능", "한 페이지씩 보기에서는 방향키·PageUp/Down·마우스 휠(끝에서)·페이지 목록으로 페이지를 넘김"], "d": "2026.10.13"}, {"v": "v0.6.4", "items": ["형광펜이 글자를 흐리게 하던 문제 개선 — 곱하기(multiply) 방식으로 칠해 글자가 선명하게 보이고(저장 PDF 포함), 글자 위에 칠하면 글자 줄에 맞는 깔끔한 띠로 자동 정리(‘글자 맞춤’, 끄면 자유롭게)", "헤더에 전체화면 / 해제 버튼 추가", "모바일 확대·축소(핀치) 중에는 이미지를 다시 그리지 않고 손을 뗀 뒤 한 번만 선명하게 그려 끊김을 줄임", "도구에 영역 지정 추가 — 사각형 또는 자유 선택으로 지정해 펜 그림·도형의 일부만 잘라 이동·복사·붙여넣기·삭제(그림판 방식), 영역 이미지 복사·저장·글자 복사 (단축키 R)", "업데이트 내역을 0.1.x · 0.2.x … 처럼 버전 두 번째 자리(y)별로 묶어 표시", "설정에서 버전 정보와 고객센터를 별도 메뉴로 분리", "모바일 상단 버튼 간격과 크기를 줄여 비좁게 보이던 문제를 완화(계정 버튼은 더보기 메뉴에도 추가)", "멀티작업의 8번째 버튼으로 계산기 추가 (키보드 입력 · 괄호 · % · 제곱근 · 기록 · 복사 · 노트 · 페이지 삽입)", "줌 바를 마우스로 끌어 옮길 수 있게 함. 위·아래 가장자리에서는 가로로, 왼쪽·오른쪽 가장자리에서는 세로로 자동 전환되고 위치는 저장됨", "고객센터 이메일 보내기 링크도 contact@meow-pdf.com으로 변경"], "d": "2026.10.13"}, {"v": "v0.6.3", "items": ["멀티작업 첫 화면에 빈 문서 · 파일 병합 · 파일 압축 버튼을 추가하고, 버튼 줄은 패널 크기에 따라 한 줄에 1개 · 2개 · 4개로만 배치", "설정에 편집기 언어 변경 추가: 한국어 / English / 日本語 / 中文", "PDF 글자를 끌어서 옮길 때 뒤에 있는 원래 글자가 잠깐 보이던 문제를 수정", "업데이트 내역을 버전 묶음(beta / 0.0.1~0.5.3 / 0.6.1~)으로 나눠 계층형으로 표시", "설정의 테마에 프루티거 에어로 테마 추가(하늘색 · 연두색 유리 질감)"], "d": "2026.10.13"}, {"v": "v0.6.2", "items": ["소개 페이지 푸터에 상호(타니아)와 주소(경기도 부천시 중동로 108)를 표기", "소개 페이지에 환불정책 추가: 결제일로부터 3일 이내에 요청하면 환불", "소개 페이지에 GitHub 링크 추가", "소개 페이지와 안내 문서의 문의 이메일을 contact@meow-pdf.com으로 변경", "메모와 번역 도구(페이지 번역, 멀티작업의 번역 · 사전)를 프리미엄 기능으로 전환", "프리미엄 전용 기능의 자물쇠 표시를 없애고, 대신 버튼을 흐리게(밝기를 낮춰) 표시"], "d": "2026.10.12"}, {"v": "v0.6.1", "items": ["멀티작업에 번역 · 사전 도구 추가: 글을 붙여넣어 번역하고, 단어를 찾으면 뜻을 보여주며 원하는 언어로 함께 번역", "번역 · 사전 결과를 복사하거나 노트에 추가, 현재 페이지에 텍스트로 삽입. 파파고 · 구글 번역 · DeepL · 네이버 사전 바로가기 제공", "번역 창 문구를 줄이고 디자인을 새로 다듬음(언어 바꾸기 버튼, 둥근 선택 버튼, 부드러운 그림자)", "Chrome 번역 모델을 내려받는 동안 진행률(%)을 표시하고, 45초 넘게 진행이 없으면 멈춤 안내와 '서버 번역만 사용' 선택지 표시", "모바일에서 파일을 열 때 용도에 맞는 모드를 고를 수 있음: 보기(읽기 전용) / 간편 수정(글자 수정 제외) / 기본(모든 기능). 더보기 메뉴에서 언제든 바꿀 수 있음", "PDF 글자를 클릭해 수정할 때 원본 글자의 자간을 읽어와 같은 간격으로 반영", "텍스트 도구, 수정 중인 글자, 선택한 글자에서 자간(-10% ~ 50%)을 직접 설정할 수 있음. 저장 · 인쇄 · 내보내기에도 반영", "멀티작업 첫 화면을 새로 디자인: 글자를 최소화하고 둥근 타일 버튼(파일 · 웹 · 번역 · OneCompiler)과 간결한 바로가기 칩으로 정리", "개체나 텍스트를 선택하면 왼쪽 위에 이동 핸들이 나타나 끌어서 옮길 수 있음", "PDF 글자를 클릭해 수정할 때, 텍스트 도구로 입력할 때도 왼쪽 위에 이동 핸들이 나타나 글자 위치를 끌어서 옮길 수 있음"], "d": "2026.10.12"}, {"v": "v0.5.3", "items": ["소개 페이지(index)와 편집기의 파비콘을 같은 고양이 아이콘으로 통일", "페이지 번역 추가: 도구 모음 가장 오른쪽의 번역 버튼으로 현재 보고 있는 페이지만 번역", "번역 방식 선택: 원문 / 전체 번역 / 마우스 오버 번역(글자에 마우스를 올리면 그 문단만 번역)", "원본 언어 자동 감지, 번역할 언어 선택(기본 한국어). 크롬 내장 번역을 우선 사용하고, 없으면 서버 번역(키 없이도 쓰는 무료 엔진 포함)으로 대체", "번역에 실패하면 원인(서버 미배포, 사용량 초과, Chrome 내장 번역 사용 불가 사유)을 안내", "Chrome 번역 모델 준비가 오래 걸리면 기다리지 않고 서버 번역으로 먼저 번역하고, 준비되면 다음부터 내장 번역 사용", "서버 번역: 한국어 등 긴 글이 무료 엔진의 글자 수(바이트) 제한에 걸려 실패하던 문제 수정", "HWP 파일이 열리지 않던 문제 수정(압축 해제 오류) — 실제 HWP 샘플 파일로 확인"], "d": "2026.10.12"}, {"v": "v0.5.2", "items": ["편집 화면 상단의 고양이 아이콘을 누르면 소개 페이지로 돌아가도록 변경"], "d": "2026.10.12"}, {"v": "v0.5.1", "items": ["서비스 소개 페이지(meow-pdf.com)를 새로 만들고, 기존 편집 화면은 /edit 주소로 이동", "소개 페이지 하단에 사업자 정보(Thaniya project, 사업자 등록번호) 표기", "옵션바의 색상 영역이 밖으로 튀어나오거나 잘리던 문제를 수정", "텍스트 정렬의 기본값을 왼쪽 정렬로 변경", "도형에 별 추가", "도형의 원 버튼에 그래픽이 비어 있던 문제를 수정"], "d": "2026.10.12"}, {"v": "v0.4.5", "items": ["시작 화면의 버튼(파일 열기, 빈 문서로 시작, 파일 병합, 파일 압축)을 모서리가 둥근 정사각형 타일 형태로 변경", "텍스트 왼쪽 정렬 / 가운데 정렬(기본) / 오른쪽 정렬 설정 추가 (새 텍스트, 편집 중, 선택한 텍스트에 적용)", "도구 모음을 좌측에 배치했을 때 도구 버튼 크기를 줄임", "캡처, 인쇄, 프레젠테이션 버튼을 다시 도구 모음으로 이동"], "d": "2026.10.12"}, {"v": "v0.4.4", "items": ["헤더의 테마 변경 버튼과 GitHub 버튼을 제거하고, 화면 밝기 조절을 설정의 화면 · 레이아웃 항목으로 이동", "도구 툴바의 저장 관련 버튼(저장, 다른 이름으로 저장)을 헤더로 이동", "헤더의 새 문서, 열기 버튼을 제거하고 실행 취소, 다시 실행, 캡처, 인쇄, 발표 버튼을 헤더로 이동", "결제 안내에 최초 1회만 결제하면 계속 이용할 수 있다는 내용을 깔끔한 카드 UI로 명시", "옵션바의 크기(내용)에 따라 화면이 재조정되지 않도록 옵션바 높이를 고정"], "d": "2026.10.12"}, {"v": "v0.4.3", "items": ["사이드 메뉴 방식의 UI 기반 설정 창을 열 수 있는 버튼 아이콘을 상단 레이아웃에 추가, 해당 설정 창 내에서 애플리케이션 버전 정보 확인과 고객센터 피드백 제출이 가능하도록 구현", "이때 접수된 불편사항은 개발자 계정의 관리자 대시보드나 DB로 수집되어 일괄 조회 및 관리가 가능", "사용자가 주요 기능의 단축키를 직접 매핑하고 변경할 수 있는 커스터마이징 기능과 함께 기존 상단에 고정되어 있던 도구 툴바 배치를 좌측 정렬 또는 상단 정렬로 선택할 수 있는 레이아웃 옵션을 제공", "반응형 UX 개선을 위해 모바일 환경에서 가로보기(Landscape) 모드로 전환될 경우, 페이지 패널이 자동으로 화면 좌측에 정렬되도록 미디어 쿼리 및 Flex/Grid 레이아웃 구조를 보완"], "d": "2026.10.12"}, {"v": "v0.4.2", "items": ["모바일 화면 크기에 맞춰 반응형 뷰포트 및 레이아웃 적용", "모바일 환경에서 레이어, 노트, 멀티작업 등 부가 기능 숨기고 최소한의 핵심 기능만 남기도록 개선", "모바일 화면에서 스와이프 및 드래그로 페이지 넘기기 기능 추가 (두 손가락 확대/축소 가능)", "모바일에서 페이지 패널을 화면 하단으로 배치", "상단 편집 버튼들을 깔끔하게 재배치하고, 계정 버튼을 저장 버튼 왼쪽으로 이동", "텍스트 직접 수정 기능 유지", "텍스트 선택 시 뜨는 옵션바(optbar)가 화면 밖으로 나가지 않도록 두 줄로 예쁘게 배치하고, 옵션바 표시 여부에 따라 화면 페이지가 밀리거나 재조정되지 않도록 수정"], "d": "2026.10.11"}, {"v": "v0.4.1", "items": ["모바일 화면 크기에 맞춰 반응형 뷰포트 및 레이아웃 적용", "모바일 환경에서 레이어, 노트, 멀티작업 등 부가 기능 숨기고 최소한의 핵심 기능만 남기도록 개선", "모바일 화면에서 스와이프 및 드래그로 페이지 넘기기 기능 추가 (두 손가락 확대/축소 가능)", "모바일에서 페이지 패널을 화면 하단으로 배치", "상단 편집 버튼들을 깔끔하게 재배치하고, 계정 버튼을 저장 버튼 왼쪽으로 이동", "텍스트 직접 수정 기능 유지", "텍스트 선택 시 뜨는 옵션바(optbar)가 화면 밖으로 나가지 않도록 두 줄로 예쁘게 배치하고, 옵션바 표시 여부에 따라 화면 페이지가 밀리거나 재조정되지 않도록 수정"], "d": "2026.10.11"}, {"v": "v0.3.3", "items": ["키 발급 관련 일부 로직 수정"], "d": "2026.10.10"}, {"v": "v0.3.2", "items": ["키 발급 관련 서버 연결 문제 해결"], "d": "2026.10.10"}, {"v": "v0.3.1", "items": ["파일이 없는 화면에서 파일 열기, 빈 문서로 시작 옆에 파일 병합, 파일 압축 기능을 배치", "파일이 없는 화면에서 안내 텍스트를 최소화하여 UI 깔끔하게 수정", "저장 버튼에 파일 압축해서 내보내기(10%, 20%, 40%)옵션 추가 - 프리미엄 사용자 한정, PPTX파일로 내보내기 옵션 추가", "화면에 다른 PDF를 드래그해서 넣으면 멀티 탭으로 넣기, 현재 파일에 병합하기 옵션이 나타나도록 기능 추가 (병합하기 시 두 파일의 병합순서 드래그로 결정 가능)", "페이지 패널에 전체 페이지 관리하기 버튼 추가-프리미엄", "전체 페이지 관리하기 시 그리드형태로(크기조절 가능) 각 페이지가 화면에 가득 차게 나타나며 드래그하여 페이지 순서를 바꿀 수도 있도 여러 페이지를 삭제하거나 이름을 바꾸거나 계층구조 수정 가능하도록 기능 추가", "페이지 패널의 버튼 UI 전반적으로 깔끔하게 수정", "헤더에 있는 PDF제목 클릭하여 직접 수정 가능하도록 개선"], "d": "2026.10.09"}, {"v": "v0.2.2", "items": ["로그인시스템 및 결제 시스템 문제 해결"], "d": "2026.10.09"}, {"v": "v0.2.1", "items": ["일부 기능 유료화 도입"], "d": "2026.10.08"}, {"v": "v0.1.3", "items": ["온라인 컴파일러 프로그램 원컴파일러(OneCompiler) 바로가기가 멀티작업에서 제공되도록 개선"], "d": "2026.10.08"}, {"v": "v0.1.2", "items": ["음성 이름 편집 및 음성 내보내기 기능 추가"], "d": "2026.10.08"}, {"v": "v0.1.1", "items": ["음성녹음 및 재생 기능 추가", "음성녹음 MPDF에 삽입 기능 추가 (따로 내보내기 가능, MPDF 확장자 파일에 삽입된 상태로 저장 가능)"], "d": "2026.10.06"}, {"v": "v0.0.1", "items": ["멀티작업에서 웹페이지를 열 수 있도록 편의 향상", "화면맞춤 상태에서 PDF내 텍스트상자 클릭 시 텍스트 수정이 진행되지 않는 문제 해결", "멀티작업 화면에 파일 드래그 시 일반 편집기 화면에 파일이 닿으면 파일 드롭 안내가 사라지지 않는 문제 해결", "페이지 패널의 크기 조절 시 썸네일로 보기의 각 썸네일 크기도 패널의 크기에 맞게 조절되도록 개선", "페이지 북마크기능 추가, 페이지 패널 상단에 북마크 바로가기 드롭다운 리스트 버튼 추가", "텍스트의 글꼴 드롭다운 버튼에서 각 버튼의 글꼴 모양을 이름과 함께 미리보기 제공", "PDF전체에서 특정 글자 빠르게 찾는 검색기능 제공", "PDF 내에서 기존에 있는 텍스트를 수정하는 로직 개편 (기존에 비해 많은 양의 텍스트를 한 번에 수정 가능하도록)", "Meow-PDF 파비콘 추가"], "d": "2026.10.06"}, {"v": "beta 0.0.5", "items": ["세로모드 시 페이지, 레이어, 노트를 모두 하단 사이드바에서 전환 가능한 형태로 변경", "모든 사이드바를 테두리 마우스 드래그를 통해 크기 조절 가능하도록 변경 (기본 좌우, 세로모드는 상하)", "페이지 맞춤 시 사이드바를 고려하여 페이지가 화면에 모두 들어오게 조절되도록 개선 (화면 비율이 작은 경우)", "검은 고양이 스티커를 넣는 기능을 추가 (이미지 버튼을 전환 가능)", "레이어/노트 패널에 탭전환 방식으로 멀티작업 탭 추가 (파일탐색기를 여는 버튼이 중앙에 있으며 누르면 파일을 불러옴, 불러온 파일은 해당 패널에 가득 차도록 띄워지며 PDF를 보며 작업 가능), 멀티작업 패널은 또한 내부에서 멀티테스킹탭으로 관리 가능", "레이어/노트/멀티작업 여닫기 패널 버튼을 작업 사이드바 버튼으로 이미지 변경", "PDF 업로드 전 나타나는 화면 문구에서 PDF뿐만 아니라 PPTX파일도 수정 가능하다고 명시", "스프라이트시트, HWP 파일도 삽입/편집 가능하도록 제공"], "d": "2026.10.06"}, {"v": "beta 0.0.4", "items": ["페이지 계층관리 시 페이지를 끈 상태에서 마우스 휠을 굴리면 페이지가 올라갔다 내려갔다 하게 되도록 변경", "도형을 그리고 Ctrl+Z를 누르면 간혹 기능이 먹히지 않는 문제 해결", "화면 밝기 조절 바 시간 표시 부분 왼쪽에 추가", "페이지에 주석달기 기능 추가 (주석을 달면 그 페이지는 눈에 잘 띄도록 변경)", "페이지 목록으로보기 기능 추가 (기본적으로 페이지1 ... 로 표시되며 페이지이름 변경 가능)", "인쇄기능 추가", "레이어 병합 기능 추가", "편집화면 및 프리젠테이션 화면에서 Ctrl+스크롤 하면 마우스 커서를 중심으로 화면이 줌아웃되도록 변경", "작게 https://github.com/architect0509/meow-PDF페이지로 이동되는 버튼을 방해되지 않도록 배치", "텍스트나 도형 그리기에서 상단 optbar가 가로로 너무 길어지는 문제 색상 팔레트의 크기를 줄이고 슬라이더들을 정리하여 화면 내에 기능이 모두 들어오도록 개선", "글자선택을 개체와 통일시키고 PDF내 모든 텍스트상자를 클릭만으로 수정 가능하도록 개선", "색상 버튼의 개수를 5개로 줄이고 우측에 색상 팔레트를 크게 배치하며 5개의 작은 색상 버튼 아래에는 최근에 사용한 색상 5개가 나타나게 되도록 개선", "UI의 배치가 전부 상하로 이동하는 세로모드 변환 기능을 제공", "멀티테스킹탭 기능을 지원 (툴바 위에 삭제 및 불러오기, 추가 가능한 형식으로)", "레이어가 있는 위치에 탭전환 방식으로 노트를 작성할 수 있도록 기능 추가(노트는 다중 페이지로 관리 가능하며 .txt확장자 파일로 내보낼 수 있음)"], "d": "2026.10.06"}, {"v": "beta 0.0.3", "items": ["현재화면 캡쳐기능 제공(버튼의 위치는 저장버튼 좌측)", "상단 레이어버튼 옆에 현재시간,분 표시", "저장버튼 좌측 프리젠테이션모드 버튼 추가 -단축키 여닫기 p(프리젠테이션 내에는 마찬가지로 강조표시, 그리기, 직선, 도형, 지우개, 텍스트툴, 그리고 레이저를 사용가능한 마우스로 끌어서 옮길 수 있는 조작 도구창이 존재)", "레이저는 프리젠테이션중에만 사용 가능하며 L키로 생성/제거 가능", "이미지 버튼 우측에 C단축키로 메모 생성기능", "메모는 위치이동 및 크기조절 가능, 다중줄 글쓰기 가능, 접기 가능, 글씨 크기조절 가능", "ppt를 pdf로 가져오기 가능하도록 개선", "페이지 그룹화를 통한 계층관리 가능하도록 개선", "편집기록을 가진 프로젝트 파일인 mpdf확장자로 내보내기&불러오기 기능 추가", "(저장 및 다른이름으로 저장에 옵션 표시- pdf of mpdf) 확장자가 달라도 일반 저장의 기본옵션은 덮어쓰기", "텍스트에 채우기 옵션 추가 (기본 투명), 도형에 채우기 옵션 추가 (기본 투명, 투명도 조절 가능)", "페이지 넘기기 단축키에 Pg Up 과 Pg Down도 추가", "각 도구의 색깔은 그림판 팔레트 UI처럼 줄바꿈 이용, 사용자 지정 색상은 크기 증가, 스포이드버튼도 추가", "프로그램 내의 황색은 #dbbe43로, 배경의 어두운 색은 좀 더 무채색에 가깝게 변경"], "d": "2026.10.04"}, {"v": "beta 0.0.2", "items": ["전반적인 테마를 변경하였으며 개선된 항목은 다음과 같습니다. 글자의 폰트 및 굵기, 기울임꼴 추가,", "화면맞춤 버튼 하단에 추가", "처음 저장버튼 누를때 파일을 불러온 경로에 자동 덮어씌우기 개선", "프로그램 테마색깔 황색으로 변경", "페이지 패널 버튼 좌측에 아이콘 추가, 패널 버튼과 거리 두기", "자 툴을 직선 그리기 툴로 변경", "펜 및 직선 그리기 툴 사용 시 붓 영역 화면 내에 표시", "펜 및 직선 그리기 툴 팔레트에 파스텔톤의 색상 추가", "강조표시는 직선형, 붓형 선택 가능하게 개선", "상단 툴을 분리 ( 글자선택과 개체 | 강조표시, 그리기, 직선 | 도형, 지우개, 텍스트 | 붙여넣기, 이미지 )", "각각의 버튼에 단축키 부여 ( 1, 2 | q, w, e | a, s, d | z, x )"], "d": "2026.10.04"}];
 const setw = $('#setw');
 
 /* ── 단축키 정의: 키 조합은 "Ctrl+Shift+KeyS" 형식(물리 키 기준이라 한글 입력 상태에서도 동작) ── */
@@ -7833,7 +8173,7 @@ const conNum = (v, lo, hi) => { const n = parseFloat(v); if (!isFinite(n)) throw
 const conNeedDoc = () => { if (!state.pages.length) throw new Error(CT('먼저 문서를 열어 주세요. (open 또는 new)', 'Open a document first. (open or new)')); };
 const CON_THEMES = [['dark', '어두운 테마', ['1', 'dark', 'darktheme', '어두운', '어두운테마']], ['light', '밝은 테마', ['2', 'light', 'lighttheme', '밝은', '밝은테마']], ['aero', '프루티거 에어로', ['3', 'aero', 'aerotheme', 'fruitiger', '프루티거', '프루티거에어로']], ['pink', '핑크세상', ['4', 'pink', 'pinktheme', 'pinkworld', '핑크', '핑크세상']], ['korea', '한국 테마', ['5', 'korea', 'koreatheme', 'kr', '한국', '한국테마']], ['japan', '일본 테마', ['6', 'japan', 'japantheme', 'jp', '일본', '일본테마']], ['dreamcore', '드림코어', ['7', 'dreamcore', 'dreamcoretheme', 'dream', '드림코어', '드림']], ['coffee', '커피', ['8', 'coffee', 'coffeetheme', 'cafe', '커피', '카페']], ['retro', '레트로게임', ['9', 'retro', 'retrotheme', 'retrogame', 'game', '레트로', '레트로게임']], ['saessak', '새싹', ['10', 'saessak', 'saessaktheme', 'sprout', 'naver', '새싹']], ['minihompy', '미니홈피', ['11', 'minihompy', 'minihome', 'minihomepy', 'cyworld', 'cy', '미니홈피', '싸이월드']]];
 const CON_LANGS = [['ko', ['1', 'ko', 'kr', 'korean', '한국어']], ['en', ['2', 'en', 'english', '영어']], ['ja', ['3', 'ja', 'jp', 'japanese', '일본어', '日本語']], ['zh', ['4', 'zh', 'cn', 'chinese', '중국어', '中文']]];
-const CON_RANGE = { 'pen.width': [1, 24], 'pen.alpha': [10, 100], 'line.width': [1, 24], 'line.alpha': [10, 100], 'highlight.width': [6, 44], 'shape.width': [0, 20], 'shape.fillAlpha': [10, 100], 'text.size': [8, 96], 'text.ls': [-10, 50], 'eraser.size': [4, 80] };
+const CON_RANGE = { 'pen.width': [1, 24], 'pen.alpha': [10, 100], 'line.width': [1, 24], 'line.alpha': [10, 100], 'highlight.width': [6, 44], 'shape.width': [0, 20], 'shape.fillAlpha': [10, 100], 'text.size': [3, 120], 'text.ls': [-10, 50], 'eraser.size': [4, 80] };
 const CON_ENUM = { 'highlight.style': ['brush', 'line'], 'shape.kind': ['rect', 'ellipse', 'star'], 'eraser.mode': ['stroke', 'area'], 'region.mode': ['rect', 'free'], 'text.align': ['left', 'center', 'right'] };
 const CON_TOOLS = ['select', 'highlight', 'pen', 'line', 'shape', 'eraser', 'text', 'region'];
 const conToolKeys = () => { const o = []; for (const g of Object.keys(settings)) if (settings[g] && typeof settings[g] === 'object') for (const k of Object.keys(settings[g])) o.push(g + '.' + k); return o; };
@@ -8090,7 +8430,7 @@ function drawLayout(b) {
   const pos = layoutPos(), thm = document.documentElement.dataset.theme, light = thm === 'light';
   const card = (v, t, sub) => `<button class="optcard${pos === v ? ' on' : ''}" data-a="pos" data-v="${v}" aria-pressed="${pos === v}"><div class="pv ${v}"><i class="pv-t"></i><i class="pv-tool"></i><i class="pv-main"></i></div><b>${t}</b><span class="sub">${sub}</span></button>`;
   b.innerHTML = `<div class="setg"><h3>도구 모음 위치</h3><p class="setd">편집 도구 줄을 화면 위쪽 또는 왼쪽에 둡니다. 휴대폰 화면과 세로 모드에서는 항상 위쪽에 표시됩니다.</p><div class="optcards">${card('top', '상단 정렬', '글자와 함께 보이는 기본 배치')}${card('left', '좌측 정렬', '아이콘만 세로로 정렬해 화면을 넓게 사용')}</div></div>
-  <div class="setg"><h3>테마</h3><p class="setd">화면 색상과 분위기를 바꿉니다. 어두운 · 밝은 · 프루티거 에어로 · 핑크세상 · 한국 · 일본 · 드림코어 · 커피 · 레트로게임 · 새싹 · 미니홈피 테마가 있습니다. 어두운 · 밝은 · 한국 · 일본 · 커피를 뺀 나머지는 프리미엄 전용이에요.</p><div class="themecur"><span class="tt" data-theme="${thm}">${themeSvg(thm)}</span><div><div class="tcn">${(THEME_DEFS.find(x => x[0] === thm) || THEME_DEFS[0])[1]}</div><button class="sb pri" data-a="themepick" style="margin-top:6px">테마 고르기</button></div></div></div>
+  <div class="setg"><h3>테마</h3><p class="setd">화면 색상과 분위기를 바꿉니다. 어두운 · 밝은 · 프루티거 에어로 · 핑크세상 · 한국 · 일본 · 드림코어 · 커피 · 레트로게임 · 새싹 · 미니홈피 테마가 있고, 프리미엄에서는 배경색 · 보조색 · 글꼴을 직접 고르는 커스텀 테마도 만들 수 있어요. 어두운 · 밝은 · 한국 · 일본 · 커피를 뺀 나머지는 프리미엄 전용이에요.</p><div class="themecur"><span class="tt" data-theme="${thm}">${themeSvg(thm)}</span><div><div class="tcn">${(THEME_DEFS.find(x => x[0] === thm) || THEME_DEFS[0])[1]}</div><button class="sb pri" data-a="themepick" style="margin-top:6px">테마 고르기</button></div></div></div>
   <div class="setg"><h3>언어</h3><p class="setd">편집기에 표시되는 언어를 바꿉니다.</p><div class="segs" role="group" aria-label="Language">${LANGS.map(([k, n]) => `<button data-a="lang" data-v="${k}" class="${LANG === k ? 'on' : ''}"><span data-no-i18n>${n}</span></button>`).join('')}</div></div>
   <div class="setg"><h3>페이지 보기</h3><p class="setd">${mMode ? '휴대폰에서 페이지를 넘기는 방식입니다.' : 'PC에서 페이지를 보는 방식입니다.'}</p><div class="segs" role="group" aria-label="페이지 보기">${(mMode ? [['single', '한 페이지씩 (좌우로 넘기기)'], ['scroll', '세로로 넘기기']] : [['scroll', '연속 스크롤'], ['single', '한 페이지씩 보기']]).map(([k, n]) => `<button data-a="view" data-v="${k}" class="${(mMode ? (mScroll ? 'scroll' : 'single') : (pcSingle ? 'single' : 'scroll')) === k ? 'on' : ''}">${n}</button>`).join('')}</div></div>
   <div class="setg"><h3>페이지 이동 연출</h3><p class="setd">페이지를 넘기거나 이동할 때 부드러운 이동 효과를 보여줍니다. 끄면 즉시 이동해 더 빠르게 느껴집니다.</p><div class="segs" role="group" aria-label="페이지 이동 연출">${[['on', '켜기'], ['off', '끄기']].map(([k, n]) => `<button data-a="panim" data-v="${k}" class="${(pageAnim ? 'on' : 'off') === k ? 'on' : ''}">${n}</button>`).join('')}</div></div>
@@ -8169,7 +8509,7 @@ function chlogHtml() {
     const a = ymin(g.list[g.list.length - 1][0].v), b = ymin(g.list[0][0].v);
     const label = g.key === 'beta' ? 'beta' : a === b ? a : a + ' ~ ' + b;
     return `<details class="chg"${gi === 0 ? ' open' : ''}><summary>${escH(label)}${gi === 0 ? '<span class="cur">현재 버전</span>' : ''}</summary><div class="chin">` +
-      g.list.map(([v, i]) => `<details${i === 0 ? ' open' : ''}><summary>${escH(v.v)}${i === 0 ? '<span class="cur">현재 버전</span>' : ''}</summary><ul>${v.items.map(x => `<li>${escH(x)}</li>`).join('')}</ul></details>`).join('') + '</div></details>';
+      g.list.map(([v, i]) => `<details${i === 0 ? ' open' : ''}><summary>${escH(v.v)}${v.d ? `<span class="chd">${escH(v.d)}</span>` : ''}${i === 0 ? '<span class="cur">현재 버전</span>' : ''}</summary><ul>${v.items.map(x => `<li>${escH(x)}</li>`).join('')}</ul></details>`).join('') + '</div></details>';
   }).join('');
 }
 async function sendFeedback() {
@@ -10017,10 +10357,11 @@ async function importImageDoc(file) {
     const dataUrl = await blobToDataURL(file), img = await loadImage(dataUrl);
     let w = (img.naturalWidth || 595) * 0.75, h = (img.naturalHeight || 842) * 0.75;
     const k = Math.min(1, 1190 / Math.max(w, h)); w *= k; h *= k;
+    if (!await confirmDiscard()) return;
+    resetDocument();
     const imgId = uid('img'); state.images.set(imgId, { img, dataUrl });
     const page = { id: uid('p'), src: null, w, h, annots: [{ id: uid('o'), type: 'image', imgId, x: 0, y: 0, w, h }], memos: [], group: null };
-    if (!await confirmDiscard()) return;
-    resetDocument(); state.pages = [page]; setSaveFormat('pdf');
+    state.pages = [page]; setSaveFormat('pdf');
     afterLoad(baseName(file.name || '이미지') + '.pdf'); setDirty(true);
   } catch (err) { console.error(err); toast('이미지를 열지 못했어요.'); }
   finally { hideLoading(); }
@@ -10071,6 +10412,7 @@ const THEME_DEFS = [
   ['saessak', '새싹', '<ellipse cx="32" cy="55" rx="15" ry="3.5" fill="#b99a74"/><path d="M32 54V31" stroke="#2f9e44" stroke-width="4" stroke-linecap="round" fill="none"/><path fill="#03c75a" d="M32 36C32 21 22 13 9 14c0 13 9 22 23 22z"/><path fill="#5be584" d="M32 31c0-13 9-20 23-19 0 13-9 20-23 19z"/>'],
   ['minihompy', '미니홈피', '<path fill="#bfe6fb" d="M8 20h48v34H8z"/><path fill="#fff" d="M12 24h40v26H12z" opacity=".75"/><rect x="31" y="8" width="3" height="8" rx="1.5" fill="#6b4220"/><path fill="#8a5a2b" d="M19 25c0-8 6-11 13-11s13 3 13 11z"/><path fill="#ff8a1f" d="M21 27h22c0 13-5 22-11 24-6-2-11-11-11-24z"/><ellipse cx="27" cy="34" rx="2.8" ry="5" fill="#ffd2a1" opacity=".9"/><circle cx="14" cy="14" r="2" fill="#ff9a3d"/><circle cx="52" cy="12" r="1.6" fill="#ff9a3d"/>']
 ];
+THEME_DEFS.push(['custom', '커스텀', '<defs><linearGradient id="tgC" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c5cff"/><stop offset="1" stop-color="#ff7ab6"/></linearGradient></defs><path fill="url(#tgC)" d="M32 6C17 6 6 17 6 31s9 21 18 21c5 0 6-3 6-6 0-4 3-6 7-6h8c7 0 13-4 13-11C58 15 46 6 32 6z"/><circle cx="20" cy="30" r="4" fill="#fff"/><circle cx="28" cy="19" r="4" fill="#ffd23f"/><circle cx="42" cy="19" r="4" fill="#3ddc97"/><circle cx="48" cy="31" r="4" fill="#4cc9f0"/>']);
 const FREE_THEMES = ['dark', 'light', 'korea', 'japan', 'coffee'];   // 앞으로 추가되는 테마는 모두 프리미엄
 const isPremTheme = k => !FREE_THEMES.includes(k);
 const PREMIUM_THEMES = { includes: isPremTheme };   // 어두운 · 밝은 · 한국 · 일본 · 커피는 무료
@@ -10096,13 +10438,21 @@ function openThemePicker() {
   const el = document.createElement('div'); el.id = 'themeP'; el.className = 'themep';
   const draw = () => {
     const c = document.documentElement.dataset.theme;
-    el.innerHTML = `<div class="tpbox" role="dialog" aria-modal="true" aria-label="테마 선택"><div class="tph"><h3>테마 선택</h3><button class="tpx" aria-label="닫기">${svg('x')}</button></div><p class="tpd">화면 분위기를 고르세요. 선택하면 바로 적용돼요.</p>${(() => { const tile = ([k, n]) => `<button class="tt${c === k ? ' on' : ''}${isPremTheme(k) ? ' prem' : ''}" data-theme="${k}" role="radio" aria-checked="${c === k}" title="${n}${isPremTheme(k) ? ' · 프리미엄' : ''}">${themeSvg(k)}<span class="tn">${n}</span>${isPremTheme(k) ? `<span class="tpro${PLAN.premium ? ' ok' : ''}">프리미엄</span>` : ''}</button>`; return `<div class="tgh">무료 테마</div><div class="tgrid" role="radiogroup" aria-label="무료 테마">${THEME_DEFS.filter(d => !isPremTheme(d[0])).map(tile).join('')}</div><div class="tgh prem">프리미엄 테마</div><div class="tgrid" role="radiogroup" aria-label="프리미엄 테마">${THEME_DEFS.filter(d => isPremTheme(d[0])).map(tile).join('')}</div>`; })()}</div>`;
+    el.innerHTML = `<div class="tpbox" role="dialog" aria-modal="true" aria-label="테마 선택"><div class="tph"><h3>테마 선택</h3><button class="tpx" aria-label="닫기">${svg('x')}</button></div><p class="tpd">화면 분위기를 고르세요. 선택하면 바로 적용돼요.</p>${(() => { const tile = ([k, n]) => `<button class="tt${c === k ? ' on' : ''}${isPremTheme(k) ? ' prem' : ''}" data-theme="${k}" role="radio" aria-checked="${c === k}" title="${n}${isPremTheme(k) ? ' · 프리미엄' : ''}">${themeSvg(k)}<span class="tn">${n}</span>${isPremTheme(k) ? `<span class="tpro${PLAN.premium ? ' ok' : ''}">프리미엄</span>` : ''}</button>`; return `<div class="tgh">무료 테마</div><div class="tgrid" role="radiogroup" aria-label="무료 테마">${THEME_DEFS.filter(d => !isPremTheme(d[0])).map(tile).join('')}</div><div class="tgh prem">프리미엄 테마</div><div class="tgrid" role="radiogroup" aria-label="프리미엄 테마">${THEME_DEFS.filter(d => isPremTheme(d[0])).map(tile).join('')}</div>${(() => { const cu = getCustomTheme(); return `<div class="tgh prem">커스텀 테마 만들기</div><div class="ctm${PLAN.premium ? '' : ' lock'}"><label>배경색<input type="color" data-ct="bg" value="${cu.bg}"></label><label>보조색<input type="color" data-ct="sub" value="${cu.sub}"></label><label class="ctf">글꼴<select data-ct="font">${Object.entries(FONTS).map(([k, f]) => `<option value="${k}"${k === cu.font ? ' selected' : ''}>${f.name}</option>`).join('')}</select></label><div class="cth">${PLAN.premium ? '바꾸면 바로 적용돼요. 글자색 · 밝기는 배경색에 맞춰 자동으로 정해져요.' : '프리미엄에서 배경색 · 보조색 · 글꼴을 직접 고를 수 있어요.'}</div></div>`; })()}`; })()}</div>`;
     const f = el.querySelector('.tt.on'); if (f && !el._f) { el._f = 1; setTimeout(() => f.focus(), 30); }
   };
   draw(); document.body.appendChild(el);
   const close = () => { el.remove(); document.removeEventListener('keydown', onk, true); if (!setw.hidden) renderSettings(); };
   const onk = e => { if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); close(); } };
   document.addEventListener('keydown', onk, true);
+  const onCt = e => {
+    const i = e.target.closest('[data-ct]'); if (!i) return;
+    if (!PLAN.premium) { if (e.type === 'change') { close(); requirePremium('커스텀 테마'); } return; }
+    setCustomTheme({ [i.dataset.ct]: i.value });
+    if (document.documentElement.dataset.theme !== 'custom') { applyTheme('custom'); try { localStorage.setItem('pdfEditorTheme', 'custom'); } catch (x) { /* ignore */ } }
+    el.querySelectorAll('.tt').forEach(b => { const on = b.dataset.theme === 'custom'; b.classList.toggle('on', on); b.setAttribute('aria-checked', on); });
+  };
+  el.addEventListener('input', onCt); el.addEventListener('change', onCt);
   el.addEventListener('click', e => {
     if (e.target === el || e.target.closest('.tpx')) { close(); return; }
     const t = e.target.closest('.tt'); if (!t) return;
@@ -10110,7 +10460,44 @@ function openThemePicker() {
     pickTheme(tk); draw(); el._f = 1; const n = el.querySelector('.tt.on'); if (n) n.focus();
   });
 }
+/* ── 커스텀 테마 (프리미엄): 배경색 · 보조색 · 글꼴 ── */
+const CUSTOM_DEF = { bg: '#1f2a44', sub: '#ffb347', font: 'sans' };
+function getCustomTheme() {
+  try { const c = JSON.parse(localStorage.getItem('meowCustomTheme') || 'null'); if (c) return Object.assign({}, CUSTOM_DEF, c); } catch (e) { /* ignore */ }
+  return Object.assign({}, CUSTOM_DEF);
+}
+const _hex = h => { h = String(h || '').replace('#', ''); if (h.length === 3) h = h.replace(/./g, m => m + m); const n = parseInt(h, 16); return isNaN(n) || h.length !== 6 ? [0, 0, 0] : [n >> 16 & 255, n >> 8 & 255, n & 255]; };
+const _rgb = a => '#' + a.map(v => Math.round(clamp(v, 0, 255)).toString(16).padStart(2, '0')).join('');
+const _mix = (a, b, t) => { const x = _hex(a), y = _hex(b); return _rgb(x.map((v, i) => v + (y[i] - v) * t)); };
+const _lum = h => { const [r, g, b] = _hex(h).map(v => { v /= 255; return v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4); }); return .2126 * r + .7152 * g + .0722 * b; };
+function customCss(c) {
+  const dark = _lum(c.bg) < .4, fg = dark ? '#f1f1f1' : '#1b1b1b', edge = dark ? '#ffffff' : '#000000';
+  const accent = c.sub, onA = _lum(accent) > .45 ? '#111111' : '#ffffff';
+  const accTxt = dark ? (_lum(accent) < .2 ? _mix(accent, '#ffffff', .45) : accent) : (_lum(accent) > .5 ? _mix(accent, '#000000', .4) : accent);
+  const [ar, ag, ab] = _hex(accent), [fr, fg2, fb] = _hex(fg);
+  const f = (FONTS[c.font] || FONTS.sans).css;
+  return `:root[data-theme="custom"]{color-scheme:${dark ? 'dark' : 'light'};--font:${f};--view:${_mix(c.bg, edge, .1)};--bar:${_mix(c.bg, edge, .05)};--bar2:${_mix(c.bg, edge, .02)};--side:${_mix(c.bg, edge, .03)};--text:${fg};--muted:${_mix(fg, c.bg, .45)};--border:${_mix(c.bg, fg, .2)};--hover:rgba(${fr},${fg2},${fb},.09);--accent:${accTxt};--accent-bg:rgba(${ar},${ag},${ab},.22);--on-accent:${onA};--main:${accent};--on-main:${onA};--danger:#e5484d;--dialog:${_mix(c.bg, edge, .06)};--shadow:0 2px 8px rgba(0,0,0,.3)}
+:root[data-theme="custom"] body{background:${_mix(c.bg, edge, .1)};font-family:${f}}
+:root[data-theme="custom"] .tool.active,:root[data-theme="custom"] .tool.primary,:root[data-theme="custom"] .btn.primary{background:${accent};color:${onA}}
+:root[data-theme="custom"] .tab.on{border-top:3px solid ${accent}}
+:root[data-theme="custom"] ::selection{background:rgba(${ar},${ag},${ab},.35)}
+.tt[data-theme=custom]{background:linear-gradient(145deg,var(--cbg),var(--csub));color:var(--ctx)}`;
+}
+function applyCustomTheme() {
+  let st = document.getElementById('customThemeCss'); if (!st) { st = document.createElement('style'); st.id = 'customThemeCss'; document.head.appendChild(st); }
+  const c = getCustomTheme(); st.textContent = customCss(c);
+  const dark = _lum(c.bg) < .4;
+  document.documentElement.style.setProperty('--cbg', c.bg); document.documentElement.style.setProperty('--csub', c.sub); document.documentElement.style.setProperty('--ctx', dark ? '#f5f5f5' : '#161616');
+  const f = FONTS[c.font] || FONTS.sans;
+  if (document.fonts) document.fonts.load('16px ' + f.css.split(',')[0], '가나다ABC').then(() => { try { redrawAll(); } catch (e) { /* ignore */ } }, () => {});
+}
+function setCustomTheme(patch) {
+  const c = Object.assign(getCustomTheme(), patch);
+  try { localStorage.setItem('meowCustomTheme', JSON.stringify(c)); } catch (e) { /* ignore */ }
+  applyCustomTheme();
+}
 function applyTheme(t) {
+  if (t === 'custom') applyCustomTheme();
   document.documentElement.dataset.theme = t;
   $('#themeBtn').innerHTML = svg(t === 'dark' ? 'sun' : 'moon');
 }
