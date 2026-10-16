@@ -613,18 +613,26 @@ app.post('/api/auth/login', authLimiter(10), async (req, res) => {
     res.status(502).json({ success: false, message: '로그인 서버에 연결하지 못했어요. 잠시 뒤 다시 시도해 주세요.' });
   }
 });
+const resetSent = new Map(), RESET_DEDUP_MS = 20 * 1000;
+setInterval(() => { const t = Date.now(); for (const [k, v] of resetSent) if (t - v > RESET_DEDUP_MS) resetSent.delete(k); }, 60 * 1000).unref();
 app.post('/api/auth/reset-send', authLimiter(5), async (req, res) => {
   if (needAdmin(res)) return;
   const id = String((req.body && req.body.id) || '').trim().toLowerCase();
+  let sentTo = '';
   try {
     let email = '';
     if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(id)) email = id;
     else if (USER_RE.test(id)) { const p = await profileByUsername(id); email = p && p.email || ''; }
     if (!email) return res.status(404).json({ success: false, message: '등록된 아이디(이메일)를 찾지 못했어요.' });
+    /* 같은 이메일로 짧은 시간에 겹쳐 들어온 요청(중복 클릭 · 중복 요청)은 메일을 한 번만 보내요 */
+    const last = resetSent.get(email);
+    if (last && Date.now() - last < RESET_DEDUP_MS) return res.json({ success: true, masked: maskEmail(email), dedup: true });
+    resetSent.set(email, Date.now()); sentTo = email;
     await axios.post(`${SUPABASE_URL}/auth/v1/otp`, { email, create_user: false },
       { headers: { apikey: SUPABASE_PUBLISHABLE_KEY, 'Content-Type': 'application/json' }, timeout: 12000 });
     res.json({ success: true, masked: maskEmail(email) });
   } catch (e) {
+    if (sentTo && !(e.response && e.response.status === 429)) resetSent.delete(sentTo);   // 발송 실패면 바로 다시 시도할 수 있게
     const m = JSON.stringify(e.response && e.response.data || '');
     if (e.response && e.response.status === 429 || /rate|seconds/i.test(m)) return res.status(429).json({ success: false, message: '인증번호를 너무 빨리 다시 요청했어요. 1분 뒤 다시 눌러 주세요.' });
     if (/not found|signups? not allowed|user_not_found/i.test(m)) return res.status(404).json({ success: false, message: '등록된 아이디(이메일)를 찾지 못했어요.' });
