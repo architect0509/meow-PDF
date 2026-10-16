@@ -546,6 +546,25 @@ app.post('/api/auth/reset-confirm', authLimiter(8), async (req, res) => {
   }
 });
 
+/* ─────────── 회원탈퇴 ───────────
+ * 로그인 토큰으로 본인을 확인하고, 확인 문구("확인했습니다")가 맞으면 계정을 지워요.
+ * users_profile · key_redemptions 는 계정에 연결돼 함께 지워지고, 프로필 사진도 지워요.
+ * 프리미엄(결제) 계정이어도 탈퇴하면 환불되지 않아요. (결제 기록은 토스페이먼츠에 남아요) */
+app.post('/api/account/delete', authLimiter(5), async (req, res) => {
+  const user = await authed(req, res, false); if (!user) return;
+  if (String((req.body && req.body.confirm) || '').trim() !== '확인했습니다') return res.status(400).json({ success: false, message: '확인 문구를 정확히 입력해 주세요.' });
+  if (isDev(user)) return res.status(403).json({ success: false, message: '개발자 계정은 여기서 탈퇴할 수 없습니다.' });
+  try {
+    try { await axios.delete(`${SUPABASE_URL}/storage/v1/object/avatars/${user.id}/avatar.jpg`, { headers: sbAdmin, timeout: 8000 }); } catch (e) { /* 사진이 없으면 무시 */ }
+    await axios.delete(`${SUPABASE_URL}/auth/v1/admin/users/${user.id}`, { headers: sbAdmin, timeout: 10000 });
+    console.log('[탈퇴]', user.id);
+    res.json({ success: true });
+  } catch (e) {
+    console.error('[탈퇴 실패]', e.response?.data || e.message);
+    res.status(502).json({ success: false, message: '탈퇴를 처리하지 못했어요. 잠시 뒤 다시 시도해 주세요.' });
+  }
+});
+
 app.get('/pay', (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   res.send(page('Meow-PDF 결제', `
