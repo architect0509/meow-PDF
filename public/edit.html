@@ -124,11 +124,11 @@ body.scrubbing,body.scrubbing *{cursor:ew-resize!important;user-select:none!impo
 
 /* ── 본문 ── */
 .main{flex:1;display:flex;min-height:0;position:relative}
-#sidebar{position:relative;width:var(--sbw,200px);flex:none;display:flex;flex-direction:column;background:var(--side);border-right:1px solid var(--border);z-index:30}
+#sidebar{position:relative;width:var(--sbw,244px);flex:none;display:flex;flex-direction:column;background:var(--side);border-right:1px solid var(--border);z-index:30}
 .sidebar-off #sidebar{display:none}
 .side-head{padding:12px 14px 6px;font-weight:500;display:flex;justify-content:space-between;color:var(--muted);font-size:12.5px}
 .thumbs{flex:1;overflow-y:auto;padding:8px 6px 16px;display:flex;flex-direction:column;align-items:center;gap:12px;scrollbar-width:thin}
-.thumb{position:relative;width:var(--tw,128px);margin-left:calc(var(--d,0) * 12px);cursor:pointer;flex:none}
+.thumb{position:relative;width:var(--tw,160px);margin-left:calc(var(--d,0) * 12px);cursor:pointer;flex:none}
 .thumb-page{position:relative;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.5);outline:2px solid transparent;outline-offset:2px;border-radius:2px}
 .thumb.active .thumb-page{outline-color:var(--accent)}
 .thumb:hover .thumb-page{outline-color:var(--border)}
@@ -164,7 +164,7 @@ body.scrubbing,body.scrubbing *{cursor:ew-resize!important;user-select:none!impo
 .page{position:relative;flex:none;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.45),0 6px 20px rgba(0,0,0,.3)}
 .page canvas{position:absolute;inset:0;width:100%;height:100%}
 .page .over{touch-action:pan-y}
-.page .hlc{pointer-events:none;mix-blend-mode:multiply}
+.page .hlc{pointer-events:none;mix-blend-mode:multiply;z-index:5}
 .tool-pen .page .over,.tool-line .page .over,.tool-highlight .page .over,.tool-shape .page .over,.tool-eraser .page .over{touch-action:none}
 .tool-shape .over{cursor:crosshair}
 .tool-pen .over,.tool-line .over,.tool-highlight .over{cursor:var(--brush-cursor,crosshair)}
@@ -479,7 +479,8 @@ body.lyr-sorting,body.lyr-sorting *{cursor:grabbing!important}
 .segs{flex-wrap:wrap}
 .segs button.aeroopt{margin-left:14px;background:linear-gradient(135deg,#9be3ff,#6fd05f);color:#06304a;font-weight:600;text-shadow:0 1px 0 rgba(255,255,255,.6)}
 .segs button.aeroopt.on{outline:2px solid var(--accent);outline-offset:1px}
-#loading{position:fixed;inset:0;z-index:100;display:none;flex-direction:column;gap:14px;align-items:center;justify-content:center;background:rgba(0,0,0,.5);color:#fff}
+#loading{position:fixed;inset:0;z-index:300;display:none;flex-direction:column;gap:14px;align-items:center;justify-content:center;background:rgba(0,0,0,.45);color:#fff;-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);cursor:progress;font-weight:600;text-align:center;padding:24px}
+#loading #loadingText{max-width:min(80vw,340px);line-height:1.5}
 #loading.show{display:flex}
 .spinner{width:34px;height:34px;border-radius:50%;border:3px solid rgba(255,255,255,.3);border-top-color:#fff;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -561,11 +562,11 @@ body.mobile .thumb-actions .del{width:24px;height:24px;border-radius:7px}
 body.mobile .thumb-actions .del svg{width:13px;height:13px}
 body.mobile .main{flex-direction:column}
 body.mobile .stage{order:1;flex:1;min-height:120px}
-body.mobile #sidebar{position:relative;order:2;left:auto;top:auto;bottom:auto;width:auto;height:136px;border:0;border-top:1px solid var(--border);box-shadow:none;flex-direction:column}
+body.mobile #sidebar{position:relative;order:2;left:auto;top:auto;bottom:auto;width:auto;height:164px;border:0;border-top:1px solid var(--border);box-shadow:none;flex-direction:column}
 body.mobile #sidebar>.side-head{display:none}
 body.mobile #sidebar>.thumbs{flex:1;min-height:0;flex-direction:row;align-items:center;overflow-x:auto;overflow-y:hidden;padding:8px 14px;gap:12px;scrollbar-width:none}
 body.mobile #sidebar>.thumbs::-webkit-scrollbar{display:none}
-body.mobile #sidebar .thumb{width:76px;margin:0;flex:none}
+body.mobile #sidebar .thumb{width:96px;margin:0;flex:none}
 body.mobile #sidebar .thumbs .thumb-num{margin-top:4px;font-size:11px}
 body.mobile .ghead{min-width:110px;align-self:center;margin:0}
 body.mobile #sidebar .ptabs,body.mobile #sidebar .side-foot,body.mobile #sidebar .side-tools .mini{display:none}
@@ -1156,14 +1157,22 @@ body.mobile .titlebar .splitbtn .tool{border-radius:50%}
 .premd .pdb{padding:4px 18px 18px;font-size:13px;line-height:1.65}.premd h4{margin:16px 0 4px;font-size:13px;color:var(--accent)}
 .premd p{margin:3px 0}.premd ul{margin:3px 0;padding-left:18px}.premd li{margin:4px 0}.premd a{color:var(--accent);text-decoration:underline}
 /* 계정 창: 가로로 넓게 두 칸으로 배치해 세로 길이를 줄임 */
-.dialog:has(.acp .paybox){width:min(780px,100%);max-height:94dvh;overflow:auto}
-.acp:has(.paybox){display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;align-items:start}
-.acp:has(.paybox)>h3,.acp:has(.paybox)>.msg,.acp:has(.paybox)>button,.acp:has(.paybox)>.lnk{grid-column:1/-1}
-.acp:has(.paybox)>.box:not(.paybox){grid-column:1}
-.acp:has(.paybox)>.paybox{grid-column:2;grid-row:2 / span 2}
-.acp:has(.paybox) .paylist li:nth-child(3){display:none}
-.acp .paybox{gap:6px}.acp .payprice strong{font-size:22px}
-@media (max-width:700px){.acp:has(.paybox){display:flex}.acp .paylist li:nth-child(3){display:block}}
+.dialog:has(.acp.split){width:min(860px,100%)}
+.acp.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 18px;align-items:stretch}
+.acp.split>.acl,.acp.split>.acr{display:flex;flex-direction:column;gap:8px;min-width:0}
+.acp.split>.acr{padding-left:18px;border-left:1px solid var(--border)}
+.acp.split>.acr>.paybox{flex:1;justify-content:space-between}
+.acp.split>.msg{grid-column:1/-1;margin-top:8px}
+.acp .acl,.acp .acr{display:flex;flex-direction:column;gap:8px}
+.acp .paybox{gap:8px}.acp .payprice strong{font-size:22px}
+.acp .actabs{display:flex;gap:4px;padding:3px;border-radius:10px;background:var(--bar2);border:1px solid var(--border)}
+.acp .actabs button{flex:1;height:32px;border-radius:8px;font-size:12.5px;font-weight:600;color:var(--muted)}
+.acp .actabs button.on{background:var(--accent-bg);color:var(--accent)}
+.acp .pwf{position:relative}.acp .pwf input{padding-right:42px}
+.acp .pwe{position:absolute;right:4px;top:50%;transform:translateY(-50%);width:34px;height:30px;border-radius:7px;display:grid;place-items:center;color:var(--muted)}
+.acp .pwe:hover{background:var(--hover);color:var(--text)}.acp .pwe svg{width:18px;height:18px}
+.acp .pwh{font-size:12px;color:var(--muted);margin:-2px 0 0}
+@media (max-width:760px){.acp.split{display:flex;flex-direction:column;gap:10px}.acp.split>.acr{padding-left:0;border-left:0;padding-top:10px;border-top:1px solid var(--border)}}
 .acp .paynote{font-size:12.5px;color:var(--muted)}
 /* 계정 창 컴팩트 */
 .dialog:has(.acp){max-height:92dvh;overflow:auto}
@@ -1525,6 +1534,108 @@ body.mobile .brand{width:26px;height:26px;margin-right:0}body.mobile .brand svg{
 body.mobile .titlebar .tool svg,body.mobile .mbtn svg{width:19px;height:19px}
 @media (max-width:340px){body.mobile .brand,body.mobile #acctBtn{display:none}}
 
+
+/* ══════ 첫 방문 튜토리얼 ══════ */
+.tut{position:fixed;inset:0;z-index:5000;display:grid;place-items:center;padding:16px;background:radial-gradient(ellipse at 50% 40%,rgba(0,0,0,.55),rgba(0,0,0,.82));-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);animation:tutIn .35s ease both}
+@keyframes tutIn{from{opacity:0}to{opacity:1}}
+.tut-card{position:relative;width:min(560px,100%);max-height:min(640px,94dvh);display:flex;flex-direction:column;background:var(--dialog);color:var(--text);border:1px solid var(--border);border-radius:22px;box-shadow:0 24px 70px rgba(0,0,0,.6);overflow:hidden;transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .7s ease,filter .7s ease}
+.tut.pc .tut-card{width:min(640px,100%)}
+.tut-top{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 0}
+.tut-step{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.04em}
+.tut-skip{height:30px;padding:0 12px;border-radius:999px;font-size:12.5px;color:var(--muted)}.tut-skip:hover{background:var(--hover);color:var(--text)}
+.tut-stage{flex:1;min-height:min(350px,60dvh);overflow:auto;justify-content:center;padding:6px 26px 6px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.tut-art{width:100%;display:grid;place-items:center;min-height:200px;margin:6px 0 10px}
+.tut-stage h2{margin:0 0 8px;font-size:23px;letter-spacing:-.02em;animation:tutUp .5s .05s both}
+.tut-stage p{margin:0 auto;max-width:44ch;font-size:14.5px;line-height:1.7;color:var(--muted);animation:tutUp .5s .12s both}
+.tut-stage p b{color:var(--text)}
+@keyframes tutUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.tut-nav{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 18px 18px}
+.tut-dots{display:flex;gap:6px;align-items:center}
+.tut-dots i{width:7px;height:7px;border-radius:99px;background:var(--border);transition:all .25s}.tut-dots i.on{width:22px;background:var(--accent)}
+.tut-btn{height:42px;min-width:84px;padding:0 20px;border-radius:12px;border:1px solid var(--border);font-weight:700;font-size:14px;color:var(--text)}
+.tut-btn:hover{background:var(--hover)}
+.tut-btn.pri{background:var(--accent);color:var(--on-accent,#000);border-color:transparent}.tut-btn.pri:hover{filter:brightness(1.08);background:var(--accent)}
+.tut-btn:focus-visible,.tut-skip:focus-visible,.tut-go:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.tut-btn[hidden]{display:none}
+/* 마지막 장: 가운데 큰 시작 버튼 */
+.tut-card.last .tut-nav{justify-content:center}.tut-card.last .tut-dots,.tut-card.last .tut-btn{display:none}
+.tut-final{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:14px 0 6px}
+.tut-go{position:relative;min-width:200px;height:64px;padding:0 38px;border-radius:999px;background:linear-gradient(135deg,var(--accent),color-mix(in srgb,var(--accent) 60%,#fff));color:var(--on-accent,#000);font-size:20px;font-weight:800;letter-spacing:-.01em;box-shadow:0 10px 30px color-mix(in srgb,var(--accent) 45%,transparent);animation:tutPulse 2s ease-in-out infinite}
+.tut-go:hover{transform:translateY(-2px) scale(1.03)}.tut-go:active{transform:scale(.97)}
+@keyframes tutPulse{0%,100%{box-shadow:0 10px 30px color-mix(in srgb,var(--accent) 40%,transparent),0 0 0 0 color-mix(in srgb,var(--accent) 45%,transparent)}50%{box-shadow:0 10px 34px color-mix(in srgb,var(--accent) 55%,transparent),0 0 0 14px transparent}}
+.tut-cat{font-size:64px;line-height:1;animation:tutBob 2.4s ease-in-out infinite;filter:drop-shadow(0 6px 14px rgba(0,0,0,.4))}
+@keyframes tutBob{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-8px) rotate(4deg)}}
+/* 끝 연출 */
+.tut.out{animation:tutOut .9s .35s ease both}
+@keyframes tutOut{to{opacity:0;backdrop-filter:blur(0);-webkit-backdrop-filter:blur(0)}}
+.tut.out .tut-card{transform:scale(1.18) translateY(-14px);opacity:0;filter:blur(8px)}
+.tut-flash{position:fixed;inset:0;z-index:5001;pointer-events:none;display:grid;place-items:center}
+.tut-flash b{font-size:clamp(30px,7vw,60px);font-weight:900;letter-spacing:-.02em;color:#fff;text-shadow:0 0 30px var(--accent),0 4px 20px rgba(0,0,0,.5);animation:tutWelcome 1.5s .1s both}
+@keyframes tutWelcome{0%{opacity:0;transform:scale(.7)}25%{opacity:1;transform:scale(1.06)}70%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.08) translateY(-12px)}}
+.tut-ring{position:fixed;left:50%;top:50%;width:20px;height:20px;margin:-10px;border-radius:50%;border:3px solid var(--accent);z-index:5001;pointer-events:none;animation:tutRing 1.1s cubic-bezier(.2,.7,.3,1) both}
+@keyframes tutRing{from{transform:scale(1);opacity:.9}to{transform:scale(90);opacity:0}}
+.tut-conf{position:fixed;inset:0;z-index:5002;pointer-events:none;width:100%;height:100%}
+/* 일러스트 (실제 화면을 닮은 작은 그림) */
+.ti{width:100%;max-width:460px;border:1px solid var(--border);border-radius:14px;background:var(--bar2);padding:14px;box-sizing:border-box;text-align:left;font-size:12px;color:var(--text)}
+.ti .row{display:flex;gap:8px;align-items:center}
+.ti .bt{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 4px;border-radius:12px;background:var(--bar);border:1px solid var(--border);font-weight:700;font-size:12px}
+.ti .bt svg{width:22px;height:22px;color:var(--accent)}.ti .bt.pri{background:var(--accent);color:#000;border-color:transparent}.ti .bt.pri svg{color:#000}
+.ti .thint{margin-top:10px;text-align:center;color:var(--muted);font-size:12px}
+.ti-flip{display:flex;gap:10px;height:170px}
+.ti-flip .th{flex:none;width:64px;display:flex;flex-direction:column;gap:8px}
+.ti-flip .th s{display:block;flex:1;border-radius:5px;background:#fff;opacity:.55;border:2px solid transparent;animation:tiTh 6s infinite}
+.ti-flip .th s:nth-child(2){animation-delay:2s}.ti-flip .th s:nth-child(3){animation-delay:4s}
+@keyframes tiTh{0%,30%{opacity:1;border-color:var(--accent)}33.4%,100%{opacity:.55;border-color:transparent}}
+.ti-flip .pg{position:relative;flex:1;overflow:hidden;border-radius:6px;background:var(--view,#333)}
+.ti-flip .pg i{position:absolute;inset:8px 18%;background:#fff;border-radius:3px;display:flex;flex-direction:column;gap:7px;padding:12px;box-sizing:border-box;animation:tiPg 6s infinite;opacity:0}
+.ti-flip .pg i:nth-child(2){animation-delay:2s}.ti-flip .pg i:nth-child(3){animation-delay:4s}
+.ti-flip .pg i em{display:block;height:7px;border-radius:3px;background:#cfcfcf}.ti-flip .pg i em:first-child{width:55%;height:11px;background:#333}.ti-flip .pg i em.h{background:var(--accent);opacity:.7;width:80%}
+.ti-flip .pg i u{position:absolute;right:10px;bottom:8px;font-size:20px;color:#999;text-decoration:none;font-weight:800}
+@keyframes tiPg{0%{opacity:0;transform:translateX(30px)}5%,30%{opacity:1;transform:none}33.4%{opacity:0;transform:translateX(-30px)}100%{opacity:0}}
+.ti-swipe{position:relative;height:180px;display:grid;place-items:center;overflow:hidden}
+.ti-swipe .ph{position:relative;width:104px;height:164px;border-radius:14px;border:3px solid var(--border);background:var(--bar);overflow:hidden}
+.ti-swipe .ph i{position:absolute;inset:10px;background:#fff;border-radius:4px;display:flex;flex-direction:column;gap:7px;padding:10px;box-sizing:border-box;animation:tiSw 4s infinite}
+.ti-swipe .ph i.b{animation-name:tiSw2;background:#ffefb0}
+.ti-swipe .ph i em{display:block;height:6px;border-radius:3px;background:#cfcfcf}.ti-swipe .ph i em:first-child{width:55%;height:10px;background:#333}
+@keyframes tiSw{0%,35%{transform:none}55%,100%{transform:translateX(-110%)}}
+@keyframes tiSw2{0%,35%{transform:translateX(110%)}55%,100%{transform:none}}
+.ti-swipe .fg{position:absolute;left:50%;top:55%;width:30px;height:30px;margin:-15px;border-radius:50%;background:var(--accent);opacity:.9;box-shadow:0 0 0 8px color-mix(in srgb,var(--accent) 30%,transparent);animation:tiFg 4s infinite}
+@keyframes tiFg{0%{transform:translateX(30px);opacity:0}10%{opacity:.9}35%{transform:translateX(30px)}55%{transform:translateX(-34px);opacity:.9}70%,100%{transform:translateX(-34px);opacity:0}}
+.ti-tool{display:flex;gap:4px;flex-wrap:wrap;justify-content:center}
+.ti-tool .tl{position:relative;width:52px;height:56px;border-radius:10px;background:var(--bar);border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:10.5px}
+.ti-tool .tl svg{width:20px;height:20px}.ti-tool .tl kbd{position:absolute;top:2px;right:4px;font-size:9.5px;font-weight:800;color:var(--accent);font-family:inherit}
+.ti-tool .tl.sel{background:var(--accent-bg);color:var(--accent)}
+.ti-tool .gp{display:flex;gap:4px;padding:5px;border-radius:13px;border:1px dashed var(--border)}
+.ti-tool .gp+.gp{margin-left:2px}.ti-tool.m .tl{width:44px;height:48px}
+.ti-lay{display:flex;flex-direction:column;gap:7px}
+.ti-lay .ly{display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:10px;background:var(--bar);border:1px solid var(--border);font-weight:600}
+.ti-lay .ly svg{width:16px;height:16px;color:var(--muted)}.ti-lay .ly .dot{width:10px;height:10px;border-radius:50%}.ti-lay .ly .sp{flex:1}
+.ti-lay .ly.hid{opacity:.45}.ti-lay .ly.hid .nm{text-decoration:line-through}
+.ti-lay .ly.new{animation:tiNew 3.2s infinite}
+@keyframes tiNew{0%,10%{transform:translateX(-14px);opacity:0}20%,80%{transform:none;opacity:1}100%{opacity:0}}
+.ti-note{display:flex;gap:12px}
+.ti-note .pgm{position:relative;flex:1;min-height:150px;border-radius:8px;background:#fff;padding:12px;box-sizing:border-box;display:flex;flex-direction:column;gap:7px}
+.ti-note .pgm em{display:block;height:7px;border-radius:3px;background:#d6d6d6}.ti-note .pgm em:first-child{width:50%;height:11px;background:#333}
+.ti-note .memo{position:absolute;right:8px;top:32px;width:84px;padding:7px 8px;border-radius:8px;background:#ffe66d;color:#4a3a00;font-size:10.5px;font-weight:700;line-height:1.35;box-shadow:0 4px 12px rgba(0,0,0,.3);transform:rotate(3deg);animation:tiMemo 3.6s infinite}
+@keyframes tiMemo{0%,8%{opacity:0;transform:translateY(-10px) rotate(0)}20%,100%{opacity:1;transform:rotate(3deg)}}
+.ti-note .nt{flex:1;border-radius:8px;background:var(--bar);border:1px solid var(--border);padding:9px;display:flex;flex-direction:column;gap:6px}
+.ti-note .nt .tg{display:flex;gap:4px}.ti-note .nt .tg b{padding:2px 8px;border-radius:6px;font-size:10.5px;background:var(--hover)}.ti-note .nt .tg b.on{background:var(--accent-bg);color:var(--accent)}
+.ti-note .nt h5{margin:2px 0 0;font-size:15px}.ti-note .nt span{color:var(--muted);font-size:11.5px}
+.ti-hero{display:grid;place-items:center;gap:10px;padding:10px 0}
+@media (max-width:560px){.tut-stage{padding:4px 16px}.tut-stage h2{font-size:21px}.ti{padding:11px}.tut-art{min-height:180px}}
+@media (prefers-reduced-motion:reduce){.tut *,.tut-card{animation:none!important;transition:none!important}.tut-flash b{animation:none;opacity:1}}
+
+/* v0.8.5 모바일: 도구 모음 접기 · 더보기 */
+.tbfold{display:none}
+body.mobile .tbfold{display:flex;align-items:center;justify-content:center;width:100%;height:22px;flex:none;background:var(--bar);border:0;border-bottom:1px solid var(--border);color:var(--muted)}
+body.mobile .tbfold svg{width:18px;height:18px;transition:transform .2s}
+body.mobile.tb-fold .tbfold svg{transform:rotate(180deg)}
+body.mobile.tb-fold .toolbar{display:none!important}
+body.mobile #app.no-doc .tbfold,body.mv-view .tbfold{display:none!important}
+body.mobile #moreToolBtn{display:flex!important}
+body.mobile #moreToolBtn{position:sticky;right:0;margin-left:auto;background:var(--bar);box-shadow:-10px 0 8px -2px var(--bar);z-index:2}
+body.mobile .toolbar .mv-more,body.mobile .toolbar .tool[data-tool="link"],body.mobile .toolbar .splitbtn:has(#digiBtn),body.mobile #presentBtn,body.mobile #trBtn{display:none!important}
+body.mv-view #moreToolBtn{display:none!important}
 /* v0.5.5 모바일 열기 모드 */
 body.mv-view .toolbar,body.mv-view #optbar,body.mv-view #undoBtn,body.mv-view #redoBtn,body.mv-view #saveBtn{display:none!important}
 body.mv-simple .tool[data-tool="text"]{display:none!important}
@@ -1637,6 +1748,7 @@ body.mv-simple .tool[data-tool="text"]{display:none!important}
     <button class="tool needs-doc" id="moreToolBtn" title="더보기 — 메모 · 음성 · 캡처 · 인쇄 · 발표 · 번역" aria-haspopup="menu" aria-label="도구 더보기"><i data-i="dots"></i><span>더보기</span></button>
   </div>
 
+  <button class="tbfold needs-doc" id="tbFold" type="button" aria-label="도구 모음 접기" aria-expanded="true" title="도구 모음 접기 / 펼치기"><i data-i="chevD"></i></button>
   <div class="optbar" id="optbar"></div>
 
   <div class="main">
@@ -1673,7 +1785,7 @@ body.mv-simple .tool[data-tool="text"]{display:none!important}
           <button class="btn etile" id="emptyMerge"><i data-i="merge"></i><span>파일 병합</span></button>
           <button class="btn etile" id="emptyCompress"><i data-i="compress"></i><span>파일 압축</span><em class="pro">프리미엄</em></button>
         </div>
-        <span class="ehint">PDF · PPTX · HWP · DOCX · PNG · MPDF 파일을 끌어다 놓을 수도 있습니다</span>
+        <span class="ehint">PDF · PPTX · HWP · DOCX · PNG · MPDF 파일을 끌어다 놓거나, 캡처한 이미지를 Ctrl+V로 바로 열 수도 있습니다</span>
       </div>
     </section>
 
@@ -1748,6 +1860,59 @@ body.mv-simple .tool[data-tool="text"]{display:none!important}
 <div id="toast" role="status" aria-live="polite"></div>
 <div id="printRoot" aria-hidden="true"></div>
 <style id="printPageStyle">
+/* v0.8.6 추가: 멀티작업 통통한 제목 · 주소줄 접기 · 안내문 닫기 · 편집기 전체 화면 */
+.wtitle{font-family:"Jua","Do Hyeon","Noto Sans KR",sans-serif!important;font-weight:400!important;letter-spacing:.01em!important;-webkit-text-stroke:.6px currentColor;paint-order:stroke fill}
+.wfold{flex:none;display:flex;align-items:center;justify-content:center;gap:4px;height:14px;width:100%;padding:0;background:var(--bar2);border:0;border-bottom:1px solid var(--border);color:var(--muted);font-size:9px;line-height:1;cursor:pointer}
+.wfold:hover{color:var(--text);background:var(--hover)}
+.wfold svg{width:10px;height:10px;transition:transform .15s}
+.wpane.urlc .wurl{display:none}
+.wpane.urlc .wfold svg{transform:rotate(180deg)}
+.whint{display:flex;align-items:flex-start;gap:6px}
+.whint .whx{margin-left:auto;flex:none;width:20px;height:20px;border-radius:6px;color:var(--muted);text-decoration:none;font-size:14px;line-height:1;display:grid;place-items:center}
+.whint .whx:hover{background:var(--hover);color:var(--text)}
+.whint[hidden]{display:none}
+.wedfab{position:absolute;right:8px;bottom:8px;z-index:4;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--bar2);border:1px solid var(--border);color:var(--muted);font-size:13px;opacity:.55}
+.wedfab:hover{opacity:1;color:var(--text)}
+.wpane.edpane{position:absolute}
+
+/* v0.8.6 백룸 테마 (프리미엄): 눅눅한 노란 벽지 · 형광등 깜빡임 · 필름 노이즈 */
+:root[data-theme="backrooms"]{color-scheme:light;--view:#a8984a;--bar:#cbbb64;--bar2:#c0b058;--side:#bfae55;--text:#2e2810;--muted:#6d6330;--border:#9a8a3e;--hover:rgba(90,75,15,.16);--accent:#7a6a1f;--accent-bg:rgba(122,106,31,.22);--on-accent:#fff7cf;--main:#8a7a2a;--on-main:#fff7cf;--danger:#a3341f;--dialog:#d6c775;--shadow:0 3px 14px rgba(60,48,5,.45)}
+:root[data-theme="backrooms"] body{background:#8f8038;filter:sepia(.12) saturate(.92)}
+:root[data-theme="backrooms"] .viewer{background:repeating-linear-gradient(90deg,rgba(80,66,10,.07) 0 2px,transparent 2px 46px),radial-gradient(ellipse at 50% 30%,#b9a954 0,#a39348 55%,#85762f 100%)}
+:root[data-theme="backrooms"] body::before{content:'';position:fixed;inset:0;z-index:9989;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,250,200,.05) 0 1px,transparent 1px 3px),linear-gradient(180deg,rgba(255,246,170,.16),transparent 22%);mix-blend-mode:soft-light;animation:brHum 7s ease-in-out infinite}
+:root[data-theme="backrooms"] body::after{content:'';position:fixed;inset:-40px;z-index:9990;pointer-events:none;opacity:.2;mix-blend-mode:multiply;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .2  0 0 0 0 .17  0 0 0 0 .05  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"),radial-gradient(ellipse at 50% 45%,transparent 50%,rgba(40,30,0,.5) 100%);background-size:180px 180px,100% 100%;animation:brGrain .9s steps(6,end) infinite}
+@keyframes brGrain{0%{transform:translate(0,0)}17%{transform:translate(-14px,9px)}33%{transform:translate(11px,-17px)}50%{transform:translate(-8px,-6px)}67%{transform:translate(16px,12px)}83%{transform:translate(-18px,4px)}100%{transform:translate(0,0)}}
+@keyframes brHum{0%,100%{opacity:.9}48%{opacity:1}50%{opacity:.55}52%{opacity:1}}
+:root[data-theme="backrooms"] .titlebar{background:linear-gradient(180deg,#d8c872,#c0b058);box-shadow:inset 0 -2px 0 #6f6020}
+:root[data-theme="backrooms"] .toolbar,:root[data-theme="backrooms"] .optbar,:root[data-theme="backrooms"] .tabbar{background:#c5b55c}
+:root[data-theme="backrooms"] #sidebar,:root[data-theme="backrooms"] #layers{background:repeating-linear-gradient(90deg,rgba(80,66,10,.06) 0 2px,transparent 2px 22px),#bfae55}
+:root[data-theme="backrooms"] .tool.active,:root[data-theme="backrooms"] .tool.primary,:root[data-theme="backrooms"] .btn.primary,:root[data-theme="backrooms"] .dialog .actions .ok{background:linear-gradient(180deg,#8d7d2c,#6e611d);color:#fff7cf;text-shadow:0 1px 0 rgba(0,0,0,.35)}
+:root[data-theme="backrooms"] .tool.active kbd{color:#f0e6a8}
+:root[data-theme="backrooms"] .tool:hover{box-shadow:inset 0 0 0 1px rgba(90,75,15,.4)}
+:root[data-theme="backrooms"] .tab.on{border-top:3px solid #6e611d}
+:root[data-theme="backrooms"] .page{box-shadow:0 0 0 1px #8a7a2a,0 0 40px 6px rgba(255,240,140,.22),0 16px 34px rgba(50,40,5,.55)}
+:root[data-theme="backrooms"] .setdlg,:root[data-theme="backrooms"] .dialog,:root[data-theme="backrooms"] .tpbox{box-shadow:0 0 0 1px #8a7a2a,0 20px 56px rgba(50,40,5,.6)}
+:root[data-theme="backrooms"] ::selection{background:rgba(110,97,29,.55);color:#fffbe0}
+:root[data-theme="backrooms"] ::-webkit-scrollbar-thumb{background:#8a7a2a;border-radius:8px}
+:root[data-theme="backrooms"] #toast{background:#4a4116;color:#f3e9a8;border:1px solid #8a7a2a}
+:root[data-theme="backrooms"] #empty h1{color:#4a4116;text-shadow:0 1px 0 rgba(255,245,170,.5)}
+:root[data-theme="backrooms"] .cxm,:root[data-theme="backrooms"] .menu{background:#d6c775}
+body.br-flicker .viewer,body.br-flicker .titlebar,body.br-flicker .toolbar,body.br-flicker #sidebar,body.br-flicker #layers{animation:brFlick .55s steps(1,end)}
+@keyframes brFlick{0%{filter:brightness(.55)}8%{filter:brightness(1.12)}16%{filter:brightness(.4)}26%{filter:brightness(.95)}40%{filter:brightness(.7)}52%{filter:none}100%{filter:none}}
+.tt[data-theme=backrooms]{background:repeating-linear-gradient(90deg,rgba(80,66,10,.12) 0 2px,transparent 2px 9px),linear-gradient(145deg,#cbbb64,#8f8038);color:#3a3312;border-color:#6e611d}
+.tpv[data-pk="backrooms"]::after{content:'';position:absolute;inset:0;pointer-events:none;opacity:.25;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .2  0 0 0 0 .17  0 0 0 0 .05  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");mix-blend-mode:multiply;animation:brGrain .9s steps(6,end) infinite}
+@media (prefers-reduced-motion:reduce){:root[data-theme="backrooms"] body::before,:root[data-theme="backrooms"] body::after,.tpv[data-pk="backrooms"]::after{animation:none}body.br-flicker .viewer{animation:none}}
+/* v0.8.6 추가: 우클릭 컨텍스트 메뉴 (작게) */
+.cxm{position:fixed;z-index:200;min-width:150px;max-width:230px;padding:4px;background:var(--dialog);color:var(--text);border:1px solid var(--border);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.35);font-size:12.5px;animation:cxin .09s ease-out}
+@keyframes cxin{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:none}}
+.cxm[hidden]{display:none}
+.cxm button{display:flex;align-items:center;gap:8px;width:100%;height:26px;padding:0 8px;border-radius:6px;color:var(--text);font-size:12.5px;text-align:left;white-space:nowrap}
+.cxm button:hover:not(:disabled){background:var(--hover)}
+.cxm button:disabled{opacity:.4;cursor:default}
+.cxm button svg{width:14px;height:14px;flex:none;color:var(--muted)}
+.cxm .cxs{height:1px;margin:3px 4px;background:var(--border)}
+.cxm .cxt{padding:6px 8px;font-size:12px;line-height:1.5;max-width:220px;max-height:160px;overflow:auto;white-space:pre-wrap;word-break:break-word}
+.cxm .cxt small{display:block;margin-bottom:3px;color:var(--muted);font-size:10.5px}
 /* v0.8.1 추가: 멀티작업 제목 · 넓게 보기 · 좌측 도구 맞춤 · 한 페이지 보기 스크롤 제거 */
 .wtitle{font-size:clamp(20px,9cqw,30px);font-weight:800;letter-spacing:-.02em;color:var(--text);line-height:1.2;margin-bottom:2px}
 .wwide{position:absolute;top:5px;right:6px;z-index:6;width:26px;height:26px;border-radius:7px;display:grid;place-items:center;color:var(--muted);background:var(--bar2);border:1px solid var(--border);cursor:pointer}
@@ -2294,7 +2459,7 @@ const PT = 96 / 72;                 // 1pt = 96/72 CSS px (100% 확대 = 실제 
 const MMPT = 72 / 25.4;             // 1mm = pt
 const LH = 1.25;
 const HL_ALPHA = 0.45;
-let THUMB_W = 128;
+let THUMB_W = 160;
 const RULER_T = 58;
 const FONT = '"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo","Segoe UI",sans-serif';
 const PALETTE = ['#111111','#e53935','#fb8c00','#fdd835','#43a047','#1e88e5','#8e24aa','#ffffff'];
@@ -2487,7 +2652,7 @@ const settings = {
   shape:     { kind: 'rect', color: '#1e88e5', width: 3, fill: null, fillAlpha: 100 },
   text:      { color: '#111111', size: 16, font: 'sans', bold: false, italic: false, fill: null, align: 'left', ls: 0 },
   eraser:    { mode: 'stroke', size: 14 },
-  region:    { mode: 'rect' }
+  region:    { mode: 'rect', act: 'cut' }
 };
 const lsGet = (k, d) => { try { const v = localStorage.getItem(k); return v == null ? d : v; } catch (e) { return d; } };
 settings.layerMode = lsGet('meowLayerMode', 'auto') === 'manual' ? 'manual' : 'auto';
@@ -2513,8 +2678,10 @@ function toast(msg) {
   toastEl.textContent = msg; toastEl.classList.add('show');
   clearTimeout(toastTimer); toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2600);
 }
-function showLoading(t) { $('#loadingText').textContent = t || '처리 중…'; $('#loading').classList.add('show'); }
-function hideLoading() { $('#loading').classList.remove('show'); }
+function showLoading(t) { $('#loadingText').textContent = t || '처리 중…'; $('#loading').classList.add('show'); document.body.classList.add('is-loading'); try { const a = document.activeElement; if (a && a !== document.body && a.blur) a.blur(); } catch (e) { /* 무시 */ } }
+function hideLoading() { $('#loading').classList.remove('show'); document.body.classList.remove('is-loading'); }
+/* 로딩 중에는 키보드로도 다른 버튼을 누를 수 없어요 */
+document.addEventListener('keydown', e => { if (document.body.classList.contains('is-loading') && !(e.ctrlKey || e.metaKey) && e.key !== 'F5' && e.key !== 'F12') { e.preventDefault(); e.stopPropagation(); } }, true);
 
 function modal({ title, message, input, multiline, ok = '확인', cancel = '취소' }) {
   return new Promise(resolve => {
@@ -2921,7 +3088,7 @@ function createView(p) {
   const base = document.createElement('canvas'), over = document.createElement('canvas'), hl = document.createElement('canvas'); over.className = 'over'; hl.className = 'hlc';
   const tl = document.createElement('div'); tl.className = 'textLayer';
   const trl = document.createElement('div'); trl.className = 'trl';
-  el.append(base, hl, tl, trl, over);
+  el.append(base, tl, trl, over, hl);   // 형광펜은 항상 맨 앞(곱하기)
 
   const tEl = document.createElement('div'); tEl.className = 'thumb'; tEl.dataset.id = p.id; tEl.draggable = true;
   tEl.innerHTML = `<div class="thumb-page"><canvas class="tbase"></canvas><canvas class="tover"></canvas><span class="thumb-flag" hidden>${svg('note')}</span></div>
@@ -3602,6 +3769,7 @@ function onUp(e, id) {
   } else if (d.kind === 'region') {
     const r = regionFrom(d, p), b = ptsBox(r.pts);
     if (b.w * state.scale < 6 || b.h * state.scale < 6 || r.pts.length < 3) { state.region = null; drawOverlay(id); renderOptions(); return; }
+    if (settings.region.act === 'erase') { eraseTouched(id, r); return; }
     r.done = true; state.region = r; drawOverlay(id); renderOptions();
   } else if (d.kind === 'move' || d.kind === 'resize') {
     if (d.moved) commit();
@@ -4075,6 +4243,32 @@ function rgScaleParams(d, pt, shift) {
   if (shift && k.length === 2) { const u = Math.max(sx, sy); sx = sy = u; }
   return { sx, sy, ax, ay };
 }
+function touchedBy(o, r, box) {
+  if (o.hidden || o.locked) return false;
+  const bb = bbox(o);
+  if (bb.x > box.x + box.w || bb.x + bb.w < box.x || bb.y > box.y + box.h || bb.y + bb.h < box.y) return false;
+  if (isPts(o)) {
+    const tol = (o.width || 2) / 2;
+    const dp = densify(o.pts.length > 1 ? o.pts : [o.pts[0], o.pts[0]], 3);
+    return dp.some(q => inPoly(r.pts, q[0], q[1])) || (o.pts.length > 1 && r.pts.some(q => o.pts.some((pp, i) => i && distSeg(q[0], q[1], o.pts[i - 1][0], o.pts[i - 1][1], pp[0], pp[1]) <= tol)));
+  }
+  const x0 = Math.max(bb.x, box.x), x1 = Math.min(bb.x + bb.w, box.x + box.w), y0 = Math.max(bb.y, box.y), y1 = Math.min(bb.y + bb.h, box.y + box.h);
+  for (let i = 0; i <= 8; i++) for (let j = 0; j <= 8; j++) if (inPoly(r.pts, x0 + (x1 - x0) * i / 8, y0 + (y1 - y0) * j / 8)) return true;
+  return r.pts.some(q => q[0] >= bb.x && q[0] <= bb.x + bb.w && q[1] >= bb.y && q[1] <= bb.y + bb.h);
+}
+function eraseTouched(id, r) {
+  const p = pageById(id); state.region = null;
+  if (!p) return;
+  const box = ptsBox(r.pts); let n = 0;
+  for (let i = p.annots.length - 1; i >= 0; i--) {
+    if (!touchedBy(p.annots[i], r, box)) continue;
+    if (state.selected && state.selected.objId === p.annots[i].id) state.selected = null;
+    p.annots.splice(i, 1); n++;
+  }
+  if (n) { commit(); touch(id); }
+  drawOverlay(id); renderOptions();
+  toast(n ? `닿은 개체 ${n}개를 삭제했어요` : '범위에 닿은 개체가 없어요');
+}
 function clearRegion(silent) {
   const r = state.region; if (!r) return;
   state.region = null;
@@ -4225,6 +4419,7 @@ async function regionAction(act) {
 }
 optbar.addEventListener('click', e => {
   let el;
+  if ((el = e.target.closest('[data-rgact]'))) { settings.region.act = el.dataset.rgact === 'erase' ? 'erase' : 'cut'; clearRegion(true); renderOptions(); return; }
   if ((el = e.target.closest('[data-rgmode]'))) { settings.region.mode = el.dataset.rgmode; clearRegion(true); syncRegionBtn(); renderOptions(); return; }
   if ((el = e.target.closest('[data-rg]'))) regionAction(el.dataset.rg);
 });
@@ -4345,6 +4540,7 @@ function renderOptions() {
   } else if (t === 'region') {
     const rg = state.region && state.region.done && pageById(state.region.id);
     h = `<div class="seg" role="group" aria-label="영역 방식"><button data-rgmode="rect" class="${settings.region.mode === 'rect' ? 'on' : ''}">${svg('rect')}사각형</button><button data-rgmode="free" class="${settings.region.mode === 'free' ? 'on' : ''}">${svg('lasso')}자유 선택</button></div>` +
+      `<div class="seg" role="group" aria-label="영역 처리 방식"><button data-rgact="cut" title="영역으로 개체를 잘라 선택해요" class="${settings.region.act !== 'erase' ? 'on' : ''}">${svg('scissors')}잘라 선택</button><button data-rgact="erase" title="범위에 닿은 개체를 모두 삭제해요" class="${settings.region.act === 'erase' ? 'on' : ''}">${svg('trash')}닿은 개체 삭제</button></div>` +
       `<div class="rgacts">${rg ? `<button data-rg="cut">${svg('scissors')}잘라내기</button><button data-rg="copyobj">${svg('copy')}복사</button>` : ''}${RG_CLIP ? `<button data-rg="paste">${svg('clip')}붙여넣기</button>` : ''}${rg ? `<button data-rg="del">${svg('trash')}삭제</button><span class="rgsep"></span><button data-rg="imgcopy">${svg('image')}이미지 복사</button><button data-rg="imgsave">${svg('download')}이미지 저장</button><button data-rg="text">${svg('type')}글자 복사</button><button data-rg="clear">${svg('x')}해제</button>` : ''}</div>` +
       (rg ? hint('영역 안쪽을 끌어 옮기고, 가장자리 8개의 점을 끌어 늘리거나 크기를 바꿔요 (Shift: 비율 유지). Delete: 삭제 · Ctrl+X/C/V') : hint('드래그해서 영역을 지정한 뒤, 안쪽을 끌어 그림·도형의 일부만 잘라 옮길 수 있어요.'));
   } else {
@@ -4612,8 +4808,9 @@ function syncRegionBtn() {
   const b = document.querySelector('.tool[data-tool="region"]'); if (!b) return;
   const f = settings.region.mode === 'free';
   let pk = 'Z'; try { pk = prettyKey(keyOf('tool.region')) || ''; } catch (e) { /* 단축키 초기화 전 */ }
-  b.innerHTML = svg(f ? 'lasso' : 'region') + `<span>${f ? '자유선택' : '영역'}</span>` + (pk ? `<kbd>${pk}</kbd>` : '');
-  b.title = (f ? '영역 지정 · 자유 선택' : '영역 지정 · 사각형') + (pk ? ` (${pk})` : '') + ' — ▾로 방식 전환';
+  const er = settings.region.act === 'erase';
+  b.innerHTML = svg(er ? 'trash' : f ? 'lasso' : 'region') + `<span>${er ? '영역삭제' : f ? '자유선택' : '영역'}</span>` + (pk ? `<kbd>${pk}</kbd>` : '');
+  b.title = (er ? '영역 삭제 · ' : '영역 지정 · ') + (f ? '자유 선택' : '사각형') + (pk ? ` (${pk})` : '') + ' — ▾로 방식 전환';
 }
 function setRegionMode(m) {
   settings.region.mode = m; clearRegion(true); syncRegionBtn();
@@ -4625,15 +4822,115 @@ function openRegionMenu(anchor) {
   const m = settings.region.mode;
   fmtMenu.innerHTML = '<div class="menu-h">영역 지정 방식</div>' +
     `<button class="mi${m === 'rect' ? ' on' : ''}" data-rgm="rect"><span class="mthumb">${svg('region')}</span><span class="mtxt"><b>사각형</b><span>끌어서 네모 영역 지정</span></span></button>` +
-    `<button class="mi${m === 'free' ? ' on' : ''}" data-rgm="free"><span class="mthumb">${svg('lasso')}</span><span class="mtxt"><b>자유 선택</b><span>손으로 그려 원하는 모양으로 지정</span></span></button>`;
+    `<button class="mi${m === 'free' ? ' on' : ''}" data-rgm="free"><span class="mthumb">${svg('lasso')}</span><span class="mtxt"><b>자유 선택</b><span>손으로 그려 원하는 모양으로 지정</span></span></button>` +
+    '<div class="menu-h">처리 방식</div>' +
+    `<button class="mi${settings.region.act !== 'erase' ? ' on' : ''}" data-rga="cut"><span class="mthumb">${svg('scissors')}</span><span class="mtxt"><b>부분을 잘라 선택</b><span>영역 안쪽만 잘라 옮기기·복사</span></span></button>` +
+    `<button class="mi${settings.region.act === 'erase' ? ' on' : ''}" data-rga="erase"><span class="mthumb">${svg('trash')}</span><span class="mtxt"><b>닿은 개체 모두 삭제</b><span>범위에 닿은 개체를 통째로 지워요</span></span></button>`;
   const r = anchor.getBoundingClientRect();
   fmtMenu.style.top = r.bottom + 6 + 'px'; fmtMenu.style.right = 'auto'; fmtMenu.style.left = Math.max(8, Math.min(r.left, window.innerWidth - 270)) + 'px';
   fmtMenu.hidden = false; placeSide(r);
 }
 $('#fmtMenu').addEventListener('click', e => {
+  const a = e.target.closest('[data-rga]');
+  if (a) { fmtMenu.hidden = true; settings.region.act = a.dataset.rga === 'erase' ? 'erase' : 'cut'; clearRegion(true); if (state.pages.length && state.tool !== 'region') setTool('region'); else renderOptions(); syncRegionBtn(); return; }
   const b = e.target.closest('[data-rgm]'); if (!b) return;
   fmtMenu.hidden = true; setRegionMode(b.dataset.rgm);
 });
+
+/* ════════════ 우클릭 컨텍스트 메뉴 (v0.8.6) ════════════ */
+let OBJ_CLIP = null;
+const cxm = document.createElement('div'); cxm.className = 'cxm'; cxm.hidden = true; cxm.setAttribute('role', 'menu'); document.body.appendChild(cxm);
+let cxCtx = null;
+function cxClose() { cxm.hidden = true; cxCtx = null; }
+function cxPlace(x, y) {
+  cxm.style.left = '0px'; cxm.style.top = '0px'; cxm.hidden = false;
+  const r = cxm.getBoundingClientRect();
+  cxm.style.left = Math.max(4, Math.min(x, window.innerWidth - r.width - 4)) + 'px';
+  cxm.style.top = Math.max(4, Math.min(y, window.innerHeight - r.height - 4)) + 'px';
+}
+function cxSel() { const s = window.getSelection(); return s && !s.isCollapsed ? String(s).trim() : ''; }
+function cxItem(act, ico, label, dis) { return `<button role="menuitem" data-cx="${act}"${dis ? ' disabled' : ''}>${svg(ico)}<span>${label}</span></button>`; }
+function openCtxMenu(e, pageEl) {
+  const id = pageEl.dataset.id, v = views.get(id), p = pageById(id); if (!v || !p) return;
+  const pt = pagePoint(e, v.over), txt = cxSel(), rg = state.region && state.region.done && state.region.id === id, so = selectedObj();
+  cxCtx = { id, pt, txt, rg, so };
+  const canCopy = !!(txt || rg || so), canPaste = !!(RG_CLIP || OBJ_CLIP || true);
+  cxm.innerHTML = (txt ? cxItem('tr', 'translate', '한국어로 번역') + '<div class="cxs"></div>' : '') +
+    cxItem('cut', 'scissors', '잘라내기', !(rg || so)) + cxItem('copy', 'copy', '복사', !canCopy) + cxItem('paste', 'clip', '붙여넣기', !canPaste) + cxItem('all', 'region', '모두 선택') +
+    '<div class="cxs"></div>' + cxItem('img', 'image', '이미지 삽입') + cxItem('table', 'table', '표 삽입') + cxItem('memo', 'memo', '메모 삽입') +
+    (PLAN.premium ? cxItem('mic', 'mic', '음성 삽입') : '');
+  cxPlace(e.clientX, e.clientY);
+}
+async function cxRun(act) {
+  const c = cxCtx; if (!c) return;
+  const { id, pt, txt } = c, p = pageById(id);
+  if (act === 'tr') {
+    cxm.innerHTML = '<div class="cxt"><small>번역 중…</small></div>';
+    try {
+      const s = await trDetect(txt);
+      if (s === 'ko') { cxm.innerHTML = '<div class="cxt"><small>한국어</small>이미 한국어예요.</div>'; return; }
+      const out = await trTranslate(txt.split(/\n+/).filter(x => x.trim()), s, 'ko', () => {});
+      cxm.innerHTML = '<div class="cxt"><small>한국어 번역</small></div><div class="cxs"></div>' + cxItem('trcopy', 'copy', '번역 복사');
+      cxm.querySelector('.cxt').append(document.createTextNode(out.join('\n'))); cxm._res = out.join('\n');
+    } catch (err) { cxm.innerHTML = '<div class="cxt"><small>번역 실패</small>' + escH((err && err.message) || '번역하지 못했어요.') + '</div>'; }
+    return;
+  }
+  if (act === 'trcopy') { try { await navigator.clipboard.writeText(cxm._res || ''); toast('번역을 복사했어요.'); } catch (e) { toast('복사하지 못했어요.'); } cxClose(); return; }
+  cxClose();
+  if (act === 'copy' || act === 'cut') {
+    if (c.rg) { regionAction(act === 'cut' ? 'cut' : 'copyobj'); return; }
+    if (txt) { await copySelection(); return; }
+    if (c.so && p) {
+      const o = p.annots.find(a => a.id === c.so.id || a.id === c.so.objId) || c.so;
+      OBJ_CLIP = clone(o);
+      if (act === 'cut') { p.annots.splice(p.annots.indexOf(o), 1); state.selected = null; commit(); touch(id); drawOverlay(id); renderOptions(); toast('잘라냈어요. 붙여넣기로 불러올 수 있어요.'); }
+      else toast('복사했어요. 붙여넣기로 불러올 수 있어요.');
+    }
+    return;
+  }
+  if (act === 'paste') {
+    if (RG_CLIP) { regionAction('paste'); return; }
+    if (OBJ_CLIP && p) {
+      const o = clone(OBJ_CLIP); o.id = uid('o'); const b = bbox(o), dx = pt[0] - b.x - b.w / 2, dy = pt[1] - b.y - b.h / 2;
+      if (isPts(o)) o.pts = o.pts.map(q => [q[0] + dx, q[1] + dy]); else { o.x += dx; o.y += dy; }
+      p.annots.push(o); commit(); touch(id); selectObj(id, o.id); drawOverlay(id); return;
+    }
+    try {
+      const items = await navigator.clipboard.read();
+      for (const it of items) { const ty = it.types.find(t => t.startsWith('image/')); if (ty) { await insertImageBlob(await it.getType(ty)); return; } }
+      const t = await navigator.clipboard.readText();
+      if (t) { openTextEditor(id, pt[0], pt[1], null, Object.assign({}, settings.text, { text: t })); return; }
+    } catch (err) { /* 권한 없음 */ }
+    toast('붙여넣을 내용이 없거나 권한이 없어요. Ctrl+V를 눌러 주세요.');
+    return;
+  }
+  if (act === 'all') {
+    const s = window.getSelection(), v = views.get(id), tl = v && v.el.querySelector('.textLayer');
+    if (tl && tl.childNodes.length && !p.annots.length) { const r = document.createRange(); r.selectNodeContents(tl); s.removeAllRanges(); s.addRange(r); return; }
+    if (p && p.annots.length) { const first = p.annots.find(a => !a.hidden && !a.locked); if (first) { selectObj(id, first.id); state.layerSel = new Set(p.annots.filter(a => !a.hidden && !a.locked).map(a => a.id)); drawOverlay(id); scheduleLayers(); toast(`개체 ${state.layerSel.size}개를 선택했어요`); } return; }
+    if (tl) { const r = document.createRange(); r.selectNodeContents(tl); s.removeAllRanges(); s.addRange(r); }
+    return;
+  }
+  if (act === 'img') { runImageMode(); return; }
+  if (act === 'table') { $('#tableBtn').click(); return; }
+  if (act === 'memo') { addMemo(); return; }
+  if (act === 'mic') { openRecorder(); return; }
+}
+cxm.addEventListener('click', e => { const b = e.target.closest('[data-cx]'); if (b && !b.disabled) cxRun(b.dataset.cx); });
+cxm.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('contextmenu', e => {
+  const t = e.target, tag = (t.tagName || '').toUpperCase();
+  if (cxm.contains(t)) return;
+  if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || t.isContentEditable) { cxClose(); return; }
+  const pg = t.closest && t.closest('.page');
+  if (!pg || !state.pages.length || mMode || t.closest('.memo') || t.closest('.modal') || t.closest('#presBar') || document.body.classList.contains('presenting')) { cxClose(); return; }
+  e.preventDefault(); openCtxMenu(e, pg);
+});
+document.addEventListener('pointerdown', e => { if (!cxm.hidden && !cxm.contains(e.target)) cxClose(); }, true);
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !cxm.hidden) { cxClose(); } });
+window.addEventListener('blur', cxClose);
+window.addEventListener('resize', cxClose);
+viewer.addEventListener('scroll', cxClose, { passive: true });
 
 /* ════════════ 페이지 디지털화: 이미지 · 스캔 · PDF의 글자를 클릭해서 고칠 수 있는 글자 개체로 ════════════ */
 const digi = { mode: lsGet('meowDigiMode', 'cur') === 'all' ? 'all' : 'cur', lang: lsGet('meowDigiLang', 'kor') === 'eng' ? 'eng' : 'kor', busy: false };
@@ -5017,10 +5314,20 @@ $('#pasteBtn').onclick = async () => {
   }
 };
 document.addEventListener('paste', async e => {
-  if (!state.pages.length) return;
   const tag = (e.target.tagName || '').toUpperCase();
-  if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+  if (tag === 'INPUT' || tag === 'TEXTAREA' || (e.target.isContentEditable && state.pages.length)) return;
   const cd = e.clipboardData; if (!cd) return;
+  if (!state.pages.length) {   // 열린 문서가 없을 때 Ctrl+V: 클립보드(캡처)의 PNG 이미지를 바로 열어요
+    for (const it of cd.items) {
+      if (it.type.startsWith('image/')) {
+        e.preventDefault(); const f = it.getAsFile(); if (!f) return;
+        const ext = (it.type.split('/')[1] || 'png').replace('jpeg', 'jpg').replace(/[^a-z0-9]/g, '') || 'png', d = new Date(), z = n => String(n).padStart(2, '0');
+        await importImageDoc(new File([f], `클립보드 캡처 ${d.getFullYear()}${z(d.getMonth() + 1)}${z(d.getDate())}-${z(d.getHours())}${z(d.getMinutes())}${z(d.getSeconds())}.${ext}`, { type: f.type || 'image/png' }));
+        toast('클립보드의 이미지를 새 문서로 열었어요.'); return;
+      }
+    }
+    return;
+  }
   for (const it of cd.items) {
     if (it.type.startsWith('image/')) { e.preventDefault(); const f = it.getAsFile(); if (f) await insertImageBlob(f); return; }
   }
@@ -5304,11 +5611,11 @@ document.addEventListener('pointerdown', e => {
 /* 썸네일 크기: 페이지 패널 폭을 따라감 */
 let thumbTimer = 0;
 function updateThumbW() {
-  let w = 128;
+  let w = app.classList.contains('vmode') && !state.listView ? 160 : 128;
   if (!app.classList.contains('vmode') && !state.listView) {
     const cw = thumbsEl.clientWidth; if (cw < 60) return;
     const depth = Math.max(0, ...state.pages.map(p => groupChain(p.group).length));
-    w = clamp(Math.round(cw - 72 - depth * 12), 56, 520);
+    w = clamp(Math.round(cw - 52 - depth * 12), 56, 560);
   }
   if (Math.abs(w - THUMB_W) < 2) return;
   THUMB_W = w; $('#sidebar').style.setProperty('--tw', w + 'px');
@@ -5595,6 +5902,11 @@ function friendlyAuthError(raw, kind) {
   if (/token has expired|otp_expired|invalid.*(token|otp)|token.*invalid|expired or is invalid/i.test(low)) {
     return '인증번호가 맞지 않거나 시간이 지나 만료됐어요. ① 메일에 적힌 6자리 숫자를 그대로 다시 입력해 보시고, ② 그래도 안 되면 \u2018코드 다시 보내기\u2019로 새 번호를 받아 가장 최근 메일의 번호를 입력해 주세요. (새 번호를 받으면 이전 번호는 쓸 수 없어요.)';
   }
+  if (/already registered|already been registered|user_already_exists|already exists/i.test(low)) return '이미 가입된 이메일이에요. \u2018비밀번호 로그인\u2019 탭에서 로그인하세요. 인증번호로만 가입했다면 \u2018인증번호\u2019 탭에서 로그인한 뒤 비밀번호를 설정할 수 있어요.';
+  if (/invalid login credentials|invalid_credentials/i.test(low)) return '이메일 또는 비밀번호가 맞지 않아요. 인증번호로만 가입했다면 비밀번호가 아직 없어요. \u2018인증번호\u2019 탭에서 로그인한 뒤 비밀번호를 설정해 주세요.';
+  if (/email not confirmed|email_not_confirmed/i.test(low)) return '이메일 인증이 아직 끝나지 않았어요. \u2018인증번호\u2019 탭에서 인증을 마쳐 주세요.';
+  if (/password.*(at least|short|weak|characters)|weak_password/i.test(low)) return '비밀번호가 너무 짧거나 쉬워요. 8자 이상으로 영문과 숫자를 섞어 주세요.';
+  if (/same.*password|different from the old/i.test(low)) return '이전과 같은 비밀번호예요. 다른 비밀번호를 입력해 주세요.';
   if (/invalid format|unable to validate email|email address.*invalid|invalid email/i.test(low)) return '이메일 주소 형식이 올바르지 않아요. 주소를 다시 확인해 주세요.';
   if (/signups? not allowed|user not found|not allowed/i.test(low)) return '이 이메일로는 로그인할 수 없어요. 주소를 다시 확인하거나 다른 이메일로 시도해 주세요.';
   if (/error sending|sending.*email|smtp|failed to send/i.test(low)) return '메일을 보내는 중 문제가 생겼어요. 잠시 뒤 다시 시도해 주세요. 계속되면 고객센터로 알려 주세요.';
@@ -5746,36 +6058,49 @@ function openPremDetail() {
   el.addEventListener('click', e => { if (e.target === el || e.target.closest('.pdx')) close(); });
 }
 async function openAccount(note) {
-  let focusKey = '', step = 'email', email = '', msg = note || '', err = false, busy = false, cool = 0, coolT = 0, issued = null, keyList = null;
+  let focusKey = '', step = 'email', mode = 'otp', pwKeep = { p: '', p2: '' }, email = '', msg = note || '', err = false, busy = false, cool = 0, coolT = 0, issued = null, keyList = null, otpType = '', acShown = false;
+  const acLoad = (on, t) => { if (on) { showLoading(t || '처리 중…'); acShown = true; } else if (acShown) { hideLoading(); acShown = false; } };
   getSb();
   await customModal({
     title: '계정 · 프리미엄',
     build(body) {
       const draw = () => {
         const q = x => body.querySelector(x);
+        acLoad(busy, msg);
         const ae = body.contains(document.activeElement) ? document.activeElement : null, wasId = ae && ae.id, selA = ae && ae.selectionStart, selB = ae && ae.selectionEnd;
         const keep = { e: q('#acEmail') ? q('#acEmail').value : email, o: q('#acOtp') ? q('#acOtp').value : '', k: q('#acKey') ? q('#acKey').value : '', n: q('#acNote') ? q('#acNote').value : '' };
-        let h = '<div class="acp">';
+        keep.p = q('#acPw') ? q('#acPw').value : pwKeep.p; keep.p2 = q('#acPw2') ? q('#acPw2').value : pwKeep.p2; pwKeep = { p: keep.p, p2: keep.p2 };
+        let Lh = '', Rh = '';
         if (PLAN.user) {
-          h += `<h3>${PLAN.premium ? '프리미엄 이용 중' : '무료 플랜 이용 중'}</h3><div class="box"><b>${escH(PLAN.user.email || '')}</b><br>` +
-            kindLine() + '</div>';
-          if (!PLAN.premium || (planLeft() && planLeft().days <= 30)) h += keyHtml(keep.k) + payHtml();
-          if (PLAN.dev) h += devHtml(keep.n);
-          h += '<button class="b" data-a="out">로그아웃</button>';
+          Lh += `<h3>${PLAN.premium ? '프리미엄 이용 중' : '무료 플랜 이용 중'}</h3><div class="box"><b>${escH(PLAN.user.email || '')}</b><br>` + kindLine() + '</div>';
+          if (!PLAN.premium || (planLeft() && planLeft().days <= 30)) { Lh += keyHtml(keep.k); Rh += payHtml(); }
+          Lh += `<div class="box keybox"><b>비밀번호 설정</b><span class="kd">설정하면 다음부터 인증번호 없이 이메일과 비밀번호로 로그인할 수 있어요.</span>${pwField('acPw', '새 비밀번호 (8자 이상)', keep.p, 'new-password')}<button class="b" data-a="setpw"${busy ? ' disabled' : ''}>비밀번호 저장</button></div>`;
+          if (PLAN.dev) Lh += devHtml(keep.n);
+          Lh += '<button class="b" data-a="out">로그아웃</button>';
         } else {
-          h += '<h3>대학생 인증</h3><p>학교 이메일(<code>.ac.kr</code> 또는 <code>.edu</code>)로 인증하시면 모든 기능을 무료로 이용하실 수 있습니다. 인증번호가 이메일로 발송됩니다.</p>';
-          if (step === 'email') h += `<input id="acEmail" type="email" placeholder="student@university.ac.kr" autocomplete="email" value="${qa(keep.e)}"><button class="b pri" data-a="send"${busy ? ' disabled' : ''}>인증 메일 받기</button>`;
-          else h += `<p style="color:var(--accent)">${escH(email)}(으)로 발송된 인증번호를 입력해 주세요.</p><input id="acOtp" type="text" inputmode="numeric" maxlength="8" placeholder="123456" autocomplete="one-time-code" style="letter-spacing:2px" value="${qa(keep.o)}"><button class="b ok" data-a="verify"${busy ? ' disabled' : ''}>인증 완료하기</button><button class="lnk" data-a="resend"${cool > 0 || busy ? ' disabled' : ''}>${cool > 0 ? cool + '초 뒤 다시 보내기' : '코드 다시 보내기'}</button><button class="lnk" data-a="back">이메일 다시 입력</button>`;
-          h += payHtml();
+          Lh += '<h3>로그인 · 대학생 인증</h3>';
+          Lh += `<div class="actabs" role="tablist">${[['otp', '인증번호'], ['pw', '비밀번호 로그인'], ['up', '회원가입']].map(([m, n]) => `<button type="button" role="tab" data-a="mode" data-m="${m}" class="${mode === m ? 'on' : ''}" aria-selected="${mode === m}">${n}</button>`).join('')}</div>`;
+          if (mode === 'pw') {
+            Lh += `<p>이메일과 비밀번호로 로그인해요.</p><input id="acEmail" type="email" placeholder="email@example.com" autocomplete="email" value="${qa(keep.e)}">${pwField('acPw', '비밀번호', keep.p, 'current-password')}<button class="b pri" data-a="signin"${busy ? ' disabled' : ''}>로그인</button><button class="lnk" data-a="mode" data-m="otp">비밀번호가 없거나 잊었어요 (인증번호로 로그인)</button>`;
+          } else if (step === 'otp') {
+            Lh += `<p style="color:var(--accent)">${escH(email)}(으)로 발송된 인증번호를 입력해 주세요.</p><input id="acOtp" type="text" inputmode="numeric" maxlength="8" placeholder="123456" autocomplete="one-time-code" style="letter-spacing:2px" value="${qa(keep.o)}"><button class="b ok" data-a="verify"${busy ? ' disabled' : ''}>인증 완료하기</button><button class="lnk" data-a="resend"${cool > 0 || busy ? ' disabled' : ''}>${cool > 0 ? cool + '초 뒤 다시 보내기' : '코드 다시 보내기'}</button><button class="lnk" data-a="back">이메일 다시 입력</button>`;
+          } else if (mode === 'up') {
+            Lh += `<p>이메일과 비밀번호로 가입하고, 메일로 받은 인증번호로 확인해요. 학교 메일(<code>.ac.kr</code> · <code>.edu</code>)이면 대학생 인증도 함께 돼요.</p><input id="acEmail" type="email" placeholder="email@example.com" autocomplete="email" value="${qa(keep.e)}">${pwField('acPw', '비밀번호 (8자 이상)', keep.p, 'new-password')}${pwField('acPw2', '비밀번호 확인', keep.p2, 'new-password')}<button class="b pri" data-a="signup"${busy ? ' disabled' : ''}>회원가입</button>`;
+          } else {
+            Lh += `<p>학교 이메일(<code>.ac.kr</code> 또는 <code>.edu</code>)로 인증하시면 모든 기능을 무료로 이용하실 수 있습니다. 인증번호가 이메일로 발송됩니다.</p><input id="acEmail" type="email" placeholder="student@university.ac.kr" autocomplete="email" value="${qa(keep.e)}"><button class="b pri" data-a="send"${busy ? ' disabled' : ''}>인증 메일 받기</button>`;
+          }
+          Rh += payHtml();
         }
-        h += `${msg ? `<div class="msg${err ? ' err' : ''}" role="status">${escH(msg)}</div>` : ''}</div>`;
+        const mh = msg ? `<div class="msg${err ? ' err' : ''}" role="status">${escH(msg)}</div>` : '';
+        const h = Rh ? `<div class="acp split"><div class="acl">${Lh}</div><div class="acr">${Rh}</div>${mh}</div>` : `<div class="acp"><div class="acl">${Lh}</div>${mh}</div>`;
         body.innerHTML = h;
-        const first = q('#acEmail') || q('#acOtp');
+        const first = q('#acEmail') || q('#acOtp') || q('#acPw');
         if (first && !busy) {
           if (wasId && first.id === wasId) { first.focus(); try { first.setSelectionRange(selA, selB); } catch (er) { /* 무시 */ } }
           else if (focusKey !== step) { focusKey = step; setTimeout(() => first.focus(), 30); }
         }
       };
+      const pwField = (id, ph, v, ac) => `<div class="pwf"><input id="${id}" type="password" placeholder="${ph}" autocomplete="${ac}" spellcheck="false" value="${qa(v || '')}"><button type="button" class="pwe" data-a="pwtoggle" data-t="${id}" aria-label="비밀번호 보기" aria-pressed="false" title="비밀번호 보기">${svg('eye')}</button></div>`;
       const keyHtml = v => `<div class="box keybox"><b>이용 키</b><span class="kd">발급받은 키를 입력하면 키 기간 동안 프리미엄이 적용돼요.</span><div class="keyin"><input id="acKey" type="text" placeholder="MEOW-XXXX-XXXX-XXXX-XXXX" autocomplete="off" spellcheck="false" style="letter-spacing:1px" value="${qa(v || '')}"><button class="b pri" data-a="redeem"${busy ? ' disabled' : ''}>키 적용</button></div></div>`;
       let keyLoad = false;
       const devHtml = n => {
@@ -5799,9 +6124,15 @@ async function openAccount(note) {
       body.addEventListener('click', async e => {
         const a = e.target.closest('[data-a]'); if (!a || a.disabled) return;
         if (a.dataset.a === 'premdetail') { openPremDetail(); return; }
-        const act = a.dataset.a, sb = await getSb();
+        if (a.dataset.a === 'pwtoggle') {   // 비밀번호 보기 · 숨기기 (화면을 다시 그리지 않아요)
+          const inp = body.querySelector('#' + a.dataset.t); if (!inp) return;
+          const show = inp.type === 'password'; inp.type = show ? 'text' : 'password';
+          a.innerHTML = svg(show ? 'eyeOff' : 'eye'); a.setAttribute('aria-pressed', String(show)); a.title = a.ariaLabel = show ? '비밀번호 숨기기' : '비밀번호 보기'; a.setAttribute('aria-label', a.title); return;
+        }
+        if (a.dataset.a === 'mode') { const ev = body.querySelector('#acEmail'); if (ev) email = ev.value.trim(); mode = a.dataset.m; otpType = ''; step = 'email'; msg = ''; err = false; clearInterval(coolT); cool = 0; draw(); return; }
+        const act = a.dataset.a; acLoad(true, '서버에 연결하는 중…'); let sb; try { sb = await getSb(); } finally { acLoad(false); }
         if (!sb) { msg = '서버에 연결할 수 없습니다. 인터넷 연결을 확인한 후 다시 시도해 주세요.'; err = true; draw(); return; }
-        if (act === 'refresh') { msg = '확인하는 중…'; err = false; draw(); await loadPlan(); msg = PLAN.premium ? '프리미엄이 적용되어 있습니다.' : '아직 결제 내역이 확인되지 않았습니다.'; err = !PLAN.premium; draw(); return; }
+        if (act === 'refresh') { msg = '확인하는 중…'; err = false; draw(); acLoad(true, '확인하는 중…'); try { await loadPlan(); } finally { acLoad(false); } msg = PLAN.premium ? '프리미엄이 적용되어 있습니다.' : '아직 결제 내역이 확인되지 않았습니다.'; err = !PLAN.premium; draw(); return; }
         if (act === 'pay') { await startPayment(sb, m => { msg = m.t; err = !!m.err; busy = !!m.busy; draw(); }); return; }
         if (act === 'redeem' || act === 'issue' || act === 'listkeys' || act === 'revoke' || act === 'copykey' || act === 'copyrow') {
           if (act === 'copyrow') { const kk = keyList && keyList[+a.dataset.i]; try { await navigator.clipboard.writeText(kk.key); msg = '키를 복사했습니다.'; err = false; } catch (er) { msg = '복사하지 못했습니다. 키를 직접 선택해 복사해 주세요.'; err = true; } draw(); return; }
@@ -5836,13 +6167,57 @@ async function openAccount(note) {
             draw(); return;
           }
         }
-        if (act === 'back') { step = 'email'; msg = ''; err = false; draw(); return; }
+        const emOk = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+        const afterLogin = async () => { acLoad(true, '계정 정보를 불러오는 중…'); try { await loadPlan(); } finally { acLoad(false); } msg = PLAN.premium ? '로그인되었습니다. 프리미엄이 적용되어 있어요.' : '로그인되었습니다. 현재 프리미엄이 적용되지 않은 계정입니다.'; err = false; draw(); };
+        if (act === 'signin') {
+          const v = String(body.querySelector('#acEmail').value || '').trim().toLowerCase(), pw = body.querySelector('#acPw').value;
+          if (!emOk(v)) { msg = '올바른 이메일 주소를 입력해 주세요.'; err = true; draw(); return; }
+          if (!pw) { msg = '비밀번호를 입력해 주세요.'; err = true; draw(); return; }
+          email = v; busy = true; msg = '로그인하는 중…'; err = false; draw();
+          let r; try { r = await sb.auth.signInWithPassword({ email: v, password: pw }); } catch (er) { r = { error: { message: String(er && er.message || er) } }; }
+          busy = false; pwKeep = { p: '', p2: '' };
+          if (r.error) { msg = friendlyAuthError(r.error.message, 'verify'); err = true; draw(); return; }
+          await afterLogin(); return;
+        }
+        if (act === 'signup') {
+          const v = String(body.querySelector('#acEmail').value || '').trim().toLowerCase(), pw = body.querySelector('#acPw').value, pw2 = body.querySelector('#acPw2').value;
+          if (!emOk(v)) { msg = '올바른 이메일 주소를 입력해 주세요.'; err = true; draw(); return; }
+          if (pw.length < 8) { msg = '비밀번호는 8자 이상으로 입력해 주세요.'; err = true; draw(); return; }
+          if (pw !== pw2) { msg = '비밀번호 확인이 달라요. 같은 비밀번호를 한 번 더 입력해 주세요.'; err = true; draw(); return; }
+          email = v; busy = true; msg = '가입하는 중…'; err = false; draw();
+          let r; try { r = await sb.auth.signUp({ email: v, password: pw }); } catch (er) { r = { error: { message: String(er && er.message || er) } }; }
+          busy = false;
+          if (r.error) { msg = friendlyAuthError(r.error.message, 'send'); err = true; draw(); return; }
+          const u = r.data && r.data.user;
+          if (u && Array.isArray(u.identities) && u.identities.length === 0) { msg = friendlyAuthError('User already registered'); err = true; draw(); return; }   // 이미 가입된(또는 인증번호로 먼저 가입한) 이메일
+          pwKeep = { p: '', p2: '' };
+          otpType = 'signup';
+          if (r.data && r.data.session) {   // 서버가 이메일 확인을 끄고 있어도 인증번호 확인을 거치도록, 로그아웃하고 인증번호를 다시 보내요
+            busy = true; msg = '인증번호를 보내는 중…'; draw();
+            try { await sb.auth.signOut(); } catch (er) { /* 무시 */ }
+            let r2; try { r2 = await sb.auth.signInWithOtp({ email: v, options: { shouldCreateUser: false } }); } catch (er) { r2 = { error: { message: String(er && er.message || er) } }; }
+            busy = false;
+            if (r2.error) { msg = friendlyAuthError(r2.error.message, 'send'); err = true; draw(); return; }
+            otpType = 'email';
+          }
+          step = 'otp'; msg = '인증번호를 발송했습니다. 이메일로 받은 숫자를 입력해야 가입이 완료돼요. 받은편지함과 스팸함을 확인해 주세요.'; err = false; cool = 30; clearInterval(coolT); coolT = setInterval(() => { cool--; if (cool <= 0) clearInterval(coolT); const rb = body.querySelector('[data-a=resend]'); if (rb) { rb.disabled = cool > 0 || busy; rb.textContent = cool > 0 ? cool + '초 뒤 다시 보내기' : '코드 다시 보내기'; } }, 1000);
+          draw(); return;
+        }
+        if (act === 'setpw') {
+          const pw = body.querySelector('#acPw').value;
+          if (pw.length < 8) { msg = '비밀번호는 8자 이상으로 입력해 주세요.'; err = true; draw(); return; }
+          busy = true; msg = '저장하는 중…'; err = false; draw();
+          let r; try { r = await sb.auth.updateUser({ password: pw }); } catch (er) { r = { error: { message: String(er && er.message || er) } }; }
+          busy = false; pwKeep = { p: '', p2: '' };
+          msg = r.error ? friendlyAuthError(r.error.message, 'verify') : '비밀번호를 저장했어요. 다음부터 \u2018비밀번호 로그인\u2019으로 들어올 수 있어요.'; err = !!r.error; draw(); return;
+        }
+        if (act === 'back') { otpType = ''; step = 'email'; msg = ''; err = false; draw(); return; }
         if (act === 'out') { await hardSignOut(sb); step = 'email'; msg = '로그아웃되었습니다.'; err = false; await loadPlan(); return; }
         if (act === 'send' || act === 'resend') {
           const v = act === 'send' ? String(body.querySelector('#acEmail').value || '').trim().toLowerCase() : email;
           if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) { msg = '올바른 이메일 주소를 입력해 주세요.'; err = true; draw(); return; }
           busy = true; msg = SCHOOL_RE.test(v) ? '메일을 보내는 중…' : '학교 메일(.ac.kr/.edu)이 아니라서 학생 인증은 되지 않아요. 결제 회원 로그인으로 진행해요…'; err = false; draw();
-          let r; try { r = await sb.auth.signInWithOtp({ email: v, options: { shouldCreateUser: true } }); } catch (er) { r = { error: { message: String(er && er.message || er) } }; }
+          let r; try { r = mode === 'up' && act === 'resend' && otpType !== 'email' ? await sb.auth.resend({ type: 'signup', email: v }) : await sb.auth.signInWithOtp({ email: v, options: { shouldCreateUser: true } }); } catch (er) { r = { error: { message: String(er && er.message || er) } }; }
           busy = false;
           if (r.error) { msg = friendlyAuthError(r.error.message, 'send'); err = true; }
           else { email = v; step = 'otp'; msg = '인증번호를 발송했습니다. 받은편지함과 스팸함을 확인해 주세요.'; err = false; cool = 30; clearInterval(coolT); coolT = setInterval(() => { cool--; if (cool <= 0) clearInterval(coolT); const rb = body.querySelector('[data-a=resend]'); if (rb) { rb.disabled = cool > 0 || busy; rb.textContent = cool > 0 ? cool + '초 뒤 다시 보내기' : '코드 다시 보내기'; } }, 1000); }
@@ -5852,7 +6227,7 @@ async function openAccount(note) {
           const token = String(body.querySelector('#acOtp').value || '').trim();
           if (!/^\d{6,8}$/.test(token)) { msg = '인증번호(숫자 6자리)를 입력해 주세요.'; err = true; draw(); return; }
           busy = true; msg = '확인하는 중…'; err = false; draw();
-          let r; try { r = await sb.auth.verifyOtp({ email, token, type: 'email' }); } catch (er) { r = { error: { message: String(er && er.message || er) } }; }
+          let r; try { r = await sb.auth.verifyOtp({ email, token, type: otpType || (mode === 'up' ? 'signup' : 'email') }); } catch (er) { r = { error: { message: String(er && er.message || er) } }; }
           busy = false;
           if (r.error) { msg = friendlyAuthError(r.error.message, 'verify'); err = true; draw(); return; }
           const user = r.data && r.data.user;
@@ -5865,13 +6240,13 @@ async function openAccount(note) {
       });
       body.addEventListener('keydown', e => {
         if (e.key !== 'Enter') return;
-        const b = body.querySelector(e.target.id === 'acOtp' ? '[data-a="verify"]' : e.target.id === 'acEmail' ? '[data-a="send"]' : e.target.id === 'acKey' ? '[data-a="redeem"]' : e.target.id === 'acNote' ? '[data-a="issue"]' : null); if (b) { e.preventDefault(); b.click(); }
+        const b = body.querySelector(e.target.id === 'acOtp' ? '[data-a="verify"]' : (e.target.id === 'acEmail' || e.target.id === 'acPw' || e.target.id === 'acPw2') ? (PLAN.user ? '[data-a="setpw"]' : mode === 'pw' ? '[data-a="signin"]' : mode === 'up' ? '[data-a="signup"]' : '[data-a="send"]') : e.target.id === 'acKey' ? '[data-a="redeem"]' : e.target.id === 'acNote' ? '[data-a="issue"]' : null); if (b) { e.preventDefault(); b.click(); }
       });
       draw();
     },
     closeX: true, buttons: []
   });
-  acctRender = null; clearInterval(coolT);
+  acctRender = null; clearInterval(coolT); if (acShown) { hideLoading(); acShown = false; }
 }
 /* 이용 키 API: 로그인 토큰을 붙여 결제 서버로 요청해요. 실패하면 { success:false, message } 를 돌려줘요. */
 async function keyApi(sb, path, method, data) {
@@ -8202,8 +8577,8 @@ function pmClose() {
 $('#manageBtn').onclick = openPageManager;
 
 /* ════════════ 설정 창 · 단축키 사용자 지정 · 도구 모음 위치 ════════════ */
-const APP_VERSION = 'v0.8.4';
-const CHANGELOG = [{"v": "v0.8.4", "d": "2026.10.16", "items": ["테마 선택 창을 ‘테마 스토어’로 개편 — 넓은 창에서 실제 화면 모양 미리보기 · 분류(전체 · 새로 나온 · 무료 · 프리미엄 · 기간 한정 · 나만의 테마) · 설명 · 적용 버튼으로 한눈에 고를 수 있음", "무료 테마에 키위 다크 추가 (배경 #000000 · 보조색 #407252 · IBM 플렉스 산스)", "공포 테마 추가 — 페이지를 넘길 때 붉은 글자가 잠깐 깜빡이고 화면 글자가 순간 깨져 보이는 연출 (적용 전 경고 문구 표시, 연출 끄기 · ‘동작 줄이기’ 설정 자동 반영)", "공포 테마는 매년 9월 1일 ~ 11월 30일에만 무료인 기간 한정 테마이며, 그 밖의 기간에는 프리미엄으로 전환됨 (남은 기간 · 다음 무료 기간 표시)", "가장 최근에 나온 테마에는 NEW 딱지 표시 (더 새로운 테마가 나오면 자동으로 이전 딱지는 사라짐)", "좌측 도구 모음에서 메모 · 음성 · 캡처 · 인쇄 · 발표 · 번역을 ‘더보기’ 도구 안으로 이동하고, 좌측 도구 버튼을 조금 더 크게 조정", "발표 모드의 나가기 버튼을 빨간색으로, 아이콘을 X 대신 나가기 아이콘으로 변경", "도구 단축키를 키보드 줄 순서로 정리 — QWER: 강조표시 · 그리기 · 직선 · 지우개 / ASDF: 도형 · 텍스트 · 링크 · 표 / ZXCV: 영역 · 이미지 · 메모 · 음성 (나머지 도구는 그 오른쪽에 배치)", "노트에서 마크다운(.md)과 텍스트(.txt) 형식을 고를 수 있고, + 버튼으로 새 노트를 만들 때도 형식을 선택", "마크다운 노트를 윈도우 메모장처럼 서식이 바로 반영된 ‘서식 보기’(기본)와 기존 ‘원문’으로 나눠 볼 수 있음 (‘# ’ · ‘- ’ · ‘1. ’ · ‘[] ’ 입력 시 바로 서식 적용)", "디지털화 정확도 개선 — 표 테두리 · 밑줄 · 도형을 글자로 읽지 않도록 걸러내고, 글자를 칸 · 단어 간격별로 나눠 원본 모양 그대로 수정할 수 있게 하며 글자 크기가 비정상적으로 커지던 문제 수정", "이메일 인증 오류 메시지를 알기 쉬운 말로 변경 (인증번호 만료 · 잘못 입력, 너무 빨리 다시 요청 등)"]}, {"v": "v0.8.2", "d": "2026.10.15", "items": ["프리미엄 기능으로 커스텀 테마를 추가 — 배경색 · 보조색 · 글꼴을 직접 골라 나만의 테마를 만들 수 있고, 글자색과 밝기는 배경색에 맞춰 자동으로 정해짐", "글꼴을 6종에서 39종으로 확대 (고딕 A1 · IBM 플렉스 산스 · 블랙한산스 · 도현 · 주아 · 개구 · 고운바탕 · Roboto · Playfair Display 등) — 사이트와 텍스트 모두에 적용", "디지털화 도구 추가 — PNG 같은 이미지, 스캔 페이지, PDF의 글자를 클릭해서 수정할 수 있는 글자 개체로 바꿔줌 (글자가 있는 PDF는 인식 없이 바로, 이미지는 글자 인식으로 변환하며 원래 글자의 위치 · 크기 · 색 · 배경색을 맞춤)", "디지털화 도구 옆 드롭다운에서 ‘현재 페이지’와 ‘전체 페이지’ 범위를 바꿀 수 있고, 이미지 글자 인식 언어(한국어 · 영어)도 고를 수 있음", "글자 크기를 소수점(0.1 단위)까지 지정할 수 있고, 자간도 0.1% 단위로 조절 가능. 디지털화할 때 크기는 소수점으로, 폭은 자간으로 맞춰서 띄어쓰기가 사라지지 않음", "docx · HWP(HWPX) 내보내기에서 쪽 크기와 가로/세로 방향을 쪽마다 그대로 맞춰 내용이 쪽 밖으로 나가지 않게 개선", "docx ‘글자 편집용’ 내보내기가 이미지 · 도형 · 그림 · 배경색은 쪽 배경으로 그대로 보존하고, 글자는 원래 자리의 글상자로 담아 바로 수정할 수 있게 개선", "레이어 이름은 목록을 더블클릭(더블탭)해도 바꿀 수 있도록 수정 (자동 · 수동 모두)", "멀티작업 버튼을 3×3으로 고정하고, 화면이 작아지면 버튼이 가려지지 않고 함께 작아지도록 개선", "PNG 파일을 열면 빈 흰 페이지로 보이던 문제를 수정", "업데이트 내역의 버전마다 업데이트 날짜를 표시"]}, {"v": "v0.8.1", "items": ["계정 · 프리미엄 창의 닫기 버튼을 오른쪽 위 X 버튼으로 변경", "테마 중 어두운 · 밝은 · 한국 · 일본 · 커피를 제외한 프루티거 에어로 · 핑크세상 · 드림코어 · 레트로게임 · 새싹은 프리미엄 전용 (선택 창에 표시, 프리미엄이 아니면 어두운 테마로 표시)", "개발자 콘솔에 game 명령어 추가 — 바로 타자연습으로 이동", "모바일에서 소개 페이지(index)는 항상 어두운 테마로 고정", "페이지 패널의 썸네일 좌우 여백을 줄이고 가운데 정렬", "상단 개발자 콘솔 버튼 또는 / 키로 여는 빠른 콘솔에 추천 명령어를 아래에 표시 (입력하면 이어지는 명령어와 인자를 추천, ↑↓ 선택 · Tab 채우기 · Enter 실행)", "개발자 계정의 키 발급 내역 보기에 진행 표시줄 추가 (불러오는 동안 진행 표시, 각 키의 남은 기간 막대)", "멀티작업 화면 위에 큰 \"멀티작업\" 제목을 넣고, 파일 버튼은 뷰어로, 빈 문서 버튼은 meow-pdf.com 편집기로 바꿈", "멀티작업 넓게 보기 버튼 추가 (탭 줄을 숨기고 패널을 넓혀요)", "전체 페이지 관리에 PDF 회전(왼쪽 · 오른쪽) 추가, 전체 페이지 관리는 이제 무료", "PPTX · HWP · MPDF 열기를 프리미엄에서 제외하고, PNG · DOCX 열기를 추가", "상단 탭의 \"불러오기\" 버튼을 없애고 + 버튼에서 새 탭 · 불러오기를 고르게 변경", "링크 도구 추가: 영역을 드래그해 웹 주소 또는 문서 안 페이지로 연결 (PDF에도 링크로 저장)", "왼쪽 도구 모음에서 모든 도구가 화면에 들어오도록 간격을 자동 조절", "한 페이지씩 보기에서 화면에 맞추면 오른쪽 스크롤바가 생기지 않도록 수정", "노트에 서식 도구 추가 (제목 · 목록 · 굵게 · 기울임 · 취소선 · 링크 · 표 · 서식 지우기), 서식을 쓰면 .md로 저장할지 물어봐요", "도구에 표 삽입 추가 (프리미엄) · 붙여넣기 버튼은 도구에서 제거 (Ctrl+V는 그대로)", "텍스트 일부만 다른 색으로 바꾸기: 글자를 선택하고 색을 고르면 그 부분만 바뀌고, 다시 수정할 때도 유지돼요", "새 테마 \"미니홈피\" 추가 (프리미엄) · 앞으로 추가되는 테마는 모두 프리미엄, 테마 창에서 무료 / 프리미엄을 나눠 표시", "내보내기에 HWP(HWPX) 추가, Word 이름을 docx로 변경"], "d": "2026.10.15"}, {"v": "v0.7.5", "items": ["커피 테마 추가 (따뜻한 크림색 · 갈색 종이 느낌, 눈이 편한 밝은 테마, 콘솔: set theme 8)", "모바일에서 개체 · 글상자를 선택하거나 영역을 지정하면 오른쪽 위에 삭제 버튼 표시", "타자연습에 난이도 추가 (쉬움 · 보통 · 어려움, 난이도별 최고 점수와 점수 배율)", "타자연습에 아이템 추가 (얼음: 낱말 정지 · 폭탄: 화면 정리 · 느림: 속도 감소 · 두배: 점수 2배 · 금빛 냥: 목숨 +1)", "레트로게임 테마 추가 (픽셀 · 네온 · 스캔라인, 콘솔: set theme 9)", "새싹 테마 추가 (옛날 포털 사이트 느낌의 연두색 · 흰색 디자인, 콘솔: set theme 10)", "멀티작업에서 연 PDF · PPTX · HWP · 빈 문서 · 병합 문서를 'Meow-PDF로 편집하기' 버튼으로 바로 편집기로 가져와 수정 (콘솔: work edit)"], "d": "2026.10.14"}, {"v": "v0.7.4", "items": ["결제 프리미엄과 이용 키 사용자를 구분해서 표시 (상단 버튼 · 계정 창 · 모바일 더보기), 이용 키 사용자도 남은 기간 표시", "프리미엄 남은 이용 기간 표시 — 상단 계정 버튼(예: 프리미엄 | 120일), 계정 창(만료일 · 남은 일수), 모바일 더보기. 만료 7일 전 안내, 30일 이내에는 계정 창에서 바로 연장 가능, 사용 중 기간이 끝나면 자동으로 해제", "모바일에서 파일을 불러올 때 전체화면이 풀리던 문제 개선 (선택이 끝나면 전체화면으로 복귀)", "멀티작업에 타자연습 게임 '타자 비' 추가 (떨어지는 낱말을 입력해 없애기 · 한글 / 영어 / 섞어서 · 최고 점수 저장, 콘솔: work type)", "숨은 재미 요소(이스터에그) 추가 — 찾아보세요", "개발자 콘솔에도 숨은 명령어 1개 추가"], "d": "2026.10.14"}, {"v": "v0.7.3", "items": ["한국 · 일본 테마 추가 (태극기 · 일장기 색)", "드림코어 테마 추가 (파스텔 하늘 · 구름 · 별빛 · 필름 입자 분위기, 콘솔: set theme 7)", "테마를 별도 선택 창에서 둥근 정사각형 버튼으로 고름 (테마별 아이콘 포함, 콘솔: set theme 5 / 6 · theme picker)", "발표 모드 레이저에 잔상 추가", "멀티작업의 빈 문서 · 병합을 멀티작업 탭으로 열기", "개발자 콘솔에 화면 맞춤 명령어 추가 (fit · fit page)", "모바일 헤더 크기를 조금 키움", "모바일 더보기 바텀 시트를 아이콘 타일 형태로 정리", "소개 페이지(index)에 지금까지의 개선 사항 반영"], "d": "2026.10.14"}, {"v": "v0.7.2", "items": ["영역 지정 도구에 드롭다운 추가 (사각형 / 자유 선택 전환)", "영역 위에 마우스를 올리면 이동 커서, 가장자리 8개 점으로 늘리기 · 크기 조정 (Shift: 비율 유지)", "설정에서 페이지 이동 연출 켜기 / 끄기 (콘솔: set pageanim off)", "개발자 콘솔 도움말을 다시 표시하고 설명을 보기 쉽게 정리", "레이어를 클릭-드래그해 순서를 바꿀 수 있음 (자동 · 수동 레이어 공통, 터치는 길게 누른 뒤)", "프리미엄 상품 상세 창 추가: 결제 1년 · 이용 키 3개월 · 환불 7일 규정 안내", "옵션바의 굵기 · 크기 · 불투명에 숫자 입력칸 추가, 글자 위에서 좌우로 끌어 조절 (유니티식)", "캡처 시 어두운 뷰어 배경을 빼고 페이지 영역만 캡처 (붙여넣었을 때 어둡게 보이던 문제)", "Ctrl+클릭으로 글상자를 여러 개 골라 동시에 수정"], "d": "2026.10.13"}, {"v": "v0.7.1", "items": ["상단 탭과 멀티작업 탭을 마우스로 끌어서 순서를 바꿀 수 있음", "개발자 콘솔 추가 (설정 > 개발자 콘솔, 단축키 Ctrl+`) — 예: set theme darktheme · set theme 1 · tool pen · zoom 150 · export docx", "개발자 콘솔의 전체 명령어와 도움말을 설정의 새 탭에 정리 (대부분의 기능을 콘솔로 실행 가능)", "멀티작업의 최근 접속 사이트를 하나씩 또는 모두 삭제할 수 있음", "Word(.docx)와 PNG로 내보내기 추가 — Word는 글자 편집용 / 페이지 이미지용, PNG는 현재 쪽 / 전체(ZIP)", "내보내기 목록을 작고 보기 쉽게 정리", "상단 헤더에 개발자 콘솔 버튼 추가 (프리미엄 전용)", "모바일 설정창 상단 메뉴를 아이콘 위주로 정리해 잘리지 않게 개선", "개발자 콘솔 도움말을 ? 에 마우스를 올리면 표시되도록 개선", "핑크세상 테마 추가 (연한 핑크, 콘솔: set theme 4)", "상단 개발자 콘솔 버튼 또는 / 키로 작은 입력 칸을 열어 바로 명령 실행 (Enter 실행 · Esc 닫기)"], "d": "2026.10.13"}, {"v": "v0.6.5", "items": ["레이어 방식 선택 추가 — 개체마다 자동으로 만드는 ‘자동’과, 그림판처럼 레이어를 직접 추가·이름 변경·순서 변경·숨김·잠금·병합하는 ‘수동’ 중에서 고를 수 있음", "PC에서는 연속 스크롤 / 한 페이지씩 보기, 모바일에서는 한 페이지씩 넘기기 / 세로로 넘기기를 설정에서 선택 가능", "한 페이지씩 보기에서는 방향키·PageUp/Down·마우스 휠(끝에서)·페이지 목록으로 페이지를 넘김"], "d": "2026.10.13"}, {"v": "v0.6.4", "items": ["형광펜이 글자를 흐리게 하던 문제 개선 — 곱하기(multiply) 방식으로 칠해 글자가 선명하게 보이고(저장 PDF 포함), 글자 위에 칠하면 글자 줄에 맞는 깔끔한 띠로 자동 정리(‘글자 맞춤’, 끄면 자유롭게)", "헤더에 전체화면 / 해제 버튼 추가", "모바일 확대·축소(핀치) 중에는 이미지를 다시 그리지 않고 손을 뗀 뒤 한 번만 선명하게 그려 끊김을 줄임", "도구에 영역 지정 추가 — 사각형 또는 자유 선택으로 지정해 펜 그림·도형의 일부만 잘라 이동·복사·붙여넣기·삭제(그림판 방식), 영역 이미지 복사·저장·글자 복사 (단축키 R)", "업데이트 내역을 0.1.x · 0.2.x … 처럼 버전 두 번째 자리(y)별로 묶어 표시", "설정에서 버전 정보와 고객센터를 별도 메뉴로 분리", "모바일 상단 버튼 간격과 크기를 줄여 비좁게 보이던 문제를 완화(계정 버튼은 더보기 메뉴에도 추가)", "멀티작업의 8번째 버튼으로 계산기 추가 (키보드 입력 · 괄호 · % · 제곱근 · 기록 · 복사 · 노트 · 페이지 삽입)", "줌 바를 마우스로 끌어 옮길 수 있게 함. 위·아래 가장자리에서는 가로로, 왼쪽·오른쪽 가장자리에서는 세로로 자동 전환되고 위치는 저장됨", "고객센터 이메일 보내기 링크도 contact@meow-pdf.com으로 변경"], "d": "2026.10.13"}, {"v": "v0.6.3", "items": ["멀티작업 첫 화면에 빈 문서 · 파일 병합 · 파일 압축 버튼을 추가하고, 버튼 줄은 패널 크기에 따라 한 줄에 1개 · 2개 · 4개로만 배치", "설정에 편집기 언어 변경 추가: 한국어 / English / 日本語 / 中文", "PDF 글자를 끌어서 옮길 때 뒤에 있는 원래 글자가 잠깐 보이던 문제를 수정", "업데이트 내역을 버전 묶음(beta / 0.0.1~0.5.3 / 0.6.1~)으로 나눠 계층형으로 표시", "설정의 테마에 프루티거 에어로 테마 추가(하늘색 · 연두색 유리 질감)"], "d": "2026.10.13"}, {"v": "v0.6.2", "items": ["소개 페이지 푸터에 상호(타니아)와 주소(경기도 부천시 중동로 108)를 표기", "소개 페이지에 환불정책 추가: 결제일로부터 3일 이내에 요청하면 환불", "소개 페이지에 GitHub 링크 추가", "소개 페이지와 안내 문서의 문의 이메일을 contact@meow-pdf.com으로 변경", "메모와 번역 도구(페이지 번역, 멀티작업의 번역 · 사전)를 프리미엄 기능으로 전환", "프리미엄 전용 기능의 자물쇠 표시를 없애고, 대신 버튼을 흐리게(밝기를 낮춰) 표시"], "d": "2026.10.12"}, {"v": "v0.6.1", "items": ["멀티작업에 번역 · 사전 도구 추가: 글을 붙여넣어 번역하고, 단어를 찾으면 뜻을 보여주며 원하는 언어로 함께 번역", "번역 · 사전 결과를 복사하거나 노트에 추가, 현재 페이지에 텍스트로 삽입. 파파고 · 구글 번역 · DeepL · 네이버 사전 바로가기 제공", "번역 창 문구를 줄이고 디자인을 새로 다듬음(언어 바꾸기 버튼, 둥근 선택 버튼, 부드러운 그림자)", "Chrome 번역 모델을 내려받는 동안 진행률(%)을 표시하고, 45초 넘게 진행이 없으면 멈춤 안내와 '서버 번역만 사용' 선택지 표시", "모바일에서 파일을 열 때 용도에 맞는 모드를 고를 수 있음: 보기(읽기 전용) / 간편 수정(글자 수정 제외) / 기본(모든 기능). 더보기 메뉴에서 언제든 바꿀 수 있음", "PDF 글자를 클릭해 수정할 때 원본 글자의 자간을 읽어와 같은 간격으로 반영", "텍스트 도구, 수정 중인 글자, 선택한 글자에서 자간(-10% ~ 50%)을 직접 설정할 수 있음. 저장 · 인쇄 · 내보내기에도 반영", "멀티작업 첫 화면을 새로 디자인: 글자를 최소화하고 둥근 타일 버튼(파일 · 웹 · 번역 · OneCompiler)과 간결한 바로가기 칩으로 정리", "개체나 텍스트를 선택하면 왼쪽 위에 이동 핸들이 나타나 끌어서 옮길 수 있음", "PDF 글자를 클릭해 수정할 때, 텍스트 도구로 입력할 때도 왼쪽 위에 이동 핸들이 나타나 글자 위치를 끌어서 옮길 수 있음"], "d": "2026.10.12"}, {"v": "v0.5.3", "items": ["소개 페이지(index)와 편집기의 파비콘을 같은 고양이 아이콘으로 통일", "페이지 번역 추가: 도구 모음 가장 오른쪽의 번역 버튼으로 현재 보고 있는 페이지만 번역", "번역 방식 선택: 원문 / 전체 번역 / 마우스 오버 번역(글자에 마우스를 올리면 그 문단만 번역)", "원본 언어 자동 감지, 번역할 언어 선택(기본 한국어). 크롬 내장 번역을 우선 사용하고, 없으면 서버 번역(키 없이도 쓰는 무료 엔진 포함)으로 대체", "번역에 실패하면 원인(서버 미배포, 사용량 초과, Chrome 내장 번역 사용 불가 사유)을 안내", "Chrome 번역 모델 준비가 오래 걸리면 기다리지 않고 서버 번역으로 먼저 번역하고, 준비되면 다음부터 내장 번역 사용", "서버 번역: 한국어 등 긴 글이 무료 엔진의 글자 수(바이트) 제한에 걸려 실패하던 문제 수정", "HWP 파일이 열리지 않던 문제 수정(압축 해제 오류) — 실제 HWP 샘플 파일로 확인"], "d": "2026.10.12"}, {"v": "v0.5.2", "items": ["편집 화면 상단의 고양이 아이콘을 누르면 소개 페이지로 돌아가도록 변경"], "d": "2026.10.12"}, {"v": "v0.5.1", "items": ["서비스 소개 페이지(meow-pdf.com)를 새로 만들고, 기존 편집 화면은 /edit 주소로 이동", "소개 페이지 하단에 사업자 정보(Thaniya project, 사업자 등록번호) 표기", "옵션바의 색상 영역이 밖으로 튀어나오거나 잘리던 문제를 수정", "텍스트 정렬의 기본값을 왼쪽 정렬로 변경", "도형에 별 추가", "도형의 원 버튼에 그래픽이 비어 있던 문제를 수정"], "d": "2026.10.12"}, {"v": "v0.4.5", "items": ["시작 화면의 버튼(파일 열기, 빈 문서로 시작, 파일 병합, 파일 압축)을 모서리가 둥근 정사각형 타일 형태로 변경", "텍스트 왼쪽 정렬 / 가운데 정렬(기본) / 오른쪽 정렬 설정 추가 (새 텍스트, 편집 중, 선택한 텍스트에 적용)", "도구 모음을 좌측에 배치했을 때 도구 버튼 크기를 줄임", "캡처, 인쇄, 프레젠테이션 버튼을 다시 도구 모음으로 이동"], "d": "2026.10.12"}, {"v": "v0.4.4", "items": ["헤더의 테마 변경 버튼과 GitHub 버튼을 제거하고, 화면 밝기 조절을 설정의 화면 · 레이아웃 항목으로 이동", "도구 툴바의 저장 관련 버튼(저장, 다른 이름으로 저장)을 헤더로 이동", "헤더의 새 문서, 열기 버튼을 제거하고 실행 취소, 다시 실행, 캡처, 인쇄, 발표 버튼을 헤더로 이동", "결제 안내에 최초 1회만 결제하면 계속 이용할 수 있다는 내용을 깔끔한 카드 UI로 명시", "옵션바의 크기(내용)에 따라 화면이 재조정되지 않도록 옵션바 높이를 고정"], "d": "2026.10.12"}, {"v": "v0.4.3", "items": ["사이드 메뉴 방식의 UI 기반 설정 창을 열 수 있는 버튼 아이콘을 상단 레이아웃에 추가, 해당 설정 창 내에서 애플리케이션 버전 정보 확인과 고객센터 피드백 제출이 가능하도록 구현", "이때 접수된 불편사항은 개발자 계정의 관리자 대시보드나 DB로 수집되어 일괄 조회 및 관리가 가능", "사용자가 주요 기능의 단축키를 직접 매핑하고 변경할 수 있는 커스터마이징 기능과 함께 기존 상단에 고정되어 있던 도구 툴바 배치를 좌측 정렬 또는 상단 정렬로 선택할 수 있는 레이아웃 옵션을 제공", "반응형 UX 개선을 위해 모바일 환경에서 가로보기(Landscape) 모드로 전환될 경우, 페이지 패널이 자동으로 화면 좌측에 정렬되도록 미디어 쿼리 및 Flex/Grid 레이아웃 구조를 보완"], "d": "2026.10.12"}, {"v": "v0.4.2", "items": ["모바일 화면 크기에 맞춰 반응형 뷰포트 및 레이아웃 적용", "모바일 환경에서 레이어, 노트, 멀티작업 등 부가 기능 숨기고 최소한의 핵심 기능만 남기도록 개선", "모바일 화면에서 스와이프 및 드래그로 페이지 넘기기 기능 추가 (두 손가락 확대/축소 가능)", "모바일에서 페이지 패널을 화면 하단으로 배치", "상단 편집 버튼들을 깔끔하게 재배치하고, 계정 버튼을 저장 버튼 왼쪽으로 이동", "텍스트 직접 수정 기능 유지", "텍스트 선택 시 뜨는 옵션바(optbar)가 화면 밖으로 나가지 않도록 두 줄로 예쁘게 배치하고, 옵션바 표시 여부에 따라 화면 페이지가 밀리거나 재조정되지 않도록 수정"], "d": "2026.10.11"}, {"v": "v0.4.1", "items": ["모바일 화면 크기에 맞춰 반응형 뷰포트 및 레이아웃 적용", "모바일 환경에서 레이어, 노트, 멀티작업 등 부가 기능 숨기고 최소한의 핵심 기능만 남기도록 개선", "모바일 화면에서 스와이프 및 드래그로 페이지 넘기기 기능 추가 (두 손가락 확대/축소 가능)", "모바일에서 페이지 패널을 화면 하단으로 배치", "상단 편집 버튼들을 깔끔하게 재배치하고, 계정 버튼을 저장 버튼 왼쪽으로 이동", "텍스트 직접 수정 기능 유지", "텍스트 선택 시 뜨는 옵션바(optbar)가 화면 밖으로 나가지 않도록 두 줄로 예쁘게 배치하고, 옵션바 표시 여부에 따라 화면 페이지가 밀리거나 재조정되지 않도록 수정"], "d": "2026.10.11"}, {"v": "v0.3.3", "items": ["키 발급 관련 일부 로직 수정"], "d": "2026.10.10"}, {"v": "v0.3.2", "items": ["키 발급 관련 서버 연결 문제 해결"], "d": "2026.10.10"}, {"v": "v0.3.1", "items": ["파일이 없는 화면에서 파일 열기, 빈 문서로 시작 옆에 파일 병합, 파일 압축 기능을 배치", "파일이 없는 화면에서 안내 텍스트를 최소화하여 UI 깔끔하게 수정", "저장 버튼에 파일 압축해서 내보내기(10%, 20%, 40%)옵션 추가 - 프리미엄 사용자 한정, PPTX파일로 내보내기 옵션 추가", "화면에 다른 PDF를 드래그해서 넣으면 멀티 탭으로 넣기, 현재 파일에 병합하기 옵션이 나타나도록 기능 추가 (병합하기 시 두 파일의 병합순서 드래그로 결정 가능)", "페이지 패널에 전체 페이지 관리하기 버튼 추가-프리미엄", "전체 페이지 관리하기 시 그리드형태로(크기조절 가능) 각 페이지가 화면에 가득 차게 나타나며 드래그하여 페이지 순서를 바꿀 수도 있도 여러 페이지를 삭제하거나 이름을 바꾸거나 계층구조 수정 가능하도록 기능 추가", "페이지 패널의 버튼 UI 전반적으로 깔끔하게 수정", "헤더에 있는 PDF제목 클릭하여 직접 수정 가능하도록 개선"], "d": "2026.10.09"}, {"v": "v0.2.2", "items": ["로그인시스템 및 결제 시스템 문제 해결"], "d": "2026.10.09"}, {"v": "v0.2.1", "items": ["일부 기능 유료화 도입"], "d": "2026.10.08"}, {"v": "v0.1.3", "items": ["온라인 컴파일러 프로그램 원컴파일러(OneCompiler) 바로가기가 멀티작업에서 제공되도록 개선"], "d": "2026.10.08"}, {"v": "v0.1.2", "items": ["음성 이름 편집 및 음성 내보내기 기능 추가"], "d": "2026.10.08"}, {"v": "v0.1.1", "items": ["음성녹음 및 재생 기능 추가", "음성녹음 MPDF에 삽입 기능 추가 (따로 내보내기 가능, MPDF 확장자 파일에 삽입된 상태로 저장 가능)"], "d": "2026.10.06"}, {"v": "v0.0.1", "items": ["멀티작업에서 웹페이지를 열 수 있도록 편의 향상", "화면맞춤 상태에서 PDF내 텍스트상자 클릭 시 텍스트 수정이 진행되지 않는 문제 해결", "멀티작업 화면에 파일 드래그 시 일반 편집기 화면에 파일이 닿으면 파일 드롭 안내가 사라지지 않는 문제 해결", "페이지 패널의 크기 조절 시 썸네일로 보기의 각 썸네일 크기도 패널의 크기에 맞게 조절되도록 개선", "페이지 북마크기능 추가, 페이지 패널 상단에 북마크 바로가기 드롭다운 리스트 버튼 추가", "텍스트의 글꼴 드롭다운 버튼에서 각 버튼의 글꼴 모양을 이름과 함께 미리보기 제공", "PDF전체에서 특정 글자 빠르게 찾는 검색기능 제공", "PDF 내에서 기존에 있는 텍스트를 수정하는 로직 개편 (기존에 비해 많은 양의 텍스트를 한 번에 수정 가능하도록)", "Meow-PDF 파비콘 추가"], "d": "2026.10.06"}, {"v": "beta 0.0.5", "items": ["세로모드 시 페이지, 레이어, 노트를 모두 하단 사이드바에서 전환 가능한 형태로 변경", "모든 사이드바를 테두리 마우스 드래그를 통해 크기 조절 가능하도록 변경 (기본 좌우, 세로모드는 상하)", "페이지 맞춤 시 사이드바를 고려하여 페이지가 화면에 모두 들어오게 조절되도록 개선 (화면 비율이 작은 경우)", "검은 고양이 스티커를 넣는 기능을 추가 (이미지 버튼을 전환 가능)", "레이어/노트 패널에 탭전환 방식으로 멀티작업 탭 추가 (파일탐색기를 여는 버튼이 중앙에 있으며 누르면 파일을 불러옴, 불러온 파일은 해당 패널에 가득 차도록 띄워지며 PDF를 보며 작업 가능), 멀티작업 패널은 또한 내부에서 멀티테스킹탭으로 관리 가능", "레이어/노트/멀티작업 여닫기 패널 버튼을 작업 사이드바 버튼으로 이미지 변경", "PDF 업로드 전 나타나는 화면 문구에서 PDF뿐만 아니라 PPTX파일도 수정 가능하다고 명시", "스프라이트시트, HWP 파일도 삽입/편집 가능하도록 제공"], "d": "2026.10.06"}, {"v": "beta 0.0.4", "items": ["페이지 계층관리 시 페이지를 끈 상태에서 마우스 휠을 굴리면 페이지가 올라갔다 내려갔다 하게 되도록 변경", "도형을 그리고 Ctrl+Z를 누르면 간혹 기능이 먹히지 않는 문제 해결", "화면 밝기 조절 바 시간 표시 부분 왼쪽에 추가", "페이지에 주석달기 기능 추가 (주석을 달면 그 페이지는 눈에 잘 띄도록 변경)", "페이지 목록으로보기 기능 추가 (기본적으로 페이지1 ... 로 표시되며 페이지이름 변경 가능)", "인쇄기능 추가", "레이어 병합 기능 추가", "편집화면 및 프리젠테이션 화면에서 Ctrl+스크롤 하면 마우스 커서를 중심으로 화면이 줌아웃되도록 변경", "작게 https://github.com/architect0509/meow-PDF페이지로 이동되는 버튼을 방해되지 않도록 배치", "텍스트나 도형 그리기에서 상단 optbar가 가로로 너무 길어지는 문제 색상 팔레트의 크기를 줄이고 슬라이더들을 정리하여 화면 내에 기능이 모두 들어오도록 개선", "글자선택을 개체와 통일시키고 PDF내 모든 텍스트상자를 클릭만으로 수정 가능하도록 개선", "색상 버튼의 개수를 5개로 줄이고 우측에 색상 팔레트를 크게 배치하며 5개의 작은 색상 버튼 아래에는 최근에 사용한 색상 5개가 나타나게 되도록 개선", "UI의 배치가 전부 상하로 이동하는 세로모드 변환 기능을 제공", "멀티테스킹탭 기능을 지원 (툴바 위에 삭제 및 불러오기, 추가 가능한 형식으로)", "레이어가 있는 위치에 탭전환 방식으로 노트를 작성할 수 있도록 기능 추가(노트는 다중 페이지로 관리 가능하며 .txt확장자 파일로 내보낼 수 있음)"], "d": "2026.10.06"}, {"v": "beta 0.0.3", "items": ["현재화면 캡쳐기능 제공(버튼의 위치는 저장버튼 좌측)", "상단 레이어버튼 옆에 현재시간,분 표시", "저장버튼 좌측 프리젠테이션모드 버튼 추가 -단축키 여닫기 p(프리젠테이션 내에는 마찬가지로 강조표시, 그리기, 직선, 도형, 지우개, 텍스트툴, 그리고 레이저를 사용가능한 마우스로 끌어서 옮길 수 있는 조작 도구창이 존재)", "레이저는 프리젠테이션중에만 사용 가능하며 L키로 생성/제거 가능", "이미지 버튼 우측에 C단축키로 메모 생성기능", "메모는 위치이동 및 크기조절 가능, 다중줄 글쓰기 가능, 접기 가능, 글씨 크기조절 가능", "ppt를 pdf로 가져오기 가능하도록 개선", "페이지 그룹화를 통한 계층관리 가능하도록 개선", "편집기록을 가진 프로젝트 파일인 mpdf확장자로 내보내기&불러오기 기능 추가", "(저장 및 다른이름으로 저장에 옵션 표시- pdf of mpdf) 확장자가 달라도 일반 저장의 기본옵션은 덮어쓰기", "텍스트에 채우기 옵션 추가 (기본 투명), 도형에 채우기 옵션 추가 (기본 투명, 투명도 조절 가능)", "페이지 넘기기 단축키에 Pg Up 과 Pg Down도 추가", "각 도구의 색깔은 그림판 팔레트 UI처럼 줄바꿈 이용, 사용자 지정 색상은 크기 증가, 스포이드버튼도 추가", "프로그램 내의 황색은 #dbbe43로, 배경의 어두운 색은 좀 더 무채색에 가깝게 변경"], "d": "2026.10.04"}, {"v": "beta 0.0.2", "items": ["전반적인 테마를 변경하였으며 개선된 항목은 다음과 같습니다. 글자의 폰트 및 굵기, 기울임꼴 추가,", "화면맞춤 버튼 하단에 추가", "처음 저장버튼 누를때 파일을 불러온 경로에 자동 덮어씌우기 개선", "프로그램 테마색깔 황색으로 변경", "페이지 패널 버튼 좌측에 아이콘 추가, 패널 버튼과 거리 두기", "자 툴을 직선 그리기 툴로 변경", "펜 및 직선 그리기 툴 사용 시 붓 영역 화면 내에 표시", "펜 및 직선 그리기 툴 팔레트에 파스텔톤의 색상 추가", "강조표시는 직선형, 붓형 선택 가능하게 개선", "상단 툴을 분리 ( 글자선택과 개체 | 강조표시, 그리기, 직선 | 도형, 지우개, 텍스트 | 붙여넣기, 이미지 )", "각각의 버튼에 단축키 부여 ( 1, 2 | q, w, e | a, s, d | z, x )"], "d": "2026.10.04"}];
+const APP_VERSION = 'v0.8.6';
+const CHANGELOG = [{"v": "v0.8.6", "d": "2026.10.16", "items": ["프리미엄 테마 ‘백룸’ 추가(콘솔 set theme 14) — 눅눅한 노란 벽지, 형광등 깜빡임, 필름 노이즈와 어두운 비네팅으로 분위기를 살렸어요.", "마우스 오른쪽 클릭 메뉴: 선택한 글자 한국어 번역(글자를 선택했을 때만), 잘라내기 · 복사 · 붙여넣기 · 모두 선택, 이미지 · 표 · 메모 삽입, 음성 삽입(프리미엄일 때만 표시). 메뉴는 작게 만들었어요.", "영역 도구에 ‘닿은 개체 삭제’ 방식을 추가했어요. 드롭다운 메뉴와 옵션바에서 ‘부분을 잘라 선택(기존)’과 바꿀 수 있어요.", "형광펜은 어떤 개체(PPTX 글자 포함)보다도 항상 맨 앞에 칠해져요.", "멀티작업: ‘멀티작업’ 제목을 통통하고 둥근 글씨체로 고정, 탭 + 는 홈 화면을 새 탭으로 열어요. 편집기는 이동 · 새로고침 · 작은 창 같은 버튼 줄 없이 넓게 열려요. 웹페이지의 주소줄은 접고 펼 수 있고, ‘화면이 비어 있거나…’ 안내문은 닫을 수 있어요.", "회원가입 시 이메일로 보낸 인증번호를 입력해야 가입이 완료돼요(서버가 확인을 꺼 둔 경우에도 인증번호 단계를 거쳐요).", "로그인 · 서버 연결 · 불러오는 동안 화면 가운데에 로딩 표시를 띄우고, 클릭과 키보드로 다른 버튼을 누르지 못하게 막아요."]}, {"v": "v0.8.5", "d": "2026.10.16", "items": ["처음 접속하면 PC/모바일에 맞춘 시작 튜토리얼(파일 열기 · 페이지 넘기기 · 도구 · 레이어/메모 · 발표)이 실행되고, 마지막 ‘시작하기’ 버튼으로 축하 연출과 함께 끝나요. 설정 → 정보에서 다시 볼 수 있어요.", "DOCX 가져오기를 다시 만들었어요. 글자 크기 · 굵게/기울임/색 · 줄 간격 · 문단 간격 · 정렬 · 들여쓰기 · 번호/글머리 · 표 · 그림 · 쪽 크기와 여백을 반영해요.", "PNG를 열 때 흰 페이지가 나오던 문제를 막았고, 문서가 없을 때 Ctrl+V로 클립보드 캡처 이미지를 새 문서로 열어요.", "모바일: 도구 모음 접기/펼치기(˅), 프레젠테이션 버튼 추가, 메모 · 링크 · 디지털화 · 프레젠테이션 · 번역은 ‘더보기’ 도구로 이동.", "계정 · 프리미엄 창(PC)을 로그인/결제 안내 좌우 분할로 정리하고, 비밀번호 보기/숨기기 버튼과 중복 가입 오류 안내를 고쳤어요.", "페이지 패널 썸네일을 더 크게 키웠어요."]}, {"v": "v0.8.4", "d": "2026.10.16", "items": ["테마 선택 창을 ‘테마 스토어’로 개편 — 넓은 창에서 실제 화면 모양 미리보기 · 분류(전체 · 새로 나온 · 무료 · 프리미엄 · 기간 한정 · 나만의 테마) · 설명 · 적용 버튼으로 한눈에 고를 수 있음", "무료 테마에 키위 다크 추가 (배경 #000000 · 보조색 #407252 · IBM 플렉스 산스)", "공포 테마 추가 — 페이지를 넘길 때 붉은 글자가 잠깐 깜빡이고 화면 글자가 순간 깨져 보이는 연출 (적용 전 경고 문구 표시, 연출 끄기 · ‘동작 줄이기’ 설정 자동 반영)", "공포 테마는 매년 9월 1일 ~ 11월 30일에만 무료인 기간 한정 테마이며, 그 밖의 기간에는 프리미엄으로 전환됨 (남은 기간 · 다음 무료 기간 표시)", "가장 최근에 나온 테마에는 NEW 딱지 표시 (더 새로운 테마가 나오면 자동으로 이전 딱지는 사라짐)", "좌측 도구 모음에서 메모 · 음성 · 캡처 · 인쇄 · 발표 · 번역을 ‘더보기’ 도구 안으로 이동하고, 좌측 도구 버튼을 조금 더 크게 조정", "발표 모드의 나가기 버튼을 빨간색으로, 아이콘을 X 대신 나가기 아이콘으로 변경", "도구 단축키를 키보드 줄 순서로 정리 — QWER: 강조표시 · 그리기 · 직선 · 지우개 / ASDF: 도형 · 텍스트 · 링크 · 표 / ZXCV: 영역 · 이미지 · 메모 · 음성 (나머지 도구는 그 오른쪽에 배치)", "노트에서 마크다운(.md)과 텍스트(.txt) 형식을 고를 수 있고, + 버튼으로 새 노트를 만들 때도 형식을 선택", "마크다운 노트를 윈도우 메모장처럼 서식이 바로 반영된 ‘서식 보기’(기본)와 기존 ‘원문’으로 나눠 볼 수 있음 (‘# ’ · ‘- ’ · ‘1. ’ · ‘[] ’ 입력 시 바로 서식 적용)", "디지털화 정확도 개선 — 표 테두리 · 밑줄 · 도형을 글자로 읽지 않도록 걸러내고, 글자를 칸 · 단어 간격별로 나눠 원본 모양 그대로 수정할 수 있게 하며 글자 크기가 비정상적으로 커지던 문제 수정", "이메일 인증 오류 메시지를 알기 쉬운 말로 변경 (인증번호 만료 · 잘못 입력, 너무 빨리 다시 요청 등)"]}, {"v": "v0.8.2", "d": "2026.10.15", "items": ["프리미엄 기능으로 커스텀 테마를 추가 — 배경색 · 보조색 · 글꼴을 직접 골라 나만의 테마를 만들 수 있고, 글자색과 밝기는 배경색에 맞춰 자동으로 정해짐", "글꼴을 6종에서 39종으로 확대 (고딕 A1 · IBM 플렉스 산스 · 블랙한산스 · 도현 · 주아 · 개구 · 고운바탕 · Roboto · Playfair Display 등) — 사이트와 텍스트 모두에 적용", "디지털화 도구 추가 — PNG 같은 이미지, 스캔 페이지, PDF의 글자를 클릭해서 수정할 수 있는 글자 개체로 바꿔줌 (글자가 있는 PDF는 인식 없이 바로, 이미지는 글자 인식으로 변환하며 원래 글자의 위치 · 크기 · 색 · 배경색을 맞춤)", "디지털화 도구 옆 드롭다운에서 ‘현재 페이지’와 ‘전체 페이지’ 범위를 바꿀 수 있고, 이미지 글자 인식 언어(한국어 · 영어)도 고를 수 있음", "글자 크기를 소수점(0.1 단위)까지 지정할 수 있고, 자간도 0.1% 단위로 조절 가능. 디지털화할 때 크기는 소수점으로, 폭은 자간으로 맞춰서 띄어쓰기가 사라지지 않음", "docx · HWP(HWPX) 내보내기에서 쪽 크기와 가로/세로 방향을 쪽마다 그대로 맞춰 내용이 쪽 밖으로 나가지 않게 개선", "docx ‘글자 편집용’ 내보내기가 이미지 · 도형 · 그림 · 배경색은 쪽 배경으로 그대로 보존하고, 글자는 원래 자리의 글상자로 담아 바로 수정할 수 있게 개선", "레이어 이름은 목록을 더블클릭(더블탭)해도 바꿀 수 있도록 수정 (자동 · 수동 모두)", "멀티작업 버튼을 3×3으로 고정하고, 화면이 작아지면 버튼이 가려지지 않고 함께 작아지도록 개선", "PNG 파일을 열면 빈 흰 페이지로 보이던 문제를 수정", "업데이트 내역의 버전마다 업데이트 날짜를 표시"]}, {"v": "v0.8.1", "items": ["계정 · 프리미엄 창의 닫기 버튼을 오른쪽 위 X 버튼으로 변경", "테마 중 어두운 · 밝은 · 한국 · 일본 · 커피를 제외한 프루티거 에어로 · 핑크세상 · 드림코어 · 레트로게임 · 새싹은 프리미엄 전용 (선택 창에 표시, 프리미엄이 아니면 어두운 테마로 표시)", "개발자 콘솔에 game 명령어 추가 — 바로 타자연습으로 이동", "모바일에서 소개 페이지(index)는 항상 어두운 테마로 고정", "페이지 패널의 썸네일 좌우 여백을 줄이고 가운데 정렬", "상단 개발자 콘솔 버튼 또는 / 키로 여는 빠른 콘솔에 추천 명령어를 아래에 표시 (입력하면 이어지는 명령어와 인자를 추천, ↑↓ 선택 · Tab 채우기 · Enter 실행)", "개발자 계정의 키 발급 내역 보기에 진행 표시줄 추가 (불러오는 동안 진행 표시, 각 키의 남은 기간 막대)", "멀티작업 화면 위에 큰 \"멀티작업\" 제목을 넣고, 파일 버튼은 뷰어로, 빈 문서 버튼은 meow-pdf.com 편집기로 바꿈", "멀티작업 넓게 보기 버튼 추가 (탭 줄을 숨기고 패널을 넓혀요)", "전체 페이지 관리에 PDF 회전(왼쪽 · 오른쪽) 추가, 전체 페이지 관리는 이제 무료", "PPTX · HWP · MPDF 열기를 프리미엄에서 제외하고, PNG · DOCX 열기를 추가", "상단 탭의 \"불러오기\" 버튼을 없애고 + 버튼에서 새 탭 · 불러오기를 고르게 변경", "링크 도구 추가: 영역을 드래그해 웹 주소 또는 문서 안 페이지로 연결 (PDF에도 링크로 저장)", "왼쪽 도구 모음에서 모든 도구가 화면에 들어오도록 간격을 자동 조절", "한 페이지씩 보기에서 화면에 맞추면 오른쪽 스크롤바가 생기지 않도록 수정", "노트에 서식 도구 추가 (제목 · 목록 · 굵게 · 기울임 · 취소선 · 링크 · 표 · 서식 지우기), 서식을 쓰면 .md로 저장할지 물어봐요", "도구에 표 삽입 추가 (프리미엄) · 붙여넣기 버튼은 도구에서 제거 (Ctrl+V는 그대로)", "텍스트 일부만 다른 색으로 바꾸기: 글자를 선택하고 색을 고르면 그 부분만 바뀌고, 다시 수정할 때도 유지돼요", "새 테마 \"미니홈피\" 추가 (프리미엄) · 앞으로 추가되는 테마는 모두 프리미엄, 테마 창에서 무료 / 프리미엄을 나눠 표시", "내보내기에 HWP(HWPX) 추가, Word 이름을 docx로 변경"], "d": "2026.10.15"}, {"v": "v0.7.5", "items": ["커피 테마 추가 (따뜻한 크림색 · 갈색 종이 느낌, 눈이 편한 밝은 테마, 콘솔: set theme 8)", "모바일에서 개체 · 글상자를 선택하거나 영역을 지정하면 오른쪽 위에 삭제 버튼 표시", "타자연습에 난이도 추가 (쉬움 · 보통 · 어려움, 난이도별 최고 점수와 점수 배율)", "타자연습에 아이템 추가 (얼음: 낱말 정지 · 폭탄: 화면 정리 · 느림: 속도 감소 · 두배: 점수 2배 · 금빛 냥: 목숨 +1)", "레트로게임 테마 추가 (픽셀 · 네온 · 스캔라인, 콘솔: set theme 9)", "새싹 테마 추가 (옛날 포털 사이트 느낌의 연두색 · 흰색 디자인, 콘솔: set theme 10)", "멀티작업에서 연 PDF · PPTX · HWP · 빈 문서 · 병합 문서를 'Meow-PDF로 편집하기' 버튼으로 바로 편집기로 가져와 수정 (콘솔: work edit)"], "d": "2026.10.14"}, {"v": "v0.7.4", "items": ["결제 프리미엄과 이용 키 사용자를 구분해서 표시 (상단 버튼 · 계정 창 · 모바일 더보기), 이용 키 사용자도 남은 기간 표시", "프리미엄 남은 이용 기간 표시 — 상단 계정 버튼(예: 프리미엄 | 120일), 계정 창(만료일 · 남은 일수), 모바일 더보기. 만료 7일 전 안내, 30일 이내에는 계정 창에서 바로 연장 가능, 사용 중 기간이 끝나면 자동으로 해제", "모바일에서 파일을 불러올 때 전체화면이 풀리던 문제 개선 (선택이 끝나면 전체화면으로 복귀)", "멀티작업에 타자연습 게임 '타자 비' 추가 (떨어지는 낱말을 입력해 없애기 · 한글 / 영어 / 섞어서 · 최고 점수 저장, 콘솔: work type)", "숨은 재미 요소(이스터에그) 추가 — 찾아보세요", "개발자 콘솔에도 숨은 명령어 1개 추가"], "d": "2026.10.14"}, {"v": "v0.7.3", "items": ["한국 · 일본 테마 추가 (태극기 · 일장기 색)", "드림코어 테마 추가 (파스텔 하늘 · 구름 · 별빛 · 필름 입자 분위기, 콘솔: set theme 7)", "테마를 별도 선택 창에서 둥근 정사각형 버튼으로 고름 (테마별 아이콘 포함, 콘솔: set theme 5 / 6 · theme picker)", "발표 모드 레이저에 잔상 추가", "멀티작업의 빈 문서 · 병합을 멀티작업 탭으로 열기", "개발자 콘솔에 화면 맞춤 명령어 추가 (fit · fit page)", "모바일 헤더 크기를 조금 키움", "모바일 더보기 바텀 시트를 아이콘 타일 형태로 정리", "소개 페이지(index)에 지금까지의 개선 사항 반영"], "d": "2026.10.14"}, {"v": "v0.7.2", "items": ["영역 지정 도구에 드롭다운 추가 (사각형 / 자유 선택 전환)", "영역 위에 마우스를 올리면 이동 커서, 가장자리 8개 점으로 늘리기 · 크기 조정 (Shift: 비율 유지)", "설정에서 페이지 이동 연출 켜기 / 끄기 (콘솔: set pageanim off)", "개발자 콘솔 도움말을 다시 표시하고 설명을 보기 쉽게 정리", "레이어를 클릭-드래그해 순서를 바꿀 수 있음 (자동 · 수동 레이어 공통, 터치는 길게 누른 뒤)", "프리미엄 상품 상세 창 추가: 결제 1년 · 이용 키 3개월 · 환불 7일 규정 안내", "옵션바의 굵기 · 크기 · 불투명에 숫자 입력칸 추가, 글자 위에서 좌우로 끌어 조절 (유니티식)", "캡처 시 어두운 뷰어 배경을 빼고 페이지 영역만 캡처 (붙여넣었을 때 어둡게 보이던 문제)", "Ctrl+클릭으로 글상자를 여러 개 골라 동시에 수정"], "d": "2026.10.13"}, {"v": "v0.7.1", "items": ["상단 탭과 멀티작업 탭을 마우스로 끌어서 순서를 바꿀 수 있음", "개발자 콘솔 추가 (설정 > 개발자 콘솔, 단축키 Ctrl+`) — 예: set theme darktheme · set theme 1 · tool pen · zoom 150 · export docx", "개발자 콘솔의 전체 명령어와 도움말을 설정의 새 탭에 정리 (대부분의 기능을 콘솔로 실행 가능)", "멀티작업의 최근 접속 사이트를 하나씩 또는 모두 삭제할 수 있음", "Word(.docx)와 PNG로 내보내기 추가 — Word는 글자 편집용 / 페이지 이미지용, PNG는 현재 쪽 / 전체(ZIP)", "내보내기 목록을 작고 보기 쉽게 정리", "상단 헤더에 개발자 콘솔 버튼 추가 (프리미엄 전용)", "모바일 설정창 상단 메뉴를 아이콘 위주로 정리해 잘리지 않게 개선", "개발자 콘솔 도움말을 ? 에 마우스를 올리면 표시되도록 개선", "핑크세상 테마 추가 (연한 핑크, 콘솔: set theme 4)", "상단 개발자 콘솔 버튼 또는 / 키로 작은 입력 칸을 열어 바로 명령 실행 (Enter 실행 · Esc 닫기)"], "d": "2026.10.13"}, {"v": "v0.6.5", "items": ["레이어 방식 선택 추가 — 개체마다 자동으로 만드는 ‘자동’과, 그림판처럼 레이어를 직접 추가·이름 변경·순서 변경·숨김·잠금·병합하는 ‘수동’ 중에서 고를 수 있음", "PC에서는 연속 스크롤 / 한 페이지씩 보기, 모바일에서는 한 페이지씩 넘기기 / 세로로 넘기기를 설정에서 선택 가능", "한 페이지씩 보기에서는 방향키·PageUp/Down·마우스 휠(끝에서)·페이지 목록으로 페이지를 넘김"], "d": "2026.10.13"}, {"v": "v0.6.4", "items": ["형광펜이 글자를 흐리게 하던 문제 개선 — 곱하기(multiply) 방식으로 칠해 글자가 선명하게 보이고(저장 PDF 포함), 글자 위에 칠하면 글자 줄에 맞는 깔끔한 띠로 자동 정리(‘글자 맞춤’, 끄면 자유롭게)", "헤더에 전체화면 / 해제 버튼 추가", "모바일 확대·축소(핀치) 중에는 이미지를 다시 그리지 않고 손을 뗀 뒤 한 번만 선명하게 그려 끊김을 줄임", "도구에 영역 지정 추가 — 사각형 또는 자유 선택으로 지정해 펜 그림·도형의 일부만 잘라 이동·복사·붙여넣기·삭제(그림판 방식), 영역 이미지 복사·저장·글자 복사 (단축키 R)", "업데이트 내역을 0.1.x · 0.2.x … 처럼 버전 두 번째 자리(y)별로 묶어 표시", "설정에서 버전 정보와 고객센터를 별도 메뉴로 분리", "모바일 상단 버튼 간격과 크기를 줄여 비좁게 보이던 문제를 완화(계정 버튼은 더보기 메뉴에도 추가)", "멀티작업의 8번째 버튼으로 계산기 추가 (키보드 입력 · 괄호 · % · 제곱근 · 기록 · 복사 · 노트 · 페이지 삽입)", "줌 바를 마우스로 끌어 옮길 수 있게 함. 위·아래 가장자리에서는 가로로, 왼쪽·오른쪽 가장자리에서는 세로로 자동 전환되고 위치는 저장됨", "고객센터 이메일 보내기 링크도 contact@meow-pdf.com으로 변경"], "d": "2026.10.13"}, {"v": "v0.6.3", "items": ["멀티작업 첫 화면에 빈 문서 · 파일 병합 · 파일 압축 버튼을 추가하고, 버튼 줄은 패널 크기에 따라 한 줄에 1개 · 2개 · 4개로만 배치", "설정에 편집기 언어 변경 추가: 한국어 / English / 日本語 / 中文", "PDF 글자를 끌어서 옮길 때 뒤에 있는 원래 글자가 잠깐 보이던 문제를 수정", "업데이트 내역을 버전 묶음(beta / 0.0.1~0.5.3 / 0.6.1~)으로 나눠 계층형으로 표시", "설정의 테마에 프루티거 에어로 테마 추가(하늘색 · 연두색 유리 질감)"], "d": "2026.10.13"}, {"v": "v0.6.2", "items": ["소개 페이지 푸터에 상호(타니아)와 주소(경기도 부천시 중동로 108)를 표기", "소개 페이지에 환불정책 추가: 결제일로부터 3일 이내에 요청하면 환불", "소개 페이지에 GitHub 링크 추가", "소개 페이지와 안내 문서의 문의 이메일을 contact@meow-pdf.com으로 변경", "메모와 번역 도구(페이지 번역, 멀티작업의 번역 · 사전)를 프리미엄 기능으로 전환", "프리미엄 전용 기능의 자물쇠 표시를 없애고, 대신 버튼을 흐리게(밝기를 낮춰) 표시"], "d": "2026.10.12"}, {"v": "v0.6.1", "items": ["멀티작업에 번역 · 사전 도구 추가: 글을 붙여넣어 번역하고, 단어를 찾으면 뜻을 보여주며 원하는 언어로 함께 번역", "번역 · 사전 결과를 복사하거나 노트에 추가, 현재 페이지에 텍스트로 삽입. 파파고 · 구글 번역 · DeepL · 네이버 사전 바로가기 제공", "번역 창 문구를 줄이고 디자인을 새로 다듬음(언어 바꾸기 버튼, 둥근 선택 버튼, 부드러운 그림자)", "Chrome 번역 모델을 내려받는 동안 진행률(%)을 표시하고, 45초 넘게 진행이 없으면 멈춤 안내와 '서버 번역만 사용' 선택지 표시", "모바일에서 파일을 열 때 용도에 맞는 모드를 고를 수 있음: 보기(읽기 전용) / 간편 수정(글자 수정 제외) / 기본(모든 기능). 더보기 메뉴에서 언제든 바꿀 수 있음", "PDF 글자를 클릭해 수정할 때 원본 글자의 자간을 읽어와 같은 간격으로 반영", "텍스트 도구, 수정 중인 글자, 선택한 글자에서 자간(-10% ~ 50%)을 직접 설정할 수 있음. 저장 · 인쇄 · 내보내기에도 반영", "멀티작업 첫 화면을 새로 디자인: 글자를 최소화하고 둥근 타일 버튼(파일 · 웹 · 번역 · OneCompiler)과 간결한 바로가기 칩으로 정리", "개체나 텍스트를 선택하면 왼쪽 위에 이동 핸들이 나타나 끌어서 옮길 수 있음", "PDF 글자를 클릭해 수정할 때, 텍스트 도구로 입력할 때도 왼쪽 위에 이동 핸들이 나타나 글자 위치를 끌어서 옮길 수 있음"], "d": "2026.10.12"}, {"v": "v0.5.3", "items": ["소개 페이지(index)와 편집기의 파비콘을 같은 고양이 아이콘으로 통일", "페이지 번역 추가: 도구 모음 가장 오른쪽의 번역 버튼으로 현재 보고 있는 페이지만 번역", "번역 방식 선택: 원문 / 전체 번역 / 마우스 오버 번역(글자에 마우스를 올리면 그 문단만 번역)", "원본 언어 자동 감지, 번역할 언어 선택(기본 한국어). 크롬 내장 번역을 우선 사용하고, 없으면 서버 번역(키 없이도 쓰는 무료 엔진 포함)으로 대체", "번역에 실패하면 원인(서버 미배포, 사용량 초과, Chrome 내장 번역 사용 불가 사유)을 안내", "Chrome 번역 모델 준비가 오래 걸리면 기다리지 않고 서버 번역으로 먼저 번역하고, 준비되면 다음부터 내장 번역 사용", "서버 번역: 한국어 등 긴 글이 무료 엔진의 글자 수(바이트) 제한에 걸려 실패하던 문제 수정", "HWP 파일이 열리지 않던 문제 수정(압축 해제 오류) — 실제 HWP 샘플 파일로 확인"], "d": "2026.10.12"}, {"v": "v0.5.2", "items": ["편집 화면 상단의 고양이 아이콘을 누르면 소개 페이지로 돌아가도록 변경"], "d": "2026.10.12"}, {"v": "v0.5.1", "items": ["서비스 소개 페이지(meow-pdf.com)를 새로 만들고, 기존 편집 화면은 /edit 주소로 이동", "소개 페이지 하단에 사업자 정보(Thaniya project, 사업자 등록번호) 표기", "옵션바의 색상 영역이 밖으로 튀어나오거나 잘리던 문제를 수정", "텍스트 정렬의 기본값을 왼쪽 정렬로 변경", "도형에 별 추가", "도형의 원 버튼에 그래픽이 비어 있던 문제를 수정"], "d": "2026.10.12"}, {"v": "v0.4.5", "items": ["시작 화면의 버튼(파일 열기, 빈 문서로 시작, 파일 병합, 파일 압축)을 모서리가 둥근 정사각형 타일 형태로 변경", "텍스트 왼쪽 정렬 / 가운데 정렬(기본) / 오른쪽 정렬 설정 추가 (새 텍스트, 편집 중, 선택한 텍스트에 적용)", "도구 모음을 좌측에 배치했을 때 도구 버튼 크기를 줄임", "캡처, 인쇄, 프레젠테이션 버튼을 다시 도구 모음으로 이동"], "d": "2026.10.12"}, {"v": "v0.4.4", "items": ["헤더의 테마 변경 버튼과 GitHub 버튼을 제거하고, 화면 밝기 조절을 설정의 화면 · 레이아웃 항목으로 이동", "도구 툴바의 저장 관련 버튼(저장, 다른 이름으로 저장)을 헤더로 이동", "헤더의 새 문서, 열기 버튼을 제거하고 실행 취소, 다시 실행, 캡처, 인쇄, 발표 버튼을 헤더로 이동", "결제 안내에 최초 1회만 결제하면 계속 이용할 수 있다는 내용을 깔끔한 카드 UI로 명시", "옵션바의 크기(내용)에 따라 화면이 재조정되지 않도록 옵션바 높이를 고정"], "d": "2026.10.12"}, {"v": "v0.4.3", "items": ["사이드 메뉴 방식의 UI 기반 설정 창을 열 수 있는 버튼 아이콘을 상단 레이아웃에 추가, 해당 설정 창 내에서 애플리케이션 버전 정보 확인과 고객센터 피드백 제출이 가능하도록 구현", "이때 접수된 불편사항은 개발자 계정의 관리자 대시보드나 DB로 수집되어 일괄 조회 및 관리가 가능", "사용자가 주요 기능의 단축키를 직접 매핑하고 변경할 수 있는 커스터마이징 기능과 함께 기존 상단에 고정되어 있던 도구 툴바 배치를 좌측 정렬 또는 상단 정렬로 선택할 수 있는 레이아웃 옵션을 제공", "반응형 UX 개선을 위해 모바일 환경에서 가로보기(Landscape) 모드로 전환될 경우, 페이지 패널이 자동으로 화면 좌측에 정렬되도록 미디어 쿼리 및 Flex/Grid 레이아웃 구조를 보완"], "d": "2026.10.12"}, {"v": "v0.4.2", "items": ["모바일 화면 크기에 맞춰 반응형 뷰포트 및 레이아웃 적용", "모바일 환경에서 레이어, 노트, 멀티작업 등 부가 기능 숨기고 최소한의 핵심 기능만 남기도록 개선", "모바일 화면에서 스와이프 및 드래그로 페이지 넘기기 기능 추가 (두 손가락 확대/축소 가능)", "모바일에서 페이지 패널을 화면 하단으로 배치", "상단 편집 버튼들을 깔끔하게 재배치하고, 계정 버튼을 저장 버튼 왼쪽으로 이동", "텍스트 직접 수정 기능 유지", "텍스트 선택 시 뜨는 옵션바(optbar)가 화면 밖으로 나가지 않도록 두 줄로 예쁘게 배치하고, 옵션바 표시 여부에 따라 화면 페이지가 밀리거나 재조정되지 않도록 수정"], "d": "2026.10.11"}, {"v": "v0.4.1", "items": ["모바일 화면 크기에 맞춰 반응형 뷰포트 및 레이아웃 적용", "모바일 환경에서 레이어, 노트, 멀티작업 등 부가 기능 숨기고 최소한의 핵심 기능만 남기도록 개선", "모바일 화면에서 스와이프 및 드래그로 페이지 넘기기 기능 추가 (두 손가락 확대/축소 가능)", "모바일에서 페이지 패널을 화면 하단으로 배치", "상단 편집 버튼들을 깔끔하게 재배치하고, 계정 버튼을 저장 버튼 왼쪽으로 이동", "텍스트 직접 수정 기능 유지", "텍스트 선택 시 뜨는 옵션바(optbar)가 화면 밖으로 나가지 않도록 두 줄로 예쁘게 배치하고, 옵션바 표시 여부에 따라 화면 페이지가 밀리거나 재조정되지 않도록 수정"], "d": "2026.10.11"}, {"v": "v0.3.3", "items": ["키 발급 관련 일부 로직 수정"], "d": "2026.10.10"}, {"v": "v0.3.2", "items": ["키 발급 관련 서버 연결 문제 해결"], "d": "2026.10.10"}, {"v": "v0.3.1", "items": ["파일이 없는 화면에서 파일 열기, 빈 문서로 시작 옆에 파일 병합, 파일 압축 기능을 배치", "파일이 없는 화면에서 안내 텍스트를 최소화하여 UI 깔끔하게 수정", "저장 버튼에 파일 압축해서 내보내기(10%, 20%, 40%)옵션 추가 - 프리미엄 사용자 한정, PPTX파일로 내보내기 옵션 추가", "화면에 다른 PDF를 드래그해서 넣으면 멀티 탭으로 넣기, 현재 파일에 병합하기 옵션이 나타나도록 기능 추가 (병합하기 시 두 파일의 병합순서 드래그로 결정 가능)", "페이지 패널에 전체 페이지 관리하기 버튼 추가-프리미엄", "전체 페이지 관리하기 시 그리드형태로(크기조절 가능) 각 페이지가 화면에 가득 차게 나타나며 드래그하여 페이지 순서를 바꿀 수도 있도 여러 페이지를 삭제하거나 이름을 바꾸거나 계층구조 수정 가능하도록 기능 추가", "페이지 패널의 버튼 UI 전반적으로 깔끔하게 수정", "헤더에 있는 PDF제목 클릭하여 직접 수정 가능하도록 개선"], "d": "2026.10.09"}, {"v": "v0.2.2", "items": ["로그인시스템 및 결제 시스템 문제 해결"], "d": "2026.10.09"}, {"v": "v0.2.1", "items": ["일부 기능 유료화 도입"], "d": "2026.10.08"}, {"v": "v0.1.3", "items": ["온라인 컴파일러 프로그램 원컴파일러(OneCompiler) 바로가기가 멀티작업에서 제공되도록 개선"], "d": "2026.10.08"}, {"v": "v0.1.2", "items": ["음성 이름 편집 및 음성 내보내기 기능 추가"], "d": "2026.10.08"}, {"v": "v0.1.1", "items": ["음성녹음 및 재생 기능 추가", "음성녹음 MPDF에 삽입 기능 추가 (따로 내보내기 가능, MPDF 확장자 파일에 삽입된 상태로 저장 가능)"], "d": "2026.10.06"}, {"v": "v0.0.1", "items": ["멀티작업에서 웹페이지를 열 수 있도록 편의 향상", "화면맞춤 상태에서 PDF내 텍스트상자 클릭 시 텍스트 수정이 진행되지 않는 문제 해결", "멀티작업 화면에 파일 드래그 시 일반 편집기 화면에 파일이 닿으면 파일 드롭 안내가 사라지지 않는 문제 해결", "페이지 패널의 크기 조절 시 썸네일로 보기의 각 썸네일 크기도 패널의 크기에 맞게 조절되도록 개선", "페이지 북마크기능 추가, 페이지 패널 상단에 북마크 바로가기 드롭다운 리스트 버튼 추가", "텍스트의 글꼴 드롭다운 버튼에서 각 버튼의 글꼴 모양을 이름과 함께 미리보기 제공", "PDF전체에서 특정 글자 빠르게 찾는 검색기능 제공", "PDF 내에서 기존에 있는 텍스트를 수정하는 로직 개편 (기존에 비해 많은 양의 텍스트를 한 번에 수정 가능하도록)", "Meow-PDF 파비콘 추가"], "d": "2026.10.06"}, {"v": "beta 0.0.5", "items": ["세로모드 시 페이지, 레이어, 노트를 모두 하단 사이드바에서 전환 가능한 형태로 변경", "모든 사이드바를 테두리 마우스 드래그를 통해 크기 조절 가능하도록 변경 (기본 좌우, 세로모드는 상하)", "페이지 맞춤 시 사이드바를 고려하여 페이지가 화면에 모두 들어오게 조절되도록 개선 (화면 비율이 작은 경우)", "검은 고양이 스티커를 넣는 기능을 추가 (이미지 버튼을 전환 가능)", "레이어/노트 패널에 탭전환 방식으로 멀티작업 탭 추가 (파일탐색기를 여는 버튼이 중앙에 있으며 누르면 파일을 불러옴, 불러온 파일은 해당 패널에 가득 차도록 띄워지며 PDF를 보며 작업 가능), 멀티작업 패널은 또한 내부에서 멀티테스킹탭으로 관리 가능", "레이어/노트/멀티작업 여닫기 패널 버튼을 작업 사이드바 버튼으로 이미지 변경", "PDF 업로드 전 나타나는 화면 문구에서 PDF뿐만 아니라 PPTX파일도 수정 가능하다고 명시", "스프라이트시트, HWP 파일도 삽입/편집 가능하도록 제공"], "d": "2026.10.06"}, {"v": "beta 0.0.4", "items": ["페이지 계층관리 시 페이지를 끈 상태에서 마우스 휠을 굴리면 페이지가 올라갔다 내려갔다 하게 되도록 변경", "도형을 그리고 Ctrl+Z를 누르면 간혹 기능이 먹히지 않는 문제 해결", "화면 밝기 조절 바 시간 표시 부분 왼쪽에 추가", "페이지에 주석달기 기능 추가 (주석을 달면 그 페이지는 눈에 잘 띄도록 변경)", "페이지 목록으로보기 기능 추가 (기본적으로 페이지1 ... 로 표시되며 페이지이름 변경 가능)", "인쇄기능 추가", "레이어 병합 기능 추가", "편집화면 및 프리젠테이션 화면에서 Ctrl+스크롤 하면 마우스 커서를 중심으로 화면이 줌아웃되도록 변경", "작게 https://github.com/architect0509/meow-PDF페이지로 이동되는 버튼을 방해되지 않도록 배치", "텍스트나 도형 그리기에서 상단 optbar가 가로로 너무 길어지는 문제 색상 팔레트의 크기를 줄이고 슬라이더들을 정리하여 화면 내에 기능이 모두 들어오도록 개선", "글자선택을 개체와 통일시키고 PDF내 모든 텍스트상자를 클릭만으로 수정 가능하도록 개선", "색상 버튼의 개수를 5개로 줄이고 우측에 색상 팔레트를 크게 배치하며 5개의 작은 색상 버튼 아래에는 최근에 사용한 색상 5개가 나타나게 되도록 개선", "UI의 배치가 전부 상하로 이동하는 세로모드 변환 기능을 제공", "멀티테스킹탭 기능을 지원 (툴바 위에 삭제 및 불러오기, 추가 가능한 형식으로)", "레이어가 있는 위치에 탭전환 방식으로 노트를 작성할 수 있도록 기능 추가(노트는 다중 페이지로 관리 가능하며 .txt확장자 파일로 내보낼 수 있음)"], "d": "2026.10.06"}, {"v": "beta 0.0.3", "items": ["현재화면 캡쳐기능 제공(버튼의 위치는 저장버튼 좌측)", "상단 레이어버튼 옆에 현재시간,분 표시", "저장버튼 좌측 프리젠테이션모드 버튼 추가 -단축키 여닫기 p(프리젠테이션 내에는 마찬가지로 강조표시, 그리기, 직선, 도형, 지우개, 텍스트툴, 그리고 레이저를 사용가능한 마우스로 끌어서 옮길 수 있는 조작 도구창이 존재)", "레이저는 프리젠테이션중에만 사용 가능하며 L키로 생성/제거 가능", "이미지 버튼 우측에 C단축키로 메모 생성기능", "메모는 위치이동 및 크기조절 가능, 다중줄 글쓰기 가능, 접기 가능, 글씨 크기조절 가능", "ppt를 pdf로 가져오기 가능하도록 개선", "페이지 그룹화를 통한 계층관리 가능하도록 개선", "편집기록을 가진 프로젝트 파일인 mpdf확장자로 내보내기&불러오기 기능 추가", "(저장 및 다른이름으로 저장에 옵션 표시- pdf of mpdf) 확장자가 달라도 일반 저장의 기본옵션은 덮어쓰기", "텍스트에 채우기 옵션 추가 (기본 투명), 도형에 채우기 옵션 추가 (기본 투명, 투명도 조절 가능)", "페이지 넘기기 단축키에 Pg Up 과 Pg Down도 추가", "각 도구의 색깔은 그림판 팔레트 UI처럼 줄바꿈 이용, 사용자 지정 색상은 크기 증가, 스포이드버튼도 추가", "프로그램 내의 황색은 #dbbe43로, 배경의 어두운 색은 좀 더 무채색에 가깝게 변경"], "d": "2026.10.04"}, {"v": "beta 0.0.2", "items": ["전반적인 테마를 변경하였으며 개선된 항목은 다음과 같습니다. 글자의 폰트 및 굵기, 기울임꼴 추가,", "화면맞춤 버튼 하단에 추가", "처음 저장버튼 누를때 파일을 불러온 경로에 자동 덮어씌우기 개선", "프로그램 테마색깔 황색으로 변경", "페이지 패널 버튼 좌측에 아이콘 추가, 패널 버튼과 거리 두기", "자 툴을 직선 그리기 툴로 변경", "펜 및 직선 그리기 툴 사용 시 붓 영역 화면 내에 표시", "펜 및 직선 그리기 툴 팔레트에 파스텔톤의 색상 추가", "강조표시는 직선형, 붓형 선택 가능하게 개선", "상단 툴을 분리 ( 글자선택과 개체 | 강조표시, 그리기, 직선 | 도형, 지우개, 텍스트 | 붙여넣기, 이미지 )", "각각의 버튼에 단축키 부여 ( 1, 2 | q, w, e | a, s, d | z, x )"], "d": "2026.10.04"}];
 const setw = $('#setw');
 
 /* ── 단축키 정의: 키 조합은 "Ctrl+Shift+KeyS" 형식(물리 키 기준이라 한글 입력 상태에서도 동작) ── */
@@ -8289,21 +8664,135 @@ function placeSide(r) {   // 좌측 도구 모음의 메뉴는 버튼 오른쪽�
 }
 
 /* ── 좌측 도구 모음의 '더보기' 메뉴: 메모 · 음성 · 캡처 · 인쇄 · 발표 · 번역 ── */
+const MORE_MOBILE = [['memo', '메모', '문서에 메모 붙이기', '#memoBtn', 0], ['link', '링크', '영역에 웹 주소 · 페이지 연결', '.toolbar .tool[data-tool=link]', 0], ['scan', '디지털화', '이미지 · 스캔의 글자를 수정 가능하게', '#digiBtn', 0], ['present', '프레젠테이션', '전체 화면 발표 모드', '#presentBtn', 1], ['translate', '번역', '지금 보는 페이지 번역', '#trBtn', 1]];
 const MORE_ITEMS = [['memo', '메모', '문서에 메모 붙이기', '#memoBtn', 'ins.memo'], ['mic', '음성', '녹음해서 페이지에 넣기', '#micBtn', 'ins.mic'], ['camera', '캡처', '지금 화면을 이미지로 저장', '#captureBtn', ''], ['printer', '인쇄', '문서를 인쇄', '#printBtn', 'file.print'], ['present', '발표', '전체 화면 발표 모드', '#presentBtn', 'view.present'], ['translate', '번역', '지금 보는 페이지 번역', '#trBtn', '']];
 function openMoreMenu(anchor) {
   if (!fmtMenu.hidden && fmtMenu._kind === 'more') { fmtMenu.hidden = true; anchor.classList.remove('on'); return; }
   fmtMenu._kind = 'more';
-  fmtMenu.innerHTML = '<div class="menu-h">더보기 도구</div>' + MORE_ITEMS.map(([ic, n, d, sel, id]) => { const pk = id ? prettyKey(keyOf(id)) : ''; return `<button class="mi" data-more="${sel}"><span class="mthumb">${svg(ic)}</span><span class="mtxt"><b>${n}</b><span>${d}${pk ? ' · ' + pk : ''}</span></span></button>`; }).join('');
+  const list = mMode ? MORE_MOBILE.filter(x => mAccess !== 'simple' || x[4]) : MORE_ITEMS;
+  fmtMenu.innerHTML = '<div class="menu-h">더보기 도구</div>' + list.map(([ic, n, d, sel, id]) => { const pk = id && !mMode && typeof id === 'string' ? prettyKey(keyOf(id)) : ''; return `<button class="mi" data-more="${sel}"><span class="mthumb">${svg(ic)}</span><span class="mtxt"><b>${n}</b><span>${d}${pk ? ' · ' + pk : ''}</span></span></button>`; }).join('');
   const r = anchor.getBoundingClientRect();
   fmtMenu.style.top = r.bottom + 6 + 'px'; fmtMenu.style.right = 'auto'; fmtMenu.style.left = Math.max(8, Math.min(r.left, window.innerWidth - 290)) + 'px';
-  fmtMenu.hidden = false; placeSide(r); anchor.classList.add('on');
+  fmtMenu.hidden = false; if (mMode) { fmtMenu.style.top = r.bottom + 6 + 'px'; fmtMenu.style.left = Math.max(8, Math.min(r.right - 280, window.innerWidth - 292)) + 'px'; } else placeSide(r); anchor.classList.add('on');
 }
 $('#moreToolBtn').addEventListener('click', e => openMoreMenu(e.currentTarget));
+/* 모바일 도구 모음 접기 / 펼치기 */
+function setTbFold(on, keep) {
+  document.body.classList.toggle('tb-fold', !!on);
+  const b = $('#tbFold'); if (b) { b.setAttribute('aria-expanded', String(!on)); b.title = b.ariaLabel = on ? '도구 모음 펼치기' : '도구 모음 접기'; b.setAttribute('aria-label', b.title); }
+  if (!keep) safeStore.setItem('meowTbFold', on ? '1' : '0');
+  if (mMode && state.pages.length) requestAnimationFrame(() => { mLast = null; if (mScroll) fitWidth(3); else { mSync(); mFit(); } });
+}
+$('#tbFold').addEventListener('click', () => setTbFold(!document.body.classList.contains('tb-fold')));
+if (safeStore.getItem('meowTbFold') === '1') document.body.classList.add('tb-fold');
 $('#fmtMenu').addEventListener('click', e => {
   const b = e.target.closest('[data-more]'); if (!b) return;
   fmtMenu.hidden = true; $('#moreToolBtn').classList.remove('on');
   const t = $(b.dataset.more); if (t) t.click();
 });
+
+
+/* ── 첫 방문 튜토리얼 (PC / 모바일 따로) ── */
+const TUT_KEY = 'meowTutorialDone';
+const tutDone = () => safeStore.getItem(TUT_KEY) === '1';
+function tutSteps(mob) {
+  const tl = (ic, n, k, sel) => `<div class="tl${sel ? ' sel' : ''}">${k ? `<kbd>${k}</kbd>` : ''}${svg(ic)}<span>${n}</span></div>`;
+  const gp = a => `<div class="gp">${a.join('')}</div>`;
+  const open = `<div class="ti"><div class="row"><div class="bt pri">${svg('folder')}파일 열기</div><div class="bt">${svg('filePlus')}빈 문서</div>${mob ? '' : `<div class="bt">${svg('merge')}파일 병합</div>`}</div><div class="thint">${mob ? 'PDF · PPTX · HWP · DOCX · PNG 파일을 열 수 있어요' : 'PDF · PPTX · HWP · DOCX · PNG를 끌어다 놓거나, 캡처한 이미지를 <b>Ctrl+V</b>로 바로 열어요'}</div></div>`;
+  const pagePc = `<div class="ti"><div class="ti-flip"><div class="th"><s></s><s></s><s></s></div><div class="pg"><i><em></em><em></em><em class="h"></em><em></em><u>1</u></i><i><em></em><em class="h"></em><em></em><em></em><u>2</u></i><i><em></em><em></em><em></em><em class="h"></em><u>3</u></i></div></div></div>`;
+  const pageMob = `<div class="ti"><div class="ti-swipe"><div class="ph"><i><em></em><em></em><em></em><em></em></i><i class="b"><em></em><em></em><em></em></i></div><div class="fg"></div></div></div>`;
+  const toolPc = `<div class="ti"><div class="ti-tool">${gp([tl('highlighter', '강조', 'Q', 1), tl('pen', '그리기', 'W'), tl('line', '직선', 'E'), tl('eraser', '지우개', 'R')])}${gp([tl('shapes', '도형', 'A'), tl('type', '텍스트', 'S'), tl('link', '링크', 'D'), tl('table', '표', 'F')])}${gp([tl('region', '영역', 'Z'), tl('image', '이미지', 'X'), tl('memo', '메모', 'C'), tl('mic', '음성', 'V')])}</div><div class="thint">키보드 한 줄이 한 묶음이에요 — <b>QWER · ASDF · ZXCV</b></div></div>`;
+  const toolMob = `<div class="ti"><div class="ti-tool m">${tl('highlighter', '강조', '', 1)}${tl('pen', '그리기')}${tl('line', '직선')}${tl('shapes', '도형')}${tl('type', '텍스트')}${tl('dots', '더보기')}</div><div class="thint" style="display:flex;align-items:center;justify-content:center;gap:6px">${svg('chevD').replace('<svg', '<svg width="16" height="16"')} 눌러서 도구 모음을 접고 펼 수 있어요</div></div>`;
+  const layer = `<div class="ti"><div class="ti-lay"><div class="ly new">${svg('highlighter')}<span class="dot" style="background:#ffe14d"></span><span class="nm">강조표시 1</span><span class="sp"></span>${svg('eye')}${svg('trash')}</div><div class="ly">${svg('pen')}<span class="dot" style="background:#ef4444"></span><span class="nm">그리기 1</span><span class="sp"></span>${svg('eye')}${svg('trash')}</div><div class="ly hid">${svg('type')}<span class="dot" style="background:#60a5fa"></span><span class="nm">텍스트 1</span><span class="sp"></span>${svg('eyeOff')}${svg('trash')}</div></div><div class="thint">눈 아이콘으로 숨기고, 휴지통으로 지워요</div></div>`;
+  const note = `<div class="ti"><div class="ti-note"><div class="pgm"><em></em><em></em><em></em><em></em><div class="memo">여기 숫자 다시 확인!</div></div>${mob ? '' : `<div class="nt"><div class="tg"><b class="on">MD</b><b>TXT</b></div><h5>회의 메모</h5><span>• 서식 보기로 바로 확인<br>• 원문과 번갈아 볼 수 있어요</span></div>`}</div></div>`;
+  const pres = `<div class="ti"><div class="ti-hero"><div style="font-size:46px">🖥️</div><div class="thint" style="margin:0">전체 화면에서 <b>레이저 · 펜</b>으로 설명하고 <b style="color:#ef4444">빨간 버튼</b>으로 나가요</div></div></div>`;
+  const final = `<div class="tut-final"><div class="tut-cat">🐱</div><button class="tut-go" data-tut="go" type="button">시작하기</button></div>`;
+  const common0 = { t: 'Meow-PDF에 오신 걸 환영해요', d: mob ? '1분이면 충분해요. 손가락으로 쓰는 핵심 기능만 빠르게 보여드릴게요.' : '1분이면 충분해요. 처음 쓰는 분을 위해 핵심 기능만 빠르게 보여드릴게요.', art: `<div class="tut-final" style="padding:0"><div class="tut-cat">🐱</div></div>` };
+  return mob ? [
+    common0,
+    { t: '파일을 열어요', d: '<b>파일 열기</b>로 문서를 불러오거나 <b>빈 문서</b>로 바로 시작해요. 열기 모드로 보기 전용 · 간편 수정 · 기본 중에서 고를 수 있어요.', art: open },
+    { t: '페이지 넘기기', d: '화면을 <b>옆으로 쓸어서</b> 다음 쪽으로 넘겨요. 두 손가락으로 벌리면 확대, 아래쪽 <b>‹ ›</b> 버튼이나 쪽 번호로도 이동해요.', art: pageMob },
+    { t: '도구 모음', d: '강조 · 그리기 · 도형 · 텍스트 같은 도구가 위에 있어요. <b>메모 · 링크 · 디지털화 · 프레젠테이션 · 번역</b>은 <b>⋯ 더보기</b> 안에 있고, 아래 <b>˅ 버튼</b>으로 도구 모음을 접을 수 있어요.', art: toolMob },
+    { t: '메모 남기기', d: '<b>더보기 → 메모</b>로 문서 위에 포스트잇처럼 메모를 붙여요. 위치를 옮기거나 지울 수도 있어요.', art: note },
+    { t: '프레젠테이션', d: '<b>더보기 → 프레젠테이션</b>으로 전체 화면 발표를 시작해요. 끝낼 때는 빨간 <b>나가기</b> 버튼을 눌러요.', art: pres },
+    { t: '준비됐어요', d: '이제 직접 써 볼 차례예요. 이 안내는 설정 → 정보에서 언제든 다시 볼 수 있어요.', art: '', final: true, fin: final }
+  ] : [
+    common0,
+    { t: '파일을 열어요', d: '<b>파일 열기</b>로 문서를 불러오거나 <b>빈 문서</b>로 시작해요. 탭으로 여러 문서를 동시에 열 수 있어요.', art: open },
+    { t: '페이지 넘기기', d: '왼쪽 <b>썸네일을 클릭</b>하거나 마우스 휠로 스크롤해서 넘겨요. 위쪽 입력칸에 <b>쪽 번호</b>를 적어 바로 이동할 수도 있어요.', art: pagePc },
+    { t: '도구 모음', d: '강조 · 그리기 · 도형 · 텍스트 같은 도구는 <b>키보드 한 줄</b>씩 묶여 있어요. 마우스를 올리면 단축키가 보이고, 설정에서 바꿀 수 있어요.', art: toolPc },
+    { t: '레이어', d: '그린 것 · 도형 · 글자는 오른쪽 <b>레이어</b>에 차곡차곡 쌓여요. 눈 아이콘으로 잠깐 숨기고, 휴지통으로 지우고, 끌어서 순서를 바꿔요.', art: layer },
+    { t: '메모 · 노트 · 발표', d: '<b>메모(C)</b>는 문서 위에 붙이는 포스트잇, <b>노트</b>는 오른쪽에서 마크다운(MD)이나 텍스트(TXT)로 쓰는 필기장이에요. <b>발표(P)</b>로 전체 화면 프레젠테이션도 해요.', art: note },
+    { t: '준비됐어요', d: '이제 직접 써 볼 차례예요. 이 안내는 설정 → 정보에서 언제든 다시 볼 수 있어요.', art: '', final: true, fin: final }
+  ];
+}
+function tutConfetti(host) {
+  const cv = document.createElement('canvas'); cv.className = 'tut-conf'; host.appendChild(cv);
+  const dpr = Math.min(2, window.devicePixelRatio || 1), W = cv.width = innerWidth * dpr, H = cv.height = innerHeight * dpr, ctx = cv.getContext('2d');
+  const acc = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#dbbe43';
+  const cols = [acc, '#ff7aa2', '#7bdcb5', '#7cc4ff', '#ffe08a', '#c8a6ff', '#ffffff'], ps = [];
+  for (let i = 0; i < 150; i++) {
+    const a = Math.random() * Math.PI * 2, sp = (6 + Math.random() * 15) * dpr;
+    ps.push({ x: W / 2, y: H / 2, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 5 * dpr, r: (3 + Math.random() * 5) * dpr, c: cols[i % cols.length], rot: Math.random() * 6, vr: (Math.random() - .5) * .4, k: i % 6, life: 1 });
+  }
+  const paw = (x, y, r) => { ctx.beginPath(); ctx.ellipse(x, y + r * .35, r * .8, r * .62, 0, 0, 7); ctx.fill(); for (const [dx, dy] of [[-.95, -.35], [-.35, -.95], [.35, -.95], [.95, -.35]]) { ctx.beginPath(); ctx.ellipse(x + dx * r, y + dy * r, r * .3, r * .38, 0, 0, 7); ctx.fill(); } };
+  let t0 = performance.now();
+  const step = now => {
+    const dt = Math.min(2, (now - t0) / 16.7); t0 = now; ctx.clearRect(0, 0, W, H); let alive = 0;
+    for (const p of ps) {
+      p.vy += .32 * dpr * dt; p.vx *= Math.pow(.985, dt); p.x += p.vx * dt; p.y += p.vy * dt; p.rot += p.vr * dt; p.life -= .0065 * dt;
+      if (p.life <= 0 || p.y > H + 40) continue; alive++;
+      ctx.globalAlpha = Math.min(1, p.life * 1.6); ctx.fillStyle = p.c; ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+      if (p.k === 0) paw(0, 0, p.r * 1.1); else if (p.k === 1) { ctx.beginPath(); for (let j = 0; j < 5; j++) { const a = j * 1.2566 - 1.5708, a2 = a + .628; ctx.lineTo(Math.cos(a) * p.r * 1.3, Math.sin(a) * p.r * 1.3); ctx.lineTo(Math.cos(a2) * p.r * .55, Math.sin(a2) * p.r * .55); } ctx.fill(); }
+      else if (p.k === 2) { ctx.beginPath(); ctx.arc(0, 0, p.r * .8, 0, 7); ctx.fill(); } else ctx.fillRect(-p.r, -p.r * .45, p.r * 2, p.r * .9);
+      ctx.restore();
+    }
+    ctx.globalAlpha = 1;
+    if (alive) requestAnimationFrame(step); else cv.remove();
+  };
+  requestAnimationFrame(step); setTimeout(() => cv.remove(), 4200);
+}
+function openTutorial(force) {
+  if (document.getElementById('tut')) return;
+  const mob = !!mMode, steps = tutSteps(mob), reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const el = document.createElement('div'); el.id = 'tut'; el.className = 'tut ' + (mob ? 'mob' : 'pc'); el.setAttribute('role', 'dialog'); el.setAttribute('aria-modal', 'true'); el.setAttribute('aria-label', '시작 안내');
+  let i = 0, finishing = false; const prevFocus = document.activeElement;
+  const draw = () => {
+    const s = steps[i], last = !!s.final;
+    el.innerHTML = `<div class="tut-card${last ? ' last' : ''}"><div class="tut-top"><span class="tut-step">${last ? '' : `${i + 1} / ${steps.length - 1}`}</span><button class="tut-skip" data-tut="skip" type="button">${last ? '' : '건너뛰기'}</button></div>
+      <div class="tut-stage" aria-live="polite"><div class="tut-art">${last ? s.fin : s.art}</div><h2>${last ? '시작해볼까요?' : s.t}</h2><p>${s.d}</p></div>
+      <div class="tut-nav"><button class="tut-btn" data-tut="prev" type="button"${i === 0 ? ' hidden' : ''}>이전</button><div class="tut-dots" aria-hidden="true">${steps.slice(0, -1).map((_, k) => `<i class="${k === i ? 'on' : ''}"></i>`).join('')}</div><button class="tut-btn pri" data-tut="next" type="button">다음</button></div></div>`;
+    const f = el.querySelector(last ? '.tut-go' : '[data-tut=next]'); if (f) f.focus({ preventScroll: true });
+  };
+  const finish = (skipped) => {
+    if (finishing) return; finishing = true; safeStore.setItem(TUT_KEY, '1');
+    document.removeEventListener('keydown', onk, true);
+    const done = () => { el.remove(); try { prevFocus && prevFocus.focus && prevFocus.focus({ preventScroll: true }); } catch (e) { /* 무시 */ } };
+    if (skipped || reduce) { el.style.transition = 'opacity .25s'; el.style.opacity = '0'; setTimeout(done, 260); if (!skipped) toast('환영해요! 🐾'); return; }
+    el.classList.add('out');
+    const fx = document.createElement('div'); fx.className = 'tut-flash'; fx.innerHTML = '<b>환영해요! 🐾</b>'; document.body.appendChild(fx);
+    const ring = document.createElement('div'); ring.className = 'tut-ring'; document.body.appendChild(ring);
+    tutConfetti(document.body);
+    setTimeout(() => ring.remove(), 1200); setTimeout(() => fx.remove(), 1800); setTimeout(done, 1300);
+  };
+  const onk = e => {
+    if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); finish(true); }
+    else if (e.key === 'ArrowRight' && i < steps.length - 1) { e.preventDefault(); e.stopPropagation(); i++; draw(); }
+    else if (e.key === 'ArrowLeft' && i > 0) { e.preventDefault(); e.stopPropagation(); i--; draw(); }
+    else if (e.key === 'Tab') { const f = [...el.querySelectorAll('button:not([hidden]):not(:empty)')]; if (!f.length) return; const k = f.indexOf(document.activeElement); if (e.shiftKey && k <= 0) { e.preventDefault(); f[f.length - 1].focus(); } else if (!e.shiftKey && k === f.length - 1) { e.preventDefault(); f[0].focus(); } }
+    else if (e.key.length === 1 || e.key === 'Enter' || e.key === ' ') { e.stopPropagation(); }   // 안내 중에는 편집기 단축키가 눌리지 않게
+  };
+  el.addEventListener('click', e => {
+    const b = e.target.closest('[data-tut]'); if (!b) return;
+    const a = b.dataset.tut;
+    if (a === 'next' && i < steps.length - 1) { i++; draw(); }
+    else if (a === 'prev' && i > 0) { i--; draw(); }
+    else if (a === 'skip') finish(true);
+    else if (a === 'go') finish(false);
+  });
+  document.addEventListener('keydown', onk, true);
+  draw(); document.body.appendChild(el);
+}
 
 /* ── 설정 창 ── */
 let setSec = 'layout', setRec = null, setPend = null, setQ = '';
@@ -8418,14 +8907,14 @@ const conNorm = v => String(v == null ? '' : v).toLowerCase().replace(/[\s_\-]/g
 const conBool = v => { const x = conNorm(v); if (['on', 'true', '1', 'yes', 'y', '켜기', '켬'].includes(x)) return true; if (['off', 'false', '0', 'no', 'n', '끄기', '끔'].includes(x)) return false; throw new Error(CT('on 또는 off 로 입력해 주세요.', 'Use on or off.')); };
 const conNum = (v, lo, hi) => { const n = parseFloat(v); if (!isFinite(n)) throw new Error(CT('숫자를 입력해 주세요.', 'Enter a number.')); return clamp(n, lo, hi); };
 const conNeedDoc = () => { if (!state.pages.length) throw new Error(CT('먼저 문서를 열어 주세요. (open 또는 new)', 'Open a document first. (open or new)')); };
-const CON_THEMES = [['dark', '어두운 테마', ['1', 'dark', 'darktheme', '어두운', '어두운테마']], ['light', '밝은 테마', ['2', 'light', 'lighttheme', '밝은', '밝은테마']], ['aero', '프루티거 에어로', ['3', 'aero', 'aerotheme', 'fruitiger', '프루티거', '프루티거에어로']], ['pink', '핑크세상', ['4', 'pink', 'pinktheme', 'pinkworld', '핑크', '핑크세상']], ['korea', '한국 테마', ['5', 'korea', 'koreatheme', 'kr', '한국', '한국테마']], ['japan', '일본 테마', ['6', 'japan', 'japantheme', 'jp', '일본', '일본테마']], ['dreamcore', '드림코어', ['7', 'dreamcore', 'dreamcoretheme', 'dream', '드림코어', '드림']], ['coffee', '커피', ['8', 'coffee', 'coffeetheme', 'cafe', '커피', '카페']], ['retro', '레트로게임', ['9', 'retro', 'retrotheme', 'retrogame', 'game', '레트로', '레트로게임']], ['saessak', '새싹', ['10', 'saessak', 'saessaktheme', 'sprout', 'naver', '새싹']], ['minihompy', '미니홈피', ['11', 'minihompy', 'minihome', 'minihomepy', 'cyworld', 'cy', '미니홈피', '싸이월드']], ['kiwidark', '키위 다크', ['12', 'kiwidark', 'kiwidarktheme', 'kiwi', '키위', '키위다크']], ['horror', '공포', ['13', 'horror', 'horrortheme', 'scary', '공포', '공포테마']]];
+const CON_THEMES = [['dark', '어두운 테마', ['1', 'dark', 'darktheme', '어두운', '어두운테마']], ['light', '밝은 테마', ['2', 'light', 'lighttheme', '밝은', '밝은테마']], ['aero', '프루티거 에어로', ['3', 'aero', 'aerotheme', 'fruitiger', '프루티거', '프루티거에어로']], ['pink', '핑크세상', ['4', 'pink', 'pinktheme', 'pinkworld', '핑크', '핑크세상']], ['korea', '한국 테마', ['5', 'korea', 'koreatheme', 'kr', '한국', '한국테마']], ['japan', '일본 테마', ['6', 'japan', 'japantheme', 'jp', '일본', '일본테마']], ['dreamcore', '드림코어', ['7', 'dreamcore', 'dreamcoretheme', 'dream', '드림코어', '드림']], ['coffee', '커피', ['8', 'coffee', 'coffeetheme', 'cafe', '커피', '카페']], ['retro', '레트로게임', ['9', 'retro', 'retrotheme', 'retrogame', 'game', '레트로', '레트로게임']], ['saessak', '새싹', ['10', 'saessak', 'saessaktheme', 'sprout', 'naver', '새싹']], ['minihompy', '미니홈피', ['11', 'minihompy', 'minihome', 'minihomepy', 'cyworld', 'cy', '미니홈피', '싸이월드']], ['kiwidark', '키위 다크', ['12', 'kiwidark', 'kiwidarktheme', 'kiwi', '키위', '키위다크']], ['horror', '공포', ['13', 'horror', 'horrortheme', 'scary', '공포', '공포테마']], ['backrooms', '백룸', ['14', 'backrooms', 'backroomstheme', 'backroom', '백룸', '백룸테마']]];
 const CON_LANGS = [['ko', ['1', 'ko', 'kr', 'korean', '한국어']], ['en', ['2', 'en', 'english', '영어']], ['ja', ['3', 'ja', 'jp', 'japanese', '일본어', '日本語']], ['zh', ['4', 'zh', 'cn', 'chinese', '중국어', '中文']]];
 const CON_RANGE = { 'pen.width': [1, 24], 'pen.alpha': [10, 100], 'line.width': [1, 24], 'line.alpha': [10, 100], 'highlight.width': [6, 44], 'shape.width': [0, 20], 'shape.fillAlpha': [10, 100], 'text.size': [3, 120], 'text.ls': [-10, 50], 'eraser.size': [4, 80] };
 const CON_ENUM = { 'highlight.style': ['brush', 'line'], 'shape.kind': ['rect', 'ellipse', 'star'], 'eraser.mode': ['stroke', 'area'], 'region.mode': ['rect', 'free'], 'text.align': ['left', 'center', 'right'] };
 const CON_TOOLS = ['select', 'highlight', 'pen', 'line', 'shape', 'eraser', 'text', 'region'];
 const conToolKeys = () => { const o = []; for (const g of Object.keys(settings)) if (settings[g] && typeof settings[g] === 'object') for (const k of Object.keys(settings[g])) o.push(g + '.' + k); return o; };
 const SETKEYS = {
-  theme: { h: ['1~13 | darktheme | lighttheme | aerotheme | pinktheme | koreatheme | japantheme | dreamcoretheme | coffeetheme | retrotheme | saessaktheme | kiwidarktheme | horrortheme', '테마 (1 어두운 · 2 밝은 · 3 프루티거 에어로 · 4 핑크세상 · 5 한국 · 6 일본 · 7 드림코어 · 8 커피 · 9 레트로게임 · 10 새싹 · 11 미니홈피 · 12 키위 다크 · 13 공포)', 'Theme (1 dark · 2 light · 3 aero · 4 pink · 5 korea · 6 japan · 7 dreamcore · 8 coffee · 9 retro · 10 saessak · 11 minihompy · 12 kiwidark · 13 horror)'],
+  theme: { h: ['1~14 | darktheme | lighttheme | aerotheme | pinktheme | koreatheme | japantheme | dreamcoretheme | coffeetheme | retrotheme | saessaktheme | kiwidarktheme | horrortheme | backroomstheme', '테마 (1 어두운 · 2 밝은 · 3 프루티거 에어로 · 4 핑크세상 · 5 한국 · 6 일본 · 7 드림코어 · 8 커피 · 9 레트로게임 · 10 새싹 · 11 미니홈피 · 12 키위 다크 · 13 공포 · 14 백룸)', 'Theme (1 dark · 2 light · 3 aero · 4 pink · 5 korea · 6 japan · 7 dreamcore · 8 coffee · 9 retro · 10 saessak · 11 minihompy · 12 kiwidark · 13 horror · 14 backrooms)'],
     get: () => document.documentElement.dataset.theme, set: v => { const x = conNorm(v), t = CON_THEMES.find(q => q[2].includes(x)); if (!t) throw new Error(CT('알 수 없는 테마예요. 1~10 또는 retrotheme · saessaktheme · coffeetheme · darktheme · lighttheme · aerotheme · pinktheme · koreatheme · japantheme · dreamcoretheme', 'Unknown theme. Use 1-10 or retrotheme · saessaktheme · coffeetheme · darktheme · lighttheme · aerotheme · pinktheme · koreatheme · japantheme · dreamcoretheme')); applyTheme(t[0]); if (!setw.hidden) renderSettings(); return CT('테마를 ' + t[1] + '(으)로 바꿨어요.', 'Theme set to ' + t[0] + '.'); } },
   lang: { h: ['ko | en | ja | zh (또는 1~4)', '편집기 언어', 'Editor language'], get: () => LANG, set: v => { const x = conNorm(v), l = CON_LANGS.find(q => q[1].includes(x)); if (!l) throw new Error('ko | en | ja | zh'); setLang(l[0]); return 'language = ' + l[0]; } },
   toolbar: { h: ['top | left', '도구 모음 위치', 'Toolbar position'], get: () => layoutPos(), set: v => { const x = conNorm(v); if (!['top', 'left'].includes(x)) throw new Error('top | left'); safeStore.setItem('meowToolbar', x); applyLayout(); if (!setw.hidden) renderSettings(); return 'toolbar = ' + x; } },
@@ -8476,6 +8965,7 @@ cdef('file', 'saveas', 'saveas [pdf|mpdf]', '다른 이름으로 저장합니다
 cdef('file', 'export', 'export <pptx|docx|docx-img|hwpx|png|png-all|compress 40|20|10>', '내보내기를 실행합니다. docx 는 글자 편집용, docx-img 는 페이지 이미지용, png 는 현재 쪽, png-all 은 전체 ZIP, compress 는 압축(프리미엄)이에요.', 'Run an export. docx = editable text, docx-img = page images, png = current page, png-all = ZIP of all pages, compress = compressed PDF (premium).',
   a => { conNeedDoc(); const k = conNorm(a[0]); if (k === 'pptx') exportPptx(); else if (k === 'docx') exportDocx('text'); else if (k === 'docximg') exportDocx('image'); else if (k === 'hwpx' || k === 'hwp') exportHwpx(); else if (k === 'png') exportPng(false); else if (k === 'pngall') exportPng(true); else if (k === 'compress') { const v = parseInt(a[1], 10); if (![40, 20, 10].includes(v)) throw new Error('export compress 40 | 20 | 10'); exportCompressed(v); } else throw new Error('pptx | docx | docx-img | png | png-all | compress <40|20|10>'); return CT('내보내기를 시작했어요.', 'Export started.'); });
 cdef('file', 'print', 'print', '인쇄합니다.', 'Print.', () => { conNeedDoc(); printDocument(); return CT('인쇄 창을 열어요.', 'Opening print.'); });
+cdef('view', 'tutorial', 'tutorial', '시작 안내(튜토리얼)를 다시 봅니다.', 'Show the intro tutorial again.', () => { openTutorial(true); return CT('시작 안내를 열었어요.', 'Opening the tutorial.'); });
 cdef('file', 'present', 'present', '발표 모드를 시작합니다.', 'Start presentation mode.', () => { conNeedDoc(); enterPresentation(); return CT('발표 모드를 시작해요.', 'Starting presentation.'); });
 cdef('file', 'capture', 'capture', '현재 화면을 캡처(PNG)합니다.', 'Capture the current view as PNG.', () => { conNeedDoc(); captureScreen(); return CT('캡처해요.', 'Capturing.'); });
 cdef('file', 'tab', 'tab list | <번호> | next | prev | new | close [번호] | move <from> <to>', '문서 탭을 다룹니다.', 'Manage document tabs.',
@@ -8727,7 +9217,7 @@ function resetKey(id) {
 }
 const envStr = () => `${APP_VERSION} | ${navigator.userAgent.slice(0, 220)} | ${window.innerWidth}x${window.innerHeight} | ${mMode ? '모바일' : '데스크톱'} | ${PLAN.user ? '로그인' : '비로그인'}`;
 function drawVer(b) {
-  b.innerHTML = `<div class="setg"><div class="aboutcard"><div class="lg">${svg('cat')}</div><div><b>Meow-PDF</b> <span class="chlog"><span class="cur">${APP_VERSION}</span></span><div class="meta">브라우저에서 바로 쓰는 PDF 편집기 · <a href="https://github.com/architect0509/meow-PDF" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">GitHub</a></div></div></div></div>
+  b.innerHTML = `<div class="setg"><div class="aboutcard"><div class="lg">${svg('cat')}</div><div><b>Meow-PDF</b> <span class="chlog"><span class="cur">${APP_VERSION}</span></span><div class="meta">브라우저에서 바로 쓰는 PDF 편집기 · <a href="https://github.com/architect0509/meow-PDF" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">GitHub</a></div></div></div><button class="sb" data-a="tutorial" style="margin-top:10px">튜토리얼 다시 보기</button></div>
     <div class="setg"><h3>업데이트 내역</h3><div class="chlog">${chlogHtml()}</div></div>`;
 }
 function drawAbout(b) {
@@ -8836,6 +9326,7 @@ setw.addEventListener('click', async e => {
   else if (act === 'panim') { pageAnim = v !== 'off'; try { localStorage.setItem('meowPageAnim', pageAnim ? 'on' : 'off'); } catch (er) { /* ignore */ } renderSettings(); }
   else if (act === 'lmode') { setLayerMode(v); renderSettings(); }
   else if (act === 'themepick') openThemePicker();
+  else if (act === 'tutorial') { openTutorial(true); }
   else if (act === 'theme') { if (!themeAllowed(v)) requirePremium(themeLabel(v) + ' 테마'); else if (THEME_DEFS.some(x => x[0] === v) && document.documentElement.dataset.theme !== v) { applyTheme(v); try { localStorage.setItem('pdfEditorTheme', v); } catch (er) { /* 무시 */ } } renderSettings(); }
   else if (act === 'resetall') {
     if (!await modal({ title: '설정 초기화', message: '단축키, 도구 모음 위치, 화면 밝기를 처음 상태로 되돌릴까요?', ok: '초기화' })) return;
@@ -9837,7 +10328,7 @@ function setVMode(on) {
 $('#vmodeBtn').onclick = () => setVMode(!vmodeOn());
 
 /* ── 사이드바 테두리 드래그로 크기 조절 (기본 좌우 · 세로 모드는 상하) ── */
-const PANEL_DEF = { sbw: 200, lyw: 232, vph: 230 };
+const PANEL_DEF = { sbw: 244, lyw: 232, vph: 250 };
 let panelSizes = {};
 try { panelSizes = JSON.parse(localStorage.getItem('meowPanels') || '{}') || {}; } catch (e) { panelSizes = {}; }
 function applyPanelSizes() { for (const k of Object.keys(PANEL_DEF)) { if (panelSizes[k]) app.style.setProperty('--' + k, panelSizes[k] + 'px'); else app.style.removeProperty('--' + k); } }
@@ -10349,8 +10840,9 @@ $('#fmtMenu').addEventListener('click', e => {
 });
 /* 멀티작업에서 만든 빈 문서 · 병합 문서는 멀티작업 탭으로 열어요 */
 function openEditorSite() {
-  let w = null; try { w = window.open('https://meow-pdf.com/edit', '_blank', 'noopener'); } catch (e) { w = null; }
-  if (!w) { try { location.href = 'https://meow-pdf.com/edit'; } catch (e) { toast('meow-pdf.com/edit 로 이동해 주세요.'); } }
+  const url = 'https://meow-pdf.com/edit';
+  const f = { id: uid('w'), name: '편집기', kind: 'web', editor: true, url, frac: 0, builtW: 0 };
+  work.files.push(f); work.active = f.id; setPanelTab('work'); renderWork();
 }
 async function workNewBlank() {
   try {
@@ -10439,7 +10931,7 @@ function renderWork() {
     const t = document.createElement('div'); t.className = 'wtab' + (f.id === work.active ? ' on' : ''); t.dataset.wid = f.id; t.setAttribute('role', 'tab'); t.title = f.name;
     t.innerHTML = `<span class="wn"></span><button class="wx" title="닫기" aria-label="탭 닫기">${svg('x')}</button>`; t.querySelector('.wn').textContent = f.name; wTabs.appendChild(t);
   }
-  if (work.files.length) { const a = document.createElement('button'); a.className = 'wadd'; a.title = '파일 더 열기'; a.setAttribute('aria-label', '파일 더 열기'); a.textContent = '+'; wTabs.appendChild(a); }
+  if (work.files.length) { const a = document.createElement('button'); a.className = 'wadd' + (work.active ? '' : ' on'); a.title = '새 탭 (멀티작업 홈)'; a.setAttribute('aria-label', '새 탭 열기'); a.textContent = '+'; wTabs.appendChild(a); }
   for (const g of work.files) if (g.pane && !g.pane.classList.contains('off')) { if (wBody.clientWidth > 0) { g._st = g.pane.scrollTop; g.frac = g._st / Math.max(1, g.pane.scrollHeight); } g.pane.classList.add('off'); }
   const oldE = wBody.querySelector(':scope > .wempty'); if (oldE) oldE.remove();
   const f = work.files.find(x => x.id === work.active);
@@ -10461,9 +10953,17 @@ function renderWork() {
   if (f.kind === 'game') { buildGamePane(P, f); return; }
   if (f.kind === 'web') {
     P.classList.add('webpane');
-    P.innerHTML = `<div class="wurl"><input id="wUrl" type="text" spellcheck="false" aria-label="주소 입력" placeholder="주소 또는 검색어 입력 후 Enter"><button data-wgo title="이동">이동</button><button data-wreload title="새로고침" aria-label="새로고침">${svg('rotate')}</button><button data-wpop title="작은 팝업 창으로 열기 (편집기 옆에 나란히)">작은 창</button><button data-wfront title="뒤로 간 작은 팝업 창을 맨 앞으로 가져오기">작은 창 앞으로</button><button data-wext title="새 브라우저 탭에서 열기" aria-label="새 브라우저 탭에서 열기">↗</button><button data-wnote title="이 주소를 현재 노트에 추가">노트+</button></div>` +
+    if (f.editor) {
+      P.classList.add('edpane');
+      P.innerHTML = '<iframe class="wframe" title="편집기" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads allow-modals" referrerpolicy="no-referrer" allow="clipboard-write"></iframe>' +
+        '<button class="wedfab" data-wext title="새 브라우저 탭에서 열기" aria-label="새 브라우저 탭에서 열기">↗</button>';
+      applyWebFrame(f);
+      return;
+    }
+    if (lsGet('meowWurlFold', '0') === '1') P.classList.add('urlc');
+    P.innerHTML = `<button class="wfold" data-wfold title="주소줄 접기 · 펼치기" aria-label="주소줄 접기 또는 펼치기">${svg('chevD')}</button><div class="wurl"><input id="wUrl" type="text" spellcheck="false" aria-label="주소 입력" placeholder="주소 또는 검색어 입력 후 Enter"><button data-wgo title="이동">이동</button><button data-wreload title="새로고침" aria-label="새로고침">${svg('rotate')}</button><button data-wpop title="작은 팝업 창으로 열기 (편집기 옆에 나란히)">작은 창</button><button data-wfront title="뒤로 간 작은 팝업 창을 맨 앞으로 가져오기">작은 창 앞으로</button><button data-wext title="새 브라우저 탭에서 열기" aria-label="새 브라우저 탭에서 열기">↗</button><button data-wnote title="이 주소를 현재 노트에 추가">노트+</button></div>` +
       '<iframe class="wframe" title="웹페이지" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads" referrerpolicy="no-referrer" allow="clipboard-write"></iframe>' +
-      '<div class="whint">화면이 비어 있거나 "연결을 거부했습니다"로 보이면 그 사이트가 삽입을 막은 거예요 → <button data-wpop>작은 창으로 열기</button> <button data-wfront title="뒤로 간 작은 팝업 창을 맨 앞으로 가져오기">작은 창 앞으로</button> <button data-wext>새 탭에서 열기</button></div>';
+      '<div class="whint"' + (lsGet('meowWhintHide', '0') === '1' ? ' hidden' : '') + '><span>화면이 비어 있거나 "연결을 거부했습니다"로 보이면 그 사이트가 삽입을 막은 거예요 → <button data-wpop>작은 창으로 열기</button> <button data-wfront title="뒤로 간 작은 팝업 창을 맨 앞으로 가져오기">작은 창 앞으로</button> <button data-wext>새 탭에서 열기</button></span><button class="whx" data-whx title="이 안내 닫기" aria-label="안내 닫기">×</button></div>';
     P.querySelector('#wUrl').value = f.url; applyWebFrame(f);
     return;
   }
@@ -10504,7 +11004,9 @@ wBody.addEventListener('click', e => {
   const f = work.files.find(x => x.id === work.active); if (!f || f.kind === 'tool' || f.kind === 'calc' || f.kind === 'game') return;
   if (e.target.closest('[data-wedit]')) { workToEditor(f); return; }
   if (f.kind === 'web') {
-    if (e.target.closest('[data-wgo]')) navWeb(f, f.pane.querySelector('#wUrl').value);
+    if (e.target.closest('[data-whx]')) { const h = f.pane.querySelector('.whint'); if (h) h.hidden = true; try { localStorage.setItem('meowWhintHide', '1'); } catch (er) { /* 무시 */ } }
+    else if (e.target.closest('[data-wfold]')) { const c = f.pane.classList.toggle('urlc'); try { localStorage.setItem('meowWurlFold', c ? '1' : '0'); } catch (er) { /* 무시 */ } }
+    else if (e.target.closest('[data-wgo]')) navWeb(f, f.pane.querySelector('#wUrl').value);
     else if (e.target.closest('[data-wreload]')) applyWebFrame(f);
     else if (e.target.closest('[data-wforce]')) { f.forced = true; applyWebFrame(f); }
     else if (e.target.closest('[data-wpop]')) openWebPopup(f.url, true);
@@ -10535,7 +11037,7 @@ function setWorkWide(on) {
 wWide.onclick = () => setWorkWide(!$('#layers').classList.contains('work-wide'));
 setWorkWide(false);
 wTabs.addEventListener('click', e => {
-  if (e.target.closest('.wadd')) { openWorkMenu(e.target.closest('.wadd')); return; }
+  if (e.target.closest('.wadd')) { work.active = null; renderWork(); return; }
   const t = e.target.closest('.wtab'); if (!t) return;
   if (e.target.closest('.wx')) closeWork(t.dataset.wid); else if (work.active !== t.dataset.wid) { work.active = t.dataset.wid; renderWork(); }
 });
@@ -10791,32 +11293,264 @@ async function readDocx(u8) {
   }
   return paras;
 }
+
+/* ── DOCX 가져오기: 쪽 크기 · 여백 · 글자 크기 · 굵게/기울임/색 · 줄 간격 · 문단 간격 · 정렬 · 들여쓰기 · 번호/글머리 · 표 · 그림을 반영해서 배치해요 ── */
+async function docxLayout(u8) {
+  const zip = await JSZip.loadAsync(u8);
+  const rd = async n => { const f = zip.file(n); return f ? new DOMParser().parseFromString(await f.async('string'), 'application/xml') : null; };
+  const docX = await rd('word/document.xml'); if (!docX) throw new Error('not-docx');
+  const stX = await rd('word/styles.xml'), numX = await rd('word/numbering.xml'), relX = await rd('word/_rels/document.xml.rels');
+  const L = (el, n) => { if (el) for (const c of el.children) if (c.localName === n) return c; return null; };
+  const A = (el, n) => el ? el.getAttribute('w:' + n) : null;
+  const on = el => !!el && !/^(0|false|off|none)$/i.test(A(el, 'val') || '1');
+  const tw = v => v == null || v === '' || isNaN(+v) ? null : +v / 20;
+  const rpr = el => {
+    const o = {}; if (!el) return o;
+    const sz = L(el, 'sz'); if (sz && A(sz, 'val')) o.sz = +A(sz, 'val') / 2;
+    const b = L(el, 'b'); if (b) o.b = on(b); const i = L(el, 'i'); if (i) o.i = on(i);
+    const c = L(el, 'color'); if (c && /^[0-9a-f]{6}$/i.test(A(c, 'val') || '')) o.color = '#' + A(c, 'val');
+    const f = L(el, 'rFonts'); if (f) { const n = A(f, 'eastAsia') || A(f, 'ascii') || A(f, 'hAnsi'); if (n) o.font = n; }
+    const h = L(el, 'highlight'); if (h && A(h, 'val') && A(h, 'val') !== 'none') o.hl = ({ yellow: '#ffff00', green: '#00ff00', cyan: '#00ffff', magenta: '#ff00ff', lightGray: '#d3d3d3' })[A(h, 'val')] || null;
+    const va = L(el, 'vertAlign'); if (va && /super|sub/.test(A(va, 'val') || '')) o.small = true;
+    return o;
+  };
+  const ppr = el => {
+    const o = {}; if (!el) return o;
+    const sp = L(el, 'spacing');
+    if (sp) { if (tw(A(sp, 'before')) != null) o.before = tw(A(sp, 'before')); if (tw(A(sp, 'after')) != null) o.after = tw(A(sp, 'after')); if (A(sp, 'line') != null && !isNaN(+A(sp, 'line'))) { o.line = +A(sp, 'line'); o.lr = A(sp, 'lineRule') || 'auto'; } }
+    const jc = L(el, 'jc'); if (jc) o.jc = A(jc, 'val');
+    const ind = L(el, 'ind');
+    if (ind) { const l = tw(A(ind, 'left') != null ? A(ind, 'left') : A(ind, 'start')); if (l != null) o.left = l; const fl = tw(A(ind, 'firstLine')); if (fl != null) o.first = fl; const hg = tw(A(ind, 'hanging')); if (hg != null) o.first = -hg; }
+    const ns = L(el, 'numPr'); if (ns) { const n = L(ns, 'numId'), l = L(ns, 'ilvl'); if (n && A(n, 'val') && A(n, 'val') !== '0') o.num = { id: A(n, 'val'), lvl: +(l ? A(l, 'val') : 0) || 0 }; }
+    if (on(L(el, 'pageBreakBefore'))) o.pbb = true;
+    const ps = L(el, 'pStyle'); if (ps) o.style = A(ps, 'val');
+    return o;
+  };
+  const styles = new Map(); let defR = {}, defP = {}, defStyle = null;
+  if (stX) {
+    const dd = L(stX.documentElement, 'docDefaults');
+    if (dd) { defR = rpr(L(L(dd, 'rPrDefault'), 'rPr')); defP = ppr(L(L(dd, 'pPrDefault'), 'pPr')); }
+    for (const s of stX.getElementsByTagName('w:style')) { const id = A(s, 'styleId'), bs = L(s, 'basedOn'); styles.set(id, { based: bs ? A(bs, 'val') : null, p: ppr(L(s, 'pPr')), r: rpr(L(s, 'rPr')) }); if (A(s, 'type') === 'paragraph' && A(s, 'default') === '1') defStyle = id; }
+  }
+  const chain = id => { const out = []; let g = 0; while (id && styles.has(id) && g++ < 20) { out.unshift(styles.get(id)); id = styles.get(id).based; } return out; };
+  const styleP = id => Object.assign({}, ...chain(id).map(s => s.p)), styleR = id => Object.assign({}, ...chain(id).map(s => s.r));
+  const nums = new Map(), absN = new Map(), cnt = new Map();
+  if (numX) {
+    for (const a of numX.getElementsByTagName('w:abstractNum')) {
+      const lv = new Map();
+      for (const l of a.getElementsByTagName('w:lvl')) { const f = L(l, 'numFmt'), t = L(l, 'lvlText'), pp = L(l, 'pPr'), ind = pp && L(pp, 'ind'); lv.set(+A(l, 'ilvl'), { fmt: f ? A(f, 'val') : 'decimal', text: t ? A(t, 'val') : '', left: ind ? tw(A(ind, 'left') != null ? A(ind, 'left') : A(ind, 'start')) : null, hang: ind ? tw(A(ind, 'hanging')) : null }); }
+      absN.set(A(a, 'abstractNumId'), lv);
+    }
+    for (const n of numX.getElementsByTagName('w:num')) { const ab = L(n, 'abstractNumId'); nums.set(A(n, 'numId'), ab ? A(ab, 'val') : null); }
+  }
+  const fmtNum = (f, n) => /lowerLetter/.test(f) ? String.fromCharCode(97 + (n - 1) % 26) : /upperLetter/.test(f) ? String.fromCharCode(65 + (n - 1) % 26) : String(n);
+  const marker = num => {
+    const lv = (absN.get(nums.get(num.id)) || new Map()).get(num.lvl);
+    if (!lv) return { t: '•', left: 18 * (num.lvl + 1), hang: 18 };
+    for (let d = num.lvl + 1; d < 9; d++) cnt.delete(num.id + ':' + d);
+    const k = num.id + ':' + num.lvl, n = (cnt.get(k) || 0) + 1; cnt.set(k, n);
+    const t = /bullet|none/.test(lv.fmt) ? '•' : (lv.text || '%' + (num.lvl + 1) + '.').replace(/%(\d)/g, (m, d) => +d - 1 === num.lvl ? fmtNum(lv.fmt, n) : String(cnt.get(num.id + ':' + (+d - 1)) || 1));
+    return { t, left: lv.left != null ? lv.left : 18 * (num.lvl + 1), hang: lv.hang != null ? lv.hang : 18 };
+  };
+  const rels = new Map(), imgs = [], imgMap = new Map();
+  if (relX) for (const r of relX.getElementsByTagName('Relationship')) rels.set(r.getAttribute('Id'), r.getAttribute('Target'));
+  for (const bl of docX.getElementsByTagName('a:blip')) {
+    const rid = bl.getAttribute('r:embed'); if (!rid || imgMap.has(rid) || !rels.has(rid)) continue;
+    const tg = rels.get(rid), path = tg.startsWith('/') ? tg.slice(1) : 'word/' + tg.replace(/^\.\//, ''), f = zip.file(path), ext = ((/\.(\w+)$/.exec(path) || [])[1] || '').toLowerCase();
+    const mime = { png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', gif: 'image/gif', webp: 'image/webp', bmp: 'image/bmp' }[ext]; if (!f || !mime) continue;
+    try { const dataUrl = `data:${mime};base64,${await f.async('base64')}`, img = await loadImage(dataUrl), id = uid('img'); imgMap.set(rid, { id, w: img.naturalWidth, h: img.naturalHeight }); imgs.push({ id, img, dataUrl }); } catch (e) { /* 그림 하나는 건너뛰어요 */ }
+  }
+  const sectOf = sp => {
+    const sz = sp && L(sp, 'pgSz'), mg = sp && L(sp, 'pgMar'); let w = sz ? tw(A(sz, 'w')) : null, h = sz ? tw(A(sz, 'h')) : null;
+    if (sz && A(sz, 'orient') === 'landscape' && w < h) [w, h] = [h, w];
+    const m = n => { const v = mg ? tw(A(mg, n)) : null; return v == null ? 56.7 : Math.abs(v); };
+    return { w: w || 595.28, h: h || 841.89, t: m('top'), b: m('bottom'), l: m('left'), r: m('right') };
+  };
+  const body = docX.getElementsByTagName('w:body')[0]; if (!body) throw new Error('not-docx');
+  const blocks = [], sects = []; let si = 0;
+  const walkBody = el => { for (const c of el.children) { if (c.localName === 'p' || c.localName === 'tbl') { const pp = c.localName === 'p' ? L(c, 'pPr') : null, sp = pp && L(pp, 'sectPr'); blocks.push({ n: c, si }); if (sp) { sects.push(sectOf(sp)); si++; } } else if (c.localName === 'sdt') { const ct = L(c, 'sdtContent'); if (ct) walkBody(ct); } else if (c.localName === 'sectPr') sects.push(sectOf(c)); } };
+  walkBody(body);
+  if (!sects.length) sects.push(sectOf(null)); while (sects.length <= si) sects.push(sects[sects.length - 1]);
+  const fKey = f => /courier|consolas|mono|코딩/i.test(f || '') ? 'mono' : /batang|바탕|myeong|명조|serif|times|cambria|georgia|palatino|garamond|궁서/i.test(f || '') && !/sans/i.test(f || '') ? 'serif' : 'sans';
+  /* 글꼴별 자연 줄 높이 배율 (Word가 '한 줄'로 잡는 높이) */
+  const natF = f => /malgun|맑은/i.test(f || '') ? 1.33 : /gothic|고딕|dotum|돋움|gulim|굴림|nanum|나눔|noto|apple/i.test(f || '') ? 1.25 : /batang|바탕|myeong|명조/i.test(f || '') ? 1.2 : /calibri/i.test(f || '') ? 1.22 : 1.17;
+  const measure = (t, st) => { mctx.font = fontStr({ font: st.fk, size: st.sz, bold: !!st.b, italic: !!st.i }); return mctx.measureText(t).width; };
+  const ATOM = /\s+|[぀-ヿ一-鿿]|[^\s぀-ヿ一-鿿]+/g;
+  const pages = []; let page = null, y = 0, sec = sects[0], curSi = -1;
+  const newPage = s => { sec = s; page = { id: uid('p'), src: null, w: s.w, h: s.h, annots: [], memos: [], group: null }; pages.push(page); y = s.t; };
+  const bottom = () => sec.h - sec.b;
+  function layout(p, avail) {
+    const base = Object.assign({}, defP, styleP(defStyle)), pp0 = ppr(L(p, 'pPr')), pr = Object.assign({}, base, styleP(pp0.style), pp0);
+    const pRun = Object.assign({}, defR, styleR(defStyle), styleR(pp0.style));
+    let left = pr.left || 0, first = pr.first || 0, mark = null;
+    if (pr.num) { const m = marker(pr.num); mark = m; if (pr.left == null) left = m.left; first = 0; }
+    const items = [];
+    const mkStyle = r => { const o = Object.assign({}, pRun, r), sz = (o.sz || 10) * (o.small ? 0.65 : 1); return { sz, b: !!o.b, i: !!o.i, color: o.color || '#000000', font: o.font, fk: fKey(o.font), hl: o.hl || null }; };
+    const walk = el => {
+      for (const c of el.children) {
+        const ln = c.localName;
+        if (ln === 'r') {
+          const rp = L(c, 'rPr'), rs = rp && L(rp, 'rStyle'), st = mkStyle(Object.assign({}, rs ? styleR(A(rs, 'val')) : {}, rpr(rp)));
+          for (const x of c.children) {
+            const xn = x.localName;
+            if (xn === 't') items.push({ t: x.textContent, st });
+            else if (xn === 'tab') items.push({ tab: true, st });
+            else if (xn === 'br') items.push(A(x, 'type') === 'page' ? { pb: true } : { br: true });
+            else if (xn === 'drawing' || xn === 'pict') {
+              const bl = x.getElementsByTagName('a:blip')[0], ex = x.getElementsByTagName('wp:extent')[0], im = bl && imgMap.get(bl.getAttribute('r:embed'));
+              if (im) items.push({ img: im, w: ex ? +ex.getAttribute('cx') / 12700 : im.w * 0.75, h: ex ? +ex.getAttribute('cy') / 12700 : im.h * 0.75, st });
+            }
+          }
+        } else if (/^(hyperlink|ins|smartTag|fldSimple|sdt|sdtContent)$/.test(ln)) walk(c);
+      }
+    };
+    walk(p);
+    const emptySt = mkStyle({});
+    const lines = [{ items: [], w: 0 }], cur = () => lines[lines.length - 1];
+    const lineMax = () => Math.max(20, avail - left - (lines.length === 1 ? first : 0));
+    const put = (t, st, w) => { const l = cur(), last = l.items[l.items.length - 1]; if (last && last.st === st && !last.img && !last.tab) { last.t += t; last.w += w; } else l.items.push({ t, st, w }); l.w += w; };
+    const newLine = () => lines.push({ items: [], w: 0 });
+    for (const it of items) {
+      if (it.br) { newLine(); continue; }
+      if (it.pb) { cur().pbAfter = true; newLine(); continue; }
+      if (it.tab) { const l = cur(), w = 36 - (l.w % 36); l.items.push({ t: '', st: it.st, w, tab: true }); l.w += w; continue; }
+      if (it.img) { let { w, h } = it; const mx = lineMax(); if (w > mx) { h *= mx / w; w = mx; } if (cur().w + w > mx + 0.5 && cur().items.length) newLine(); const l = cur(); l.items.push({ img: it.img, w, h, st: it.st }); l.w += w; continue; }
+      for (const a of String(it.t).match(ATOM) || []) {
+        const w = measure(a, it.st), mx = lineMax(), ws = /^\s+$/.test(a);
+        if (cur().w + w <= mx + 0.5 || (ws && cur().items.length)) { if (ws && !cur().items.length) continue; put(a, it.st, w); continue; }
+        newLine(); if (ws) continue;
+        if (w > lineMax()) { for (const ch of a) { const cw = measure(ch, it.st); if (cur().w + cw > lineMax() && cur().items.length) newLine(); put(ch, it.st, cw); } } else put(a, it.st, w);
+      }
+    }
+    const lr = pr.lr || 'auto', lv = pr.line != null ? pr.line : 240;
+    for (const l of lines) {
+      let nat = 0, mxSz = 0, ih = 0;
+      for (const it of l.items) { if (it.img) { ih = Math.max(ih, it.h); continue; } nat = Math.max(nat, it.st.sz * natF(it.st.font)); mxSz = Math.max(mxSz, it.st.sz); }
+      if (!nat && !ih) { nat = emptySt.sz * natF(emptySt.font); mxSz = emptySt.sz; }
+      let h = Math.max(nat, ih ? ih + 2 : 0);
+      if (lr === 'exact') h = Math.max(1, lv / 20); else if (lr === 'atLeast') h = Math.max(h, lv / 20); else h = h * (lv / 240);
+      l.h = h; l.mx = mxSz || emptySt.sz;
+    }
+    return { pr, lines, left, first, mark, before: pr.before || 0, after: pr.after || 0, avail, mkSt: emptySt };
+  }
+  function emitLine(pg, para, l, idx, x0, yTop) {
+    const { pr, left, first, avail } = para, off = idx === 0 ? first : 0, innerL = x0 + left + off, innerW = avail - left - off;
+    const jc = pr.jc || 'left'; let x = innerL;
+    const lw = l.items.reduce((a, it, k, arr) => a + (k === arr.length - 1 && !it.img && it.t ? measure(it.t.replace(/\s+$/, ''), it.st) : it.w), 0);
+    if (jc === 'center') x = innerL + Math.max(0, (innerW - lw) / 2); else if (jc === 'right' || jc === 'end') x = innerL + Math.max(0, innerW - lw);
+    const base = yTop + Math.max(0, (l.h - l.mx * LH) / 2);
+    for (const it of l.items) {
+      if (it.img) { pg.annots.push({ id: uid('o'), type: 'image', imgId: it.img.id, x, y: yTop + l.h - it.h, w: it.w, h: it.h }); x += it.w; continue; }
+      const t = it.t.replace(/\s+$/, '');
+      if (t.trim()) pg.annots.push({ id: uid('o'), type: 'text', x, y: base + (l.mx - it.st.sz) * 0.85, text: t, size: it.st.sz, color: it.st.color, font: it.st.fk, bold: it.st.b, italic: it.st.i, fill: it.st.hl });
+      x += it.w;
+    }
+    if (idx === 0 && para.mark) { const st = para.mkSt, mw = measure(para.mark.t, st); pg.annots.push({ id: uid('o'), type: 'text', x: Math.max(x0, x0 + left - Math.max(para.mark.hang, mw + 3)), y: base, text: para.mark.t, size: st.sz, color: '#000000', font: st.fk, bold: false, italic: false, fill: null }); }
+  }
+  function flowPara(p, x0, avail) {
+    const para = layout(p, avail), pr = para.pr;
+    if (pr.pbb && page && page.annots.length) newPage(sec);
+    if (y > sec.t + 0.5) y += para.before;
+    para.lines.forEach((l, i) => {
+      if (y + l.h > bottom() + 0.5 && y > sec.t + 1) newPage(sec);
+      emitLine(page, para, l, i, x0, y); y += l.h;
+      if (l.pbAfter) newPage(sec);
+    });
+    y += para.after;
+  }
+  function flowTable(tbl, x0, avail) {
+    const tp = L(tbl, 'tblPr'), grid = L(tbl, 'tblGrid'); let cols = grid ? [...grid.children].map(c => tw(A(c, 'w')) || 0) : [];
+    const rows = [...tbl.children].filter(c => c.localName === 'tr');
+    if (!cols.length || !cols.some(c => c > 0)) { const f1 = rows[0] && [...rows[0].children].filter(c => c.localName === 'tc'); cols = f1 ? f1.map(c => { const w = L(L(c, 'tcPr'), 'tcW'); return w ? tw(A(w, 'w')) || 60 : 60; }) : [avail]; }
+    const sum = cols.reduce((a, b) => a + b, 0); if (sum > avail + 1) cols = cols.map(c => c * avail / sum);
+    const tb = tp && L(tp, 'tblBorders'), ts = tp && L(tp, 'tblStyle');
+    const hasB = b => b && !/^(nil|none)$/.test(A(b, 'val') || '');
+    const tblB = tb ? ['top', 'left', 'bottom', 'right', 'insideH', 'insideV'].some(n => hasB(L(tb, n))) : /grid/i.test(ts ? A(ts, 'val') || '' : '');
+    const PAD = 5.4;
+    for (const tr of rows) {
+      const cells = []; let ci = 0;
+      for (const tc of [...tr.children].filter(c => c.localName === 'tc')) {
+        const pr = L(tc, 'tcPr'), gs = pr && L(pr, 'gridSpan'), span = gs ? +A(gs, 'val') || 1 : 1, vm = pr && L(pr, 'vMerge');
+        let w = 0; for (let k = 0; k < span; k++) w += cols[ci + k] || 0;
+        const xs = cols.slice(0, ci).reduce((a, b) => a + b, 0), shd = pr && L(pr, 'shd'), cb = pr && L(pr, 'tcBorders');
+        const cont = vm && A(vm, 'val') !== 'restart';
+        const paras = cont ? [] : [...tc.children].filter(c => c.localName === 'p').map(p => layout(p, Math.max(10, w - PAD * 2)));
+        let h = 0; paras.forEach((pa, i) => { h += (i ? pa.before : 0) + pa.lines.reduce((a, l) => a + l.h, 0) + pa.after; });
+        cells.push({ x: xs, w, paras, h, fill: shd && /^[0-9a-f]{6}$/i.test(A(shd, 'fill') || '') ? '#' + A(shd, 'fill') : null, border: tblB || (cb && ['top', 'left', 'bottom', 'right'].some(n => hasB(L(cb, n)))) });
+        ci += span;
+      }
+      const th = L(L(tr, 'trPr'), 'trHeight'), rh = Math.max(th ? tw(A(th, 'val')) || 0 : 0, ...cells.map(c => c.h + 2), 12);
+      if (y + rh > bottom() + 0.5 && y > sec.t + 1) newPage(sec);
+      for (const c of cells) {
+        if (c.fill) page.annots.push({ id: uid('o'), type: 'rect', x: x0 + c.x, y, w: c.w, h: rh, color: c.fill, width: 0, fill: c.fill, fillAlpha: 1 });
+        if (c.border) page.annots.push({ id: uid('o'), type: 'rect', x: x0 + c.x, y, w: c.w, h: rh, color: '#000000', width: 0.5, fill: null });
+        let cy = y + 1; c.paras.forEach((pa, i) => { if (i) cy += pa.before; pa.lines.forEach((l, k) => { emitLine(page, pa, l, k, x0 + c.x + PAD, cy); cy += l.h; }); cy += pa.after; });
+      }
+      y += rh;
+    }
+    y += 4;
+  }
+  for (const b of blocks) {
+    if (pages.length >= 300) break;
+    if (!page) newPage(sects[b.si] || sects[0]);
+    else if (b.si !== curSi) { if (page.annots.length) newPage(sects[b.si] || sec); else { sec = sects[b.si] || sec; page.w = sec.w; page.h = sec.h; y = sec.t; } }
+    curSi = b.si;
+    const x0 = sec.l, avail = sec.w - sec.l - sec.r;
+    if (b.n.localName === 'tbl') flowTable(b.n, x0, avail); else flowPara(b.n, x0, avail);
+  }
+  if (!pages.length) newPage(sects[0]);
+  return { pages, imgs };
+}
 async function importDocx(file) {
   showLoading('DOCX 문서를 읽는 중…');
-  let pages;
+  let pages, imgs = [], plain = false;
   try {
-    const paras = await readDocx(new Uint8Array(await file.arrayBuffer()));
-    if (!paras.some(t => String(t).trim())) throw new Error('empty');
-    pages = layoutParagraphs(paras);
+    const u8 = new Uint8Array(await file.arrayBuffer());
+    try { const r = await docxLayout(u8); pages = r.pages; imgs = r.imgs; if (!pages.some(p => p.annots.length)) throw new Error('empty-layout'); }
+    catch (e1) {   // 배치에 실패하면 글자만이라도 가져와요
+      console.error(e1); const paras = await readDocx(u8);
+      if (!paras.some(t => String(t).trim())) throw new Error('empty');
+      pages = layoutParagraphs(paras); imgs = []; plain = true;
+    }
   } catch (err) { console.error(err); hideLoading(); toast('DOCX 문서를 읽지 못했어요. 글자가 없거나 손상된 파일일 수 있어요.'); return; }
   hideLoading();
+  const regImgs = () => imgs.forEach(i => state.images.set(i.id, { img: i.img, dataUrl: i.dataUrl }));
   let insert = false;
-  if (state.pages.length) insert = await modal({ title: 'DOCX 문서를 어떻게 열까요?', message: `“${file.name}”의 글자를 ${pages.length}쪽 분량으로 가져왔어요.`, ok: '현재 문서에 삽입', cancel: '새 문서로 열기' });
+  if (state.pages.length) insert = await modal({ title: 'DOCX 문서를 어떻게 열까요?', message: `“${file.name}”을 ${pages.length}쪽으로 가져왔어요.`, ok: '현재 문서에 삽입', cancel: '새 문서로 열기' });
   if (insert) {
+    regImgs();
     const at = Math.max(0, idxOf(state.currentId)) + 1;
     state.pages.splice(at, 0, ...pages); syncDOM(); commit(); goToPage(pages[0].id);
     toast(`DOCX ${pages.length}쪽을 현재 문서에 삽입했어요.`);
   } else {
-    resetDocument(); state.pages = pages; setSaveFormat('pdf');
+    resetDocument(); regImgs(); state.pages = pages; setSaveFormat('pdf');
     afterLoad(baseName(file.name) + '.pdf'); setDirty(true);
-    toast(`DOCX를 ${pages.length}쪽으로 가져왔어요. 글자는 개체로 수정할 수 있어요. (표 · 그림 · 서식은 글자만 가져와요)`);
+    toast(plain ? `DOCX를 ${pages.length}쪽으로 가져왔어요. 서식을 읽지 못해 글자만 가져왔어요.` : `DOCX를 ${pages.length}쪽으로 가져왔어요. 글자 크기 · 줄 간격 · 표 · 그림이 반영되고, 글자는 개체로 수정할 수 있어요.`);
   }
+}
+/* 너무 큰 이미지는 브라우저(특히 모바일)가 그리지 못해 흰 페이지가 되므로 적당한 크기로 줄여서 써요 */
+async function prepImage(file) {
+  let dataUrl = await blobToDataURL(file), img = await loadImage(dataUrl);
+  try { if (img.decode) await img.decode(); } catch (e) { /* 이미 디코딩됨 */ }
+  const nw = img.naturalWidth || img.width, nh = img.naturalHeight || img.height;
+  if (!nw || !nh) throw new Error('empty-image');
+  const MAXS = 4096, px = nw * nh;
+  if (Math.max(nw, nh) > MAXS || px > 14e6) {
+    const s = Math.min(MAXS / Math.max(nw, nh), Math.sqrt(14e6 / px)), c = document.createElement('canvas');
+    c.width = Math.max(1, Math.round(nw * s)); c.height = Math.max(1, Math.round(nh * s));
+    c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+    dataUrl = c.toDataURL(/jpe?g/i.test(file.type || '') ? 'image/jpeg' : 'image/png', 0.92); img = await loadImage(dataUrl);
+    try { if (img.decode) await img.decode(); } catch (e) { /* 무시 */ }
+    c.width = c.height = 1;
+  }
+  return { img, dataUrl, nw: img.naturalWidth || nw, nh: img.naturalHeight || nh, scaled: img.naturalWidth !== nw };
 }
 async function importImageDoc(file) {
   showLoading('이미지를 여는 중…');
   try {
-    const dataUrl = await blobToDataURL(file), img = await loadImage(dataUrl);
-    let w = (img.naturalWidth || 595) * 0.75, h = (img.naturalHeight || 842) * 0.75;
+    const { img, dataUrl, nw, nh, scaled } = await prepImage(file);
+    const orig = scaled ? await loadImage(await blobToDataURL(file)).then(i => [i.naturalWidth, i.naturalHeight]).catch(() => [nw, nh]) : [nw, nh];
+    let w = orig[0] * 0.75, h = orig[1] * 0.75;
     const k = Math.min(1, 1190 / Math.max(w, h)); w *= k; h *= k;
     if (!await confirmDiscard()) return;
     resetDocument();
@@ -10824,7 +11558,8 @@ async function importImageDoc(file) {
     const page = { id: uid('p'), src: null, w, h, annots: [{ id: uid('o'), type: 'image', imgId, x: 0, y: 0, w, h }], memos: [], group: null };
     state.pages = [page]; setSaveFormat('pdf');
     afterLoad(baseName(file.name || '이미지') + '.pdf'); setDirty(true);
-  } catch (err) { console.error(err); toast('이미지를 열지 못했어요.'); }
+    requestAnimationFrame(() => requestAnimationFrame(() => { try { redrawAll(); } catch (e) { /* 무시 */ } }));   // 그림이 준비된 뒤 한 번 더 그려요
+  } catch (err) { console.error(err); toast('이미지를 열지 못했어요. 파일이 손상되었거나 지원하지 않는 형식일 수 있어요.'); }
   finally { hideLoading(); }
 }
 async function importHwp(file) {
@@ -10874,12 +11609,13 @@ const THEME_DEFS = [
   ['minihompy', '미니홈피', '<path fill="#bfe6fb" d="M8 20h48v34H8z"/><path fill="#fff" d="M12 24h40v26H12z" opacity=".75"/><rect x="31" y="8" width="3" height="8" rx="1.5" fill="#6b4220"/><path fill="#8a5a2b" d="M19 25c0-8 6-11 13-11s13 3 13 11z"/><path fill="#ff8a1f" d="M21 27h22c0 13-5 22-11 24-6-2-11-11-11-24z"/><ellipse cx="27" cy="34" rx="2.8" ry="5" fill="#ffd2a1" opacity=".9"/><circle cx="14" cy="14" r="2" fill="#ff9a3d"/><circle cx="52" cy="12" r="1.6" fill="#ff9a3d"/>']
 ];
 THEME_DEFS.push(['kiwidark', '키위 다크', '<circle cx="32" cy="32" r="23" fill="#5a4630"/><circle cx="32" cy="32" r="20.5" fill="#8cc468"/><circle cx="32" cy="32" r="16.5" fill="#407252"/><circle cx="32" cy="32" r="5.6" fill="#e9f3cf"/><g fill="#0a0f0a"><circle cx="42.5" cy="32.0" r="1.5"/><circle cx="39.4" cy="39.4" r="1.5"/><circle cx="32.0" cy="42.5" r="1.5"/><circle cx="24.6" cy="39.4" r="1.5"/><circle cx="21.5" cy="32.0" r="1.5"/><circle cx="24.6" cy="24.6" r="1.5"/><circle cx="32.0" cy="21.5" r="1.5"/><circle cx="39.4" cy="24.6" r="1.5"/></g>'], ['horror', '공포', '<path fill="#efe3df" d="M32 6c-12 0-20 8-20 20v28l6.5-4.5 6.5 5 7-5 7 5 6.5-5L52 54V26C52 14 44 6 32 6z"/><ellipse cx="24.5" cy="27" rx="4" ry="5.5" fill="#150304"/><ellipse cx="39.5" cy="27" rx="4" ry="5.5" fill="#150304"/><circle cx="24.5" cy="28" r="1.9" fill="#e11d27"/><circle cx="39.5" cy="28" r="1.9" fill="#e11d27"/><ellipse cx="32" cy="41" rx="4.2" ry="6" fill="#150304"/>']);
+THEME_DEFS.push(['backrooms', '백룸', '<rect x="8" y="10" width="48" height="44" rx="3" fill="#cbbb64"/><path d="M8 24h48M8 40h48" stroke="#8a7a2a" stroke-width="1.4" opacity=".6"/><g stroke="#9a8a3e" stroke-width="1.4" opacity=".7"><path d="M16 10v44M28 10v44M40 10v44M52 10v44"/></g><rect x="19" y="13" width="26" height="6" rx="1.5" fill="#fffbd0"/><path d="M20 54l6-18h12l6 18z" fill="#6e611d" opacity=".8"/>']);
 THEME_DEFS.push(['custom', '커스텀', '<defs><linearGradient id="tgC" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c5cff"/><stop offset="1" stop-color="#ff7ab6"/></linearGradient></defs><path fill="url(#tgC)" d="M32 6C17 6 6 17 6 31s9 21 18 21c5 0 6-3 6-6 0-4 3-6 7-6h8c7 0 13-4 13-11C58 15 46 6 32 6z"/><circle cx="20" cy="30" r="4" fill="#fff"/><circle cx="28" cy="19" r="4" fill="#ffd23f"/><circle cx="42" cy="19" r="4" fill="#3ddc97"/><circle cx="48" cy="31" r="4" fill="#4cc9f0"/>']);
 const FREE_THEMES = ['dark', 'light', 'korea', 'japan', 'coffee', 'kiwidark'];   // 상시 무료. 앞으로 추가되는 테마는 프리미엄 (한정 테마는 아래 THEME_LIMIT 기간에만 무료)
 /* 한정 테마: 매년 이 기간에만 무료이고, 그 밖의 기간에는 프리미엄으로 바뀌어요 (공포 테마: 9월 1일 ~ 11월 30일) */
 const THEME_LIMIT = { horror: { from: [9, 1], to: [11, 30], label: '9월 1일 ~ 11월 30일' } };
 /* NEW 딱지: 새 테마를 만들면 여기에 출시 버전을 적으세요. 가장 최근 버전의 테마에만 NEW 딱지가 붙고, 더 새로운 테마가 나오면 이전 것은 자동으로 떼져요. */
-const THEME_REL = { kiwidark: '0.8.4', horror: '0.8.4' };
+const THEME_REL = { kiwidark: '0.8.4', horror: '0.8.4', backrooms: '0.8.6' };
 const relNum = s => String(s || '0').replace(/^v/, '').split('.').reduce((a, x) => a * 1000 + (parseInt(x, 10) || 0), 0);
 const LATEST_REL = Math.max(0, ...Object.values(THEME_REL).map(relNum));
 const isNewTheme = k => !!THEME_REL[k] && relNum(THEME_REL[k]) === LATEST_REL;
@@ -10901,7 +11637,7 @@ const THEME_DESC = {
   dark: '눈이 편한 기본 어두운 화면', light: '깔끔하고 환한 기본 화면', aero: '반짝이는 유리 질감, 2000년대 감성', pink: '말랑말랑한 파스텔 핑크',
   korea: '태극 색을 담은 단정한 화면', japan: '붉은 해를 닮은 차분한 화면', dreamcore: '몽환적인 파스텔 하늘과 구름', coffee: '따뜻한 카페 같은 갈색 톤',
   retro: '픽셀과 네온의 오락실 분위기', saessak: '연두빛 새싹 포털 감성', minihompy: '도토리 시절 미니홈피 감성',
-  kiwidark: '새까만 배경에 키위 그린 포인트 · IBM 플렉스 산스', horror: '페이지를 넘길 때 무언가 나타나요 · 기간 한정', custom: '배경색 · 보조색 · 글꼴을 내 마음대로'
+  kiwidark: '새까만 배경에 키위 그린 포인트 · IBM 플렉스 산스', horror: '페이지를 넘길 때 무언가 나타나요 · 기간 한정', backrooms: '눅눅한 노란 벽지와 깜빡이는 형광등 · 필름 노이즈', custom: '배경색 · 보조색 · 글꼴을 내 마음대로'
 };
 const THEME_PV = {
   dark: { v: '#232323', b: '#2e2e2e', s: '#272727', f: '#ececec', m: '#9a9a9a', a: '#dbbe43', oa: '#2a2200', bd: '#434343' },
@@ -10916,6 +11652,7 @@ const THEME_PV = {
   saessak: { v: '#eef2ee', b: '#ffffff', s: '#f8fbf8', f: '#2b2b2b', m: '#6f7f6f', a: '#03c75a', oa: '#ffffff', bd: '#cfd8cf' },
   minihompy: { v: '#d9edfb', b: '#ffffff', s: '#f3faff', f: '#33506c', m: '#7a93ab', a: '#ff8a1f', oa: '#ffffff', bd: '#b4d4ec' },
   kiwidark: { v: '#000000', b: '#0b0d0b', s: '#070807', f: '#eef3ef', m: '#8fa196', a: '#407252', oa: '#ffffff', bd: '#1f2b23' },
+  backrooms: { v: '#a8984a', b: '#cbbb64', s: '#bfae55', f: '#2e2810', m: '#6d6330', a: '#7a6a1f', oa: '#fff7cf', bd: '#9a8a3e', bgx: 'repeating-linear-gradient(90deg,rgba(80,66,10,.12) 0 2px,transparent 2px 9px),linear-gradient(180deg,#b9a954,#8f8038)' },
   horror: { v: '#0a0405', b: '#150708', s: '#0e0506', f: '#eadbd6', m: '#a07d78', a: '#b3171f', oa: '#ffffff', bd: '#401214', bgx: 'radial-gradient(ellipse at 50% 40%,#1c0708,#060203 75%)' }
 };
 /* 프리미엄이 아니면 프리미엄 테마 대신 어두운 테마로 보여줘요 (저장된 선택은 그대로 둬서, 프리미엄이 되면 다시 적용돼요) */
@@ -11117,6 +11854,16 @@ setInterval(() => {   // 가끔은 페이지를 넘기지 않아도 글자가 �
   if (!horrorFxOn() || document.hidden || Date.now() - horrorLast < 25000 || Math.random() > .35) return;
   horrorLast = Date.now(); if (Math.random() < .6) horrorGlitch(); else horrorFlash();
 }, 20000);
+/* 백룸 효과: 형광등이 가끔 깜빡이고, 페이지를 넘길 때 살짝 지직거려요 */
+const brFxOn = () => document.documentElement.dataset.theme === 'backrooms' && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+let brLast = 0;
+function brFlicker() {
+  if (!brFxOn()) return; brLast = Date.now();
+  document.body.classList.remove('br-flicker'); void document.body.offsetWidth; document.body.classList.add('br-flicker');
+  setTimeout(() => document.body.classList.remove('br-flicker'), 620);
+}
+{ const _sc1 = setCurrent; setCurrent = function (id) { const prev = state.currentId, r = _sc1.apply(this, arguments); if (id && prev && prev !== id && brFxOn() && Date.now() - brLast > 4000 && Math.random() < .3) brFlicker(); return r; }; }
+setInterval(() => { if (brFxOn() && !document.hidden && Date.now() - brLast > 15000 && Math.random() < .3) brFlicker(); }, 8000);
 function applyTheme(t) {
   if (t === 'custom') applyCustomTheme();
   document.documentElement.dataset.theme = t;
@@ -11419,6 +12166,7 @@ setTool('select');
 updateHistoryButtons();
 updateTitle();
 if (mMq.matches) mApply();
+setTimeout(() => { if (!tutDone() && !document.querySelector('.modal:not([hidden]),.themep,#mModeDlg,#setw:not([hidden])') && !state.pages.length) openTutorial(); }, 900);
 })();
 </script>
 </body>
