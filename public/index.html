@@ -214,8 +214,8 @@ footer .copy{margin-top:28px;padding-top:20px;border-top:1px solid var(--line);f
   <section id="price" class="alt">
     <div class="wrap">
       <div class="eyebrow">요금</div>
-      <h2>기본 기능은 무료, 프리미엄은 1년 이용권</h2>
-      <p class="lead">구독이 아닌 <b style="color:var(--text)">1년 이용권</b>입니다. 한 번 결제하면 결제일로부터 1년간 이용하고, <b style="color:var(--text)">매년 자동으로 결제되지 않습니다.</b> 이용 키는 발급일로부터 3개월간 이용할 수 있습니다.</p>
+      <h2>기본 기능은 무료, 프리미엄은 월 1,200원부터</h2>
+      <p class="lead"><b style="color:var(--text)">월간 구독 1,200원</b> 또는 <b style="color:var(--text)">연간 구독 10,500원</b>(월 875원 꼴)을 고를 수 있어요. 결제일마다 <b style="color:var(--text)">자동으로 결제</b>되고, <b style="color:var(--text)">언제든 해지</b>할 수 있으며 해지해도 이미 낸 기간은 끝까지 이용할 수 있습니다. 이용 키는 발급일로부터 3개월간 이용할 수 있습니다.</p>
       <div class="plans">
         <div class="plan">
           <h3>무료</h3>
@@ -230,15 +230,16 @@ footer .copy{margin-top:28px;padding-top:20px;border-top:1px solid var(--line);f
         </div>
         <div class="plan pro">
           <h3>프리미엄</h3>
-          <div class="price">3,900원<small>1년 이용 · 한 번만 결제</small></div>
-          <p style="margin:4px 0 0;font-size:14px;color:var(--accent);font-weight:600">구독 아님 · 자동결제 없음 — 1년이 지나면 그대로 끝나요</p>
+          <div class="price">1,200원<small>/ 월 · 월간 구독</small></div>
+          <div class="price" style="margin-top:2px">10,500원<small>/ 년 · 연간 구독 (약 27% 저렴)</small></div>
+          <p style="margin:4px 0 0;font-size:14px;color:var(--accent);font-weight:600">자동결제 · 언제든 해지 — 해지하면 다음 결제부터 청구되지 않아요</p>
           <ul>
             <li>파일 압축, 표 삽입, 프리미엄 테마, 커스텀 테마(배경색 · 보조색 · 글꼴)</li>
             <li>PPTX 내보내기, 음성 녹음, 멀티작업, 개발자 콘솔</li>
             <li>대학생 인증(.ac.kr, .edu) 또는 이용 키로도 이용 가능</li>
           </ul>
           <a class="btn" href="/edit">프리미엄 시작</a>
-          <button type="button" class="btn ghost" id="premDetailBtn" style="margin-top:8px;width:100%">상품 상세 · 환불 안내</button>
+          <button type="button" class="btn ghost" id="premDetailBtn" style="margin-top:8px;width:100%">상품 상세 · 구독 · 환불 안내</button>
         </div>
       </div>
     </div>
@@ -254,10 +255,12 @@ footer .copy{margin-top:28px;padding-top:20px;border-top:1px solid var(--line);f
 </main>
 
 <dialog id="premDetail" class="pdd"><form method="dialog"><div class="pdh"><h3>프리미엄 상품 상세</h3><button class="pdx" aria-label="닫기">×</button></div></form><div class="pdb"><h4>상품 정보</h4>
-<p>상품명: Meow-PDF 프리미엄 이용권 · 3,900원 (부가세 포함)</p>
+<p>상품명: Meow-PDF 프리미엄 월간 구독 · <b>1,200원 / 월</b> (부가세 포함)<br>상품명: Meow-PDF 프리미엄 연간 구독 · <b>10,500원 / 년</b> (부가세 포함, 월 환산 875원)</p>
 <h4>이용 기간</h4>
 <ul>
-<li><b>프리미엄 결제</b>: 구독이 아닌 <b>1년 이용권</b>입니다. 결제 승인일로부터 <b>1년</b>간 이용할 수 있으며 <b>매년 자동으로 결제되지 않습니다.</b> 이용 기간 중 다시 결제하시면 현재 만료일부터 1년이 추가됩니다.</li>
+<li><b>구독(자동결제)</b>: 카드를 등록하면 첫 결제가 바로 이뤄지고, 이후 <b>월간은 매달 · 연간은 매년 같은 날 자동으로 결제</b>됩니다. 결제할 때마다 이용 기간이 1개월 또는 1년씩 더해집니다.</li>
+<li><b>구독 해지</b>: 계정 창의 ‘구독 해지’로 언제든 해지할 수 있습니다. 해지하면 <b>다음 결제부터 청구되지 않으며</b>, 이미 결제한 기간은 만료일까지 계속 이용할 수 있습니다.</li>
+<li><b>결제 실패</b>: 정기결제가 실패하면 하루 간격으로 최대 3번 다시 시도하고, 끝내 실패하면 구독이 종료됩니다. 이미 결제한 기간은 유지됩니다.</li>
 <li><b>이용 키</b>: 발급일로부터 <b>3개월</b>간 이용할 수 있습니다. 키를 입력하면 키의 만료일까지 프리미엄이 적용됩니다.</li>
 <li><b>대학생 인증</b>: 학교 이메일(.ac.kr, .edu)로 인증한 계정은 인증이 유지되는 동안 이용할 수 있습니다.</li>
 <li>이용 기간이 끝나면 무료 기능으로 전환되며, 프리미엄 기능만 제한됩니다. 저장해 둔 파일에는 영향이 없습니다.</li>
@@ -269,6 +272,7 @@ footer .copy{margin-top:28px;padding-top:20px;border-top:1px solid var(--line);f
 <li>환불 가능 기간은 결제일로부터 <b>7일</b>입니다.</li>
 <li><b>단순 변심</b>(사용 여부와 관계없이 마음이 바뀐 경우)은 환불되지 않습니다.</li>
 <li>다음의 경우에는 환불할 수 있습니다. ① 시스템 오류로 결제되었으나 프리미엄이 적용되지 않은 경우 ② 안내된 상품 또는 기능이 제공되지 않은 경우</li>
+<li>구독 해지는 <b>다음 결제부터</b> 적용되며, 이미 결제된 금액은 위 ①②에 해당할 때만 환불됩니다.</li>
 <li>환불 요청: <a href="mailto:contact@meow-pdf.com">contact@meow-pdf.com</a> (결제한 이메일과 주문 내용을 적어 주세요.) 환불이 확정되면 결제 수단으로 취소 처리하며, 처리 시점은 결제 수단에 따라 다를 수 있습니다.</li>
 </ul></div></dialog>
 <footer id="contact">
