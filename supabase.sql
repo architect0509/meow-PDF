@@ -89,40 +89,88 @@ create table if not exists public.feedback (
 create index if not exists feedback_created_idx on public.feedback (created_at desc);
 alter table public.feedback enable row level security;
 
--- ═══════════════════════════════════════════════════════════════
--- 아이디 · 비밀번호 계정 (v0.8.3) — 아래를 SQL Editor 에서 실행하세요 (여러 번 실행해도 안전해요)
--- ═══════════════════════════════════════════════════════════════
--- 1) 프로필 칸: 아이디(중복 불가) · 닉네임 · 프로필 사진 주소
-alter table public.users_profile add column if not exists username text;
-alter table public.users_profile add column if not exists nickname text;
-alter table public.users_profile add column if not exists avatar_url text;
 
--- 아이디 규칙: 영문 소문자로 시작, 영문 소문자 · 숫자 · _ 조합 4~20자 (대소문자 구분 없이 중복 불가)
-do $$ begin
-  alter table public.users_profile add constraint users_profile_username_fmt check (username is null or username ~ '^[a-z][a-z0-9_]{3,19}$');
-exception when duplicate_object then null; end $$;
+-- ─────────────────────────────────────────────────────────────
+-- 5) 아이디 · 닉네임 · 프로필 사진 (v0.8.3)
+--    이미 위쪽 1~4번을 실행했다면 이 5번 부분만 따로 실행해도 돼요. (여러 번 실행해도 안전해요)
+-- ─────────────────────────────────────────────────────────────
+alter table public.users_profile add column if not exists username text;     -- 로그인 아이디 (영문 소문자·숫자·_ 4~20자)
+alter table public.users_profile add column if not exists nickname text;     -- 화면에 보이는 이름
+alter table public.users_profile add column if not exists avatar_url text;   -- 프로필 사진 주소
+
+-- 아이디는 대소문자 구분 없이 중복 불가
 create unique index if not exists users_profile_username_key on public.users_profile (lower(username)) where username is not null;
+do $$ begin
+  alter table public.users_profile add constraint users_profile_username_fmt
+    check (username is null or username ~ '^[a-z0-9_]{4,20}$') not valid;   -- 이미 있는 행은 검사하지 않아요
+exception when duplicate_object then null; end $$;
 
--- 2) 학생 인증 트리거 보완: 아이디 · 비밀번호로 가입한 계정은 이메일 소유 확인 전이라
---    학교 이메일이어도 자동으로 학생이 되지 않아요. (인증번호 확인 후 서버가 is_student 를 기록)
-create or replace function public.sync_student_profile() returns trigger
+-- 가입할 때 앱이 보낸 아이디/닉네임을 프로필에 저장. 아이디가 겹치면 가입이 거절돼요.
+create or replace function public.handle_new_user() returns trigger
 language plpgsql security definer set search_path = public as $$
+declare
+  u text := lower(nullif(trim(new.raw_user_meta_data->>'username'), ''));
+  n text := nullif(trim(new.raw_user_meta_data->>'nickname'), '');
 begin
-  if coalesce(new.raw_user_meta_data->>'signup_type', '') = 'password' then
-    return new;
+  if u is not null and u !~ '^[a-z0-9_]{4,20}$' then
+    raise exception 'invalid_username';
   end if;
-  if new.email_confirmed_at is not null and new.email ~* '\.(ac\.kr|edu)$' then
-    insert into public.users_profile (id, email, is_student, student_verified_at)
-    values (new.id, new.email, true, new.email_confirmed_at)
-    on conflict (id) do update set email = excluded.email, is_student = true,
-      student_verified_at = coalesce(public.users_profile.student_verified_at, excluded.student_verified_at);
-  end if;
+  insert into public.users_profile (id, email, username, nickname)
+  values (new.id, new.email, u, left(n, 20))
+  on conflict (id) do update set
+    email = excluded.email,
+    username = coalesce(public.users_profile.username, excluded.username),
+    nickname = coalesce(public.users_profile.nickname, excluded.nickname);
   return new;
 end $$;
+drop trigger if exists on_auth_user_created_profile on auth.users;
+create trigger on_auth_user_created_profile after insert on auth.users
+  for each row execute function public.handle_new_user();
 
--- 3) 프로필 사진 저장소 (공개 읽기, 쓰기는 서버만)
+-- 내 닉네임 바꾸기 / (아직 아이디가 없는 기존 계정만) 아이디 정하기
+create or replace function public.set_my_profile(p_nickname text default null, p_username text default null) returns void
+language plpgsql security definer set search_path = public as $$
+declare uid uuid := auth.uid(); u text := lower(nullif(trim(p_username), ''));
+begin
+  if uid is null then raise exception 'not_logged_in'; end if;
+  if p_nickname is not null then
+    update public.users_profile set nickname = left(nullif(trim(p_nickname), ''), 20) where id = uid;
+  end if;
+  if u is not null then
+    if u !~ '^[a-z0-9_]{4,20}$' then raise exception 'invalid_username'; end if;
+    update public.users_profile set username = u where id = uid and username is null;
+  end if;
+end $$;
+revoke all on function public.set_my_profile(text, text) from public, anon;
+grant execute on function public.set_my_profile(text, text) to authenticated;
+
+-- 내 프로필 사진 주소 저장 (내 폴더에 올린 사진 주소만 받아요)
+create or replace function public.set_my_avatar(p_url text) returns void
+language plpgsql security definer set search_path = public as $$
+declare uid uuid := auth.uid();
+begin
+  if uid is null then raise exception 'not_logged_in'; end if;
+  if p_url is not null and p_url not like '%/avatars/' || uid::text || '/%' then raise exception 'invalid_avatar'; end if;
+  update public.users_profile set avatar_url = p_url where id = uid;
+end $$;
+revoke all on function public.set_my_avatar(text) from public, anon;
+grant execute on function public.set_my_avatar(text) to authenticated;
+
+-- 프로필 사진 저장소 (공개 읽기 · 본인 폴더에만 올리기, 2MB, jpg/png/webp)
 insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
-values ('avatars', 'avatars', true, 524288, array['image/png','image/jpeg','image/webp'])
-on conflict (id) do update set public = true, file_size_limit = 524288, allowed_mime_types = array['image/png','image/jpeg','image/webp'];
+values ('avatars', 'avatars', true, 2097152, array['image/jpeg','image/png','image/webp'])
+on conflict (id) do update set public = true, file_size_limit = 2097152, allowed_mime_types = array['image/jpeg','image/png','image/webp'];
+drop policy if exists "avatar read" on storage.objects;
+create policy "avatar read" on storage.objects for select using (bucket_id = 'avatars');
+drop policy if exists "avatar insert own" on storage.objects;
+create policy "avatar insert own" on storage.objects for insert to authenticated
+  with check (bucket_id = 'avatars' and (storage.foldername(name))[1] = auth.uid()::text);
+drop policy if exists "avatar update own" on storage.objects;
+create policy "avatar update own" on storage.objects for update to authenticated
+  using (bucket_id = 'avatars' and (storage.foldername(name))[1] = auth.uid()::text)
+  with check (bucket_id = 'avatars' and (storage.foldername(name))[1] = auth.uid()::text);
+drop policy if exists "avatar delete own" on storage.objects;
+create policy "avatar delete own" on storage.objects for delete to authenticated
+  using (bucket_id = 'avatars' and (storage.foldername(name))[1] = auth.uid()::text);
 
 notify pgrst, 'reload schema';

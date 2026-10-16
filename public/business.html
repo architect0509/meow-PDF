@@ -5,49 +5,51 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="dark light">
 <title>사업자 정보 — Meow-PDF</title>
-<meta name="description" content="Meow-PDF 사업자 정보: 상호, 대표자, 사업자 등록번호, 사업장 주소, 전화번호, 문의 이메일">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23dbbe43' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2 3 7v10l9 5 9-5V7z'/%3E%3C/svg%3E">
+<meta name="description" content="Meow-PDF 운영 사업자 정보: 상호, 대표자, 사업자 등록번호, 사업장 주소, 연락처">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23dbbe43' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3 4 7v6c0 4 3.4 7 8 8 4.6-1 8-4 8-8V7z'/%3E%3C/svg%3E">
 <style>
 :root{--bg:#0e0e11;--bg2:#15151a;--line:rgba(255,255,255,.12);--text:#f4f4f5;--muted:#a1a1aa;--accent:#dbbe43;--card:rgba(255,255,255,.04)}
 @media (prefers-color-scheme:light){:root{--bg:#fbfaf6;--bg2:#f2f0e8;--line:rgba(0,0,0,.12);--text:#18181b;--muted:#5f5f68;--accent:#9a7f12;--card:rgba(0,0,0,.03)}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font-family:"Pretendard","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;line-height:1.7;word-break:keep-all}
 a{color:inherit}
-.wrap{width:min(760px,100% - 40px);margin:0 auto;padding:36px 0 72px}
-.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px;font-size:14px}
-.top .brand{font-weight:700;font-size:16px;text-decoration:none}
-.top a.back{color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:4px}
-.top a.back:hover{color:var(--accent)}
-.eyebrow{font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.06em}
-h1{margin:6px 0 8px;font-size:clamp(28px,5vw,38px);letter-spacing:-.01em}
+.wrap{width:min(720px,100% - 32px);margin:0 auto}
+header{padding:22px 0}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--muted);text-decoration:none;font-size:14px}
+.back:hover{color:var(--text)}
+h1{margin:28px 0 6px;font-size:clamp(26px,5vw,36px);letter-spacing:-.01em}
 .lead{margin:0 0 28px;color:var(--muted)}
-dl{margin:0;border:1px solid var(--line);border-radius:18px;background:var(--card);overflow:hidden}
+.card{border:1px solid var(--line);border-radius:18px;background:var(--card);overflow:hidden}
+dl{margin:0}
 .row{display:grid;grid-template-columns:150px 1fr;gap:12px;padding:18px 22px;border-top:1px solid var(--line)}
 .row:first-child{border-top:0}
-dt{color:var(--muted);font-size:14px}
-dd{margin:0;font-size:16px;font-weight:500}
+dt{color:var(--muted);font-size:14px;font-weight:600}
+dd{margin:0;font-size:16px}
 dd a{text-decoration:underline;text-underline-offset:3px}
-.note{margin-top:22px;color:var(--muted);font-size:13.5px}
+.note{margin:22px 0 0;color:var(--muted);font-size:13.5px}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin:28px 0 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:44px;padding:0 22px;border-radius:999px;border:1px solid var(--text);background:var(--text);color:var(--bg);text-decoration:none;font-weight:600;font-size:15px}
+.btn.ghost{background:transparent;color:var(--text);border-color:var(--line)}
+footer{margin:56px 0 0;padding:24px 0 40px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:13px}
 @media (max-width:560px){.row{grid-template-columns:1fr;gap:2px;padding:14px 18px}}
 </style>
 </head>
 <body>
+<header><div class="wrap"><a class="back" href="/">← Meow-PDF 홈으로</a></div></header>
 <main class="wrap">
-  <div class="top"><a class="brand" href="/">Meow-PDF</a><a class="back" href="/">← 처음으로</a></div>
-  <div class="eyebrow">사업자 정보</div>
   <h1>사업자 정보</h1>
   <p class="lead">Meow-PDF를 운영하는 사업자의 정보입니다.</p>
-  <dl>
+  <div class="card"><dl>
     <div class="row"><dt>상호</dt><dd>타니아 (Thaniya project)</dd></div>
     <div class="row"><dt>대표자명</dt><dd>홍재현</dd></div>
     <div class="row"><dt>사업자 등록번호</dt><dd>401-23-95257</dd></div>
     <div class="row"><dt>사업장 주소</dt><dd>경기도 부천시 원미구 중동로 108 (중동, 팰리스카운티) 116동 1003호</dd></div>
-    <div class="row"><dt>전화번호</dt><dd><a href="tel:010-9703-0061">010-9703-0061</a></dd></div>
-    <div class="row"><dt>문의 이메일</dt><dd><a href="mailto:contact@meow-pdf.com">contact@meow-pdf.com</a></dd></div>
-    <div class="row"><dt>이용권 안내</dt><dd>구독(정기결제)이 아닌 <b>1년 결제권</b>입니다. 자동으로 결제되지 않습니다.</dd></div>
-    <div class="row"><dt>환불</dt><dd>결제일로부터 7일 이내 · 단순 변심 불가 · 시스템 오류 또는 상품 미제공 시 가능</dd></div>
-  </dl>
-  <p class="note">© 2026 Thaniya project. All rights reserved.</p>
+    <div class="row"><dt>전화번호</dt><dd><a href="tel:01097030061">010-9703-0061</a></dd></div>
+    <div class="row"><dt>이메일</dt><dd><a href="mailto:contact@meow-pdf.com">contact@meow-pdf.com</a></dd></div>
+  </dl></div>
+  <p class="note">환불·결제 문의는 이메일로 보내 주세요. 환불 가능 기간은 결제일로부터 7일입니다. 프리미엄은 구독이 아닌 1년 이용권이며 자동으로 갱신 결제되지 않습니다.</p>
+  <div class="cta"><a class="btn" href="/edit">편집 시작하기</a><a class="btn ghost" href="/#refund">환불정책 보기</a></div>
 </main>
+<footer><div class="wrap">© 2026 Thaniya project. All rights reserved.</div></footer>
 </body>
 </html>

@@ -107,16 +107,8 @@ footer .links{display:flex;justify-content:center;gap:8px 22px;flex-wrap:wrap;ma
 footer .links a:hover{color:var(--text)}
 footer .info{font-style:normal;line-height:1.95;max-width:760px;margin:0 auto}
 footer .info span{display:inline-block;white-space:nowrap}
-footer .info span.wrapok{white-space:normal}
 footer .info span:not(:last-child)::after{content:" | ";white-space:pre;opacity:.55;margin:0 .15em}
 footer .info a{text-decoration:underline;text-underline-offset:3px}
-footer .biz{display:inline-flex;align-items:center;gap:4px;margin:0 auto 8px;color:var(--text);font-weight:600;font-size:14px;padding:4px 12px;border:1px solid var(--line);border-radius:999px}
-footer .biz:hover{border-color:var(--accent);color:var(--accent)}
-.nosub{margin:18px 0 0;padding:14px 18px;max-width:42em;border:1px solid var(--accent);border-radius:14px;background:var(--card);font-size:15.5px;color:var(--text)}
-.nosub b{color:var(--accent)}
-.nosub2{margin:14px 0 0;padding:16px 20px;max-width:42em;border-radius:16px;background:var(--card);border:1px solid var(--line,rgba(128,128,128,.3))}
-.ns-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}.ns-chips span{padding:4px 12px;border-radius:999px;background:var(--accent);color:#1b1b1b;font-weight:800;font-size:13.5px}
-.nosub2 ul{margin:0;padding-left:20px;line-height:1.8;font-size:15px}.nosub2 li b{color:var(--accent)}
 footer .refund{margin-top:20px;font-size:13px}
 footer .refund summary{cursor:pointer;color:var(--text);font-weight:600;width:max-content;margin:0 auto}
 footer .refund p{margin:6px auto 0;max-width:560px}
@@ -223,9 +215,7 @@ footer .copy{margin-top:28px;padding-top:20px;border-top:1px solid var(--line);f
     <div class="wrap">
       <div class="eyebrow">요금</div>
       <h2>기본 기능은 무료, 프리미엄은 1년 이용권</h2>
-      <p class="lead">한 번 결제하면 결제일로부터 1년간 이용할 수 있습니다. 이용 키는 발급일로부터 3개월간 이용할 수 있습니다.</p>
-      <p class="nosub"><b>구독이 아닌 1년 결제권</b> · 1년이 지나도 <b>자동으로 결제되지 않습니다.</b> 매달, 매년 빠져나가는 요금 걱정 없이 필요할 때 한 번만 결제하세요.</p>
-      <div class="nosub2" role="note"><div class="ns-chips"><span>구독 아님</span><span>자동결제 없음</span><span>1년 결제권</span></div><ul><li><b>해지할 필요가 없어요.</b> 1년이 지나면 저절로 무료 플랜으로 돌아갑니다.</li><li><b>매년 자동으로 빠져나가는 요금이 없어요.</b> 갱신을 잊어도 청구되지 않습니다.</li><li><b>정기결제용 카드 등록이 없어요.</b> 필요할 때 한 번만 결제하면 끝입니다.</li></ul></div>
+      <p class="lead">구독이 아닌 <b style="color:var(--text)">1년 이용권</b>입니다. 한 번 결제하면 결제일로부터 1년간 이용하고, <b style="color:var(--text)">매년 자동으로 결제되지 않습니다.</b> 이용 키는 발급일로부터 3개월간 이용할 수 있습니다.</p>
       <div class="plans">
         <div class="plan">
           <h3>무료</h3>
@@ -240,9 +230,9 @@ footer .copy{margin-top:28px;padding-top:20px;border-top:1px solid var(--line);f
         </div>
         <div class="plan pro">
           <h3>프리미엄</h3>
-          <div class="price">3,900원<small>1회 결제 · 1년 이용권</small></div>
+          <div class="price">3,900원<small>1년 이용 · 한 번만 결제</small></div>
+          <p style="margin:4px 0 0;font-size:14px;color:var(--accent);font-weight:600">구독 아님 · 자동결제 없음 — 1년이 지나면 그대로 끝나요</p>
           <ul>
-            <li><b>구독이 아닙니다.</b> 자동결제 없이 1년 이용권을 한 번만 결제하고, 기간이 끝나면 저절로 무료 플랜으로 돌아갑니다.</li>
             <li>파일 압축, 표 삽입, 프리미엄 테마, 커스텀 테마(배경색 · 보조색 · 글꼴)</li>
             <li>PPTX 내보내기, 음성 녹음, 멀티작업, 개발자 콘솔</li>
             <li>대학생 인증(.ac.kr, .edu) 또는 이용 키로도 이용 가능</li>
@@ -267,10 +257,9 @@ footer .copy{margin-top:28px;padding-top:20px;border-top:1px solid var(--line);f
 <p>상품명: Meow-PDF 프리미엄 이용권 · 3,900원 (부가세 포함)</p>
 <h4>이용 기간</h4>
 <ul>
-<li><b>프리미엄 결제</b>: 결제 승인일로부터 <b>1년</b>간 이용할 수 있습니다. 이용 기간 중 다시 결제하시면 현재 만료일부터 1년이 추가됩니다.</li>
+<li><b>프리미엄 결제</b>: 구독이 아닌 <b>1년 이용권</b>입니다. 결제 승인일로부터 <b>1년</b>간 이용할 수 있으며 <b>매년 자동으로 결제되지 않습니다.</b> 이용 기간 중 다시 결제하시면 현재 만료일부터 1년이 추가됩니다.</li>
 <li><b>이용 키</b>: 발급일로부터 <b>3개월</b>간 이용할 수 있습니다. 키를 입력하면 키의 만료일까지 프리미엄이 적용됩니다.</li>
 <li><b>대학생 인증</b>: 학교 이메일(.ac.kr, .edu)로 인증한 계정은 인증이 유지되는 동안 이용할 수 있습니다.</li>
-<li><b>구독(정기결제)이 아닙니다.</b> 1년이 지나도 자동으로 결제되지 않으며, 계속 이용하시려면 직접 다시 결제하실 때만 청구됩니다.</li>
 <li>이용 기간이 끝나면 무료 기능으로 전환되며, 프리미엄 기능만 제한됩니다. 저장해 둔 파일에는 영향이 없습니다.</li>
 </ul>
 <h4>제공 기능</h4>
@@ -289,18 +278,18 @@ footer .copy{margin-top:28px;padding-top:20px;border-top:1px solid var(--line);f
       <a href="#features">기능</a>
       <a href="#how">사용법</a>
       <a href="#price">요금</a>
-      <a href="#refund" id="refundLink">환불정책</a>
       <a href="/business">사업자 정보</a>
+      <a href="#refund" id="refundLink">환불정책</a>
       <a href="https://github.com/architect0509/meow-PDF" target="_blank" rel="noopener noreferrer">GitHub</a>
       <a href="/edit">편집 시작</a>
     </nav>
-    <a class="biz" href="/business" aria-label="사업자 정보 페이지로 이동">사업자 정보<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
     <address class="info">
       <span>상호: 타니아 (Thaniya project)</span>
       <span>대표자명: 홍재현</span>
       <span>사업자 등록번호: 401-23-95257</span>
-      <span class="wrapok">사업장 주소: 경기도 부천시 원미구 중동로 108 (중동, 팰리스카운티) 116동 1003호</span>
-      <span>전화번호: <a href="tel:010-9703-0061">010-9703-0061</a></span>
+      <span>주소: 경기도 부천시 원미구 중동로 108 (중동, 팰리스카운티) 116동 1003호</span>
+      <span>전화: 010-9703-0061</span>
+      <span><a href="/business">사업자 정보 자세히</a></span>
       <span>문의: <a href="mailto:contact@meow-pdf.com">contact@meow-pdf.com</a></span>
     </address>
     <details class="refund" id="refund">
