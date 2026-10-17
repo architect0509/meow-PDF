@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0e0e11" media="(max-width:820px)">
+<title>Meow-PDF — 설치 없이 브라우저에서 쓰는 PDF 편집기</title>
+<meta name="description" content="PDF 속 글자를 눌러 고치고, 그리고, 합치고, 다른 형식으로 내보내세요. 설치 없이 컴퓨터와 휴대폰에서 바로 사용할 수 있습니다.">
+<meta property="og:title" content="Meow-PDF">
+<meta property="og:description" content="설치 없이 브라우저에서 쓰는 PDF 편집기">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23dbbe43' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 5c.67 0 1.35.09 2 .26 1.78-2 5.03-2.84 6.42-2.26 1.4.58-.42 7-.42 7 .57 1.07 1 2.24 1 3.44C21 17.9 16.97 21 12 21s-9-3-9-7.56c0-1.25.5-2.4 1-3.44 0 0-1.89-6.42-.5-7 1.39-.58 4.72.23 6.5 2.23A9.04 9.04 0 0 1 12 5Z'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#0e0e11;--bg2:#15151a;--line:rgba(255,255,255,.12);--text:#f4f4f5;--muted:#a1a1aa;
+  --accent:#dbbe43;--ink:#111;--card:rgba(255,255,255,.04);
+}
+@media (prefers-color-scheme:light) and (min-width:821px){
+  :root:not([data-theme="dark"]){--bg:#fbfaf6;--bg2:#f2f0e8;--line:rgba(0,0,0,.12);--text:#18181b;--muted:#5f5f68;--accent:#9a7f12;--ink:#fff;--card:rgba(0,0,0,.03)}
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{word-break:keep-all;margin:0;background:var(--bg);color:var(--text);font-family:"Pretendard","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+svg{display:block}
+.wrap{width:min(1120px,100% - 40px);margin:0 auto}
+
+/* 버튼: 장식 없이 단조롭게 */
+.btn{display:inline-flex;align-items:center;justify-content:center;height:44px;padding:0 22px;border-radius:999px;border:1px solid var(--text);background:var(--text);color:var(--bg);font-size:15px;font-weight:600;cursor:pointer;font-family:inherit}
+.btn.ghost{background:transparent;color:var(--text);border-color:var(--line)}
+.btn.sm{height:36px;padding:0 16px;font-size:14px}
+.hact{display:flex;align-items:center;gap:10px}
+.langsel{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 8px 0 11px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:14px;cursor:pointer}
+.langsel:hover,.langsel:focus-within{color:var(--text);border-color:var(--muted)}
+.langsel svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;flex:none}
+.langsel select{appearance:none;-webkit-appearance:none;border:0;background:transparent;color:inherit;font:inherit;padding:0 2px;cursor:pointer;outline:0}
+.langsel select option{color:#111;background:#fff}
+.btn:focus-visible,.nav a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* 상단 */
+.top{position:fixed;inset:0 0 auto 0;z-index:20;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid transparent}
+.top.scrolled{border-bottom-color:var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.logo{display:flex;align-items:center;gap:9px;font-weight:700;font-size:18px}
+.logo svg{width:26px;height:26px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.nav{display:flex;gap:30px;font-size:14px;color:var(--muted)}
+.nav a:hover{color:var(--text)}
+
+/* 히어로 */
+.hero{position:relative;padding:150px 0 0;text-align:center;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0 0 auto 0;height:760px;background:
+  radial-gradient(60% 55% at 50% 0%,rgba(219,190,67,.30),transparent 70%),
+  radial-gradient(40% 40% at 12% 18%,rgba(120,110,255,.20),transparent 70%),
+  radial-gradient(40% 40% at 90% 12%,rgba(255,140,90,.16),transparent 70%);pointer-events:none}
+.hero .wrap{position:relative}
+.appicon{width:76px;height:76px;margin:0 auto 34px;border-radius:20px;background:var(--bg2);border:1px solid var(--line);display:grid;place-items:center}
+.appicon svg{width:44px;height:44px;stroke:var(--accent);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.hero h1{margin:0;font-size:clamp(46px,8vw,76px);font-weight:700;letter-spacing:-.02em;line-height:1.1}
+.hero .sub{margin:22px auto 0;max-width:34em;font-size:clamp(17px,2.2vw,21px);color:var(--text);opacity:.88}
+.hero .cta{margin-top:34px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.hero .note{margin-top:14px;font-size:13px;color:var(--muted)}
+
+.formats{margin-top:70px}
+.formats p{margin:0 0 18px;font-size:14px;color:var(--muted)}
+.fmtrow{display:flex;justify-content:center;gap:clamp(18px,5vw,56px);flex-wrap:wrap;font-weight:700;font-size:clamp(18px,2.6vw,26px);letter-spacing:.02em}
+.fmtrow span{opacity:.82}
+
+.shot{margin:72px auto 0;width:min(1000px,100%);border:1px solid var(--line);border-bottom:0;border-radius:18px 18px 0 0;overflow:hidden;background:#222}
+.shot .bar{display:flex;gap:7px;align-items:center;padding:11px 14px;background:#1d1d21;border-bottom:1px solid rgba(255,255,255,.08)}
+.shot .bar i{width:11px;height:11px;border-radius:50%;background:#ff5f57}
+.shot .bar i:nth-child(2){background:#febc2e}.shot .bar i:nth-child(3){background:#28c840}
+.shot .bar b{margin-left:12px;font-size:12px;font-weight:500;color:#9a9aa3}
+.shot img{display:block;width:100%;height:auto}
+
+/* 섹션 */
+section{padding:104px 0}
+section.alt{background:var(--bg2);border-block:1px solid var(--line)}
+.eyebrow{font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.06em}
+h2{margin:8px 0 0;font-size:clamp(28px,4.2vw,40px);line-height:1.25;letter-spacing:-.01em}
+.lead{margin:14px 0 0;max-width:36em;color:var(--muted);font-size:17px}
+.grid{margin-top:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{padding:26px;border:1px solid var(--line);border-radius:18px;background:var(--card)}
+.card .ic{width:40px;height:40px;border-radius:12px;border:1px solid var(--line);display:grid;place-items:center;margin-bottom:18px}
+.card .ic svg{width:20px;height:20px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.card h3{margin:0 0 8px;font-size:18px}
+.card p{margin:0;color:var(--muted);font-size:15px}
+
+.steps{margin-top:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:s}
+.step{padding:26px;border:1px solid var(--line);border-radius:18px;background:var(--bg)}
+.step::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:32px;height:32px;border-radius:50%;border:1px solid var(--accent);color:var(--accent);font-weight:700;font-size:14px;margin-bottom:16px}
+.step h3{margin:0 0 6px;font-size:18px}.step p{margin:0;color:var(--muted);font-size:15px}
+
+.plans{margin-top:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1080px}
+.plan{position:relative}
+.plan .pnote{margin:4px 0 0;font-size:14px;color:var(--accent);font-weight:600}
+.plan.best{box-shadow:0 0 0 1px var(--accent) inset}
+.plan .ptag{position:absolute;top:18px;right:18px;padding:3px 10px;border-radius:999px;background:var(--accent);color:#111;font-size:12px;font-weight:700}
+.plan{padding:30px;border:1px solid var(--line);border-radius:20px;background:var(--card)}
+.plan.pro{border-color:var(--accent)}
+.plan h3{margin:0;font-size:18px}
+.plan .price{margin:10px 0 4px;font-size:34px;font-weight:700;letter-spacing:-.01em}
+.plan .price small{font-size:14px;font-weight:500;color:var(--muted);margin-left:6px}
+.plan ul{margin:18px 0 0;padding:0;list-style:none;display:grid;gap:10px;color:var(--muted);font-size:15px}
+.plan li{display:flex;gap:10px}
+.plan li::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-top:10px}
+.plan .btn{margin-top:26px;width:100%}
+/* 요금 블록: 내용 길이와 상관없이 버튼을 같은 높이(맨 아래)에 맞춰요 */
+.plan{display:flex;flex-direction:column}
+.plan ul{margin-bottom:26px}
+.plan .btn{margin-top:auto}
+
+.closing{text-align:center}
+.closing p{margin:14px auto 0;max-width:30em;color:var(--muted);font-size:17px}
+.closing .btn{margin-top:30px}
+
+/* 푸터 */
+footer{border-top:1px solid var(--line);padding:44px 0 52px;color:var(--muted);font-size:14px;text-align:center}
+footer .brand{color:var(--text);font-weight:700;font-size:16px;margin-bottom:14px}
+footer .links{display:flex;justify-content:center;gap:8px 22px;flex-wrap:wrap;margin-bottom:18px}
+footer .links a:hover{color:var(--text)}
+footer .info{font-style:normal;line-height:1.95;max-width:760px;margin:0 auto}
+footer .info span{display:inline-block;white-space:nowrap}
+footer .info span:not(:last-child)::after{content:" | ";white-space:pre;opacity:.55;margin:0 .15em}
+footer .info a{text-decoration:underline;text-underline-offset:3px}
+footer .refund{margin-top:20px;font-size:13px}
+footer .refund summary{cursor:pointer;color:var(--text);font-weight:600;width:max-content;margin:0 auto}
+footer .refund p{margin:6px auto 0;max-width:560px}
+footer .refund a{text-decoration:underline}
+footer .copy{margin-top:28px;padding-top:20px;border-top:1px solid var(--line);font-size:13px}
+.pdd{width:min(560px,calc(100% - 28px));max-height:86vh;padding:0;border:1px solid var(--line);border-radius:16px;background:var(--bg);color:var(--text)}
+.pdd::backdrop{background:rgba(0,0,0,.5)}
+.pdd .pdh{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:var(--bg);border-bottom:1px solid var(--line)}
+.pdd h3{margin:0;font-size:18px}.pdd .pdx{font-size:24px;line-height:1;width:34px;height:34px;border-radius:50%;border:0;background:transparent;color:var(--muted);cursor:pointer}
+.pdd .pdb{padding:6px 20px 20px;font-size:14px}.pdd h4{margin:18px 0 6px;font-size:14px;color:var(--accent)}
+.pdd p{margin:4px 0}.pdd ul{margin:4px 0;padding-left:18px}.pdd li{margin:5px 0}.pdd a{text-decoration:underline}
+
+@media (max-width:900px){
+  .nav{display:none}
+  .grid,.steps{grid-template-columns:1fr 1fr}
+}
+@media (max-width:620px){
+  section{padding:76px 0}
+  .hero{padding-top:120px}
+  .grid,.steps,.plans{grid-template-columns:1fr}
+  .shot{margin-top:52px;border-radius:12px 12px 0 0}
+  .formats{margin-top:52px}
+  .top .btn.ghost{display:none}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="logo" href="#intro" aria-label="Meow-PDF 홈">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5c.67 0 1.35.09 2 .26 1.78-2 5.03-2.84 6.42-2.26 1.4.58-.42 7-.42 7 .57 1.07 1 2.24 1 3.44C21 17.9 16.97 21 12 21s-9-3-9-7.56c0-1.25.5-2.4 1-3.44 0 0-1.89-6.42-.5-7 1.39-.58 4.72.23 6.5 2.23A9.04 9.04 0 0 1 12 5Z"/><path d="M8 14v.5"/><path d="M16 14v.5"/><path d="M11.25 16.25h1.5L12 17l-.75-.75Z"/></svg>
+      Meow-PDF
+    </a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="#intro">소개</a>
+      <a href="#features">기능</a>
+      <a href="#how">사용법</a>
+      <a href="#price">요금</a>
+      <a href="#contact">문의</a>
+    </nav>
+    <div class="hact">
+      <label class="langsel" title="언어 · Language">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+        <select id="langSel" aria-label="언어 · Language"><option value="ko">한국어</option><option value="en">English</option><option value="ja">日本語</option><option value="zh">中文</option></select>
+      </label>
+      <a class="btn sm" href="/edit">편집 시작</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="intro" style="padding-bottom:0">
+    <div class="wrap">
+      <div class="appicon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 5c.67 0 1.35.09 2 .26 1.78-2 5.03-2.84 6.42-2.26 1.4.58-.42 7-.42 7 .57 1.07 1 2.24 1 3.44C21 17.9 16.97 21 12 21s-9-3-9-7.56c0-1.25.5-2.4 1-3.44 0 0-1.89-6.42-.5-7 1.39-.58 4.72.23 6.5 2.23A9.04 9.04 0 0 1 12 5Z"/><path d="M8 14v.5"/><path d="M16 14v.5"/><path d="M11.25 16.25h1.5L12 17l-.75-.75Z"/></svg>
+      </div>
+      <h1>Meow-PDF</h1>
+      <p class="sub">설치 없이 브라우저에서 바로 쓰는 PDF 편집기. 글자를 눌러 고치고, 그리고, 합치고, 내보내세요.</p>
+      <div class="cta">
+        <a class="btn" href="/edit">편집 시작하기</a>
+      </div>
+      <p class="note">회원가입 없이 바로 사용 · 파일은 브라우저에서만 처리됩니다</p>
+
+      <div class="formats">
+        <p>이런 파일을 열 수 있습니다</p>
+        <div class="fmtrow"><span>PDF</span><span>PPTX</span><span>HWP</span><span>DOCX</span><span>MPDF</span><span>PNG</span></div>
+      </div>
+
+      <div class="shot">
+        <div class="bar"><i></i><i></i><i></i><b>Meow-PDF — 편집 화면</b></div>
+        <img src="assets/editor.webp" width="1800" height="1125" alt="Meow-PDF 편집 화면: PDF 문서에 형광펜과 펜으로 표시한 모습" fetchpriority="high">
+      </div>
+    </div>
+  </section>
+
+  <section id="features" class="alt">
+    <div class="wrap">
+      <div class="eyebrow">기능</div>
+      <h2>PDF 작업에 필요한 것만 담았습니다</h2>
+      <p class="lead">복잡한 설치도, 무거운 프로그램도 필요 없습니다. 열고, 고치고, 저장하면 끝입니다.</p>
+      <div class="grid">
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg></div><h3>글자 바로 수정</h3><p>PDF 안의 글자를 눌러 고칩니다. 글꼴, 크기, 굵게, 기울임, 색, 배경색, 왼쪽 · 가운데 · 오른쪽 정렬을 지원합니다.</p></div>
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></div><h3>그리기와 도형</h3><p>펜, 형광펜, 직선, 화살표, 사각형, 원, 별, 지우개로 문서에 표시하고 이미지와 메모, 음성 녹음도 넣을 수 있습니다. 형광펜은 글자를 가리지 않고 글줄에 맞춰 칠해집니다.</p></div>
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></div><h3>문서 관리</h3><p>여러 문서를 탭으로 열고, 페이지를 정리하고, PDF를 합치고, 용량을 줄입니다.</p></div>
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 21h16"/></svg></div><h3>다양한 저장</h3><p>PDF와 편집 상태를 유지하는 MPDF로 저장하고, PPTX(페이지 한 장이 슬라이드 한 장), Word(.docx), PNG로 내보냅니다.</p></div>
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div><h3>휴대폰에서도</h3><p>화면이 작아지면 모바일 화면으로 바뀝니다. 두 손가락 확대 · 축소와 좌우 쓸어 넘기기를 지원합니다.</p></div>
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 9h.01M11 9h.01M15 9h.01M7 13h10"/></svg></div><h3>내 방식대로 설정</h3><p>단축키를 직접 바꾸고, 도구 모음을 상단이나 좌측에 두고, 화면 밝기를 조절합니다. 어두운 · 밝은 · 프루티거 에어로 · 핑크세상 · 한국 · 일본 테마를 고를 수 있고, 개발자 콘솔(프리미엄)에서는 명령어로 빠르게 조작합니다.</p></div>
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" stroke-dasharray="4 3"/><path d="M9 9h6v6H9z"/></svg></div><h3>영역 지정과 레이어</h3><p>영역을 사각형이나 자유 형태로 지정해 그림과 도형의 일부를 오리고, 옮기고, 크기를 바꿉니다. 자동 레이어와 그림판식 수동 레이어를 고를 수 있고, 레이어는 끌어서 순서를 바꿉니다.</p></div>
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M15 4v16"/></svg></div><h3>멀티작업</h3><p>문서를 보면서 옆 패널에서 다른 파일, 웹페이지, 계산기, 번역 · 사전을 함께 엽니다. 빈 문서와 병합 문서도 멀티작업 탭으로 열리고, 탭은 끌어서 순서를 바꿉니다. (프리미엄)</p></div>
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg></div><h3>발표 모드</h3><p>전체 화면으로 발표하며 펜과 형광펜으로 표시합니다. 레이저 포인터는 지나간 자리에 잔상을 남기고, 페이지 이동 연출은 설정에서 켜고 끌 수 있습니다.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="eyebrow">사용법</div>
+      <h2>세 단계면 충분합니다</h2>
+      <div class="steps">
+        <div class="step"><h3>파일 열기</h3><p>PDF를 끌어다 놓거나 열기를 눌러 선택합니다. 빈 문서로 시작할 수도 있습니다.</p></div>
+        <div class="step"><h3>편집하기</h3><p>글자를 고치거나 그림, 도형, 이미지, 메모를 넣어 필요한 만큼 손봅니다.</p></div>
+        <div class="step"><h3>저장하기</h3><p>PDF로 내려받거나 MPDF, PPTX로 내보냅니다. 인쇄와 발표 모드도 쓸 수 있습니다.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="price" class="alt">
+    <div class="wrap">
+      <div class="eyebrow">요금</div>
+      <h2>기본 기능은 무료, 프리미엄은 월 1,200원부터</h2>
+      <p class="lead"><b style="color:var(--text)">월간 구독 1,200원</b> 또는 <b style="color:var(--text)">연간 구독 10,500원</b>(월 875원)을 고를 수 있어요. 결제일마다 <b style="color:var(--text)">자동으로 결제</b>되고, <b style="color:var(--text)">언제든 해지</b>할 수 있으며 해지해도 이미 낸 기간은 끝까지 이용할 수 있습니다. 이용 키는 발급일로부터 3개월간 이용할 수 있습니다.</p>
+      <div class="plans">
+        <div class="plan">
+          <h3>무료</h3>
+          <div class="price">0원</div>
+          <ul>
+            <li>글자 수정, 그리기, 도형, 이미지, 메모</li>
+            <li>PDF 저장, 인쇄, 발표 모드</li>
+            <li>전체 페이지 관리(회전 · 순서 · 그룹), 다양한 형식 열기</li>
+            <li>여러 문서 탭 작업</li>
+          </ul>
+          <a class="btn ghost" href="/edit">무료로 시작</a>
+        </div>
+        <div class="plan pro">
+          <h3>월간 구독</h3>
+          <div class="price">1,200원<small>/ 월</small></div>
+          <p class="pnote">매달 자동결제 · 언제든 해지</p>
+          <ul>
+            <li>프리미엄 기능 전체 이용</li>
+            <li>부담 없이 한 달씩 이용</li>
+            <li>해지하면 다음 결제부터 청구되지 않아요</li>
+          </ul>
+          <a class="btn" href="/edit">월간 구독 시작</a>
+        </div>
+        <div class="plan pro best">
+          <span class="ptag">27% 저렴</span>
+          <h3>연간 구독</h3>
+          <div class="price">10,500원<small>/ 년</small></div>
+          <p class="pnote">월 875원 · 매년 자동결제 · 언제든 해지</p>
+          <ul>
+            <li>파일 압축, 표 삽입, 전체 페이지 디지털화, 프리미엄 · 커스텀 테마</li>
+            <li>PPTX 내보내기, 음성 녹음, 멀티작업, 페이지 번역, 개발자 콘솔</li>
+            <li>대학생 인증(.ac.kr, .edu) 또는 이용 키로도 이용 가능</li>
+          </ul>
+          <a class="btn" href="/edit">연간 구독 시작</a>
+        </div>
+      </div>
+      <button type="button" class="btn ghost" id="premDetailBtn" style="margin-top:16px">상품 상세 · 구독 · 환불 안내</button>
+    </div>
+  </section>
+
+  <section class="closing">
+    <div class="wrap">
+      <h2>지금 바로 열어 보세요</h2>
+      <p>설치도 가입도 필요 없습니다. 브라우저에서 PDF를 끌어다 놓으면 시작됩니다.</p>
+      <a class="btn" href="/edit">편집 시작하기</a>
+    </div>
+  </section>
+</main>
+
+<dialog id="premDetail" class="pdd"><form method="dialog"><div class="pdh"><h3>프리미엄 상품 상세</h3><button class="pdx" aria-label="닫기">×</button></div></form><div class="pdb"><h4>상품 정보</h4>
+<p>상품명: Meow-PDF 프리미엄 월간 구독 · <b>1,200원 / 월</b> (부가세 포함)<br>상품명: Meow-PDF 프리미엄 연간 구독 · <b>10,500원 / 년</b> (부가세 포함, 월 환산 875원)</p>
+<h4>이용 기간</h4>
+<ul>
+<li><b>구독(자동결제)</b>: 카드를 등록하면 첫 결제가 바로 이뤄지고, 이후 <b>월간은 매달 · 연간은 매년 같은 날 자동으로 결제</b>됩니다. 결제할 때마다 이용 기간이 1개월 또는 1년씩 더해집니다.</li>
+<li><b>구독 해지</b>: 계정 창의 ‘구독 해지’로 언제든 해지할 수 있습니다. 해지하면 <b>다음 결제부터 청구되지 않으며</b>, 이미 결제한 기간은 만료일까지 계속 이용할 수 있습니다.</li>
+<li><b>결제 실패</b>: 정기결제가 실패하면 하루 간격으로 최대 3번 다시 시도하고, 끝내 실패하면 구독이 종료됩니다. 이미 결제한 기간은 유지됩니다.</li>
+<li><b>이용 키</b>: 발급일로부터 <b>3개월</b>간 이용할 수 있습니다. 키를 입력하면 키의 만료일까지 프리미엄이 적용됩니다.</li>
+<li><b>대학생 인증</b>: 학교 이메일(.ac.kr, .edu)로 인증한 계정은 인증이 유지되는 동안 이용할 수 있습니다.</li>
+<li>이용 기간이 끝나면 무료 기능으로 전환되며, 프리미엄 기능만 제한됩니다. 저장해 둔 파일에는 영향이 없습니다.</li>
+</ul>
+<h4>제공 기능</h4>
+<p>PDF 압축, PPTX 내보내기, 음성 녹음 및 MP3 내보내기, 메모, 표 삽입, 전체 페이지 디지털화, 멀티작업(계산기 · 번역 · 사전), 페이지 번역, 개발자 콘솔, 프리미엄 테마</p>
+<h4>환불 안내</h4>
+<ul>
+<li>환불 가능 기간은 결제일로부터 <b>7일</b>입니다.</li>
+<li><b>단순 변심</b>(사용 여부와 관계없이 마음이 바뀐 경우)은 환불되지 않습니다.</li>
+<li>다음의 경우에는 환불할 수 있습니다. ① 시스템 오류로 결제되었으나 프리미엄이 적용되지 않은 경우 ② 안내된 상품 또는 기능이 제공되지 않은 경우</li>
+<li>구독 해지는 <b>다음 결제부터</b> 적용되며, 이미 결제된 금액은 위 ①②에 해당할 때만 환불됩니다.</li>
+<li>환불 요청: <a href="mailto:contact@meow-pdf.com">contact@meow-pdf.com</a> (결제한 이메일과 주문 내용을 적어 주세요.) 환불이 확정되면 결제 수단으로 취소 처리하며, 처리 시점은 결제 수단에 따라 다를 수 있습니다.</li>
+</ul></div></dialog>
+<footer id="contact">
+  <div class="wrap">
+    <div class="brand">Meow-PDF</div>
+    <nav class="links" aria-label="바로가기">
+      <a href="#features">기능</a>
+      <a href="#how">사용법</a>
+      <a href="#price">요금</a>
+      <a href="/business">사업자 정보</a>
+      <a href="#refund" id="refundLink">환불정책</a>
+      <a href="https://github.com/architect0509/meow-PDF" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="/edit">편집 시작</a>
+    </nav>
+    <address class="info">
+      <span>상호: 타니아 (Thaniya project)</span>
+      <span>대표자명: 홍재현</span>
+      <span>사업자 등록번호: 401-23-95257</span>
+      <span>주소: 경기도 부천시 원미구 중동로 108 (중동, 팰리스카운티) 116동 1003호</span>
+      <span>전화: 010-9703-0061</span>
+      <span><a href="/business">사업자 정보 자세히</a></span>
+      <span>문의: <a href="mailto:contact@meow-pdf.com">contact@meow-pdf.com</a></span>
+    </address>
+    <details class="refund" id="refund">
+      <summary>환불정책</summary>
+      <p>환불 가능 기간은 결제일로부터 7일입니다.</p>
+      <p>단순 변심으로 인한 환불은 불가합니다. 시스템 오류 또는 상품 미제공 사유로는 환불이 가능합니다.</p>
+      <p>환불 요청: <a href="mailto:contact@meow-pdf.com">contact@meow-pdf.com</a></p>
+    </details>
+    <div class="copy">© 2026 Thaniya project. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  (function(){var b=document.getElementById('premDetailBtn'),d=document.getElementById('premDetail');if(b&&d&&d.showModal)b.addEventListener('click',function(){d.showModal();});if(d)d.addEventListener('click',function(e){if(e.target===d)d.close();});})();
+  (function(){var l=document.getElementById('refundLink'),d=document.getElementById('refund');if(l&&d)l.addEventListener('click',function(){d.open=true;});})();
+(function(){
+  /* 파일로 직접 열었을 때(file://)는 /edit 주소가 없으므로 같은 폴더의 편집기 파일로 연결 */
+  if(location.protocol==='file:'){
+    document.querySelectorAll('a[href="/edit"]').forEach(function(a){a.setAttribute('href','edit.html');});
+  }
+  var t=document.getElementById('top');
+  function f(){t.classList.toggle('scrolled',window.scrollY>8)}
+  f();window.addEventListener('scroll',f,{passive:true});
+})();
+</script>
+<script>
+/* 언어 설정: 여기서 고른 언어는 편집기(같은 사이트의 meowLang)에도 그대로 적용돼요 */
+(function(){
+  var D={"en":{"Meow-PDF — 설치 없이 브라우저에서 쓰는 PDF 편집기":"Meow-PDF — A PDF editor that runs in your browser, no install","PDF 속 글자를 눌러 고치고, 그리고, 합치고, 다른 형식으로 내보내세요. 설치 없이 컴퓨터와 휴대폰에서 바로 사용할 수 있습니다.":"Click the text in a PDF to fix it, draw, merge, and export to other formats. Works right away on computers and phones with nothing to install.","설치 없이 브라우저에서 쓰는 PDF 편집기":"A PDF editor that runs in your browser, no install","Meow-PDF 홈":"Meow-PDF home","주요 메뉴":"Main menu","소개":"About","기능":"Features","사용법":"How it works","요금":"Pricing","문의":"Contact","편집 시작":"Start editing","설치 없이 브라우저에서 바로 쓰는 PDF 편집기. 글자를 눌러 고치고, 그리고, 합치고, 내보내세요.":"A PDF editor that works right in your browser. Click text to fix it, draw, merge, and export.","편집 시작하기":"Start editing","회원가입 없이 바로 사용 · 파일은 브라우저에서만 처리됩니다":"Use it right away without signing up · Files are processed only in your browser","이런 파일을 열 수 있습니다":"Files you can open","Meow-PDF — 편집 화면":"Meow-PDF — editor screen","PDF 작업에 필요한 것만 담았습니다":"Just what you need for PDF work","복잡한 설치도, 무거운 프로그램도 필요 없습니다. 열고, 고치고, 저장하면 끝입니다.":"No complicated setup or heavy software. Open, edit, save — done.","글자 바로 수정":"Edit text directly","PDF 안의 글자를 눌러 고칩니다. 글꼴, 크기, 굵게, 기울임, 색, 배경색, 왼쪽 · 가운데 · 오른쪽 정렬을 지원합니다.":"Click any text in a PDF to change it. Supports font, size, bold, italic, color, background color, and left · center · right alignment.","그리기와 도형":"Drawing and shapes","펜, 형광펜, 직선, 화살표, 사각형, 원, 별, 지우개로 문서에 표시하고 이미지와 메모, 음성 녹음도 넣을 수 있습니다. 형광펜은 글자를 가리지 않고 글줄에 맞춰 칠해집니다.":"Mark up documents with pen, highlighter, line, arrow, rectangle, circle, star, and eraser, and add images, notes, and voice recordings. The highlighter follows text lines without covering the letters.","문서 관리":"Document management","여러 문서를 탭으로 열고, 페이지를 정리하고, PDF를 합치고, 용량을 줄입니다.":"Open several documents in tabs, organize pages, merge PDFs, and reduce file size.","다양한 저장":"Many ways to save","PDF와 편집 상태를 유지하는 MPDF로 저장하고, PPTX(페이지 한 장이 슬라이드 한 장), Word(.docx), PNG로 내보냅니다.":"Save as PDF or MPDF (keeps your edits editable), and export to PPTX (one page per slide), Word (.docx), and PNG.","휴대폰에서도":"On your phone too","화면이 작아지면 모바일 화면으로 바뀝니다. 두 손가락 확대 · 축소와 좌우 쓸어 넘기기를 지원합니다.":"Switches to a mobile layout on small screens, with pinch to zoom and swipe to turn pages.","내 방식대로 설정":"Set it up your way","단축키를 직접 바꾸고, 도구 모음을 상단이나 좌측에 두고, 화면 밝기를 조절합니다. 어두운 · 밝은 · 프루티거 에어로 · 핑크세상 · 한국 · 일본 테마를 고를 수 있고, 개발자 콘솔(프리미엄)에서는 명령어로 빠르게 조작합니다.":"Customize shortcuts, place the toolbar on the top or left, and adjust screen brightness. Choose Dark · Light · Frutiger Aero · Pink World · Korea · Japan themes, and use the developer console (Premium) to work fast with commands.","영역 지정과 레이어":"Regions and layers","영역을 사각형이나 자유 형태로 지정해 그림과 도형의 일부를 오리고, 옮기고, 크기를 바꿉니다. 자동 레이어와 그림판식 수동 레이어를 고를 수 있고, 레이어는 끌어서 순서를 바꿉니다.":"Select a rectangular or freeform region to cut, move, and resize parts of drawings and shapes. Choose automatic layers or paint-style manual layers, and drag layers to reorder them.","멀티작업":"Multitasking","문서를 보면서 옆 패널에서 다른 파일, 웹페이지, 계산기, 번역 · 사전을 함께 엽니다. 빈 문서와 병합 문서도 멀티작업 탭으로 열리고, 탭은 끌어서 순서를 바꿉니다. (프리미엄)":"While viewing a document, open other files, web pages, a calculator, or translation · dictionary in the side panel. Blank and merged documents also open as multitask tabs, which you can drag to reorder. (Premium)","발표 모드":"Presentation mode","전체 화면으로 발표하며 펜과 형광펜으로 표시합니다. 레이저 포인터는 지나간 자리에 잔상을 남기고, 페이지 이동 연출은 설정에서 켜고 끌 수 있습니다.":"Present full screen and mark up with pen and highlighter. The laser pointer leaves a trail, and page transition effects can be turned on or off in settings.","세 단계면 충분합니다":"Three steps is all it takes","파일 열기":"Open a file","PDF를 끌어다 놓거나 열기를 눌러 선택합니다. 빈 문서로 시작할 수도 있습니다.":"Drag and drop a PDF or click Open to choose one. You can also start with a blank document.","편집하기":"Edit","글자를 고치거나 그림, 도형, 이미지, 메모를 넣어 필요한 만큼 손봅니다.":"Fix text or add drawings, shapes, images, and notes — as much as you need.","저장하기":"Save","PDF로 내려받거나 MPDF, PPTX로 내보냅니다. 인쇄와 발표 모드도 쓸 수 있습니다.":"Download as PDF or export to MPDF or PPTX. Printing and presentation mode are available too.","기본 기능은 무료, 프리미엄은 월 1,200원부터":"Core features are free; Premium starts at ₩1,200/month","월간 구독 1,200원":"Monthly plan ₩1,200","또는":"or","연간 구독 10,500원":"Yearly plan ₩10,500","(월 875원)을 고를 수 있어요. 결제일마다":"(₩875/month). Each billing date it is","자동으로 결제":"charged automatically","되고,":", and you can","언제든 해지":"cancel anytime","할 수 있으며 해지해도 이미 낸 기간은 끝까지 이용할 수 있습니다. 이용 키는 발급일로부터 3개월간 이용할 수 있습니다.":"— after canceling you can still use the period you've already paid for. Access keys are valid for 3 months from issue.","무료":"Free","0원":"₩0","글자 수정, 그리기, 도형, 이미지, 메모":"Edit text, draw, shapes, images, notes","PDF 저장, 인쇄, 발표 모드":"Save PDF, print, presentation mode","전체 페이지 관리(회전 · 순서 · 그룹), 다양한 형식 열기":"Manage all pages (rotate · reorder · group), open many formats","여러 문서 탭 작업":"Work with multiple document tabs","무료로 시작":"Start for free","월간 구독":"Monthly plan","1,200원":"₩1,200","/ 월":"/ month","매달 자동결제 · 언제든 해지":"Billed monthly · Cancel anytime","프리미엄 기능 전체 이용":"All Premium features","부담 없이 한 달씩 이용":"Try it a month at a time","해지하면 다음 결제부터 청구되지 않아요":"After canceling, you won't be charged again","월간 구독 시작":"Start monthly plan","27% 저렴":"27% off","연간 구독":"Yearly plan","10,500원":"₩10,500","/ 년":"/ year","월 875원 · 매년 자동결제 · 언제든 해지":"₩875/month · Billed yearly · Cancel anytime","파일 압축, 표 삽입, 전체 페이지 디지털화, 프리미엄 · 커스텀 테마":"File compression, tables, full-document digitizing, Premium · custom themes","PPTX 내보내기, 음성 녹음, 멀티작업, 페이지 번역, 개발자 콘솔":"PPTX export, voice recording, multitasking, page translation, developer console","대학생 인증(.ac.kr, .edu) 또는 이용 키로도 이용 가능":"Also available with student verification (.ac.kr, .edu) or an access key","연간 구독 시작":"Start yearly plan","상품 상세 · 구독 · 환불 안내":"Product details · Subscription · Refunds","지금 바로 열어 보세요":"Open it now","설치도 가입도 필요 없습니다. 브라우저에서 PDF를 끌어다 놓으면 시작됩니다.":"No install, no sign-up. Drop a PDF into your browser to begin.","프리미엄 상품 상세":"Premium product details","닫기":"Close","상품 정보":"Product information","상품명: Meow-PDF 프리미엄 월간 구독 ·":"Product: Meow-PDF Premium Monthly ·","1,200원 / 월":"₩1,200 / month","(부가세 포함)":"(VAT included)","상품명: Meow-PDF 프리미엄 연간 구독 ·":"Product: Meow-PDF Premium Yearly ·","10,500원 / 년":"₩10,500 / year","(부가세 포함, 월 환산 875원)":"(VAT included, ₩875 per month)","이용 기간":"Usage period","구독(자동결제)":"Subscription (auto-billing)",": 카드를 등록하면 첫 결제가 바로 이뤄지고, 이후":": when you register a card, the first payment is made right away, and after that","월간은 매달 · 연간은 매년 같은 날 자동으로 결제":"monthly plans are charged every month · yearly plans every year on the same day","됩니다. 결제할 때마다 이용 기간이 1개월 또는 1년씩 더해집니다.":". Each payment adds 1 month or 1 year of access.","구독 해지":"Canceling",": 계정 창의 ‘구독 해지’로 언제든 해지할 수 있습니다. 해지하면":": Cancel anytime with ‘Cancel subscription’ in the account window. After canceling,","다음 결제부터 청구되지 않으며":"you won't be charged from the next billing date",", 이미 결제한 기간은 만료일까지 계속 이용할 수 있습니다.":", and you can keep using the period already paid for until it ends.","결제 실패":"Failed payments",": 정기결제가 실패하면 하루 간격으로 최대 3번 다시 시도하고, 끝내 실패하면 구독이 종료됩니다. 이미 결제한 기간은 유지됩니다.":": if a recurring payment fails, it is retried up to 3 times, once a day. If it still fails, the subscription ends. The period already paid for is kept.","이용 키":"Access key",": 발급일로부터":": usable for","3개월":"3 months","간 이용할 수 있습니다. 키를 입력하면 키의 만료일까지 프리미엄이 적용됩니다.":"from the date of issue. Entering a key applies Premium until the key expires.","대학생 인증":"Student verification",": 학교 이메일(.ac.kr, .edu)로 인증한 계정은 인증이 유지되는 동안 이용할 수 있습니다.":": accounts verified with a school email (.ac.kr, .edu) can use Premium while verification remains valid.","이용 기간이 끝나면 무료 기능으로 전환되며, 프리미엄 기능만 제한됩니다. 저장해 둔 파일에는 영향이 없습니다.":"When your period ends, you switch to the free features and only Premium features are limited. Your saved files are not affected.","제공 기능":"Included features","PDF 압축, PPTX 내보내기, 음성 녹음 및 MP3 내보내기, 메모, 표 삽입, 전체 페이지 디지털화, 멀티작업(계산기 · 번역 · 사전), 페이지 번역, 개발자 콘솔, 프리미엄 테마":"PDF compression, PPTX export, voice recording and MP3 export, notes, tables, full-document digitizing, multitasking (calculator · translation · dictionary), page translation, developer console, Premium themes","환불 안내":"Refund policy","환불 가능 기간은 결제일로부터":"Refunds can be requested within","7일":"7 days","입니다.":"of payment.","단순 변심":"Change of mind","(사용 여부와 관계없이 마음이 바뀐 경우)은 환불되지 않습니다.":"(whether or not the service was used) is not eligible for a refund.","다음의 경우에는 환불할 수 있습니다. ① 시스템 오류로 결제되었으나 프리미엄이 적용되지 않은 경우 ② 안내된 상품 또는 기능이 제공되지 않은 경우":"Refunds are possible in these cases: ① you were charged but Premium wasn't applied due to a system error ② the product or feature described was not provided","구독 해지는":"Canceling a subscription applies","다음 결제부터":"from the next billing date","적용되며, 이미 결제된 금액은 위 ①②에 해당할 때만 환불됩니다.":"; amounts already paid are refunded only in cases ①② above.","환불 요청:":"Refund requests:","(결제한 이메일과 주문 내용을 적어 주세요.) 환불이 확정되면 결제 수단으로 취소 처리하며, 처리 시점은 결제 수단에 따라 다를 수 있습니다.":"(Please include the email you paid with and your order details.) Once a refund is confirmed, it is canceled through your payment method; timing may vary by payment method.","바로가기":"Links","사업자 정보":"Business information","환불정책":"Refund policy","상호: 타니아 (Thaniya project)":"Company: 타니아 (Thaniya project)","대표자명: 홍재현":"Representative: 홍재현","사업자 등록번호: 401-23-95257":"Business registration no.: 401-23-95257","주소: 경기도 부천시 원미구 중동로 108 (중동, 팰리스카운티) 116동 1003호":"Address: 경기도 부천시 원미구 중동로 108 (중동, 팰리스카운티) 116동 1003호","전화: 010-9703-0061":"Phone: 010-9703-0061","사업자 정보 자세히":"Business details","문의:":"Contact:","환불 가능 기간은 결제일로부터 7일입니다.":"Refunds can be requested within 7 days of payment.","단순 변심으로 인한 환불은 불가합니다. 시스템 오류 또는 상품 미제공 사유로는 환불이 가능합니다.":"Refunds for a change of mind are not available. Refunds are possible for system errors or if the product was not provided."},"ja":{"Meow-PDF — 설치 없이 브라우저에서 쓰는 PDF 편집기":"Meow-PDF — インストール不要、ブラウザで使えるPDFエディター","PDF 속 글자를 눌러 고치고, 그리고, 합치고, 다른 형식으로 내보내세요. 설치 없이 컴퓨터와 휴대폰에서 바로 사용할 수 있습니다.":"PDFの文字をクリックして修正し、描き込み、結合し、ほかの形式に書き出せます。インストール不要で、パソコンでもスマホでもすぐに使えます。","설치 없이 브라우저에서 쓰는 PDF 편집기":"インストール不要、ブラウザで使えるPDFエディター","Meow-PDF 홈":"Meow-PDF ホーム","주요 메뉴":"メインメニュー","소개":"紹介","기능":"機能","사용법":"使い方","요금":"料金","문의":"お問い合わせ","편집 시작":"編集を始める","설치 없이 브라우저에서 바로 쓰는 PDF 편집기. 글자를 눌러 고치고, 그리고, 합치고, 내보내세요.":"ブラウザですぐ使えるPDFエディター。文字をクリックして修正し、描き込み、結合し、書き出せます。","편집 시작하기":"編集を始める","회원가입 없이 바로 사용 · 파일은 브라우저에서만 처리됩니다":"会員登録なしですぐ使えます · ファイルはブラウザ内だけで処理されます","이런 파일을 열 수 있습니다":"開けるファイル","Meow-PDF — 편집 화면":"Meow-PDF — 編集画面","PDF 작업에 필요한 것만 담았습니다":"PDF作業に必要なものだけを","복잡한 설치도, 무거운 프로그램도 필요 없습니다. 열고, 고치고, 저장하면 끝입니다.":"面倒なインストールも重いソフトも不要。開いて、直して、保存すれば完了です。","글자 바로 수정":"文字をそのまま修正","PDF 안의 글자를 눌러 고칩니다. 글꼴, 크기, 굵게, 기울임, 색, 배경색, 왼쪽 · 가운데 · 오른쪽 정렬을 지원합니다.":"PDF内の文字をクリックして修正します。フォント、サイズ、太字、斜体、色、背景色、左 · 中央 · 右揃えに対応しています。","그리기와 도형":"描画と図形","펜, 형광펜, 직선, 화살표, 사각형, 원, 별, 지우개로 문서에 표시하고 이미지와 메모, 음성 녹음도 넣을 수 있습니다. 형광펜은 글자를 가리지 않고 글줄에 맞춰 칠해집니다.":"ペン、蛍光ペン、直線、矢印、四角形、円、星、消しゴムで書き込み、画像やメモ、音声録音も追加できます。蛍光ペンは文字を隠さず行に合わせて塗られます。","문서 관리":"ドキュメント管理","여러 문서를 탭으로 열고, 페이지를 정리하고, PDF를 합치고, 용량을 줄입니다.":"複数の文書をタブで開き、ページを整理し、PDFを結合し、容量を減らします。","다양한 저장":"多彩な保存","PDF와 편집 상태를 유지하는 MPDF로 저장하고, PPTX(페이지 한 장이 슬라이드 한 장), Word(.docx), PNG로 내보냅니다.":"PDFと編集状態を保つMPDFで保存し、PPTX(1ページ=1スライド)、Word(.docx)、PNGに書き出せます。","휴대폰에서도":"スマホでも","화면이 작아지면 모바일 화면으로 바뀝니다. 두 손가락 확대 · 축소와 좌우 쓸어 넘기기를 지원합니다.":"画面が小さくなるとモバイル表示に切り替わります。2本指でのズームと左右スワイプに対応しています。","내 방식대로 설정":"自分好みに設定","단축키를 직접 바꾸고, 도구 모음을 상단이나 좌측에 두고, 화면 밝기를 조절합니다. 어두운 · 밝은 · 프루티거 에어로 · 핑크세상 · 한국 · 일본 테마를 고를 수 있고, 개발자 콘솔(프리미엄)에서는 명령어로 빠르게 조작합니다.":"ショートカットを変更し、ツールバーを上部または左側に置き、画面の明るさを調整できます。ダーク · ライト · フルーティガーエアロ · ピンクワールド · 韓国 · 日本のテーマを選べ、開発者コンソール(プレミアム)ではコマンドで素早く操作できます。","영역 지정과 레이어":"範囲指定とレイヤー","영역을 사각형이나 자유 형태로 지정해 그림과 도형의 일부를 오리고, 옮기고, 크기를 바꿉니다. 자동 레이어와 그림판식 수동 레이어를 고를 수 있고, 레이어는 끌어서 순서를 바꿉니다.":"範囲を四角形や自由な形で指定して、絵や図形の一部を切り取り、移動し、サイズを変えます。自動レイヤーとペイント風の手動レイヤーを選べ、レイヤーはドラッグで並べ替えられます。","멀티작업":"マルチタスク","문서를 보면서 옆 패널에서 다른 파일, 웹페이지, 계산기, 번역 · 사전을 함께 엽니다. 빈 문서와 병합 문서도 멀티작업 탭으로 열리고, 탭은 끌어서 순서를 바꿉니다. (프리미엄)":"文書を見ながら、横のパネルでほかのファイル、Webページ、電卓、翻訳 · 辞書を一緒に開けます。空の文書や結合した文書もマルチタスクのタブで開き、タブはドラッグで並べ替えられます。(プレミアム)","발표 모드":"プレゼンモード","전체 화면으로 발표하며 펜과 형광펜으로 표시합니다. 레이저 포인터는 지나간 자리에 잔상을 남기고, 페이지 이동 연출은 설정에서 켜고 끌 수 있습니다.":"全画面で発表しながらペンと蛍光ペンで書き込めます。レーザーポインターは軌跡を残し、ページ切り替え演出は設定でオン・オフできます。","세 단계면 충분합니다":"3ステップで十分です","파일 열기":"ファイルを開く","PDF를 끌어다 놓거나 열기를 눌러 선택합니다. 빈 문서로 시작할 수도 있습니다.":"PDFをドラッグ&ドロップするか、「開く」を押して選びます。空の文書から始めることもできます。","편집하기":"編集する","글자를 고치거나 그림, 도형, 이미지, 메모를 넣어 필요한 만큼 손봅니다.":"文字を直したり、絵、図形、画像、メモを加えたりして、必要なだけ手直しします。","저장하기":"保存する","PDF로 내려받거나 MPDF, PPTX로 내보냅니다. 인쇄와 발표 모드도 쓸 수 있습니다.":"PDFでダウンロードするか、MPDF、PPTXに書き出します。印刷とプレゼンモードも使えます。","기본 기능은 무료, 프리미엄은 월 1,200원부터":"基本機能は無料、プレミアムは月1,200ウォンから","월간 구독 1,200원":"月額プラン 1,200ウォン","또는":"または","연간 구독 10,500원":"年額プラン 10,500ウォン","(월 875원)을 고를 수 있어요. 결제일마다":"(月875ウォン)を選べます。決済日ごとに","자동으로 결제":"自動で決済","되고,":"され、","언제든 해지":"いつでも解約","할 수 있으며 해지해도 이미 낸 기간은 끝까지 이용할 수 있습니다. 이용 키는 발급일로부터 3개월간 이용할 수 있습니다.":"でき、解約してもすでに支払った期間は最後まで利用できます。利用キーは発行日から3か月間利用できます。","무료":"無料","0원":"0ウォン","글자 수정, 그리기, 도형, 이미지, 메모":"文字修正、描画、図形、画像、メモ","PDF 저장, 인쇄, 발표 모드":"PDF保存、印刷、プレゼンモード","전체 페이지 관리(회전 · 순서 · 그룹), 다양한 형식 열기":"全ページ管理(回転 · 並べ替え · グループ)、さまざまな形式を開く","여러 문서 탭 작업":"複数の文書タブで作業","무료로 시작":"無料で始める","월간 구독":"月額プラン","1,200원":"1,200ウォン","/ 월":"/ 月","매달 자동결제 · 언제든 해지":"毎月自動決済 · いつでも解約","프리미엄 기능 전체 이용":"プレミアム機能をすべて利用","부담 없이 한 달씩 이용":"気軽に1か月ずつ利用","해지하면 다음 결제부터 청구되지 않아요":"解約すると次回から請求されません","월간 구독 시작":"月額プランを始める","27% 저렴":"27%お得","연간 구독":"年額プラン","10,500원":"10,500ウォン","/ 년":"/ 年","월 875원 · 매년 자동결제 · 언제든 해지":"月875ウォン · 毎年自動決済 · いつでも解約","파일 압축, 표 삽입, 전체 페이지 디지털화, 프리미엄 · 커스텀 테마":"ファイル圧縮、表の挿入、全ページのデジタル化、プレミアム · カスタムテーマ","PPTX 내보내기, 음성 녹음, 멀티작업, 페이지 번역, 개발자 콘솔":"PPTX書き出し、音声録音、マルチタスク、ページ翻訳、開発者コンソール","대학생 인증(.ac.kr, .edu) 또는 이용 키로도 이용 가능":"大学生認証(.ac.kr、.edu)または利用キーでも利用可能","연간 구독 시작":"年額プランを始める","상품 상세 · 구독 · 환불 안내":"商品詳細 · サブスクリプション · 返金案内","지금 바로 열어 보세요":"今すぐ開いてみてください","설치도 가입도 필요 없습니다. 브라우저에서 PDF를 끌어다 놓으면 시작됩니다.":"インストールも登録も不要です。ブラウザにPDFをドラッグ&ドロップすれば始まります。","프리미엄 상품 상세":"プレミアム商品詳細","닫기":"閉じる","상품 정보":"商品情報","상품명: Meow-PDF 프리미엄 월간 구독 ·":"商品名:Meow-PDF プレミアム月額プラン ·","1,200원 / 월":"1,200ウォン / 月","(부가세 포함)":"(付加価値税込み)","상품명: Meow-PDF 프리미엄 연간 구독 ·":"商品名:Meow-PDF プレミアム年額プラン ·","10,500원 / 년":"10,500ウォン / 年","(부가세 포함, 월 환산 875원)":"(付加価値税込み、月換算875ウォン)","이용 기간":"利用期間","구독(자동결제)":"サブスクリプション(自動決済)",": 카드를 등록하면 첫 결제가 바로 이뤄지고, 이후":":カードを登録すると初回の決済がすぐに行われ、その後は","월간은 매달 · 연간은 매년 같은 날 자동으로 결제":"月額は毎月 · 年額は毎年同じ日に自動で決済","됩니다. 결제할 때마다 이용 기간이 1개월 또는 1년씩 더해집니다.":"されます。決済のたびに利用期間が1か月または1年ずつ追加されます。","구독 해지":"サブスクリプションの解約",": 계정 창의 ‘구독 해지’로 언제든 해지할 수 있습니다. 해지하면":":アカウント画面の「サブスクリプション解約」からいつでも解約できます。解約すると","다음 결제부터 청구되지 않으며":"次回の決済から請求されず",", 이미 결제한 기간은 만료일까지 계속 이용할 수 있습니다.":"、すでに支払った期間は満了日まで引き続き利用できます。","결제 실패":"決済失敗",": 정기결제가 실패하면 하루 간격으로 최대 3번 다시 시도하고, 끝내 실패하면 구독이 종료됩니다. 이미 결제한 기간은 유지됩니다.":":定期決済に失敗した場合、1日おきに最大3回再試行し、それでも失敗するとサブスクリプションは終了します。すでに支払った期間は維持されます。","이용 키":"利用キー",": 발급일로부터":":発行日から","3개월":"3か月","간 이용할 수 있습니다. 키를 입력하면 키의 만료일까지 프리미엄이 적용됩니다.":"間利用できます。キーを入力すると、キーの有効期限までプレミアムが適用されます。","대학생 인증":"大学生認証",": 학교 이메일(.ac.kr, .edu)로 인증한 계정은 인증이 유지되는 동안 이용할 수 있습니다.":":学校のメールアドレス(.ac.kr、.edu)で認証したアカウントは、認証が有効な間利用できます。","이용 기간이 끝나면 무료 기능으로 전환되며, 프리미엄 기능만 제한됩니다. 저장해 둔 파일에는 영향이 없습니다.":"利用期間が終わると無料機能に切り替わり、プレミアム機能のみ制限されます。保存したファイルには影響ありません。","제공 기능":"提供機能","PDF 압축, PPTX 내보내기, 음성 녹음 및 MP3 내보내기, 메모, 표 삽입, 전체 페이지 디지털화, 멀티작업(계산기 · 번역 · 사전), 페이지 번역, 개발자 콘솔, 프리미엄 테마":"PDF圧縮、PPTX書き出し、音声録音とMP3書き出し、メモ、表の挿入、全ページのデジタル化、マルチタスク(電卓 · 翻訳 · 辞書)、ページ翻訳、開発者コンソール、プレミアムテーマ","환불 안내":"返金案内","환불 가능 기간은 결제일로부터":"返金可能期間は決済日から","7일":"7日","입니다.":"です。","단순 변심":"単なる気持ちの変化","(사용 여부와 관계없이 마음이 바뀐 경우)은 환불되지 않습니다.":"(利用の有無にかかわらず)による返金はできません。","다음의 경우에는 환불할 수 있습니다. ① 시스템 오류로 결제되었으나 프리미엄이 적용되지 않은 경우 ② 안내된 상품 또는 기능이 제공되지 않은 경우":"次の場合は返金できます。① システムエラーで決済されたがプレミアムが適用されなかった場合 ② 案内した商品または機能が提供されなかった場合","구독 해지는":"サブスクリプションの解約は","다음 결제부터":"次回の決済から","적용되며, 이미 결제된 금액은 위 ①②에 해당할 때만 환불됩니다.":"適用され、すでに決済された金額は上記①②に該当する場合のみ返金されます。","환불 요청:":"返金のご依頼:","(결제한 이메일과 주문 내용을 적어 주세요.) 환불이 확정되면 결제 수단으로 취소 처리하며, 처리 시점은 결제 수단에 따라 다를 수 있습니다.":"(決済したメールアドレスと注文内容をご記入ください。)返金が確定すると決済手段で取り消し処理を行います。処理時期は決済手段によって異なる場合があります。","바로가기":"リンク","사업자 정보":"事業者情報","환불정책":"返金ポリシー","상호: 타니아 (Thaniya project)":"商号:타니아 (Thaniya project)","대표자명: 홍재현":"代表者名:홍재현","사업자 등록번호: 401-23-95257":"事業者登録番号:401-23-95257","주소: 경기도 부천시 원미구 중동로 108 (중동, 팰리스카운티) 116동 1003호":"住所:경기도 부천시 원미구 중동로 108 (중동, 팰리스카운티) 116동 1003호","전화: 010-9703-0061":"電話:010-9703-0061","사업자 정보 자세히":"事業者情報の詳細","문의:":"お問い合わせ:","환불 가능 기간은 결제일로부터 7일입니다.":"返金可能期間は決済日から7日です。","단순 변심으로 인한 환불은 불가합니다. 시스템 오류 또는 상품 미제공 사유로는 환불이 가능합니다.":"気持ちの変化による返金はできません。システムエラーまたは商品未提供の場合は返金が可能です。"},"zh":{"Meow-PDF — 설치 없이 브라우저에서 쓰는 PDF 편집기":"Meow-PDF — 无需安装、在浏览器中使用的 PDF 编辑器","PDF 속 글자를 눌러 고치고, 그리고, 합치고, 다른 형식으로 내보내세요. 설치 없이 컴퓨터와 휴대폰에서 바로 사용할 수 있습니다.":"点击 PDF 中的文字即可修改，还能绘制、合并并导出为其他格式。无需安装，电脑和手机都能立即使用。","설치 없이 브라우저에서 쓰는 PDF 편집기":"无需安装、在浏览器中使用的 PDF 编辑器","Meow-PDF 홈":"Meow-PDF 首页","주요 메뉴":"主菜单","소개":"介绍","기능":"功能","사용법":"使用方法","요금":"价格","문의":"联系我们","편집 시작":"开始编辑","설치 없이 브라우저에서 바로 쓰는 PDF 편집기. 글자를 눌러 고치고, 그리고, 합치고, 내보내세요.":"在浏览器中直接使用的 PDF 编辑器。点击文字即可修改，还能绘制、合并、导出。","편집 시작하기":"开始编辑","회원가입 없이 바로 사용 · 파일은 브라우저에서만 처리됩니다":"无需注册即可使用 · 文件只在浏览器中处理","이런 파일을 열 수 있습니다":"可以打开的文件","Meow-PDF — 편집 화면":"Meow-PDF — 编辑界面","PDF 작업에 필요한 것만 담았습니다":"只保留 PDF 工作需要的功能","복잡한 설치도, 무거운 프로그램도 필요 없습니다. 열고, 고치고, 저장하면 끝입니다.":"无需复杂安装，也不用笨重的软件。打开、修改、保存，就这么简单。","글자 바로 수정":"直接修改文字","PDF 안의 글자를 눌러 고칩니다. 글꼴, 크기, 굵게, 기울임, 색, 배경색, 왼쪽 · 가운데 · 오른쪽 정렬을 지원합니다.":"点击 PDF 中的文字即可修改。支持字体、字号、粗体、斜体、颜色、背景色，以及左 · 中 · 右对齐。","그리기와 도형":"绘图与形状","펜, 형광펜, 직선, 화살표, 사각형, 원, 별, 지우개로 문서에 표시하고 이미지와 메모, 음성 녹음도 넣을 수 있습니다. 형광펜은 글자를 가리지 않고 글줄에 맞춰 칠해집니다.":"用钢笔、荧光笔、直线、箭头、矩形、圆形、星形和橡皮擦在文档上标注，还能插入图片、便签和录音。荧光笔会贴合文字行涂色，不会遮住文字。","문서 관리":"文档管理","여러 문서를 탭으로 열고, 페이지를 정리하고, PDF를 합치고, 용량을 줄입니다.":"用标签页打开多个文档，整理页面，合并 PDF，缩小文件大小。","다양한 저장":"多种保存方式","PDF와 편집 상태를 유지하는 MPDF로 저장하고, PPTX(페이지 한 장이 슬라이드 한 장), Word(.docx), PNG로 내보냅니다.":"保存为 PDF 或可保留编辑状态的 MPDF，并可导出为 PPTX（每页一张幻灯片）、Word（.docx）和 PNG。","휴대폰에서도":"手机上也能用","화면이 작아지면 모바일 화면으로 바뀝니다. 두 손가락 확대 · 축소와 좌우 쓸어 넘기기를 지원합니다.":"屏幕变小时会切换为移动版界面。支持双指缩放和左右滑动翻页。","내 방식대로 설정":"按自己的方式设置","단축키를 직접 바꾸고, 도구 모음을 상단이나 좌측에 두고, 화면 밝기를 조절합니다. 어두운 · 밝은 · 프루티거 에어로 · 핑크세상 · 한국 · 일본 테마를 고를 수 있고, 개발자 콘솔(프리미엄)에서는 명령어로 빠르게 조작합니다.":"自定义快捷键，把工具栏放在顶部或左侧，并调整屏幕亮度。可选择深色 · 浅色 · Frutiger Aero · 粉色世界 · 韩国 · 日本主题，在开发者控制台（高级版）中可用命令快速操作。","영역 지정과 레이어":"区域选择与图层","영역을 사각형이나 자유 형태로 지정해 그림과 도형의 일부를 오리고, 옮기고, 크기를 바꿉니다. 자동 레이어와 그림판식 수동 레이어를 고를 수 있고, 레이어는 끌어서 순서를 바꿉니다.":"用矩形或自由形状选择区域，剪切、移动并调整图画和形状的一部分。可选择自动图层或画图式手动图层，拖动即可调整图层顺序。","멀티작업":"多任务","문서를 보면서 옆 패널에서 다른 파일, 웹페이지, 계산기, 번역 · 사전을 함께 엽니다. 빈 문서와 병합 문서도 멀티작업 탭으로 열리고, 탭은 끌어서 순서를 바꿉니다. (프리미엄)":"查看文档的同时，在侧边面板中打开其他文件、网页、计算器或翻译 · 词典。空白文档和合并后的文档也会以多任务标签打开，标签可拖动排序。（高级版）","발표 모드":"演示模式","전체 화면으로 발표하며 펜과 형광펜으로 표시합니다. 레이저 포인터는 지나간 자리에 잔상을 남기고, 페이지 이동 연출은 설정에서 켜고 끌 수 있습니다.":"全屏演示时可用钢笔和荧光笔标注。激光笔会留下轨迹，翻页效果可在设置中开启或关闭。","세 단계면 충분합니다":"三步就够了","파일 열기":"打开文件","PDF를 끌어다 놓거나 열기를 눌러 선택합니다. 빈 문서로 시작할 수도 있습니다.":"拖放 PDF，或点击“打开”进行选择。也可以从空白文档开始。","편집하기":"编辑","글자를 고치거나 그림, 도형, 이미지, 메모를 넣어 필요한 만큼 손봅니다.":"修改文字，或添加图画、形状、图片和便签，按需调整。","저장하기":"保存","PDF로 내려받거나 MPDF, PPTX로 내보냅니다. 인쇄와 발표 모드도 쓸 수 있습니다.":"下载为 PDF，或导出为 MPDF、PPTX。也可以打印和使用演示模式。","기본 기능은 무료, 프리미엄은 월 1,200원부터":"基础功能免费，高级版每月 1,200 韩元起","월간 구독 1,200원":"月度订阅 1,200 韩元","또는":"或","연간 구독 10,500원":"年度订阅 10,500 韩元","(월 875원)을 고를 수 있어요. 결제일마다":"（每月 875 韩元）任选其一。每到付款日都会","자동으로 결제":"自动扣款","되고,":"，并且可以","언제든 해지":"随时取消","할 수 있으며 해지해도 이미 낸 기간은 끝까지 이용할 수 있습니다. 이용 키는 발급일로부터 3개월간 이용할 수 있습니다.":"，取消后已付费的期间仍可使用到结束。使用密钥自发放之日起 3 个月内有效。","무료":"免费","0원":"0 韩元","글자 수정, 그리기, 도형, 이미지, 메모":"修改文字、绘图、形状、图片、便签","PDF 저장, 인쇄, 발표 모드":"保存 PDF、打印、演示模式","전체 페이지 관리(회전 · 순서 · 그룹), 다양한 형식 열기":"管理全部页面（旋转 · 排序 · 分组），打开多种格式","여러 문서 탭 작업":"多文档标签页工作","무료로 시작":"免费开始","월간 구독":"月度订阅","1,200원":"1,200 韩元","/ 월":"/ 月","매달 자동결제 · 언제든 해지":"每月自动扣款 · 随时取消","프리미엄 기능 전체 이용":"使用全部高级功能","부담 없이 한 달씩 이용":"每次一个月，轻松无负担","해지하면 다음 결제부터 청구되지 않아요":"取消后下次起不再扣费","월간 구독 시작":"开始月度订阅","27% 저렴":"省 27%","연간 구독":"年度订阅","10,500원":"10,500 韩元","/ 년":"/ 年","월 875원 · 매년 자동결제 · 언제든 해지":"每月 875 韩元 · 每年自动扣款 · 随时取消","파일 압축, 표 삽입, 전체 페이지 디지털화, 프리미엄 · 커스텀 테마":"文件压缩、插入表格、全页数字化、高级 · 自定义主题","PPTX 내보내기, 음성 녹음, 멀티작업, 페이지 번역, 개발자 콘솔":"导出 PPTX、录音、多任务、页面翻译、开发者控制台","대학생 인증(.ac.kr, .edu) 또는 이용 키로도 이용 가능":"也可通过大学生认证（.ac.kr、.edu）或使用密钥使用","연간 구독 시작":"开始年度订阅","상품 상세 · 구독 · 환불 안내":"商品详情 · 订阅 · 退款说明","지금 바로 열어 보세요":"现在就打开试试","설치도 가입도 필요 없습니다. 브라우저에서 PDF를 끌어다 놓으면 시작됩니다.":"无需安装，也无需注册。把 PDF 拖进浏览器即可开始。","프리미엄 상품 상세":"高级版商品详情","닫기":"关闭","상품 정보":"商品信息","상품명: Meow-PDF 프리미엄 월간 구독 ·":"商品名称：Meow-PDF 高级版月度订阅 ·","1,200원 / 월":"1,200 韩元 / 月","(부가세 포함)":"（含增值税）","상품명: Meow-PDF 프리미엄 연간 구독 ·":"商品名称：Meow-PDF 高级版年度订阅 ·","10,500원 / 년":"10,500 韩元 / 年","(부가세 포함, 월 환산 875원)":"（含增值税，折合每月 875 韩元）","이용 기간":"使用期间","구독(자동결제)":"订阅（自动扣款）",": 카드를 등록하면 첫 결제가 바로 이뤄지고, 이후":"：登记银行卡后会立即进行首次付款，之后","월간은 매달 · 연간은 매년 같은 날 자동으로 결제":"月度订阅每月、年度订阅每年在同一天自动扣款","됩니다. 결제할 때마다 이용 기간이 1개월 또는 1년씩 더해집니다.":"。每次付款会增加 1 个月或 1 年的使用期间。","구독 해지":"取消订阅",": 계정 창의 ‘구독 해지’로 언제든 해지할 수 있습니다. 해지하면":"：可随时在账户窗口中点击“取消订阅”。取消后","다음 결제부터 청구되지 않으며":"下次起不再扣费",", 이미 결제한 기간은 만료일까지 계속 이용할 수 있습니다.":"，已付费的期间可继续使用到到期日。","결제 실패":"扣款失败",": 정기결제가 실패하면 하루 간격으로 최대 3번 다시 시도하고, 끝내 실패하면 구독이 종료됩니다. 이미 결제한 기간은 유지됩니다.":"：定期扣款失败时，每隔一天重试，最多 3 次；仍失败则订阅终止。已付费的期间会保留。","이용 키":"使用密钥",": 발급일로부터":"：自发放之日起","3개월":"3 个月","간 이용할 수 있습니다. 키를 입력하면 키의 만료일까지 프리미엄이 적용됩니다.":"内可用。输入密钥后，高级版将生效至密钥到期日。","대학생 인증":"大学生认证",": 학교 이메일(.ac.kr, .edu)로 인증한 계정은 인증이 유지되는 동안 이용할 수 있습니다.":"：用学校邮箱（.ac.kr、.edu）认证的账户，在认证有效期间可以使用。","이용 기간이 끝나면 무료 기능으로 전환되며, 프리미엄 기능만 제한됩니다. 저장해 둔 파일에는 영향이 없습니다.":"使用期间结束后会切换为免费功能，只有高级功能会受到限制。已保存的文件不受影响。","제공 기능":"提供功能","PDF 압축, PPTX 내보내기, 음성 녹음 및 MP3 내보내기, 메모, 표 삽입, 전체 페이지 디지털화, 멀티작업(계산기 · 번역 · 사전), 페이지 번역, 개발자 콘솔, 프리미엄 테마":"PDF 压缩、导出 PPTX、录音及导出 MP3、便签、插入表格、全页数字化、多任务（计算器 · 翻译 · 词典）、页面翻译、开发者控制台、高级主题","환불 안내":"退款说明","환불 가능 기간은 결제일로부터":"可退款期间为自付款日起","7일":"7 天","입니다.":"。","단순 변심":"因个人原因改变主意","(사용 여부와 관계없이 마음이 바뀐 경우)은 환불되지 않습니다.":"（无论是否使用）不予退款。","다음의 경우에는 환불할 수 있습니다. ① 시스템 오류로 결제되었으나 프리미엄이 적용되지 않은 경우 ② 안내된 상품 또는 기능이 제공되지 않은 경우":"以下情况可以退款：① 因系统错误已扣款但未开通高级版 ② 未提供所说明的商品或功能","구독 해지는":"取消订阅自","다음 결제부터":"下次付款起","적용되며, 이미 결제된 금액은 위 ①②에 해당할 때만 환불됩니다.":"生效；已支付的金额仅在符合上述①②时退款。","환불 요청:":"退款申请：","(결제한 이메일과 주문 내용을 적어 주세요.) 환불이 확정되면 결제 수단으로 취소 처리하며, 처리 시점은 결제 수단에 따라 다를 수 있습니다.":"（请写明付款时使用的邮箱和订单内容。）退款确认后将通过原付款方式取消，处理时间可能因付款方式而异。","바로가기":"快捷链接","사업자 정보":"商家信息","환불정책":"退款政策","상호: 타니아 (Thaniya project)":"商号：타니아 (Thaniya project)","대표자명: 홍재현":"代表人：홍재현","사업자 등록번호: 401-23-95257":"营业执照号：401-23-95257","주소: 경기도 부천시 원미구 중동로 108 (중동, 팰리스카운티) 116동 1003호":"地址：경기도 부천시 원미구 중동로 108 (중동, 팰리스카운티) 116동 1003호","전화: 010-9703-0061":"电话：010-9703-0061","사업자 정보 자세히":"商家信息详情","문의:":"联系方式：","환불 가능 기간은 결제일로부터 7일입니다.":"可退款期间为自付款日起 7 天。","단순 변심으로 인한 환불은 불가합니다. 시스템 오류 또는 상품 미제공 사유로는 환불이 가능합니다.":"因改变主意不予退款。因系统错误或未提供商品可以退款。"}}, LS=['ko','en','ja','zh'], cur='ko';
+  try{var v=localStorage.getItem('meowLang'); if(LS.indexOf(v)>=0) cur=v;}catch(e){}
+  var norm=function(t){return t.replace(/\s+/g,' ').trim();}, nodes=[], attrs=[], ko=/[\uac00-\ud7a3]/;
+  var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode:function(n){var p=n.parentNode;while(p&&p!==document.body){if(/^(SCRIPT|STYLE|SELECT|svg)$/i.test(p.nodeName))return NodeFilter.FILTER_REJECT;p=p.parentNode;}return ko.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;}});
+  for(var n;(n=w.nextNode());) nodes.push([n,n.nodeValue]);
+  document.querySelectorAll('[title],[aria-label],meta[content]').forEach(function(el){['title','aria-label','content'].forEach(function(a){var v=el.getAttribute(a);if(v&&ko.test(v))attrs.push([el,a,v]);});});
+  var t0=document.title;
+  function apply(l){
+    var d=D[l]||null;
+    nodes.forEach(function(x){var o=x[1];if(!d){x[0].nodeValue=o;return;}var tr=d[norm(o)];if(tr){var m=o.match(/^\s*/)[0],e=o.match(/\s*$/)[0];x[0].nodeValue=m+tr+e;}else x[0].nodeValue=o;});
+    attrs.forEach(function(x){x[0].setAttribute(x[1],d&&d[norm(x[2])]||x[2]);});
+    document.title=d&&d[norm(t0)]||t0;
+    document.documentElement.lang=l;
+  }
+  var sel=document.getElementById('langSel');
+  if(sel){sel.value=cur;sel.addEventListener('change',function(){cur=sel.value;try{localStorage.setItem('meowLang',cur);}catch(e){}apply(cur);});}
+  if(cur!=='ko')apply(cur);
+})();
+</script>
+</body>
+</html>
