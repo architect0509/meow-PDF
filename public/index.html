@@ -79,19 +79,22 @@ section.alt{background:var(--bg2);border-block:1px solid var(--line)}
 .eyebrow{font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.06em}
 h2{margin:8px 0 0;font-size:clamp(28px,4.2vw,40px);line-height:1.25;letter-spacing:-.01em}
 .lead{margin:14px 0 0;max-width:36em;color:var(--muted);font-size:17px}
-.grid{margin-top:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid{margin-top:48px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
 .card{padding:26px;border:1px solid var(--line);border-radius:18px;background:var(--card)}
 .card .ic{width:40px;height:40px;border-radius:12px;border:1px solid var(--line);display:grid;place-items:center;margin-bottom:18px}
 .card .ic svg{width:20px;height:20px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .card h3{margin:0 0 8px;font-size:18px}
 .card p{margin:0;color:var(--muted);font-size:15px}
 
-.steps{margin-top:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:s}
+.steps{margin-top:48px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;counter-reset:s}
 .step{padding:26px;border:1px solid var(--line);border-radius:18px;background:var(--bg)}
 .step::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:32px;height:32px;border-radius:50%;border:1px solid var(--accent);color:var(--accent);font-weight:700;font-size:14px;margin-bottom:16px}
 .step h3{margin:0 0 6px;font-size:18px}.step p{margin:0;color:var(--muted);font-size:15px}
 
-.plans{margin-top:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1080px}
+.plans{margin-top:48px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;max-width:1080px}
+/* 언어별 줄바꿈: 한국어는 낱말 단위(keep-all), 일본어 · 중국어는 글자 단위로 줄을 바꿔야 블록이 옆으로 늘어나지 않아요 */
+html:lang(ja) body,html:lang(zh) body{word-break:normal;line-break:strict}
+.card,.step,.plan{min-width:0;overflow-wrap:anywhere}
 .plan{position:relative}
 .plan .pnote{margin:4px 0 0;font-size:14px;color:var(--accent);font-weight:600}
 .plan.best{box-shadow:0 0 0 1px var(--accent) inset}
@@ -120,7 +123,8 @@ footer .brand{color:var(--text);font-weight:700;font-size:16px;margin-bottom:14p
 footer .links{display:flex;justify-content:center;gap:8px 22px;flex-wrap:wrap;margin-bottom:18px}
 footer .links a:hover{color:var(--text)}
 footer .info{font-style:normal;line-height:1.95;max-width:760px;margin:0 auto}
-footer .info span{display:inline-block;white-space:nowrap}
+footer .info span{display:inline-block;white-space:nowrap;max-width:100%}
+@media (max-width:600px){footer .info span{white-space:normal}}
 footer .info span:not(:last-child)::after{content:" | ";white-space:pre;opacity:.55;margin:0 .15em}
 footer .info a{text-decoration:underline;text-underline-offset:3px}
 footer .refund{margin-top:20px;font-size:13px}
@@ -137,12 +141,12 @@ footer .copy{margin-top:28px;padding-top:20px;border-top:1px solid var(--line);f
 
 @media (max-width:900px){
   .nav{display:none}
-  .grid,.steps{grid-template-columns:1fr 1fr}
+  .grid,.steps{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:620px){
   section{padding:76px 0}
   .hero{padding-top:120px}
-  .grid,.steps,.plans{grid-template-columns:1fr}
+  .grid,.steps,.plans{grid-template-columns:minmax(0,1fr)}
   .shot{margin-top:52px;border-radius:12px 12px 0 0}
   .formats{margin-top:52px}
   .top .btn.ghost{display:none}
