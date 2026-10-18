@@ -1,0 +1,59 @@
+# Meow-PDF 데스크톱 앱 빌드 · 배포
+# · v로 시작하는 태그(예: v1.0.1)를 올리면 Windows · macOS · Linux 설치 파일을 만들어 GitHub Releases 에 올려요.
+#   태그는 public/edit.html 의 APP_VERSION 과 같아야 해요.
+# · Actions 탭에서 직접 실행(workflow_dispatch)하면 올리지 않고 설치 파일만 만들어 Artifacts 로 남겨요.
+name: Desktop app
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create release (if missing)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1 || \
+          gh release create "$TAG" --repo "$REPO" --title "Meow-PDF $TAG" --notes "Meow-PDF $TAG 설치 파일이에요. 바뀐 내용은 앱의 설정 › 버전 정보 또는 https://www.meow-pdf.com/ 에서 볼 수 있어요."
+
+  build:
+    needs: release
+    if: always() && (needs.release.result == 'success' || needs.release.result == 'skipped')
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: desktop
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-audit --no-fund
+      - name: Build
+        run: npm run ${{ startsWith(github.ref, 'refs/tags/') && 'release' || 'dist' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+      - uses: actions/upload-artifact@v4
+        if: ${{ !startsWith(github.ref, 'refs/tags/') }}
+        with:
+          name: Meow-PDF-${{ matrix.os }}
+          path: |
+            desktop/dist/*.exe
+            desktop/dist/*.dmg
+            desktop/dist/*.AppImage
+          if-no-files-found: ignore
