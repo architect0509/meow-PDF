@@ -2310,11 +2310,11 @@ body.mobile .off-badge{padding:0 7px}body.mobile .off-badge span{display:none}
   <div class="toolbar needs-doc" role="toolbar" aria-label="편집 도구">
     <button class="tool" data-tool="select" title="선택 — 글자 드래그(복사) · 글자 클릭(바로 수정) · 개체 선택/이동/크기 조절 (1 · 2)"><i data-i="cursor"></i><span>선택</span><kbd>1</kbd></button>
     <div class="sep"></div>
-    <button class="tool" data-tool="highlight" title="강조표시 (Q)"><i data-i="highlighter"></i><span>강조표시</span><kbd>Q</kbd></button>
-    <button class="tool" data-tool="pen" title="그리기 (W)"><i data-i="pen"></i><span>그리기</span><kbd>W</kbd></button>
-    <button class="tool" data-tool="line" title="직선 그리기 (E)"><i data-i="line"></i><span>직선</span><kbd>E</kbd></button>
-    <button class="tool" data-tool="eraser" title="지우개 (R)"><i data-i="eraser"></i><span>지우개</span><kbd>R</kbd></button>
-    <button class="tool" data-tool="mosaic" title="모자이크 — 드래그한 영역을 네모 블록으로 가려요 (G)"><i data-i="mosaic"></i><span>모자이크</span><kbd>G</kbd></button>
+    <button class="tool" data-tool="highlight" title="강조표시 (2)"><i data-i="highlighter"></i><span>강조표시</span><kbd>2</kbd></button>
+    <button class="tool" data-tool="pen" title="그리기 (3)"><i data-i="pen"></i><span>그리기</span><kbd>3</kbd></button>
+    <button class="tool" data-tool="line" title="직선 그리기 (4)"><i data-i="line"></i><span>직선</span><kbd>4</kbd></button>
+    <button class="tool" data-tool="eraser" title="지우개 (5)"><i data-i="eraser"></i><span>지우개</span><kbd>5</kbd></button>
+    <button class="tool" data-tool="mosaic" title="모자이크 — 드래그한 영역을 네모 블록으로 가려요 (6)"><i data-i="mosaic"></i><span>모자이크</span><kbd>6</kbd></button>
     <div class="sep"></div>
     <button class="tool" data-tool="shape" title="도형 삽입 (A)"><i data-i="shapes"></i><span>도형</span><kbd>A</kbd></button>
     <button class="tool" data-tool="text" title="텍스트 삽입 (S)"><i data-i="type"></i><span>텍스트</span><kbd>S</kbd></button>
@@ -3242,6 +3242,58 @@ body.mobile #dhFx .dh-rb{width:52vmin;left:-8vmin;top:9vh;opacity:.6}body.mobile
 #eggFx .eg-dh{position:absolute;left:var(--x);top:var(--y);width:var(--w);animation:egParade var(--d) linear var(--dl) forwards}
 #eggFx .eg-dh svg{display:block;width:100%;height:auto;animation:dhHop .7s ease-in-out infinite;transform-origin:50% 100%}
 @keyframes egParade{0%{transform:translateX(-20vw)}100%{transform:translateX(125vw)}}
+/* ═══ v0.11.8 ═══ */
+/* 유니티식 변형 도구 패널 */
+.gzbar{position:absolute;z-index:21;left:12px;top:12px;display:flex;flex-direction:column;align-items:center;gap:3px;width:38px;padding:4px 3px 5px;border-radius:12px;background:color-mix(in srgb,var(--bar) 94%,transparent);border:1px solid var(--border);box-shadow:var(--shadow),0 8px 22px rgba(0,0,0,.26);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+#app.no-doc .gzbar,body.mobile .gzbar,.presenting .gzbar,body.sh-view .gzbar{display:none!important}
+.gzbar.drag{box-shadow:0 0 0 2px var(--accent),0 12px 28px rgba(0,0,0,.35)}
+.gz-grip{width:22px;height:9px;margin:1px 0 0;cursor:grab;border-radius:3px;background:linear-gradient(var(--muted),var(--muted)) 50% 2px/18px 1.5px no-repeat,linear-gradient(var(--muted),var(--muted)) 50% 6px/18px 1.5px no-repeat;opacity:.7}
+.gz-grip:hover{opacity:1;background-color:var(--hover)}
+.gzbar.drag .gz-grip{cursor:grabbing}
+.gz-tools{display:flex;flex-direction:column;gap:2px}
+.gz-tools button{display:grid;place-items:center;width:30px;height:27px;border-radius:7px;color:var(--muted);transition:background .12s,color .12s,transform .12s,box-shadow .12s}
+.gz-tools button svg{width:16px;height:16px}
+.gz-tools button:hover{background:var(--hover);color:var(--text);transform:scale(1.06)}
+.gz-tools button.on{background:var(--accent-bg);color:var(--accent);box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--accent) 70%,transparent)}
+.gz-tools button[data-gz="hand"]{margin-bottom:3px}
+.gzmenu{z-index:300;min-width:230px}
+.gzmenu button{flex-direction:row;align-items:center;gap:8px}
+.gzmenu button svg{width:14px;height:14px;opacity:0;flex:none}
+.gzmenu button.on svg,.gzmenu button[data-go="reset"] svg{opacity:.9}
+.gzmenu button.on{color:var(--accent)}
+.gzmenu button:disabled{opacity:.4}
+.gzmenu .gz-tip{white-space:normal;max-width:250px;line-height:1.55;text-transform:none;letter-spacing:0}
+.stage.gz-hand .viewer,.stage.gz-hand .page .over,.stage.gz-hand .textLayer,.stage.gz-hand .textLayer span{cursor:grab!important}
+.stage.gz-panning .viewer,.stage.gz-panning .page .over,.stage.gz-panning .textLayer,.stage.gz-panning .textLayer span{cursor:grabbing!important;user-select:none}
+/* v0.11.8 기즈모 모드에서만 변형 도구 막대 · 막대 접기 */
+body:not(.gz-mode) .gzbar{display:none!important}
+.segs button:disabled{opacity:.38;cursor:not-allowed}
+.gz-fold{display:grid;place-items:center;width:30px;height:16px;margin:-1px 0 2px;border-radius:5px;color:var(--muted)}
+.gz-fold svg{width:13px;height:13px}
+.gz-fold:hover{background:var(--hover);color:var(--text)}
+.gzbar.fold .gz-tools button:not(.on){display:none}
+.gzbar.fold .gz-tools button.on{margin-bottom:0}
+/* 레이어 복제 버튼: 줄 이름이 좁아지지 않게 버튼을 조금 줄이고, 복제는 마우스를 올린 줄 · 선택한 줄에 보여요 */
+.layer .l-btn{width:24px;height:26px}.layer .l-btn svg{width:15px;height:15px}
+@media (hover:hover){.layer:not(:hover):not(.sel) .l-btn[data-act="dup"],.mlyr:not(:hover):not(.sel) .l-btn[data-ml="dup"]{display:none}}
+.l-btn[data-act="dup"]:hover,.l-btn[data-ml="dup"]:hover{color:var(--accent)}
+/* 페이지 패널 썸네일 메뉴: 버튼이 눌리지 않던 문제(보이지 않는 덮개가 가로챔) 해결 · 더 크고 잘 보이게 · 마우스를 올리면 강조 */
+body:not(.mobile) .thumb-actions::after{z-index:0}
+body:not(.mobile) .thumb-actions,body:not(.mobile) .thumb-actions:hover,body:not(.mobile) .thumb-actions:focus-within,body:not(.mobile) .list .thumb-actions,body:not(.mobile) .list .thumb-actions:hover{width:26px;height:26px;background:rgba(20,20,24,.9);box-shadow:0 0 0 1.5px rgba(255,255,255,.55),0 3px 10px rgba(0,0,0,.45)}
+body:not(.mobile) .thumb.active .thumb-actions{opacity:.8}
+body:not(.mobile) .thumb-actions.open,body:not(.mobile) .thumb-actions:hover{box-shadow:0 0 0 2px var(--accent),0 3px 12px rgba(0,0,0,.5)}
+body:not(.mobile) .thumb-actions button,body:not(.mobile) .list .thumb-actions button{z-index:2;width:30px;height:30px;margin:-2px 0 0 -2px;background:var(--bar);color:var(--text);border:1.5px solid color-mix(in srgb,var(--accent) 45%,var(--border));box-shadow:0 3px 10px rgba(0,0,0,.5)}
+body:not(.mobile) .thumb-actions button svg{width:15px;height:15px}
+body:not(.mobile) .thumb-actions button:nth-child(1){--x:15px;--y:72px;transition-delay:0s}
+body:not(.mobile) .thumb-actions button:nth-child(2){--x:-11px;--y:73px;transition-delay:.025s}
+body:not(.mobile) .thumb-actions button:nth-child(3){--x:-35px;--y:65px;transition-delay:.05s}
+body:not(.mobile) .thumb-actions button:nth-child(4){--x:-55px;--y:49px;transition-delay:.075s}
+body:not(.mobile) .thumb-actions button:nth-child(5){--x:-68px;--y:26px;transition-delay:.1s}
+body:not(.mobile) .thumb-actions button:nth-child(6){--x:-72px;--y:0px;transition-delay:.125s}
+body:not(.mobile) .thumb-actions:hover::after,body:not(.mobile) .thumb-actions.open::after{width:126px;height:128px;right:-16px;top:-14px}
+body:not(.mobile) .thumb-actions:is(:hover,:focus-within,.open) button:hover,body:not(.mobile) .thumb-actions:is(:hover,:focus-within,.open) button:focus-visible{transform:translate(var(--x),var(--y)) scale(1.2);background:var(--accent);color:var(--on-accent,#000);border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-bg),0 6px 16px rgba(0,0,0,.5);z-index:3}
+body:not(.mobile) .thumb-actions:is(:hover,:focus-within,.open) button.del:hover{background:#e5484d;color:#fff;border-color:#e5484d;box-shadow:0 0 0 4px rgba(229,72,77,.3),0 6px 16px rgba(0,0,0,.5)}
+body:not(.mobile) .thumb-actions button:active{transform:translate(var(--x),var(--y)) scale(.94)!important}
 </style>
 <div id="loading"><div class="spinner"></div><div id="loadingText">처리 중…</div></div>
 <input type="file" id="fileInput" multiple accept="application/pdf,.pdf,.mpdf,.zip,.pptx,.ppt,.hwp,.hwpx,.docx,image/png,image/jpeg,image/webp,.png,.jpg,.jpeg,.webp" hidden>
@@ -4049,7 +4101,28 @@ function rrPath(ctx, x, y, w, h, r) {
   ctx.beginPath(); ctx.moveTo(x + r, y); ctx.lineTo(x + w - r, y); ctx.arcTo(x + w, y, x + w, y + r, r); ctx.lineTo(x + w, y + h - r); ctx.arcTo(x + w, y + h, x + w - r, y + h, r);
   ctx.lineTo(x + r, y + h); ctx.arcTo(x, y + h, x, y + h - r, r); ctx.lineTo(x, y + r); ctx.arcTo(x, y, x + r, y, r); ctx.closePath();
 }
+/* v0.11.8 개체 회전: o.rot(도, 시계 방향)을 상자 가운데 기준으로 적용해요 — 선 · 펜 · 형광펜 · 화살표는 점을 직접 돌리고, 링크 · 모자이크 · 음성은 돌리지 않아요 */
+const canRot = o => !!o && !isPts(o) && o.type !== 'link' && o.type !== 'audio' && !o.mosaic;
+const rotOf = o => (canRot(o) && o.rot) ? o.rot : 0;
+const rotC = o => { const b = bbox(o); return [b.x + b.w / 2, b.y + b.h / 2]; };
+const rotXY = (x, y, cx, cy, deg) => { const a = deg * Math.PI / 180, c = Math.cos(a), sn = Math.sin(a), dx = x - cx, dy = y - cy; return [cx + dx * c - dy * sn, cy + dx * sn + dy * c]; };
+const toLocal = (o, x, y) => { const r = rotOf(o); if (!r) return [x, y]; const c = rotC(o); return rotXY(x, y, c[0], c[1], -r); };
+const toPage = (o, x, y) => { const r = rotOf(o); if (!r) return [x, y]; const c = rotC(o); return rotXY(x, y, c[0], c[1], r); };
+const rotCorners = o => { const b = bbox(o); return [[b.x, b.y], [b.x + b.w, b.y], [b.x + b.w, b.y + b.h], [b.x, b.y + b.h]].map(q => toPage(o, q[0], q[1])); };
+function abox(o) {   // 돌린 개체를 감싸는 화면 기준 상자
+  if (!rotOf(o)) return bbox(o);
+  const P = rotCorners(o), xs = P.map(q => q[0]), ys = P.map(q => q[1]), x = Math.min(...xs), y = Math.min(...ys);
+  return { x, y, w: Math.max(...xs) - x, h: Math.max(...ys) - y };
+}
+const normRot = d => { d = ((d % 360) + 360) % 360; if (d > 359.95 || d < 0.05) d = 0; return Math.round(d * 100) / 100; };
+function setRot(o, d) { d = normRot(d); if (d) o.rot = d; else delete o.rot; }
+const rotTL = o => toPage(o, o.x, o.y);
+function pinTL(o, P) { const q = rotTL(o); o.x += P[0] - q[0]; o.y += P[1] - q[1]; }   // 크기를 바꿔도 돌린 왼쪽 위 모서리가 제자리에 있게
 function hit(o, x, y, tol) {
+  if (rotOf(o)) [x, y] = toLocal(o, x, y);
+  return hit0(o, x, y, tol);
+}
+function hit0(o, x, y, tol) {
   if (o.hidden || o.locked) return false;
   switch (o.type) {
     case 'pen': case 'highlight': case 'line': case 'arrow': {
@@ -4068,7 +4141,7 @@ function hit(o, x, y, tol) {
     }
     case 'star': {
       const P = starPts(o); if (o.w < 1 || o.h < 1) return false;
-      if (o.fill && inPoly(x, y, P)) return true;
+      if (o.fill && inPoly(P, x, y)) return true;   // v0.11.8 인자 순서 바로잡음 (채운 별 안쪽을 눌러도 선택돼요)
       for (let i = 0; i < P.length; i++) { const q = P[(i + 1) % P.length]; if (distSeg(x, y, P[i][0], P[i][1], q[0], q[1]) <= o.width / 2 + tol) return true; }
       return false;
     }
@@ -4160,6 +4233,11 @@ function drawMosaic(ctx, o, s) {
   ctx.drawImage(sm, 0, 0, sw, sh, x, y, sw * blk, sh * blk); ctx.restore();
 }
 function drawObj(ctx, o, s) {
+  const r = rotOf(o); if (!r) { drawObj0(ctx, o, s); return; }
+  const c = rotC(o); ctx.save(); ctx.translate(c[0] * s, c[1] * s); ctx.rotate(r * Math.PI / 180); ctx.translate(-c[0] * s, -c[1] * s);
+  try { drawObj0(ctx, o, s); } finally { ctx.restore(); }
+}
+function drawObj0(ctx, o, s) {
   switch (o.type) {
     case 'pen': case 'line': drawStroke(ctx, o, s); break;
     case 'arrow': {
@@ -4319,6 +4397,7 @@ function createView(p) {
       <button class="note" title="페이지 주석 달기" aria-label="페이지 주석">${svg('note')}</button>
       <button class="ren" title="페이지 이름 바꾸기" aria-label="페이지 이름 바꾸기">${svg('pen')}</button>
       <button class="add" title="이 페이지 뒤에 빈 페이지 추가" aria-label="빈 페이지 추가">${svg('plus')}</button>
+      <button class="dup" title="이 페이지 복제 (내용 포함)" aria-label="페이지 복제">${svg('copy')}</button>
       <button class="del" title="페이지 삭제" aria-label="페이지 삭제">${svg('trash')}</button>
     </div>`;
   const v = {
@@ -4382,6 +4461,7 @@ function createView(p) {
   });
   { const ta = tEl.querySelector('.thumb-actions'), hub = e => { if (e.target.closest('button')) { setTimeout(() => { ta.classList.remove('open'); tEl.classList.remove('ta-open'); }, 0); return; } const o = ta.classList.toggle('open'); tEl.classList.toggle('ta-open', o); e.stopPropagation(); }; ta.addEventListener('click', hub); }
   tEl.querySelector('.add').addEventListener('click', () => addBlankAfter(p.id));
+  tEl.querySelector('.dup').addEventListener('click', () => dupPage(p.id));
   tEl.querySelector('.note').addEventListener('click', () => editPageNote(p.id));
   tEl.querySelector('.bm').addEventListener('click', () => toggleBookmark(p.id));
   tEl.querySelector('.ren').addEventListener('click', () => renamePage(p.id));
@@ -4569,7 +4649,7 @@ function selGroup(pid) {
 }
 function gFake(L) {
   let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
-  for (const a of L) { const b = bbox(a); x0 = Math.min(x0, b.x); y0 = Math.min(y0, b.y); x1 = Math.max(x1, b.x + b.w); y1 = Math.max(y1, b.y + b.h); }
+  for (const a of L) { const b = abox(a); x0 = Math.min(x0, b.x); y0 = Math.min(y0, b.y); x1 = Math.max(x1, b.x + b.w); y1 = Math.max(y1, b.y + b.h); }
   return { type: 'rect', x: x0, y: y0, w: Math.max(1, x1 - x0), h: Math.max(1, y1 - y0), width: 0, group: true };
 }
 function toggleSel(id, p, o) {
@@ -4584,24 +4664,291 @@ function toggleSel(id, p, o) {
   if (prev && prev.pageId !== id) drawOverlay(prev.pageId);
   drawOverlay(id); renderOptions(); scheduleLayers();
 }
+/* ═══ v0.11.8 바운딩 박스 모드 (기본 · 모바일 고정): 파워포인트처럼 모서리 · 변의 점으로 크기, 위쪽 손잡이로 회전, 오른쪽 위는 삭제 ═══ */
+let SELMODE = (() => { try { return localStorage.getItem('meowSelMode') === 'gizmo' ? 'gizmo' : 'bbox'; } catch (e) { return 'bbox'; } })();
+const selMode = () => (mMode ? 'bbox' : SELMODE);
+function bbKind(o) {
+  if (o.group) return { corner: true, edge: true, rot: false };
+  if (o.type === 'audio') return { corner: false, edge: false, rot: false };
+  if (o.type === 'text') return { corner: true, edge: false, rot: true };
+  if (o.type === 'link' || o.mosaic) return { corner: true, edge: true, rot: false };
+  return { corner: true, edge: true, rot: true };
+}
+const BB_ROT_GAP = 30;   // 회전 손잡이: 위쪽 가운데에서 떨어진 거리 (화면 px)
+function bbHandles(o) {
+  const b = bbox(o), S = state.scale, K = bbKind(o), cx = b.x + b.w / 2, cy = b.y + b.h / 2, L = [];
+  if (K.rot) L.push(['rot', cx, b.y - BB_ROT_GAP / S]);
+  if (K.corner) L.push(['nw', b.x, b.y], ['se', b.x + b.w, b.y + b.h], ['sw', b.x, b.y + b.h]);
+  if (K.edge && b.w * S > 26) L.push(['n', cx, b.y], ['s', cx, b.y + b.h]);
+  if (K.edge && b.h * S > 26) L.push(['w', b.x, cy], ['e', b.x + b.w, cy]);
+  return L.map(([k, x, y]) => { const q = toPage(o, x, y); return { k, x: q[0], y: q[1] }; });
+}
+function bbHit(o, pt, touchy) {
+  const S = state.scale, r = (touchy ? 16 : 9) / S;
+  for (const h of bbHandles(o)) if (Math.hypot(pt[0] - h.x, pt[1] - h.y) <= r) return h.k;
+  return null;
+}
+const BB_CUR = { nw: 'nwse-resize', se: 'nwse-resize', sw: 'nesw-resize', n: 'ns-resize', s: 'ns-resize', e: 'ew-resize', w: 'ew-resize', rot: 'grab' };
 function drawSelection(ctx, o, s, q, del) {
-  const b = bbox(o);
+  const b = bbox(o), rr = rotOf(o), P = [[b.x, b.y], [b.x + b.w, b.y], [b.x + b.w, b.y + b.h], [b.x, b.y + b.h]].map(p => { const t = toPage(o, p[0], p[1]); return [t[0] * s, t[1] * s]; });
   ctx.save();
-  ctx.strokeStyle = '#dbbe43'; ctx.lineWidth = 1.5 * q; ctx.setLineDash([6 * q, 4 * q]);
-  ctx.strokeRect(b.x * s - 3 * q, b.y * s - 3 * q, b.w * s + 6 * q, b.h * s + 6 * q);
-  ctx.setLineDash([]);
-  const hx = (b.x + b.w) * s + 3 * q, hy = (b.y + b.h) * s + 3 * q, hs = 5 * q;
-  ctx.fillStyle = '#fff'; ctx.lineWidth = 2 * q;
-  ctx.fillRect(hx - hs, hy - hs, hs * 2, hs * 2); ctx.strokeRect(hx - hs, hy - hs, hs * 2, hs * 2);
-  /* 왼쪽 위 이동 핸들 */
-  const mx = Math.max(b.x * s - 3 * q, 12 * q), my = Math.max(b.y * s - 3 * q, 12 * q), R = 10 * q;
-  ctx.beginPath(); ctx.arc(mx, my, R, 0, Math.PI * 2); ctx.fillStyle = '#dbbe43'; ctx.fill(); ctx.strokeStyle = '#fff'; ctx.lineWidth = 2 * q; ctx.stroke();
-  ctx.strokeStyle = '#1b1b1b'; ctx.fillStyle = '#1b1b1b'; ctx.lineWidth = 1.4 * q; ctx.lineCap = 'round';
-  const a = 5.5 * q, h = 2 * q;
-  ctx.beginPath(); ctx.moveTo(mx - a, my); ctx.lineTo(mx + a, my); ctx.moveTo(mx, my - a); ctx.lineTo(mx, my + a); ctx.stroke();
-  if (del) { const pw = ctx.canvas.width / s, d = delHandlePt(o, pw); drawDelBtn(ctx, d[0] * s, d[1] * s, q); }
-  for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) { ctx.beginPath(); ctx.moveTo(mx + dx * (a + h), my + dy * (a + h)); ctx.lineTo(mx + dx * a - dy * h, my + dy * a + dx * h); ctx.lineTo(mx + dx * a + dy * h, my + dy * a - dx * h); ctx.closePath(); ctx.fill(); }
+  ctx.beginPath(); P.forEach((p, i) => i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1])); ctx.closePath();
+  if (!del) { ctx.strokeStyle = 'rgba(219,190,67,.9)'; ctx.lineWidth = 1.2 * q; ctx.setLineDash([4 * q, 3 * q]); ctx.stroke(); ctx.restore(); return; }   // 함께 고른 다른 개체: 점선만
+  ctx.strokeStyle = '#8f8f96'; ctx.lineWidth = 1.2 * q; ctx.stroke();
+  ctx.strokeStyle = 'rgba(255,255,255,.55)'; ctx.lineWidth = 0.6 * q; ctx.stroke();
+  const H = bbHandles(o), hr = (mMode ? 7 : 5.5) * q, rh = H.find(h => h.k === 'rot');
+  if (rh) {   // 위쪽 가운데 → 회전 손잡이 연결선
+    const t = toPage(o, b.x + b.w / 2, b.y); ctx.beginPath(); ctx.moveTo(t[0] * s, t[1] * s); ctx.lineTo(rh.x * s, rh.y * s); ctx.strokeStyle = '#8f8f96'; ctx.lineWidth = 1.2 * q; ctx.stroke();
+  }
+  for (const h of H) {
+    const x = h.x * s, y = h.y * s;
+    if (h.k === 'rot') {
+      const R = (mMode ? 11 : 9) * q;
+      ctx.beginPath(); ctx.arc(x, y, R, 0, Math.PI * 2); ctx.fillStyle = '#fff'; ctx.fill(); ctx.strokeStyle = '#6b6b72'; ctx.lineWidth = 1.3 * q; ctx.stroke();
+      const a0 = -0.35 * Math.PI, a1 = 1.25 * Math.PI, rr2 = R * 0.52;   // 둥근 화살표 ↻
+      ctx.beginPath(); ctx.arc(x, y, rr2, a0, a1); ctx.strokeStyle = '#3a3a40'; ctx.lineWidth = 1.7 * q; ctx.lineCap = 'round'; ctx.stroke();
+      const ex = x + rr2 * Math.cos(a0), ey = y + rr2 * Math.sin(a0), al = 3.4 * q;
+      ctx.beginPath(); ctx.moveTo(ex + al * 0.9, ey - al * 0.2); ctx.lineTo(ex, ey); ctx.lineTo(ex + al * 0.15, ey + al); ctx.stroke();
+      continue;
+    }
+    ctx.beginPath(); ctx.arc(x, y, hr, 0, Math.PI * 2); ctx.fillStyle = '#fff'; ctx.fill(); ctx.strokeStyle = '#5f5f66'; ctx.lineWidth = 1.4 * q; ctx.stroke();
+  }
   ctx.restore();
+  const pw = ctx.canvas.width / s, d = delHandlePt(o, pw); drawDelBtn(ctx, d[0] * s, d[1] * s, q);
+}
+function bbStart(e, id, v, o, k, pt, items) {
+  const c = rotC(o);
+  drag = { kind: 'bb', id, obj: o, orig: clone(o), k, start: pt, c, a0: Math.atan2(pt[1] - c[1], pt[0] - c[0]), moved: false, items };
+  v.over.setPointerCapture(e.pointerId);
+}
+function bbMove(e, d, pt) {
+  const o = d.obj, O = d.orig, S = state.scale, k = d.k;
+  if (!d.moved && Math.hypot(pt[0] - d.start[0], pt[1] - d.start[1]) * S < 2) return;
+  d.moved = true;
+  if (!d.items) { for (const kk of Object.keys(o)) if (!(kk in O)) delete o[kk]; Object.assign(o, clone(O)); }
+  if (k === 'rot') {
+    let deg = (Math.atan2(pt[1] - d.c[1], pt[0] - d.c[0]) - d.a0) * 180 / Math.PI;
+    if (e.shiftKey) deg = Math.round(deg / 15) * 15;
+    if (isPts(O)) o.pts = O.pts.map(p => rotXY(p[0], p[1], d.c[0], d.c[1], deg));
+    else setRot(o, (O.rot || 0) + deg);
+    d.deg = deg; return;
+  }
+  const b = bbox(O), lp = toLocal(O, pt[0], pt[1]), mn = 4;
+  let x0 = b.x, y0 = b.y, x1 = b.x + b.w, y1 = b.y + b.h;
+  if (k.includes('w')) x0 = Math.min(lp[0], x1 - mn); if (k.includes('e')) x1 = Math.max(lp[0], x0 + mn);
+  if (k.includes('n')) y0 = Math.min(lp[1], y1 - mn); if (k.includes('s')) y1 = Math.max(lp[1], y0 + mn);
+  const corner = k.length === 2, keep = corner && ((O.type === 'image' || O.type === 'text' || O.group) ? !e.shiftKey : e.shiftKey);
+  if (keep || O.type === 'text') {   // 비율 유지 (이미지 · 글자 · 묶음은 기본, 나머지는 Shift)
+    const f = Math.max((x1 - x0) / b.w, (y1 - y0) / b.h);
+    if (k.includes('w')) x0 = x1 - b.w * f; else x1 = x0 + b.w * f;
+    if (k.includes('n')) y0 = y1 - b.h * f; else y1 = y0 + b.h * f;
+  }
+  const sx = (x1 - x0) / b.w, sy = (y1 - y0) / b.h, ax = k.includes('w') ? b.x + b.w : b.x, ay = k.includes('n') ? b.y + b.h : b.y;
+  d.fx = sx; d.fy = sy;
+  if (d.items) { d.items.forEach(({ a, orig }) => scaleFromOrig(a, orig, ax, ay, sx, sy)); return; }
+  if (isPts(O)) { o.pts = O.pts.map(p => [ax + (p[0] - ax) * sx, ay + (p[1] - ay) * sy]); return; }
+  if (O.type === 'text') {
+    o.size = clamp(O.size * sy, 4, 400);
+    const nb = bbox(o), nx0 = k.includes('w') ? x1 - nb.w : b.x, ny0 = k.includes('n') ? y1 - nb.h : b.y;
+    const cp = toPage(O, nx0 + nb.w / 2, ny0 + nb.h / 2); o.x = cp[0] - nb.w / 2; o.y = cp[1] - nb.h / 2; return;
+  }
+  const w = x1 - x0, h = y1 - y0, cp = toPage(O, x0 + w / 2, y0 + h / 2);
+  o.w = w; o.h = h; o.x = cp[0] - w / 2; o.y = cp[1] - h / 2;
+}
+function bbEnd(d) {
+  if (d.moved) commit();
+  touch(d.id); renderOptions();
+}
+/* ═══ v0.11.8 유니티식 변형 도구 (PC · 기즈모 모드 · 모든 개체): Q 화면 이동 · W 이동 · E 회전 · R 크기 조절 · T 사각형 · Y 통합 ═══
+   선택한 개체 위에 축 화살표 · 회전 고리 · 크기 큐브 · 모서리 점을 그려서 끌어 조작해요. 화면 크기와 상관없이 기즈모는 늘 같은 크기로 보여요. */
+const gzLS = k => { try { return localStorage.getItem(k); } catch (e) { return null; } };
+const GZ_MODES = ['move', 'rotate', 'scale', 'rect', 'all'];
+const GZ = {
+  mode: (() => { const v = gzLS('meowGiz'); return GZ_MODES.includes(v) ? v : 'rect'; })(),
+  space: 'global', snap: false,   // v0.11.8 변형 옵션 메뉴는 없앰 (Ctrl · Shift로 스냅)
+  hand: false, hover: null, live: null
+};
+const GZ_L = 74, GZ_R = 82, GZ_COL = { x: '#ef4444', y: '#22c55e', z: '#3b82f6', hot: '#fde047', ring: 'rgba(200,200,210,.75)', rect: '#3b82f6' };
+const GZ_CUR = { mx: 'ew-resize', my: 'ns-resize', mxy: 'move', rot: 'grab', sx: 'ew-resize', sy: 'ns-resize', sxy: 'nwse-resize', c0: 'nwse-resize', c1: 'nesw-resize', c2: 'nwse-resize', c3: 'nesw-resize', e0: 'ns-resize', e1: 'ew-resize', e2: 'ns-resize', e3: 'ew-resize', rrot: 'alias' };
+const gzOn = o => selMode() === 'gizmo' && !mMode && !state.present && state.tool === 'select' && !GZ.hand && !!o && o.type !== 'audio' && !o.locked && !o.hidden;
+const gzRotOk = o => canRot(o) || isPts(o);   // 링크 · 모자이크는 회전 없음
+const gzRad = o => rotOf(o) * Math.PI / 180;
+function gzAxes(o, forScale) {   // 화면 방향 단위 벡터: x 오른쪽, y 위쪽
+  const local = forScale || GZ.space === 'local', a = local ? gzRad(o) : 0;
+  return { x: [Math.cos(a), Math.sin(a)], y: [Math.sin(a), -Math.cos(a)] };
+}
+const gzDot = (a, b) => a[0] * b[0] + a[1] * b[1];
+const gzCross = (a, b) => a[0] * b[1] - a[1] * b[0];
+function gzHit(o, pt) {
+  const S = state.scale, c = rotC(o), d = [(pt[0] - c[0]) * S, (pt[1] - c[1]) * S], dist = Math.hypot(d[0], d[1]), m = GZ.mode;
+  const moveHit = () => {
+    const A = gzAxes(o), u = gzDot(d, A.x), w = gzDot(d, A.y);
+    if (u >= 0 && u <= 22 && w >= 0 && w <= 22) return 'mxy';
+    if (u >= -4 && u <= GZ_L + 14 && Math.abs(gzCross(A.x, d)) <= 8) return 'mx';
+    if (w >= -4 && w <= GZ_L + 14 && Math.abs(gzCross(A.y, d)) <= 8) return 'my';
+    return null;
+  };
+  const ringHit = () => !gzRotOk(o) ? null : (Math.abs(dist - GZ_R) <= 8 || Math.abs(dist - GZ_R - 12) <= 6) ? 'rot' : null;
+  if (m === 'move') return moveHit();
+  if (m === 'rotate') return ringHit();
+  if (m === 'scale') {
+    const A = gzAxes(o, true);
+    if (dist <= 11) return 'sxy';
+    if (Math.hypot(d[0] - A.x[0] * GZ_L, d[1] - A.x[1] * GZ_L) <= 11) return 'sx';
+    if (Math.hypot(d[0] - A.y[0] * GZ_L, d[1] - A.y[1] * GZ_L) <= 11) return 'sy';
+    if (gzDot(d, A.x) > 0 && gzDot(d, A.x) < GZ_L && Math.abs(gzCross(A.x, d)) <= 6) return 'sx';
+    if (gzDot(d, A.y) > 0 && gzDot(d, A.y) < GZ_L && Math.abs(gzCross(A.y, d)) <= 6) return 'sy';
+    return null;
+  }
+  if (m === 'all') { if (dist <= 9) return 'sxy'; return moveHit() || ringHit(); }
+  /* rect: 모서리 점(크기) · 모서리 바로 바깥(회전) · 변(한쪽만) */
+  const P = rotCorners(o);
+  for (let i = 0; i < 4; i++) if (Math.hypot((pt[0] - P[i][0]) * S, (pt[1] - P[i][1]) * S) <= 9) return 'c' + i;
+  const b = bbox(o), lp = toLocal(o, pt[0], pt[1]), lx = (lp[0] - b.x) * S, ly = (lp[1] - b.y) * S, W = b.w * S, H = b.h * S;
+  const inside = lx >= 0 && lx <= W && ly >= 0 && ly <= H;
+  if (!inside && gzRotOk(o)) for (let i = 0; i < 4; i++) if (Math.hypot((pt[0] - P[i][0]) * S, (pt[1] - P[i][1]) * S) <= 26) return 'rrot';
+  if (o.type === 'text') return null;   // 글자는 모서리로만 (크기는 비율대로)
+  if (lx > 6 && lx < W - 6) { if (Math.abs(ly) <= 6) return 'e0'; if (Math.abs(ly - H) <= 6) return 'e2'; }
+  if (ly > 6 && ly < H - 6) { if (Math.abs(lx) <= 6) return 'e3'; if (Math.abs(lx - W) <= 6) return 'e1'; }
+  return null;
+}
+function gzStart(e, id, v, o, part, pt) {
+  const c = rotC(o);
+  drag = { kind: 'giz', id, obj: o, orig: clone(o), part, start: pt, c, a0: Math.atan2(pt[1] - c[1], pt[0] - c[0]), moved: false };
+  GZ.live = { part, id: o.id };
+  v.over.setPointerCapture(e.pointerId); drawOverlay(id);
+}
+function gzMove(e, d, pt) {
+  const o = d.obj, O = d.orig, S = state.scale, dx = pt[0] - d.start[0], dy = pt[1] - d.start[1], P = d.part;
+  if (!d.moved && Math.hypot(dx, dy) * S < 2) return;
+  d.moved = true;
+  for (const k of Object.keys(o)) if (!(k in O)) delete o[k];
+  Object.assign(o, clone(O));
+  const snap = GZ.snap || e.ctrlKey || e.metaKey;
+  if (P === 'mx' || P === 'my') { const A = gzAxes(O)[P === 'mx' ? 'x' : 'y'], t = dx * A[0] + dy * A[1]; moveFromOrig(o, O, A[0] * t, A[1] * t); return; }
+  if (P === 'mxy') { moveFromOrig(o, O, dx, dy); return; }
+  if (P === 'rot' || P === 'rrot') {
+    let deg = (Math.atan2(pt[1] - d.c[1], pt[0] - d.c[0]) - d.a0) * 180 / Math.PI;
+    if (snap || e.shiftKey) deg = Math.round(deg / 15) * 15;
+    if (isPts(O)) o.pts = O.pts.map(p => rotXY(p[0], p[1], d.c[0], d.c[1], deg));   // 펜 · 직선은 점을 돌려요
+    else if (canRot(O)) setRot(o, (O.rot || 0) + deg);
+    d.deg = deg; return;
+  }
+  const B = bbox(O), bcx = B.x + B.w / 2, bcy = B.y + B.h / 2;
+  const keep = (w, h) => { w = Math.max(4, w); h = Math.max(4, h); gzApply(o, O, B, bcx - w / 2, bcy - h / 2, bcx + w / 2, bcy + h / 2); };
+  if (P === 'sx' || P === 'sy' || P === 'sxy') {
+    const A = gzAxes(O, true), sd = [dx * S, dy * S];
+    let fx = 1, fy = 1;
+    if (P === 'sx') fx = 1 + gzDot(sd, A.x) / GZ_L;
+    else if (P === 'sy') fy = 1 + gzDot(sd, A.y) / GZ_L;
+    else fx = fy = 1 + (sd[0] - sd[1]) / (GZ_L * 1.4);
+    if ((e.shiftKey || O.type === 'text') && P !== 'sxy') { if (P === 'sx') fy = fx; else fx = fy; }
+    fx = Math.max(0.03, fx); fy = Math.max(0.03, fy);
+    keep(B.w * fx, B.h * fy); d.fx = fx; d.fy = fy; return;
+  }
+  /* rect: 반대쪽 모서리 · 변을 고정하고 개체 기준 방향으로 늘려요 (이미지 · 글자는 비율 유지, Shift를 누르면 자유롭게 · 나머지는 Shift로 비율 유지) */
+  const b = bbox(O), lp = toLocal(O, pt[0], pt[1]);
+  let x0 = b.x, y0 = b.y, x1 = b.x + b.w, y1 = b.y + b.h;
+  if (P[0] === 'c') {
+    const i = +P[1], ax = (i === 1 || i === 2) ? x0 : x1, ay = (i >= 2) ? y0 : y1;
+    let nx = lp[0], ny = lp[1];
+    const keepR = O.type === 'text' || (O.type === 'image' ? !e.shiftKey : e.shiftKey);
+    if (keepR) { const r = b.h / b.w, w = Math.abs(nx - ax), h = Math.abs(ny - ay), k = Math.max(w / b.w, h / b.h); nx = ax + Math.sign(nx - ax || 1) * b.w * k; ny = ay + Math.sign(ny - ay || 1) * b.w * k * r; }
+    x0 = Math.min(ax, nx); x1 = Math.max(ax, nx); y0 = Math.min(ay, ny); y1 = Math.max(ay, ny);
+  } else {
+    if (P === 'e0') y0 = Math.min(lp[1], y1 - 8); if (P === 'e2') y1 = Math.max(lp[1], y0 + 8);
+    if (P === 'e3') x0 = Math.min(lp[0], x1 - 8); if (P === 'e1') x1 = Math.max(lp[0], x0 + 8);
+  }
+  gzApply(o, O, b, x0, y0, x0 + Math.max(4, x1 - x0), y0 + Math.max(4, y1 - y0));
+}
+/* 개체 기준(돌리기 전) 새 상자 x0..x1 · y0..y1 를 개체 종류에 맞게 적용 */
+function gzApply(o, O, b, x0, y0, x1, y1) {
+  const w = x1 - x0, h = y1 - y0, pc = toPage(O, x0 + w / 2, y0 + h / 2);
+  if (isPts(O)) { const fx = b.w > 0.01 ? w / b.w : 1, fy = b.h > 0.01 ? h / b.h : 1; o.pts = O.pts.map(p => [x0 + (p[0] - b.x) * fx, y0 + (p[1] - b.y) * fy]); return; }
+  if (O.type === 'text') { o.size = clamp(O.size * h / b.h, 4, 400); const nb = bbox(o); o.x += pc[0] - (nb.x + nb.w / 2); o.y += pc[1] - (nb.y + nb.h / 2); return; }
+  o.w = w; o.h = h; o.x = pc[0] - w / 2; o.y = pc[1] - h / 2;
+}
+function gzEnd(d) {
+  GZ.live = null;
+  if (d.moved) commit();
+  touch(d.id); renderOptions();
+}
+function gzDraw(ctx, o, s, q) {
+  const c = rotC(o), C = [c[0] * s, c[1] * s], L = GZ_L * q, live = GZ.live && GZ.live.id === o.id ? GZ.live.part : null, hot = k => live === k || (!live && GZ.hover === k);
+  const P = rotCorners(o).map(p => [p[0] * s, p[1] * s]), m = GZ.mode;
+  ctx.save();
+  /* 선택 윤곽 (돌린 모양 그대로) */
+  ctx.beginPath(); P.forEach((p, i) => i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1])); ctx.closePath();
+  ctx.lineWidth = 2 * q; ctx.strokeStyle = m === 'rect' ? GZ_COL.rect : '#ff8a3d'; ctx.stroke();
+  const arrow = (dir, col, key) => {
+    const e = [C[0] + dir[0] * L, C[1] + dir[1] * L], k = hot(key) ? GZ_COL.hot : col;
+    ctx.strokeStyle = k; ctx.fillStyle = k; ctx.lineWidth = 2.6 * q; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(C[0], C[1]); ctx.lineTo(e[0], e[1]); ctx.stroke();
+    const n = [-dir[1], dir[0]], hl = 13 * q, hw = 6 * q;
+    ctx.beginPath(); ctx.moveTo(e[0] + dir[0] * hl, e[1] + dir[1] * hl); ctx.lineTo(e[0] + n[0] * hw, e[1] + n[1] * hw); ctx.lineTo(e[0] - n[0] * hw, e[1] - n[1] * hw); ctx.closePath(); ctx.fill();
+  };
+  const cube = (pos, col, key, r) => { const k = hot(key) ? GZ_COL.hot : col, h = (r || 6) * q; ctx.fillStyle = k; ctx.strokeStyle = 'rgba(0,0,0,.45)'; ctx.lineWidth = 1 * q; ctx.fillRect(pos[0] - h, pos[1] - h, h * 2, h * 2); ctx.strokeRect(pos[0] - h, pos[1] - h, h * 2, h * 2); };
+  const drawMove = () => {
+    const A = gzAxes(o), g = 20 * q;
+    ctx.beginPath(); ctx.moveTo(C[0], C[1]); ctx.lineTo(C[0] + A.x[0] * g, C[1] + A.x[1] * g); ctx.lineTo(C[0] + (A.x[0] + A.y[0]) * g, C[1] + (A.x[1] + A.y[1]) * g); ctx.lineTo(C[0] + A.y[0] * g, C[1] + A.y[1] * g); ctx.closePath();
+    ctx.fillStyle = hot('mxy') ? 'rgba(253,224,71,.65)' : 'rgba(59,130,246,.45)'; ctx.fill(); ctx.strokeStyle = 'rgba(255,255,255,.9)'; ctx.lineWidth = 3 * q; ctx.stroke(); ctx.strokeStyle = hot('mxy') ? GZ_COL.hot : GZ_COL.z; ctx.lineWidth = 1.4 * q; ctx.stroke();
+    arrow(A.y, GZ_COL.y, 'my'); arrow(A.x, GZ_COL.x, 'mx');
+  };
+  const drawRing = () => {
+    const R = GZ_R * q, a = gzRad(o), ax = [Math.cos(a), Math.sin(a)], ay = [Math.sin(a), -Math.cos(a)];
+    ctx.lineWidth = 1.2 * q; ctx.strokeStyle = 'rgba(239,68,68,.75)'; ctx.beginPath(); ctx.moveTo(C[0] - ay[0] * R, C[1] - ay[1] * R); ctx.lineTo(C[0] + ay[0] * R, C[1] + ay[1] * R); ctx.stroke();
+    ctx.strokeStyle = 'rgba(34,197,94,.8)'; ctx.beginPath(); ctx.moveTo(C[0] - ax[0] * R, C[1] - ax[1] * R); ctx.lineTo(C[0] + ax[0] * R, C[1] + ax[1] * R); ctx.stroke();
+    if (live === 'rot' && drag && drag.kind === 'giz' && drag.deg) {   // 돌린 만큼 부채꼴로 표시
+      ctx.beginPath(); ctx.moveTo(C[0], C[1]); ctx.arc(C[0], C[1], R, drag.a0, drag.a0 + drag.deg * Math.PI / 180, drag.deg < 0); ctx.closePath(); ctx.fillStyle = 'rgba(253,224,71,.22)'; ctx.fill();
+    }
+    ctx.lineWidth = 2.6 * q; ctx.strokeStyle = hot('rot') ? GZ_COL.hot : GZ_COL.z; ctx.beginPath(); ctx.arc(C[0], C[1], R, 0, Math.PI * 2); ctx.stroke();
+    ctx.lineWidth = 1.4 * q; ctx.strokeStyle = GZ_COL.ring; ctx.beginPath(); ctx.arc(C[0], C[1], R + 12 * q, 0, Math.PI * 2); ctx.stroke();
+  };
+  if (m === 'move') drawMove();
+  else if (m === 'rotate') { if (gzRotOk(o)) drawRing(); }
+  else if (m === 'scale') {
+    const A = gzAxes(o, true);
+    for (const [ax, col, key] of [[A.x, GZ_COL.x, 'sx'], [A.y, GZ_COL.y, 'sy']]) {
+      const k = hot(key) ? GZ_COL.hot : col, e = [C[0] + ax[0] * L, C[1] + ax[1] * L];
+      ctx.strokeStyle = k; ctx.lineWidth = 2.6 * q; ctx.beginPath(); ctx.moveTo(C[0], C[1]); ctx.lineTo(e[0], e[1]); ctx.stroke(); cube(e, col, key);
+    }
+    cube(C, '#d4d4d8', 'sxy', 7);
+  } else if (m === 'all') { if (gzRotOk(o)) drawRing(); drawMove(); cube(C, '#d4d4d8', 'sxy', 5); }
+  else {
+    for (let i = 0; i < 4; i++) { ctx.beginPath(); ctx.arc(P[i][0], P[i][1], 5.5 * q, 0, Math.PI * 2); ctx.fillStyle = hot('c' + i) ? GZ_COL.hot : GZ_COL.rect; ctx.fill(); ctx.lineWidth = 1.6 * q; ctx.strokeStyle = '#fff'; ctx.stroke(); }
+    ctx.beginPath(); ctx.arc(C[0], C[1], 5 * q, 0, Math.PI * 2); ctx.lineWidth = 2 * q; ctx.strokeStyle = 'rgba(59,130,246,.9)'; ctx.stroke();
+    if (/^e\d$/.test(live || GZ.hover || '')) { const k = +(live || GZ.hover)[1], a = P[k], b = P[(k + 1) % 4]; ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.lineWidth = 3 * q; ctx.strokeStyle = GZ_COL.hot; ctx.stroke(); }
+  }
+  /* 조작 중인 값 (각도 · 배율) */
+  if (live && drag && drag.kind === 'giz' && drag.moved) {
+    const t = (live === 'rot' || live === 'rrot') ? Math.round(rotOf(o)) + '°' : /^s/.test(live) ? Math.round((drag.fx || 1) * 100) + '% × ' + Math.round((drag.fy || 1) * 100) + '%' : (b => Math.round(b.w) + ' × ' + Math.round(b.h))(bbox(o));
+    ctx.font = `600 ${11.5 * q}px system-ui,sans-serif`; const tw = ctx.measureText(t).width, bx = C[0] + 14 * q, by = C[1] + 16 * q;
+    ctx.fillStyle = 'rgba(20,20,24,.82)'; ctx.fillRect(bx - 5 * q, by - 10 * q, tw + 10 * q, 19 * q); ctx.fillStyle = '#fff'; ctx.textBaseline = 'middle'; ctx.fillText(t, bx, by);
+  }
+  ctx.restore();
+  { const pw = ctx.canvas.width / s, dh = delHandlePt(o, pw); drawDelBtn(ctx, dh[0] * s, dh[1] * s, q); }
+}
+function gzHover(e, id, o) {   // 마우스를 올린 축은 노랗게
+  const v = views.get(id); if (!v) return;
+  const part = gzHit(o, pagePoint(e, v.over));
+  if (part !== GZ.hover) { GZ.hover = part; drawOverlay(id); }
+}
+/* 패널 · 단축키 */
+function gzSet(m) {
+  if (mMode || state.present || !state.pages.length || selMode() !== 'gizmo') return false;
+  if (state.tool !== 'select') setTool('select');
+  if (m === 'hand') GZ.hand = true;
+  else { GZ.hand = false; if (GZ_MODES.includes(m)) { GZ.mode = m; safeStore.setItem('meowGiz', m); } }
+  GZ.hover = null; gzSync();
+  if (state.selected) drawOverlay(state.selected.pageId);
+}
+function gzSync() {
+  const bar = document.getElementById('gzBar');
+  document.body.classList.toggle('gz-mode', selMode() === 'gizmo');
+  stage.classList.toggle('gz-hand', !!GZ.hand && !mMode);
+  if (!bar) return;
+  const cur = GZ.hand ? 'hand' : state.tool === 'select' ? GZ.mode : '';
+  bar.querySelectorAll('[data-gz]').forEach(b => { const on = b.dataset.gz === cur; b.classList.toggle('on', on); b.setAttribute('aria-pressed', String(on)); });
 }
 function drawOverlay(id, draft) {
   const p = pageById(id), v = views.get(id);
@@ -4617,12 +4964,12 @@ function drawOverlay(id, draft) {
   const G = selGroup(id);
   if (G) {   // v0.11.3 여러 개 선택: 각 개체는 얇은 점선, 묶음 상자에 이동 · 크기 · 삭제 핸들
     ctx.save(); ctx.strokeStyle = 'rgba(219,190,67,.85)'; ctx.lineWidth = 1 * v.q; ctx.setLineDash([3 * v.q, 3 * v.q]);
-    for (const a of G) { const b = bbox(a); ctx.strokeRect(b.x * s - 2 * v.q, b.y * s - 2 * v.q, b.w * s + 4 * v.q, b.h * s + 4 * v.q); }
+    for (const a of G) { const b = abox(a); ctx.strokeRect(b.x * s - 2 * v.q, b.y * s - 2 * v.q, b.w * s + 4 * v.q, b.h * s + 4 * v.q); }
     ctx.restore();
     drawSelection(ctx, gFake(G), s, v.q, true);
   } else if (state.selected && state.selected.pageId === id) {
     const o = p.annots.find(a => a.id === state.selected.objId);
-    if (o && !o.hidden && o.id !== state.editingId) drawSelection(ctx, o, s, v.q, true);
+    if (o && !o.hidden && o.id !== state.editingId) { if (gzOn(o)) gzDraw(ctx, o, s, v.q); else drawSelection(ctx, o, s, v.q, true); }
     if (state.layerSel.size > 1) for (const a of p.annots) if (a !== o && state.layerSel.has(a.id) && !a.hidden && a.id !== state.editingId) drawSelection(ctx, a, s, v.q);
   }
   if (state.region && state.region.id === id) drawRegion(ctx, state.region, s, v.q);
@@ -4771,7 +5118,7 @@ function pagePoint(e, over) {
 }
 
 /* 모바일: 선택한 개체 · 영역의 오른쪽 위 삭제 버튼 */
-const delHandlePt = (o, pw) => { const b = bbox(o), s = state.scale, mh = moveHandlePt(o); return [Math.min(Math.max(b.x + b.w + 3 / s, mh[0] + 28 / s), pw - 12 / s), mh[1]]; };
+const delHandlePt = (o, pw) => { const s = state.scale; if (!gzOn(o)) { const b = bbox(o), q = toPage(o, b.x + b.w + 11 / s, b.y - 11 / s); return [clamp(q[0], 12 / s, pw - 12 / s), Math.max(q[1], 12 / s)]; } const a = abox(o); return [Math.min(a.x + a.w + 14 / s, pw - 12 / s), Math.max(a.y - 14 / s, 12 / s)]; };   // v0.11.8 바운딩 박스: 오른쪽 위 모서리 바깥이 삭제 버튼
 const rgDelPt = (r, pw) => { const b = ptsBox(r.pts), s = state.scale; return [Math.min(b.x + b.w, pw - 12 / s), Math.max(b.y - 20 / s, 12 / s)]; };
 const moveHandlePt = o => { const b = bbox(o), s = state.scale; return [Math.max(b.x - 3 / s, 12 / s), Math.max(b.y - 3 / s, 12 / s)]; };
 function onDown(e, id) {
@@ -4812,27 +5159,15 @@ function onDown(e, id) {
     if (G && !mod) {
       const fk = gFake(G), items = () => G.map(a => ({ a, orig: clone(a) }));
       { const dh = delHandlePt(fk, p.w); if (Math.hypot(pt[0] - dh[0], pt[1] - dh[1]) <= 15 / s) { e.preventDefault(); deleteSelected(); return; } }
-      const mh = moveHandlePt(fk);
-      if (Math.hypot(pt[0] - mh[0], pt[1] - mh[1]) <= 14 / s) { e.preventDefault(); drag = { kind: 'gmove', id, items: items(), start: pt, moved: false }; v.over.setPointerCapture(e.pointerId); return; }
-      if (Math.hypot(pt[0] - (fk.x + fk.w + 3 / s), pt[1] - (fk.y + fk.h + 3 / s)) <= 12 / s) { e.preventDefault(); drag = { kind: 'gscale', id, items: items(), start: pt, gb: fk, moved: false }; v.over.setPointerCapture(e.pointerId); return; }
+      { const hk = bbHit(fk, pt, e.pointerType !== 'mouse'); if (hk) { e.preventDefault(); bbStart(e, id, v, fk, hk, pt, items()); return; } }   // v0.11.8 묶음 바운딩 박스
       let on = null; for (let i = p.annots.length - 1; i >= 0; i--) if (hit(p.annots[i], pt[0], pt[1], 6 / s)) { on = p.annots[i]; break; }
       if (on && G.includes(on)) { e.preventDefault(); state.selected = { pageId: id, objId: on.id }; drag = { kind: 'gmove', id, items: items(), start: pt, moved: false, clickObj: on }; v.over.setPointerCapture(e.pointerId); return; }
     }
     const sel = !G && state.selected && state.selected.pageId === id ? p.annots.find(a => a.id === state.selected.objId) : null;
     if (sel) {
       { const dh = delHandlePt(sel, p.w); if (Math.hypot(pt[0] - dh[0], pt[1] - dh[1]) <= 15 / s) { e.preventDefault(); deleteSelected(); return; } }
-      const mh = moveHandlePt(sel);
-      if (Math.hypot(pt[0] - mh[0], pt[1] - mh[1]) <= 14 / s) {
-        e.preventDefault();
-        drag = { kind: 'move', id, obj: sel, orig: clone(sel), start: pt, moved: false, handle: true };
-        v.over.setPointerCapture(e.pointerId); return;
-      }
-      const b = bbox(sel), hx = b.x + b.w + 3 / s, hy = b.y + b.h + 3 / s;
-      if (Math.hypot(pt[0] - hx, pt[1] - hy) <= 12 / s) {
-        e.preventDefault();
-        drag = { kind: 'resize', id, obj: sel, orig: clone(sel), start: pt, moved: false };
-        v.over.setPointerCapture(e.pointerId); return;
-      }
+      if (gzOn(sel)) { const part = gzHit(sel, pt); if (part) { e.preventDefault(); gzStart(e, id, v, sel, part, pt); return; } }   // v0.11.8 유니티식 변형 도구
+      if (!gzOn(sel)) { const hk = bbHit(sel, pt, e.pointerType !== 'mouse'); if (hk) { e.preventDefault(); bbStart(e, id, v, sel, hk, pt); return; } }   // v0.11.8 바운딩 박스: 크기 · 회전 손잡이
     }
     let found = null;
     for (let i = p.annots.length - 1; i >= 0; i--) if (hit(p.annots[i], pt[0], pt[1], 6 / s)) { found = p.annots[i]; break; }
@@ -4979,6 +5314,8 @@ function onMove(e, id) {
     return;
   }
   const d = drag;
+  if (d.kind === 'giz') { gzMove(e, d, pagePoint(e, v.over)); drawOverlay(id); return; }
+  if (d.kind === 'bb') { bbMove(e, d, pagePoint(e, v.over)); drawOverlay(id); return; }
   if (d.kind === 'rgmove') {
     const pt = pagePoint(e, v.over), dx = pt[0] - d.start[0], dy = pt[1] - d.start[1], r = state.region;
     if (!r) return;
@@ -5031,7 +5368,9 @@ function onMove(e, id) {
     const dx = pt[0] - d.start[0], dy = pt[1] - d.start[1];
     if (!d.moved && Math.hypot(dx, dy) * state.scale < 2) return;
     d.moved = true;
-    if (d.kind === 'move') moveFromOrig(d.obj, d.orig, dx, dy); else resizeFromOrig(d.obj, d.orig, dx, dy);
+    if (d.kind === 'move') { let mx = dx, my = dy; if (e.shiftKey && !mMode && !d.handle) { if (Math.abs(dx) > Math.abs(dy)) my = 0; else mx = 0; } moveFromOrig(d.obj, d.orig, mx, my); }   // v0.11.8 Shift: 가로 · 세로로만
+    else if (rotOf(d.orig)) { const l = rotXY(dx, dy, 0, 0, -rotOf(d.orig)); resizeFromOrig(d.obj, d.orig, l[0], l[1]); pinTL(d.obj, rotTL(d.orig)); }   // v0.11.8 돌린 개체: 개체 기준 방향으로 늘리고 왼쪽 위 모서리는 그대로
+    else resizeFromOrig(d.obj, d.orig, dx, dy);
     drawOverlay(id);
   } else if (d.kind === 'rgscale') {
     const pt = pagePoint(e, v.over), r = state.region; if (!r) return;
@@ -5087,6 +5426,10 @@ function onUp(e, id) {
     if (d.moved) commit();
     touch(id);
     if (!d.moved && d.kind === 'move' && !d.handle && d.obj.type === 'text' && mMode) { const mt = multiTexts(); if (mt.length > 1 && mt.includes(d.obj)) { openMultiEdit(id, d.obj, mt); return; } selectObj(null); openTextEditor(id, d.obj.x, d.obj.y, d.obj); }   // v0.11.2 PC는 한 번 클릭 = 선택, 두 번 클릭 = 입력 (onDbl)
+  } else if (d.kind === 'giz') {
+    gzEnd(d);
+  } else if (d.kind === 'bb') {
+    bbEnd(d);
   } else if (d.kind === 'erase') {
     if (d.any) commit();
   } else if (d.kind === 'text') {
@@ -5102,7 +5445,8 @@ function onUp(e, id) {
 function cancelDrag(id) {
   if (!drag) return;
   const d = drag; drag = null;
-  if (d.kind === 'move' || d.kind === 'resize') { Object.assign(d.obj, d.orig); }
+  if (d.kind === 'bb' && d.items) d.items.forEach(({ a, orig }) => { for (const k of Object.keys(a)) if (!(k in orig)) delete a[k]; Object.assign(a, orig); });
+  if (d.kind === 'move' || d.kind === 'resize' || d.kind === 'giz' || (d.kind === 'bb' && !d.items)) { for (const k of Object.keys(d.obj)) if (!(k in d.orig)) delete d.obj[k]; Object.assign(d.obj, d.orig); }
   if ((d.kind === 'gmove' || d.kind === 'gscale') && d.items) d.items.forEach(({ a, orig }) => { for (const k of Object.keys(a)) if (!(k in orig)) delete a[k]; Object.assign(a, orig); });
   if (d.kind === 'region') { state.region = null; if (d.auto) { setTool('select'); mqAuto = false; obAuto(); } }
   if (d.kind === 'rgmove' && d.moved && state.region) { (d.orig || []).forEach(({ a, orig }) => moveFromOrig(a, orig, 0, 0)); state.region.pts = d.pts0; }
@@ -5125,10 +5469,10 @@ function annotHitAt(p, pt) {
   const s = state.scale, G = selGroup(p.id);
   const sel = G ? gFake(G) : state.selected && state.selected.pageId === p.id ? p.annots.find(a => a.id === state.selected.objId) : null;
   if (sel) {
-    const b = bbox(sel), mh = moveHandlePt(sel);
+    const b = bbox(sel), mh = moveHandlePt(sel), lp = toLocal(sel, pt[0], pt[1]);
     { const dh = delHandlePt(sel, p.w); if (Math.hypot(pt[0] - dh[0], pt[1] - dh[1]) <= 15 / s) return true; }
-    if (Math.hypot(pt[0] - mh[0], pt[1] - mh[1]) <= 14 / s) return true;
-    if (Math.hypot(pt[0] - (b.x + b.w + 3 / s), pt[1] - (b.y + b.h + 3 / s)) <= 12 / s) return true;
+    if (!G && gzOn(sel) && gzHit(sel, pt)) return true;
+    if ((G || !gzOn(sel)) && bbHit(sel, pt, mMode)) return true;
   }
   for (let i = p.annots.length - 1; i >= 0; i--) if (hit(p.annots[i], pt[0], pt[1], 6 / s)) return true;
   return false;
@@ -5239,11 +5583,8 @@ function hoverCursor(e, id) {
   const s = state.scale, pt = pagePoint(e, v.over);
   let cur = 'default';
   const G = selGroup(id), sel = G ? gFake(G) : state.selected && state.selected.pageId === id ? p.annots.find(a => a.id === state.selected.objId) : null;
-  if (sel) {
-    const b = bbox(sel), mh = moveHandlePt(sel);
-    if (Math.hypot(pt[0] - mh[0], pt[1] - mh[1]) <= 14 / s) cur = 'grab';
-    else if (Math.hypot(pt[0] - (b.x + b.w + 3 / s), pt[1] - (b.y + b.h + 3 / s)) <= 12 / s) cur = 'nwse-resize';
-  }
+  if (sel && !G && gzOn(sel)) { const part = gzHit(sel, pt); if (part) cur = GZ_CUR[part] || 'pointer'; if (part !== GZ.hover) { GZ.hover = part; drawOverlay(id); } }
+  else if (sel) { const hk = bbHit(sel, pt, false); if (hk) cur = BB_CUR[hk]; }
   if (cur === 'default') for (let i = p.annots.length - 1; i >= 0; i--) if (hit(p.annots[i], pt[0], pt[1], 6 / s)) { cur = 'move'; break; }
   v.over.style.cursor = cur;
 }
@@ -5306,6 +5647,7 @@ function openTextEditor(id, x, y, obj, init, multi) {
   ta.className = 'text-editor'; ta.spellcheck = false; ta.rows = 1; ta.value = obj ? obj.text : (init ? init.text : '');
   ta.style.left = x * state.scale + 'px'; ta.style.top = y * state.scale + 'px';
   ta.style.color = src.color;
+  if (obj && rotOf(obj)) { const b0 = bbox(obj); ta.style.transformOrigin = `${b0.w / 2 * state.scale}px ${b0.h / 2 * state.scale}px`; ta.style.transform = `rotate(${obj.rot}deg)`; }   // v0.11.8 돌린 글자는 입력칸도 같이 돌려요
   ta.setAttribute('aria-label', '텍스트 입력');
   const mir = document.createElement('div'); mir.className = 'te-mirror'; mir.setAttribute('aria-hidden', 'true'); v.el.appendChild(mir);
   const fit = () => {
@@ -5388,9 +5730,10 @@ function finishEditor() {
     }
   }
   if (e.obj) {
-    const o = e.obj;
+    const o = e.obj, tl0 = rotOf(o) ? rotTL(o) : null;
     if (!text.trim()) { p.annots = p.annots.filter(a => a.id !== o.id); if (state.selected && state.selected.objId === o.id) state.selected = null; }
     else { o.text = text; o.size = e.size; o.color = e.color; o.font = e.font; o.bold = e.bold; o.italic = e.italic; o.fill = e.fill; o.align = e.align; o.x = e.x; o.y = e.y; if (e.ls) o.ls = e.ls; else delete o.ls; if (e.lh) o.lh = e.lh; else delete o.lh; if (rcp) o.rc = rcp; else delete o.rc; if (rbp) o.rb = rbp; else delete o.rb; }
+    if (tl0 && text.trim() && !e.moved) pinTL(o, tl0);
     commit();
   } else if (e.init) {
     const i = e.init, rc0 = JSON.stringify(rcClip(i.rc || [], text.length));
@@ -5642,6 +5985,11 @@ function rgHit(r, pt, tol) {
 function scaleFromOrig(o, orig, ax, ay, sx, sy) {
   const X = v => ax + (v - ax) * sx, Y = v => ay + (v - ay) * sy;
   if (orig.pts) { o.pts = orig.pts.map(p => [X(p[0]), Y(p[1])]); return; }
+  if (rotOf(orig)) {   // v0.11.8 돌린 개체는 가운데를 기준으로 비율대로
+    const c = rotC(orig), k = (sx + sy) / 2;
+    if (o.type === 'text') o.size = clamp(orig.size * k, 6, 300); else if (orig.w != null) { o.w = Math.max(2, orig.w * k); o.h = Math.max(2, orig.h * k); }
+    const b = bbox(o); o.x = X(c[0]) - b.w / 2; o.y = Y(c[1]) - b.h / 2; return;
+  }
   o.x = X(orig.x); o.y = Y(orig.y);
   if (orig.w != null && orig.h != null && o.type !== 'text') { o.w = Math.max(2, orig.w * sx); o.h = Math.max(2, orig.h * sy); }
   if (o.type === 'text') o.size = clamp(orig.size * (sx + sy) / 2, 6, 300);
@@ -5657,7 +6005,7 @@ function rgScaleParams(d, pt, shift) {
 }
 function touchedBy(o, r, box) {
   if (o.hidden || o.locked) return false;
-  const bb = bbox(o);
+  const bb = abox(o);
   if (bb.x > box.x + box.w || bb.x + bb.w < box.x || bb.y > box.y + box.h || bb.y + bb.h < box.y) return false;
   if (isPts(o)) {
     const tol = (o.width || 2) / 2;
@@ -5847,6 +6195,7 @@ function setTool(t) {
   finishEditor();
   autoBack = null;   // v0.11.4 직접 도구를 바꾸면 자동 복귀 해제
   state.tool = t;
+  try { GZ.hand = false; GZ.hover = null; gzSync(); } catch (e) { /* 변형 도구 준비 전 */ }
   document.querySelectorAll('.page .over').forEach(o => { o.style.pointerEvents = ''; });
   document.querySelectorAll('.tool[data-tool]').forEach(b => b.classList.toggle('active', b.dataset.tool === t));
   if (t !== 'select') { const sel = window.getSelection(); if (sel) sel.removeAllRanges(); }
@@ -5857,6 +6206,66 @@ function setTool(t) {
   renderOptions();
 }
 document.querySelectorAll('.tool[data-tool]').forEach(b => b.addEventListener('click', () => setTool(b.dataset.tool)));
+/* v0.11.8 유니티식 변형 도구 패널 (PC · 기즈모 모드): 끌어서 옮기는 손잡이 · 접기 · 6개 도구 */
+(() => {
+  const IC = {
+    gzHand: '<path d="M18 11V6a2 2 0 0 0-4 0v5"/><path d="M14 10V4a2 2 0 0 0-4 0v6"/><path d="M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/>',
+    gzMove: '<path d="M12 2v20M2 12h20"/><path d="m5 9-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3"/>',
+    gzRot: '<path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/>',
+    gzScale: '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 16 16 8"/><path d="M11 8h5v5"/>',
+    gzRect: '<rect x="5" y="5" width="14" height="14" rx="1"/><circle cx="5" cy="5" r="1.8" fill="currentColor"/><circle cx="19" cy="5" r="1.8" fill="currentColor"/><circle cx="5" cy="19" r="1.8" fill="currentColor"/><circle cx="19" cy="19" r="1.8" fill="currentColor"/>',
+    gzAll: '<circle cx="12" cy="12" r="8.5"/><path d="M12 1.5v4M12 18.5v4M1.5 12h4M18.5 12h4"/><rect x="10" y="10" width="4" height="4" fill="currentColor"/>',
+    gzCube: '<path d="M12 2.5 3.5 7v10l8.5 4.5 8.5-4.5V7z"/><path d="M3.5 7 12 11.5 20.5 7M12 11.5v10"/>'
+  };
+  Object.assign(ICONS, IC);
+  const TOOLS = [['hand', 'gzHand', '화면 이동', 'gz.hand'], ['move', 'gzMove', '이동', 'gz.move'], ['rotate', 'gzRot', '회전', 'gz.rotate'], ['scale', 'gzScale', '크기 조절', 'gz.scale'], ['rect', 'gzRect', '사각형 변형', 'gz.rect'], ['all', 'gzAll', '통합 변형 (이동 · 회전 · 크기)', 'gz.all']];
+  const bar = document.createElement('div'); bar.id = 'gzBar'; bar.className = 'gzbar'; bar.setAttribute('role', 'toolbar'); bar.setAttribute('aria-label', '변형 도구');
+  bar.innerHTML = `<div class="gz-grip" title="끌어서 옮기기" aria-hidden="true"></div><button type="button" class="gz-fold" title="도구 막대 접기" aria-label="도구 막대 접기" aria-expanded="true">${svg('chevU')}</button>` +
+    `<div class="gz-tools">${TOOLS.map(([k, ic, n, sc]) => `<button type="button" data-gz="${k}" data-sc="${sc}" title="${n}" aria-label="${n}">${svg(ic)}</button>`).join('')}</div>`;
+  stage.appendChild(bar);
+  const tipSync = () => bar.querySelectorAll('[data-gz]').forEach(b => { const n = b.getAttribute('aria-label'), pk = prettyKey(keyOf(b.dataset.sc)); b.title = pk ? `${n} (${pk})` : n; });
+  window.gzTips = tipSync;
+  bar.addEventListener('click', e => {
+    const b = e.target.closest('[data-gz]'); if (b) { if (bar.classList.contains('fold') && b.classList.contains('on')) { setFold(false); return; } gzSet(b.dataset.gz); return; }
+    if (e.target.closest('.gz-fold')) setFold(!bar.classList.contains('fold'));
+  });
+  /* 손잡이로 끌어 옮기기 (위치 기억) */
+  const place = (x, y) => { const W = stage.clientWidth, H = stage.clientHeight; x = clamp(x, 6, Math.max(6, W - bar.offsetWidth - 6)); y = clamp(y, 6, Math.max(6, H - bar.offsetHeight - 6)); bar.style.left = x + 'px'; bar.style.top = y + 'px'; return [x, y]; };
+  let pos = null; try { pos = JSON.parse(gzLS('meowGizPos') || 'null'); } catch (e) { pos = null; }
+  const home = () => place(pos ? pos[0] : 12, pos ? pos[1] : 12);
+  requestAnimationFrame(home); window.addEventListener('resize', () => requestAnimationFrame(home));
+  bar.querySelector('.gz-grip').addEventListener('pointerdown', e => {
+    e.preventDefault(); const r = bar.getBoundingClientRect(), sr = stage.getBoundingClientRect(), ox = e.clientX - r.left, oy = e.clientY - r.top;
+    bar.classList.add('drag');
+    const mv = ev => { pos = place(ev.clientX - sr.left - ox, ev.clientY - sr.top - oy); };
+    const up = () => { bar.classList.remove('drag'); window.removeEventListener('pointermove', mv); window.removeEventListener('pointerup', up); if (pos) safeStore.setItem('meowGizPos', JSON.stringify(pos)); };
+    window.addEventListener('pointermove', mv); window.addEventListener('pointerup', up);
+  });
+  /* v0.11.8 도구 막대 접기: 접으면 손잡이와 지금 도구만 보여요 (상태 기억) */
+  function setFold(on) {
+    bar.classList.toggle('fold', !!on); try { localStorage.setItem('meowGizFold', on ? '1' : '0'); } catch (e) { /* 무시 */ }
+    const f = bar.querySelector('.gz-fold'); f.innerHTML = svg(on ? 'chevD' : 'chevU'); f.title = on ? '도구 막대 펼치기' : '도구 막대 접기'; f.setAttribute('aria-label', f.title); f.setAttribute('aria-expanded', String(!on));
+    requestAnimationFrame(home);
+  }
+  if (gzLS('meowGizFold') === '1') setFold(true);
+  /* 손 도구 · 가운데 버튼: 화면을 끌어서 이동 */
+  let pan = null;
+  viewer.addEventListener('pointerdown', e => {
+    if (mMode || state.present) return;
+    const hand = GZ.hand && e.button === 0 && e.pointerType === 'mouse';
+    if (!hand && e.button !== 1) return;
+    if (e.target.closest && e.target.closest('.memo,.text-editor,.te-handle,.te-del,button,input,textarea,select')) return;
+    e.preventDefault(); e.stopPropagation();
+    pan = { x: e.clientX, y: e.clientY, l: viewer.scrollLeft, t: viewer.scrollTop, id: e.pointerId };
+    stage.classList.add('gz-panning');
+    try { viewer.setPointerCapture(e.pointerId); } catch (er) { /* 무시 */ }
+  }, true);
+  viewer.addEventListener('pointermove', e => { if (!pan || e.pointerId !== pan.id) return; viewer.scrollLeft = pan.l - (e.clientX - pan.x); viewer.scrollTop = pan.t - (e.clientY - pan.y); }, true);
+  const endPan = e => { if (!pan || (e && e.pointerId !== pan.id)) return; pan = null; stage.classList.remove('gz-panning'); };
+  viewer.addEventListener('pointerup', endPan, true); viewer.addEventListener('pointercancel', endPan, true);
+  viewer.addEventListener('auxclick', e => { if (e.button === 1) e.preventDefault(); });
+  gzSync();
+})();
 
 const SHAPES = [['rect', '사각형'], ['rrect', '둥근 사각형'], ['ellipse', '원'], ['star', '별']];   // v0.11.4 둥근 사각형
 const QUICK = ['#111111', '#e53935', '#fdd835', '#43a047', '#1e88e5'];
@@ -5976,6 +6385,7 @@ function renderOptions() {
       if (o.type === 'rect' && o.round != null && !o.mosaic) h += range('모서리', 'sel.round', 0, 100, Math.round(o.round), '%');   // v0.11.4 둥근 사각형 모서리
       if (!o.mosaic && (o.type === 'rect' || o.type === 'ellipse' || o.type === 'star')) h += range('불투명도', 'sel.fillAlpha', 10, 100, Math.round((o.fillAlpha == null ? 1 : o.fillAlpha) * 100), '%');
       if (strokeLike) h += range('불투명', 'sel.alpha', 10, 100, Math.round((o.alpha == null ? 1 : o.alpha) * 100), '%');
+      if (canRot(o)) h += range('기울기', 'sel.rot', 0, 360, Math.round(rotOf(o)) % 360, '°');   // v0.11.8 기울기(회전 각도) 직접 입력
       if (settings.layerMode === 'manual') { const pp = pageById(state.selected.pageId); if (pp && pp.layers) h += `<div class="grp"><label>레이어</label><select class="lsel" data-movelayer aria-label="레이어 이동">${pp.layers.slice().reverse().map(l => `<option value="${l.id}"${l.id === o.lid ? ' selected' : ''}>${escH(l.name)}</option>`).join('')}</select></div>`; }
       h += `<button class="danger-btn" data-del>${svg('trash')}삭제</button>` + hint(o.type === 'audio' ? '드래그해서 위치 이동 · 더블클릭하면 바로 재생' : (mMode ? '모서리 핸들로 크기 조절 · 글자 개체는 클릭하면 바로 수정' : '모서리 핸들로 크기 조절 · 글자 개체는 두 번 클릭하면 입력 · Ctrl+C / Ctrl+V로 복사 · 붙여넣기'));
     } else h = mMode ? '' : '<span>개체를 클릭해 선택 · 드래그해서 이동 · PDF 글자는 드래그해서 복사하고, 두 번 클릭하면 수정할 수 있어요.</span><button class="opt-btn" data-copy>선택한 글자 복사</button>';
@@ -5991,7 +6401,7 @@ function mobOb() {
   const kids = [...optbar.children].filter(el => !el.classList.contains('hint'));
   optbar.classList.toggle('mob-ob', kids.length > 0);
   if (!kids.length) return;
-  const ICN = { '굵기': 'lineW', '선 굵기': 'lineW', '불투명': 'drop', '불투명도': 'drop', '크기': 'tsize', '글자 크기': 'tsize', '자간': 'spacing', '줄간격': 'rows', '블록 크기': 'mosaic', '선 종류': 'line', '강조 방식': 'highlighter', '글자 맞춤': 'textcursor', '지우개 방식': 'eraser', '레이어': 'layers' };
+  const ICN = { '굵기': 'lineW', '선 굵기': 'lineW', '불투명': 'drop', '불투명도': 'drop', '크기': 'tsize', '글자 크기': 'tsize', '자간': 'spacing', '줄간격': 'rows', '블록 크기': 'mosaic', '기울기': 'rotate', '선 종류': 'line', '강조 방식': 'highlighter', '글자 맞춤': 'textcursor', '지우개 방식': 'eraser', '레이어': 'layers' };
   const items = [], direct = [];
   kids.forEach(el => {
     const lb = el.querySelector(':scope>label'), lt = lb ? lb.textContent.trim() : (el.getAttribute('aria-label') || '').trim();
@@ -6080,6 +6490,7 @@ optbar.addEventListener('input', e => {
       if (f === 'alpha') { if (val >= 100) delete o.alpha; else o.alpha = val / 100; }
       else if (f === 'width') { o.width = val; if (o.type === 'rect' || o.type === 'ellipse' || o.type === 'star') { settings.shape.width = val; saveToolSet(); } }
       else if (f === 'fillAlpha') { o.fillAlpha = val / 100; if (o.type === 'rect' || o.type === 'ellipse' || o.type === 'star') { settings.shape.fillAlpha = val; saveToolSet(); } }
+      else if (f === 'rot') { if (canRot(o)) setRot(o, val); }
       else if (f === 'block') o.mosaic = val;
       else if (f === 'round') { o.round = val; settings.shape.round = val; saveToolSet(); }
       else if (f === 'size') o.size = val;
@@ -6221,6 +6632,19 @@ function addBlankAfter(id) {
   syncDOM(); commit();
   setTimeout(() => goToPage(np.id), 30);
   toast('빈 페이지를 추가했어요.');
+}
+/* v0.11.8 페이지 복제: 원본 · 그린 것 · 메모 · 레이어를 그대로 복사해 바로 뒤에 넣어요 */
+function dupPage(id) {
+  finishEditor();
+  const i = idxOf(id); if (i < 0) return;
+  const np = clone(state.pages[i]);
+  np.id = uid('p'); np.annots = (np.annots || []).map(a => Object.assign(a, { id: uid('o') })); np.memos = (np.memos || []).map(m => Object.assign(m, { id: uid('m') }));
+  delete np.bookmark;
+  if (np.name) np.name = (np.name + ' (사본)').slice(0, 60);
+  state.pages.splice(i + 1, 0, np);
+  syncDOM(); commit();
+  setTimeout(() => goToPage(np.id), 30);
+  toast('페이지를 복제했어요. Ctrl+Z로 되돌릴 수 있어요.');
 }
 function movePage(fromId, toId, after, grp) {
   const from = idxOf(fromId); if (from < 0 || fromId === toId) return;
@@ -10009,7 +10433,7 @@ function setLayerMode(m) {
 function layerMenu(btn, p, L) {
   document.querySelectorAll('.lmenu').forEach(n => n.remove());
   const i = p.layers.indexOf(L), m = document.createElement('div'); m.className = 'lmenu'; m.setAttribute('role', 'menu');
-  const items = [['ren', '이름 바꾸기'], ['up', '위로 올리기', i >= p.layers.length - 1], ['down', '아래로 내리기', i <= 0], ['merge', '아래 레이어와 합치기', i <= 0], ['del', '레이어 삭제', p.layers.length < 2]];
+  const items = [['ren', '이름 바꾸기'], ['dup', '레이어 복제'], ['up', '위로 올리기', i >= p.layers.length - 1], ['down', '아래로 내리기', i <= 0], ['merge', '아래 레이어와 합치기', i <= 0], ['del', '레이어 삭제', p.layers.length < 2]];
   m.innerHTML = items.map(([k, t, d]) => `<button data-lm2="${k}" role="menuitem"${d ? ' disabled' : ''}>${t}</button>`).join('');
   document.body.appendChild(m);
   const r = btn.getBoundingClientRect(); m.style.top = Math.min(window.innerHeight - m.offsetHeight - 8, r.bottom + 4) + 'px'; m.style.left = Math.max(8, r.right - m.offsetWidth) + 'px';
@@ -10020,6 +10444,7 @@ function layerMenu(btn, p, L) {
     m.remove(); document.removeEventListener('pointerdown', off, true);
     const k = b.dataset.lm2;
     if (k === 'ren') { const n = await modal({ title: '레이어 이름', message: '', input: L.name, ok: '확인' }); if (n && n.trim()) { L.name = n.trim().slice(0, 30); commit(); renderLayers(); } return; }
+    if (k === 'dup') { dupManualLayer(p, L); return; }
     if (k === 'up' || k === 'down') { const j = i + (k === 'up' ? 1 : -1); if (j < 0 || j >= p.layers.length) return; [p.layers[i], p.layers[j]] = [p.layers[j], p.layers[i]]; layerSort(p); commit(); touch(p.id); renderLayers(); return; }
     if (k === 'merge') { const lo = p.layers[i - 1]; if (!lo) return; p.annots.forEach(a => { if (a.lid === L.id) a.lid = lo.id; }); p.layers.splice(i, 1); p.activeLayer = lo.id; layerSort(p); commit(); touch(p.id); renderLayers(); return; }
     if (k === 'del') delManualLayer(p, L);
@@ -10032,6 +10457,18 @@ function delManualLayer(p, L) {
   if (state.selected && !p.annots.some(a => a.id === state.selected.objId)) state.selected = null;
   layerEnsure(p); commit(); touch(p.id); renderOptions(); renderLayers(); toast('레이어를 삭제했어요. Ctrl+Z로 되돌릴 수 있어요.');
 }
+/* v0.11.8 수동 레이어 복제: 레이어 안의 개체를 모두 복사해 바로 위에 새 레이어로 */
+function dupManualLayer(p, L) {
+  const i = p.layers.indexOf(L); if (i < 0) return;
+  const nid = uid('L'), NL = Object.assign(clone(L), { id: nid, name: (L.name + ' 사본').slice(0, 30) }); delete NL.locked;
+  p.layers.splice(i + 1, 0, NL);
+  const src = p.annots.filter(a => a.lid === L.id), last = src.length ? p.annots.indexOf(src[src.length - 1]) : p.annots.length - 1;
+  const cp = src.map(a => Object.assign(clone(a), { id: uid('o'), lid: nid }));
+  cp.forEach(a => delete a.locked);
+  p.annots.splice(last + 1, 0, ...cp);
+  p.activeLayer = nid; layerSort(p); commit(); touch(p.id); renderLayers();
+  toast(`레이어를 복제했어요. (개체 ${cp.length}개)`);
+}
 function renderManualLayers(p) {
   layerSort(p);
   $('#layerCount').textContent = (idxOf(p.id) + 1) + '쪽 · ' + p.layers.length + '개';
@@ -10042,7 +10479,7 @@ function renderManualLayers(p) {
     const thumbs = lvGet() === 'thumb';
     row.innerHTML = (thumbs ? '<canvas class="l-thumb" width="80" height="80"></canvas>' : '') + `<span class="l-name" title="개체 ${n}개"></span>` +
       `<button class="l-btn" data-ml="vis" title="${L.hidden ? '보이기' : '숨기기'}" aria-label="${L.hidden ? '보이기' : '숨기기'}">${svg(L.hidden ? 'eyeOff' : 'eye')}</button>` +
-      `<button class="l-btn${L.locked ? ' on' : ''}" data-ml="lock" title="${L.locked ? '잠금 해제' : '잠금'}" aria-label="${L.locked ? '잠금 해제' : '잠금'}">${svg(L.locked ? 'lock' : 'unlock')}</button><button class="l-btn" data-ml="del" title="${p.layers.length < 2 ? '레이어는 하나 이상 필요해요' : '레이어 삭제'}" aria-label="레이어 삭제"${p.layers.length < 2 ? ' disabled' : ''}>${svg('trash')}</button><button class="l-btn" data-ml="more" title="더보기" aria-label="더보기">${svg('dots')}</button>`;
+      `<button class="l-btn${L.locked ? ' on' : ''}" data-ml="lock" title="${L.locked ? '잠금 해제' : '잠금'}" aria-label="${L.locked ? '잠금 해제' : '잠금'}">${svg(L.locked ? 'lock' : 'unlock')}</button><button class="l-btn" data-ml="del" title="${p.layers.length < 2 ? '레이어는 하나 이상 필요해요' : '레이어 삭제'}" aria-label="레이어 삭제"${p.layers.length < 2 ? ' disabled' : ''}>${svg('trash')}</button><button class="l-btn" data-ml="dup" title="레이어 복제" aria-label="레이어 복제">${svg('copy')}</button><button class="l-btn" data-ml="more" title="더보기" aria-label="더보기">${svg('dots')}</button>`;
     row.querySelector('.l-name').textContent = L.name;
     layerList.appendChild(row);
     if (thumbs) layerThumb(row.querySelector('.l-thumb'), p.annots.filter(a => a.lid === L.id));
@@ -10057,6 +10494,7 @@ layerList.addEventListener('click', e => {
   if (act && act.dataset.ml === 'vis') { if (L.hidden) delete L.hidden; else L.hidden = true; layerSort(p); commit(); touch(p.id); renderLayers(); return; }
   if (act && act.dataset.ml === 'lock') { if (L.locked) delete L.locked; else L.locked = true; if (L.locked && state.selected && p.annots.some(a => a.id === state.selected.objId && a.lid === L.id)) selectObj(null); layerSort(p); commit(); renderOptions(); renderLayers(); return; }
   if (act && act.dataset.ml === 'more') { layerMenu(act, p, L); return; }
+  if (act && act.dataset.ml === 'dup') { dupManualLayer(p, L); return; }
   if (act && act.dataset.ml === 'del') { if (!act.disabled) delManualLayer(p, L); return; }
   if (!act && layerDoubleTap(L.id)) { renameManualLayer(p, L); return; }
   p.activeLayer = L.id; renderLayers();
@@ -10162,6 +10600,7 @@ function renderLayers0() {
     row.innerHTML = (thumbs ? '<canvas class="l-thumb" width="80" height="80"></canvas>' : `<span class="l-ico">${svg(LAYER_ICONS[a.type] || 'pen')}</span>${a.color ? `<span class="l-dot" style="--c:${a.color}"></span>` : ''}`) + `<span class="l-name"></span>` +
       `<button class="l-btn" data-act="vis" title="${a.hidden ? '보이기' : '숨기기'}" aria-label="${a.hidden ? '보이기' : '숨기기'}">${svg(a.hidden ? 'eyeOff' : 'eye')}</button>` +
       `<button class="l-btn l-lock${a.locked ? ' on' : ''}" data-act="lock" title="${a.locked ? '잠금 풀기' : '잠그기 (선택 · 이동 · 지우기 막기)'}" aria-label="${a.locked ? '잠금 풀기' : '잠그기'}" aria-pressed="${!!a.locked}">${svg(a.locked ? 'lock' : 'unlock')}</button>` +   // v0.11.2 자동 레이어에도 자물쇠
+      `<button class="l-btn" data-act="dup" title="복제" aria-label="복제">${svg('copy')}</button>` +
       `<button class="l-btn" data-act="del" title="삭제" aria-label="삭제">${svg('trash')}</button>`;
     row.querySelector('.l-name').textContent = names.get(a.id);
     layerList.appendChild(row);
@@ -10178,6 +10617,10 @@ layerList.addEventListener('click', e => {
     if (o.locked) delete o.locked; else o.locked = true;
     if (o.locked) { if (state.selected && state.selected.objId === o.id) state.selected = null; state.layerSel.delete(o.id); }
     commit(); touch(p.id); renderOptions(); renderLayers(); toast(o.locked ? '잠갔어요. 선택 · 이동 · 지우기가 막혀요.' : '잠금을 풀었어요.'); return;
+  }
+  if (act && act.dataset.act === 'dup') {   // v0.11.8 자동 레이어 복제: 바로 위에 같은 자리로
+    const c = clone(o); c.id = uid('o'); delete c.locked; if (c.lname) c.lname = (c.lname + ' 사본').slice(0, 30);
+    p.annots.splice(p.annots.indexOf(o) + 1, 0, c); commit(); touch(p.id); selectObj(p.id, c.id); renderLayers(); toast('개체를 복제했어요.'); return;
   }
   if (act && act.dataset.act === 'del') {
     if (o.locked) { toast('잠긴 개체예요. 자물쇠를 풀고 지워 주세요.'); return; }
@@ -11340,6 +11783,16 @@ $('#printBtn').onclick = printDocument;
 
 /* ════════════ 병합 · 압축 · PPTX 내보내기 · 전체 페이지 관리 ════════════ */
 const isPdfFile = f => !!f && (f.type === 'application/pdf' || /\.pdf$/i.test(f.name || ''));
+const isPngFile = f => !!f && (f.type === 'image/png' || /\.png$/i.test(f.name || ''));
+/* v0.11.8 병합할 파일 하나를 페이지로: PDF는 그대로, PNG는 그림 한 장을 가득 채운 페이지로 */
+async function loadMergeSource(f) {
+  if (!isPngFile(f)) return Object.assign(await loadPdfSource(f), { imgs: [] });
+  const { img, dataUrl, nw, nh } = await prepImage(f);
+  let w = nw * 0.75, h = nh * 0.75; const k = Math.min(1, 1190 / Math.max(w, h)); w *= k; h *= k;
+  const imgId = uid('img');
+  return { docId: null, imgs: [[imgId, { img, dataUrl }]], pages: [{ id: uid('p'), src: null, w, h, annots: [{ id: uid('o'), type: 'image', imgId, x: 0, y: 0, w, h }], memos: [], group: null }] };
+}
+const regMergeSource = src => { if (src.docId) state.docs.set(src.docId, { pdf: src.pdf, bytes: src.bytes }); for (const [k, v] of src.imgs || []) state.images.set(k, v); };
 const fmtSize = n => n >= 1048576 ? (n / 1048576).toFixed(1) + ' MB' : Math.max(1, Math.round(n / 1024)) + ' KB';
 const tick = () => new Promise(r => setTimeout(r, 0));
 function pickFiles(accept, multiple) {
@@ -11405,20 +11858,21 @@ function mergeOrderDialog(items, title) {
 /* 새 문서(새 탭)로 병합 */
 async function mergeFilesToNew(files) {
   const items = files.map((f, i) => ({ key: i, name: f.name, sub: fmtSize(f.size) }));
-  const order = await mergeOrderDialog(items, 'PDF 병합 순서');
+  const order = await mergeOrderDialog(items, files.some(isPngFile) ? '병합 순서' : 'PDF 병합 순서');
   if (!order) return;
-  showLoading('PDF를 병합하는 중…');
+  showLoading('파일을 병합하는 중…');
   try {
     const srcs = [];
-    for (const k of order) srcs.push(await loadPdfSource(files[k]));
+    for (const k of order) srcs.push(await loadMergeSource(files[k]));
     resetDocument();
     const pages = [];
-    for (const s of srcs) { state.docs.set(s.docId, { pdf: s.pdf, bytes: s.bytes }); pages.push(...s.pages); }
+    for (const s of srcs) { regMergeSource(s); pages.push(...s.pages); }
     state.pages = pages;
     state.handles = { pdf: null, mpdf: null };
     setSaveFormat('pdf');
     afterLoad('병합 문서.pdf');
-    toast(`PDF ${srcs.length}개(${pages.length}쪽)를 병합했습니다.`);
+    toast(files.some(isPngFile) ? `파일 ${srcs.length}개(${pages.length}쪽)를 병합했습니다.` : `PDF ${srcs.length}개(${pages.length}쪽)를 병합했습니다.`);
+    if (files.some(isPngFile)) { setDirty(true); requestAnimationFrame(() => requestAnimationFrame(() => { try { redrawAll(); } catch (e) { /* 무시 */ } })); }
   } catch (err) { console.error(err); toast(pdfErrMsg(err)); }
   finally { hideLoading(); }
 }
@@ -11431,9 +11885,9 @@ async function mergeFilesIntoCurrent(files) {
   try {
     finishEditor();
     const loaded = new Map();
-    for (const k of order) if (k !== 'cur') loaded.set(k, await loadPdfSource(files[k]));
+    for (const k of order) if (k !== 'cur') loaded.set(k, await loadMergeSource(files[k]));
     const before = [], after = []; let seen = false;
-    for (const k of order) { if (k === 'cur') { seen = true; continue; } const s = loaded.get(k); state.docs.set(s.docId, { pdf: s.pdf, bytes: s.bytes }); (seen ? after : before).push(...s.pages); }
+    for (const k of order) { if (k === 'cur') { seen = true; continue; } const s = loaded.get(k); regMergeSource(s); (seen ? after : before).push(...s.pages); }
     const first = (before[0] || after[0] || state.pages[0]).id;
     state.pages = [...before, ...state.pages, ...after];
     syncDOM(); commit();
@@ -11605,10 +12059,10 @@ async function exportPptx() {
 }
 
 /* ── 빈 화면 버튼 ── */
-$('#emptyMerge').onclick = async () => {
-  const files = (await pickFiles('application/pdf,.pdf', true)).filter(isPdfFile);
+$('#emptyMerge').onclick = async () => {   // v0.11.8 PNG도 함께 병합 (PNG+PNG · PNG+PDF)
+  const files = (await pickFiles('application/pdf,.pdf,image/png,.png', true)).filter(f => isPdfFile(f) || isPngFile(f));
   if (!files.length) return;
-  if (files.length < 2) { toast('병합하려면 PDF 파일을 2개 이상 선택해 주세요.'); return; }
+  if (files.length < 2) { toast('병합하려면 PDF · PNG 파일을 2개 이상 선택해 주세요.'); return; }
   mergeFilesToNew(files);
 };
 $('#emptyCompress').onclick = compressFileFlow;
@@ -11825,11 +12279,12 @@ function rotRect(o, w, h, dir) {
 function rotCenter(o, bw, bh, w, h, dir) { const c = rotPt([o.x + bw / 2, o.y + bh / 2], w, h, dir); o.x = c[0] - bw / 2; o.y = c[1] - bh / 2; }
 function rotateOnePage(p, dir) {
   const w = p.w, h = p.h;
+  /* v0.11.8 페이지를 돌리면 글자 · 이미지 · 도형 · 표도 페이지와 함께 통째로 돌아가요 (가운데를 옮기고 개체 자체도 90° 회전) */
   for (const o of p.annots) {
     if (isPts(o)) o.pts = o.pts.map(q => rotPt(q, w, h, dir));
-    else if (o.type === 'rect' || o.type === 'ellipse' || o.type === 'star' || o.type === 'link') rotRect(o, w, h, dir);
-    else if (o.type === 'text') { const b = bbox(o); rotCenter(o, b.w, b.h, w, h, dir); }
-    else if (o.w != null && o.h != null) rotCenter(o, o.w, o.h, w, h, dir);
+    else if (o.type === 'link' || o.mosaic || ((o.type === 'rect' || o.type === 'ellipse') && !rotOf(o))) rotRect(o, w, h, dir);   // 대칭인 도형 · 링크 · 모자이크는 가로 · 세로만 바꿔요
+    else if (o.type === 'audio') rotCenter(o, o.w, o.h, w, h, dir);
+    else { const b = bbox(o); rotCenter(o, b.w, b.h, w, h, dir); setRot(o, (o.rot || 0) + (dir > 0 ? 90 : -90)); }
   }
   for (const m of p.memos || []) rotCenter(m, m.w, m.collapsed ? 24 : m.h, w, h, dir);
   p.w = h; p.h = w;
@@ -12086,9 +12541,9 @@ function pmClose() {
 $('#manageBtn').onclick = openPageManager;
 
 /* ════════════ 설정 창 · 단축키 사용자 지정 · 도구 모음 위치 ════════════ */
-const APP_VERSION = 'v0.11.7';
+const APP_VERSION = 'v0.11.8';
 /* 업데이트 내역(CHANGELOG · README) 작성 규칙: 모든 항목은 음슴체(~함 · ~됨 · ~음) 또는 명사형(~추가 · ~완료 · ~개선 · ~수정 · ~해결 · ~변경)으로 끝맺기. ‘~해요 · ~돼요 · ~합니다’ 같은 높임 · 대화체는 쓰지 않기 */
-const CHANGELOG = [{"v": "v0.11.7", "d": "2026.10.18", "items": ["모바일 가로 화면: 시작 화면의 4개 버튼(파일 열기 · 빈 문서로 시작 · 파일 병합 · 파일 압축)을 더 작게 줄여 한 줄로 가운데에 가지런히 배열 — 비어 있는 페이지 패널을 숨겨 화면 정가운데에 표시", "새 테마 ‘동화’ 추가 (프리미엄) — 그림책 속 포근한 마을, 무지개 · 웃는 해 · 몽실몽실 구름 · 꽃 언덕 · 말랑한 친구들이 있는 만화 같은 화면 (테마 스토어에서 구름 · 친구들 움직임 끄기 가능)", "동화 테마 이스터에그 — 빈 배경을 누르면 하트 · 꽃 · 별이 퐁퐁, 빠르게 일곱 번 누르면 숨은 장면", "모바일: 하단 + 플로팅 네비게이션 버튼을 더 잘 보이게 — 접혀 있을 때도 보조색 · 밝은 테두리 · 그림자로 표시, 펼친 버튼의 글자도 더 선명하게", "모바일: + 플로팅 네비게이션 버튼의 자리를 세로 화면 · 가로 화면에서 따로 기억 — 세로는 아래 가운데, 가로는 오른쪽 아래가 처음 자리이고, 옮겨 둔 자리는 방향마다 따로 유지", "버튼을 누를 때 버튼 글자가 선택(파란 강조)되거나 포커스 테두리가 생기던 문제 수정 — 키보드로 이동할 때만 테두리 표시", "음성 도구를 드롭다운으로 변경 — 음성 녹음 / MP3 파일 넣기(신규) 중에서 선택, MP3 파일(최대 30MB)을 골라 녹음처럼 페이지에 넣고 재생 · 이름 바꾸기 · MP3 내보내기 가능 (V 단축키는 바로 녹음)", "PC: 테마 스토어 오른쪽 아래에 시즌 테마(기간 한정) 알림을 작은 팝업으로 표시 — 남은 기간 · 다음 무료 기간과 ‘기간 한정 테마 보기’ 버튼, 닫으면 이번 접속 동안 숨김", "공유작업 패널 아래쪽 ‘지금 탭 공유하기’ 안내를 깔끔한 카드로 바꾸고 누르면 프로젝트 관리 창이 열리도록 개선", "인쇄한 뒤 일부 테마 화면 꾸밈이 사라지던 문제 수정", "영어 · 일본어 · 중국어 화면에서 번역이 빠져 있던 문구 채움 (지금까지의 기능 · 업데이트 내역 포함)"]}, {"v": "v0.11.6", "d": "2026.10.18", "items": ["모바일: 발표 중 다음 페이지로 넘길 때 화면이 검게 변하던 문제 수정 — 발표 페이지로 바로 전환하고 짧게 페이드", "모바일: 발표 중 화면 편집 막기 — 밀어서 넘길 때 개체가 옮겨지던 문제 해결, 발표 도구 막대에는 이전 · 다음 · 나가기만 표시 (링크는 눌러서 열 수 있음)", "모바일: 발표 중 좌우로 밀거나 화면 왼쪽 / 오른쪽을 짧게 눌러 이전 · 다음 페이지로 이동", "모바일: 발표를 마치고 돌아오면 하단 플로팅 네비게이션 버튼이 위쪽으로 옮겨져 있던 문제 수정 — 발표 중 회전 · 전체화면 변화에는 자리를 바꾸지 않고, 끝나면 처음 자리로 복귀", "구글 애드센스 코드 추가 — 소개 페이지 · 사업자 정보 페이지의 head에 넣음, 편집기는 데스크톱에서 설정 · 계정 · 테마 스토어 창이 열렸을 때만 창 좌우에 세로 광고 표시(프리미엄 · 모바일 · 발표 중에는 표시 안 함), 프리미엄 안내 · 결제 창 · 소개 페이지 요금 안내에 ‘광고 제거’ 문구 추가, 오프라인용 서비스 워커는 광고 스크립트 · 요청을 저장하지 않도록 제외"]}, {"v": "v0.11.5", "d": "2026.10.18", "items": ["설정 › 화면 · 레이아웃에 ‘테마 배경 효과’ 추가 — 프리미엄 테마의 배경 클릭 효과 · 이스터에그를 모두 켜기 / 클릭 효과만 / 모두 끄기 중 선택", "테마 이스터에그 상단 문구를 ‘형광등 소리만 들린다.’ 같은 짧은 평서체로 바꾸고 이모티콘 줄임", "공유작업 채팅방에서 신고(메시지 · 참여자)하면 채팅 기록도 함께 전송 — 메시지 신고는 그 메시지 앞 20개 · 뒤 10개, 그 밖에는 최근 30개, 고객 문의 관리 › 공유작업 신고에서 신고 대상의 메시지를 강조해 표시", "모바일: 노치(카메라) 영역을 검은색으로 채움, 상태 표시줄 색도 검은색으로 변경", "모바일: 휴대폰을 가로로 돌리면 노치가 있는 쪽(왼쪽 / 오른쪽)을 자동으로 비우고 위쪽 여백은 없앰", "모바일: 하단 플로팅 네비게이션 버튼의 처음 위치를 더 아래로 이동", "모바일: 발표를 누르면 자동으로 전체화면 · 여백 없이 화면 가득 표시, 가로 모양 페이지는 자동으로 가로 화면으로 전환(지원하는 브라우저)", "발표 모드 배경을 테마와 상관없이 항상 검은색으로 고정, 테마 장식 숨김", "모바일 가로 화면 발표에서 도구 막대(presbar)가 화면 밖으로 사라지던 문제 수정 — 화면을 돌리면 자동으로 화면 안으로 이동, 모바일에서는 화면 폭에 맞춰 줄바꿈", "발표 도구 막대는 펼쳤을 때 버튼이 가려지는 위치(화면 밖 · 노치 · 홈 바)로는 옮길 수 없도록 제한, 접은 상태에서 가장자리로 옮긴 뒤 펼쳐도 안쪽으로 자동 이동"]}, {"v": "v0.11.4", "d": "2026.10.18", "items": ["도형 · 텍스트 · 링크를 만든 뒤 자동으로 바뀐 선택 도구에서 개체 밖(빈 곳 · PDF 글자 · 페이지 바깥)을 누르면 원래 도구로 복귀 — 도형 · 링크는 누른 채 끌면 바로 새로 그려짐", "도형에 ‘둥근 사각형’ 추가 — 옵션바의 ‘모서리’(0~100%)로 둥근 정도 조절, 그린 뒤에도 선택해서 수정 가능", "공유작업 ‘모두 공개’ 완성 — 공개 프로젝트 목록에 올라가고 프리미엄 회원은 누구나(방장의 친구는 프리미엄이 아니어도) 참여 가능", "공유작업 최대 인원 10명 — 가득 차면 목록 · 방 정보 창에 ‘가득 참’ 표시", "프로젝트 관리에 입장 비밀번호(사용 / 사용 안 함 · 변경) · 장르(교육 · 개발 · 그림 · 디자인 · 공부 · 업무 · 기타) · 입장 기본 권한(관전자 / 편집 허용) 설정 추가", "참여자가 나가기 · 공유 탭 닫기 · 창 닫기로 나가면 프로젝트 관리의 참여자 목록에서 바로 삭제, 3분 넘게 신호가 없는 참여자도 자동 정리", "공유작업 패널 상단 탭 바로 친구 프로젝트 ↔ 공개 프로젝트 이동, 공개 프로젝트 검색(이름 · 장르 · 방장) · 정렬(인원순 / 최신순) · 장르 필터 추가", "친구가 모두 공개로 진행하는 프로젝트는 친구 프로젝트 목록에는 안 보이고 친구 창의 ‘함께 작업’ 버튼으로 표시", "친구 창의 ‘함께 작업’ · 공유작업 패널의 ‘보기’(기존 ‘참여’)를 누르면 방 정보 창 표시 — 방 이름 · 장르 · 방장 · 인원 · 입장 권한 · 참여자 목록과 참여하기 버튼", "공개 프로젝트 신고 버튼 추가(불건전 · 욕설 · 명예훼손 · 범죄 · 기타 + 자세한 내용), 공유작업 채팅 메시지 신고 버튼 추가", "공유작업 채팅 · 접속자 사진을 누르면 프로필 카드 표시 — 친구 추가 버튼(이미 친구면 ‘친구됨’, 요청 중이면 ‘요청됨’)과 신고 버튼", "신고한 방의 이름 · 방장 · 방 정보가 개발자 계정의 ‘고객 문의 관리 › 공유작업 신고’로 전송, 처리 시 공유작업 이용 제한(1개월 · 3개월 · 1년 · 영구) · 진행 중인 방 종료 · 제한 해제 가능", "모바일: 메뉴 아래쪽 목록(새 문서 ~ 개발자 콘솔)이 잘려 보이지 않던 문제 수정 — 메뉴 전체를 위아래로 스크롤 가능"]}, {"v": "v0.11.3", "d": "2026.10.18", "items": ["글자 줄간격 옵션 추가 — 글자 도구 · 글자 편집 중 · 선택한 글자 개체의 옵션바에 ‘줄간격’(80~300%) 추가, 자간과 함께 여러 줄 글자 모양 조절 가능, Word(DOCX) 내보내기에도 반영", "도형 바탕이 가끔 투명으로 돌아가던 문제 해결 — 도형 · 펜 · 글자 등 도구 설정(색 · 바탕 · 굵기 · 불투명도)을 브라우저에 기억해 새로고침 후에도 유지, 선택한 도형의 바탕 · 색 · 굵기 변경이 다음에 그릴 도형에도 이어지도록 개선", "여러 개체 함께 옮기기 · 크기 조절 추가 — Shift · Ctrl로 여러 개체를 고른 뒤 하나를 끌면 모두 함께 이동, 묶음 오른쪽 아래 손잡이로 한꺼번에 크기 조절 (Shift를 누르면 비율 자유)", "글자 입력 중 다른 곳을 누르면 입력 상태가 바로 끝나도록 개선 (글자 도구에서도 새 글상자 없이 입력만 종료)", "디지털화(이미지 글자 인식) 정확도 대폭 향상 — 표 칸막이 짧은 선까지 찾아 글자와 구분, 칸을 넘지 않게 분리 · 글자를 실제로 그려 원본 잉크에 크기 · 자간 · 위치를 맞추고 번짐까지 보정 · 덮개는 글자 잉크만 감싸고 표 선 쪽 여백을 없애 파란 표 선을 가리지 않음 · 넓게 벌려 쓴 이름표(세 금 계 산 서)는 한 개체 + 넓은 자간으로, 위아래 이름표(상 호 / (법인명), 공 / 급 / 자)는 줄간격을 가진 한 개체로 병합 · 자신 없는 칸과 엔진이 놓친 숫자 칸은 그 부분만 다시 인식 · 문서 안 글자 크기 · 글자색 통일, 제목급 굵은 글자 인식", "선택 도구로 빈 곳을 끌어 영역을 지정하면 영역에 닿은 개체(잠금 · 숨김 제외)를 모두 선택하도록 개선 — 끄는 동안 잡힐 개체 미리 표시, 여러 개면 함께 옮기기 · 크기 조절 가능", "영역 도구로 개체를 고르면(닿은 개체 선택) 선택 도구로 자동 전환", "‘핑크세상’ 테마 무료로 전환", "프리미엄 테마 이스터에그 추가 — 문서 바깥 빈 배경(시작 화면 포함)을 누르면 테마마다 다른 반응(물방울 · 반짝이 · 점수 · 새싹 · 도토리 · 반딧불 · 별 · 탄막 등), 빠르게 연달아 누르면 테마마다 숨은 장면 등장", "새 테마 ‘동방’ 추가 — 홍백 무녀의 신사, 음양옥 · 부적 · 돌아가는 마법진 · 소용돌이와 고리 탄막 · 흩날리는 벚꽃 · 도리이가 있는 환상의 밤 (테마 스토어에서 탄막 · 벚꽃 움직임 끄기 가능)"]}, {"v": "v0.11.2", "d": "2026.10.17", "items": ["오프라인 작업 지원 — 한 번 연 편집기와 PDF · 압축 라이브러리를 브라우저에 저장해 두어 인터넷이 끊겨도 열기 · 편집 · 저장 가능, 헤더에 오프라인 표시, 앱처럼 설치 가능(PWA)", "PC: 글자 밖에서 눌러 끌면 처음 누른 점과 지금 점을 대각으로 하는 사각형에 닿은 글자만 선택 (엉뚱한 글자까지 함께 선택되던 문제 해결) — Ctrl+C · ‘선택한 글자 복사’로 복사", "PC: 페이지 패널의 페이지 옵션(방사형) 버튼에 마우스를 올리면 강조 효과", "친구 창 · 공유작업 패널에 새로고침 버튼 추가", "자동 레이어에도 자물쇠 추가 — 잠근 개체는 선택 · 이동 · 지우기 불가", "PC: 글상자 · PDF 글자를 한 번 클릭하면 선택만(입력 불가, 복사 가능), 두 번 클릭하면 입력 — 선택한 개체는 Ctrl+C / Ctrl+V로 복사 · 붙여넣기 (글상자의 글자는 일반 글자로도 복사)", "자간을 100%까지 늘릴 수 있도록 확대", "모바일: 공유(프로젝트 관리) · 프로필 버튼을 헤더에서 메뉴로 옮기고, 전체화면 버튼을 헤더로, 더보기 버튼을 점 9개 아이콘으로 변경", "모바일: 오른쪽 작업 패널(노트 · 멀티작업 · 공유작업)을 오른쪽 가장자리 손잡이나 메뉴로 열고 닫을 수 있도록 추가", "모바일: 하단 플로팅 네비게이션 바를 원형 버튼으로 바꾸고 누르면 부채꼴로 펼쳐지도록 개선 — 펼쳤을 때 모든 버튼이 화면 안에 보이는 범위까지만 옮길 수 있고, 편집기에 들어올 때마다 처음 위치로", "모바일: 플로팅 버튼이 계정 창 등 다른 창 위로 올라오던 문제 수정", "모바일: 하단 페이지 패널 가장자리를 끌어 크기 조절 (가로 화면은 오른쪽 가장자리)", "모바일: 친구 · 메일 창을 열 때 아이디 입력칸에 바로 포커스되어 자판이 뜨던 문제 수정", "모바일: 계정 창이 화면 밖으로 넘치지 않도록 크기 조절, 시작 화면 버튼 아래 설명이 화면 밖으로 나가던 문제 수정", "모바일: 전체화면에서 메뉴가 스크롤되지 않던 문제 수정", "모바일: 오른쪽 작업 패널 안을 눌러도 닫히거나 화면이 어두워지던 문제, 메뉴 아래쪽이 잘리고 스크롤되지 않던 문제 수정", "소개 페이지 개편 — ‘온라인 · 오프라인 어디서나 쓰는 종합 문서 편집기’, 새 화면 이미지(함께 편집 · 휴대폰), ‘어디서나’ 섹션, 기능 12가지, 요금 안내 갱신, 휴대폰에서 헤더 글자가 밖으로 넘치던 문제 수정, PC에서도 항상 어두운 화면으로 고정, 첫 화면 문구를 짧게 정리 (노란 문구: 온라인 • 오프라인 종합 문서 편집기)"]}, {"v": "v0.11.1", "d": "2026.10.17", "items": ["공유작업 추가 (프리미엄) — 헤더의 ‘프로젝트 관리’ 버튼으로 지금 탭을 공유 프로젝트로 만들고 고유 코드 · 공유할 이름 · 공개 여부(모두 공개 / 친구 공개 / 비공개) · 고유 코드로 입장(허용 / 허용 안 함)을 설정", "프로젝트 관리 창에서 참여자 권한(관전자 / 편집 허용) 변경과 추방, 공유 종료", "여러 사람이 같은 문서를 동시에 편집 — 개체 단위로 실시간 반영되고, 같은 개체를 동시에 고치면 마지막 변경이 남음. 실행 취소는 내 변경만 되돌림", "참여자의 마우스 포인터와 작업 중인 페이지를 프로필 사진으로 표시 (페이지 오른쪽 위 · 페이지 패널 썸네일)", "공유작업 패널: 고유 코드로 참여하기, 친구 프로젝트(친구 공개로 진행 중인 프로젝트) 목록, 내 프로젝트 다시 열기, 공개 프로젝트(준비 중)", "공유작업 중에는 공유작업 패널에 참여자 채팅방 표시", "친구 창의 내 친구 목록에서 친구 공개 프로젝트를 진행 중인 친구 옆에 ‘함께 작업’ 버튼 표시", "참여자 화면에서는 저장 · 프로젝트 관리 버튼을 숨기고 ‘다른 이름으로 저장’만 표시, 관전자는 보기만 가능", "공유 프로젝트 접속 링크(…/edit?join=고유코드) — 프로젝트 관리 창 · 공유작업 패널에서 복사, 받은 사람이 열고 로그인하면 바로 참여 (고유 코드로 입장을 허용했을 때)"]}, {"v": "v0.10.4", "d": "2026.10.17", "items": ["표 내용 편집: 행 · 열 숫자가 입력칸 위쪽으로 치우쳐 보이던 문제 수정", "표 내용 편집: 칸 글자의 왼쪽 · 가운데 · 오른쪽 정렬과 글자 크기 설정 — 선택한 칸 · 행 · 열 · 표 전체 단위로 적용 (PC는 Shift+클릭으로 여러 칸 선택)", "알림을 무료 플랜에서도 사용할 수 있도록 변경 (친구 · 메일은 계속 프리미엄)", "무료 플랜에서 헤더의 개발자 콘솔 버튼을 다른 프리미엄 버튼처럼 흐리게 표시", "모바일 옵션바 재디자인 — 설정 항목을 아이콘 탭(예: 모양 · 불투명도 · 선 굵기 · 색 · 바탕)으로 나열하고, 누른 항목의 옵션만 아래로 펼쳐 화면을 덜 가리도록 개선", "선택 도구를 눌러도 옵션바가 닫히지 않도록 변경", "글꼴 절반 정도(블랙한산스 · 감자꽃 · 독도 · Pacifico 등 19종)를 프리미엄 전용으로 — 글꼴 목록에 ‘프리미엄 글꼴’ 구역으로 표시, 이미 문서에 쓰인 글꼴은 그대로 보임", "업데이트 내역의 버전 묶음(0.3.x · 0.10.x 등) 오른쪽에 그 묶음의 가장 큰 변화를 짧은 부제목으로 표시"]}, {"v": "v0.10.3", "d": "2026.10.17", "items": ["한 페이지씩 보기에서 페이지 바깥을 휠로 굴리면 스크롤바가 없어도 화면이 위아래로 움직이도록 개선 — 설정 › 페이지 보기에서 ‘화면 위아래로 이동 / 페이지 넘기기’ 선택", "펜 · 태블릿 · 터치로 그리다가 길게 누를 때 컨텍스트 메뉴가 뜨지 않도록 수정 (마우스 우클릭 메뉴는 그대로)", "표 삽입 창과 표 내용 편집 창을 하나로 통합, 행 · 열 입력 높이를 낮춤", "표 내용 편집에서 배경색 컬러 피커를 누르면 바로 닫히던 문제 수정", "모바일 플로팅 바: 화면 왼쪽에 두면 오른쪽으로, 오른쪽에 두면 왼쪽으로 펼쳐지도록 개선", "여러 파일을 끌어다 놓거나 한 번에 골라 열면 각각 새 탭으로 열기 (PDF가 아닌 형식이 섞여도)", "여러 PDF를 새 탭으로 열었을 때 저장을 누르면 원래 파일에 바로 덮어쓰도록 수정 (다른 이름으로 저장으로 넘어가던 문제)", "친구 버튼을 멀티작업 패널에서 공유작업 패널로 옮김", "PDF에 있는 글자를 눌러 편집할 때 PDF 안의 실제 글자 정보(크기 · 굵기 · 글꼴 · 글자 간격)를 써서 띄어쓰기가 원본 그대로 유지되도록 개선, 덮개는 실제 글자 자리만 덮음", "글자 편집 중 오른쪽 위 삭제 버튼 추가 (PDF 원래 글자도 지울 수 있음)", "PDF 글자 편집 중 일부 글자색을 바꾸면 나머지 글자가 가려지던 문제 수정"]}, {"v": "v0.10.2", "d": "2026.10.17", "items": ["소개 페이지 기능 블록이 언어(일본어 · 중국어 등)에 따라 옆으로 늘어나던 문제 수정, 휴대폰 폭에서 사업자 주소가 화면 밖으로 넘치던 문제 수정", "선택 도구 옵션바: 아무 개체도 선택하지 않았을 때만 닫히고, 개체를 선택하면 원래 자리에 다시 보이도록 수정", "우측 패널 탭(레이어 · 노트 · 멀티작업 · 공유작업)을 기본으로 아이콘으로 표시하고 가로 공간에 꽉 맞게 배치 — 설정 › 패널 탭 표시 또는 패널 설정(톱니바퀴)에서 텍스트로 바꿀 수 있음", "계정 창의 프로필 · 비밀번호 · 이용 키를 정사각형 블록 버튼으로 가로 정렬, 누르면 각각의 창이 열림", "표 삽입 · 편집 창 디자인 개선 — 행 · 열 +/− 버튼, ‘첫 줄을 제목으로’ 스위치, 표 미리보기, 제목 줄 강조, 휴대폰 화면에 맞춤", "편집기 전체에서 빠져 있던 영어 · 일본어 · 중국어 번역을 채움", "공포 테마에서 언어를 바꾼 뒤 테마와 언어를 되돌리면 일부 글자가 원래 언어로 돌아오지 않던 문제 수정", "모바일 하단 플로팅 네비게이션 바를 길게 눌러 옮기기가 잘 안 되던 문제 수정 — 손가락 떨림 허용, 화면 어디로 끌어도 따라옴, 바로 끌 수 있는 손잡이(⠿) 추가"]}, {"v": "v0.10.1", "d": "2026.10.17", "items": ["도구 모음 기본 위치를 좌측 정렬로 변경", "선택 도구에서 아무 개체도 선택하지 않았을 때는 옵션바를 닫아 두도록 변경 — 개체를 선택하거나 다른 도구를 고르면 다시 보임 (직접 접어 둔 경우에는 계속 숨김)", "영역 선택 도구의 기본 방식을 ‘닿은 개체 선택’으로 변경", "선택 도구에서 빈 곳을 길게 누른 채 끌면 ‘닿은 개체 선택’ 영역 지정으로 바뀌어 여러 개체를 한 번에 선택", "페이지(캔버스) 바깥을 눌러도 선택이 해제되도록 개선", "소개 페이지 헤더에 언어 설정 추가 — 소개 페이지가 바로 번역되고, 고른 언어가 편집기에도 적용", "친구 기능 추가 (프리미엄) — 헤더의 친구 버튼, 아이디로 친구 추가, 요청 관리(받은 요청 · 보낸 요청), 내 친구 목록(프로필 사진 · 닉네임 · 아이디, 메일 보내기 · 친구 삭제), 친구 요청 받지 않기 설정", "메일 기능 추가 (프리미엄) — 친구에게 제목과 내용으로 메일 보내기, 받은 메일 · 보낸 메일함, 답장 · 삭제", "알림 기능 추가 — 헤더의 종 버튼, 친구 요청 · 수락 · 메일 알림 목록과 바로가기, 종류별 알림 켜기/끄기", "멀티작업 패널 위쪽에 친구 창 버튼 추가", "모바일: 헤더에 알림 버튼, 메뉴에 친구 · 메일함 추가, 메뉴를 자주 쓰는 기능 위주(큰 버튼 4개 + 한 줄 목록)로 다시 디자인", "무료 플랜에서는 친구 · 메일 · 알림과 프리미엄 기능을 PC · 모바일 모두 흐리게 표시 (모바일 메뉴에는 PRO 표시)", "수동 레이어 목록에 삭제 버튼 추가", "새 문구 영어 · 일본어 · 중국어 번역 추가"]}, {"v": "v0.9.5", "d": "2026.10.17", "items": ["디지털화 정확도 향상 — 글자 배경이 실제 글자 자리만 덮어서 주변 선 · 도형 · 그림을 가리지 않고, 붙어 있는 글자도 크기가 다르면 각각 다른 글자 개체로 나눔", "모바일 하단 플로팅 네비게이션 바를 길게 눌러 원하는 위치로 옮길 수 있도록 개선 (위치 기억)", "모바일 노치 · 카메라 홀 여백을 더 넓히고, 전체화면일 때만 여백이 생기도록 변경", "우측 패널에 설정(톱니바퀴) 추가 — 레이어 · 노트 · 멀티작업 · 공유작업을 켜고 끄거나 좌우로 나눠 두 개를 나란히 볼 수 있음 (기본: 모두 켜짐 · 나누지 않음)", "공유작업 탭 추가 (준비 중)", "프로필의 비밀번호 변경을 ‘비밀번호 변경’ 버튼으로 여는 별도 창으로 변경", "로그아웃 전에 ‘로그아웃 하시겠습니까?’ 확인 창 표시", "비밀번호 변경 · 회원가입 · 비밀번호 재설정의 비밀번호 칸이 브라우저 자동 완성으로 채워지지 않도록 개선", "인증번호 메일 안내에 Outlook(Hotmail) 정크 메일함 확인 문구 추가", "‘PDF 전체에서 찾기’ 입력칸을 넓혀 안내 글자가 잘리지 않도록 개선", "소개 페이지 요금 블록의 버튼 높이를 모두 같게 맞춤", "서버에 아직 없는 기능을 부를 때 ‘서버에 연결할 수 없습니다’ 대신 다시 배포가 필요하다는 안내를 표시"]}, {"v": "v0.9.4", "d": "2026.10.17", "items": ["도형 · 텍스트를 넣으면 바로 선택 도구로 바뀌고 넣은 개체가 선택된 상태가 되도록 개선", "글자 배경 칠하기: 글 입력 중 일부만 드래그한 뒤 배경색을 고르면 그 부분만 칠해지도록 변경 (docx 내보내기에도 반영)", "상단 탭의 + 버튼을 누르면 파일이 없을 때의 시작 화면이 ‘메인’ 탭으로 열리도록 변경 (메인 탭에서 연 문서는 그 자리에 열림)", "번역 버튼을 도구 모음 · 더보기에서 상단 헤더로 이동", "레이어 보기 기본값: 자동 레이어는 간단히 보기, 수동 레이어는 썸네일 보기 (방식마다 따로 기억)", "페이지 패널 썸네일 크기를 줄이고 좌우 여백을 넓힘", "요금제 카드의 ‘월 875원 꼴’ 문구를 ‘월 875원’으로 바꾸고, 계정 창의 구독 블록 가로폭을 넓힘", "멀티작업 빈 화면 가운데의 ‘멀티작업’ 제목을 단순한 글자로 변경", "모바일: 상단 노치 · 하단 홈 바 영역에 맞춰 위아래를 살짝 띄우고, 화면이 아래로 넘치던 문제 수정", "모바일: 프레젠테이션 · 번역 · 찾기 · 보기/편집 · 북마크를 접고 펼 수 있는 하단 플로팅 네비게이션 바로 이동 (메뉴의 ‘문서’ 항목 삭제)", "홈페이지 요금 안내의 프리미엄 블록을 월간 구독 · 연간 구독으로 나눔", "디지털화의 ‘전체 페이지’를 프리미엄 기능으로 변경하고, 무료 플랜에서 표 버튼이 다른 프리미엄 도구처럼 흐리게 보이도록 수정", "나만의 테마 만들기의 글꼴 미리보기가 모두 같은 글꼴로 보이던 문제 수정 (글꼴마다 실제 모양으로 표시)", "계정 창을 여러 번 열면 버튼 한 번에 요청이 여러 번 나가던 문제 수정 (비밀번호 찾기 인증메일 중복 발송 등)", "인증메일 문구를 ‘대학생 인증 번호’에서 ‘인증번호’로 변경 (비밀번호 찾기 · 회원가입에도 같은 메일 사용)", "프루티거 에어로 테마 강화 — 하늘 · 햇살 · 오로라 스우시 · 초록 언덕 · 떠오르는 물방울, 유리 광택 도구 모음 · 탭 · 버튼 (‘물방울 · 빛 움직임’ 끄기 지원)", "PDF에 원래 있던 글자를 수정할 때 일부만 고른 글자색 · 배경색이 저장되지 않던 문제 수정", "드림코어 테마 강화 — 파스텔 무지개 · 움직이는 체크무늬 바닥 · 떠다니는 문 · 하늘의 눈 · 반짝이 · 하트, 홀로그램 제목 · 버튼 (‘구름 · 반짝임 움직임’ 끄기 지원)"]}, {"v": "v0.9.3", "d": "2026.10.17", "items": ["프리미엄 테마 ‘우주’ 추가 — 달 · 고리 행성 · 푸른 행성 · 반짝이는 별 · 성운 · 유성 (콘솔 set theme 16, ‘별 · 유성 움직임’ 끄기 지원)", "신규 테마 NEW 배지를 가장 최근에 나온 3개 기준으로 변경하고, 테마 스토어의 ‘새로 나온 테마’는 가로로 스크롤해 볼 수 있도록 개선", "결제를 구독으로 전환 — 월간 구독 1,200원/월, 연간 구독 10,500원/년 (결제일마다 자동 결제, 요금제 선택 카드 추가)", "계정 창에 구독 상태(요금제 · 다음 결제일 · 카드)와 ‘구독 해지’ 추가 — 해지하면 다음 결제부터 청구되지 않고 낸 기간은 유지", "정기결제가 실패하면 하루 간격으로 최대 3번 다시 시도하고, 끝내 실패하면 구독이 종료되도록 개선", "상품 상세 · 환불 안내 · 탈퇴 안내 문구를 구독 기준으로 수정하고, 홈페이지 요금 안내도 월간/연간으로 변경", "모바일 안전 영역(카메라 홀 · 노치 · 홈 바)을 비워 두도록 개선하고 하단도 살짝 띄움", "모바일에서 프레젠테이션 · 번역 버튼을 더보기 밖으로 꺼내 도구 모음의 ⋯ 버튼 왼쪽에 배치", "상단 헤더의 북마크 목록 · 주석 버튼 제거", "레이어 패널의 레이어 이름이 너무 왼쪽에 붙어 보이던 문제 수정 (왼쪽 여백 추가)", "PC에서 옵션바를 접거나 펼 때 화면이 덜덜 떨리던 문제 수정 (화면 크기와 맞춤 배율을 한 프레임에 함께 바꾸도록 변경)"]}, {"v": "v0.9.2", "d": "2026.10.17", "items": ["PC에서 옵션바를 위로 접었다 펼 수 있도록 개선 (화면 위쪽 가운데 작은 토글 버튼, 접은 상태는 기억)", "토글 버튼에 마우스가 가까워지면 점점 밝아지도록 개선 (어두운 테마에서도 잘 보이도록 기본 밝기도 올림)", "디지털화를 실행하면 새로 만들어진 글자가 잠깐 반짝이는 효과 추가 (‘동작 줄이기’ 설정을 따름)", "모바일 메뉴에 PDF · MPDF 저장, PNG(현재 쪽 · 전체 ZIP) 내보내기 추가", "모자이크 도구 추가 — 영역을 드래그해 네모 블록으로 가리고, 만든 뒤에도 크기 · 블록 크기를 바꿀 수 있음 (PC 도구 모음 · 모바일은 더보기, 단축키 G)", "모바일에서 표 삽입 · 영역 선택 · 이미지 삽입을 더보기로 옮기고, 더보기를 아이콘 타일 시트로 새로 디자인", "회원 탈퇴 기능 추가 — ‘정말 탈퇴하시겠습니까? 계정 복구는 불가능합니다.’ 안내와 ‘확인했습니다’ 입력으로 진행, 프리미엄 계정은 환불이 되지 않는다는 안내 포함", "도형의 ‘채움 투명도’ 명칭을 ‘불투명도’로 변경", "PC 옵션바의 슬라이드바를 없애고 숫자 입력과 글자 끌기로 조절하도록 바꾸고, 옵션 사이 간격을 넓힘", "프리미엄 테마 ‘안개 숲’ 추가 — 짙은 초록 숲 실루엣과 달빛, 흐르는 흰 안개, 반딧불 (콘솔 `set theme 15`, 움직임은 테마 스토어에서 끌 수 있음)"]}, {"v": "v0.9.1", "d": "2026.10.16", "items": ["레이어 패널 상단 레이어 이름 입력창을 아래 블록과 구분되도록 더 밝게 개선", "좌우 패널에 붙은 작은 토글 버튼으로 열기/닫기 추가, 패널 크기를 크게 줄이면 자동으로 닫히도록 개선 (PC 상단 헤더의 패널 버튼 제거)", "페이지 썸네일 ⋯ 메뉴를 버튼 기준으로 펼쳐지는 방사형 메뉴로 변경", "노트 삭제 버튼을 노트 탭 줄 오른쪽의 빨간 휴지통 아이콘으로 이동", "타자연습 Enter 시작 지원, 플레이 중 나가기 버튼 · Esc 추가, 메뉴에 탭 닫기 버튼 추가", "페이지 패널 정렬 개선 (썸네일 보기는 가운데, 목록 보기는 왼쪽), 불필요한 검색 버튼 제거", "설정의 테마 설명 문구 간소화", "설정 콘솔 명령어 도움말을 묶음별로 접고 펼 수 있도록 정리", "헤더 시간에 마우스를 올리면 년월일 · 요일 · 시분초를 보여주는 작은 창 추가", "캡처 방식 선택 추가 (화면 캡처 기본 / 카메라 캡처), 카메라 캡처는 촬영한 사진을 바로 페이지에 삽입", "카메라 · 음성 녹음 장치 선택 기능 추가 (선택한 장치 기억)", "공포 테마 글자 깨짐 연출을 더 많이, 더 자주 나오도록 강화하고 경고 문구 간소화", "공포 테마에서 다른 테마로 바꿨을 때 깨진 글자가 그대로 남던 문제 수정 (글자 원본 복구)", "영역 도구의 ‘닿은 개체 삭제’를 ‘닿은 개체 선택’으로 변경, 선택한 여러 개체를 Delete로 한 번에 삭제 가능", "백룸 테마 화면 깜빡임을 약하고 드물게 조정, 테마 스토어에서 깜빡임 켜기/끄기 추가", "튜토리얼의 고양이 이모지를 사이트 파비콘 모양 아이콘으로 단순화", "튜토리얼 후반부에 전체화면 사용 추천 단계 추가 (실제 전체화면 버튼을 빛나는 테두리와 말풍선으로 안내)", "업데이트 내역을 개발 일지 형식(추가 · 개선 · 수정)으로 정리"]}, {"v": "v0.8.6", "d": "2026.10.16", "items": ["프리미엄 ‘백룸’ 테마 추가 (노란 벽지 · 형광등 깜빡임 · 필름 노이즈, 콘솔 set theme 14)", "마우스 오른쪽 클릭 컨텍스트 메뉴 추가 (선택한 글자 한국어 번역, 잘라내기 · 복사 · 붙여넣기 · 모두 선택, 이미지 · 표 · 메모 삽입, 프리미엄 음성 삽입)", "영역 도구에 범위에 닿은 개체를 한꺼번에 다루는 방식 추가 (드롭다운 · 옵션바에서 선택)", "형광펜이 모든 개체(PPTX 글자 포함) 위, 맨 앞에 그려지도록 수정", "멀티작업 개선 — 제목 글씨체를 통통하고 둥근 폰트로 고정, 탭 + 버튼은 홈 화면을 새 탭으로 열도록 변경, 편집기의 버튼 줄 제거, 웹페이지 주소줄 접기/펼치기 추가, 안내 문구 닫기 추가", "회원가입 시 이메일 인증번호 확인 필수화 (서버 설정과 무관하게 인증번호 단계 적용)", "로그인 · 서버 연결 · 불러오는 중 화면 중앙 로딩 UI 추가 및 다른 버튼 입력 차단"]}, {"v": "v0.8.5", "d": "2026.10.16", "items": ["첫 방문 시작 튜토리얼 추가 (PC / 모바일 구분, 설정 → 정보에서 다시 보기)", "DOCX 가져오기 전면 개선 (글자 크기 · 서식 · 줄/문단 간격 · 정렬 · 번호/글머리 · 표 · 그림 · 쪽 크기와 여백 반영)", "PNG 열기 시 흰 페이지가 나오던 문제 수정, 문서 없을 때 Ctrl+V로 클립보드 이미지 열기 추가", "모바일 도구 모음 접기/펼치기 추가, 프레젠테이션 버튼 추가, 메모 · 링크 · 디지털화 · 프레젠테이션 · 번역을 더보기 도구로 이동", "계정 · 프리미엄 창(PC) 좌우 분할 레이아웃, 비밀번호 보기/숨기기 버튼 추가, 중복 가입 안내 오류 수정", "페이지 패널 썸네일 크기 확대"]}, {"v": "v0.8.4", "d": "2026.10.16", "items": ["테마 선택 창을 ‘테마 스토어’로 개편 — 넓은 창에서 실제 화면 모양 미리보기 · 분류(전체 · 새로 나온 · 무료 · 프리미엄 · 기간 한정 · 나만의 테마) · 설명 · 적용 버튼으로 한눈에 고를 수 있음", "무료 테마에 키위 다크 추가 (배경 #000000 · 보조색 #407252 · IBM 플렉스 산스)", "공포 테마 추가 — 페이지를 넘길 때 붉은 글자가 잠깐 깜빡이고 화면 글자가 순간 깨져 보이는 연출 (적용 전 경고 문구 표시, 연출 끄기 · ‘동작 줄이기’ 설정 자동 반영)", "공포 테마는 매년 9월 1일 ~ 11월 30일에만 무료인 기간 한정 테마이며, 그 밖의 기간에는 프리미엄으로 전환됨 (남은 기간 · 다음 무료 기간 표시)", "가장 최근에 나온 테마에는 NEW 딱지 표시 (더 새로운 테마가 나오면 자동으로 이전 딱지는 사라짐)", "좌측 도구 모음에서 메모 · 음성 · 캡처 · 인쇄 · 발표 · 번역을 ‘더보기’ 도구 안으로 이동하고, 좌측 도구 버튼을 조금 더 크게 조정", "발표 모드의 나가기 버튼을 빨간색으로, 아이콘을 X 대신 나가기 아이콘으로 변경", "도구 단축키를 키보드 줄 순서로 정리 — QWER: 강조표시 · 그리기 · 직선 · 지우개 / ASDF: 도형 · 텍스트 · 링크 · 표 / ZXCV: 영역 · 이미지 · 메모 · 음성 (나머지 도구는 그 오른쪽에 배치)", "노트에서 마크다운(.md)과 텍스트(.txt) 형식을 고를 수 있고, + 버튼으로 새 노트를 만들 때도 형식을 선택", "마크다운 노트를 윈도우 메모장처럼 서식이 바로 반영된 ‘서식 보기’(기본)와 기존 ‘원문’으로 나눠 볼 수 있음 (‘# ’ · ‘- ’ · ‘1. ’ · ‘[] ’ 입력 시 바로 서식 적용)", "디지털화 정확도 개선 — 표 테두리 · 밑줄 · 도형을 글자로 읽지 않도록 걸러내고, 글자를 칸 · 단어 간격별로 나눠 원본 모양 그대로 수정할 수 있게 하며 글자 크기가 비정상적으로 커지던 문제 수정", "이메일 인증 오류 메시지를 알기 쉬운 말로 변경 (인증번호 만료 · 잘못 입력, 너무 빨리 다시 요청 등)"]}, {"v": "v0.8.3", "d": "2026.10.16", "items": ["프리미엄은 구독이 아닌 ‘1년 이용권’이라는 점을 계정 창 · 상품 상세 · 홈페이지 요금 안내에 명시, 매년 자동결제가 되지 않는다는 점을 강조해 안내 추가", "멀티작업 패널 제목을 아이콘이 들어간 그라데이션 디자인으로 개선", "페이지 패널 썸네일 좌우 여백을 줄여 썸네일이 더 크게 보이도록 개선", "표 / 도형 / 그리기 등 선택한 모든 개체의 오른쪽 위에 삭제 버튼 추가", "표 편집에서 행 · 열 배경색을 바꿀 수 있도록 추가", "전체 페이지 관리 상단 바를 아이콘이 들어간 묶음 구성으로 개선", "커스텀 테마 만들기를 별도 화면으로 분리하고 큰 미리보기 · 색상 견본 · 글꼴 목록 추가, 커스텀 테마 버튼은 세로를 줄이고 가로를 전체 폭에 맞춤", "커스텀 테마 글꼴 39종을 각 글꼴로 미리 볼 수 있도록 추가", "홈페이지 푸터에 사업자 정보 페이지 링크 추가, 사업장 주소(상세) · 전화번호를 사업자 정보 페이지에 게시", "아이디 · 비밀번호 로그인 추가 (회원가입: 닉네임 · 아이디(중복 불가) · 비밀번호 · 이메일 인증번호 확인, 이후 아이디와 비밀번호만으로 로그인)", "로그인 후 비밀번호 변경(현재 비밀번호 확인), 로그인 전 등록된 이메일 인증번호로 비밀번호 재설정 추가", "프로필 사진 변경 · 삭제와 닉네임 수정 추가, 상단 계정 버튼에 프로필 사진 표시", "로그인 · 회원가입 창의 폭을 고정하고 오른쪽 결제 카드가 늘었다 줄지 않도록 개선, 결제 카드 디자인 정리"]}, {"v": "v0.8.2", "d": "2026.10.15", "items": ["프리미엄 기능으로 커스텀 테마를 추가 — 배경색 · 보조색 · 글꼴을 직접 골라 나만의 테마를 만들 수 있고, 글자색과 밝기는 배경색에 맞춰 자동으로 정해짐", "글꼴을 6종에서 39종으로 확대 (고딕 A1 · IBM 플렉스 산스 · 블랙한산스 · 도현 · 주아 · 개구 · 고운바탕 · Roboto · Playfair Display 등) — 사이트와 텍스트 모두에 적용", "디지털화 도구 추가 — PNG 같은 이미지, 스캔 페이지, PDF의 글자를 클릭해서 수정할 수 있는 글자 개체로 바꿔줌 (글자가 있는 PDF는 인식 없이 바로, 이미지는 글자 인식으로 변환하며 원래 글자의 위치 · 크기 · 색 · 배경색을 맞춤)", "디지털화 도구 옆 드롭다운에서 ‘현재 페이지’와 ‘전체 페이지’ 범위를 바꿀 수 있고, 이미지 글자 인식 언어(한국어 · 영어)도 고를 수 있음", "글자 크기를 소수점(0.1 단위)까지 지정할 수 있고, 자간도 0.1% 단위로 조절 가능. 디지털화할 때 크기는 소수점으로, 폭은 자간으로 맞춰서 띄어쓰기가 사라지지 않음", "docx · HWP(HWPX) 내보내기에서 쪽 크기와 가로/세로 방향을 쪽마다 그대로 맞춰 내용이 쪽 밖으로 나가지 않게 개선", "docx ‘글자 편집용’ 내보내기가 이미지 · 도형 · 그림 · 배경색은 쪽 배경으로 그대로 보존하고, 글자는 원래 자리의 글상자로 담아 바로 수정할 수 있게 개선", "레이어 이름은 목록을 더블클릭(더블탭)해도 바꿀 수 있도록 수정 (자동 · 수동 모두)", "멀티작업 버튼을 3×3으로 고정하고, 화면이 작아지면 버튼이 가려지지 않고 함께 작아지도록 개선", "PNG 파일을 열면 빈 흰 페이지로 보이던 문제를 수정", "업데이트 내역의 버전마다 업데이트 날짜를 표시"]}, {"v": "v0.8.1", "items": ["계정 · 프리미엄 창의 닫기 버튼을 오른쪽 위 X 버튼으로 변경", "테마 중 어두운 · 밝은 · 한국 · 일본 · 커피를 제외한 프루티거 에어로 · 핑크세상 · 드림코어 · 레트로게임 · 새싹은 프리미엄 전용 (선택 창에 표시, 프리미엄이 아니면 어두운 테마로 표시)", "개발자 콘솔에 game 명령어 추가 — 바로 타자연습으로 이동", "모바일에서 소개 페이지(index)는 항상 어두운 테마로 고정", "페이지 패널의 썸네일 좌우 여백을 줄이고 가운데 정렬", "상단 개발자 콘솔 버튼 또는 / 키로 여는 빠른 콘솔에 추천 명령어를 아래에 표시 (입력하면 이어지는 명령어와 인자를 추천, ↑↓ 선택 · Tab 채우기 · Enter 실행)", "개발자 계정의 키 발급 내역 보기에 진행 표시줄 추가 (불러오는 동안 진행 표시, 각 키의 남은 기간 막대)", "멀티작업 화면 위에 큰 \"멀티작업\" 제목을 넣고, 파일 버튼은 뷰어로, 빈 문서 버튼은 meow-pdf.com 편집기로 바꿈", "멀티작업 넓게 보기 버튼 추가 (탭 줄을 숨기고 패널을 넓힘)", "전체 페이지 관리에 PDF 회전(왼쪽 · 오른쪽) 추가, 전체 페이지 관리는 이제 무료", "PPTX · HWP · MPDF 열기를 프리미엄에서 제외하고, PNG · DOCX 열기를 추가", "상단 탭의 \"불러오기\" 버튼을 없애고 + 버튼에서 새 탭 · 불러오기를 고르게 변경", "링크 도구 추가: 영역을 드래그해 웹 주소 또는 문서 안 페이지로 연결 (PDF에도 링크로 저장)", "왼쪽 도구 모음에서 모든 도구가 화면에 들어오도록 간격을 자동 조절", "한 페이지씩 보기에서 화면에 맞추면 오른쪽 스크롤바가 생기지 않도록 수정", "노트에 서식 도구 추가 (제목 · 목록 · 굵게 · 기울임 · 취소선 · 링크 · 표 · 서식 지우기), 서식을 쓰면 .md로 저장할지 확인", "도구에 표 삽입 추가 (프리미엄) · 붙여넣기 버튼은 도구에서 제거 (Ctrl+V는 그대로)", "텍스트 일부만 다른 색으로 바꾸기 추가 — 글자를 선택하고 색을 고르면 그 부분만 변경, 다시 수정할 때도 유지", "새 테마 \"미니홈피\" 추가 (프리미엄) · 앞으로 추가되는 테마는 모두 프리미엄, 테마 창에서 무료 / 프리미엄을 나눠 표시", "내보내기에 HWP(HWPX) 추가, Word 이름을 docx로 변경"], "d": "2026.10.15"}, {"v": "v0.7.5", "items": ["커피 테마 추가 (따뜻한 크림색 · 갈색 종이 느낌, 눈이 편한 밝은 테마, 콘솔: set theme 8)", "모바일에서 개체 · 글상자를 선택하거나 영역을 지정하면 오른쪽 위에 삭제 버튼 표시", "타자연습에 난이도 추가 (쉬움 · 보통 · 어려움, 난이도별 최고 점수와 점수 배율)", "타자연습에 아이템 추가 (얼음: 낱말 정지 · 폭탄: 화면 정리 · 느림: 속도 감소 · 두배: 점수 2배 · 금빛 냥: 목숨 +1)", "레트로게임 테마 추가 (픽셀 · 네온 · 스캔라인, 콘솔: set theme 9)", "새싹 테마 추가 (옛날 포털 사이트 느낌의 연두색 · 흰색 디자인, 콘솔: set theme 10)", "멀티작업에서 연 PDF · PPTX · HWP · 빈 문서 · 병합 문서를 'Meow-PDF로 편집하기' 버튼으로 바로 편집기로 가져와 수정 (콘솔: work edit)"], "d": "2026.10.14"}, {"v": "v0.7.4", "items": ["결제 프리미엄과 이용 키 사용자를 구분해서 표시 (상단 버튼 · 계정 창 · 모바일 더보기), 이용 키 사용자도 남은 기간 표시", "프리미엄 남은 이용 기간 표시 — 상단 계정 버튼(예: 프리미엄 | 120일), 계정 창(만료일 · 남은 일수), 모바일 더보기. 만료 7일 전 안내, 30일 이내에는 계정 창에서 바로 연장 가능, 사용 중 기간이 끝나면 자동으로 해제", "모바일에서 파일을 불러올 때 전체화면이 풀리던 문제 개선 (선택이 끝나면 전체화면으로 복귀)", "멀티작업에 타자연습 게임 '타자 비' 추가 (떨어지는 낱말을 입력해 없애기 · 한글 / 영어 / 섞어서 · 최고 점수 저장, 콘솔: work type)", "숨은 재미 요소(이스터에그) 추가 — 직접 찾아보기", "개발자 콘솔에도 숨은 명령어 1개 추가"], "d": "2026.10.14"}, {"v": "v0.7.3", "items": ["한국 · 일본 테마 추가 (태극기 · 일장기 색)", "드림코어 테마 추가 (파스텔 하늘 · 구름 · 별빛 · 필름 입자 분위기, 콘솔: set theme 7)", "테마를 별도 선택 창에서 둥근 정사각형 버튼으로 고름 (테마별 아이콘 포함, 콘솔: set theme 5 / 6 · theme picker)", "발표 모드 레이저에 잔상 추가", "멀티작업의 빈 문서 · 병합을 멀티작업 탭으로 열기", "개발자 콘솔에 화면 맞춤 명령어 추가 (fit · fit page)", "모바일 헤더 크기를 조금 키움", "모바일 더보기 바텀 시트를 아이콘 타일 형태로 정리", "소개 페이지(index)에 지금까지의 개선 사항 반영"], "d": "2026.10.14"}, {"v": "v0.7.2", "items": ["영역 지정 도구에 드롭다운 추가 (사각형 / 자유 선택 전환)", "영역 위에 마우스를 올리면 이동 커서, 가장자리 8개 점으로 늘리기 · 크기 조정 (Shift: 비율 유지)", "설정에서 페이지 이동 연출 켜기 / 끄기 (콘솔: set pageanim off)", "개발자 콘솔 도움말을 다시 표시하고 설명을 보기 쉽게 정리", "레이어를 클릭-드래그해 순서를 바꿀 수 있음 (자동 · 수동 레이어 공통, 터치는 길게 누른 뒤)", "프리미엄 상품 상세 창 추가: 결제 1년 · 이용 키 3개월 · 환불 7일 규정 안내", "옵션바의 굵기 · 크기 · 불투명에 숫자 입력칸 추가, 글자 위에서 좌우로 끌어 조절 (유니티식)", "캡처 시 어두운 뷰어 배경을 빼고 페이지 영역만 캡처 (붙여넣었을 때 어둡게 보이던 문제)", "Ctrl+클릭으로 글상자를 여러 개 골라 동시에 수정"], "d": "2026.10.13"}, {"v": "v0.7.1", "items": ["상단 탭과 멀티작업 탭을 마우스로 끌어서 순서를 바꿀 수 있음", "개발자 콘솔 추가 (설정 > 개발자 콘솔, 단축키 Ctrl+`) — 예: set theme darktheme · set theme 1 · tool pen · zoom 150 · export docx", "개발자 콘솔의 전체 명령어와 도움말을 설정의 새 탭에 정리 (대부분의 기능을 콘솔로 실행 가능)", "멀티작업의 최근 접속 사이트를 하나씩 또는 모두 삭제할 수 있음", "Word(.docx)와 PNG로 내보내기 추가 — Word는 글자 편집용 / 페이지 이미지용, PNG는 현재 쪽 / 전체(ZIP)", "내보내기 목록을 작고 보기 쉽게 정리", "상단 헤더에 개발자 콘솔 버튼 추가 (프리미엄 전용)", "모바일 설정창 상단 메뉴를 아이콘 위주로 정리해 잘리지 않게 개선", "개발자 콘솔 도움말을 ? 에 마우스를 올리면 표시되도록 개선", "핑크세상 테마 추가 (연한 핑크, 콘솔: set theme 4)", "상단 개발자 콘솔 버튼 또는 / 키로 작은 입력 칸을 열어 바로 명령 실행 (Enter 실행 · Esc 닫기)"], "d": "2026.10.13"}, {"v": "v0.6.5", "items": ["레이어 방식 선택 추가 — 개체마다 자동으로 만드는 ‘자동’과, 그림판처럼 레이어를 직접 추가·이름 변경·순서 변경·숨김·잠금·병합하는 ‘수동’ 중에서 고를 수 있음", "PC에서는 연속 스크롤 / 한 페이지씩 보기, 모바일에서는 한 페이지씩 넘기기 / 세로로 넘기기를 설정에서 선택 가능", "한 페이지씩 보기에서는 방향키·PageUp/Down·마우스 휠(끝에서)·페이지 목록으로 페이지를 넘김"], "d": "2026.10.13"}, {"v": "v0.6.4", "items": ["형광펜이 글자를 흐리게 하던 문제 개선 — 곱하기(multiply) 방식으로 칠해 글자가 선명하게 보이고(저장 PDF 포함), 글자 위에 칠하면 글자 줄에 맞는 깔끔한 띠로 자동 정리(‘글자 맞춤’, 끄면 자유롭게)", "헤더에 전체화면 / 해제 버튼 추가", "모바일 확대·축소(핀치) 중에는 이미지를 다시 그리지 않고 손을 뗀 뒤 한 번만 선명하게 그려 끊김을 줄임", "도구에 영역 지정 추가 — 사각형 또는 자유 선택으로 지정해 펜 그림·도형의 일부만 잘라 이동·복사·붙여넣기·삭제(그림판 방식), 영역 이미지 복사·저장·글자 복사 (단축키 R)", "업데이트 내역을 0.1.x · 0.2.x … 처럼 버전 두 번째 자리(y)별로 묶어 표시", "설정에서 버전 정보와 고객센터를 별도 메뉴로 분리", "모바일 상단 버튼 간격과 크기를 줄여 비좁게 보이던 문제를 완화(계정 버튼은 더보기 메뉴에도 추가)", "멀티작업의 8번째 버튼으로 계산기 추가 (키보드 입력 · 괄호 · % · 제곱근 · 기록 · 복사 · 노트 · 페이지 삽입)", "줌 바를 마우스로 끌어 옮길 수 있게 함. 위·아래 가장자리에서는 가로로, 왼쪽·오른쪽 가장자리에서는 세로로 자동 전환되고 위치는 저장됨", "고객센터 이메일 보내기 링크도 contact@meow-pdf.com으로 변경"], "d": "2026.10.13"}, {"v": "v0.6.3", "items": ["멀티작업 첫 화면에 빈 문서 · 파일 병합 · 파일 압축 버튼을 추가하고, 버튼 줄은 패널 크기에 따라 한 줄에 1개 · 2개 · 4개로만 배치", "설정에 편집기 언어 변경 추가: 한국어 / English / 日本語 / 中文", "PDF 글자를 끌어서 옮길 때 뒤에 있는 원래 글자가 잠깐 보이던 문제를 수정", "업데이트 내역을 버전 묶음(beta / 0.0.1~0.5.3 / 0.6.1~)으로 나눠 계층형으로 표시", "설정의 테마에 프루티거 에어로 테마 추가(하늘색 · 연두색 유리 질감)"], "d": "2026.10.13"}, {"v": "v0.6.2", "items": ["소개 페이지 푸터에 상호(타니아)와 주소(경기도 부천시 중동로 108)를 표기", "소개 페이지에 환불정책 추가: 결제일로부터 3일 이내에 요청하면 환불", "소개 페이지에 GitHub 링크 추가", "소개 페이지와 안내 문서의 문의 이메일을 contact@meow-pdf.com으로 변경", "메모와 번역 도구(페이지 번역, 멀티작업의 번역 · 사전)를 프리미엄 기능으로 전환", "프리미엄 전용 기능의 자물쇠 표시를 없애고, 대신 버튼을 흐리게(밝기를 낮춰) 표시"], "d": "2026.10.12"}, {"v": "v0.6.1", "items": ["멀티작업에 번역 · 사전 도구 추가: 글을 붙여넣어 번역하고, 단어를 찾으면 뜻을 보여주며 원하는 언어로 함께 번역", "번역 · 사전 결과를 복사하거나 노트에 추가, 현재 페이지에 텍스트로 삽입. 파파고 · 구글 번역 · DeepL · 네이버 사전 바로가기 제공", "번역 창 문구를 줄이고 디자인을 새로 다듬음(언어 바꾸기 버튼, 둥근 선택 버튼, 부드러운 그림자)", "Chrome 번역 모델을 내려받는 동안 진행률(%)을 표시하고, 45초 넘게 진행이 없으면 멈춤 안내와 '서버 번역만 사용' 선택지 표시", "모바일에서 파일을 열 때 용도에 맞는 모드를 고를 수 있음: 보기(읽기 전용) / 간편 수정(글자 수정 제외) / 기본(모든 기능). 더보기 메뉴에서 언제든 바꿀 수 있음", "PDF 글자를 클릭해 수정할 때 원본 글자의 자간을 읽어와 같은 간격으로 반영", "텍스트 도구, 수정 중인 글자, 선택한 글자에서 자간(-10% ~ 50%)을 직접 설정할 수 있음. 저장 · 인쇄 · 내보내기에도 반영", "멀티작업 첫 화면을 새로 디자인: 글자를 최소화하고 둥근 타일 버튼(파일 · 웹 · 번역 · OneCompiler)과 간결한 바로가기 칩으로 정리", "개체나 텍스트를 선택하면 왼쪽 위에 이동 핸들이 나타나 끌어서 옮길 수 있음", "PDF 글자를 클릭해 수정할 때, 텍스트 도구로 입력할 때도 왼쪽 위에 이동 핸들이 나타나 글자 위치를 끌어서 옮길 수 있음"], "d": "2026.10.12"}, {"v": "v0.5.3", "items": ["소개 페이지(index)와 편집기의 파비콘을 같은 고양이 아이콘으로 통일", "페이지 번역 추가: 도구 모음 가장 오른쪽의 번역 버튼으로 현재 보고 있는 페이지만 번역", "번역 방식 선택: 원문 / 전체 번역 / 마우스 오버 번역(글자에 마우스를 올리면 그 문단만 번역)", "원본 언어 자동 감지, 번역할 언어 선택(기본 한국어). 크롬 내장 번역을 우선 사용하고, 없으면 서버 번역(키 없이도 쓰는 무료 엔진 포함)으로 대체", "번역에 실패하면 원인(서버 미배포, 사용량 초과, Chrome 내장 번역 사용 불가 사유)을 안내", "Chrome 번역 모델 준비가 오래 걸리면 기다리지 않고 서버 번역으로 먼저 번역하고, 준비되면 다음부터 내장 번역 사용", "서버 번역: 한국어 등 긴 글이 무료 엔진의 글자 수(바이트) 제한에 걸려 실패하던 문제 수정", "HWP 파일이 열리지 않던 문제 수정(압축 해제 오류) — 실제 HWP 샘플 파일로 확인"], "d": "2026.10.12"}, {"v": "v0.5.2", "items": ["편집 화면 상단의 고양이 아이콘을 누르면 소개 페이지로 돌아가도록 변경"], "d": "2026.10.12"}, {"v": "v0.5.1", "items": ["서비스 소개 페이지(meow-pdf.com)를 새로 만들고, 기존 편집 화면은 /edit 주소로 이동", "소개 페이지 하단에 사업자 정보(Thaniya project, 사업자 등록번호) 표기", "옵션바의 색상 영역이 밖으로 튀어나오거나 잘리던 문제를 수정", "텍스트 정렬의 기본값을 왼쪽 정렬로 변경", "도형에 별 추가", "도형의 원 버튼에 그래픽이 비어 있던 문제를 수정"], "d": "2026.10.12"}, {"v": "v0.4.5", "items": ["시작 화면의 버튼(파일 열기, 빈 문서로 시작, 파일 병합, 파일 압축)을 모서리가 둥근 정사각형 타일 형태로 변경", "텍스트 왼쪽 정렬 / 가운데 정렬(기본) / 오른쪽 정렬 설정 추가 (새 텍스트, 편집 중, 선택한 텍스트에 적용)", "도구 모음을 좌측에 배치했을 때 도구 버튼 크기를 줄임", "캡처, 인쇄, 프레젠테이션 버튼을 다시 도구 모음으로 이동"], "d": "2026.10.12"}, {"v": "v0.4.4", "items": ["헤더의 테마 변경 버튼과 GitHub 버튼을 제거하고, 화면 밝기 조절을 설정의 화면 · 레이아웃 항목으로 이동", "도구 툴바의 저장 관련 버튼(저장, 다른 이름으로 저장)을 헤더로 이동", "헤더의 새 문서, 열기 버튼을 제거하고 실행 취소, 다시 실행, 캡처, 인쇄, 발표 버튼을 헤더로 이동", "결제 안내에 최초 1회만 결제하면 계속 이용할 수 있다는 내용을 깔끔한 카드 UI로 명시", "옵션바의 크기(내용)에 따라 화면이 재조정되지 않도록 옵션바 높이를 고정"], "d": "2026.10.12"}, {"v": "v0.4.3", "items": ["사이드 메뉴 방식의 UI 기반 설정 창을 열 수 있는 버튼 아이콘을 상단 레이아웃에 추가, 해당 설정 창 내에서 애플리케이션 버전 정보 확인과 고객센터 피드백 제출이 가능하도록 구현", "이때 접수된 불편사항은 개발자 계정의 관리자 대시보드나 DB로 수집되어 일괄 조회 및 관리가 가능", "사용자가 주요 기능의 단축키를 직접 매핑하고 변경할 수 있는 커스터마이징 기능과 함께 기존 상단에 고정되어 있던 도구 툴바 배치를 좌측 정렬 또는 상단 정렬로 선택할 수 있는 레이아웃 옵션을 제공", "반응형 UX 개선을 위해 모바일 환경에서 가로보기(Landscape) 모드로 전환될 경우, 페이지 패널이 자동으로 화면 좌측에 정렬되도록 미디어 쿼리 및 Flex/Grid 레이아웃 구조를 보완"], "d": "2026.10.12"}, {"v": "v0.4.2", "items": ["모바일 화면 크기에 맞춰 반응형 뷰포트 및 레이아웃 적용", "모바일 환경에서 레이어, 노트, 멀티작업 등 부가 기능 숨기고 최소한의 핵심 기능만 남기도록 개선", "모바일 화면에서 스와이프 및 드래그로 페이지 넘기기 기능 추가 (두 손가락 확대/축소 가능)", "모바일에서 페이지 패널을 화면 하단으로 배치", "상단 편집 버튼들을 깔끔하게 재배치하고, 계정 버튼을 저장 버튼 왼쪽으로 이동", "텍스트 직접 수정 기능 유지", "텍스트 선택 시 뜨는 옵션바(optbar)가 화면 밖으로 나가지 않도록 두 줄로 예쁘게 배치하고, 옵션바 표시 여부에 따라 화면 페이지가 밀리거나 재조정되지 않도록 수정"], "d": "2026.10.11"}, {"v": "v0.4.1", "items": ["모바일 화면 크기에 맞춰 반응형 뷰포트 및 레이아웃 적용", "모바일 환경에서 레이어, 노트, 멀티작업 등 부가 기능 숨기고 최소한의 핵심 기능만 남기도록 개선", "모바일 화면에서 스와이프 및 드래그로 페이지 넘기기 기능 추가 (두 손가락 확대/축소 가능)", "모바일에서 페이지 패널을 화면 하단으로 배치", "상단 편집 버튼들을 깔끔하게 재배치하고, 계정 버튼을 저장 버튼 왼쪽으로 이동", "텍스트 직접 수정 기능 유지", "텍스트 선택 시 뜨는 옵션바(optbar)가 화면 밖으로 나가지 않도록 두 줄로 예쁘게 배치하고, 옵션바 표시 여부에 따라 화면 페이지가 밀리거나 재조정되지 않도록 수정"], "d": "2026.10.11"}, {"v": "v0.3.3", "items": ["키 발급 관련 일부 로직 수정"], "d": "2026.10.10"}, {"v": "v0.3.2", "items": ["키 발급 관련 서버 연결 문제 해결"], "d": "2026.10.10"}, {"v": "v0.3.1", "items": ["파일이 없는 화면에서 파일 열기, 빈 문서로 시작 옆에 파일 병합, 파일 압축 기능을 배치", "파일이 없는 화면에서 안내 텍스트를 최소화하여 UI 깔끔하게 수정", "저장 버튼에 파일 압축해서 내보내기(10%, 20%, 40%)옵션 추가 - 프리미엄 사용자 한정, PPTX파일로 내보내기 옵션 추가", "화면에 다른 PDF를 드래그해서 넣으면 멀티 탭으로 넣기, 현재 파일에 병합하기 옵션이 나타나도록 기능 추가 (병합하기 시 두 파일의 병합순서 드래그로 결정 가능)", "페이지 패널에 전체 페이지 관리하기 버튼 추가-프리미엄", "전체 페이지 관리하기 시 그리드형태로(크기조절 가능) 각 페이지가 화면에 가득 차게 나타나며 드래그하여 페이지 순서를 바꿀 수도 있도 여러 페이지를 삭제하거나 이름을 바꾸거나 계층구조 수정 가능하도록 기능 추가", "페이지 패널의 버튼 UI 전반적으로 깔끔하게 수정", "헤더에 있는 PDF제목 클릭하여 직접 수정 가능하도록 개선"], "d": "2026.10.09"}, {"v": "v0.2.2", "items": ["로그인시스템 및 결제 시스템 문제 해결"], "d": "2026.10.09"}, {"v": "v0.2.1", "items": ["일부 기능 유료화 도입"], "d": "2026.10.08"}, {"v": "v0.1.3", "items": ["온라인 컴파일러 프로그램 원컴파일러(OneCompiler) 바로가기가 멀티작업에서 제공되도록 개선"], "d": "2026.10.08"}, {"v": "v0.1.2", "items": ["음성 이름 편집 및 음성 내보내기 기능 추가"], "d": "2026.10.08"}, {"v": "v0.1.1", "items": ["음성녹음 및 재생 기능 추가", "음성녹음 MPDF에 삽입 기능 추가 (따로 내보내기 가능, MPDF 확장자 파일에 삽입된 상태로 저장 가능)"], "d": "2026.10.06"}, {"v": "v0.0.1", "items": ["멀티작업에서 웹페이지를 열 수 있도록 편의 향상", "화면맞춤 상태에서 PDF내 텍스트상자 클릭 시 텍스트 수정이 진행되지 않는 문제 해결", "멀티작업 화면에 파일 드래그 시 일반 편집기 화면에 파일이 닿으면 파일 드롭 안내가 사라지지 않는 문제 해결", "페이지 패널의 크기 조절 시 썸네일로 보기의 각 썸네일 크기도 패널의 크기에 맞게 조절되도록 개선", "페이지 북마크기능 추가, 페이지 패널 상단에 북마크 바로가기 드롭다운 리스트 버튼 추가", "텍스트의 글꼴 드롭다운 버튼에서 각 버튼의 글꼴 모양을 이름과 함께 미리보기 제공", "PDF전체에서 특정 글자 빠르게 찾는 검색기능 제공", "PDF 내에서 기존에 있는 텍스트를 수정하는 로직 개편 (기존에 비해 많은 양의 텍스트를 한 번에 수정 가능하도록)", "Meow-PDF 파비콘 추가"], "d": "2026.10.06"}, {"v": "beta 0.0.5", "items": ["세로모드 시 페이지, 레이어, 노트를 모두 하단 사이드바에서 전환 가능한 형태로 변경", "모든 사이드바를 테두리 마우스 드래그를 통해 크기 조절 가능하도록 변경 (기본 좌우, 세로모드는 상하)", "페이지 맞춤 시 사이드바를 고려하여 페이지가 화면에 모두 들어오게 조절되도록 개선 (화면 비율이 작은 경우)", "검은 고양이 스티커를 넣는 기능을 추가 (이미지 버튼을 전환 가능)", "레이어/노트 패널에 탭전환 방식으로 멀티작업 탭 추가 (파일탐색기를 여는 버튼이 중앙에 있으며 누르면 파일을 불러옴, 불러온 파일은 해당 패널에 가득 차도록 띄워지며 PDF를 보며 작업 가능), 멀티작업 패널은 또한 내부에서 멀티테스킹탭으로 관리 가능", "레이어/노트/멀티작업 여닫기 패널 버튼을 작업 사이드바 버튼으로 이미지 변경", "PDF 업로드 전 나타나는 화면 문구에서 PDF뿐만 아니라 PPTX파일도 수정 가능하다고 명시", "스프라이트시트, HWP 파일도 삽입/편집 가능하도록 제공"], "d": "2026.10.06"}, {"v": "beta 0.0.4", "items": ["페이지 계층관리 시 페이지를 끈 상태에서 마우스 휠을 굴리면 페이지가 올라갔다 내려갔다 하게 되도록 변경", "도형을 그리고 Ctrl+Z를 누르면 간혹 기능이 먹히지 않는 문제 해결", "화면 밝기 조절 바 시간 표시 부분 왼쪽에 추가", "페이지에 주석달기 기능 추가 (주석을 달면 그 페이지는 눈에 잘 띄도록 변경)", "페이지 목록으로보기 기능 추가 (기본적으로 페이지1 ... 로 표시되며 페이지이름 변경 가능)", "인쇄기능 추가", "레이어 병합 기능 추가", "편집화면 및 프리젠테이션 화면에서 Ctrl+스크롤 하면 마우스 커서를 중심으로 화면이 줌아웃되도록 변경", "작게 https://github.com/architect0509/meow-PDF페이지로 이동되는 버튼을 방해되지 않도록 배치", "텍스트나 도형 그리기에서 상단 optbar가 가로로 너무 길어지는 문제 색상 팔레트의 크기를 줄이고 슬라이더들을 정리하여 화면 내에 기능이 모두 들어오도록 개선", "글자선택을 개체와 통일시키고 PDF내 모든 텍스트상자를 클릭만으로 수정 가능하도록 개선", "색상 버튼의 개수를 5개로 줄이고 우측에 색상 팔레트를 크게 배치하며 5개의 작은 색상 버튼 아래에는 최근에 사용한 색상 5개가 나타나게 되도록 개선", "UI의 배치가 전부 상하로 이동하는 세로모드 변환 기능을 제공", "멀티테스킹탭 기능을 지원 (툴바 위에 삭제 및 불러오기, 추가 가능한 형식으로)", "레이어가 있는 위치에 탭전환 방식으로 노트를 작성할 수 있도록 기능 추가(노트는 다중 페이지로 관리 가능하며 .txt확장자 파일로 내보낼 수 있음)"], "d": "2026.10.06"}, {"v": "beta 0.0.3", "items": ["현재화면 캡쳐기능 제공(버튼의 위치는 저장버튼 좌측)", "상단 레이어버튼 옆에 현재시간,분 표시", "저장버튼 좌측 프리젠테이션모드 버튼 추가 -단축키 여닫기 p(프리젠테이션 내에는 마찬가지로 강조표시, 그리기, 직선, 도형, 지우개, 텍스트툴, 그리고 레이저를 사용가능한 마우스로 끌어서 옮길 수 있는 조작 도구창이 존재)", "레이저는 프리젠테이션중에만 사용 가능하며 L키로 생성/제거 가능", "이미지 버튼 우측에 C단축키로 메모 생성기능", "메모는 위치이동 및 크기조절 가능, 다중줄 글쓰기 가능, 접기 가능, 글씨 크기조절 가능", "ppt를 pdf로 가져오기 가능하도록 개선", "페이지 그룹화를 통한 계층관리 가능하도록 개선", "편집기록을 가진 프로젝트 파일인 mpdf확장자로 내보내기&불러오기 기능 추가", "(저장 및 다른이름으로 저장에 옵션 표시- pdf of mpdf) 확장자가 달라도 일반 저장의 기본옵션은 덮어쓰기", "텍스트에 채우기 옵션 추가 (기본 투명), 도형에 채우기 옵션 추가 (기본 투명, 투명도 조절 가능)", "페이지 넘기기 단축키에 Pg Up 과 Pg Down도 추가", "각 도구의 색깔은 그림판 팔레트 UI처럼 줄바꿈 이용, 사용자 지정 색상은 크기 증가, 스포이드버튼도 추가", "프로그램 내의 황색은 #dbbe43로, 배경의 어두운 색은 좀 더 무채색에 가깝게 변경"], "d": "2026.10.04"}, {"v": "beta 0.0.2", "items": ["전반적인 테마 변경, 개선 항목: 글자의 폰트 및 굵기, 기울임꼴 추가,", "화면맞춤 버튼 하단에 추가", "처음 저장버튼 누를때 파일을 불러온 경로에 자동 덮어씌우기 개선", "프로그램 테마색깔 황색으로 변경", "페이지 패널 버튼 좌측에 아이콘 추가, 패널 버튼과 거리 두기", "자 툴을 직선 그리기 툴로 변경", "펜 및 직선 그리기 툴 사용 시 붓 영역 화면 내에 표시", "펜 및 직선 그리기 툴 팔레트에 파스텔톤의 색상 추가", "강조표시는 직선형, 붓형 선택 가능하게 개선", "상단 툴을 분리 ( 글자선택과 개체 | 강조표시, 그리기, 직선 | 도형, 지우개, 텍스트 | 붙여넣기, 이미지 )", "각각의 버튼에 단축키 부여 ( 1, 2 | q, w, e | a, s, d | z, x )"], "d": "2026.10.04"}];
+const CHANGELOG = [{"v": "v0.11.8", "d": "2026.10.18", "items": ["전체 페이지 관리에서 페이지를 돌리면 글자 · 이미지 · 도형 · 표 등 페이지의 내용도 모두 함께 통째로 회전", "개체 회전 지원 — 돌린 개체도 선택 · 이동 · 크기 조절 · 글자 수정이 개체 방향 그대로 동작하고, PDF 저장 · 인쇄에도 반영", "파일 병합에 PNG 추가 — PNG+PNG · PNG+PDF를 원하는 순서로 한 문서로 병합 (PNG는 한 장이 한 페이지)", "페이지 패널 썸네일 메뉴(⋯)의 버튼이 눌리지 않던 문제 수정 — 보이지 않는 덮개가 클릭을 가로채던 것을 해결", "페이지 패널 썸네일 메뉴에 ‘페이지 복제’ 추가 (그린 것 · 메모 · 레이어까지 그대로 복사해 바로 뒤에), 버튼을 더 크고 잘 보이게, 마우스를 올리면 커지며 강조", "자동 레이어 · 수동 레이어에 복제 추가 — 자동은 줄의 복제 버튼, 수동은 복제 버튼과 더보기 › 레이어 복제", "개체 선택 방식 추가 (설정 › 화면 · 레이아웃) — 바운딩 박스(기본)와 기즈모(PC) 중에서 고르고, 모바일은 바운딩 박스로 고정", "바운딩 박스 모드: 모서리 · 변의 흰 점을 끌어 크기 조절, 위쪽 손잡이로 회전(Shift: 15° 단위), 오른쪽 위는 삭제 — 이미지 · 글자 · 묶음은 모서리를 끌면 비율 유지(Shift: 자유롭게), 펜 선도 통째로 회전", "PC 기즈모 모드: 유니티식 변형 도구 — 화면 왼쪽 위의 도구 막대(끌어서 이동 · 접기 가능)에서 화면 이동(Q) · 이동(W) · 회전(E) · 크기 조절(R) · 사각형 변형(T) · 통합 변형(Y)", "기즈모 모드에서 개체(이미지 · 도형 · 글자 · 선 등)를 선택하면 고른 도구에 맞춰 축 화살표(빨강 · 초록) · 평면 이동(파랑) · 회전 고리 · 크기 큐브 · 모서리 점이 나타나고, 마우스를 올린 축은 노랗게 강조 · 끄는 동안 각도와 크기를 표시", "옵션바에 ‘기울기’ 추가 — 도형 · 이미지 · 글자 · 표의 회전 각도를 숫자로 입력하거나 글자 위에서 좌우로 끌어 조절 (0–360°)", "기즈모 모드 조작 — Shift: 한 방향 고정 · 비율 · 15°, Ctrl: 회전 스냅, 마우스 가운데 버튼 끌기: 화면 이동", "도구 단축키 변경: 강조 2 · 그리기 3 · 직선 4 · 지우개 5 · 모자이크 6 (Q · W · E · R · T · Y는 기즈모 모드의 변형 도구)", "채운 별 도형의 안쪽을 눌러도 선택되지 않던 문제 수정", "선택 도구로 개체를 옮길 때 Shift를 누르면 가로 · 세로 한 방향으로만 이동"]}, {"v": "v0.11.7", "d": "2026.10.18", "items": ["모바일 가로 화면: 시작 화면의 4개 버튼(파일 열기 · 빈 문서로 시작 · 파일 병합 · 파일 압축)을 더 작게 줄여 한 줄로 가운데에 가지런히 배열 — 비어 있는 페이지 패널을 숨겨 화면 정가운데에 표시", "새 테마 ‘동화’ 추가 (프리미엄) — 그림책 속 포근한 마을, 무지개 · 웃는 해 · 몽실몽실 구름 · 꽃 언덕 · 말랑한 친구들이 있는 만화 같은 화면 (테마 스토어에서 구름 · 친구들 움직임 끄기 가능)", "동화 테마 이스터에그 — 빈 배경을 누르면 하트 · 꽃 · 별이 퐁퐁, 빠르게 일곱 번 누르면 숨은 장면", "모바일: 하단 + 플로팅 네비게이션 버튼을 더 잘 보이게 — 접혀 있을 때도 보조색 · 밝은 테두리 · 그림자로 표시, 펼친 버튼의 글자도 더 선명하게", "모바일: + 플로팅 네비게이션 버튼의 자리를 세로 화면 · 가로 화면에서 따로 기억 — 세로는 아래 가운데, 가로는 오른쪽 아래가 처음 자리이고, 옮겨 둔 자리는 방향마다 따로 유지", "버튼을 누를 때 버튼 글자가 선택(파란 강조)되거나 포커스 테두리가 생기던 문제 수정 — 키보드로 이동할 때만 테두리 표시", "음성 도구를 드롭다운으로 변경 — 음성 녹음 / MP3 파일 넣기(신규) 중에서 선택, MP3 파일(최대 30MB)을 골라 녹음처럼 페이지에 넣고 재생 · 이름 바꾸기 · MP3 내보내기 가능 (V 단축키는 바로 녹음)", "PC: 테마 스토어 오른쪽 아래에 시즌 테마(기간 한정) 알림을 작은 팝업으로 표시 — 남은 기간 · 다음 무료 기간과 ‘기간 한정 테마 보기’ 버튼, 닫으면 이번 접속 동안 숨김", "공유작업 패널 아래쪽 ‘지금 탭 공유하기’ 안내를 깔끔한 카드로 바꾸고 누르면 프로젝트 관리 창이 열리도록 개선", "인쇄한 뒤 일부 테마 화면 꾸밈이 사라지던 문제 수정", "영어 · 일본어 · 중국어 화면에서 번역이 빠져 있던 문구 채움 (지금까지의 기능 · 업데이트 내역 포함)"]}, {"v": "v0.11.6", "d": "2026.10.18", "items": ["모바일: 발표 중 다음 페이지로 넘길 때 화면이 검게 변하던 문제 수정 — 발표 페이지로 바로 전환하고 짧게 페이드", "모바일: 발표 중 화면 편집 막기 — 밀어서 넘길 때 개체가 옮겨지던 문제 해결, 발표 도구 막대에는 이전 · 다음 · 나가기만 표시 (링크는 눌러서 열 수 있음)", "모바일: 발표 중 좌우로 밀거나 화면 왼쪽 / 오른쪽을 짧게 눌러 이전 · 다음 페이지로 이동", "모바일: 발표를 마치고 돌아오면 하단 플로팅 네비게이션 버튼이 위쪽으로 옮겨져 있던 문제 수정 — 발표 중 회전 · 전체화면 변화에는 자리를 바꾸지 않고, 끝나면 처음 자리로 복귀", "구글 애드센스 코드 추가 — 소개 페이지 · 사업자 정보 페이지의 head에 넣음, 편집기는 데스크톱에서 설정 · 계정 · 테마 스토어 창이 열렸을 때만 창 좌우에 세로 광고 표시(프리미엄 · 모바일 · 발표 중에는 표시 안 함), 프리미엄 안내 · 결제 창 · 소개 페이지 요금 안내에 ‘광고 제거’ 문구 추가, 오프라인용 서비스 워커는 광고 스크립트 · 요청을 저장하지 않도록 제외"]}, {"v": "v0.11.5", "d": "2026.10.18", "items": ["설정 › 화면 · 레이아웃에 ‘테마 배경 효과’ 추가 — 프리미엄 테마의 배경 클릭 효과 · 이스터에그를 모두 켜기 / 클릭 효과만 / 모두 끄기 중 선택", "테마 이스터에그 상단 문구를 ‘형광등 소리만 들린다.’ 같은 짧은 평서체로 바꾸고 이모티콘 줄임", "공유작업 채팅방에서 신고(메시지 · 참여자)하면 채팅 기록도 함께 전송 — 메시지 신고는 그 메시지 앞 20개 · 뒤 10개, 그 밖에는 최근 30개, 고객 문의 관리 › 공유작업 신고에서 신고 대상의 메시지를 강조해 표시", "모바일: 노치(카메라) 영역을 검은색으로 채움, 상태 표시줄 색도 검은색으로 변경", "모바일: 휴대폰을 가로로 돌리면 노치가 있는 쪽(왼쪽 / 오른쪽)을 자동으로 비우고 위쪽 여백은 없앰", "모바일: 하단 플로팅 네비게이션 버튼의 처음 위치를 더 아래로 이동", "모바일: 발표를 누르면 자동으로 전체화면 · 여백 없이 화면 가득 표시, 가로 모양 페이지는 자동으로 가로 화면으로 전환(지원하는 브라우저)", "발표 모드 배경을 테마와 상관없이 항상 검은색으로 고정, 테마 장식 숨김", "모바일 가로 화면 발표에서 도구 막대(presbar)가 화면 밖으로 사라지던 문제 수정 — 화면을 돌리면 자동으로 화면 안으로 이동, 모바일에서는 화면 폭에 맞춰 줄바꿈", "발표 도구 막대는 펼쳤을 때 버튼이 가려지는 위치(화면 밖 · 노치 · 홈 바)로는 옮길 수 없도록 제한, 접은 상태에서 가장자리로 옮긴 뒤 펼쳐도 안쪽으로 자동 이동"]}, {"v": "v0.11.4", "d": "2026.10.18", "items": ["도형 · 텍스트 · 링크를 만든 뒤 자동으로 바뀐 선택 도구에서 개체 밖(빈 곳 · PDF 글자 · 페이지 바깥)을 누르면 원래 도구로 복귀 — 도형 · 링크는 누른 채 끌면 바로 새로 그려짐", "도형에 ‘둥근 사각형’ 추가 — 옵션바의 ‘모서리’(0~100%)로 둥근 정도 조절, 그린 뒤에도 선택해서 수정 가능", "공유작업 ‘모두 공개’ 완성 — 공개 프로젝트 목록에 올라가고 프리미엄 회원은 누구나(방장의 친구는 프리미엄이 아니어도) 참여 가능", "공유작업 최대 인원 10명 — 가득 차면 목록 · 방 정보 창에 ‘가득 참’ 표시", "프로젝트 관리에 입장 비밀번호(사용 / 사용 안 함 · 변경) · 장르(교육 · 개발 · 그림 · 디자인 · 공부 · 업무 · 기타) · 입장 기본 권한(관전자 / 편집 허용) 설정 추가", "참여자가 나가기 · 공유 탭 닫기 · 창 닫기로 나가면 프로젝트 관리의 참여자 목록에서 바로 삭제, 3분 넘게 신호가 없는 참여자도 자동 정리", "공유작업 패널 상단 탭 바로 친구 프로젝트 ↔ 공개 프로젝트 이동, 공개 프로젝트 검색(이름 · 장르 · 방장) · 정렬(인원순 / 최신순) · 장르 필터 추가", "친구가 모두 공개로 진행하는 프로젝트는 친구 프로젝트 목록에는 안 보이고 친구 창의 ‘함께 작업’ 버튼으로 표시", "친구 창의 ‘함께 작업’ · 공유작업 패널의 ‘보기’(기존 ‘참여’)를 누르면 방 정보 창 표시 — 방 이름 · 장르 · 방장 · 인원 · 입장 권한 · 참여자 목록과 참여하기 버튼", "공개 프로젝트 신고 버튼 추가(불건전 · 욕설 · 명예훼손 · 범죄 · 기타 + 자세한 내용), 공유작업 채팅 메시지 신고 버튼 추가", "공유작업 채팅 · 접속자 사진을 누르면 프로필 카드 표시 — 친구 추가 버튼(이미 친구면 ‘친구됨’, 요청 중이면 ‘요청됨’)과 신고 버튼", "신고한 방의 이름 · 방장 · 방 정보가 개발자 계정의 ‘고객 문의 관리 › 공유작업 신고’로 전송, 처리 시 공유작업 이용 제한(1개월 · 3개월 · 1년 · 영구) · 진행 중인 방 종료 · 제한 해제 가능", "모바일: 메뉴 아래쪽 목록(새 문서 ~ 개발자 콘솔)이 잘려 보이지 않던 문제 수정 — 메뉴 전체를 위아래로 스크롤 가능"]}, {"v": "v0.11.3", "d": "2026.10.18", "items": ["글자 줄간격 옵션 추가 — 글자 도구 · 글자 편집 중 · 선택한 글자 개체의 옵션바에 ‘줄간격’(80~300%) 추가, 자간과 함께 여러 줄 글자 모양 조절 가능, Word(DOCX) 내보내기에도 반영", "도형 바탕이 가끔 투명으로 돌아가던 문제 해결 — 도형 · 펜 · 글자 등 도구 설정(색 · 바탕 · 굵기 · 불투명도)을 브라우저에 기억해 새로고침 후에도 유지, 선택한 도형의 바탕 · 색 · 굵기 변경이 다음에 그릴 도형에도 이어지도록 개선", "여러 개체 함께 옮기기 · 크기 조절 추가 — Shift · Ctrl로 여러 개체를 고른 뒤 하나를 끌면 모두 함께 이동, 묶음 오른쪽 아래 손잡이로 한꺼번에 크기 조절 (Shift를 누르면 비율 자유)", "글자 입력 중 다른 곳을 누르면 입력 상태가 바로 끝나도록 개선 (글자 도구에서도 새 글상자 없이 입력만 종료)", "디지털화(이미지 글자 인식) 정확도 대폭 향상 — 표 칸막이 짧은 선까지 찾아 글자와 구분, 칸을 넘지 않게 분리 · 글자를 실제로 그려 원본 잉크에 크기 · 자간 · 위치를 맞추고 번짐까지 보정 · 덮개는 글자 잉크만 감싸고 표 선 쪽 여백을 없애 파란 표 선을 가리지 않음 · 넓게 벌려 쓴 이름표(세 금 계 산 서)는 한 개체 + 넓은 자간으로, 위아래 이름표(상 호 / (법인명), 공 / 급 / 자)는 줄간격을 가진 한 개체로 병합 · 자신 없는 칸과 엔진이 놓친 숫자 칸은 그 부분만 다시 인식 · 문서 안 글자 크기 · 글자색 통일, 제목급 굵은 글자 인식", "선택 도구로 빈 곳을 끌어 영역을 지정하면 영역에 닿은 개체(잠금 · 숨김 제외)를 모두 선택하도록 개선 — 끄는 동안 잡힐 개체 미리 표시, 여러 개면 함께 옮기기 · 크기 조절 가능", "영역 도구로 개체를 고르면(닿은 개체 선택) 선택 도구로 자동 전환", "‘핑크세상’ 테마 무료로 전환", "프리미엄 테마 이스터에그 추가 — 문서 바깥 빈 배경(시작 화면 포함)을 누르면 테마마다 다른 반응(물방울 · 반짝이 · 점수 · 새싹 · 도토리 · 반딧불 · 별 · 탄막 등), 빠르게 연달아 누르면 테마마다 숨은 장면 등장", "새 테마 ‘동방’ 추가 — 홍백 무녀의 신사, 음양옥 · 부적 · 돌아가는 마법진 · 소용돌이와 고리 탄막 · 흩날리는 벚꽃 · 도리이가 있는 환상의 밤 (테마 스토어에서 탄막 · 벚꽃 움직임 끄기 가능)"]}, {"v": "v0.11.2", "d": "2026.10.17", "items": ["오프라인 작업 지원 — 한 번 연 편집기와 PDF · 압축 라이브러리를 브라우저에 저장해 두어 인터넷이 끊겨도 열기 · 편집 · 저장 가능, 헤더에 오프라인 표시, 앱처럼 설치 가능(PWA)", "PC: 글자 밖에서 눌러 끌면 처음 누른 점과 지금 점을 대각으로 하는 사각형에 닿은 글자만 선택 (엉뚱한 글자까지 함께 선택되던 문제 해결) — Ctrl+C · ‘선택한 글자 복사’로 복사", "PC: 페이지 패널의 페이지 옵션(방사형) 버튼에 마우스를 올리면 강조 효과", "친구 창 · 공유작업 패널에 새로고침 버튼 추가", "자동 레이어에도 자물쇠 추가 — 잠근 개체는 선택 · 이동 · 지우기 불가", "PC: 글상자 · PDF 글자를 한 번 클릭하면 선택만(입력 불가, 복사 가능), 두 번 클릭하면 입력 — 선택한 개체는 Ctrl+C / Ctrl+V로 복사 · 붙여넣기 (글상자의 글자는 일반 글자로도 복사)", "자간을 100%까지 늘릴 수 있도록 확대", "모바일: 공유(프로젝트 관리) · 프로필 버튼을 헤더에서 메뉴로 옮기고, 전체화면 버튼을 헤더로, 더보기 버튼을 점 9개 아이콘으로 변경", "모바일: 오른쪽 작업 패널(노트 · 멀티작업 · 공유작업)을 오른쪽 가장자리 손잡이나 메뉴로 열고 닫을 수 있도록 추가", "모바일: 하단 플로팅 네비게이션 바를 원형 버튼으로 바꾸고 누르면 부채꼴로 펼쳐지도록 개선 — 펼쳤을 때 모든 버튼이 화면 안에 보이는 범위까지만 옮길 수 있고, 편집기에 들어올 때마다 처음 위치로", "모바일: 플로팅 버튼이 계정 창 등 다른 창 위로 올라오던 문제 수정", "모바일: 하단 페이지 패널 가장자리를 끌어 크기 조절 (가로 화면은 오른쪽 가장자리)", "모바일: 친구 · 메일 창을 열 때 아이디 입력칸에 바로 포커스되어 자판이 뜨던 문제 수정", "모바일: 계정 창이 화면 밖으로 넘치지 않도록 크기 조절, 시작 화면 버튼 아래 설명이 화면 밖으로 나가던 문제 수정", "모바일: 전체화면에서 메뉴가 스크롤되지 않던 문제 수정", "모바일: 오른쪽 작업 패널 안을 눌러도 닫히거나 화면이 어두워지던 문제, 메뉴 아래쪽이 잘리고 스크롤되지 않던 문제 수정", "소개 페이지 개편 — ‘온라인 · 오프라인 어디서나 쓰는 종합 문서 편집기’, 새 화면 이미지(함께 편집 · 휴대폰), ‘어디서나’ 섹션, 기능 12가지, 요금 안내 갱신, 휴대폰에서 헤더 글자가 밖으로 넘치던 문제 수정, PC에서도 항상 어두운 화면으로 고정, 첫 화면 문구를 짧게 정리 (노란 문구: 온라인 • 오프라인 종합 문서 편집기)"]}, {"v": "v0.11.1", "d": "2026.10.17", "items": ["공유작업 추가 (프리미엄) — 헤더의 ‘프로젝트 관리’ 버튼으로 지금 탭을 공유 프로젝트로 만들고 고유 코드 · 공유할 이름 · 공개 여부(모두 공개 / 친구 공개 / 비공개) · 고유 코드로 입장(허용 / 허용 안 함)을 설정", "프로젝트 관리 창에서 참여자 권한(관전자 / 편집 허용) 변경과 추방, 공유 종료", "여러 사람이 같은 문서를 동시에 편집 — 개체 단위로 실시간 반영되고, 같은 개체를 동시에 고치면 마지막 변경이 남음. 실행 취소는 내 변경만 되돌림", "참여자의 마우스 포인터와 작업 중인 페이지를 프로필 사진으로 표시 (페이지 오른쪽 위 · 페이지 패널 썸네일)", "공유작업 패널: 고유 코드로 참여하기, 친구 프로젝트(친구 공개로 진행 중인 프로젝트) 목록, 내 프로젝트 다시 열기, 공개 프로젝트(준비 중)", "공유작업 중에는 공유작업 패널에 참여자 채팅방 표시", "친구 창의 내 친구 목록에서 친구 공개 프로젝트를 진행 중인 친구 옆에 ‘함께 작업’ 버튼 표시", "참여자 화면에서는 저장 · 프로젝트 관리 버튼을 숨기고 ‘다른 이름으로 저장’만 표시, 관전자는 보기만 가능", "공유 프로젝트 접속 링크(…/edit?join=고유코드) — 프로젝트 관리 창 · 공유작업 패널에서 복사, 받은 사람이 열고 로그인하면 바로 참여 (고유 코드로 입장을 허용했을 때)"]}, {"v": "v0.10.4", "d": "2026.10.17", "items": ["표 내용 편집: 행 · 열 숫자가 입력칸 위쪽으로 치우쳐 보이던 문제 수정", "표 내용 편집: 칸 글자의 왼쪽 · 가운데 · 오른쪽 정렬과 글자 크기 설정 — 선택한 칸 · 행 · 열 · 표 전체 단위로 적용 (PC는 Shift+클릭으로 여러 칸 선택)", "알림을 무료 플랜에서도 사용할 수 있도록 변경 (친구 · 메일은 계속 프리미엄)", "무료 플랜에서 헤더의 개발자 콘솔 버튼을 다른 프리미엄 버튼처럼 흐리게 표시", "모바일 옵션바 재디자인 — 설정 항목을 아이콘 탭(예: 모양 · 불투명도 · 선 굵기 · 색 · 바탕)으로 나열하고, 누른 항목의 옵션만 아래로 펼쳐 화면을 덜 가리도록 개선", "선택 도구를 눌러도 옵션바가 닫히지 않도록 변경", "글꼴 절반 정도(블랙한산스 · 감자꽃 · 독도 · Pacifico 등 19종)를 프리미엄 전용으로 — 글꼴 목록에 ‘프리미엄 글꼴’ 구역으로 표시, 이미 문서에 쓰인 글꼴은 그대로 보임", "업데이트 내역의 버전 묶음(0.3.x · 0.10.x 등) 오른쪽에 그 묶음의 가장 큰 변화를 짧은 부제목으로 표시"]}, {"v": "v0.10.3", "d": "2026.10.17", "items": ["한 페이지씩 보기에서 페이지 바깥을 휠로 굴리면 스크롤바가 없어도 화면이 위아래로 움직이도록 개선 — 설정 › 페이지 보기에서 ‘화면 위아래로 이동 / 페이지 넘기기’ 선택", "펜 · 태블릿 · 터치로 그리다가 길게 누를 때 컨텍스트 메뉴가 뜨지 않도록 수정 (마우스 우클릭 메뉴는 그대로)", "표 삽입 창과 표 내용 편집 창을 하나로 통합, 행 · 열 입력 높이를 낮춤", "표 내용 편집에서 배경색 컬러 피커를 누르면 바로 닫히던 문제 수정", "모바일 플로팅 바: 화면 왼쪽에 두면 오른쪽으로, 오른쪽에 두면 왼쪽으로 펼쳐지도록 개선", "여러 파일을 끌어다 놓거나 한 번에 골라 열면 각각 새 탭으로 열기 (PDF가 아닌 형식이 섞여도)", "여러 PDF를 새 탭으로 열었을 때 저장을 누르면 원래 파일에 바로 덮어쓰도록 수정 (다른 이름으로 저장으로 넘어가던 문제)", "친구 버튼을 멀티작업 패널에서 공유작업 패널로 옮김", "PDF에 있는 글자를 눌러 편집할 때 PDF 안의 실제 글자 정보(크기 · 굵기 · 글꼴 · 글자 간격)를 써서 띄어쓰기가 원본 그대로 유지되도록 개선, 덮개는 실제 글자 자리만 덮음", "글자 편집 중 오른쪽 위 삭제 버튼 추가 (PDF 원래 글자도 지울 수 있음)", "PDF 글자 편집 중 일부 글자색을 바꾸면 나머지 글자가 가려지던 문제 수정"]}, {"v": "v0.10.2", "d": "2026.10.17", "items": ["소개 페이지 기능 블록이 언어(일본어 · 중국어 등)에 따라 옆으로 늘어나던 문제 수정, 휴대폰 폭에서 사업자 주소가 화면 밖으로 넘치던 문제 수정", "선택 도구 옵션바: 아무 개체도 선택하지 않았을 때만 닫히고, 개체를 선택하면 원래 자리에 다시 보이도록 수정", "우측 패널 탭(레이어 · 노트 · 멀티작업 · 공유작업)을 기본으로 아이콘으로 표시하고 가로 공간에 꽉 맞게 배치 — 설정 › 패널 탭 표시 또는 패널 설정(톱니바퀴)에서 텍스트로 바꿀 수 있음", "계정 창의 프로필 · 비밀번호 · 이용 키를 정사각형 블록 버튼으로 가로 정렬, 누르면 각각의 창이 열림", "표 삽입 · 편집 창 디자인 개선 — 행 · 열 +/− 버튼, ‘첫 줄을 제목으로’ 스위치, 표 미리보기, 제목 줄 강조, 휴대폰 화면에 맞춤", "편집기 전체에서 빠져 있던 영어 · 일본어 · 중국어 번역을 채움", "공포 테마에서 언어를 바꾼 뒤 테마와 언어를 되돌리면 일부 글자가 원래 언어로 돌아오지 않던 문제 수정", "모바일 하단 플로팅 네비게이션 바를 길게 눌러 옮기기가 잘 안 되던 문제 수정 — 손가락 떨림 허용, 화면 어디로 끌어도 따라옴, 바로 끌 수 있는 손잡이(⠿) 추가"]}, {"v": "v0.10.1", "d": "2026.10.17", "items": ["도구 모음 기본 위치를 좌측 정렬로 변경", "선택 도구에서 아무 개체도 선택하지 않았을 때는 옵션바를 닫아 두도록 변경 — 개체를 선택하거나 다른 도구를 고르면 다시 보임 (직접 접어 둔 경우에는 계속 숨김)", "영역 선택 도구의 기본 방식을 ‘닿은 개체 선택’으로 변경", "선택 도구에서 빈 곳을 길게 누른 채 끌면 ‘닿은 개체 선택’ 영역 지정으로 바뀌어 여러 개체를 한 번에 선택", "페이지(캔버스) 바깥을 눌러도 선택이 해제되도록 개선", "소개 페이지 헤더에 언어 설정 추가 — 소개 페이지가 바로 번역되고, 고른 언어가 편집기에도 적용", "친구 기능 추가 (프리미엄) — 헤더의 친구 버튼, 아이디로 친구 추가, 요청 관리(받은 요청 · 보낸 요청), 내 친구 목록(프로필 사진 · 닉네임 · 아이디, 메일 보내기 · 친구 삭제), 친구 요청 받지 않기 설정", "메일 기능 추가 (프리미엄) — 친구에게 제목과 내용으로 메일 보내기, 받은 메일 · 보낸 메일함, 답장 · 삭제", "알림 기능 추가 — 헤더의 종 버튼, 친구 요청 · 수락 · 메일 알림 목록과 바로가기, 종류별 알림 켜기/끄기", "멀티작업 패널 위쪽에 친구 창 버튼 추가", "모바일: 헤더에 알림 버튼, 메뉴에 친구 · 메일함 추가, 메뉴를 자주 쓰는 기능 위주(큰 버튼 4개 + 한 줄 목록)로 다시 디자인", "무료 플랜에서는 친구 · 메일 · 알림과 프리미엄 기능을 PC · 모바일 모두 흐리게 표시 (모바일 메뉴에는 PRO 표시)", "수동 레이어 목록에 삭제 버튼 추가", "새 문구 영어 · 일본어 · 중국어 번역 추가"]}, {"v": "v0.9.5", "d": "2026.10.17", "items": ["디지털화 정확도 향상 — 글자 배경이 실제 글자 자리만 덮어서 주변 선 · 도형 · 그림을 가리지 않고, 붙어 있는 글자도 크기가 다르면 각각 다른 글자 개체로 나눔", "모바일 하단 플로팅 네비게이션 바를 길게 눌러 원하는 위치로 옮길 수 있도록 개선 (위치 기억)", "모바일 노치 · 카메라 홀 여백을 더 넓히고, 전체화면일 때만 여백이 생기도록 변경", "우측 패널에 설정(톱니바퀴) 추가 — 레이어 · 노트 · 멀티작업 · 공유작업을 켜고 끄거나 좌우로 나눠 두 개를 나란히 볼 수 있음 (기본: 모두 켜짐 · 나누지 않음)", "공유작업 탭 추가 (준비 중)", "프로필의 비밀번호 변경을 ‘비밀번호 변경’ 버튼으로 여는 별도 창으로 변경", "로그아웃 전에 ‘로그아웃 하시겠습니까?’ 확인 창 표시", "비밀번호 변경 · 회원가입 · 비밀번호 재설정의 비밀번호 칸이 브라우저 자동 완성으로 채워지지 않도록 개선", "인증번호 메일 안내에 Outlook(Hotmail) 정크 메일함 확인 문구 추가", "‘PDF 전체에서 찾기’ 입력칸을 넓혀 안내 글자가 잘리지 않도록 개선", "소개 페이지 요금 블록의 버튼 높이를 모두 같게 맞춤", "서버에 아직 없는 기능을 부를 때 ‘서버에 연결할 수 없습니다’ 대신 다시 배포가 필요하다는 안내를 표시"]}, {"v": "v0.9.4", "d": "2026.10.17", "items": ["도형 · 텍스트를 넣으면 바로 선택 도구로 바뀌고 넣은 개체가 선택된 상태가 되도록 개선", "글자 배경 칠하기: 글 입력 중 일부만 드래그한 뒤 배경색을 고르면 그 부분만 칠해지도록 변경 (docx 내보내기에도 반영)", "상단 탭의 + 버튼을 누르면 파일이 없을 때의 시작 화면이 ‘메인’ 탭으로 열리도록 변경 (메인 탭에서 연 문서는 그 자리에 열림)", "번역 버튼을 도구 모음 · 더보기에서 상단 헤더로 이동", "레이어 보기 기본값: 자동 레이어는 간단히 보기, 수동 레이어는 썸네일 보기 (방식마다 따로 기억)", "페이지 패널 썸네일 크기를 줄이고 좌우 여백을 넓힘", "요금제 카드의 ‘월 875원 꼴’ 문구를 ‘월 875원’으로 바꾸고, 계정 창의 구독 블록 가로폭을 넓힘", "멀티작업 빈 화면 가운데의 ‘멀티작업’ 제목을 단순한 글자로 변경", "모바일: 상단 노치 · 하단 홈 바 영역에 맞춰 위아래를 살짝 띄우고, 화면이 아래로 넘치던 문제 수정", "모바일: 프레젠테이션 · 번역 · 찾기 · 보기/편집 · 북마크를 접고 펼 수 있는 하단 플로팅 네비게이션 바로 이동 (메뉴의 ‘문서’ 항목 삭제)", "홈페이지 요금 안내의 프리미엄 블록을 월간 구독 · 연간 구독으로 나눔", "디지털화의 ‘전체 페이지’를 프리미엄 기능으로 변경하고, 무료 플랜에서 표 버튼이 다른 프리미엄 도구처럼 흐리게 보이도록 수정", "나만의 테마 만들기의 글꼴 미리보기가 모두 같은 글꼴로 보이던 문제 수정 (글꼴마다 실제 모양으로 표시)", "계정 창을 여러 번 열면 버튼 한 번에 요청이 여러 번 나가던 문제 수정 (비밀번호 찾기 인증메일 중복 발송 등)", "인증메일 문구를 ‘대학생 인증 번호’에서 ‘인증번호’로 변경 (비밀번호 찾기 · 회원가입에도 같은 메일 사용)", "프루티거 에어로 테마 강화 — 하늘 · 햇살 · 오로라 스우시 · 초록 언덕 · 떠오르는 물방울, 유리 광택 도구 모음 · 탭 · 버튼 (‘물방울 · 빛 움직임’ 끄기 지원)", "PDF에 원래 있던 글자를 수정할 때 일부만 고른 글자색 · 배경색이 저장되지 않던 문제 수정", "드림코어 테마 강화 — 파스텔 무지개 · 움직이는 체크무늬 바닥 · 떠다니는 문 · 하늘의 눈 · 반짝이 · 하트, 홀로그램 제목 · 버튼 (‘구름 · 반짝임 움직임’ 끄기 지원)"]}, {"v": "v0.9.3", "d": "2026.10.17", "items": ["프리미엄 테마 ‘우주’ 추가 — 달 · 고리 행성 · 푸른 행성 · 반짝이는 별 · 성운 · 유성 (콘솔 set theme 16, ‘별 · 유성 움직임’ 끄기 지원)", "신규 테마 NEW 배지를 가장 최근에 나온 3개 기준으로 변경하고, 테마 스토어의 ‘새로 나온 테마’는 가로로 스크롤해 볼 수 있도록 개선", "결제를 구독으로 전환 — 월간 구독 1,200원/월, 연간 구독 10,500원/년 (결제일마다 자동 결제, 요금제 선택 카드 추가)", "계정 창에 구독 상태(요금제 · 다음 결제일 · 카드)와 ‘구독 해지’ 추가 — 해지하면 다음 결제부터 청구되지 않고 낸 기간은 유지", "정기결제가 실패하면 하루 간격으로 최대 3번 다시 시도하고, 끝내 실패하면 구독이 종료되도록 개선", "상품 상세 · 환불 안내 · 탈퇴 안내 문구를 구독 기준으로 수정하고, 홈페이지 요금 안내도 월간/연간으로 변경", "모바일 안전 영역(카메라 홀 · 노치 · 홈 바)을 비워 두도록 개선하고 하단도 살짝 띄움", "모바일에서 프레젠테이션 · 번역 버튼을 더보기 밖으로 꺼내 도구 모음의 ⋯ 버튼 왼쪽에 배치", "상단 헤더의 북마크 목록 · 주석 버튼 제거", "레이어 패널의 레이어 이름이 너무 왼쪽에 붙어 보이던 문제 수정 (왼쪽 여백 추가)", "PC에서 옵션바를 접거나 펼 때 화면이 덜덜 떨리던 문제 수정 (화면 크기와 맞춤 배율을 한 프레임에 함께 바꾸도록 변경)"]}, {"v": "v0.9.2", "d": "2026.10.17", "items": ["PC에서 옵션바를 위로 접었다 펼 수 있도록 개선 (화면 위쪽 가운데 작은 토글 버튼, 접은 상태는 기억)", "토글 버튼에 마우스가 가까워지면 점점 밝아지도록 개선 (어두운 테마에서도 잘 보이도록 기본 밝기도 올림)", "디지털화를 실행하면 새로 만들어진 글자가 잠깐 반짝이는 효과 추가 (‘동작 줄이기’ 설정을 따름)", "모바일 메뉴에 PDF · MPDF 저장, PNG(현재 쪽 · 전체 ZIP) 내보내기 추가", "모자이크 도구 추가 — 영역을 드래그해 네모 블록으로 가리고, 만든 뒤에도 크기 · 블록 크기를 바꿀 수 있음 (PC 도구 모음 · 모바일은 더보기, 단축키 G)", "모바일에서 표 삽입 · 영역 선택 · 이미지 삽입을 더보기로 옮기고, 더보기를 아이콘 타일 시트로 새로 디자인", "회원 탈퇴 기능 추가 — ‘정말 탈퇴하시겠습니까? 계정 복구는 불가능합니다.’ 안내와 ‘확인했습니다’ 입력으로 진행, 프리미엄 계정은 환불이 되지 않는다는 안내 포함", "도형의 ‘채움 투명도’ 명칭을 ‘불투명도’로 변경", "PC 옵션바의 슬라이드바를 없애고 숫자 입력과 글자 끌기로 조절하도록 바꾸고, 옵션 사이 간격을 넓힘", "프리미엄 테마 ‘안개 숲’ 추가 — 짙은 초록 숲 실루엣과 달빛, 흐르는 흰 안개, 반딧불 (콘솔 `set theme 15`, 움직임은 테마 스토어에서 끌 수 있음)"]}, {"v": "v0.9.1", "d": "2026.10.16", "items": ["레이어 패널 상단 레이어 이름 입력창을 아래 블록과 구분되도록 더 밝게 개선", "좌우 패널에 붙은 작은 토글 버튼으로 열기/닫기 추가, 패널 크기를 크게 줄이면 자동으로 닫히도록 개선 (PC 상단 헤더의 패널 버튼 제거)", "페이지 썸네일 ⋯ 메뉴를 버튼 기준으로 펼쳐지는 방사형 메뉴로 변경", "노트 삭제 버튼을 노트 탭 줄 오른쪽의 빨간 휴지통 아이콘으로 이동", "타자연습 Enter 시작 지원, 플레이 중 나가기 버튼 · Esc 추가, 메뉴에 탭 닫기 버튼 추가", "페이지 패널 정렬 개선 (썸네일 보기는 가운데, 목록 보기는 왼쪽), 불필요한 검색 버튼 제거", "설정의 테마 설명 문구 간소화", "설정 콘솔 명령어 도움말을 묶음별로 접고 펼 수 있도록 정리", "헤더 시간에 마우스를 올리면 년월일 · 요일 · 시분초를 보여주는 작은 창 추가", "캡처 방식 선택 추가 (화면 캡처 기본 / 카메라 캡처), 카메라 캡처는 촬영한 사진을 바로 페이지에 삽입", "카메라 · 음성 녹음 장치 선택 기능 추가 (선택한 장치 기억)", "공포 테마 글자 깨짐 연출을 더 많이, 더 자주 나오도록 강화하고 경고 문구 간소화", "공포 테마에서 다른 테마로 바꿨을 때 깨진 글자가 그대로 남던 문제 수정 (글자 원본 복구)", "영역 도구의 ‘닿은 개체 삭제’를 ‘닿은 개체 선택’으로 변경, 선택한 여러 개체를 Delete로 한 번에 삭제 가능", "백룸 테마 화면 깜빡임을 약하고 드물게 조정, 테마 스토어에서 깜빡임 켜기/끄기 추가", "튜토리얼의 고양이 이모지를 사이트 파비콘 모양 아이콘으로 단순화", "튜토리얼 후반부에 전체화면 사용 추천 단계 추가 (실제 전체화면 버튼을 빛나는 테두리와 말풍선으로 안내)", "업데이트 내역을 개발 일지 형식(추가 · 개선 · 수정)으로 정리"]}, {"v": "v0.8.6", "d": "2026.10.16", "items": ["프리미엄 ‘백룸’ 테마 추가 (노란 벽지 · 형광등 깜빡임 · 필름 노이즈, 콘솔 set theme 14)", "마우스 오른쪽 클릭 컨텍스트 메뉴 추가 (선택한 글자 한국어 번역, 잘라내기 · 복사 · 붙여넣기 · 모두 선택, 이미지 · 표 · 메모 삽입, 프리미엄 음성 삽입)", "영역 도구에 범위에 닿은 개체를 한꺼번에 다루는 방식 추가 (드롭다운 · 옵션바에서 선택)", "형광펜이 모든 개체(PPTX 글자 포함) 위, 맨 앞에 그려지도록 수정", "멀티작업 개선 — 제목 글씨체를 통통하고 둥근 폰트로 고정, 탭 + 버튼은 홈 화면을 새 탭으로 열도록 변경, 편집기의 버튼 줄 제거, 웹페이지 주소줄 접기/펼치기 추가, 안내 문구 닫기 추가", "회원가입 시 이메일 인증번호 확인 필수화 (서버 설정과 무관하게 인증번호 단계 적용)", "로그인 · 서버 연결 · 불러오는 중 화면 중앙 로딩 UI 추가 및 다른 버튼 입력 차단"]}, {"v": "v0.8.5", "d": "2026.10.16", "items": ["첫 방문 시작 튜토리얼 추가 (PC / 모바일 구분, 설정 → 정보에서 다시 보기)", "DOCX 가져오기 전면 개선 (글자 크기 · 서식 · 줄/문단 간격 · 정렬 · 번호/글머리 · 표 · 그림 · 쪽 크기와 여백 반영)", "PNG 열기 시 흰 페이지가 나오던 문제 수정, 문서 없을 때 Ctrl+V로 클립보드 이미지 열기 추가", "모바일 도구 모음 접기/펼치기 추가, 프레젠테이션 버튼 추가, 메모 · 링크 · 디지털화 · 프레젠테이션 · 번역을 더보기 도구로 이동", "계정 · 프리미엄 창(PC) 좌우 분할 레이아웃, 비밀번호 보기/숨기기 버튼 추가, 중복 가입 안내 오류 수정", "페이지 패널 썸네일 크기 확대"]}, {"v": "v0.8.4", "d": "2026.10.16", "items": ["테마 선택 창을 ‘테마 스토어’로 개편 — 넓은 창에서 실제 화면 모양 미리보기 · 분류(전체 · 새로 나온 · 무료 · 프리미엄 · 기간 한정 · 나만의 테마) · 설명 · 적용 버튼으로 한눈에 고를 수 있음", "무료 테마에 키위 다크 추가 (배경 #000000 · 보조색 #407252 · IBM 플렉스 산스)", "공포 테마 추가 — 페이지를 넘길 때 붉은 글자가 잠깐 깜빡이고 화면 글자가 순간 깨져 보이는 연출 (적용 전 경고 문구 표시, 연출 끄기 · ‘동작 줄이기’ 설정 자동 반영)", "공포 테마는 매년 9월 1일 ~ 11월 30일에만 무료인 기간 한정 테마이며, 그 밖의 기간에는 프리미엄으로 전환됨 (남은 기간 · 다음 무료 기간 표시)", "가장 최근에 나온 테마에는 NEW 딱지 표시 (더 새로운 테마가 나오면 자동으로 이전 딱지는 사라짐)", "좌측 도구 모음에서 메모 · 음성 · 캡처 · 인쇄 · 발표 · 번역을 ‘더보기’ 도구 안으로 이동하고, 좌측 도구 버튼을 조금 더 크게 조정", "발표 모드의 나가기 버튼을 빨간색으로, 아이콘을 X 대신 나가기 아이콘으로 변경", "도구 단축키를 키보드 줄 순서로 정리 — QWER: 강조표시 · 그리기 · 직선 · 지우개 / ASDF: 도형 · 텍스트 · 링크 · 표 / ZXCV: 영역 · 이미지 · 메모 · 음성 (나머지 도구는 그 오른쪽에 배치)", "노트에서 마크다운(.md)과 텍스트(.txt) 형식을 고를 수 있고, + 버튼으로 새 노트를 만들 때도 형식을 선택", "마크다운 노트를 윈도우 메모장처럼 서식이 바로 반영된 ‘서식 보기’(기본)와 기존 ‘원문’으로 나눠 볼 수 있음 (‘# ’ · ‘- ’ · ‘1. ’ · ‘[] ’ 입력 시 바로 서식 적용)", "디지털화 정확도 개선 — 표 테두리 · 밑줄 · 도형을 글자로 읽지 않도록 걸러내고, 글자를 칸 · 단어 간격별로 나눠 원본 모양 그대로 수정할 수 있게 하며 글자 크기가 비정상적으로 커지던 문제 수정", "이메일 인증 오류 메시지를 알기 쉬운 말로 변경 (인증번호 만료 · 잘못 입력, 너무 빨리 다시 요청 등)"]}, {"v": "v0.8.3", "d": "2026.10.16", "items": ["프리미엄은 구독이 아닌 ‘1년 이용권’이라는 점을 계정 창 · 상품 상세 · 홈페이지 요금 안내에 명시, 매년 자동결제가 되지 않는다는 점을 강조해 안내 추가", "멀티작업 패널 제목을 아이콘이 들어간 그라데이션 디자인으로 개선", "페이지 패널 썸네일 좌우 여백을 줄여 썸네일이 더 크게 보이도록 개선", "표 / 도형 / 그리기 등 선택한 모든 개체의 오른쪽 위에 삭제 버튼 추가", "표 편집에서 행 · 열 배경색을 바꿀 수 있도록 추가", "전체 페이지 관리 상단 바를 아이콘이 들어간 묶음 구성으로 개선", "커스텀 테마 만들기를 별도 화면으로 분리하고 큰 미리보기 · 색상 견본 · 글꼴 목록 추가, 커스텀 테마 버튼은 세로를 줄이고 가로를 전체 폭에 맞춤", "커스텀 테마 글꼴 39종을 각 글꼴로 미리 볼 수 있도록 추가", "홈페이지 푸터에 사업자 정보 페이지 링크 추가, 사업장 주소(상세) · 전화번호를 사업자 정보 페이지에 게시", "아이디 · 비밀번호 로그인 추가 (회원가입: 닉네임 · 아이디(중복 불가) · 비밀번호 · 이메일 인증번호 확인, 이후 아이디와 비밀번호만으로 로그인)", "로그인 후 비밀번호 변경(현재 비밀번호 확인), 로그인 전 등록된 이메일 인증번호로 비밀번호 재설정 추가", "프로필 사진 변경 · 삭제와 닉네임 수정 추가, 상단 계정 버튼에 프로필 사진 표시", "로그인 · 회원가입 창의 폭을 고정하고 오른쪽 결제 카드가 늘었다 줄지 않도록 개선, 결제 카드 디자인 정리"]}, {"v": "v0.8.2", "d": "2026.10.15", "items": ["프리미엄 기능으로 커스텀 테마를 추가 — 배경색 · 보조색 · 글꼴을 직접 골라 나만의 테마를 만들 수 있고, 글자색과 밝기는 배경색에 맞춰 자동으로 정해짐", "글꼴을 6종에서 39종으로 확대 (고딕 A1 · IBM 플렉스 산스 · 블랙한산스 · 도현 · 주아 · 개구 · 고운바탕 · Roboto · Playfair Display 등) — 사이트와 텍스트 모두에 적용", "디지털화 도구 추가 — PNG 같은 이미지, 스캔 페이지, PDF의 글자를 클릭해서 수정할 수 있는 글자 개체로 바꿔줌 (글자가 있는 PDF는 인식 없이 바로, 이미지는 글자 인식으로 변환하며 원래 글자의 위치 · 크기 · 색 · 배경색을 맞춤)", "디지털화 도구 옆 드롭다운에서 ‘현재 페이지’와 ‘전체 페이지’ 범위를 바꿀 수 있고, 이미지 글자 인식 언어(한국어 · 영어)도 고를 수 있음", "글자 크기를 소수점(0.1 단위)까지 지정할 수 있고, 자간도 0.1% 단위로 조절 가능. 디지털화할 때 크기는 소수점으로, 폭은 자간으로 맞춰서 띄어쓰기가 사라지지 않음", "docx · HWP(HWPX) 내보내기에서 쪽 크기와 가로/세로 방향을 쪽마다 그대로 맞춰 내용이 쪽 밖으로 나가지 않게 개선", "docx ‘글자 편집용’ 내보내기가 이미지 · 도형 · 그림 · 배경색은 쪽 배경으로 그대로 보존하고, 글자는 원래 자리의 글상자로 담아 바로 수정할 수 있게 개선", "레이어 이름은 목록을 더블클릭(더블탭)해도 바꿀 수 있도록 수정 (자동 · 수동 모두)", "멀티작업 버튼을 3×3으로 고정하고, 화면이 작아지면 버튼이 가려지지 않고 함께 작아지도록 개선", "PNG 파일을 열면 빈 흰 페이지로 보이던 문제를 수정", "업데이트 내역의 버전마다 업데이트 날짜를 표시"]}, {"v": "v0.8.1", "items": ["계정 · 프리미엄 창의 닫기 버튼을 오른쪽 위 X 버튼으로 변경", "테마 중 어두운 · 밝은 · 한국 · 일본 · 커피를 제외한 프루티거 에어로 · 핑크세상 · 드림코어 · 레트로게임 · 새싹은 프리미엄 전용 (선택 창에 표시, 프리미엄이 아니면 어두운 테마로 표시)", "개발자 콘솔에 game 명령어 추가 — 바로 타자연습으로 이동", "모바일에서 소개 페이지(index)는 항상 어두운 테마로 고정", "페이지 패널의 썸네일 좌우 여백을 줄이고 가운데 정렬", "상단 개발자 콘솔 버튼 또는 / 키로 여는 빠른 콘솔에 추천 명령어를 아래에 표시 (입력하면 이어지는 명령어와 인자를 추천, ↑↓ 선택 · Tab 채우기 · Enter 실행)", "개발자 계정의 키 발급 내역 보기에 진행 표시줄 추가 (불러오는 동안 진행 표시, 각 키의 남은 기간 막대)", "멀티작업 화면 위에 큰 \"멀티작업\" 제목을 넣고, 파일 버튼은 뷰어로, 빈 문서 버튼은 meow-pdf.com 편집기로 바꿈", "멀티작업 넓게 보기 버튼 추가 (탭 줄을 숨기고 패널을 넓힘)", "전체 페이지 관리에 PDF 회전(왼쪽 · 오른쪽) 추가, 전체 페이지 관리는 이제 무료", "PPTX · HWP · MPDF 열기를 프리미엄에서 제외하고, PNG · DOCX 열기를 추가", "상단 탭의 \"불러오기\" 버튼을 없애고 + 버튼에서 새 탭 · 불러오기를 고르게 변경", "링크 도구 추가: 영역을 드래그해 웹 주소 또는 문서 안 페이지로 연결 (PDF에도 링크로 저장)", "왼쪽 도구 모음에서 모든 도구가 화면에 들어오도록 간격을 자동 조절", "한 페이지씩 보기에서 화면에 맞추면 오른쪽 스크롤바가 생기지 않도록 수정", "노트에 서식 도구 추가 (제목 · 목록 · 굵게 · 기울임 · 취소선 · 링크 · 표 · 서식 지우기), 서식을 쓰면 .md로 저장할지 확인", "도구에 표 삽입 추가 (프리미엄) · 붙여넣기 버튼은 도구에서 제거 (Ctrl+V는 그대로)", "텍스트 일부만 다른 색으로 바꾸기 추가 — 글자를 선택하고 색을 고르면 그 부분만 변경, 다시 수정할 때도 유지", "새 테마 \"미니홈피\" 추가 (프리미엄) · 앞으로 추가되는 테마는 모두 프리미엄, 테마 창에서 무료 / 프리미엄을 나눠 표시", "내보내기에 HWP(HWPX) 추가, Word 이름을 docx로 변경"], "d": "2026.10.15"}, {"v": "v0.7.5", "items": ["커피 테마 추가 (따뜻한 크림색 · 갈색 종이 느낌, 눈이 편한 밝은 테마, 콘솔: set theme 8)", "모바일에서 개체 · 글상자를 선택하거나 영역을 지정하면 오른쪽 위에 삭제 버튼 표시", "타자연습에 난이도 추가 (쉬움 · 보통 · 어려움, 난이도별 최고 점수와 점수 배율)", "타자연습에 아이템 추가 (얼음: 낱말 정지 · 폭탄: 화면 정리 · 느림: 속도 감소 · 두배: 점수 2배 · 금빛 냥: 목숨 +1)", "레트로게임 테마 추가 (픽셀 · 네온 · 스캔라인, 콘솔: set theme 9)", "새싹 테마 추가 (옛날 포털 사이트 느낌의 연두색 · 흰색 디자인, 콘솔: set theme 10)", "멀티작업에서 연 PDF · PPTX · HWP · 빈 문서 · 병합 문서를 'Meow-PDF로 편집하기' 버튼으로 바로 편집기로 가져와 수정 (콘솔: work edit)"], "d": "2026.10.14"}, {"v": "v0.7.4", "items": ["결제 프리미엄과 이용 키 사용자를 구분해서 표시 (상단 버튼 · 계정 창 · 모바일 더보기), 이용 키 사용자도 남은 기간 표시", "프리미엄 남은 이용 기간 표시 — 상단 계정 버튼(예: 프리미엄 | 120일), 계정 창(만료일 · 남은 일수), 모바일 더보기. 만료 7일 전 안내, 30일 이내에는 계정 창에서 바로 연장 가능, 사용 중 기간이 끝나면 자동으로 해제", "모바일에서 파일을 불러올 때 전체화면이 풀리던 문제 개선 (선택이 끝나면 전체화면으로 복귀)", "멀티작업에 타자연습 게임 '타자 비' 추가 (떨어지는 낱말을 입력해 없애기 · 한글 / 영어 / 섞어서 · 최고 점수 저장, 콘솔: work type)", "숨은 재미 요소(이스터에그) 추가 — 직접 찾아보기", "개발자 콘솔에도 숨은 명령어 1개 추가"], "d": "2026.10.14"}, {"v": "v0.7.3", "items": ["한국 · 일본 테마 추가 (태극기 · 일장기 색)", "드림코어 테마 추가 (파스텔 하늘 · 구름 · 별빛 · 필름 입자 분위기, 콘솔: set theme 7)", "테마를 별도 선택 창에서 둥근 정사각형 버튼으로 고름 (테마별 아이콘 포함, 콘솔: set theme 5 / 6 · theme picker)", "발표 모드 레이저에 잔상 추가", "멀티작업의 빈 문서 · 병합을 멀티작업 탭으로 열기", "개발자 콘솔에 화면 맞춤 명령어 추가 (fit · fit page)", "모바일 헤더 크기를 조금 키움", "모바일 더보기 바텀 시트를 아이콘 타일 형태로 정리", "소개 페이지(index)에 지금까지의 개선 사항 반영"], "d": "2026.10.14"}, {"v": "v0.7.2", "items": ["영역 지정 도구에 드롭다운 추가 (사각형 / 자유 선택 전환)", "영역 위에 마우스를 올리면 이동 커서, 가장자리 8개 점으로 늘리기 · 크기 조정 (Shift: 비율 유지)", "설정에서 페이지 이동 연출 켜기 / 끄기 (콘솔: set pageanim off)", "개발자 콘솔 도움말을 다시 표시하고 설명을 보기 쉽게 정리", "레이어를 클릭-드래그해 순서를 바꿀 수 있음 (자동 · 수동 레이어 공통, 터치는 길게 누른 뒤)", "프리미엄 상품 상세 창 추가: 결제 1년 · 이용 키 3개월 · 환불 7일 규정 안내", "옵션바의 굵기 · 크기 · 불투명에 숫자 입력칸 추가, 글자 위에서 좌우로 끌어 조절 (유니티식)", "캡처 시 어두운 뷰어 배경을 빼고 페이지 영역만 캡처 (붙여넣었을 때 어둡게 보이던 문제)", "Ctrl+클릭으로 글상자를 여러 개 골라 동시에 수정"], "d": "2026.10.13"}, {"v": "v0.7.1", "items": ["상단 탭과 멀티작업 탭을 마우스로 끌어서 순서를 바꿀 수 있음", "개발자 콘솔 추가 (설정 > 개발자 콘솔, 단축키 Ctrl+`) — 예: set theme darktheme · set theme 1 · tool pen · zoom 150 · export docx", "개발자 콘솔의 전체 명령어와 도움말을 설정의 새 탭에 정리 (대부분의 기능을 콘솔로 실행 가능)", "멀티작업의 최근 접속 사이트를 하나씩 또는 모두 삭제할 수 있음", "Word(.docx)와 PNG로 내보내기 추가 — Word는 글자 편집용 / 페이지 이미지용, PNG는 현재 쪽 / 전체(ZIP)", "내보내기 목록을 작고 보기 쉽게 정리", "상단 헤더에 개발자 콘솔 버튼 추가 (프리미엄 전용)", "모바일 설정창 상단 메뉴를 아이콘 위주로 정리해 잘리지 않게 개선", "개발자 콘솔 도움말을 ? 에 마우스를 올리면 표시되도록 개선", "핑크세상 테마 추가 (연한 핑크, 콘솔: set theme 4)", "상단 개발자 콘솔 버튼 또는 / 키로 작은 입력 칸을 열어 바로 명령 실행 (Enter 실행 · Esc 닫기)"], "d": "2026.10.13"}, {"v": "v0.6.5", "items": ["레이어 방식 선택 추가 — 개체마다 자동으로 만드는 ‘자동’과, 그림판처럼 레이어를 직접 추가·이름 변경·순서 변경·숨김·잠금·병합하는 ‘수동’ 중에서 고를 수 있음", "PC에서는 연속 스크롤 / 한 페이지씩 보기, 모바일에서는 한 페이지씩 넘기기 / 세로로 넘기기를 설정에서 선택 가능", "한 페이지씩 보기에서는 방향키·PageUp/Down·마우스 휠(끝에서)·페이지 목록으로 페이지를 넘김"], "d": "2026.10.13"}, {"v": "v0.6.4", "items": ["형광펜이 글자를 흐리게 하던 문제 개선 — 곱하기(multiply) 방식으로 칠해 글자가 선명하게 보이고(저장 PDF 포함), 글자 위에 칠하면 글자 줄에 맞는 깔끔한 띠로 자동 정리(‘글자 맞춤’, 끄면 자유롭게)", "헤더에 전체화면 / 해제 버튼 추가", "모바일 확대·축소(핀치) 중에는 이미지를 다시 그리지 않고 손을 뗀 뒤 한 번만 선명하게 그려 끊김을 줄임", "도구에 영역 지정 추가 — 사각형 또는 자유 선택으로 지정해 펜 그림·도형의 일부만 잘라 이동·복사·붙여넣기·삭제(그림판 방식), 영역 이미지 복사·저장·글자 복사 (단축키 R)", "업데이트 내역을 0.1.x · 0.2.x … 처럼 버전 두 번째 자리(y)별로 묶어 표시", "설정에서 버전 정보와 고객센터를 별도 메뉴로 분리", "모바일 상단 버튼 간격과 크기를 줄여 비좁게 보이던 문제를 완화(계정 버튼은 더보기 메뉴에도 추가)", "멀티작업의 8번째 버튼으로 계산기 추가 (키보드 입력 · 괄호 · % · 제곱근 · 기록 · 복사 · 노트 · 페이지 삽입)", "줌 바를 마우스로 끌어 옮길 수 있게 함. 위·아래 가장자리에서는 가로로, 왼쪽·오른쪽 가장자리에서는 세로로 자동 전환되고 위치는 저장됨", "고객센터 이메일 보내기 링크도 contact@meow-pdf.com으로 변경"], "d": "2026.10.13"}, {"v": "v0.6.3", "items": ["멀티작업 첫 화면에 빈 문서 · 파일 병합 · 파일 압축 버튼을 추가하고, 버튼 줄은 패널 크기에 따라 한 줄에 1개 · 2개 · 4개로만 배치", "설정에 편집기 언어 변경 추가: 한국어 / English / 日本語 / 中文", "PDF 글자를 끌어서 옮길 때 뒤에 있는 원래 글자가 잠깐 보이던 문제를 수정", "업데이트 내역을 버전 묶음(beta / 0.0.1~0.5.3 / 0.6.1~)으로 나눠 계층형으로 표시", "설정의 테마에 프루티거 에어로 테마 추가(하늘색 · 연두색 유리 질감)"], "d": "2026.10.13"}, {"v": "v0.6.2", "items": ["소개 페이지 푸터에 상호(타니아)와 주소(경기도 부천시 중동로 108)를 표기", "소개 페이지에 환불정책 추가: 결제일로부터 3일 이내에 요청하면 환불", "소개 페이지에 GitHub 링크 추가", "소개 페이지와 안내 문서의 문의 이메일을 contact@meow-pdf.com으로 변경", "메모와 번역 도구(페이지 번역, 멀티작업의 번역 · 사전)를 프리미엄 기능으로 전환", "프리미엄 전용 기능의 자물쇠 표시를 없애고, 대신 버튼을 흐리게(밝기를 낮춰) 표시"], "d": "2026.10.12"}, {"v": "v0.6.1", "items": ["멀티작업에 번역 · 사전 도구 추가: 글을 붙여넣어 번역하고, 단어를 찾으면 뜻을 보여주며 원하는 언어로 함께 번역", "번역 · 사전 결과를 복사하거나 노트에 추가, 현재 페이지에 텍스트로 삽입. 파파고 · 구글 번역 · DeepL · 네이버 사전 바로가기 제공", "번역 창 문구를 줄이고 디자인을 새로 다듬음(언어 바꾸기 버튼, 둥근 선택 버튼, 부드러운 그림자)", "Chrome 번역 모델을 내려받는 동안 진행률(%)을 표시하고, 45초 넘게 진행이 없으면 멈춤 안내와 '서버 번역만 사용' 선택지 표시", "모바일에서 파일을 열 때 용도에 맞는 모드를 고를 수 있음: 보기(읽기 전용) / 간편 수정(글자 수정 제외) / 기본(모든 기능). 더보기 메뉴에서 언제든 바꿀 수 있음", "PDF 글자를 클릭해 수정할 때 원본 글자의 자간을 읽어와 같은 간격으로 반영", "텍스트 도구, 수정 중인 글자, 선택한 글자에서 자간(-10% ~ 50%)을 직접 설정할 수 있음. 저장 · 인쇄 · 내보내기에도 반영", "멀티작업 첫 화면을 새로 디자인: 글자를 최소화하고 둥근 타일 버튼(파일 · 웹 · 번역 · OneCompiler)과 간결한 바로가기 칩으로 정리", "개체나 텍스트를 선택하면 왼쪽 위에 이동 핸들이 나타나 끌어서 옮길 수 있음", "PDF 글자를 클릭해 수정할 때, 텍스트 도구로 입력할 때도 왼쪽 위에 이동 핸들이 나타나 글자 위치를 끌어서 옮길 수 있음"], "d": "2026.10.12"}, {"v": "v0.5.3", "items": ["소개 페이지(index)와 편집기의 파비콘을 같은 고양이 아이콘으로 통일", "페이지 번역 추가: 도구 모음 가장 오른쪽의 번역 버튼으로 현재 보고 있는 페이지만 번역", "번역 방식 선택: 원문 / 전체 번역 / 마우스 오버 번역(글자에 마우스를 올리면 그 문단만 번역)", "원본 언어 자동 감지, 번역할 언어 선택(기본 한국어). 크롬 내장 번역을 우선 사용하고, 없으면 서버 번역(키 없이도 쓰는 무료 엔진 포함)으로 대체", "번역에 실패하면 원인(서버 미배포, 사용량 초과, Chrome 내장 번역 사용 불가 사유)을 안내", "Chrome 번역 모델 준비가 오래 걸리면 기다리지 않고 서버 번역으로 먼저 번역하고, 준비되면 다음부터 내장 번역 사용", "서버 번역: 한국어 등 긴 글이 무료 엔진의 글자 수(바이트) 제한에 걸려 실패하던 문제 수정", "HWP 파일이 열리지 않던 문제 수정(압축 해제 오류) — 실제 HWP 샘플 파일로 확인"], "d": "2026.10.12"}, {"v": "v0.5.2", "items": ["편집 화면 상단의 고양이 아이콘을 누르면 소개 페이지로 돌아가도록 변경"], "d": "2026.10.12"}, {"v": "v0.5.1", "items": ["서비스 소개 페이지(meow-pdf.com)를 새로 만들고, 기존 편집 화면은 /edit 주소로 이동", "소개 페이지 하단에 사업자 정보(Thaniya project, 사업자 등록번호) 표기", "옵션바의 색상 영역이 밖으로 튀어나오거나 잘리던 문제를 수정", "텍스트 정렬의 기본값을 왼쪽 정렬로 변경", "도형에 별 추가", "도형의 원 버튼에 그래픽이 비어 있던 문제를 수정"], "d": "2026.10.12"}, {"v": "v0.4.5", "items": ["시작 화면의 버튼(파일 열기, 빈 문서로 시작, 파일 병합, 파일 압축)을 모서리가 둥근 정사각형 타일 형태로 변경", "텍스트 왼쪽 정렬 / 가운데 정렬(기본) / 오른쪽 정렬 설정 추가 (새 텍스트, 편집 중, 선택한 텍스트에 적용)", "도구 모음을 좌측에 배치했을 때 도구 버튼 크기를 줄임", "캡처, 인쇄, 프레젠테이션 버튼을 다시 도구 모음으로 이동"], "d": "2026.10.12"}, {"v": "v0.4.4", "items": ["헤더의 테마 변경 버튼과 GitHub 버튼을 제거하고, 화면 밝기 조절을 설정의 화면 · 레이아웃 항목으로 이동", "도구 툴바의 저장 관련 버튼(저장, 다른 이름으로 저장)을 헤더로 이동", "헤더의 새 문서, 열기 버튼을 제거하고 실행 취소, 다시 실행, 캡처, 인쇄, 발표 버튼을 헤더로 이동", "결제 안내에 최초 1회만 결제하면 계속 이용할 수 있다는 내용을 깔끔한 카드 UI로 명시", "옵션바의 크기(내용)에 따라 화면이 재조정되지 않도록 옵션바 높이를 고정"], "d": "2026.10.12"}, {"v": "v0.4.3", "items": ["사이드 메뉴 방식의 UI 기반 설정 창을 열 수 있는 버튼 아이콘을 상단 레이아웃에 추가, 해당 설정 창 내에서 애플리케이션 버전 정보 확인과 고객센터 피드백 제출이 가능하도록 구현", "이때 접수된 불편사항은 개발자 계정의 관리자 대시보드나 DB로 수집되어 일괄 조회 및 관리가 가능", "사용자가 주요 기능의 단축키를 직접 매핑하고 변경할 수 있는 커스터마이징 기능과 함께 기존 상단에 고정되어 있던 도구 툴바 배치를 좌측 정렬 또는 상단 정렬로 선택할 수 있는 레이아웃 옵션을 제공", "반응형 UX 개선을 위해 모바일 환경에서 가로보기(Landscape) 모드로 전환될 경우, 페이지 패널이 자동으로 화면 좌측에 정렬되도록 미디어 쿼리 및 Flex/Grid 레이아웃 구조를 보완"], "d": "2026.10.12"}, {"v": "v0.4.2", "items": ["모바일 화면 크기에 맞춰 반응형 뷰포트 및 레이아웃 적용", "모바일 환경에서 레이어, 노트, 멀티작업 등 부가 기능 숨기고 최소한의 핵심 기능만 남기도록 개선", "모바일 화면에서 스와이프 및 드래그로 페이지 넘기기 기능 추가 (두 손가락 확대/축소 가능)", "모바일에서 페이지 패널을 화면 하단으로 배치", "상단 편집 버튼들을 깔끔하게 재배치하고, 계정 버튼을 저장 버튼 왼쪽으로 이동", "텍스트 직접 수정 기능 유지", "텍스트 선택 시 뜨는 옵션바(optbar)가 화면 밖으로 나가지 않도록 두 줄로 예쁘게 배치하고, 옵션바 표시 여부에 따라 화면 페이지가 밀리거나 재조정되지 않도록 수정"], "d": "2026.10.11"}, {"v": "v0.4.1", "items": ["모바일 화면 크기에 맞춰 반응형 뷰포트 및 레이아웃 적용", "모바일 환경에서 레이어, 노트, 멀티작업 등 부가 기능 숨기고 최소한의 핵심 기능만 남기도록 개선", "모바일 화면에서 스와이프 및 드래그로 페이지 넘기기 기능 추가 (두 손가락 확대/축소 가능)", "모바일에서 페이지 패널을 화면 하단으로 배치", "상단 편집 버튼들을 깔끔하게 재배치하고, 계정 버튼을 저장 버튼 왼쪽으로 이동", "텍스트 직접 수정 기능 유지", "텍스트 선택 시 뜨는 옵션바(optbar)가 화면 밖으로 나가지 않도록 두 줄로 예쁘게 배치하고, 옵션바 표시 여부에 따라 화면 페이지가 밀리거나 재조정되지 않도록 수정"], "d": "2026.10.11"}, {"v": "v0.3.3", "items": ["키 발급 관련 일부 로직 수정"], "d": "2026.10.10"}, {"v": "v0.3.2", "items": ["키 발급 관련 서버 연결 문제 해결"], "d": "2026.10.10"}, {"v": "v0.3.1", "items": ["파일이 없는 화면에서 파일 열기, 빈 문서로 시작 옆에 파일 병합, 파일 압축 기능을 배치", "파일이 없는 화면에서 안내 텍스트를 최소화하여 UI 깔끔하게 수정", "저장 버튼에 파일 압축해서 내보내기(10%, 20%, 40%)옵션 추가 - 프리미엄 사용자 한정, PPTX파일로 내보내기 옵션 추가", "화면에 다른 PDF를 드래그해서 넣으면 멀티 탭으로 넣기, 현재 파일에 병합하기 옵션이 나타나도록 기능 추가 (병합하기 시 두 파일의 병합순서 드래그로 결정 가능)", "페이지 패널에 전체 페이지 관리하기 버튼 추가-프리미엄", "전체 페이지 관리하기 시 그리드형태로(크기조절 가능) 각 페이지가 화면에 가득 차게 나타나며 드래그하여 페이지 순서를 바꿀 수도 있도 여러 페이지를 삭제하거나 이름을 바꾸거나 계층구조 수정 가능하도록 기능 추가", "페이지 패널의 버튼 UI 전반적으로 깔끔하게 수정", "헤더에 있는 PDF제목 클릭하여 직접 수정 가능하도록 개선"], "d": "2026.10.09"}, {"v": "v0.2.2", "items": ["로그인시스템 및 결제 시스템 문제 해결"], "d": "2026.10.09"}, {"v": "v0.2.1", "items": ["일부 기능 유료화 도입"], "d": "2026.10.08"}, {"v": "v0.1.3", "items": ["온라인 컴파일러 프로그램 원컴파일러(OneCompiler) 바로가기가 멀티작업에서 제공되도록 개선"], "d": "2026.10.08"}, {"v": "v0.1.2", "items": ["음성 이름 편집 및 음성 내보내기 기능 추가"], "d": "2026.10.08"}, {"v": "v0.1.1", "items": ["음성녹음 및 재생 기능 추가", "음성녹음 MPDF에 삽입 기능 추가 (따로 내보내기 가능, MPDF 확장자 파일에 삽입된 상태로 저장 가능)"], "d": "2026.10.06"}, {"v": "v0.0.1", "items": ["멀티작업에서 웹페이지를 열 수 있도록 편의 향상", "화면맞춤 상태에서 PDF내 텍스트상자 클릭 시 텍스트 수정이 진행되지 않는 문제 해결", "멀티작업 화면에 파일 드래그 시 일반 편집기 화면에 파일이 닿으면 파일 드롭 안내가 사라지지 않는 문제 해결", "페이지 패널의 크기 조절 시 썸네일로 보기의 각 썸네일 크기도 패널의 크기에 맞게 조절되도록 개선", "페이지 북마크기능 추가, 페이지 패널 상단에 북마크 바로가기 드롭다운 리스트 버튼 추가", "텍스트의 글꼴 드롭다운 버튼에서 각 버튼의 글꼴 모양을 이름과 함께 미리보기 제공", "PDF전체에서 특정 글자 빠르게 찾는 검색기능 제공", "PDF 내에서 기존에 있는 텍스트를 수정하는 로직 개편 (기존에 비해 많은 양의 텍스트를 한 번에 수정 가능하도록)", "Meow-PDF 파비콘 추가"], "d": "2026.10.06"}, {"v": "beta 0.0.5", "items": ["세로모드 시 페이지, 레이어, 노트를 모두 하단 사이드바에서 전환 가능한 형태로 변경", "모든 사이드바를 테두리 마우스 드래그를 통해 크기 조절 가능하도록 변경 (기본 좌우, 세로모드는 상하)", "페이지 맞춤 시 사이드바를 고려하여 페이지가 화면에 모두 들어오게 조절되도록 개선 (화면 비율이 작은 경우)", "검은 고양이 스티커를 넣는 기능을 추가 (이미지 버튼을 전환 가능)", "레이어/노트 패널에 탭전환 방식으로 멀티작업 탭 추가 (파일탐색기를 여는 버튼이 중앙에 있으며 누르면 파일을 불러옴, 불러온 파일은 해당 패널에 가득 차도록 띄워지며 PDF를 보며 작업 가능), 멀티작업 패널은 또한 내부에서 멀티테스킹탭으로 관리 가능", "레이어/노트/멀티작업 여닫기 패널 버튼을 작업 사이드바 버튼으로 이미지 변경", "PDF 업로드 전 나타나는 화면 문구에서 PDF뿐만 아니라 PPTX파일도 수정 가능하다고 명시", "스프라이트시트, HWP 파일도 삽입/편집 가능하도록 제공"], "d": "2026.10.06"}, {"v": "beta 0.0.4", "items": ["페이지 계층관리 시 페이지를 끈 상태에서 마우스 휠을 굴리면 페이지가 올라갔다 내려갔다 하게 되도록 변경", "도형을 그리고 Ctrl+Z를 누르면 간혹 기능이 먹히지 않는 문제 해결", "화면 밝기 조절 바 시간 표시 부분 왼쪽에 추가", "페이지에 주석달기 기능 추가 (주석을 달면 그 페이지는 눈에 잘 띄도록 변경)", "페이지 목록으로보기 기능 추가 (기본적으로 페이지1 ... 로 표시되며 페이지이름 변경 가능)", "인쇄기능 추가", "레이어 병합 기능 추가", "편집화면 및 프리젠테이션 화면에서 Ctrl+스크롤 하면 마우스 커서를 중심으로 화면이 줌아웃되도록 변경", "작게 https://github.com/architect0509/meow-PDF페이지로 이동되는 버튼을 방해되지 않도록 배치", "텍스트나 도형 그리기에서 상단 optbar가 가로로 너무 길어지는 문제 색상 팔레트의 크기를 줄이고 슬라이더들을 정리하여 화면 내에 기능이 모두 들어오도록 개선", "글자선택을 개체와 통일시키고 PDF내 모든 텍스트상자를 클릭만으로 수정 가능하도록 개선", "색상 버튼의 개수를 5개로 줄이고 우측에 색상 팔레트를 크게 배치하며 5개의 작은 색상 버튼 아래에는 최근에 사용한 색상 5개가 나타나게 되도록 개선", "UI의 배치가 전부 상하로 이동하는 세로모드 변환 기능을 제공", "멀티테스킹탭 기능을 지원 (툴바 위에 삭제 및 불러오기, 추가 가능한 형식으로)", "레이어가 있는 위치에 탭전환 방식으로 노트를 작성할 수 있도록 기능 추가(노트는 다중 페이지로 관리 가능하며 .txt확장자 파일로 내보낼 수 있음)"], "d": "2026.10.06"}, {"v": "beta 0.0.3", "items": ["현재화면 캡쳐기능 제공(버튼의 위치는 저장버튼 좌측)", "상단 레이어버튼 옆에 현재시간,분 표시", "저장버튼 좌측 프리젠테이션모드 버튼 추가 -단축키 여닫기 p(프리젠테이션 내에는 마찬가지로 강조표시, 그리기, 직선, 도형, 지우개, 텍스트툴, 그리고 레이저를 사용가능한 마우스로 끌어서 옮길 수 있는 조작 도구창이 존재)", "레이저는 프리젠테이션중에만 사용 가능하며 L키로 생성/제거 가능", "이미지 버튼 우측에 C단축키로 메모 생성기능", "메모는 위치이동 및 크기조절 가능, 다중줄 글쓰기 가능, 접기 가능, 글씨 크기조절 가능", "ppt를 pdf로 가져오기 가능하도록 개선", "페이지 그룹화를 통한 계층관리 가능하도록 개선", "편집기록을 가진 프로젝트 파일인 mpdf확장자로 내보내기&불러오기 기능 추가", "(저장 및 다른이름으로 저장에 옵션 표시- pdf of mpdf) 확장자가 달라도 일반 저장의 기본옵션은 덮어쓰기", "텍스트에 채우기 옵션 추가 (기본 투명), 도형에 채우기 옵션 추가 (기본 투명, 투명도 조절 가능)", "페이지 넘기기 단축키에 Pg Up 과 Pg Down도 추가", "각 도구의 색깔은 그림판 팔레트 UI처럼 줄바꿈 이용, 사용자 지정 색상은 크기 증가, 스포이드버튼도 추가", "프로그램 내의 황색은 #dbbe43로, 배경의 어두운 색은 좀 더 무채색에 가깝게 변경"], "d": "2026.10.04"}, {"v": "beta 0.0.2", "items": ["전반적인 테마 변경, 개선 항목: 글자의 폰트 및 굵기, 기울임꼴 추가,", "화면맞춤 버튼 하단에 추가", "처음 저장버튼 누를때 파일을 불러온 경로에 자동 덮어씌우기 개선", "프로그램 테마색깔 황색으로 변경", "페이지 패널 버튼 좌측에 아이콘 추가, 패널 버튼과 거리 두기", "자 툴을 직선 그리기 툴로 변경", "펜 및 직선 그리기 툴 사용 시 붓 영역 화면 내에 표시", "펜 및 직선 그리기 툴 팔레트에 파스텔톤의 색상 추가", "강조표시는 직선형, 붓형 선택 가능하게 개선", "상단 툴을 분리 ( 글자선택과 개체 | 강조표시, 그리기, 직선 | 도형, 지우개, 텍스트 | 붙여넣기, 이미지 )", "각각의 버튼에 단축키 부여 ( 1, 2 | q, w, e | a, s, d | z, x )"], "d": "2026.10.04"}];
 const setw = $('#setw');
 /* v0.11.6 설정 · 계정 · 테마 스토어 창이 열리고 닫힐 때 좌우 광고를 맞춰요 */
 { let t = 0; const q = () => { clearTimeout(t); t = setTimeout(() => { try { adRailSync(); } catch (e) { /* 무시 */ } }, 120); };
@@ -12102,11 +12557,17 @@ const toolRun = t => () => { if (state.present) { if (PRES_TOOLS.includes(t)) pr
 const clickRun = sel => () => { $(sel).click(); };
 const SC_LIST = [
   { id: 'tool.select', label: '선택', group: '도구', def: 'Digit1', doc: 1, run: toolRun('select') },
-  { id: 'tool.highlight', label: '강조표시', group: '도구', def: 'KeyQ', doc: 1, pres: 1, run: toolRun('highlight') },
-  { id: 'tool.pen', label: '그리기', group: '도구', def: 'KeyW', doc: 1, pres: 1, run: toolRun('pen') },
-  { id: 'tool.line', label: '직선 그리기', group: '도구', def: 'KeyE', doc: 1, pres: 1, run: toolRun('line') },
-  { id: 'tool.eraser', label: '지우개', group: '도구', def: 'KeyR', doc: 1, pres: 1, run: toolRun('eraser') },
-  { id: 'tool.mosaic', label: '모자이크', group: '도구', def: 'KeyG', doc: 1, run: toolRun('mosaic') },
+  { id: 'tool.highlight', label: '강조표시', group: '도구', def: 'Digit2', doc: 1, pres: 1, run: toolRun('highlight') },
+  { id: 'tool.pen', label: '그리기', group: '도구', def: 'Digit3', doc: 1, pres: 1, run: toolRun('pen') },
+  { id: 'tool.line', label: '직선 그리기', group: '도구', def: 'Digit4', doc: 1, pres: 1, run: toolRun('line') },
+  { id: 'tool.eraser', label: '지우개', group: '도구', def: 'Digit5', doc: 1, pres: 1, run: toolRun('eraser') },
+  { id: 'tool.mosaic', label: '모자이크', group: '도구', def: 'Digit6', doc: 1, run: toolRun('mosaic') },
+  { id: 'gz.hand', label: '화면 이동 (손 도구)', group: '변형', def: 'KeyQ', doc: 1, run: () => gzSet('hand') },
+  { id: 'gz.move', label: '이동 도구', group: '변형', def: 'KeyW', doc: 1, run: () => gzSet('move') },
+  { id: 'gz.rotate', label: '회전 도구', group: '변형', def: 'KeyE', doc: 1, run: () => gzSet('rotate') },
+  { id: 'gz.scale', label: '크기 조절 도구', group: '변형', def: 'KeyR', doc: 1, run: () => gzSet('scale') },
+  { id: 'gz.rect', label: '사각형 변형 도구', group: '변형', def: 'KeyT', doc: 1, run: () => gzSet('rect') },
+  { id: 'gz.all', label: '통합 변형 도구', group: '변형', def: 'KeyY', doc: 1, run: () => gzSet('all') },
   { id: 'tool.shape', label: '도형 삽입', group: '도구', def: 'KeyA', doc: 1, pres: 1, run: toolRun('shape') },
   { id: 'tool.text', label: '텍스트 삽입', group: '도구', def: 'KeyS', doc: 1, pres: 1, run: toolRun('text') },
   { id: 'tool.link', label: '링크', group: '도구', def: 'KeyD', doc: 1, run: toolRun('link') },
@@ -12156,9 +12617,10 @@ function comboOf(e) {
 const BLOCKED_KEYS = new Set(['Escape', 'Tab', 'Enter', 'Backspace', 'Ctrl+KeyC', 'Ctrl+KeyV', 'Ctrl+KeyX', 'Ctrl+KeyA', 'Ctrl+KeyW', 'Ctrl+KeyT', 'Ctrl+KeyN', 'Ctrl+KeyR', 'Ctrl+KeyQ', 'Ctrl+Shift+KeyI', 'Alt+F4', 'F5', 'F11', 'F12']);
 
 /* 버튼의 툴팁과 단축키 표시를 현재 설정에 맞춰 갱신 */
-const HINT_BTNS = [['.tool[data-tool="select"]', 'tool.select'], ['.tool[data-tool="highlight"]', 'tool.highlight'], ['.tool[data-tool="pen"]', 'tool.pen'], ['.tool[data-tool="line"]', 'tool.line'], ['.tool[data-tool="shape"]', 'tool.shape'], ['.tool[data-tool="eraser"]', 'tool.eraser'], ['.tool[data-tool="text"]', 'tool.text'], ['.tool[data-tool="region"]', 'tool.region'],
+const HINT_BTNS = [['.tool[data-tool="select"]', 'tool.select'], ['.tool[data-tool="mosaic"]', 'tool.mosaic'], ['.tool[data-tool="highlight"]', 'tool.highlight'], ['.tool[data-tool="pen"]', 'tool.pen'], ['.tool[data-tool="line"]', 'tool.line'], ['.tool[data-tool="shape"]', 'tool.shape'], ['.tool[data-tool="eraser"]', 'tool.eraser'], ['.tool[data-tool="text"]', 'tool.text'], ['.tool[data-tool="region"]', 'tool.region'],
   ['#pasteBtn', 'ins.paste'], ['.tool[data-tool="link"]', 'tool.link'], ['#tableBtn', 'ins.table'], ['#imageBtn', 'ins.image'], ['#memoBtn', 'ins.memo'], ['#micBtn', 'ins.mic'], ['#undoBtn', 'edit.undo'], ['#redoBtn', 'edit.redo'], ['#printBtn', 'file.print'], ['#openBtn', 'file.open'], ['#saveBtn', 'file.save'], ['#saveAsBtn', 'file.saveas'], ['#presentBtn', 'view.present'], ['#setBtn', 'view.settings'], ['#sidebarBtn', 'view.panel'], ['#themeBtn', 'view.theme']];
 function applyHints() {
+  try { if (window.gzTips) window.gzTips(); } catch (e) { /* 무시 */ }
   for (const [sel, id] of HINT_BTNS) {
     const el = $(sel); if (!el) continue;
     if (el.dataset.t0 === undefined) el.dataset.t0 = (el.getAttribute('title') || '').replace(/\s*\([^()]*\)\s*$/, '');
@@ -12219,7 +12681,7 @@ function tutSteps(mob) {
   const open = `<div class="ti"><div class="row"><div class="bt pri">${svg('folder')}파일 열기</div><div class="bt">${svg('filePlus')}빈 문서</div>${mob ? '' : `<div class="bt">${svg('merge')}파일 병합</div>`}</div><div class="thint">${mob ? 'PDF · PPTX · HWP · DOCX · PNG 파일을 열 수 있어요' : 'PDF · PPTX · HWP · DOCX · PNG를 끌어다 놓거나, 캡처한 이미지를 <b>Ctrl+V</b>로 바로 열어요'}</div></div>`;
   const pagePc = `<div class="ti"><div class="ti-flip"><div class="th"><s></s><s></s><s></s></div><div class="pg"><i><em></em><em></em><em class="h"></em><em></em><u>1</u></i><i><em></em><em class="h"></em><em></em><em></em><u>2</u></i><i><em></em><em></em><em></em><em class="h"></em><u>3</u></i></div></div></div>`;
   const pageMob = `<div class="ti"><div class="ti-swipe"><div class="ph"><i><em></em><em></em><em></em><em></em></i><i class="b"><em></em><em></em><em></em></i></div><div class="fg"></div></div></div>`;
-  const toolPc = `<div class="ti"><div class="ti-tool">${gp([tl('highlighter', '강조', 'Q', 1), tl('pen', '그리기', 'W'), tl('line', '직선', 'E'), tl('eraser', '지우개', 'R')])}${gp([tl('shapes', '도형', 'A'), tl('type', '텍스트', 'S'), tl('link', '링크', 'D'), tl('table', '표', 'F')])}${gp([tl('region', '영역', 'Z'), tl('image', '이미지', 'X'), tl('memo', '메모', 'C'), tl('mic', '음성', 'V')])}</div><div class="thint">키보드 한 줄이 한 묶음이에요 — <b>QWER · ASDF · ZXCV</b></div></div>`;
+  const toolPc = `<div class="ti"><div class="ti-tool">${gp([tl('highlighter', '강조', '2', 1), tl('pen', '그리기', '3'), tl('line', '직선', '4'), tl('eraser', '지우개', '5')])}${gp([tl('shapes', '도형', 'A'), tl('type', '텍스트', 'S'), tl('link', '링크', 'D'), tl('table', '표', 'F')])}${gp([tl('region', '영역', 'Z'), tl('image', '이미지', 'X'), tl('memo', '메모', 'C'), tl('mic', '음성', 'V')])}</div><div class="thint">키보드 한 줄이 한 묶음이에요 — <b>QWER · ASDF · ZXCV</b></div></div>`;
   const toolMob = `<div class="ti"><div class="ti-tool m">${tl('highlighter', '강조', '', 1)}${tl('pen', '그리기')}${tl('line', '직선')}${tl('shapes', '도형')}${tl('type', '텍스트')}${tl('dots', '더보기')}</div><div class="thint" style="display:flex;align-items:center;justify-content:center;gap:6px">${svg('chevD').replace('<svg', '<svg width="16" height="16"')} 눌러서 도구 모음을 접고 펼 수 있어요</div></div>`;
   const layer = `<div class="ti"><div class="ti-lay"><div class="ly new">${svg('highlighter')}<span class="dot" style="background:#ffe14d"></span><span class="nm">강조표시 1</span><span class="sp"></span>${svg('eye')}${svg('trash')}</div><div class="ly">${svg('pen')}<span class="dot" style="background:#ef4444"></span><span class="nm">그리기 1</span><span class="sp"></span>${svg('eye')}${svg('trash')}</div><div class="ly hid">${svg('type')}<span class="dot" style="background:#60a5fa"></span><span class="nm">텍스트 1</span><span class="sp"></span>${svg('eyeOff')}${svg('trash')}</div></div><div class="thint">눈 아이콘으로 숨기고, 휴지통으로 지워요</div></div>`;
   const note = `<div class="ti"><div class="ti-note"><div class="pgm"><em></em><em></em><em></em><em></em><div class="memo">여기 숫자 다시 확인!</div></div>${mob ? '' : `<div class="nt"><div class="tg"><b class="on">MD</b><b>TXT</b></div><h5>회의 메모</h5><span>• 서식 보기로 바로 확인<br>• 원문과 번갈아 볼 수 있어요</span></div>`}</div></div>`;
@@ -12643,6 +13105,12 @@ let LANG = (() => { const v = safeStore.getItem('meowLang'); return LANGS.some(l
 [["en",{"영역 안쪽을 끌어 옮기고, 가장자리 8개의 점을 끌어 늘리거나 크기를 바꿔요 (Shift: 비율 유지). Delete: 삭제 · Ctrl+X/C/V":"Drag inside the region to move it, or drag the 8 edge points to stretch or resize (Shift: keep proportions). Delete: delete · Ctrl+X/C/V","영역 안쪽만 잘라 옮기기·복사":"Cut, move or copy only what's inside the region","디지털화 중… ({0}/{1}쪽)":"Digitizing… (page {0}/{1})","디지털화 중…":"Digitizing…","공개":"Public","프로젝트":"Project","채팅 메시지":"Chat message","광고 제거, PDF 압축, PPTX 내보내기, 음성 녹음 및 MP3 내보내기, 메모, 표 삽입, 전체 페이지 디지털화, 멀티작업(계산기 · 번역 · 사전), 페이지 번역, 개발자 콘솔, 프리미엄 테마":"Ad removal, PDF compression, PPTX export, voice recording and MP3 export, memos, table insertion, all-page digitize, Multitask (calculator · translate · dictionary), page translation, developer console, Premium themes","사용 · 압축 · PPTX 내보내기 · 표 · 프리미엄/커스텀 테마 · 멀티작업":"· compression · PPTX export · tables · Premium/custom themes · Multitask","{0}쪽을 PNG로 만들어 ZIP 한 개로 내보냈어요.":"Exported {0} pages as PNGs in a single ZIP.","docx로 내보냈어요. 각 쪽이 쪽 크기 그대로 이미지로 들어가요.":"Exported to docx. Each page goes in as an image at its original page size.","docx로 내보냈어요. 글자는 원래 자리의 글상자로, 이미지 · 도형 · 배경은 그대로 담겼어요. (글자가 없는 {0}쪽은 이미지로만 들어가요)":"Exported to docx. Text is in text boxes at its original spots, and images · shapes · backgrounds are kept as is. ({0} pages without text are included as images only)","HWPX(한글)로 내보냈어요. 쪽 크기 · 가로/세로 방향은 맞췄고, 글자만 담기고 그림·도형은 빠져요. {0}":"Exported to HWPX (Hangul). Page size and orientation are matched; only text is included, without images or shapes. {0}","HWPX(한글)로 내보냈어요. 쪽 크기 · 가로/세로 방향은 맞췄고, 글자만 담기고 그림·도형은 빠져요. (글자가 없는 {0}쪽은 빈 쪽으로 들어가요) {1}":"Exported to HWPX (Hangul). Page size and orientation are matched; only text is included, without images or shapes. ({0} pages without text are included as blank pages) {1}","선택한 페이지(선택이 없으면 전체)를 왼쪽으로 90° 회전":"Rotate the selected pages (all if none) 90° left","선택한 페이지(선택이 없으면 전체)를 오른쪽으로 90° 회전":"Rotate the selected pages (all if none) 90° right","왼쪽으로 회전":"Rotate left","오른쪽으로 회전":"Rotate right","왼쪽 회전":"Rotate left","오른쪽 회전":"Rotate right","{0}쪽을 오른쪽으로 회전했어요.":"Rotated {0} pages to the right.","{0}쪽을 왼쪽으로 회전했어요.":"Rotated {0} pages to the left.","화면 위쪽":"At the top of the screen, the","위쪽의":"Press the","다음 쪽으로 넘겨요. 두 손가락으로 벌리면 확대, 아래쪽":"to go to the next page. Spread two fingers to zoom, or use the","버튼이나 쪽 번호로도 이동해요.":"buttons or the page number at the bottom.","하거나 마우스 휠로 스크롤해서 넘겨요. 위쪽 입력칸에":"or scroll with the mouse wheel to turn pages. In the box at the top, type a","그린 것 · 도형 · 글자는 오른쪽":"Drawings, shapes and text go into the right-hand","는 오른쪽에서 마크다운(MD)이나 텍스트(TXT)로 쓰는 필기장이에요.":"is a notebook on the right for writing in Markdown (MD) or text (TXT).","한 쪽 전체 보기":"Fit page","이 사용자":"this user","신고 삭제":"Delete report","영구히":"permanently","“{0}”을 {1}쪽으로 가져왔어요.":"Imported “{0}” as {1} pages.","DOCX {0}쪽을 현재 문서에 삽입했어요.":"Inserted {0} DOCX pages into the current document.","DOCX를 {0}쪽으로 가져왔어요. 서식을 읽지 못해 글자만 가져왔어요.":"Imported the DOCX as {0} pages. Formatting couldn't be read, so only the text was imported.","DOCX를 {0}쪽으로 가져왔어요. 글자 크기 · 줄 간격 · 표 · 그림이 반영되고, 글자는 개체로 수정할 수 있어요.":"Imported the DOCX as {0} pages. Font sizes · line spacing · tables · images are applied, and the text can be edited as objects.","방 정보":"Room info","(없어진 방)":"(deleted room)","{0} · 대상 {1}":"{0} · target {1}"}],["ja",{"영역 안쪽을 끌어 옮기고, 가장자리 8개의 점을 끌어 늘리거나 크기를 바꿔요 (Shift: 비율 유지). Delete: 삭제 · Ctrl+X/C/V":"範囲の内側をドラッグして移動し、端の8つの点をドラッグして伸ばしたりサイズを変えたりします(Shift: 比率維持)。Delete: 削除 · Ctrl+X/C/V","영역 안쪽만 잘라 옮기기·복사":"範囲の内側だけを切り取って移動・コピー","디지털화 중… ({0}/{1}쪽)":"デジタル化中… ({0}/{1}ページ)","디지털화 중…":"デジタル化中…","공개":"公開","프로젝트":"プロジェクト","채팅 메시지":"チャットメッセージ","광고 제거, PDF 압축, PPTX 내보내기, 음성 녹음 및 MP3 내보내기, 메모, 표 삽입, 전체 페이지 디지털화, 멀티작업(계산기 · 번역 · 사전), 페이지 번역, 개발자 콘솔, 프리미엄 테마":"広告の削除、PDF圧縮、PPTX書き出し、音声録音とMP3書き出し、メモ、表の挿入、全ページのデジタル化、マルチタスク(電卓・翻訳・辞書)、ページ翻訳、開発者コンソール、プレミアムテーマ","사용 · 압축 · PPTX 내보내기 · 표 · 프리미엄/커스텀 테마 · 멀티작업":"· 圧縮 · PPTX書き出し · 表 · プレミアム/カスタムテーマ · マルチタスク","{0}쪽을 PNG로 만들어 ZIP 한 개로 내보냈어요.":"{0}ページをPNGにして1つのZIPで書き出しました。","docx로 내보냈어요. 각 쪽이 쪽 크기 그대로 이미지로 들어가요.":"docxで書き出しました。各ページがページサイズのまま画像として入ります。","docx로 내보냈어요. 글자는 원래 자리의 글상자로, 이미지 · 도형 · 배경은 그대로 담겼어요. (글자가 없는 {0}쪽은 이미지로만 들어가요)":"docxで書き出しました。文字は元の位置のテキストボックスに、画像・図形・背景はそのまま入っています。(文字のない{0}ページは画像だけで入ります)","HWPX(한글)로 내보냈어요. 쪽 크기 · 가로/세로 방향은 맞췄고, 글자만 담기고 그림·도형은 빠져요. {0}":"HWPX(ハングル)で書き出しました。ページサイズ・縦横の向きは合わせ、文字だけが入り、画像・図形は含まれません。{0}","HWPX(한글)로 내보냈어요. 쪽 크기 · 가로/세로 방향은 맞췄고, 글자만 담기고 그림·도형은 빠져요. (글자가 없는 {0}쪽은 빈 쪽으로 들어가요) {1}":"HWPX(ハングル)で書き出しました。ページサイズ・縦横の向きは合わせ、文字だけが入り、画像・図形は含まれません。(文字のない{0}ページは空白ページで入ります) {1}","선택한 페이지(선택이 없으면 전체)를 왼쪽으로 90° 회전":"選択したページ(選択がなければ全体)を左に90°回転","선택한 페이지(선택이 없으면 전체)를 오른쪽으로 90° 회전":"選択したページ(選択がなければ全体)を右に90°回転","왼쪽으로 회전":"左に回転","오른쪽으로 회전":"右に回転","왼쪽 회전":"左回転","오른쪽 회전":"右回転","{0}쪽을 오른쪽으로 회전했어요.":"{0}ページを右に回転しました。","{0}쪽을 왼쪽으로 회전했어요.":"{0}ページを左に回転しました。","화면 위쪽":"画面上部の","위쪽의":"上部の","다음 쪽으로 넘겨요. 두 손가락으로 벌리면 확대, 아래쪽":"次のページへめくります。2本指で広げると拡大、下の","버튼이나 쪽 번호로도 이동해요.":"ボタンやページ番号でも移動できます。","하거나 마우스 휠로 스크롤해서 넘겨요. 위쪽 입력칸에":"するか、マウスホイールでスクロールしてめくります。上の入力欄に","그린 것 · 도형 · 글자는 오른쪽":"描いたもの・図形・文字は右の","는 오른쪽에서 마크다운(MD)이나 텍스트(TXT)로 쓰는 필기장이에요.":"は右側でマークダウン(MD)やテキスト(TXT)で書くノートです。","한 쪽 전체 보기":"1ページ全体を表示","이 사용자":"このユーザー","신고 삭제":"通報の削除","영구히":"永久に","“{0}”을 {1}쪽으로 가져왔어요.":"「{0}」を{1}ページとして取り込みました。","DOCX {0}쪽을 현재 문서에 삽입했어요.":"DOCXの{0}ページを現在の文書に挿入しました。","DOCX를 {0}쪽으로 가져왔어요. 서식을 읽지 못해 글자만 가져왔어요.":"DOCXを{0}ページとして取り込みました。書式を読み取れなかったため、文字だけを取り込みました。","DOCX를 {0}쪽으로 가져왔어요. 글자 크기 · 줄 간격 · 표 · 그림이 반영되고, 글자는 개체로 수정할 수 있어요.":"DOCXを{0}ページとして取り込みました。文字サイズ・行間・表・画像が反映され、文字はオブジェクトとして修正できます。","방 정보":"ルーム情報","(없어진 방)":"(なくなったルーム)","{0} · 대상 {1}":"{0} · 対象 {1}"}],["zh",{"영역 안쪽을 끌어 옮기고, 가장자리 8개의 점을 끌어 늘리거나 크기를 바꿔요 (Shift: 비율 유지). Delete: 삭제 · Ctrl+X/C/V":"拖动区域内部可移动，拖动边缘的 8 个点可拉伸或调整大小(Shift:保持比例)。Delete:删除 · Ctrl+X/C/V","영역 안쪽만 잘라 옮기기·복사":"仅剪切 · 移动 · 复制区域内部","디지털화 중… ({0}/{1}쪽)":"数字化中… (第 {0}/{1} 页)","디지털화 중…":"数字化中…","공개":"公开","프로젝트":"项目","채팅 메시지":"聊天消息","광고 제거, PDF 압축, PPTX 내보내기, 음성 녹음 및 MP3 내보내기, 메모, 표 삽입, 전체 페이지 디지털화, 멀티작업(계산기 · 번역 · 사전), 페이지 번역, 개발자 콘솔, 프리미엄 테마":"去广告、PDF 压缩、PPTX 导出、语音录制及 MP3 导出、便签、插入表格、全部页面数字化、多任务(计算器 · 翻译 · 词典)、页面翻译、开发者控制台、高级版主题","사용 · 압축 · PPTX 내보내기 · 표 · 프리미엄/커스텀 테마 · 멀티작업":"· 压缩 · PPTX 导出 · 表格 · 高级版/自定义主题 · 多任务","{0}쪽을 PNG로 만들어 ZIP 한 개로 내보냈어요.":"已将 {0} 页转为 PNG 并打包为一个 ZIP 导出。","docx로 내보냈어요. 각 쪽이 쪽 크기 그대로 이미지로 들어가요.":"已导出为 docx。每页都按原页面大小以图片形式放入。","docx로 내보냈어요. 글자는 원래 자리의 글상자로, 이미지 · 도형 · 배경은 그대로 담겼어요. (글자가 없는 {0}쪽은 이미지로만 들어가요)":"已导出为 docx。文字放在原位置的文本框中，图片 · 形状 · 背景原样保留。(没有文字的 {0} 页仅以图片放入)","HWPX(한글)로 내보냈어요. 쪽 크기 · 가로/세로 방향은 맞췄고, 글자만 담기고 그림·도형은 빠져요. {0}":"已导出为 HWPX(韩文 Hangul)。已匹配页面大小 · 横竖方向，只包含文字，不含图片 · 形状。{0}","HWPX(한글)로 내보냈어요. 쪽 크기 · 가로/세로 방향은 맞췄고, 글자만 담기고 그림·도형은 빠져요. (글자가 없는 {0}쪽은 빈 쪽으로 들어가요) {1}":"已导出为 HWPX(韩文 Hangul)。已匹配页面大小 · 横竖方向，只包含文字，不含图片 · 形状。(没有文字的 {0} 页以空白页放入) {1}","선택한 페이지(선택이 없으면 전체)를 왼쪽으로 90° 회전":"将所选页面(未选择则全部)向左旋转 90°","선택한 페이지(선택이 없으면 전체)를 오른쪽으로 90° 회전":"将所选页面(未选择则全部)向右旋转 90°","왼쪽으로 회전":"向左旋转","오른쪽으로 회전":"向右旋转","왼쪽 회전":"向左旋转","오른쪽 회전":"向右旋转","{0}쪽을 오른쪽으로 회전했어요.":"已将 {0} 页向右旋转。","{0}쪽을 왼쪽으로 회전했어요.":"已将 {0} 页向左旋转。","화면 위쪽":"屏幕上方的","위쪽의":"点击上方的","다음 쪽으로 넘겨요. 두 손가락으로 벌리면 확대, 아래쪽":"即可翻到下一页。双指张开可放大，也可用下方的","버튼이나 쪽 번호로도 이동해요.":"按钮或页码跳转。","하거나 마우스 휠로 스크롤해서 넘겨요. 위쪽 입력칸에":"或用鼠标滚轮滚动翻页。也可在上方输入框中输入","그린 것 · 도형 · 글자는 오른쪽":"绘制内容 · 形状 · 文字会放进右侧的","는 오른쪽에서 마크다운(MD)이나 텍스트(TXT)로 쓰는 필기장이에요.":"是在右侧用 Markdown(MD)或文本(TXT)书写的笔记本。","한 쪽 전체 보기":"显示整页","이 사용자":"此用户","신고 삭제":"删除举报","영구히":"永久","“{0}”을 {1}쪽으로 가져왔어요.":"已将“{0}”导入为 {1} 页。","DOCX {0}쪽을 현재 문서에 삽입했어요.":"已将 DOCX 的 {0} 页插入当前文档。","DOCX를 {0}쪽으로 가져왔어요. 서식을 읽지 못해 글자만 가져왔어요.":"已将 DOCX 导入为 {0} 页。无法读取格式，只导入了文字。","DOCX를 {0}쪽으로 가져왔어요. 글자 크기 · 줄 간격 · 표 · 그림이 반영되고, 글자는 개체로 수정할 수 있어요.":"已将 DOCX 导入为 {0} 页。已反映字号 · 行距 · 表格 · 图片，文字可作为对象修改。","방 정보":"房间信息","(없어진 방)":"(已删除的房间)","{0} · 대상 {1}":"{0} · 对象 {1}"}]].forEach(([l,d])=>{I18N[l]=Object.assign(I18N[l]||{},d);});
 [["en",{"{0}점 · Lv.{1} · {2} · 새 최고 기록!":"{0} pts · Lv.{1} · {2} · New high score!","다음 무료 기간: {0}년 {1}월 {2}일":"Next free period: {1}/{2}/{0}"}],["ja",{"{0}점 · Lv.{1} · {2} · 새 최고 기록!":"{0}点 · Lv.{1} · {2} · 最高記録更新!","다음 무료 기간: {0}년 {1}월 {2}일":"次の無料期間: {0}年{1}月{2}日"}],["zh",{"{0}점 · Lv.{1} · {2} · 새 최고 기록!":"{0} 分 · Lv.{1} · {2} · 新纪录！","다음 무료 기간: {0}년 {1}월 {2}일":"下次免费期间: {0}年{1}月{2}日"}]].forEach(([l,d])=>{I18N[l]=Object.assign(I18N[l]||{},d);});
 [["en",{"페이지 {0}":"Page {0}","{0}쪽 · {1}개":"p. {0} · {1} objects","프리미엄 테마에서 문서 바깥 빈 배경을 누르면 나오는 클릭 효과와, 빠르게 여러 번 누르면 나오는 숨은 장면(이스터에그)을 켜고 끕니다.":"Turns on or off the click effects that appear when you tap the empty background outside the document in Premium themes, and the hidden scenes (easter eggs) that appear when you tap quickly several times."}],["ja",{"페이지 {0}":"ページ {0}","{0}쪽 · {1}개":"{0}ページ · {1}個","프리미엄 테마에서 문서 바깥 빈 배경을 누르면 나오는 클릭 효과와, 빠르게 여러 번 누르면 나오는 숨은 장면(이스터에그)을 켜고 끕니다.":"プレミアムテーマで文書の外の何もない背景を押すと出るクリック効果と、素早く何度も押すと出る隠しシーン(イースターエッグ)をオン・オフします。"}],["zh",{"페이지 {0}":"第 {0} 页","{0}쪽 · {1}개":"第 {0} 页 · {1} 个","프리미엄 테마에서 문서 바깥 빈 배경을 누르면 나오는 클릭 효과와, 빠르게 여러 번 누르면 나오는 숨은 장면(이스터에그)을 켜고 끕니다.":"开启或关闭在高级版主题中点击文档外空白背景时出现的点击效果,以及快速连续点击时出现的隐藏场景(彩蛋)。"}]].forEach(([l,d])=>{I18N[l]=Object.assign(I18N[l]||{},d);});
+/* v0.11.8 새 문구 번역: 유니티식 변형 도구 · 개체 회전 · 페이지 · 레이어 복제 · PNG 병합 */
+[["en",{"이 페이지 복제 (내용 포함)":"Duplicate this page (with content)","페이지 복제":"Duplicate page","화면 이동":"Pan view","회전":"Rotate","통합 변형 (이동 · 회전 · 크기)":"Transform (move · rotate · scale)","사각형 변형":"Rect transform","변형 도구":"Transform tools","끌어서 옮기기":"Drag to move","변형 옵션 (축 기준 · 회전 스냅)":"Transform options (axis space · rotation snap)","변형 옵션":"Transform options","이동 축 기준":"Move axis space","화면 기준 (전역)":"Screen (global)","개체 기준 (로컬)":"Object (local)","회전 15° 단위로 맞추기":"Snap rotation to 15°","선택한 개체 회전 초기화":"Reset rotation of selected object","Shift: 한 방향 고정 · 비율 · 15° · Ctrl: 회전 스냅 · 가운데 버튼 끌기: 화면 이동":"Shift: lock direction · keep ratio · 15° · Ctrl: rotation snap · middle-button drag: pan view","페이지를 복제했어요. Ctrl+Z로 되돌릴 수 있어요.":"Page duplicated. Press Ctrl+Z to undo.","{0} 사본":"{0} copy","{0} (사본)":"{0} (copy)","레이어를 복제했어요. (개체 {0}개)":"Layer duplicated. ({0} objects)","레이어 복제":"Duplicate layer","복제":"Duplicate","개체를 복제했어요.":"Object duplicated.","파일을 병합하는 중…":"Merging files…","파일 {0}개({1}쪽)를 병합했습니다.":"Merged {0} files ({1} pages).","병합하려면 PDF · PNG 파일을 2개 이상 선택해 주세요.":"Select 2 or more PDF or PNG files to merge.","병합 순서":"Merge order","화면 이동 (손 도구)":"Pan view (hand tool)","변형":"Transform","이동 도구":"Move tool","회전 도구":"Rotate tool","크기 조절 도구":"Scale tool","사각형 변형 도구":"Rect transform tool","통합 변형 도구":"Transform tool","화면 이동 ({0})":"Pan view ({0})","이동 ({0})":"Move ({0})","회전 ({0})":"Rotate ({0})","크기 조절 ({0})":"Scale ({0})","사각형 변형 ({0})":"Rect transform ({0})","통합 변형 (이동 · 회전 · 크기) ({0})":"Transform (move · rotate · scale) ({0})","직선 그리기 ({0})":"Draw line ({0})","지우개 ({0})":"Eraser ({0})","그리기 ({0})":"Draw ({0})","강조표시 ({0})":"Highlight ({0})","모자이크 — 드래그한 영역을 네모 블록으로 가려요 ({0})":"Mosaic — hide the dragged area with square blocks ({0})","레이어 {0} 사본":"Layer {0} copy","전체 페이지 관리에서 페이지를 돌리면 글자 · 이미지 · 도형 · 표 등 페이지의 내용도 모두 함께 통째로 회전":"Rotating pages in All pages now rotates everything on the page with it — text, images, shapes, tables and more","개체 회전 지원 — 돌린 개체도 선택 · 이동 · 크기 조절 · 글자 수정이 개체 방향 그대로 동작하고, PDF 저장 · 인쇄에도 반영":"Object rotation support — rotated objects can still be selected, moved, resized and edited along their own direction, and rotation is kept when saving to PDF and printing","파일 병합에 PNG 추가 — PNG+PNG · PNG+PDF를 원하는 순서로 한 문서로 병합 (PNG는 한 장이 한 페이지)":"Added PNG to Merge files — merge PNG+PNG or PNG+PDF into one document in any order (each PNG becomes one page)","페이지 패널 썸네일 메뉴(⋯)의 버튼이 눌리지 않던 문제 수정 — 보이지 않는 덮개가 클릭을 가로채던 것을 해결":"Fixed the buttons in the page panel thumbnail menu (⋯) not responding — an invisible overlay was swallowing the clicks","페이지 패널 썸네일 메뉴에 ‘페이지 복제’ 추가 (그린 것 · 메모 · 레이어까지 그대로 복사해 바로 뒤에), 버튼을 더 크고 잘 보이게, 마우스를 올리면 커지며 강조":"Added ‘Duplicate page’ to the thumbnail menu (copies drawings · memos · layers and places it right after), with larger, clearer buttons that grow and highlight on hover","자동 레이어 · 수동 레이어에 복제 추가 — 자동은 줄의 복제 버튼, 수동은 복제 버튼과 더보기 › 레이어 복제":"Added duplicate to auto and manual layers — the duplicate button on each row for auto layers, and the duplicate button or More › Duplicate layer for manual layers","PC: 유니티식 변형 도구 추가 — 화면 왼쪽 위의 도구 패널(끌어서 이동)에서 화면 이동(Q) · 이동(W) · 회전(E) · 크기 조절(R) · 사각형 변형(T) · 통합 변형(Y)":"PC: added Unity-style transform tools — a tool panel at the top left (drag to move it) with Pan (Q) · Move (W) · Rotate (E) · Scale (R) · Rect (T) · Transform (Y)","이미지를 선택하면 고른 도구에 맞춰 축 화살표(빨강 · 초록) · 평면 이동(파랑) · 회전 고리 · 크기 큐브 · 모서리 점이 나타나고, 마우스를 올린 축은 노랗게 강조 · 끄는 동안 각도와 크기를 표시":"Selecting an image shows gizmos for the chosen tool — axis arrows (red · green), plane move (blue), rotation rings, scale cubes and corner dots; the hovered axis turns yellow, and the angle and size are shown while dragging","변형 옵션(큐브 버튼): 이동 축 기준(화면 기준 / 개체 기준), 회전 15° 단위로 맞추기, 회전 초기화 — Shift: 한 방향 고정 · 비율 · 15°, Ctrl: 회전 스냅, 마우스 가운데 버튼 끌기: 화면 이동":"Transform options (cube button): move axis space (screen / object), snap rotation to 15°, reset rotation — Shift: lock one direction · keep ratio · 15°, Ctrl: rotation snap, drag with the middle mouse button: pan the view","도구 단축키 변경: 강조 2 · 그리기 3 · 직선 4 · 지우개 5 · 모자이크 6 (Q · W · E · R · T · Y는 변형 도구)":"Tool shortcuts changed: Highlight 2 · Draw 3 · Line 4 · Eraser 5 · Mosaic 6 (Q · W · E · R · T · Y are the transform tools)","채운 별 도형의 안쪽을 눌러도 선택되지 않던 문제 수정":"Fixed filled star shapes not being selectable by clicking inside them","선택 도구로 개체를 옮길 때 Shift를 누르면 가로 · 세로 한 방향으로만 이동":"Holding Shift while moving an object with the Select tool keeps it to one direction (horizontal or vertical)"}],["ja",{"이 페이지 복제 (내용 포함)":"このページを複製(内容を含む)","페이지 복제":"ページを複製","화면 이동":"画面移動","회전":"回転","통합 변형 (이동 · 회전 · 크기)":"統合変形(移動・回転・サイズ)","사각형 변형":"矩形変形","변형 도구":"変形ツール","끌어서 옮기기":"ドラッグで移動","변형 옵션 (축 기준 · 회전 스냅)":"変形オプション(軸の基準・回転スナップ)","변형 옵션":"変形オプション","이동 축 기준":"移動軸の基準","화면 기준 (전역)":"画面基準(グローバル)","개체 기준 (로컬)":"オブジェクト基準(ローカル)","회전 15° 단위로 맞추기":"回転を15°単位に合わせる","선택한 개체 회전 초기화":"選択したオブジェクトの回転をリセット","Shift: 한 방향 고정 · 비율 · 15° · Ctrl: 회전 스냅 · 가운데 버튼 끌기: 화면 이동":"Shift: 一方向に固定・比率・15° · Ctrl: 回転スナップ · 中ボタンでドラッグ: 画面移動","페이지를 복제했어요. Ctrl+Z로 되돌릴 수 있어요.":"ページを複製しました。Ctrl+Zで元に戻せます。","{0} 사본":"{0} のコピー","{0} (사본)":"{0}(コピー)","레이어를 복제했어요. (개체 {0}개)":"レイヤーを複製しました。(オブジェクト{0}個)","레이어 복제":"レイヤーを複製","복제":"複製","개체를 복제했어요.":"オブジェクトを複製しました。","파일을 병합하는 중…":"ファイルを結合中…","파일 {0}개({1}쪽)를 병합했습니다.":"{0}個のファイル({1}ページ)を結合しました。","병합하려면 PDF · PNG 파일을 2개 이상 선택해 주세요.":"結合するにはPDF・PNGファイルを2つ以上選んでください。","병합 순서":"結合の順番","화면 이동 (손 도구)":"画面移動(手のツール)","변형":"変形","이동 도구":"移動ツール","회전 도구":"回転ツール","크기 조절 도구":"サイズ調整ツール","사각형 변형 도구":"矩形変形ツール","통합 변형 도구":"統合変形ツール","화면 이동 ({0})":"画面移動 ({0})","이동 ({0})":"移動 ({0})","회전 ({0})":"回転 ({0})","크기 조절 ({0})":"サイズ調整 ({0})","사각형 변형 ({0})":"矩形変形 ({0})","통합 변형 (이동 · 회전 · 크기) ({0})":"統合変形(移動・回転・サイズ) ({0})","직선 그리기 ({0})":"直線を描く ({0})","지우개 ({0})":"消しゴム ({0})","그리기 ({0})":"描画 ({0})","강조표시 ({0})":"強調表示 ({0})","모자이크 — 드래그한 영역을 네모 블록으로 가려요 ({0})":"モザイク — ドラッグした範囲を四角いブロックで隠します ({0})","레이어 {0} 사본":"レイヤー {0} のコピー","전체 페이지 관리에서 페이지를 돌리면 글자 · 이미지 · 도형 · 표 등 페이지의 내용도 모두 함께 통째로 회전":"全ページ管理でページを回転すると、文字・画像・図形・表などページの内容もすべて一緒に丸ごと回転","개체 회전 지원 — 돌린 개체도 선택 · 이동 · 크기 조절 · 글자 수정이 개체 방향 그대로 동작하고, PDF 저장 · 인쇄에도 반영":"オブジェクトの回転に対応 — 回転したオブジェクトも選択・移動・サイズ調整・文字修正がオブジェクトの向きのまま動作し、PDF保存・印刷にも反映","파일 병합에 PNG 추가 — PNG+PNG · PNG+PDF를 원하는 순서로 한 문서로 병합 (PNG는 한 장이 한 페이지)":"ファイル結合にPNGを追加 — PNG+PNG・PNG+PDFを好きな順番で1つの文書に結合(PNGは1枚が1ページ)","페이지 패널 썸네일 메뉴(⋯)의 버튼이 눌리지 않던 문제 수정 — 보이지 않는 덮개가 클릭을 가로채던 것을 해결":"ページパネルのサムネイルメニュー(⋯)のボタンが押せない問題を修正 — 見えないカバーがクリックを横取りしていたのを解決","페이지 패널 썸네일 메뉴에 ‘페이지 복제’ 추가 (그린 것 · 메모 · 레이어까지 그대로 복사해 바로 뒤에), 버튼을 더 크고 잘 보이게, 마우스를 올리면 커지며 강조":"サムネイルメニューに「ページを複製」を追加(描いたもの・メモ・レイヤーまでそのままコピーしてすぐ後ろに)、ボタンを大きく見やすく、マウスを乗せると大きくなって強調","자동 레이어 · 수동 레이어에 복제 추가 — 자동은 줄의 복제 버튼, 수동은 복제 버튼과 더보기 › 레이어 복제":"自動レイヤー・手動レイヤーに複製を追加 — 自動は行の複製ボタン、手動は複製ボタンとその他 › レイヤーを複製","PC: 유니티식 변형 도구 추가 — 화면 왼쪽 위의 도구 패널(끌어서 이동)에서 화면 이동(Q) · 이동(W) · 회전(E) · 크기 조절(R) · 사각형 변형(T) · 통합 변형(Y)":"PC: Unity風の変形ツールを追加 — 画面左上のツールパネル(ドラッグで移動)で画面移動(Q)・移動(W)・回転(E)・サイズ調整(R)・矩形変形(T)・統合変形(Y)","이미지를 선택하면 고른 도구에 맞춰 축 화살표(빨강 · 초록) · 평면 이동(파랑) · 회전 고리 · 크기 큐브 · 모서리 점이 나타나고, 마우스를 올린 축은 노랗게 강조 · 끄는 동안 각도와 크기를 표시":"画像を選ぶと選んだツールに合わせて軸の矢印(赤・緑)・平面移動(青)・回転リング・サイズキューブ・角の点が表示され、マウスを乗せた軸は黄色く強調・ドラッグ中は角度とサイズを表示","변형 옵션(큐브 버튼): 이동 축 기준(화면 기준 / 개체 기준), 회전 15° 단위로 맞추기, 회전 초기화 — Shift: 한 방향 고정 · 비율 · 15°, Ctrl: 회전 스냅, 마우스 가운데 버튼 끌기: 화면 이동":"変形オプション(キューブボタン): 移動軸の基準(画面基準 / オブジェクト基準)、回転を15°単位に合わせる、回転のリセット — Shift: 一方向に固定・比率・15°、Ctrl: 回転スナップ、マウスの中ボタンでドラッグ: 画面移動","도구 단축키 변경: 강조 2 · 그리기 3 · 직선 4 · 지우개 5 · 모자이크 6 (Q · W · E · R · T · Y는 변형 도구)":"ツールのショートカットを変更: 強調 2・描画 3・直線 4・消しゴム 5・モザイク 6(Q・W・E・R・T・Yは変形ツール)","채운 별 도형의 안쪽을 눌러도 선택되지 않던 문제 수정":"塗りつぶした星の図形の内側を押しても選択されない問題を修正","선택 도구로 개체를 옮길 때 Shift를 누르면 가로 · 세로 한 방향으로만 이동":"選択ツールでオブジェクトを動かすときShiftを押すと、横・縦の一方向だけに移動"}],["zh",{"이 페이지 복제 (내용 포함)":"复制此页面(包含内容)","페이지 복제":"复制页面","화면 이동":"平移视图","회전":"旋转","통합 변형 (이동 · 회전 · 크기)":"综合变换(移动 · 旋转 · 缩放)","사각형 변형":"矩形变换","변형 도구":"变换工具","끌어서 옮기기":"拖动以移动","변형 옵션 (축 기준 · 회전 스냅)":"变换选项(轴基准 · 旋转吸附)","변형 옵션":"变换选项","이동 축 기준":"移动轴基准","화면 기준 (전역)":"屏幕基准(全局)","개체 기준 (로컬)":"对象基准(局部)","회전 15° 단위로 맞추기":"旋转按 15° 对齐","선택한 개체 회전 초기화":"重置所选对象的旋转","Shift: 한 방향 고정 · 비율 · 15° · Ctrl: 회전 스냅 · 가운데 버튼 끌기: 화면 이동":"Shift:锁定方向 · 保持比例 · 15° · Ctrl:旋转吸附 · 中键拖动：平移视图","페이지를 복제했어요. Ctrl+Z로 되돌릴 수 있어요.":"已复制页面。可按 Ctrl+Z 撤销。","{0} 사본":"{0} 副本","{0} (사본)":"{0}(副本)","레이어를 복제했어요. (개체 {0}개)":"已复制图层。({0} 个对象)","레이어 복제":"复制图层","복제":"复制","개체를 복제했어요.":"已复制对象。","파일을 병합하는 중…":"正在合并文件…","파일 {0}개({1}쪽)를 병합했습니다.":"已合并 {0} 个文件({1} 页)。","병합하려면 PDF · PNG 파일을 2개 이상 선택해 주세요.":"请选择 2 个或以上的 PDF · PNG 文件进行合并。","병합 순서":"合并顺序","화면 이동 (손 도구)":"平移视图(抓手工具)","변형":"变换","이동 도구":"移动工具","회전 도구":"旋转工具","크기 조절 도구":"缩放工具","사각형 변형 도구":"矩形变换工具","통합 변형 도구":"综合变换工具","화면 이동 ({0})":"平移视图 ({0})","이동 ({0})":"移动 ({0})","회전 ({0})":"旋转 ({0})","크기 조절 ({0})":"缩放 ({0})","사각형 변형 ({0})":"矩形变换 ({0})","통합 변형 (이동 · 회전 · 크기) ({0})":"综合变换(移动 · 旋转 · 缩放) ({0})","직선 그리기 ({0})":"绘制直线 ({0})","지우개 ({0})":"橡皮擦 ({0})","그리기 ({0})":"绘制 ({0})","강조표시 ({0})":"高亮 ({0})","모자이크 — 드래그한 영역을 네모 블록으로 가려요 ({0})":"马赛克 — 用方块遮盖拖选的区域 ({0})","레이어 {0} 사본":"图层 {0} 副本","전체 페이지 관리에서 페이지를 돌리면 글자 · 이미지 · 도형 · 표 등 페이지의 내용도 모두 함께 통째로 회전":"在全部页面管理中旋转页面时，文字 · 图片 · 形状 · 表格等页面内容也会整体一起旋转","개체 회전 지원 — 돌린 개체도 선택 · 이동 · 크기 조절 · 글자 수정이 개체 방향 그대로 동작하고, PDF 저장 · 인쇄에도 반영":"支持对象旋转 — 旋转后的对象也能按自身方向选择 · 移动 · 调整大小 · 修改文字，并会反映到 PDF 保存 · 打印中","파일 병합에 PNG 추가 — PNG+PNG · PNG+PDF를 원하는 순서로 한 문서로 병합 (PNG는 한 장이 한 페이지)":"合并文件新增 PNG — 可按任意顺序将 PNG+PNG · PNG+PDF 合并为一个文档(每张 PNG 为一页)","페이지 패널 썸네일 메뉴(⋯)의 버튼이 눌리지 않던 문제 수정 — 보이지 않는 덮개가 클릭을 가로채던 것을 해결":"修复页面面板缩略图菜单(⋯)中的按钮无法点击的问题 — 解决了不可见的遮罩拦截点击的情况","페이지 패널 썸네일 메뉴에 ‘페이지 복제’ 추가 (그린 것 · 메모 · 레이어까지 그대로 복사해 바로 뒤에), 버튼을 더 크고 잘 보이게, 마우스를 올리면 커지며 강조":"缩略图菜单新增“复制页面”(连同绘制内容 · 便签 · 图层一起复制并放在其后),按钮更大更醒目，鼠标悬停时放大并高亮","자동 레이어 · 수동 레이어에 복제 추가 — 자동은 줄의 복제 버튼, 수동은 복제 버튼과 더보기 › 레이어 복제":"自动图层 · 手动图层新增复制 — 自动图层用每行的复制按钮，手动图层用复制按钮或更多 › 复制图层","PC: 유니티식 변형 도구 추가 — 화면 왼쪽 위의 도구 패널(끌어서 이동)에서 화면 이동(Q) · 이동(W) · 회전(E) · 크기 조절(R) · 사각형 변형(T) · 통합 변형(Y)":"PC:新增 Unity 风格的变换工具 — 在屏幕左上角的工具面板(可拖动)中使用平移视图(Q) · 移动(W) · 旋转(E) · 缩放(R) · 矩形变换(T) · 综合变换(Y)","이미지를 선택하면 고른 도구에 맞춰 축 화살표(빨강 · 초록) · 평면 이동(파랑) · 회전 고리 · 크기 큐브 · 모서리 점이 나타나고, 마우스를 올린 축은 노랗게 강조 · 끄는 동안 각도와 크기를 표시":"选中图片时会按所选工具显示坐标轴箭头(红 · 绿) · 平面移动(蓝) · 旋转环 · 缩放方块 · 角点，鼠标悬停的轴会以黄色高亮，拖动时显示角度和尺寸","변형 옵션(큐브 버튼): 이동 축 기준(화면 기준 / 개체 기준), 회전 15° 단위로 맞추기, 회전 초기화 — Shift: 한 방향 고정 · 비율 · 15°, Ctrl: 회전 스냅, 마우스 가운데 버튼 끌기: 화면 이동":"变换选项(方块按钮):移动轴基准(屏幕 / 对象)、旋转按 15° 对齐、重置旋转 — Shift:锁定单一方向 · 保持比例 · 15°,Ctrl:旋转吸附，按住鼠标中键拖动：平移视图","도구 단축키 변경: 강조 2 · 그리기 3 · 직선 4 · 지우개 5 · 모자이크 6 (Q · W · E · R · T · Y는 변형 도구)":"工具快捷键变更：高亮 2 · 绘制 3 · 直线 4 · 橡皮擦 5 · 马赛克 6(Q · W · E · R · T · Y 为变换工具)","채운 별 도형의 안쪽을 눌러도 선택되지 않던 문제 수정":"修复点击已填充星形内部无法选中的问题","선택 도구로 개체를 옮길 때 Shift를 누르면 가로 · 세로 한 방향으로만 이동":"用选择工具移动对象时按住 Shift,只沿水平或垂直一个方向移动"}]].forEach(([l,d])=>{I18N[l]=Object.assign(I18N[l]||{},d);});
+/* v0.11.8 개체 선택 방식 (바운딩 박스 · 기즈모) 번역 */
+[["en",{"개체 선택 방식": "Object selection", "바운딩 박스": "Bounding box", "기즈모": "Gizmo", "도구 막대 접기": "Collapse toolbar", "도구 막대 펼치기": "Expand toolbar", "바운딩 박스: 모서리 · 변의 점을 끌어 크기를, 위쪽 회전 손잡이로 각도를 바꾸고 오른쪽 위 버튼으로 지워요. 기즈모(PC): 화면 이동(Q) · 이동(W) · 회전(E) · 크기 조절(R) · 사각형(T) · 통합(Y) 도구로 이미지를 다뤄요.": "Bounding box: drag the points on the corners and edges to resize, use the rotate handle on top to change the angle, and the top-right button to delete. Gizmo (PC): handle images with the Pan (Q) · Move (W) · Rotate (E) · Scale (R) · Rect (T) · Transform (Y) tools.", "바운딩 박스: 모서리 · 변의 점을 끌어 크기를, 위쪽 회전 손잡이로 각도를 바꾸고 오른쪽 위 버튼으로 지워요. 기즈모(PC): 화면 이동(Q) · 이동(W) · 회전(E) · 크기 조절(R) · 사각형(T) · 통합(Y) 도구로 이미지를 다뤄요. 모바일은 바운딩 박스로 고정돼요.": "Bounding box: drag the points on the corners and edges to resize, use the rotate handle on top to change the angle, and the top-right button to delete. Gizmo (PC): handle images with the Pan (Q) · Move (W) · Rotate (E) · Scale (R) · Rect (T) · Transform (Y) tools. On mobile it's fixed to bounding box.", "모바일은 바운딩 박스로 고정돼요.": "On mobile it's fixed to bounding box.", "개체 선택 방식 추가 (설정 › 화면 · 레이아웃) — 바운딩 박스(기본)와 기즈모(PC) 중에서 고르고, 모바일은 바운딩 박스로 고정": "Added Object selection (Settings › Display · Layout) — choose Bounding box (default) or Gizmo (PC); mobile is fixed to Bounding box", "바운딩 박스 모드: 모서리 · 변의 흰 점을 끌어 크기 조절, 위쪽 손잡이로 회전(Shift: 15° 단위), 오른쪽 위는 삭제 — 이미지 · 글자 · 묶음은 모서리를 끌면 비율 유지(Shift: 자유롭게), 펜 선도 통째로 회전": "Bounding box mode: drag the white points on the corners and edges to resize, the handle on top to rotate (Shift: 15° steps), and the top-right button deletes — images · text · groups keep their ratio when dragging a corner (Shift: free), and pen strokes rotate as a whole", "PC 기즈모 모드: 유니티식 변형 도구 — 화면 왼쪽 위의 도구 막대(끌어서 이동 · 접기 가능)에서 화면 이동(Q) · 이동(W) · 회전(E) · 크기 조절(R) · 사각형 변형(T) · 통합 변형(Y)": "PC Gizmo mode: Unity-style transform tools — a toolbar at the top left (drag to move, collapsible) with Pan (Q) · Move (W) · Rotate (E) · Scale (R) · Rect (T) · Transform (Y)", "기즈모 모드 조작 — Shift: 한 방향 고정 · 비율 · 15°, Ctrl: 회전 스냅, 마우스 가운데 버튼 끌기: 화면 이동": "Gizmo mode controls — Shift: lock one direction · keep ratio · 15°, Ctrl: rotation snap, drag with the middle mouse button: pan", "도구 단축키 변경: 강조 2 · 그리기 3 · 직선 4 · 지우개 5 · 모자이크 6 (Q · W · E · R · T · Y는 기즈모 모드의 변형 도구)": "Tool shortcuts changed: Highlight 2 · Draw 3 · Line 4 · Eraser 5 · Mosaic 6 (Q · W · E · R · T · Y are the Gizmo mode transform tools)"}],["ja",{"개체 선택 방식": "オブジェクトの選択方式", "바운딩 박스": "バウンディングボックス", "기즈모": "ギズモ", "도구 막대 접기": "ツールバーを折りたたむ", "도구 막대 펼치기": "ツールバーを展開", "바운딩 박스: 모서리 · 변의 점을 끌어 크기를, 위쪽 회전 손잡이로 각도를 바꾸고 오른쪽 위 버튼으로 지워요. 기즈모(PC): 화면 이동(Q) · 이동(W) · 회전(E) · 크기 조절(R) · 사각형(T) · 통합(Y) 도구로 이미지를 다뤄요.": "バウンディングボックス: 角・辺の点をドラッグしてサイズを、上の回転ハンドルで角度を変え、右上のボタンで削除します。ギズモ(PC): 画面移動(Q)・移動(W)・回転(E)・サイズ調整(R)・矩形(T)・統合(Y)ツールで画像を操作します。", "바운딩 박스: 모서리 · 변의 점을 끌어 크기를, 위쪽 회전 손잡이로 각도를 바꾸고 오른쪽 위 버튼으로 지워요. 기즈모(PC): 화면 이동(Q) · 이동(W) · 회전(E) · 크기 조절(R) · 사각형(T) · 통합(Y) 도구로 이미지를 다뤄요. 모바일은 바운딩 박스로 고정돼요.": "バウンディングボックス: 角・辺の点をドラッグしてサイズを、上の回転ハンドルで角度を変え、右上のボタンで削除します。ギズモ(PC): 画面移動(Q)・移動(W)・回転(E)・サイズ調整(R)・矩形(T)・統合(Y)ツールで画像を操作します。モバイルではバウンディングボックスに固定されます。", "모바일은 바운딩 박스로 고정돼요.": "モバイルではバウンディングボックスに固定されます。", "개체 선택 방식 추가 (설정 › 화면 · 레이아웃) — 바운딩 박스(기본)와 기즈모(PC) 중에서 고르고, 모바일은 바운딩 박스로 고정": "オブジェクトの選択方式を追加(設定 › 画面・レイアウト)— バウンディングボックス(既定)とギズモ(PC)から選べ、モバイルはバウンディングボックスに固定", "바운딩 박스 모드: 모서리 · 변의 흰 점을 끌어 크기 조절, 위쪽 손잡이로 회전(Shift: 15° 단위), 오른쪽 위는 삭제 — 이미지 · 글자 · 묶음은 모서리를 끌면 비율 유지(Shift: 자유롭게), 펜 선도 통째로 회전": "バウンディングボックスモード: 角・辺の白い点をドラッグしてサイズ調整、上のハンドルで回転(Shift: 15°単位)、右上は削除 — 画像・文字・グループは角をドラッグすると比率を維持(Shift: 自由に)、ペンの線も丸ごと回転", "PC 기즈모 모드: 유니티식 변형 도구 — 화면 왼쪽 위의 도구 막대(끌어서 이동 · 접기 가능)에서 화면 이동(Q) · 이동(W) · 회전(E) · 크기 조절(R) · 사각형 변형(T) · 통합 변형(Y)": "PCギズモモード: Unity風の変形ツール — 画面左上のツールバー(ドラッグで移動・折りたたみ可)で画面移動(Q)・移動(W)・回転(E)・サイズ調整(R)・矩形変形(T)・統合変形(Y)", "기즈모 모드 조작 — Shift: 한 방향 고정 · 비율 · 15°, Ctrl: 회전 스냅, 마우스 가운데 버튼 끌기: 화면 이동": "ギズモモードの操作 — Shift: 一方向に固定・比率・15°、Ctrl: 回転スナップ、マウスの中ボタンでドラッグ: 画面移動", "도구 단축키 변경: 강조 2 · 그리기 3 · 직선 4 · 지우개 5 · 모자이크 6 (Q · W · E · R · T · Y는 기즈모 모드의 변형 도구)": "ツールのショートカットを変更: 強調 2・描画 3・直線 4・消しゴム 5・モザイク 6(Q・W・E・R・T・Yはギズモモードの変形ツール)"}],["zh",{"개체 선택 방식": "对象选择方式", "바운딩 박스": "边界框", "기즈모": "Gizmo", "도구 막대 접기": "收起工具栏", "도구 막대 펼치기": "展开工具栏", "바운딩 박스: 모서리 · 변의 점을 끌어 크기를, 위쪽 회전 손잡이로 각도를 바꾸고 오른쪽 위 버튼으로 지워요. 기즈모(PC): 화면 이동(Q) · 이동(W) · 회전(E) · 크기 조절(R) · 사각형(T) · 통합(Y) 도구로 이미지를 다뤄요.": "边界框:拖动角和边上的点调整大小,用上方的旋转手柄改变角度,用右上角的按钮删除。Gizmo(PC):用平移视图(Q) · 移动(W) · 旋转(E) · 缩放(R) · 矩形(T) · 综合(Y)工具操作图片。", "바운딩 박스: 모서리 · 변의 점을 끌어 크기를, 위쪽 회전 손잡이로 각도를 바꾸고 오른쪽 위 버튼으로 지워요. 기즈모(PC): 화면 이동(Q) · 이동(W) · 회전(E) · 크기 조절(R) · 사각형(T) · 통합(Y) 도구로 이미지를 다뤄요. 모바일은 바운딩 박스로 고정돼요.": "边界框:拖动角和边上的点调整大小,用上方的旋转手柄改变角度,用右上角的按钮删除。Gizmo(PC):用平移视图(Q) · 移动(W) · 旋转(E) · 缩放(R) · 矩形(T) · 综合(Y)工具操作图片。移动端固定为边界框。", "모바일은 바운딩 박스로 고정돼요.": "移动端固定为边界框。", "개체 선택 방식 추가 (설정 › 화면 · 레이아웃) — 바운딩 박스(기본)와 기즈모(PC) 중에서 고르고, 모바일은 바운딩 박스로 고정": "新增对象选择方式(设置 › 显示 · 布局)— 可在边界框(默认)和 Gizmo(PC)之间选择,移动端固定为边界框", "바운딩 박스 모드: 모서리 · 변의 흰 점을 끌어 크기 조절, 위쪽 손잡이로 회전(Shift: 15° 단위), 오른쪽 위는 삭제 — 이미지 · 글자 · 묶음은 모서리를 끌면 비율 유지(Shift: 자유롭게), 펜 선도 통째로 회전": "边界框模式:拖动角和边上的白点调整大小,拖动上方手柄旋转(Shift:按 15°),右上角为删除 — 图片 · 文字 · 组合拖动角时保持比例(Shift:自由),笔迹也能整体旋转", "PC 기즈모 모드: 유니티식 변형 도구 — 화면 왼쪽 위의 도구 막대(끌어서 이동 · 접기 가능)에서 화면 이동(Q) · 이동(W) · 회전(E) · 크기 조절(R) · 사각형 변형(T) · 통합 변형(Y)": "PC Gizmo 模式:Unity 风格的变换工具 — 在屏幕左上角的工具栏(可拖动、可收起)中使用平移视图(Q) · 移动(W) · 旋转(E) · 缩放(R) · 矩形变换(T) · 综合变换(Y)", "기즈모 모드 조작 — Shift: 한 방향 고정 · 비율 · 15°, Ctrl: 회전 스냅, 마우스 가운데 버튼 끌기: 화면 이동": "Gizmo 模式操作 — Shift:锁定单一方向 · 保持比例 · 15°,Ctrl:旋转吸附,按住鼠标中键拖动:平移视图", "도구 단축키 변경: 강조 2 · 그리기 3 · 직선 4 · 지우개 5 · 모자이크 6 (Q · W · E · R · T · Y는 기즈모 모드의 변형 도구)": "工具快捷键变更:高亮 2 · 绘制 3 · 直线 4 · 橡皮擦 5 · 马赛克 6(Q · W · E · R · T · Y 为 Gizmo 模式的变换工具)"}]].forEach(([l,d])=>{I18N[l]=Object.assign(I18N[l]||{},d);});
+/* v0.11.8 기즈모 모든 개체 · 기울기 입력 번역 */
+[["en",{"기즈모 모드에서 개체(이미지 · 도형 · 글자 · 선 등)를 선택하면 고른 도구에 맞춰 축 화살표(빨강 · 초록) · 평면 이동(파랑) · 회전 고리 · 크기 큐브 · 모서리 점이 나타나고, 마우스를 올린 축은 노랗게 강조 · 끄는 동안 각도와 크기를 표시": "In Gizmo mode, selecting any object (image · shape · text · line, etc.) shows gizmos for the chosen tool — axis arrows (red · green), plane move (blue), rotation rings, scale cubes and corner dots; the hovered axis turns yellow, and the angle and size are shown while dragging", "옵션바에 ‘기울기’ 추가 — 도형 · 이미지 · 글자 · 표의 회전 각도를 숫자로 입력하거나 글자 위에서 좌우로 끌어 조절 (0–360°)": "Added ‘Tilt’ to the options bar — type the rotation angle of shapes · images · text · tables, or drag left and right on the label to adjust it (0–360°)", "기울기": "Tilt", "기울기 값": "Tilt value"}],["ja",{"기즈모 모드에서 개체(이미지 · 도형 · 글자 · 선 등)를 선택하면 고른 도구에 맞춰 축 화살표(빨강 · 초록) · 평면 이동(파랑) · 회전 고리 · 크기 큐브 · 모서리 점이 나타나고, 마우스를 올린 축은 노랗게 강조 · 끄는 동안 각도와 크기를 표시": "ギズモモードでオブジェクト(画像・図形・文字・線など)を選ぶと選んだツールに合わせて軸の矢印(赤・緑)・平面移動(青)・回転リング・サイズキューブ・角の点が表示され、マウスを乗せた軸は黄色く強調・ドラッグ中は角度とサイズを表示", "옵션바에 ‘기울기’ 추가 — 도형 · 이미지 · 글자 · 표의 회전 각도를 숫자로 입력하거나 글자 위에서 좌우로 끌어 조절 (0–360°)": "オプションバーに「傾き」を追加 — 図形・画像・文字・表の回転角度を数値で入力するか、ラベルの上で左右にドラッグして調整(0–360°)", "기울기": "傾き", "기울기 값": "傾きの値"}],["zh",{"기즈모 모드에서 개체(이미지 · 도형 · 글자 · 선 등)를 선택하면 고른 도구에 맞춰 축 화살표(빨강 · 초록) · 평면 이동(파랑) · 회전 고리 · 크기 큐브 · 모서리 점이 나타나고, 마우스를 올린 축은 노랗게 강조 · 끄는 동안 각도와 크기를 표시": "在 Gizmo 模式下选中对象(图片 · 形状 · 文字 · 线条等)时会按所选工具显示坐标轴箭头(红 · 绿) · 平面移动(蓝) · 旋转环 · 缩放方块 · 角点,鼠标悬停的轴会以黄色高亮,拖动时显示角度和尺寸", "옵션바에 ‘기울기’ 추가 — 도형 · 이미지 · 글자 · 표의 회전 각도를 숫자로 입력하거나 글자 위에서 좌우로 끌어 조절 (0–360°)": "选项栏新增“倾斜” — 可输入形状 · 图片 · 文字 · 表格的旋转角度,或在标签上左右拖动调整(0–360°)", "기울기": "倾斜", "기울기 값": "倾斜值"}]].forEach(([l,d])=>{I18N[l]=Object.assign(I18N[l]||{},d);});
 const i18n = (() => {
   const HG = /[가-힣]/, SKIP = '.textLayer,.trl,.trtip,.text-editor,textarea,input,script,style,.wtres,.wtext,[data-no-i18n]', SKIPA = '.textLayer,.trl,.trtip,script,style,[data-no-i18n]', ATTRS = ['title', 'aria-label', 'placeholder', 'alt'];
   const tpls = {}, nrm = t => t.replace(/\s+/g, ' ').trim();
@@ -12726,6 +13194,7 @@ function drawLayout(b) {
   <div class="setg"><h3>언어</h3><p class="setd">편집기에 표시되는 언어를 바꿉니다.</p><div class="segs" role="group" aria-label="Language">${LANGS.map(([k, n]) => `<button data-a="lang" data-v="${k}" class="${LANG === k ? 'on' : ''}"><span data-no-i18n>${n}</span></button>`).join('')}</div></div>
   <div class="setg"><h3>페이지 보기</h3><p class="setd">${mMode ? '휴대폰에서 페이지를 넘기는 방식입니다.' : 'PC에서 페이지를 보는 방식입니다.'}</p><div class="segs" role="group" aria-label="페이지 보기">${(mMode ? [['single', '한 페이지씩 (좌우로 넘기기)'], ['scroll', '세로로 넘기기']] : [['scroll', '연속 스크롤'], ['single', '한 페이지씩 보기']]).map(([k, n]) => `<button data-a="view" data-v="${k}" class="${(mMode ? (mScroll ? 'scroll' : 'single') : (pcSingle ? 'single' : 'scroll')) === k ? 'on' : ''}">${n}</button>`).join('')}</div>${mMode ? '' : `<p class="setd" style="margin-top:12px">한 페이지씩 보기에서 마우스 휠을 굴리면:</p><div class="segs" role="group" aria-label="한 페이지 보기 휠 동작">${[['pan', '화면 위아래로 이동'], ['page', '페이지 넘기기']].map(([k, n]) => `<button data-a="swheel" data-v="${k}" class="${swheelMode() === k ? 'on' : ''}">${n}</button>`).join('')}</div>`}</div>
   <div class="setg"><h3>패널 탭 표시</h3><p class="setd">오른쪽 패널 위쪽의 레이어 · 노트 · 멀티작업 · 공유작업 탭을 아이콘으로 보일지, 글자로 보일지 고릅니다.</p><div class="segs" role="group" aria-label="패널 탭 표시">${[['icon', '아이콘'], ['text', '텍스트']].map(([k, n]) => `<button data-a="ptabmode" data-v="${k}" class="${(ptabText() ? 'text' : 'icon') === k ? 'on' : ''}">${n}</button>`).join('')}</div></div>
+  <div class="setg"><h3>개체 선택 방식</h3><p class="setd">바운딩 박스: 모서리 · 변의 점을 끌어 크기를, 위쪽 회전 손잡이로 각도를 바꾸고 오른쪽 위 버튼으로 지워요. 기즈모(PC): 화면 이동(Q) · 이동(W) · 회전(E) · 크기 조절(R) · 사각형(T) · 통합(Y) 도구로 이미지를 다뤄요.${mMode ? ' 모바일은 바운딩 박스로 고정돼요.' : ''}</p><div class="segs" role="group" aria-label="개체 선택 방식">${[['bbox', '바운딩 박스'], ['gizmo', '기즈모']].map(([k, n]) => `<button data-a="selmode" data-v="${k}" class="${selMode() === k ? 'on' : ''}"${mMode && k === 'gizmo' ? ' disabled' : ''}>${n}</button>`).join('')}</div></div>
   <div class="setg"><h3>테마 배경 효과</h3><p class="setd">프리미엄 테마에서 문서 바깥 빈 배경을 누르면 나오는 클릭 효과와, 빠르게 여러 번 누르면 나오는 숨은 장면(이스터에그)을 켜고 끕니다.</p><div class="segs" role="group" aria-label="테마 배경 효과">${[['all', '모두 켜기'], ['hit', '클릭 효과만'], ['off', '모두 끄기']].map(([k, n]) => `<button data-a="eggmode" data-v="${k}" class="${eggMode() === k ? 'on' : ''}">${n}</button>`).join('')}</div></div>
   <div class="setg"><h3>페이지 이동 연출</h3><p class="setd">페이지를 넘기거나 이동할 때 부드러운 이동 효과를 보여줍니다. 끄면 즉시 이동해 더 빠르게 느껴집니다.</p><div class="segs" role="group" aria-label="페이지 이동 연출">${[['on', '켜기'], ['off', '끄기']].map(([k, n]) => `<button data-a="panim" data-v="${k}" class="${(pageAnim ? 'on' : 'off') === k ? 'on' : ''}">${n}</button>`).join('')}</div></div>
   <div class="setg"><h3>레이어 방식</h3><p class="setd">레이어를 개체마다 자동으로 만들지, 그림판처럼 직접 추가해 관리할지 고릅니다.</p><div class="segs" role="group" aria-label="레이어 방식">${[['auto', '자동 (개체마다)'], ['manual', '수동 (그림판형)']].map(([k, n]) => `<button data-a="lmode" data-v="${k}" class="${settings.layerMode === k ? 'on' : ''}">${n}</button>`).join('')}</div></div>
@@ -12928,6 +13397,7 @@ setw.addEventListener('click', async e => {
   else if (act === 'swheel') { safeStore.setItem('meowSingleWheel', v === 'page' ? 'page' : 'pan'); svReset(); renderSettings(); }
   else if (act === 'view') { if (mMode) { mScroll = v === 'scroll'; try { localStorage.setItem('meowViewMobile', mScroll ? 'scroll' : 'single'); } catch (e) { /* ignore */ } } else { pcSingle = v === 'single'; try { localStorage.setItem('meowViewPc', pcSingle ? 'single' : 'scroll'); } catch (e) { /* ignore */ } } applyView(); renderSettings(); }
   else if (act === 'ptabmode') { setPtabText(v === 'text'); renderSettings(); }
+  else if (act === 'selmode') { if (mMode) return; SELMODE = v === 'gizmo' ? 'gizmo' : 'bbox'; safeStore.setItem('meowSelMode', SELMODE); GZ.hand = false; GZ.hover = null; gzSync(); if (state.selected) drawOverlay(state.selected.pageId); renderSettings(); }
   else if (act === 'eggmode') { safeStore.setItem('meowEgg', v); if (v === 'off') { try { EGG.reset(); } catch (er) { /* 무시 */ } } renderSettings(); }
   else if (act === 'panim') { pageAnim = v !== 'off'; try { localStorage.setItem('meowPageAnim', pageAnim ? 'on' : 'off'); } catch (er) { /* ignore */ } renderSettings(); }
   else if (act === 'lmode') { setLayerMode(v); renderSettings(); }
