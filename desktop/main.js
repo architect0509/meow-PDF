@@ -16,7 +16,8 @@ const START = SITE + '/edit';
 const HOSTS = new Set(['www.meow-pdf.com', 'meow-pdf.com']);
 const APP_DIR = path.join(__dirname, 'app');
 const NET_ONLY = /^\/(api|payment|download|auth)(\/|$)|^\/version\.json$/;   // 늘 인터넷에서 받아요
-const DOWNLOAD = { win32: SITE + '/download/windows', darwin: SITE + '/download/mac', linux: SITE + '/download/linux' };
+const RELEASES = 'https://github.com/architect0509/meow-PDF/releases/latest';   // v1.0.2 자동 업데이트가 안 되면 릴리스 페이지를 열어요 (설치 파일 주소는 아직 없을 수 있어서)
+const DOWNLOAD = { win32: RELEASES, darwin: SITE + '/download/mac', linux: RELEASES };
 const STAY_HOSTS = /(^|\.)(meow-pdf\.com|tosspayments\.com|toss\.im)$/;   // 앱 창 안에서 열어 둘 주소 (결제 화면은 끝나면 돌아와요)
 const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.mjs': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.json': 'application/json; charset=utf-8', '.webmanifest': 'application/manifest+json', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.gif': 'image/gif', '.ico': 'image/x-icon', '.txt': 'text/plain; charset=utf-8', '.xml': 'application/xml', '.woff2': 'font/woff2', '.woff': 'font/woff', '.mp3': 'audio/mpeg', '.wasm': 'application/wasm' };
 
