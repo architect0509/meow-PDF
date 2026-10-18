@@ -1,0 +1,64 @@
+{
+  "name": "meow-pdf-desktop",
+  "productName": "Meow-PDF",
+  "version": "1.0.1",
+  "description": "Meow-PDF 데스크톱 앱 — 온라인 · 오프라인 종합 문서 편집기",
+  "author": "Meow-PDF <contact@meow-pdf.com>",
+  "homepage": "https://www.meow-pdf.com/",
+  "license": "UNLICENSED",
+  "private": true,
+  "main": "main.js",
+  "scripts": {
+    "prepare-app": "node scripts/prepare.js",
+    "start": "node scripts/prepare.js && electron .",
+    "dist": "node scripts/prepare.js && electron-builder --publish never",
+    "release": "node scripts/prepare.js && electron-builder --publish always"
+  },
+  "dependencies": {
+    "electron-updater": "^6.6.2"
+  },
+  "devDependencies": {
+    "electron": "^38.2.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.meowpdf.app",
+    "productName": "Meow-PDF",
+    "copyright": "© 2026 Meow-PDF",
+    "directories": { "output": "dist", "buildResources": "build" },
+    "files": ["main.js", "preload.js", "package.json", "build/icon.png", "app/**/*"],
+    "asar": true,
+    "win": {
+      "target": [{ "target": "nsis", "arch": ["x64"] }],
+      "icon": "build/icon.ico",
+      "artifactName": "Meow-PDF-Setup.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Meow-PDF",
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico",
+      "uninstallDisplayName": "Meow-PDF"
+    },
+    "mac": {
+      "target": [{ "target": "dmg", "arch": ["universal"] }],
+      "icon": "build/icon.png",
+      "category": "public.app-category.productivity",
+      "identity": "-",
+      "artifactName": "Meow-PDF-mac.${ext}"
+    },
+    "dmg": { "title": "Meow-PDF" },
+    "linux": {
+      "target": [{ "target": "AppImage", "arch": ["x64"] }],
+      "icon": "build/icon.png",
+      "category": "Office",
+      "synopsis": "PDF · 문서 편집기",
+      "artifactName": "Meow-PDF-linux.${ext}"
+    },
+    "publish": [{ "provider": "github", "releaseType": "release" }]
+  }
+}

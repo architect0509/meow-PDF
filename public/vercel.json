@@ -1,3 +1,40 @@
 {
-  "cleanUrls": true
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/download/windows",
+      "destination": "https://github.com/architect0509/meow-PDF/releases/latest/download/Meow-PDF-Setup.exe",
+      "permanent": false
+    },
+    {
+      "source": "/download/mac",
+      "destination": "https://github.com/architect0509/meow-PDF/releases/latest/download/Meow-PDF-mac.dmg",
+      "permanent": false
+    },
+    {
+      "source": "/download/linux",
+      "destination": "https://github.com/architect0509/meow-PDF/releases/latest/download/Meow-PDF-linux.AppImage",
+      "permanent": false
+    },
+    {
+      "source": "/download",
+      "destination": "/#download",
+      "permanent": false
+    }
+  ],
+  "headers": [
+    {
+      "source": "/version.json",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, max-age=0"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    }
+  ]
 }
