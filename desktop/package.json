@@ -58,7 +58,8 @@
       "shortcutName": "Meow-PDF",
       "installerIcon": "build/icon.ico",
       "uninstallerIcon": "build/icon.ico",
-      "uninstallDisplayName": "Meow-PDF"
+      "uninstallDisplayName": "Meow-PDF",
+      "include": "build/installer.nsh"
     },
     "mac": {
       "target": [
@@ -97,6 +98,22 @@
         "owner": "architect0509",
         "repo": "meow-PDF",
         "releaseType": "release"
+      }
+    ],
+    "fileAssociations": [
+      {
+        "ext": "pdf",
+        "name": "MeowPDF.pdf",
+        "description": "PDF 문서",
+        "mimeType": "application/pdf",
+        "role": "Editor"
+      },
+      {
+        "ext": "mpdf",
+        "name": "MeowPDF.mpdf",
+        "description": "Meow-PDF 문서",
+        "mimeType": "application/x-meow-pdf",
+        "role": "Editor"
       }
     ]
   },

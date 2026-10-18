@@ -1,7 +1,7 @@
 {
  "name": "Meow-PDF",
- "version": "v1.0.1",
- "date": "2026.10.18",
+ "version": "v1.0.2",
+ "date": "2026.10.19",
  "site": "https://www.meow-pdf.com/",
  "download": {
   "win": "https://www.meow-pdf.com/download/windows",
@@ -10,6 +10,44 @@
   "page": "https://www.meow-pdf.com/#download"
  },
  "history": [
+  {
+   "v": "v1.0.2",
+   "d": "2026.10.19",
+   "items": {
+    "ko": [
+     "화면 맞춤 상태에서 좌우 패널을 끌어 좁힐 때 캔버스가 덜덜 떨리던 문제 수정 — 끄는 동안에는 그대로 두고, 멈추거나 놓으면 한 번에 맞춰요",
+     "안내 문구 · 소개 페이지의 글자가 끌어도 선택되지 않게 바꿈 (입력칸 · PDF 글자 복사 · 노트 · 채팅 · 메일은 그대로 선택돼요)",
+     "공유 프로젝트 관리에서 공개 여부 · 고유 코드로 입장 · 장르 · 입장 기본 권한을 눌러도 화면에 바로 보이지 않던 문제 수정",
+     "앱 아이콘을 원래 고양이 아이콘으로 되돌림 (휴대폰 홈 화면 · PC 프로그램)",
+     "PC 프로그램: PDF · MPDF 파일에 Meow-PDF 파일 아이콘을 쓰고, 파일을 두 번 누르거나 앱 아이콘에 끌어 놓으면 Meow-PDF에서 열려요",
+     "PC 프로그램: Meow-PDF가 PDF 기본 연결 프로그램이 아니면 오른쪽 아래 ‘기본 연결 프로그램으로 설정해보세요!’ 창으로 알려 주고, 설정하기를 누르면 설정 화면을 열어요 (설정 › 버전 정보에서도 바꿀 수 있어요)"
+    ],
+    "en": [
+     "Fixed the canvas shaking when narrowing the side panels while fit to screen — it now stays put while you drag and fits once when you pause or let go",
+     "Guide text and intro page text no longer get selected when dragged (inputs, PDF text copying, notes, chat and mail can still be selected)",
+     "Fixed Visibility, Join by code, Genre and Default role in project management not updating on screen when clicked",
+     "Restored the original cat app icon (phone home screen · PC app)",
+     "PC app: PDF · MPDF files get the Meow-PDF file icon, and double-clicking a file or dropping it on the app icon opens it in Meow-PDF",
+     "PC app: if Meow-PDF isn't the default app for PDFs, a ‘Set it as your default app!’ window appears at the bottom right — Set up opens the settings screen (you can also change it in Settings › Version info)"
+    ],
+    "ja": [
+     "画面に合わせた状態で左右のパネルを狭めるとキャンバスががたがた揺れる問題を修正 — ドラッグ中はそのままにして、止めるか離すと一度で合わせます",
+     "案内文・紹介ページの文字はドラッグしても選択されないように変更(入力欄・PDFの文字のコピー・ノート・チャット・メールはそのまま選択できます)",
+     "共有プロジェクト管理で公開範囲・コードで参加・ジャンル・参加時の基本権限を押しても画面にすぐ反映されない問題を修正",
+     "アプリのアイコンを元の猫アイコンに戻しました(スマホのホーム画面・PCアプリ)",
+     "PCアプリ: PDF・MPDFファイルにMeow-PDFのファイルアイコンを使い、ファイルをダブルクリックするかアプリのアイコンにドロップするとMeow-PDFで開きます",
+     "PCアプリ: Meow-PDFがPDFの既定のアプリでない場合、右下の「既定のアプリに設定してみましょう!」ウィンドウでお知らせし、設定するを押すと設定画面を開きます(設定 › バージョン情報でも変更できます)"
+    ],
+    "zh": [
+     "修复在适应屏幕状态下拖动缩窄左右面板时画布抖动的问题 — 拖动时保持不变,停下或松开后一次性适配",
+     "提示文字和介绍页的文字拖动时不再被选中(输入框 · PDF 文字复制 · 笔记 · 聊天 · 邮件仍可选择)",
+     "修复共享项目管理中点击公开范围 · 用代码加入 · 类型 · 加入默认权限后界面没有立即更新的问题",
+     "应用图标恢复为原来的猫咪图标(手机主屏幕 · PC 程序)",
+     "PC 程序:PDF · MPDF 文件使用 Meow-PDF 文件图标,双击文件或拖到应用图标上即可在 Meow-PDF 中打开",
+     "PC 程序:如果 Meow-PDF 不是 PDF 的默认程序,会在右下角显示“设为默认打开程序吧!”窗口,点击设置即可打开设置界面(也可在设置 › 版本信息中更改)"
+    ]
+   }
+  },
   {
    "v": "v1.0.1",
    "d": "2026.10.18",
@@ -517,52 +555,6 @@
      "在好友窗口的好友列表中，正在进行好友可见项目的好友旁会显示“一起协作”按钮",
      "参与者界面隐藏保存 · 项目管理按钮，只显示“另存为”;观看者只能查看",
      "共享项目加入链接(…/edit?join=专属代码) — 可在项目管理窗口 · 协作面板中复制，收到的人打开并登录后即可直接加入(在允许通过专属代码加入时)"
-    ]
-   }
-  },
-  {
-   "v": "v0.10.4",
-   "d": "2026.10.17",
-   "items": {
-    "ko": [
-     "표 내용 편집: 행 · 열 숫자가 입력칸 위쪽으로 치우쳐 보이던 문제 수정",
-     "표 내용 편집: 칸 글자의 왼쪽 · 가운데 · 오른쪽 정렬과 글자 크기 설정 — 선택한 칸 · 행 · 열 · 표 전체 단위로 적용 (PC는 Shift+클릭으로 여러 칸 선택)",
-     "알림을 무료 플랜에서도 사용할 수 있도록 변경 (친구 · 메일은 계속 프리미엄)",
-     "무료 플랜에서 헤더의 개발자 콘솔 버튼을 다른 프리미엄 버튼처럼 흐리게 표시",
-     "모바일 옵션바 재디자인 — 설정 항목을 아이콘 탭(예: 모양 · 불투명도 · 선 굵기 · 색 · 바탕)으로 나열하고, 누른 항목의 옵션만 아래로 펼쳐 화면을 덜 가리도록 개선",
-     "선택 도구를 눌러도 옵션바가 닫히지 않도록 변경",
-     "글꼴 절반 정도(블랙한산스 · 감자꽃 · 독도 · Pacifico 등 19종)를 프리미엄 전용으로 — 글꼴 목록에 ‘프리미엄 글꼴’ 구역으로 표시, 이미 문서에 쓰인 글꼴은 그대로 보임",
-     "업데이트 내역의 버전 묶음(0.3.x · 0.10.x 등) 오른쪽에 그 묶음의 가장 큰 변화를 짧은 부제목으로 표시"
-    ],
-    "en": [
-     "Table editing: fixed row/column numbers looking shifted toward the top of their input boxes",
-     "Table editing: set left · center · right alignment and font size for cell text — applied to the selected cell · row · column · whole table (on PC, Shift+click selects multiple cells)",
-     "Notifications are now available on the free plan too (Friends and Mail remain Premium)",
-     "On the free plan, the header's developer console button is dimmed like other Premium buttons",
-     "Redesigned the mobile option bar — settings are listed as icon tabs (e.g. Style · Opacity · Line width · Color · Fill), and only the tapped item's options open below, covering less of the screen",
-     "The option bar no longer closes when you tap the Select tool",
-     "About half of the fonts (19 including Black Han Sans · Gamja Flower · Dokdo · Pacifico) are now Premium-only — shown in a ‘Premium fonts’ section of the font list; fonts already used in a document still display",
-     "Update history version groups (0.3.x · 0.10.x, etc.) now show that group's biggest change as a short subtitle on the right"
-    ],
-    "ja": [
-     "表の内容編集: 行・列の数字が入力欄の上に寄って見える問題を修正",
-     "表の内容編集: セルの文字の左・中央・右揃えと文字サイズを設定 — 選択したセル・行・列・表全体の単位で適用(PCはShift+クリックで複数セルを選択)",
-     "通知を無料プランでも使えるよう変更(友達・メールは引き続きプレミアム)",
-     "無料プランではヘッダーの開発者コンソールボタンを他のプレミアムボタンと同じく薄く表示",
-     "モバイルのオプションバーを再デザイン — 設定項目をアイコンタブ(例: 形・不透明度・線の太さ・色・塗り)で並べ、押した項目のオプションだけ下に開いて画面を隠しにくく改善",
-     "選択ツールを押してもオプションバーが閉じないよう変更",
-     "フォントの約半分(Black Han Sans・Gamja Flower・Dokdo・Pacificoなど19種)をプレミアム専用に — フォント一覧に「プレミアムフォント」欄として表示、すでに文書で使われているフォントはそのまま表示",
-     "更新履歴のバージョンのまとまり(0.3.x・0.10.xなど)の右に、そのまとまりの一番大きな変更を短いサブタイトルで表示"
-    ],
-    "zh": [
-     "表格内容编辑:修复行 · 列数字在输入框中偏上显示的问题",
-     "表格内容编辑:可设置单元格文字的左 · 中 · 右对齐和字号 — 按所选单元格 · 行 · 列 · 整个表格应用(PC 端可 Shift+点击选择多个单元格)",
-     "通知功能改为免费版也可使用(好友 · 邮件仍为高级版)",
-     "免费版中页眉的开发者控制台按钮与其他高级版按钮一样以淡色显示",
-     "重新设计移动端选项栏 — 设置项以图标标签(如样式 · 不透明度 · 线宽 · 颜色 · 填充)排列，只展开所点项目的选项，减少遮挡屏幕",
-     "点击选择工具时选项栏不再关闭",
-     "约一半字体(Black Han Sans · Gamja Flower · Dokdo · Pacifico 等 19 种)改为高级版专用 — 在字体列表中以“高级版字体”分区显示，文档中已使用的字体照常显示",
-     "更新记录的版本分组(0.3.x · 0.10.x 等)右侧会以简短副标题显示该组最大的变化"
     ]
    }
   }

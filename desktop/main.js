@@ -8,6 +8,8 @@
 const { app, BrowserWindow, net, shell, ipcMain, session, Menu, nativeImage } = require('electron');
 const path = require('path');
 const fs = require('fs');
+const os = require('os');
+const { execFile } = require('child_process');
 
 const SITE = 'https://www.meow-pdf.com';
 const START = SITE + '/edit';
@@ -19,6 +21,67 @@ const STAY_HOSTS = /(^|\.)(meow-pdf\.com|tosspayments\.com|toss\.im)$/;   // 앱
 const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.mjs': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.json': 'application/json; charset=utf-8', '.webmanifest': 'application/manifest+json', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.gif': 'image/gif', '.ico': 'image/x-icon', '.txt': 'text/plain; charset=utf-8', '.xml': 'application/xml', '.woff2': 'font/woff2', '.woff': 'font/woff', '.mp3': 'audio/mpeg', '.wasm': 'application/wasm' };
 
 if (!app.requestSingleInstanceLock()) { app.quit(); }
+
+/* ── v1.0.2 파일 열기: PDF · MPDF 등을 두 번 누르거나(연결 프로그램) 앱 아이콘에 끌어 놓으면 편집 화면에서 열어요 ── */
+const OPEN_EXT = /\.(pdf|mpdf|zip|pptx|hwpx?|docx|png|jpe?g|webp|gif|bmp)$/i;
+const MAX_OPEN = 600 * 1024 * 1024;
+let pendingFiles = [], rendererReady = false;
+function filesFromArgv(argv) {
+  return (argv || []).slice(1).filter(a => a && !a.startsWith('-') && OPEN_EXT.test(a)).filter(a => { try { return fs.statSync(a).isFile(); } catch (e) { return false; } });
+}
+async function readForRenderer(paths) {
+  const out = [];
+  for (const f of paths) {
+    try { const st = await fs.promises.stat(f); if (st.size > MAX_OPEN) continue; out.push({ name: path.basename(f), path: f, data: new Uint8Array(await fs.promises.readFile(f)) }); } catch (e) { /* 읽지 못한 파일은 건너뛰어요 */ }
+  }
+  return out;
+}
+async function queueFiles(paths) {
+  if (!paths.length) return;
+  if (!rendererReady || !mainWin || mainWin.isDestroyed()) { pendingFiles.push(...paths); return; }
+  const list = await readForRenderer(paths);
+  if (list.length) { try { mainWin.webContents.send('meow:open-files', list); } catch (e) { /* 무시 */ } }
+  if (mainWin.isMinimized()) mainWin.restore(); mainWin.focus();
+}
+pendingFiles = filesFromArgv(process.argv);
+app.on('open-file', (e, f) => { e.preventDefault(); queueFiles([f]); });   // macOS: Finder에서 열기
+ipcMain.handle('meow:take-files', async () => { rendererReady = true; const p = pendingFiles; pendingFiles = []; return readForRenderer(p); });
+
+/* ── v1.0.2 기본 연결 프로그램: 지금 PDF를 Meow-PDF가 여는지 확인하고, 설정 화면을 열어요 ── */
+const run = (cmd, args, ms) => new Promise(res => { try { execFile(cmd, args, { timeout: ms || 4000, windowsHide: true }, (err, out) => res(err ? '' : String(out || ''))); } catch (e) { res(''); } });
+async function winProgId(ext) {
+  const uc = await run('reg', ['query', `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\${ext}\\UserChoice`, '/v', 'ProgId']);
+  let m = /ProgId\s+REG_SZ\s+(.+)/i.exec(uc); if (m) return m[1].trim();
+  const cl = await run('reg', ['query', `HKCR\\${ext}`, '/ve']);
+  m = /REG_SZ\s+(.+)/i.exec(cl); return m ? m[1].trim() : '';
+}
+async function macDefaultApp(ext) {
+  const tmp = path.join(os.tmpdir(), 'meow-check' + ext);
+  try { if (!fs.existsSync(tmp)) fs.writeFileSync(tmp, ext === '.pdf' ? '%PDF-1.4\n%%EOF\n' : 'PK'); } catch (e) { return ''; }
+  const js = `ObjC.import('AppKit'); var u = $.NSWorkspace.sharedWorkspace.URLForApplicationToOpenURL($.NSURL.fileURLWithPath(${JSON.stringify(tmp)})); u ? ObjC.unwrap(u.path) : ''`;
+  return (await run('osascript', ['-l', 'JavaScript', '-e', js], 5000)).trim();
+}
+async function assocStatus() {
+  if (!app.isPackaged) return { supported: false, reason: 'dev' };
+  if (process.platform === 'win32') {
+    const [pdf, mpdf] = await Promise.all([winProgId('.pdf'), winProgId('.mpdf')]);
+    return { supported: true, platform: 'win32', isDefault: /meow/i.test(pdf), pdf, mpdfOk: /meow/i.test(mpdf) };
+  }
+  if (process.platform === 'darwin') {
+    const a = await macDefaultApp('.pdf'), mine = (process.execPath.split('/Contents/')[0] || '');
+    return { supported: true, platform: 'darwin', isDefault: a ? a === mine || /Meow-PDF\.app$/i.test(a) : null, pdf: a };
+  }
+  return { supported: false, platform: process.platform };   // Linux AppImage 는 파일 연결을 등록하지 않아요
+}
+ipcMain.handle('meow:assoc-status', () => assocStatus());
+ipcMain.handle('meow:assoc-open', async () => {
+  if (process.platform === 'win32') {
+    try { await shell.openExternal('ms-settings:defaultapps?registeredAppUser=Meow-PDF'); } catch (e) { try { await shell.openExternal('ms-settings:defaultapps'); } catch (er) { return { state: 'error' }; } }
+    return { state: 'settings' };
+  }
+  if (process.platform === 'darwin') return { state: 'guide' };
+  return { state: 'unsupported' };
+});
 
 /* 앱 안에 넣은 파일 찾기 (사이트의 cleanUrls 처럼 /edit → edit.html) */
 function localFile(pathname) {
@@ -135,7 +198,8 @@ function setMenu() {
   Menu.setApplicationMenu(Menu.buildFromTemplate([{ role: 'appMenu' }, { role: 'editMenu' }, { role: 'viewMenu' }, { role: 'windowMenu' }]));
 }
 
-app.on('second-instance', () => { if (mainWin) { if (mainWin.isMinimized()) mainWin.restore(); mainWin.focus(); } });
+app.on('second-instance', (e, argv) => { if (mainWin) { if (mainWin.isMinimized()) mainWin.restore(); mainWin.focus(); } queueFiles(filesFromArgv(argv)); });
+app.on('browser-window-focus', (e, w) => { try { w.webContents.send('meow:focus'); } catch (er) { /* 무시 */ } });   // 설정을 바꾸고 돌아오면 다시 확인
 app.whenReady().then(async () => {
   try { await session.defaultSession.clearStorageData({ storages: ['serviceworkers', 'cachestorage'] }); } catch (e) { /* 무시 */ }   // 웹용 오프라인 캐시가 앱 파일을 가리지 않게
   serveLocal(); setMenu();
