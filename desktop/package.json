@@ -25,11 +25,27 @@
     "appId": "com.meowpdf.app",
     "productName": "Meow-PDF",
     "copyright": "© 2026 Meow-PDF",
-    "directories": { "output": "dist", "buildResources": "build" },
-    "files": ["main.js", "preload.js", "package.json", "build/icon.png", "app/**/*"],
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "package.json",
+      "build/icon.png",
+      "app/**/*"
+    ],
     "asar": true,
     "win": {
-      "target": [{ "target": "nsis", "arch": ["x64"] }],
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
       "icon": "build/icon.ico",
       "artifactName": "Meow-PDF-Setup.${ext}"
     },
@@ -45,20 +61,47 @@
       "uninstallDisplayName": "Meow-PDF"
     },
     "mac": {
-      "target": [{ "target": "dmg", "arch": ["universal"] }],
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "universal"
+          ]
+        }
+      ],
       "icon": "build/icon.png",
       "category": "public.app-category.productivity",
       "identity": "-",
       "artifactName": "Meow-PDF-mac.${ext}"
     },
-    "dmg": { "title": "Meow-PDF" },
+    "dmg": {
+      "title": "Meow-PDF"
+    },
     "linux": {
-      "target": [{ "target": "AppImage", "arch": ["x64"] }],
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
       "icon": "build/icon.png",
       "category": "Office",
       "synopsis": "PDF · 문서 편집기",
       "artifactName": "Meow-PDF-linux.${ext}"
     },
-    "publish": [{ "provider": "github", "releaseType": "release" }]
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "architect0509",
+        "repo": "meow-PDF",
+        "releaseType": "release"
+      }
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/architect0509/meow-PDF.git"
   }
 }
