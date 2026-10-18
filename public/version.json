@@ -15,6 +15,8 @@
    "d": "2026.10.19",
    "items": {
     "ko": [
+     "헤더의 설정 버튼과 전체화면 버튼 자리를 바꿔 전체화면 버튼이 맨 오른쪽에 오게 함 (튜토리얼도 반영)",
+     "PC 프로그램: PDF · MPDF 파일 아이콘을 새 모양으로 — 큰 아이콘은 금색 라벨(PDF · MPDF), 작은 아이콘은 고양이 아이콘(MPDF는 M 배지)",
      "화면 맞춤 상태에서 좌우 패널을 끌어 좁힐 때 캔버스가 덜덜 떨리던 문제 수정 — 끄는 동안에는 그대로 두고, 멈추거나 놓으면 한 번에 맞춰요",
      "안내 문구 · 소개 페이지의 글자가 끌어도 선택되지 않게 바꿈 (입력칸 · PDF 글자 복사 · 노트 · 채팅 · 메일은 그대로 선택돼요)",
      "공유 프로젝트 관리에서 공개 여부 · 고유 코드로 입장 · 장르 · 입장 기본 권한을 눌러도 화면에 바로 보이지 않던 문제 수정",
@@ -23,6 +25,8 @@
      "PC 프로그램: Meow-PDF가 PDF 기본 연결 프로그램이 아니면 오른쪽 아래 ‘기본 연결 프로그램으로 설정해보세요!’ 창으로 알려 주고, 설정하기를 누르면 설정 화면을 열어요 (설정 › 버전 정보에서도 바꿀 수 있어요)"
     ],
     "en": [
+     "Swapped the Settings and Fullscreen buttons in the header so Fullscreen is at the far right (tutorial updated too)",
+     "PC app: new PDF · MPDF file icons — large icons have a gold PDF · MPDF label, small icons show the cat icon (with an M badge for MPDF)",
      "Fixed the canvas shaking when narrowing the side panels while fit to screen — it now stays put while you drag and fits once when you pause or let go",
      "Guide text and intro page text no longer get selected when dragged (inputs, PDF text copying, notes, chat and mail can still be selected)",
      "Fixed Visibility, Join by code, Genre and Default role in project management not updating on screen when clicked",
@@ -31,6 +35,8 @@
      "PC app: if Meow-PDF isn't the default app for PDFs, a ‘Set it as your default app!’ window appears at the bottom right — Set up opens the settings screen (you can also change it in Settings › Version info)"
     ],
     "ja": [
+     "ヘッダーの設定ボタンと全画面ボタンの位置を入れ替え、全画面ボタンを一番右に(チュートリアルにも反映)",
+     "PCアプリ: PDF・MPDFファイルのアイコンを新しいデザインに — 大きいアイコンは金色のラベル(PDF・MPDF)、小さいアイコンは猫アイコン(MPDFはMバッジ)",
      "画面に合わせた状態で左右のパネルを狭めるとキャンバスががたがた揺れる問題を修正 — ドラッグ中はそのままにして、止めるか離すと一度で合わせます",
      "案内文・紹介ページの文字はドラッグしても選択されないように変更(入力欄・PDFの文字のコピー・ノート・チャット・メールはそのまま選択できます)",
      "共有プロジェクト管理で公開範囲・コードで参加・ジャンル・参加時の基本権限を押しても画面にすぐ反映されない問題を修正",
@@ -39,6 +45,8 @@
      "PCアプリ: Meow-PDFがPDFの既定のアプリでない場合、右下の「既定のアプリに設定してみましょう!」ウィンドウでお知らせし、設定するを押すと設定画面を開きます(設定 › バージョン情報でも変更できます)"
     ],
     "zh": [
+     "交换标题栏中设置按钮和全屏按钮的位置,全屏按钮位于最右侧(教程也已更新)",
+     "PC 程序:PDF · MPDF 文件图标换成新样式 — 大图标带金色标签(PDF · MPDF),小图标为猫咪图标(MPDF 带 M 标记)",
      "修复在适应屏幕状态下拖动缩窄左右面板时画布抖动的问题 — 拖动时保持不变,停下或松开后一次性适配",
      "提示文字和介绍页的文字拖动时不再被选中(输入框 · PDF 文字复制 · 笔记 · 聊天 · 邮件仍可选择)",
      "修复共享项目管理中点击公开范围 · 用代码加入 · 类型 · 加入默认权限后界面没有立即更新的问题",
