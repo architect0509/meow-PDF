@@ -1,6 +1,6 @@
 {
  "name": "Meow-PDF",
- "version": "v1.0.3",
+ "version": "v1.0.4",
  "date": "2026.10.19",
  "site": "https://www.meow-pdf.com/",
  "download": {
@@ -10,6 +10,60 @@
   "page": "https://www.meow-pdf.com/#download"
  },
  "history": [
+  {
+   "v": "v1.0.4",
+   "d": "2026.10.19",
+   "items": {
+    "ko": [
+     "토스페이 입점 심사 보완: 이용권은 결제하면 이용 키 없이 바로 내 계정에 적용 — 상품 상세 · 결제 창 · 소개 페이지에 제공 방식을 명시하고, 이용 키는 판매하지 않는 무료 키로 분리",
+     "모든 이용권은 결제일로부터 1년 안에 제공이 끝나도록 변경 — 이어 붙여서 끝나는 날이 결제일 + 1년을 넘으면 결제를 막음 (1년 이용권은 지금 기간이 끝난 뒤 결제)",
+     "환불 규정 개정 — 결제일로부터 7일 이내 전액, 그 뒤에는 사용하지 않은 남은 기간만큼 일할 계산해 부분 환불 (1개월 · 1년 이용권 공통, 위약금 없음), 계산식 · 예시 명시",
+     "계정 창에 ‘환불 요청’ 버튼 추가 — 아이디 · 결제 이메일 · 이용 기간을 채운 환불 요청 메일 작성",
+     "회원가입을 이메일 인증번호 없이 바로 가입 · 로그인되도록 변경 (대학생 인증은 학교 메일 인증번호로 따로)",
+     "계정 창이 처음에 학생 인증 탭으로 열려 일반 이메일로는 가입이 막힌 것처럼 보이던 문제 수정 — 처음에는 로그인 탭, 구매 버튼으로 들어오면 회원가입 탭으로 열기",
+     "이메일로도 로그인 가능 · 예전에 인증번호를 입력하지 못해 로그인이 안 되던 계정도 비밀번호로 로그인",
+     "소개 페이지 요금 안내에 구매 방법(구매 버튼 → 회원가입 → 토스페이먼츠 결제 → 바로 적용) 추가, 구매 버튼을 누르면 그 이용권을 골라 둔 채로 계정 창 열기",
+     "결제 서버가 잠들어 있으면 가입 · 로그인 중 ‘서버를 깨우는 중’ 안내, 계정 창을 열 때 미리 깨우기",
+     "결제 창을 넓혀 토스페이먼츠 결제창이 좌우로 잘리던 문제 수정"
+    ],
+    "en": [
+     "Toss Pay review fixes: passes are applied to your account right after payment with no access key — the delivery method is stated in product details, the payment window and the landing page, and access keys are separated as free keys that are never sold",
+     "Every pass is now fully provided within 1 year of payment — purchases that would end more than 1 year after the payment date are blocked (buy the 1-year pass after your current period ends)",
+     "Refund policy revised — full refund within 7 days of payment, then a prorated partial refund for unused time (both 1-month and 1-year passes, no penalty), with the formula and examples",
+     "Added a ‘Request refund’ button to the account window — opens a refund email pre-filled with your ID, payment email and period",
+     "Sign-up now completes instantly without an email code and signs you in (student verification still uses a school email code separately)",
+     "Fixed the account window opening on the Student tab, which made sign-up with a regular email look impossible — it now opens on Sign in, or on Sign up when you come from a Buy button",
+     "You can sign in with your email too · accounts that couldn't sign in because the email code was never entered can now sign in with their password",
+     "Added how to buy (Buy button → Sign up → Toss Payments → applied instantly) to the landing page pricing, and the Buy buttons open the account window with that pass already selected",
+     "If the payment server is asleep, sign-up and sign-in show ‘Waking up the server’, and opening the account window wakes it in advance",
+     "Widened the payment window so the Toss Payments checkout is no longer cut off on the sides"
+    ],
+    "ja": [
+     "Toss Pay審査への対応:利用券は決済すると利用キーなしですぐアカウントに適用 — 商品詳細 · 決済画面 · 紹介ページに提供方法を明記し、利用キーは販売しない無料キーとして分離",
+     "すべての利用券を決済日から1年以内に提供し終えるよう変更 — 追加後の終了日が決済日 + 1年を超える場合は決済不可(1年券は現在の期間終了後に決済)",
+     "返金規定を改定 — 決済日から7日以内は全額、その後は使っていない残り期間分を日割りで部分返金(1か月券 · 1年券共通、違約金なし)、計算式 · 例を明記",
+     "アカウント画面に「返金申請」ボタンを追加 — ID · 決済メール · 利用期間を入力済みの返金申請メールを作成",
+     "会員登録をメールの認証番号なしですぐ登録 · ログインできるよう変更(大学生認証は学校メールの認証番号で別途)",
+     "アカウント画面が最初に学生認証タブで開き、一般メールでは登録できないように見えた問題を修正 — 最初はログインタブ、購入ボタンから来たときは会員登録タブで開く",
+     "メールでもログイン可能 · 以前認証番号を入力できずログインできなかったアカウントもパスワードでログイン",
+     "紹介ページの料金案内に購入方法(購入ボタン → 会員登録 → TossPayments決済 → すぐ適用)を追加し、購入ボタンを押すとその利用券を選んだ状態でアカウント画面を開く",
+     "決済サーバーがスリープ中なら登録 · ログイン中に「サーバーを起動中」と表示し、アカウント画面を開いたときに事前に起動",
+     "決済ウィンドウを広げ、Toss Paymentsの決済画面の左右が切れていた問題を修正"
+    ],
+    "zh": [
+     "Toss Pay 审核补充:使用券付款后无需使用密钥即应用到账号 — 在商品详情 · 付款窗口 · 介绍页注明提供方式，使用密钥作为不出售的免费密钥单独区分",
+     "所有使用券改为在付款后1年内提供完毕 — 叠加后结束日期超过付款日 + 1年时禁止付款(1年券需在当前期限结束后购买)",
+     "修订退款规定 — 付款后7天内全额退款，之后按未使用的剩余天数比例部分退款(1个月券 · 1年券通用，无违约金)，并注明计算方式 · 示例",
+     "账号窗口新增“申请退款”按钮 — 生成已填好账号 · 付款邮箱 · 使用期限的退款申请邮件",
+     "注册改为无需邮箱验证码即可立即注册并登录(大学生认证仍通过学校邮箱验证码单独进行)",
+     "修复账号窗口默认打开学生认证标签、看起来无法用普通邮箱注册的问题 — 默认打开登录标签，从购买按钮进入时打开注册标签",
+     "也可用邮箱登录 · 以前因未输入验证码而无法登录的账号也可用密码登录",
+     "在介绍页价格说明中新增购买方法(购买按钮 → 注册 → Toss Payments 付款 → 立即生效)，点击购买按钮会在已选好该使用券的状态下打开账号窗口",
+     "付款服务器休眠时，注册 · 登录过程中显示“正在唤醒服务器”，打开账号窗口时提前唤醒",
+     "加宽支付窗口，修复 Toss Payments 支付页面左右被截断的问题"
+    ]
+   }
+  },
   {
    "v": "v1.0.3",
    "d": "2026.10.19",
@@ -489,88 +543,6 @@
      "“粉色世界”主题改为免费",
      "新增高级版主题彩蛋 — 点击文档外的空白背景(含开始界面)会按主题出现不同反应(泡泡 · 闪光 · 分数 · 嫩芽 · 橡果 · 萤火虫 · 星星 · 弹幕等),快速连续点击会出现各主题的隐藏场景",
      "新增主题“东方” — 红白巫女的神社，有阴阳玉 · 符札 · 旋转的魔法阵 · 漩涡与环形弹幕 · 飞舞的樱花 · 鸟居的幻想之夜(可在主题商店关闭弹幕与樱花动画)"
-    ]
-   }
-  },
-  {
-   "v": "v0.11.2",
-   "d": "2026.10.17",
-   "items": {
-    "ko": [
-     "오프라인 작업 지원 — 한 번 연 편집기와 PDF · 압축 라이브러리를 브라우저에 저장해 두어 인터넷이 끊겨도 열기 · 편집 · 저장 가능, 헤더에 오프라인 표시, 앱처럼 설치 가능(PWA)",
-     "PC: 글자 밖에서 눌러 끌면 처음 누른 점과 지금 점을 대각으로 하는 사각형에 닿은 글자만 선택 (엉뚱한 글자까지 함께 선택되던 문제 해결) — Ctrl+C · ‘선택한 글자 복사’로 복사",
-     "PC: 페이지 패널의 페이지 옵션(방사형) 버튼에 마우스를 올리면 강조 효과",
-     "친구 창 · 공유작업 패널에 새로고침 버튼 추가",
-     "자동 레이어에도 자물쇠 추가 — 잠근 개체는 선택 · 이동 · 지우기 불가",
-     "PC: 글상자 · PDF 글자를 한 번 클릭하면 선택만(입력 불가, 복사 가능), 두 번 클릭하면 입력 — 선택한 개체는 Ctrl+C / Ctrl+V로 복사 · 붙여넣기 (글상자의 글자는 일반 글자로도 복사)",
-     "자간을 100%까지 늘릴 수 있도록 확대",
-     "모바일: 공유(프로젝트 관리) · 프로필 버튼을 헤더에서 메뉴로 옮기고, 전체화면 버튼을 헤더로, 더보기 버튼을 점 9개 아이콘으로 변경",
-     "모바일: 오른쪽 작업 패널(노트 · 멀티작업 · 공유작업)을 오른쪽 가장자리 손잡이나 메뉴로 열고 닫을 수 있도록 추가",
-     "모바일: 하단 플로팅 네비게이션 바를 원형 버튼으로 바꾸고 누르면 부채꼴로 펼쳐지도록 개선 — 펼쳤을 때 모든 버튼이 화면 안에 보이는 범위까지만 옮길 수 있고, 편집기에 들어올 때마다 처음 위치로",
-     "모바일: 플로팅 버튼이 계정 창 등 다른 창 위로 올라오던 문제 수정",
-     "모바일: 하단 페이지 패널 가장자리를 끌어 크기 조절 (가로 화면은 오른쪽 가장자리)",
-     "모바일: 친구 · 메일 창을 열 때 아이디 입력칸에 바로 포커스되어 자판이 뜨던 문제 수정",
-     "모바일: 계정 창이 화면 밖으로 넘치지 않도록 크기 조절, 시작 화면 버튼 아래 설명이 화면 밖으로 나가던 문제 수정",
-     "모바일: 전체화면에서 메뉴가 스크롤되지 않던 문제 수정",
-     "모바일: 오른쪽 작업 패널 안을 눌러도 닫히거나 화면이 어두워지던 문제, 메뉴 아래쪽이 잘리고 스크롤되지 않던 문제 수정",
-     "소개 페이지 개편 — ‘온라인 · 오프라인 어디서나 쓰는 종합 문서 편집기’, 새 화면 이미지(함께 편집 · 휴대폰), ‘어디서나’ 섹션, 기능 12가지, 요금 안내 갱신, 휴대폰에서 헤더 글자가 밖으로 넘치던 문제 수정, PC에서도 항상 어두운 화면으로 고정, 첫 화면 문구를 짧게 정리 (노란 문구: 온라인 • 오프라인 종합 문서 편집기)"
-    ],
-    "en": [
-     "Offline support — the editor and its PDF and compression libraries are stored in the browser after the first visit, so you can open, edit and save even without internet; an offline badge in the header, and it can be installed like an app (PWA)",
-     "PC: pressing and dragging outside text now selects only the text touched by the rectangle between the start point and the current point (fixes unrelated text getting selected) — copy with Ctrl+C or ‘Copy selected text’",
-     "PC: the page options (radial) button in the page panel highlights on hover",
-     "Added refresh buttons to the Friends window and the Shared work panel",
-     "Auto layers also get a lock — locked objects can't be selected, moved or erased",
-     "PC: a single click on a text box or PDF text only selects it (no typing, copying works) and a double click starts typing — selected objects can be copied and pasted with Ctrl+C / Ctrl+V (text in a text box also copies as plain text)",
-     "Letter spacing can now go up to 100%",
-     "Mobile: moved the Share (project manager) and Profile buttons from the header to the menu, moved the Fullscreen button to the header, and changed the More button to a 9-dot icon",
-     "Mobile: added opening and closing the right work panel (Notes · Multitask · Shared work) with the right-edge handle or the menu",
-     "Mobile: the bottom floating navigation bar is now a round button that fans out when tapped — it can only be moved where all buttons stay on screen when expanded, and returns to its starting spot each time you enter the editor",
-     "Mobile: fixed the floating button appearing above other windows such as the account window",
-     "Mobile: drag the edge of the bottom page panel to resize it (the right edge in landscape)",
-     "Mobile: fixed the keyboard popping up when opening the Friends or Mail window because the ID field got focus",
-     "Mobile: resized the account window so it no longer overflows the screen, and fixed the description under the start-screen buttons going off screen",
-     "Mobile: fixed the menu not scrolling in fullscreen",
-     "Mobile: fixed tapping inside the right work panel closing it or dimming the screen, and the bottom of the menu being cut off and not scrolling",
-     "Redesigned the intro page — ‘an all-in-one document editor for anywhere, online or offline’, new screenshots (editing together · phone), an ‘Anywhere’ section, 12 features, updated pricing; fixed header text overflowing on phones, always dark on PC too, and a shorter hero line (yellow text: All-in-one online • offline document editor)"
-    ],
-    "ja": [
-     "オフライン作業に対応 — 一度開いたエディターとPDF・圧縮ライブラリをブラウザーに保存しておき、インターネットが切れても開く・編集・保存が可能、ヘッダーにオフライン表示、アプリのようにインストール可能(PWA)",
-     "PC: 文字の外から押してドラッグすると、最初に押した点と今の点を対角とする四角形に触れた文字だけを選択(関係ない文字まで選択される問題を解決) — Ctrl+C・「選択した文字をコピー」でコピー",
-     "PC: ページパネルのページオプション(放射状)ボタンにマウスを乗せると強調表示",
-     "友達ウィンドウ・共同作業パネルに更新ボタンを追加",
-     "自動レイヤーにも鍵を追加 — ロックしたオブジェクトは選択・移動・消去不可",
-     "PC: テキストボックス・PDFの文字を1回クリックすると選択のみ(入力不可、コピー可能)、2回クリックすると入力 — 選択したオブジェクトはCtrl+C / Ctrl+Vでコピー・貼り付け(テキストボックスの文字は通常の文字としてもコピー)",
-     "字間を100%まで広げられるよう拡大",
-     "モバイル: 共有(プロジェクト管理)・プロフィールボタンをヘッダーからメニューへ移し、全画面ボタンをヘッダーに、その他ボタンを9つの点のアイコンに変更",
-     "モバイル: 右側の作業パネル(ノート・マルチタスク・共同作業)を右端のハンドルやメニューで開閉できるよう追加",
-     "モバイル: 下部のフローティングナビゲーションバーを丸いボタンにし、押すと扇形に広がるよう改善 — 展開時にすべてのボタンが画面内に見える範囲までしか動かせず、エディターに入るたびに初期位置へ",
-     "モバイル: フローティングボタンがアカウントウィンドウなど他のウィンドウの上に表示される問題を修正",
-     "モバイル: 下部のページパネルの端をドラッグしてサイズ調整(横画面は右端)",
-     "モバイル: 友達・メールウィンドウを開くとID入力欄にすぐフォーカスされてキーボードが出る問題を修正",
-     "モバイル: アカウントウィンドウが画面からはみ出さないようサイズを調整し、スタート画面のボタン下の説明が画面外に出る問題を修正",
-     "モバイル: 全画面でメニューがスクロールしない問題を修正",
-     "モバイル: 右側の作業パネル内を押しても閉じたり画面が暗くなったりする問題、メニュー下部が切れてスクロールしない問題を修正",
-     "紹介ページを刷新 — 「オンライン・オフラインどこでも使える総合文書エディター」、新しい画面画像(一緒に編集・スマホ)、「どこでも」セクション、機能12種、料金案内を更新、スマホでヘッダーの文字がはみ出す問題を修正、PCでも常に暗い画面に固定、最初の画面の文言を短く整理(黄色の文言: オンライン • オフライン総合文書エディター)"
-    ],
-    "zh": [
-     "支持离线工作 — 打开过一次的编辑器以及 PDF · 压缩库会保存在浏览器中，断网也能打开 · 编辑 · 保存；页眉显示离线状态，可像应用一样安装(PWA)",
-     "PC:在文字外按下拖动时，只选中以起点和当前点为对角的矩形所接触的文字(解决无关文字也被选中的问题) — 用 Ctrl+C · “复制所选文字”复制",
-     "PC:鼠标悬停在页面面板的页面选项(径向)按钮上时会高亮",
-     "在好友窗口 · 协作面板中新增刷新按钮",
-     "自动图层也新增锁定 — 锁定的对象无法选择 · 移动 · 擦除",
-     "PC:单击文本框 · PDF 文字只会选中(不能输入，可复制),双击才进入输入 — 选中的对象可用 Ctrl+C / Ctrl+V 复制 · 粘贴(文本框中的文字也会作为普通文字复制)",
-     "字间距最大可增至 100%",
-     "移动端:将共享(项目管理) · 个人资料按钮从页眉移到菜单，全屏按钮移到页眉，更多按钮改为九点图标",
-     "移动端:新增可通过右侧边缘手柄或菜单打开和关闭右侧工作面板(笔记 · 多任务 · 协作)",
-     "移动端:底部悬浮导航栏改为圆形按钮，点击后呈扇形展开 — 只能移动到展开时所有按钮都在屏幕内的范围，每次进入编辑器都会回到初始位置",
-     "移动端:修复悬浮按钮显示在账号窗口等其他窗口上方的问题",
-     "移动端:拖动底部页面面板的边缘可调整大小(横屏为右侧边缘)",
-     "移动端:修复打开好友 · 邮件窗口时 ID 输入框自动获得焦点而弹出键盘的问题",
-     "移动端:调整账号窗口大小使其不超出屏幕，并修复开始界面按钮下方说明超出屏幕的问题",
-     "移动端:修复全屏时菜单无法滚动的问题",
-     "移动端:修复点击右侧工作面板内部会关闭面板或使屏幕变暗的问题，以及菜单底部被截断且无法滚动的问题",
-     "改版介绍页 — “在线 · 离线随处可用的综合文档编辑器”,新的界面图片(一起编辑 · 手机),“随处可用”板块，12 项功能，更新价格说明；修复手机上页眉文字溢出的问题，PC 端也始终为深色界面，首屏文案更简短(黄色文字:在线 • 离线综合文档编辑器)"
     ]
    }
   }

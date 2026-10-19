@@ -146,7 +146,21 @@ app.get('/health', (req, res) => res.json({ ok: true, ready: ready(), testKeys: 
  *  3) 토스 → /payment/success?paymentKey&orderId&amount
  *  4) POST /api/confirm-payment → 금액 확인 → 결제 승인 → premium_until 연장 (남은 기간 뒤에 이어 붙임)
  *  · 자동으로 다시 결제되지 않아요. 기간이 3일 이내로 남으면 앱이 연장할지 알려 줘요.
+ *  · 결제하면 이용 키 없이 바로 계정에 적용돼요. (이용 키는 개발자가 따로 나눠 주는 무료 키이고 판매하지 않아요)
+ *  · v1.0.4 결제 후 1년 안에 제공이 끝나야 해요(토스페이 심사 기준). 이어 붙여서 끝나는 날이 결제일 + 1년을 넘으면 결제를 막아요.
  */
+const PROVIDE_MONTHS = 12;
+/** 이 이용권을 지금 결제하면 이용 기간이 어떻게 되는지 — ok=false 면 결제일로부터 1년을 넘어서 살 수 없어요 */
+function passPeriod(curUntil, plan, now = new Date()) {
+  const cur = curUntil && !isNaN(curUntil) && curUntil > now ? curUntil : null;
+  const base = cur || now, end = addMonths(base, plan.months), limit = addMonths(now, PROVIDE_MONTHS);
+  const ok = end.getTime() <= limit.getTime() + 60 * 1000;
+  const after = ok ? null : addMonths(cur, -(PROVIDE_MONTHS - plan.months));   // 이 날 이후에 결제할 수 있어요
+  return { base, end, limit, ok, extend: !!cur, after };
+}
+const passBlockMsg = (plan, P) => plan.months >= PROVIDE_MONTHS
+  ? `이용권은 결제일로부터 1년 안에 모두 제공돼야 해서, 남은 기간이 있을 때는 1년 이용권을 결제할 수 없어요. 지금 기간이 끝난 뒤(${P.after.toLocaleDateString('sv-SE')} 이후) 결제하거나 1개월 이용권을 이용해 주세요.`
+  : `이용권은 결제일로부터 1년 안에 모두 제공돼야 해서, 남은 기간이 11개월 이하일 때 결제할 수 있어요. ${P.after.toLocaleDateString('sv-SE')} 이후에 다시 결제해 주세요.`;
 const sbJ = { ...sbAdmin, 'Content-Type': 'application/json' };
 const tossJ = { Authorization: TOSS_AUTH, 'Content-Type': 'application/json' };
 const dbMissing = e => { const c = e && e.response && e.response.data && e.response.data.code; return c === 'PGRST205' || c === '42P01' || c === 'PGRST204' || c === '42703'; };
@@ -157,6 +171,7 @@ app.post('/api/create-order', limiter, async (req, res) => {
   const plan = planOf(req.body && req.body.plan);
   if (!plan) return res.status(400).json({ success: false, message: '이용권을 선택해 주세요. (1개월 / 1년)' });
   if (!user.email_confirmed_at) return res.status(401).json({ success: false, message: '이메일 인증이 완료된 계정만 결제할 수 있습니다.' });
+  { const P = passPeriod(await profileUntil(user.id), plan); if (!P.ok) return res.status(409).json({ success: false, code: 'OVER_1Y', message: passBlockMsg(plan, P) }); }
   const orderId = makeOrderId(user.id, plan.code);
   res.json({ success: true, orderId, plan: plan.id, payUrl: `${PUBLIC_BASE_URL}/pay?order=${encodeURIComponent(orderId)}` });
 });
@@ -165,9 +180,9 @@ app.post('/api/create-order', limiter, async (req, res) => {
 app.get('/api/order-info', limiter, async (req, res) => {
   const o = parseOrderId(req.query.order);
   if (!o || Date.now() - o.ts > 60 * 60 * 1000) return res.status(400).json({ success: false, message: '주문이 올바르지 않거나 만료되었습니다. 앱에서 결제를 다시 시작해 주세요.' });
-  const until = ready() ? await profileUntil(o.uid) : null, now = new Date(), base = until && until > now ? until : now;
+  const P = passPeriod(ready() ? await profileUntil(o.uid) : null, o.plan);
   res.json({ success: true, clientKey: TOSS_CLIENT_KEY, amount: o.plan.amount, orderName: o.plan.orderName, plan: o.plan.id, label: o.plan.label, unit: o.plan.unit,
-    from: base.toISOString(), to: addMonths(base, o.plan.months).toISOString(), extend: !!(until && until > now) });
+    from: P.base.toISOString(), to: P.end.toISOString(), extend: P.extend, ok: P.ok, message: P.ok ? '' : passBlockMsg(o.plan, P) });
 });
 
 // 2) 결제 승인 → 이용 기간 연장
@@ -180,6 +195,8 @@ app.post('/api/confirm-payment', limiter, async (req, res) => {
   const before = await profileRow(o.uid);
   if (before && before.last_order_id === orderId) return res.json({ success: true, already: true, plan: o.plan.id, until: before.premium_until, message: '이미 적용된 결제예요.' });   // 성공 페이지 새로고침 대비
   if (Date.now() - o.ts > 2 * 60 * 60 * 1000) return res.status(400).json({ success: false, message: '주문이 만료되었습니다. 앱에서 결제를 다시 시작해 주세요.' });
+  { const P = passPeriod(before && before.premium_until ? new Date(before.premium_until) : null, o.plan);   // 승인 전에 한 번 더 — 1년을 넘으면 결제하지 않아요
+    if (!P.ok) return res.status(409).json({ success: false, code: 'OVER_1Y', message: passBlockMsg(o.plan, P) }); }
   let paid;
   try {
     const r = await axios.post(`${TOSS_API}/v1/payments/confirm`, { paymentKey, orderId, amount: o.plan.amount }, { headers: tossJ, timeout: 25000 });
@@ -190,9 +207,8 @@ app.post('/api/confirm-payment', limiter, async (req, res) => {
     return res.status(400).json({ success: false, code: d && d.code, message: (d && d.message) || e.message || '결제를 승인하지 못했습니다.' });
   }
   try {
-    const now = new Date(), curUntil = before && before.premium_until ? new Date(before.premium_until) : null;
-    const base = curUntil && !isNaN(curUntil) && curUntil > now ? curUntil : now;   // 이용 기간이 남아 있으면 그 뒤부터 이어 붙여요.
-    const end = addMonths(base, o.plan.months);
+    const curUntil = before && before.premium_until ? new Date(before.premium_until) : null;
+    const end = passPeriod(curUntil, o.plan).end;   // 이용 기간이 남아 있으면 그 뒤부터 이어 붙여요. (결제일 + 1년 이내)
     await grantPremiumUntil(o.uid, end, orderId, paymentKey);
     console.log('[이용권 결제]', o.uid, o.plan.id, '→', end.toISOString());
     return res.json({ success: true, plan: o.plan.id, until: end.toISOString(), message: o.plan.label + ' 결제가 완료되었습니다.' });
@@ -504,24 +520,90 @@ app.get('/api/auth/username-available', authLimiter(30), async (req, res) => {
 app.post('/api/auth/login', authLimiter(10), async (req, res) => {
   if (needAdmin(res)) return;
   const u = normUser(req.body && req.body.id), pw = String((req.body && req.body.password) || '');
-  const bad = () => res.status(401).json({ success: false, message: '아이디 또는 비밀번호가 맞지 않아요.' });
-  if (!USER_RE.test(u) || !pw || pw.length > 200) return bad();
+  const isEmail = EMAIL_RE.test(u);   // v1.0.4 이메일로도 로그인
+  const bad = () => res.status(401).json({ success: false, message: isEmail ? '이메일 또는 비밀번호가 맞지 않아요.' : '아이디 또는 비밀번호가 맞지 않아요.' });
+  if ((!isEmail && !USER_RE.test(u)) || !pw || pw.length > 200) return bad();
   try {
-    const p = await profileByUsername(u); if (!p || !p.email) return bad();
-    const r = await axios.post(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, { email: p.email, password: pw },
-      { headers: { apikey: SUPABASE_PUBLISHABLE_KEY, 'Content-Type': 'application/json' }, timeout: 10000 });
-    res.json({ success: true, session: { access_token: r.data.access_token, refresh_token: r.data.refresh_token } });
+    let email = u;
+    if (!isEmail) { const p = await profileByUsername(u); if (!p || !p.email) return bad(); email = p.email; }
+    let s;
+    try { s = await passwordSession(email, pw); }
+    catch (e1) {
+      // v1.0.4 예전에 인증번호를 입력하지 못해 '인증 안 됨'으로 남은 계정 — 비밀번호가 맞을 때만 이 오류가 나와요. 인증 처리하고 다시 로그인해요.
+      if (!/email_not_confirmed|not confirmed/i.test(JSON.stringify((e1.response && e1.response.data) || ''))) throw e1;
+      const au = await adminUserByEmail(email); if (!au) throw e1;
+      await axios.put(`${SUPABASE_URL}/auth/v1/admin/users/${au.id}`, { email_confirm: true }, { headers: { ...sbAdmin, 'Content-Type': 'application/json' }, timeout: 10000 });
+      s = await passwordSession(email, pw);
+    }
+    res.json({ success: true, session: s });
   } catch (e) {
     const st = e.response && e.response.status;
-    if (st === 400 || st === 401 || st === 422) {
-      const m = JSON.stringify(e.response.data || '');
-      if (/email_not_confirmed|not confirmed/i.test(m)) return res.status(403).json({ success: false, message: '이메일 인증이 끝나지 않았어요. ‘회원가입’에서 인증번호를 입력해 인증을 마쳐 주세요.' });
-      return bad();
-    }
+    if (st === 400 || st === 401 || st === 422) return bad();
     console.error('[login]', e.response?.data || e.message);
     res.status(502).json({ success: false, message: '로그인 서버에 연결하지 못했어요. 잠시 뒤 다시 시도해 주세요.' });
   }
 });
+/* ─────────── v1.0.4 회원가입 (이메일 인증번호 없이 바로 가입) ───────────
+ * 인증 메일이 오지 않아 가입하지 못하는 일이 없도록, 서버가 '인증된 계정'으로 바로 만들고 로그인 세션까지 돌려줘요.
+ * (대학생 인증은 그대로 학교 메일 인증번호로 따로 해요) */
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+async function passwordSession(email, pw) {
+  const r = await axios.post(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, { email, password: pw },
+    { headers: { apikey: SUPABASE_PUBLISHABLE_KEY, 'Content-Type': 'application/json' }, timeout: 10000 });
+  return { access_token: r.data.access_token, refresh_token: r.data.refresh_token };
+}
+async function adminUserByEmail(email) {
+  try {
+    const p = await axios.get(`${SUPABASE_URL}/rest/v1/users_profile?email=eq.${encodeURIComponent(email)}&select=id&limit=1`, { headers: sbAdmin, timeout: 8000 });
+    if (p.data && p.data[0]) return { id: p.data[0].id };
+  } catch (e) { /* 프로필이 없을 수 있어요 */ }
+  for (let page = 1; page <= 20; page++) {   // 프로필이 아직 없는 계정은 관리자 목록에서 찾아요
+    const r = await axios.get(`${SUPABASE_URL}/auth/v1/admin/users?page=${page}&per_page=200`, { headers: sbAdmin, timeout: 15000 });
+    const list = (r.data && r.data.users) || [];
+    const hit = list.find(x => String(x.email || '').toLowerCase() === email); if (hit) return hit;
+    if (list.length < 200) break;
+  }
+  return null;
+}
+const signupHits = new Map();   // 한 IP에서 하루 10개까지만 가입할 수 있어요 (무더기 가입 방지)
+setInterval(() => signupHits.clear(), 24 * 60 * 60 * 1000).unref();
+app.post('/api/auth/signup', authLimiter(5), async (req, res) => {
+  if (needAdmin(res)) return;
+  const b = req.body || {}, email = String(b.email || '').trim().toLowerCase(), pw = String(b.password || '');
+  const un = normUser(b.username), nick = String(b.nickname || '').trim().slice(0, 20);
+  if (!nick) return res.status(400).json({ success: false, message: '닉네임을 1~20자로 입력해 주세요.' });
+  if (!USER_RE.test(un)) return res.status(400).json({ success: false, message: '아이디는 영문 소문자 · 숫자 · 밑줄(_) 4~20자로 입력해 주세요.' });
+  if (!EMAIL_RE.test(email) || email.length > 200) return res.status(400).json({ success: false, message: '올바른 이메일 주소를 입력해 주세요.' });
+  if (pw.length < 8 || pw.length > 200) return res.status(400).json({ success: false, message: '비밀번호는 8자 이상으로 입력해 주세요.' });
+  const ipk = req.ip || 'x', n = (signupHits.get(ipk) || 0) + 1;
+  if (n > 10) return res.status(429).json({ success: false, message: '오늘은 이 네트워크에서 더 가입할 수 없어요. 내일 다시 시도해 주세요.' });
+  try {
+    if (await profileByUsername(un)) return res.status(409).json({ success: false, code: 'USERNAME_TAKEN', message: '이미 사용 중인 아이디예요.' });
+    let user;
+    try {
+      const r = await axios.post(`${SUPABASE_URL}/auth/v1/admin/users`, { email, password: pw, email_confirm: true, user_metadata: { username: un, nickname: nick } },
+        { headers: { ...sbAdmin, 'Content-Type': 'application/json' }, timeout: 15000 });
+      user = r.data && (r.data.user || r.data);
+    } catch (e) {
+      const m = JSON.stringify((e.response && e.response.data) || e.message || '');
+      if (/already|registered|exists|email_exists/i.test(m)) return res.status(409).json({ success: false, code: 'EMAIL_TAKEN', message: '이미 가입된 이메일이에요. 로그인하거나 ‘비밀번호 찾기’를 이용해 주세요.' });
+      if (/password/i.test(m)) return res.status(400).json({ success: false, message: '비밀번호가 너무 쉬워요. 영문 · 숫자를 섞어 8자 이상으로 입력해 주세요.' });
+      throw e;
+    }
+    signupHits.set(ipk, n);
+    if (user && user.id) {   // 아이디 · 닉네임을 프로필에 바로 기록 (DB 트리거가 이미 했으면 같은 값으로 덮어써요)
+      try { await upsertProfile({ id: user.id, email, username: un, nickname: nick }); }
+      catch (e) { try { await upsertProfile({ id: user.id, email, username: un }); } catch (e2) { console.warn('[signup] 프로필 기록 실패', e2.response?.data || e2.message); } }
+    }
+    const session = await passwordSession(email, pw);
+    console.log('[signup]', un);
+    res.json({ success: true, session });
+  } catch (e) {
+    console.error('[signup]', e.response?.data || e.message);
+    res.status(502).json({ success: false, message: '가입을 처리하지 못했어요. 잠시 뒤 다시 시도해 주세요.' });
+  }
+});
+
 const resetSent = new Map(), RESET_DEDUP_MS = 20 * 1000;
 setInterval(() => { const t = Date.now(); for (const [k, v] of resetSent) if (t - v > RESET_DEDUP_MS) resetSent.delete(k); }, 60 * 1000).unref();
 app.post('/api/auth/reset-send', authLimiter(5), async (req, res) => {
@@ -603,10 +685,20 @@ app.get('/pay', (req, res) => {
 <div class="box" style="line-height:1.7">
   <b>이용권 안내</b>
   <ul style="margin:8px 0 0;padding-left:18px;color:#ccc;font-size:13.5px">
+    <li>결제가 끝나면 <b>이용 키 없이 바로 내 계정에 적용</b>되고, 이용 기간도 그때부터 시작돼요.</li>
     <li><b>한 번만 결제</b>돼요. 기간이 끝나도 <b>자동으로 다시 결제되지 않아요.</b></li>
-    <li>이용 기간이 남아 있으면 남은 기간 <b>뒤에 이어서</b> ${plan.unit}이 더해져요.</li>
+    <li>이용 기간이 남아 있으면 남은 기간 <b>뒤에 이어서</b> ${plan.unit}이 더해져요. 모든 이용권은 결제일로부터 1년 안에 제공이 끝나요.</li>
     <li>기간이 3일 이내로 남으면 앱에서 연장할지 알려 드려요.</li>
-    <li>환불은 결제일로부터 7일 이내, 시스템 오류 또는 상품 미제공 사유에 한해 가능하며 단순 변심은 환불되지 않습니다.</li>
+  </ul>
+</div>
+<div class="box" style="line-height:1.7">
+  <b>환불 규정</b> <span style="color:#aaa;font-size:12.5px">(1개월 · 1년 이용권 공통)</span>
+  <ul style="margin:8px 0 0;padding-left:18px;color:#ccc;font-size:13.5px">
+    <li>결제일로부터 <b>7일 이내</b>에 요청하면 사용 여부와 관계없이 <b>전액 환불</b>해요.</li>
+    <li>7일이 지난 뒤에도 사용하지 않은 <b>남은 기간만큼 일할 계산해 부분 환불</b>해요. 환불 금액 = 결제 금액 × 남은 일수 ÷ 전체 이용 일수 (1원 미만 버림, 위약금 · 수수료 없음)</li>
+    <li>예) ${plan.months === 1 ? '1개월 이용권(1,200원 · 30일)을 10일 쓰고 요청하면 800원' : '1년 이용권(10,500원 · 365일)을 100일 쓰고 요청하면 7,623원'} 환불</li>
+    <li>아직 시작되지 않은 기간(남은 기간 뒤에 이어 붙은 이용권)과 시스템 오류 등 회사 사유는 전액 환불해요.</li>
+    <li>요청: 앱 계정 창의 ‘환불 요청’ 또는 <a href="mailto:contact@meow-pdf.com" style="color:#dbbe43">contact@meow-pdf.com</a> · 접수 후 3영업일 안에 결제 수단으로 취소해요.</li>
   </ul>
 </div>
 <label style="display:flex;gap:8px;align-items:flex-start;margin-top:14px;font-size:13.5px;color:#ddd"><input id="agree" type="checkbox" style="margin-top:4px"> <span>위 이용권 안내와 환불 규정에 동의합니다. (필수)</span></label>
@@ -623,6 +715,7 @@ app.get('/pay', (req, res) => {
     if (!info.success) { msg.textContent = info.message; return; }
     const d = s => new Date(s).toLocaleDateString('sv-SE');
     per.textContent = (info.extend ? '남은 기간에 이어서 ' : '') + '이용 기간: ' + d(info.from) + ' ~ ' + d(info.to);
+    if (info.ok === false) { msg.textContent = info.message; agree.disabled = true; btn.disabled = true; return; }   // v1.0.4 결제일로부터 1년을 넘으면 결제할 수 없어요
     const toss = TossPayments(info.clientKey);
     agree.onchange = () => { btn.disabled = !agree.checked; }; btn.disabled = !agree.checked;
     btn.addEventListener('click', async () => {
