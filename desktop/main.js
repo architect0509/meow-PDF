@@ -5,7 +5,7 @@
    · 앱 안에 없는 주소(/api, /payment, version.json, 다른 사이트 …)는 진짜 인터넷으로 보내요.
    · 업데이트: Windows(설치판) · Linux(AppImage)는 electron-updater 로 내려받아 다시 시작하며 설치하고,
      macOS 등은 다운로드 페이지를 열어요. */
-const { app, BrowserWindow, net, shell, ipcMain, session, Menu, nativeImage } = require('electron');
+const { app, BrowserWindow, net, shell, ipcMain, session, Menu, nativeImage, dialog } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const os = require('os');
@@ -125,6 +125,15 @@ function loadBounds() { try { return JSON.parse(fs.readFileSync(STATE_FILE(), 'u
 function saveBounds(win) { try { const b = win.getNormalBounds(); fs.writeFileSync(STATE_FILE(), JSON.stringify({ ...b, max: win.isMaximized() })); } catch (e) { /* 무시 */ } }
 
 const ICON = path.join(__dirname, 'build', 'icon.png');
+/* v1.0.3 닫기 확인 창 문구 — 편집 화면의 언어(설정 › 언어)를 따라요 */
+const CLOSE_TXT = {
+  ko: { message: '저장하지 않은 변경 사항이 있어요.', detail: '저장하지 않고 닫으면 바뀐 내용이 사라져요. 그래도 닫을까요?', close: '저장하지 않고 닫기', cancel: '취소' },
+  en: { message: 'You have unsaved changes.', detail: 'If you close without saving, your changes will be lost. Close anyway?', close: "Close without saving", cancel: 'Cancel' },
+  ja: { message: '保存していない変更があります。', detail: '保存せずに閉じると変更内容は失われます。閉じますか？', close: '保存せずに閉じる', cancel: 'キャンセル' },
+  zh: { message: '有尚未保存的更改。', detail: '不保存就关闭，更改将会丢失。仍要关闭吗？', close: '不保存并关闭', cancel: '取消' }
+};
+let uiLang = 'ko';
+ipcMain.on('meow:lang', (e, l) => { l = String(l || ''); if (CLOSE_TXT[l]) uiLang = l; });
 let mainWin = null;
 
 function openExternal(url) {
@@ -142,6 +151,13 @@ function makeWindow(url) {
   if (st && st.max) win.maximize();
   win.once('ready-to-show', () => win.show());
   win.on('close', () => saveBounds(win));
+  /* v1.0.3 저장하지 않은 채 X를 누르면 확인 창을 띄워요
+     (편집 화면이 beforeunload 로 닫기를 막으면 Electron 은 아무 알림 없이 창을 그대로 두기 때문이에요) */
+  win.webContents.on('will-prevent-unload', e => {
+    const T = CLOSE_TXT[uiLang] || CLOSE_TXT.ko;
+    const r = dialog.showMessageBoxSync(win, { type: 'warning', title: 'Meow-PDF', message: T.message, detail: T.detail, buttons: [T.close, T.cancel], defaultId: 1, cancelId: 1, noLink: true });
+    if (r === 0) e.preventDefault();   // preventDefault = 막은 것을 무시하고 닫기
+  });
   /* 새 창: 우리 사이트는 앱 창으로, 다른 사이트는 기본 브라우저로 */
   win.webContents.setWindowOpenHandler(({ url: u }) => {
     try { const h = new URL(u).hostname; if (HOSTS.has(h)) return { action: 'allow', overrideBrowserWindowOptions: { autoHideMenuBar: true, backgroundColor: '#0e0e11', webPreferences: { preload: path.join(__dirname, 'preload.js'), contextIsolation: true, sandbox: true } } }; } catch (e) { /* 무시 */ }

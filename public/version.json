@@ -1,6 +1,6 @@
 {
  "name": "Meow-PDF",
- "version": "v1.0.2",
+ "version": "v1.0.3",
  "date": "2026.10.19",
  "site": "https://www.meow-pdf.com/",
  "download": {
@@ -11,18 +11,76 @@
  },
  "history": [
   {
+   "v": "v1.0.3",
+   "d": "2026.10.19",
+   "items": {
+    "ko": [
+     "PC 프로그램: 앱 아이콘을 모서리가 둥근 정사각형으로 변경",
+     "PC 프로그램: 저장하지 않은 상태에서 X를 누르면 아무 알림 없이 창이 닫히지 않던 문제 수정 — ‘저장하지 않고 닫을까요?’ 확인 창 표시",
+     "‘PNG 내보내기’를 ‘이미지로 내보내기’로 변경 — PNG · JPG · JPEG · WEBP 중 형식을 고르고 현재 쪽 또는 전체 페이지(ZIP)로 내보내기",
+     "프리미엄 결제를 구독(자동결제)에서 이용권으로 다시 전환 — 1개월 이용권 1,200원 · 1년 이용권 10,500원, 한 번만 결제되고 남은 기간이 있으면 그 뒤에 이어서 연장",
+     "프리미엄 이용 기간이 3일 이내로 남으면 계속 결제할지 알림 — 알림 창 · 오른쪽 아래 작은 창(PC 프로그램은 운영체제 알림도)에서 바로 이용권 연장",
+     "공유작업 프로젝트 관리에 방 설명 입력 추가 (500자까지, 방 정보 창에 표시)",
+     "우클릭 메뉴에 앞으로 보내기 · 뒤로 보내기 · 맨 앞으로 보내기 · 맨 뒤로 보내기 추가 — 개체 순서를 레이어에 자동 반영 (수동 레이어는 같은 레이어 안에서 이동)",
+     "음성 도구에 드롭다운 버튼(▾) 추가 — 버튼은 고른 방식(음성 녹음 · MP3 파일 넣기)을 바로 실행, ▾에서 방식 전환 (V는 바로 녹음)",
+     "도형 · 텍스트를 만든 뒤 개체 밖을 누르면 선택 도구로 전환 — 텍스트가 선택 도구로 바뀐 뒤 바깥을 한 번 더 누르면 텍스트 도구로 돌아가던 문제 수정",
+     "발표 버튼에 드롭다운 추가 — 현재 페이지부터(기본) · 첫 페이지부터 중에서 시작 위치 선택",
+     "v1.0.1 · v1.0.2 업데이트 내역의 말투를 이전 내역과 같게 정리"
+    ],
+    "en": [
+     "PC app: the app icon is now a rounded square",
+     "PC app: fixed the window silently refusing to close when you pressed X with unsaved changes — it now asks whether to close without saving",
+     "‘PNG export’ is now ‘Export as image’ — choose PNG · JPG · JPEG · WEBP and export the current page or all pages (ZIP)",
+     "Premium payments switched back from subscriptions (auto-renewal) to passes — 1-month pass ₩1,200 · 1-year pass ₩10,500, charged once and added after any remaining time",
+     "When 3 days or less of Premium remain, you're asked whether to keep paying — extend with a pass right from the notifications panel or the small bottom-right window (plus an OS notification in the PC app)",
+     "Added a room description field to shared project management (up to 500 characters, shown in the room info window)",
+     "Added Bring forward · Send backward · Bring to front · Send to back to the right-click menu — the order is reflected in layers automatically (manual layers move within the same layer)",
+     "Added a dropdown button (▾) to the Voice tool — the button runs the chosen mode (voice recording · insert MP3 file) right away, switch modes from ▾ (V records right away)",
+     "After creating a shape or text, clicking outside it switches to the Select tool — fixed text going back to the Text tool when you clicked outside once more",
+     "Added a dropdown to the Present button — choose to start from the current page (default) or the first page",
+     "Made the wording of the v1.0.1 · v1.0.2 update notes consistent with earlier notes"
+    ],
+    "ja": [
+     "PCアプリ: アプリアイコンを角の丸い正方形に変更",
+     "PCアプリ: 保存していない状態でXを押すと何の通知もなくウィンドウが閉じなかった問題を修正 — 「保存せずに閉じますか？」の確認を表示",
+     "「PNG書き出し」を「画像として書き出し」に変更 — PNG · JPG · JPEG · WEBPから形式を選び、現在のページまたは全ページ(ZIP)で書き出し",
+     "プレミアムの決済をサブスクリプション(自動決済)から利用券に戻す — 1か月利用券 1,200ウォン · 1年利用券 10,500ウォン、1回だけ決済され、残りの期間があればその後に延長",
+     "プレミアムの利用期間が残り3日以内になると、続けて決済するかお知らせ — 通知パネル · 右下の小さなウィンドウ(PCアプリはOSの通知も)からすぐに利用券で延長",
+     "共有作業のプロジェクト管理にルームの説明入力を追加 (500文字まで、ルーム情報に表示)",
+     "右クリックメニューに前面へ移動 · 背面へ移動 · 最前面へ移動 · 最背面へ移動を追加 — オブジェクトの順序をレイヤーに自動反映 (手動レイヤーは同じレイヤー内で移動)",
+     "音声ツールにドロップダウンボタン(▾)を追加 — ボタンは選んだ方式(音声録音 · MP3ファイル挿入)をすぐ実行、▾で方式を切り替え (Vはすぐ録音)",
+     "図形 · テキストを作成した後、オブジェクトの外を押すと選択ツールに切り替え — テキストが選択ツールに変わった後、外をもう一度押すとテキストツールに戻っていた問題を修正",
+     "発表ボタンにドロップダウンを追加 — 現在のページから(既定) · 最初のページからの中から開始位置を選択",
+     "v1.0.1 · v1.0.2 の更新履歴の文体を以前の履歴と揃えて整理"
+    ],
+    "zh": [
+     "PC 程序：应用图标改为圆角正方形",
+     "PC 程序：修复未保存时点击 X 窗口没有任何提示也关不掉的问题 — 现在会显示“不保存就关闭吗？”确认窗口",
+     "“导出 PNG”改为“导出为图片” — 可选择 PNG · JPG · JPEG · WEBP 格式，导出当前页或全部页面 (ZIP)",
+     "高级版付款由订阅 (自动续费) 改回使用券 — 1 个月使用券 1,200 韩元 · 1 年使用券 10,500 韩元，只扣款一次，如有剩余期限则接在其后续期",
+     "高级版使用期限剩余 3 天以内时提醒是否继续付款 — 可在通知面板 · 右下角小窗口 (PC 程序还有系统通知) 中直接用使用券续期",
+     "共享协作的项目管理中新增房间说明 (最多 500 字，显示在房间信息窗口中)",
+     "右键菜单新增上移一层 · 下移一层 · 置于顶层 · 置于底层 — 对象顺序自动反映到图层 (手动图层在同一图层内移动)",
+     "语音工具新增下拉按钮 (▾) — 按钮直接执行所选方式 (语音录制 · 插入 MP3 文件)，在 ▾ 中切换方式 (V 直接录音)",
+     "创建形状 · 文字后点击对象外部会切换到选择工具 — 修复文字切换到选择工具后再次点击外部又回到文字工具的问题",
+     "演示按钮新增下拉菜单 — 可选择从当前页 (默认) 或第一页开始",
+     "统一 v1.0.1 · v1.0.2 更新记录的措辞，与之前的记录保持一致"
+    ]
+   }
+  },
+  {
    "v": "v1.0.2",
    "d": "2026.10.19",
    "items": {
     "ko": [
      "헤더의 설정 버튼과 전체화면 버튼 자리를 바꿔 전체화면 버튼이 맨 오른쪽에 오게 함 (튜토리얼도 반영)",
-     "PC 프로그램: PDF · MPDF 파일 아이콘을 새 모양으로 — 큰 아이콘은 금색 라벨(PDF · MPDF), 작은 아이콘은 고양이 아이콘(MPDF는 M 배지)",
-     "화면 맞춤 상태에서 좌우 패널을 끌어 좁힐 때 캔버스가 덜덜 떨리던 문제 수정 — 끄는 동안에는 그대로 두고, 멈추거나 놓으면 한 번에 맞춰요",
-     "안내 문구 · 소개 페이지의 글자가 끌어도 선택되지 않게 바꿈 (입력칸 · PDF 글자 복사 · 노트 · 채팅 · 메일은 그대로 선택돼요)",
+     "PC 프로그램: PDF · MPDF 파일 아이콘을 새 모양으로 변경 — 큰 아이콘은 금색 라벨(PDF · MPDF), 작은 아이콘은 고양이 아이콘(MPDF는 M 배지)",
+     "화면 맞춤 상태에서 좌우 패널을 끌어 좁힐 때 캔버스가 덜덜 떨리던 문제 수정 — 끄는 동안에는 그대로 두고, 멈추거나 놓으면 한 번에 맞춤",
+     "안내 문구 · 소개 페이지의 글자가 끌어도 선택되지 않게 바꿈 (입력칸 · PDF 글자 복사 · 노트 · 채팅 · 메일은 그대로 선택 가능)",
      "공유 프로젝트 관리에서 공개 여부 · 고유 코드로 입장 · 장르 · 입장 기본 권한을 눌러도 화면에 바로 보이지 않던 문제 수정",
      "앱 아이콘을 원래 고양이 아이콘으로 되돌림 (휴대폰 홈 화면 · PC 프로그램)",
-     "PC 프로그램: PDF · MPDF 파일에 Meow-PDF 파일 아이콘을 쓰고, 파일을 두 번 누르거나 앱 아이콘에 끌어 놓으면 Meow-PDF에서 열려요",
-     "PC 프로그램: Meow-PDF가 PDF 기본 연결 프로그램이 아니면 오른쪽 아래 ‘기본 연결 프로그램으로 설정해보세요!’ 창으로 알려 주고, 설정하기를 누르면 설정 화면을 열어요 (설정 › 버전 정보에서도 바꿀 수 있어요)"
+     "PC 프로그램: PDF · MPDF 파일에 Meow-PDF 파일 아이콘 적용, 파일을 두 번 누르거나 앱 아이콘에 끌어 놓으면 Meow-PDF에서 열림",
+     "PC 프로그램: Meow-PDF가 PDF 기본 연결 프로그램이 아니면 오른쪽 아래 ‘기본 연결 프로그램으로 설정해보세요!’ 창으로 안내, 설정하기를 누르면 설정 화면 열기 (설정 › 버전 정보에서도 변경 가능)"
     ],
     "en": [
      "Swapped the Settings and Fullscreen buttons in the header so Fullscreen is at the far right (tutorial updated too)",
@@ -61,12 +119,12 @@
    "d": "2026.10.18",
    "items": {
     "ko": [
-     "스마트 안내선 — 개체를 옮기거나 크기를 바꿀 때 다른 개체 · 페이지의 양 끝과 가운데가 맞으면 파워포인트처럼 빨간 점선으로 알려 주고 딱 맞춰요 (Alt를 누르면 끄기)",
-     "옵션바의 입력칸을 누르면 내용이 모두 선택돼서 지우지 않고 바로 고쳐 쓸 수 있어요 — 입력하는 동안 숫자가 최솟값으로 바뀌던 문제도 수정",
-     "PC 프로그램 출시 — 소개 페이지에서 Windows · macOS · Linux용 Meow-PDF를 내려받아 설치할 수 있어요 (실행하면 소개 화면 없이 바로 편집 화면 · 인터넷이 없어도 열려요)",
-     "PC 프로그램: 새 버전이 나오면 알림(버전마다 한 번)과 오른쪽 아래 작은 창으로 알려 주고, 자세히 보기에서 바뀐 내용을 본 뒤 업데이트 버튼으로 바로 업데이트",
+     "스마트 안내선 추가 — 개체를 옮기거나 크기를 바꿀 때 다른 개체 · 페이지의 양 끝과 가운데가 맞으면 파워포인트처럼 빨간 점선으로 표시하고 딱 맞춤 (Alt를 누르면 끄기)",
+     "옵션바의 입력칸을 누르면 내용이 모두 선택되어 지우지 않고 바로 고쳐 쓰기 가능 — 입력하는 동안 숫자가 최솟값으로 바뀌던 문제도 수정",
+     "PC 프로그램 출시 — 소개 페이지에서 Windows · macOS · Linux용 Meow-PDF를 내려받아 설치 가능 (실행하면 소개 화면 없이 바로 편집 화면 · 인터넷이 없어도 실행)",
+     "PC 프로그램: 새 버전이 나오면 알림(버전마다 한 번)과 오른쪽 아래 작은 창으로 안내, 자세히 보기에서 바뀐 내용을 본 뒤 업데이트 버튼으로 바로 업데이트",
      "PC 프로그램: 설정 › 버전 정보에 업데이트 버튼(최신 버전이면 ‘최신 버전이에요’)과 meow-pdf.com 가기 버튼",
-     "앱 아이콘을 금색 테두리의 고양이 아이콘으로 고정 — 휴대폰 홈 화면 · PC 프로그램에서 같은 아이콘으로 보여요"
+     "앱 아이콘을 금색 테두리의 고양이 아이콘으로 고정 — 휴대폰 홈 화면 · PC 프로그램에서 같은 아이콘으로 표시"
     ],
     "en": [
      "Smart guides — when you move or resize an object, red dashed lines show up PowerPoint-style as its edges or center line up with other objects or the page, and it snaps into place (hold Alt to turn off)",
@@ -513,56 +571,6 @@
      "移动端:修复全屏时菜单无法滚动的问题",
      "移动端:修复点击右侧工作面板内部会关闭面板或使屏幕变暗的问题，以及菜单底部被截断且无法滚动的问题",
      "改版介绍页 — “在线 · 离线随处可用的综合文档编辑器”,新的界面图片(一起编辑 · 手机),“随处可用”板块，12 项功能，更新价格说明；修复手机上页眉文字溢出的问题，PC 端也始终为深色界面，首屏文案更简短(黄色文字:在线 • 离线综合文档编辑器)"
-    ]
-   }
-  },
-  {
-   "v": "v0.11.1",
-   "d": "2026.10.17",
-   "items": {
-    "ko": [
-     "공유작업 추가 (프리미엄) — 헤더의 ‘프로젝트 관리’ 버튼으로 지금 탭을 공유 프로젝트로 만들고 고유 코드 · 공유할 이름 · 공개 여부(모두 공개 / 친구 공개 / 비공개) · 고유 코드로 입장(허용 / 허용 안 함)을 설정",
-     "프로젝트 관리 창에서 참여자 권한(관전자 / 편집 허용) 변경과 추방, 공유 종료",
-     "여러 사람이 같은 문서를 동시에 편집 — 개체 단위로 실시간 반영되고, 같은 개체를 동시에 고치면 마지막 변경이 남음. 실행 취소는 내 변경만 되돌림",
-     "참여자의 마우스 포인터와 작업 중인 페이지를 프로필 사진으로 표시 (페이지 오른쪽 위 · 페이지 패널 썸네일)",
-     "공유작업 패널: 고유 코드로 참여하기, 친구 프로젝트(친구 공개로 진행 중인 프로젝트) 목록, 내 프로젝트 다시 열기, 공개 프로젝트(준비 중)",
-     "공유작업 중에는 공유작업 패널에 참여자 채팅방 표시",
-     "친구 창의 내 친구 목록에서 친구 공개 프로젝트를 진행 중인 친구 옆에 ‘함께 작업’ 버튼 표시",
-     "참여자 화면에서는 저장 · 프로젝트 관리 버튼을 숨기고 ‘다른 이름으로 저장’만 표시, 관전자는 보기만 가능",
-     "공유 프로젝트 접속 링크(…/edit?join=고유코드) — 프로젝트 관리 창 · 공유작업 패널에서 복사, 받은 사람이 열고 로그인하면 바로 참여 (고유 코드로 입장을 허용했을 때)"
-    ],
-    "en": [
-     "Added Shared work (Premium) — use the ‘Project’ button in the header to turn the current tab into a shared project and set its code, shared name, visibility (Public / Friends / Private) and joining by code (Allow / Don't allow)",
-     "In the project manager, change participant roles (Viewer / Can edit), remove participants and end sharing",
-     "Several people can edit the same document at once — changes sync in real time per object, the last change wins when the same object is edited at the same time, and undo only reverts your own changes",
-     "Participants' mouse pointers and the pages they're working on are shown with their profile photos (top right of the page · page panel thumbnails)",
-     "Shared work panel: join with a code, a list of friends' projects (running as Friends), reopen my projects, public projects (coming soon)",
-     "During shared work, the Shared work panel shows a participant chat room",
-     "In the Friends window's friend list, a ‘Work together’ button appears next to friends running a Friends project",
-     "Participants don't see the Save and Project buttons, only ‘Save as’; viewers can only watch",
-     "Shared project join link (…/edit?join=CODE) — copy it from the project manager or Shared work panel; whoever opens it and logs in joins right away (when joining by code is allowed)"
-    ],
-    "ja": [
-     "共同作業を追加(プレミアム) — ヘッダーの「プロジェクト管理」ボタンで今のタブを共有プロジェクトにし、固有コード・共有する名前・公開範囲(全体公開 / 友だち公開 / 非公開)・固有コードでの入室(許可 / 許可しない)を設定",
-     "プロジェクト管理ウィンドウで参加者の権限(閲覧者 / 編集可)の変更と退出、共有の終了",
-     "複数人で同じ文書を同時に編集 — オブジェクト単位でリアルタイムに反映され、同じオブジェクトを同時に修正すると最後の変更が残ります。元に戻すは自分の変更だけを戻します",
-     "参加者のマウスポインターと作業中のページをプロフィール写真で表示(ページ右上・ページパネルのサムネイル)",
-     "共同作業パネル: 固有コードで参加、友だちのプロジェクト(友だち公開で進行中のプロジェクト)一覧、マイプロジェクトを再び開く、公開プロジェクト(準備中)",
-     "共同作業中は共同作業パネルに参加者のチャットルームを表示",
-     "友達ウィンドウの友達一覧で、友だち公開プロジェクトを進めている友達の横に「一緒に作業」ボタンを表示",
-     "参加者の画面では保存・プロジェクト管理ボタンを隠して「名前を付けて保存」のみ表示、閲覧者は見ることだけ可能",
-     "共有プロジェクトの参加リンク(…/edit?join=固有コード) — プロジェクト管理ウィンドウ・共同作業パネルからコピー、受け取った人が開いてログインするとすぐに参加(固有コードでの入室を許可しているとき)"
-    ],
-    "zh": [
-     "新增协作(高级版) — 通过页眉的“项目管理”按钮将当前标签页创建为共享项目，并设置专属代码 · 共享名称 · 公开范围(公开 / 好友可见 / 私密) · 通过专属代码加入(允许 / 不允许)",
-     "在项目管理窗口中更改参与者权限(观看者 / 可编辑)、移出参与者、结束共享",
-     "多人同时编辑同一文档 — 以对象为单位实时同步，同时修改同一对象时保留最后的修改；撤销只会撤回自己的修改",
-     "以头像显示参与者的鼠标指针和正在编辑的页面(页面右上角 · 页面面板缩略图)",
-     "协作面板:通过专属代码加入，好友的项目(以好友可见方式进行的项目)列表，重新打开我的项目，公开项目(准备中)",
-     "协作期间，协作面板会显示参与者聊天室",
-     "在好友窗口的好友列表中，正在进行好友可见项目的好友旁会显示“一起协作”按钮",
-     "参与者界面隐藏保存 · 项目管理按钮，只显示“另存为”;观看者只能查看",
-     "共享项目加入链接(…/edit?join=专属代码) — 可在项目管理窗口 · 协作面板中复制，收到的人打开并登录后即可直接加入(在允许通过专属代码加入时)"
     ]
    }
   }

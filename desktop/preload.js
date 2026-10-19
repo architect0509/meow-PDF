@@ -9,6 +9,7 @@ contextBridge.exposeInMainWorld('meowDesktop', {
   arch: info.arch,
   autoUpdate: !!info.autoUpdate,
   openExternal: url => ipcRenderer.send('meow:open-external', String(url || '')),
+  setLang: l => ipcRenderer.send('meow:lang', String(l || '')),   // v1.0.3 닫기 확인 창 언어
   files: {   // v1.0.2 연결 프로그램으로 연 파일
     take: () => ipcRenderer.invoke('meow:take-files'),
     onOpen: cb => { if (typeof cb === 'function') ipcRenderer.on('meow:open-files', (e, list) => { try { cb(list); } catch (er) { /* 무시 */ } }); }

@@ -1,13 +1,11 @@
 'use strict';
 /**
  * Meow-PDF 결제 서버
- *  - 토스페이먼츠 자동결제(빌링키)로 월간 1,200원 / 연간 10,500원 구독 처리. 시크릿 키는 이 서버에만 존재
- *  - 결제가 성공할 때마다 Supabase users_profile.premium_until 을 1개월/1년씩 연장
- *  - 구독 정보(암호화된 빌링키 포함)는 Supabase subscriptions 테이블에 저장 (서버 전용, supabase.sql 6번)
+ *  - 토스페이먼츠 일반 결제로 1개월 1,200원 / 1년 10,500원 이용권 판매. 시크릿 키는 이 서버에만 존재
+ *  - v1.0.3 구독(자동결제)에서 이용권(한 번 결제)으로 다시 바꿨어요 — 자동으로 다시 결제되지 않아요.
+ *  - 결제가 승인되면 Supabase users_profile.premium_until 을 1개월/1년 연장 (남은 기간이 있으면 그 뒤에 이어 붙여요)
  *
- * 흐름: POST /api/create-order {plan} → /pay 팝업(카드 등록) → /payment/success → POST /api/subscribe
- *       → 이후 서버가 매시간 만기 구독을 자동 결제 (POST /api/cron/renew 로도 실행 가능)
- *       POST /api/subscription/cancel 로 해지 · GET /api/subscription 으로 상태 확인
+ * 흐름: POST /api/create-order {plan} → /pay 팝업(토스 결제창) → /payment/success → POST /api/confirm-payment
  */
 const _envPath = require('path').join(__dirname, '.env');
 const _envRes = require('dotenv').config({ path: _envPath });   // 실행 위치와 상관없이 server.js 옆의 .env 를 읽어요
@@ -21,17 +19,15 @@ const path = require('path');
 const PORT = Number(process.env.PORT || 3000);
 const PUBLIC_BASE_URL = (process.env.PUBLIC_BASE_URL || `http://localhost:${PORT}`).replace(/\/$/, '');
 
-/* 구독 요금제 — 금액은 서버가 정해요. 클라이언트가 보낸 금액은 믿지 않아요. (토스 자동결제 · 빌링키 방식) */
+/* 이용권 — 금액은 서버가 정해요. 클라이언트가 보낸 금액은 믿지 않아요. (한 번 결제 · 자동결제 없음) */
 const PLANS = {
-  monthly: { id: 'monthly', label: '월간 구독', amount: 1200,  months: 1,  orderName: 'Meow-PDF 프리미엄 월간 구독', unit: '월' },
-  yearly:  { id: 'yearly',  label: '연간 구독', amount: 10500, months: 12, orderName: 'Meow-PDF 프리미엄 연간 구독', unit: '년' }
+  monthly: { id: 'monthly', code: 'm', label: '1개월 이용권', amount: 1200,  months: 1,  orderName: 'Meow-PDF 프리미엄 1개월 이용권', unit: '1개월' },
+  yearly:  { id: 'yearly',  code: 'y', label: '1년 이용권',   amount: 10500, months: 12, orderName: 'Meow-PDF 프리미엄 1년 이용권',   unit: '1년' }
 };
 const planOf = id => (Object.prototype.hasOwnProperty.call(PLANS, id) ? PLANS[id] : null);
-const RETRY_MAX = 3;                                  // 정기결제 실패 시 하루 간격으로 최대 3번까지 다시 시도해요.
-const CRON_SECRET = process.env.CRON_SECRET || '';    // 외부 스케줄러가 /api/cron/renew 를 호출할 때 쓰는 비밀값 (선택)
 const addMonths = (d, n) => { const x = new Date(d), day = x.getDate(); x.setDate(1); x.setMonth(x.getMonth() + n); const last = new Date(x.getFullYear(), x.getMonth() + 1, 0).getDate(); x.setDate(Math.min(day, last)); return x; };
 
-// 토스페이먼츠 — 자동결제(빌링)는 '결제위젯 키(gck/gsk)'가 아니라 'API 개별 연동 키(ck/sk)'를 써야 해요. 기본값은 토스 공식 문서의 "테스트 키"입니다. 실결제 전에 반드시 .env 로 교체하세요.
+// 토스페이먼츠 — 결제창(SDK v1)은 'API 개별 연동 키(ck/sk)'를 써요. 기본값은 토스 공식 문서의 "테스트 키"입니다. 실결제 전에 반드시 .env 로 교체하세요.
 const TOSS_CLIENT_KEY = process.env.TOSS_CLIENT_KEY || 'test_ck_docs_Ovk5rk1EwkEbP0W43n07xlzm';
 const TOSS_SECRET_KEY = process.env.TOSS_SECRET_KEY || 'test_sk_docs_OaPz8L5KdmQXkzRz3y47BMw6';
 const TOSS_API = (process.env.TOSS_API_BASE || 'https://api.tosspayments.com').replace(/\/$/, '');
@@ -43,7 +39,10 @@ const SUPABASE_PUBLISHABLE_KEY = process.env.SUPABASE_PUBLISHABLE_KEY || 'sb_pub
 const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || '';   // 필수 (없으면 결제를 시작하지 않아요)
 
 const ORDER_SECRET = process.env.ORDER_SECRET || crypto.randomBytes(32).toString('hex');
-const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || '').split(',').map(s => s.trim()).filter(Boolean);
+const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || '').split(',').map(s => s.trim().replace(/\/+$/, '')).filter(Boolean);
+/* www 가 붙은 주소와 안 붙은 주소는 같은 사이트로 봐요 (예: meow-pdf.com 만 적어도 www.meow-pdf.com 허용) */
+const wwwSwap = o => { try { const u = new URL(o); u.hostname = u.hostname.startsWith('www.') ? u.hostname.slice(4) : 'www.' + u.hostname; return u.origin; } catch (e) { return ''; } };
+const originOk = o => !ALLOWED_ORIGINS.length || o === 'null' || ALLOWED_ORIGINS.includes(o) || ALLOWED_ORIGINS.includes(wwwSwap(o));
 
 const ready = () => !!SUPABASE_SERVICE_KEY;
 
@@ -55,7 +54,7 @@ app.use(express.json({ limit: '20kb' }));
 // CORS: 앱(HTML 파일 / 다른 주소)에서 호출할 수 있게. 쿠키를 쓰지 않고 Bearer 토큰만 쓰므로 안전해요.
 app.use((req, res, next) => {
   const origin = req.headers.origin;
-  if (origin && (!ALLOWED_ORIGINS.length || ALLOWED_ORIGINS.includes(origin) || origin === 'null')) {
+  if (origin && originOk(origin)) {
     res.setHeader('Access-Control-Allow-Origin', ALLOWED_ORIGINS.length ? origin : '*');
     res.setHeader('Vary', 'Origin');
   }
@@ -78,17 +77,17 @@ const sign = s => crypto.createHmac('sha256', ORDER_SECRET).update(s).digest('he
 const hex32 = uuid => String(uuid).replace(/-/g, '');
 const unhex32 = h => `${h.slice(0, 8)}-${h.slice(8, 12)}-${h.slice(12, 16)}-${h.slice(16, 20)}-${h.slice(20)}`;
 
-/** 주문번호 = m_<사용자ID 32자>_<시각 base36>_<서명 10자> (토스 규칙: 6~64자, 영문/숫자/-/_) */
-function makeOrderId(uid) {
+/** 주문번호 = p_<사용자ID 32자>_<시각 base36>_<이용권 m|y>_<서명 10자> (토스 규칙: 6~64자, 영문/숫자/-/_) — 이용권 종류도 서명에 넣어 바꿔치기를 막아요 */
+function makeOrderId(uid, code) {
   const u = hex32(uid), t = Date.now().toString(36);
-  return `m_${u}_${t}_${sign(u + t)}`;
+  return `p_${u}_${t}_${code}_${sign('p' + u + t + code)}`;
 }
 function parseOrderId(id) {
-  const m = /^m_([0-9a-f]{32})_([0-9a-z]{6,10})_([0-9a-f]{10})$/.exec(String(id || ''));
+  const m = /^p_([0-9a-f]{32})_([0-9a-z]{6,10})_([my])_([0-9a-f]{10})$/.exec(String(id || ''));
   if (!m) return null;
-  const [, u, t, sg] = m, good = sign(u + t);
+  const [, u, t, c, sg] = m, good = sign('p' + u + t + c);
   if (!crypto.timingSafeEqual(Buffer.from(sg), Buffer.from(good))) return null;
-  return { uid: unhex32(u), ts: parseInt(t, 36) };
+  return { uid: unhex32(u), ts: parseInt(t, 36), plan: c === 'y' ? PLANS.yearly : PLANS.monthly };
 }
 
 /** Supabase 로그인 토큰 검증 → 사용자 정보 */
@@ -108,12 +107,15 @@ async function grantPremiumUntil(uid, until, orderId, paymentKey) {
     id: uid, email: au.data.email, paid_at: new Date().toISOString(), premium_until: until.toISOString(), last_order_id: orderId, last_payment_key: paymentKey, premium_source: 'paid'
   });
 }
-async function profileUntil(uid) {
+async function profileRow(uid) {
   try {
-    const p = await axios.get(`${SUPABASE_URL}/rest/v1/users_profile?id=eq.${uid}&select=premium_until&limit=1`, { headers: sbAdmin, timeout: 8000 });
-    const cur = p.data && p.data[0] && p.data[0].premium_until ? new Date(p.data[0].premium_until) : null;
-    return cur && !isNaN(cur) ? cur : null;
+    const p = await axios.get(`${SUPABASE_URL}/rest/v1/users_profile?id=eq.${uid}&select=premium_until,last_order_id&limit=1`, { headers: sbAdmin, timeout: 8000 });
+    return (p.data && p.data[0]) || null;
   } catch (e) { return null; }
+}
+async function profileUntil(uid) {
+  const r = await profileRow(uid), cur = r && r.premium_until ? new Date(r.premium_until) : null;
+  return cur && !isNaN(cur) ? cur : null;
 }
 /** users_profile 저장. premium_source 칸이 아직 없는 DB 에서는 그 칸만 빼고 다시 저장해요. */
 async function upsertProfile(body) {
@@ -138,176 +140,83 @@ async function cancelPayment(paymentKey, reason) {
 /* ─────────── API ─────────── */
 app.get('/health', (req, res) => res.json({ ok: true, ready: ready(), testKeys: TOSS_SECRET_KEY.startsWith('test_') }));
 
-/* ─────────── 구독 (월간 1,200원 · 연간 10,500원) ───────────
+/* ─────────── 이용권 (1개월 1,200원 · 1년 10,500원) — v1.0.3 구독에서 이용권으로 ───────────
  *  1) 앱: POST /api/create-order {plan}  → { payUrl }          (로그인 토큰 필요)
- *  2) 팝업 /pay  → 토스 requestBillingAuth (카드 등록)
- *  3) 토스 → /payment/success?authKey&customerKey&order&plan
- *  4) POST /api/subscribe → 빌링키 발급 → 첫 결제 → 구독 저장 + premium_until 연장
- *  5) 매 시간 만기 도래 구독을 서버가 자동 결제(실패 시 하루 간격 재시도 최대 3회) / POST /api/cron/renew 로도 실행 가능
- *  6) POST /api/subscription/cancel  → 다음 결제부터 중단, 이미 낸 기간은 끝까지 이용
+ *  2) 팝업 /pay  → 토스 결제창 requestPayment (한 번 결제)
+ *  3) 토스 → /payment/success?paymentKey&orderId&amount
+ *  4) POST /api/confirm-payment → 금액 확인 → 결제 승인 → premium_until 연장 (남은 기간 뒤에 이어 붙임)
+ *  · 자동으로 다시 결제되지 않아요. 기간이 3일 이내로 남으면 앱이 연장할지 알려 줘요.
  */
 const sbJ = { ...sbAdmin, 'Content-Type': 'application/json' };
 const tossJ = { Authorization: TOSS_AUTH, 'Content-Type': 'application/json' };
-const chargeOrderId = uid => { const u = hex32(uid), t = Date.now().toString(36); return `s_${u}_${t}_${sign('s' + u + t)}`; };
 const dbMissing = e => { const c = e && e.response && e.response.data && e.response.data.code; return c === 'PGRST205' || c === '42P01' || c === 'PGRST204' || c === '42703'; };
 
-async function getSub(uid) {
-  const r = await axios.get(rest(`subscriptions?user_id=eq.${uid}&select=*&limit=1`), { headers: sbAdmin, timeout: 8000 });
-  return (r.data && r.data[0]) || null;
-}
-async function saveSub(row) {
-  await axios.post(rest('subscriptions?on_conflict=user_id'), row, { headers: { ...sbJ, Prefer: 'resolution=merge-duplicates,return=minimal' }, timeout: 8000 });
-}
-const subPublic = s => s ? { plan: s.plan, status: s.status, amount: s.amount, periodEnd: s.current_period_end, nextChargeAt: s.status === 'active' || s.status === 'past_due' ? s.next_charge_at : null, card: s.card_label || null, canceledAt: s.canceled_at || null } : null;
-
-// 1) 주문(카드 등록 세션) 만들기 — 로그인 + 이메일 인증한 사용자만
+// 1) 주문 만들기 — 로그인 + 이메일 인증한 사용자만
 app.post('/api/create-order', limiter, async (req, res) => {
   const user = await authed(req, res, false); if (!user) return;
   const plan = planOf(req.body && req.body.plan);
-  if (!plan) return res.status(400).json({ success: false, message: '요금제를 선택해 주세요. (월간 / 연간)' });
-  if (!user.email_confirmed_at) return res.status(401).json({ success: false, message: '이메일 인증이 완료된 계정만 구독할 수 있습니다.' });
-  try {
-    const cur = await getSub(user.id);
-    if (cur && cur.status === 'active') return res.status(409).json({ success: false, message: '이미 구독 중이에요. 요금제를 바꾸려면 현재 구독을 해지한 뒤 다시 구독해 주세요.' });
-  } catch (e) { if (dbMissing(e)) return res.status(503).json({ success: false, message: '구독 테이블이 아직 없어요. supabase.sql 의 6번(구독) 블록을 실행해 주세요.' }); }
-  const orderId = makeOrderId(user.id);
-  res.json({ success: true, orderId, plan: plan.id, payUrl: `${PUBLIC_BASE_URL}/pay?order=${encodeURIComponent(orderId)}&plan=${plan.id}` });
+  if (!plan) return res.status(400).json({ success: false, message: '이용권을 선택해 주세요. (1개월 / 1년)' });
+  if (!user.email_confirmed_at) return res.status(401).json({ success: false, message: '이메일 인증이 완료된 계정만 결제할 수 있습니다.' });
+  const orderId = makeOrderId(user.id, plan.code);
+  res.json({ success: true, orderId, plan: plan.id, payUrl: `${PUBLIC_BASE_URL}/pay?order=${encodeURIComponent(orderId)}` });
 });
 
-// 결제 팝업이 카드 등록 창을 여는 데 필요한 정보 (클라이언트 키는 공개 값)
-app.get('/api/order-info', limiter, (req, res) => {
-  const o = parseOrderId(req.query.order), plan = planOf(req.query.plan);
-  if (!o || !plan || Date.now() - o.ts > 60 * 60 * 1000) return res.status(400).json({ success: false, message: '주문이 올바르지 않거나 만료되었습니다. 앱에서 결제를 다시 시작해 주세요.' });
-  res.json({ success: true, clientKey: TOSS_CLIENT_KEY, customerKey: 'user_' + hex32(o.uid), amount: plan.amount, orderName: plan.orderName, plan: plan.id, label: plan.label, unit: plan.unit });
+// 결제 팝업이 결제창을 여는 데 필요한 정보 (클라이언트 키는 공개 값)
+app.get('/api/order-info', limiter, async (req, res) => {
+  const o = parseOrderId(req.query.order);
+  if (!o || Date.now() - o.ts > 60 * 60 * 1000) return res.status(400).json({ success: false, message: '주문이 올바르지 않거나 만료되었습니다. 앱에서 결제를 다시 시작해 주세요.' });
+  const until = ready() ? await profileUntil(o.uid) : null, now = new Date(), base = until && until > now ? until : now;
+  res.json({ success: true, clientKey: TOSS_CLIENT_KEY, amount: o.plan.amount, orderName: o.plan.orderName, plan: o.plan.id, label: o.plan.label, unit: o.plan.unit,
+    from: base.toISOString(), to: addMonths(base, o.plan.months).toISOString(), extend: !!(until && until > now) });
 });
 
-// 한 번의 청구 — 빌링키로 결제 승인
-async function chargeBilling(billingKey, customerKey, plan, uid) {
-  const orderId = chargeOrderId(uid);
-  const r = await axios.post(`${TOSS_API}/v1/billing/${encodeURIComponent(billingKey)}`, { customerKey, amount: plan.amount, orderId, orderName: plan.orderName },
-    { headers: tossJ, timeout: 25000 });
-  const p = r.data;
-  if (!p || p.status !== 'DONE' || Number(p.totalAmount) !== plan.amount) throw Object.assign(new Error('결제 상태를 확인할 수 없습니다.'), { toss: p });
-  return { orderId, paymentKey: p.paymentKey };
-}
-
-// 2) 카드 등록 완료 → 빌링키 발급 → 첫 결제 → 구독 시작
-app.post('/api/subscribe', limiter, async (req, res) => {
+// 2) 결제 승인 → 이용 기간 연장
+app.post('/api/confirm-payment', limiter, async (req, res) => {
   if (!ready()) return res.status(503).json({ success: false, message: '결제 서버 설정이 완료되지 않았습니다.' });
-  const { authKey, customerKey, order } = req.body || {}, plan = planOf(req.body && req.body.plan);
-  const o = parseOrderId(order);
-  if (!o || !plan || !authKey || typeof authKey !== 'string') return res.status(400).json({ success: false, message: '주문 정보가 올바르지 않습니다.' });
-  if (Date.now() - o.ts > 60 * 60 * 1000) return res.status(400).json({ success: false, message: '주문이 만료되었습니다. 앱에서 구독을 다시 시작해 주세요.' });
-  const ck = 'user_' + hex32(o.uid);
-  if (customerKey !== ck) return res.status(400).json({ success: false, message: '고객 정보가 일치하지 않습니다.' });   // 남의 계정으로 등록 방지
-  let cur = null;
-  try { cur = await getSub(o.uid); } catch (e) { if (dbMissing(e)) return res.status(503).json({ success: false, message: '구독 테이블이 아직 없어요. supabase.sql 의 6번(구독) 블록을 실행해 주세요.' }); return res.status(502).json({ success: false, message: '구독 정보를 읽지 못했어요.' }); }
-  if (cur && cur.status === 'active' && cur.last_order_id && cur.billing_key_enc) return res.json({ success: true, already: true, message: '이미 구독 중이에요.' });   // 성공 페이지 새로고침 대비
-
-  let billingKey, cardLabel = null;
-  try {
-    const r = await axios.post(`${TOSS_API}/v1/billing/authorizations/issue`, { authKey, customerKey: ck }, { headers: tossJ, timeout: 20000 });
-    billingKey = r.data && r.data.billingKey;
-    const num = r.data && r.data.card && r.data.card.number ? String(r.data.card.number).replace(/\D/g, '').slice(-4) : '';
-    cardLabel = [r.data && r.data.cardCompany, num ? '····' + num : ''].filter(Boolean).join(' ') || null;
-  } catch (e) {
-    const d = e.response && e.response.data;
-    return res.status(400).json({ success: false, code: d && d.code, message: (d && d.message) || '카드 등록에 실패했습니다.' });
-  }
-  if (!billingKey) return res.status(400).json({ success: false, message: '카드 등록 정보를 받지 못했습니다.' });
-
+  const { paymentKey, orderId } = req.body || {}, amount = Number(req.body && req.body.amount);
+  const o = parseOrderId(orderId);
+  if (!o || !paymentKey || typeof paymentKey !== 'string') return res.status(400).json({ success: false, message: '주문 정보가 올바르지 않습니다.' });
+  if (amount !== o.plan.amount) return res.status(400).json({ success: false, message: '결제 금액이 이용권 금액과 다릅니다.' });   // 금액 바꿔치기 방지
+  const before = await profileRow(o.uid);
+  if (before && before.last_order_id === orderId) return res.json({ success: true, already: true, plan: o.plan.id, until: before.premium_until, message: '이미 적용된 결제예요.' });   // 성공 페이지 새로고침 대비
+  if (Date.now() - o.ts > 2 * 60 * 60 * 1000) return res.status(400).json({ success: false, message: '주문이 만료되었습니다. 앱에서 결제를 다시 시작해 주세요.' });
   let paid;
-  try { paid = await chargeBilling(billingKey, ck, plan, o.uid); }
-  catch (e) {
-    const d = e.response && e.response.data;
-    return res.status(400).json({ success: false, code: d && d.code, message: (d && d.message) || e.message || '첫 결제에 실패했습니다. 카드 한도·잔액을 확인해 주세요.' });
-  }
   try {
-    const now = new Date(), curUntil = await profileUntil(o.uid);
-    const base = curUntil && curUntil > now ? curUntil : now;                // 이용 기간이 남아 있으면 그 뒤부터 이어 붙여요.
-    const end = addMonths(base, plan.months);
-    await grantPremiumUntil(o.uid, end, paid.orderId, paid.paymentKey);
-    await saveSub({
-      user_id: o.uid, plan: plan.id, amount: plan.amount, status: 'active', billing_key_enc: encKey(billingKey), customer_key: ck, card_label: cardLabel,
-      current_period_end: end.toISOString(), next_charge_at: end.toISOString(), fail_count: 0, last_order_id: paid.orderId, last_payment_key: paid.paymentKey,
-      canceled_at: null, updated_at: now.toISOString(), started_at: (cur && cur.started_at) || now.toISOString()
-    });
-    return res.json({ success: true, plan: plan.id, until: end.toISOString(), message: '구독이 시작되었습니다.' });
+    const r = await axios.post(`${TOSS_API}/v1/payments/confirm`, { paymentKey, orderId, amount: o.plan.amount }, { headers: tossJ, timeout: 25000 });
+    paid = r.data;
+    if (!paid || paid.status !== 'DONE' || Number(paid.totalAmount) !== o.plan.amount) throw Object.assign(new Error('결제 상태를 확인할 수 없습니다.'), { toss: paid });
   } catch (e) {
-    console.error('[구독 저장 실패]', e.response?.data || e.message);
-    const refunded = await cancelPayment(paid.paymentKey, '구독 권한 부여 실패로 자동 취소');
-    return res.status(500).json({ success: false, message: refunded ? '구독 처리에 실패하여 결제를 자동으로 취소했습니다. 다시 시도해 주세요.' : '구독 처리에 실패했습니다. 결제 취소가 필요하시면 문의해 주세요.' });
+    const d = e.response && e.response.data;
+    return res.status(400).json({ success: false, code: d && d.code, message: (d && d.message) || e.message || '결제를 승인하지 못했습니다.' });
+  }
+  try {
+    const now = new Date(), curUntil = before && before.premium_until ? new Date(before.premium_until) : null;
+    const base = curUntil && !isNaN(curUntil) && curUntil > now ? curUntil : now;   // 이용 기간이 남아 있으면 그 뒤부터 이어 붙여요.
+    const end = addMonths(base, o.plan.months);
+    await grantPremiumUntil(o.uid, end, orderId, paymentKey);
+    console.log('[이용권 결제]', o.uid, o.plan.id, '→', end.toISOString());
+    return res.json({ success: true, plan: o.plan.id, until: end.toISOString(), message: o.plan.label + ' 결제가 완료되었습니다.' });
+  } catch (e) {
+    console.error('[이용권 적용 실패]', e.response?.data || e.message);
+    const refunded = await cancelPayment(paymentKey, '프리미엄 적용 실패로 자동 취소');
+    return res.status(500).json({ success: false, message: refunded ? '프리미엄 적용에 실패하여 결제를 자동으로 취소했습니다. 다시 시도해 주세요.' : '프리미엄 적용에 실패했습니다. 결제 취소가 필요하시면 문의해 주세요.' });
   }
 });
 
-// 내 구독 상태
-app.get('/api/subscription', limiter, async (req, res) => {
-  const user = await authed(req, res, false); if (!user) return;
-  try { res.json({ success: true, subscription: subPublic(await getSub(user.id)) }); }
-  catch (e) { if (dbMissing(e)) return res.json({ success: true, subscription: null, note: 'subscriptions 테이블 없음' }); res.status(502).json({ success: false, message: '구독 정보를 읽지 못했어요.' }); }
-});
-
-// 구독 해지 — 다음 결제부터 중단, 이미 결제한 기간은 만료일까지 계속 이용
-app.post('/api/subscription/cancel', limiter, async (req, res) => {
-  const user = await authed(req, res, false); if (!user) return;
+/* 예전 구독(v0.9.3 ~ v1.0.2) 정리 — 남아 있는 자동결제를 모두 멈추고 저장된 빌링키를 지워요.
+   이미 결제한 이용 기간(premium_until)은 그대로 유지돼요. subscriptions 표가 없으면 아무것도 하지 않아요. */
+async function endLegacySubscriptions() {
+  if (!ready()) return;
   try {
-    const cur = await getSub(user.id);
-    if (!cur || !['active', 'past_due'].includes(cur.status)) return res.status(400).json({ success: false, message: '해지할 구독이 없어요.' });
-    await saveSub({ user_id: user.id, status: 'canceled', billing_key_enc: null, next_charge_at: null, canceled_at: new Date().toISOString(), updated_at: new Date().toISOString() });
-    res.json({ success: true, subscription: subPublic({ ...cur, status: 'canceled', next_charge_at: null, canceled_at: new Date().toISOString() }) });
-  } catch (e) { console.error('[구독 해지 실패]', e.response?.data || e.message); res.status(502).json({ success: false, message: '해지를 처리하지 못했어요. 잠시 뒤 다시 시도해 주세요.' }); }
-});
-
-/* ─────────── 정기결제 (만기 도래 구독 자동 청구) ─────────── */
-let renewing = false;
-async function renewDue() {
-  if (!ready() || renewing) return { checked: 0, ok: 0, failed: 0 };
-  renewing = true; const out = { checked: 0, ok: 0, failed: 0 };
-  try {
-    const nowIso = new Date().toISOString();
-    const r = await axios.get(rest(`subscriptions?status=in.(active,past_due)&next_charge_at=lte.${encodeURIComponent(nowIso)}&billing_key_enc=not.is.null&select=*&order=next_charge_at.asc&limit=50`), { headers: sbAdmin, timeout: 15000 });
-    for (const sub of r.data || []) {
-      // 같은 행을 두 번 청구하지 않도록 먼저 선점(15분 뒤로 미룸). 이미 다른 곳에서 선점했으면 건너뜀.
-      let claimed;
-      try {
-        const c = await axios.patch(rest(`subscriptions?user_id=eq.${sub.user_id}&next_charge_at=eq.${encodeURIComponent(sub.next_charge_at)}&status=in.(active,past_due)`),
-          { next_charge_at: new Date(Date.now() + 15 * 60 * 1000).toISOString() }, { headers: { ...sbJ, Prefer: 'return=representation' }, timeout: 8000 });
-        claimed = c.data && c.data[0];
-      } catch (e) { continue; }
-      if (!claimed) continue;
-      out.checked++;
-      const plan = planOf(sub.plan), key = decKey(sub.billing_key_enc);
-      try {
-        if (!plan || !key) throw new Error('구독 정보를 확인할 수 없어요.');
-        const paid = await chargeBilling(key, sub.customer_key, plan, sub.user_id);
-        const now = new Date(), curUntil = (await profileUntil(sub.user_id)) || new Date(sub.current_period_end);
-        const base = curUntil > now ? curUntil : now, end = addMonths(base, plan.months);
-        await grantPremiumUntil(sub.user_id, end, paid.orderId, paid.paymentKey);
-        await saveSub({ user_id: sub.user_id, status: 'active', current_period_end: end.toISOString(), next_charge_at: end.toISOString(), fail_count: 0, last_order_id: paid.orderId, last_payment_key: paid.paymentKey, updated_at: now.toISOString() });
-        out.ok++; console.log('[정기결제 성공]', sub.user_id, plan.id);
-      } catch (e) {
-        out.failed++;
-        const d = e.response && e.response.data, fails = (sub.fail_count || 0) + 1, giveUp = fails >= RETRY_MAX;
-        console.error('[정기결제 실패]', sub.user_id, fails + '/' + RETRY_MAX, (d && (d.code + ' ' + d.message)) || e.message);
-        try {
-          await saveSub({ user_id: sub.user_id, status: giveUp ? 'expired' : 'past_due', fail_count: fails, next_charge_at: giveUp ? null : new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
-            billing_key_enc: giveUp ? null : sub.billing_key_enc, updated_at: new Date().toISOString() });
-        } catch (e2) { console.error('[정기결제 상태 저장 실패]', e2.message); }
-      }
-    }
-  } catch (e) { if (!dbMissing(e)) console.error('[정기결제 조회 실패]', e.response?.data || e.message); }
-  finally { renewing = false; }
-  return out;
+    const now = new Date().toISOString();
+    const r = await axios.patch(rest('subscriptions?or=(status.in.(active,past_due),billing_key_enc.not.is.null)'),
+      { status: 'canceled', billing_key_enc: null, next_charge_at: null, canceled_at: now, updated_at: now }, { headers: { ...sbJ, Prefer: 'return=representation' }, timeout: 15000 });
+    if (r.data && r.data.length) console.log('• 예전 구독 ' + r.data.length + '건의 자동결제를 멈췄어요 (이용 기간은 유지).');
+  } catch (e) { if (!dbMissing(e)) console.error('[예전 구독 정리 실패]', e.response?.data || e.message); }
 }
-// 외부 스케줄러(cron-job.org, GitHub Actions 등)에서 호출하는 길 — 서버가 잠들어 있는 호스팅용. 헤더: x-cron-secret
-app.post('/api/cron/renew', async (req, res) => {
-  const given = String(req.headers['x-cron-secret'] || '');
-  if (!CRON_SECRET || given.length !== CRON_SECRET.length || !crypto.timingSafeEqual(Buffer.from(given), Buffer.from(CRON_SECRET)))
-    return res.status(403).json({ success: false });
-  res.json({ success: true, ...(await renewDue()) });
-});
-setInterval(() => { renewDue().catch(() => {}); }, 60 * 60 * 1000).unref();
-setTimeout(() => { renewDue().catch(() => {}); }, 30 * 1000).unref();
+setTimeout(() => { endLegacySubscriptions().catch(() => {}); }, 10 * 1000).unref();
+// 예전 앱이 부르는 주소 — 이제 구독이 없어요
+app.get('/api/subscription', limiter, (req, res) => res.json({ success: true, subscription: null, note: 'v1.0.3부터 이용권제' }));
 
 
 /* ─────────── 이용 키 (개발자 계정이 발급 → 발급일로부터 3개월간 프리미엄) ─────────── */
@@ -686,42 +595,45 @@ app.post('/api/account/delete', authLimiter(5), async (req, res) => {
 
 app.get('/pay', (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
-  const plan = planOf(req.query.plan) || PLANS.monthly, won = n => n.toLocaleString('ko-KR') + '원';
-  res.send(page('Meow-PDF 구독', `
+  const o = parseOrderId(req.query.order), plan = (o && o.plan) || PLANS.monthly, won = n => n.toLocaleString('ko-KR') + '원';
+  res.send(page('Meow-PDF 이용권 결제', `
 <h1>Meow-PDF 프리미엄 ${plan.label}</h1>
-<p style="font-size:20px;color:#fff;font-weight:700;margin:10px 0 2px">${won(plan.amount)} <span style="font-size:13px;color:#aaa;font-weight:500">/ ${plan.unit}</span></p>
+<p style="font-size:20px;color:#fff;font-weight:700;margin:10px 0 2px">${won(plan.amount)} <span style="font-size:13px;color:#aaa;font-weight:500">/ ${plan.unit} · 한 번 결제</span></p>
+<p id="period" style="font-size:13.5px;color:#ddd;margin:4px 0 0"></p>
 <div class="box" style="line-height:1.7">
-  <b>구독 안내</b>
+  <b>이용권 안내</b>
   <ul style="margin:8px 0 0;padding-left:18px;color:#ccc;font-size:13.5px">
-    <li>카드를 등록하면 <b>지금 ${won(plan.amount)}</b>이 결제되고, 이후 ${plan.months === 1 ? '매달' : '매년'} 같은 날 <b>자동으로 결제</b>됩니다.</li>
-    <li>언제든 앱의 <b>계정 → 구독 해지</b>에서 해지할 수 있어요. 해지하면 다음 결제부터 청구되지 않고, 이미 결제한 기간은 끝까지 이용할 수 있어요.</li>
-    <li>정기결제가 실패하면 하루 간격으로 최대 ${RETRY_MAX}번 다시 시도하고, 끝내 실패하면 구독이 종료돼요.</li>
+    <li><b>한 번만 결제</b>돼요. 기간이 끝나도 <b>자동으로 다시 결제되지 않아요.</b></li>
+    <li>이용 기간이 남아 있으면 남은 기간 <b>뒤에 이어서</b> ${plan.unit}이 더해져요.</li>
+    <li>기간이 3일 이내로 남으면 앱에서 연장할지 알려 드려요.</li>
     <li>환불은 결제일로부터 7일 이내, 시스템 오류 또는 상품 미제공 사유에 한해 가능하며 단순 변심은 환불되지 않습니다.</li>
   </ul>
 </div>
-<label style="display:flex;gap:8px;align-items:flex-start;margin-top:14px;font-size:13.5px;color:#ddd"><input id="agree" type="checkbox" style="margin-top:4px"> <span>위 구독 안내와 <b>자동결제</b>에 동의합니다. (필수)</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;margin-top:14px;font-size:13.5px;color:#ddd"><input id="agree" type="checkbox" style="margin-top:4px"> <span>위 이용권 안내와 환불 규정에 동의합니다. (필수)</span></label>
 <div id="msg" class="err" style="margin-top:10px"></div>
-<button id="pay-button" disabled>카드 등록하고 ${won(plan.amount)} 결제하기</button>`, `
+<button id="pay-button" disabled>${won(plan.amount)} 결제하기</button>`, `
 <script src="https://js.tosspayments.com/v1/payment"></script>
 <script>
 (async () => {
-  const msg = document.getElementById('msg'), btn = document.getElementById('pay-button'), agree = document.getElementById('agree');
-  const q = new URLSearchParams(location.search), order = q.get('order'), planId = q.get('plan');
+  const msg = document.getElementById('msg'), btn = document.getElementById('pay-button'), agree = document.getElementById('agree'), per = document.getElementById('period');
+  const q = new URLSearchParams(location.search), order = q.get('order');
   try {
     if (typeof TossPayments !== 'function') { msg.textContent = '결제 모듈(js.tosspayments.com)을 불러오지 못했습니다. 광고·보안 차단 확장 프로그램이나 네트워크 상태를 확인한 후 새로고침해 주세요.'; return; }
-    const info = await (await fetch('/api/order-info?order=' + encodeURIComponent(order) + '&plan=' + encodeURIComponent(planId))).json();
+    const info = await (await fetch('/api/order-info?order=' + encodeURIComponent(order))).json();
     if (!info.success) { msg.textContent = info.message; return; }
+    const d = s => new Date(s).toLocaleDateString('sv-SE');
+    per.textContent = (info.extend ? '남은 기간에 이어서 ' : '') + '이용 기간: ' + d(info.from) + ' ~ ' + d(info.to);
     const toss = TossPayments(info.clientKey);
     agree.onchange = () => { btn.disabled = !agree.checked; }; btn.disabled = !agree.checked;
     btn.addEventListener('click', async () => {
       btn.disabled = true; msg.textContent = '';
       try {
-        await toss.requestBillingAuth('카드', {
-          customerKey: info.customerKey,
-          successUrl: location.origin + '/payment/success?order=' + encodeURIComponent(order) + '&plan=' + encodeURIComponent(info.plan),
+        await toss.requestPayment('카드', {
+          amount: info.amount, orderId: order, orderName: info.orderName,
+          successUrl: location.origin + '/payment/success',
           failUrl: location.origin + '/payment/fail'
         });
-      } catch (e) { console.error('카드 등록 에러:', e); if (e && e.code !== 'USER_CANCEL') msg.textContent = e.message || '카드 등록을 시작하지 못했습니다.'; btn.disabled = !agree.checked; }
+      } catch (e) { console.error('결제 에러:', e); if (e && e.code !== 'USER_CANCEL') msg.textContent = e.message || '결제를 시작하지 못했습니다.'; btn.disabled = !agree.checked; }
     });
   } catch (e) { console.error(e); msg.textContent = '결제 정보를 불러오지 못했습니다: ' + (e && e.message ? e.message : e); }
 })();
@@ -730,28 +642,29 @@ app.get('/pay', (req, res) => {
 
 app.get('/payment/success', (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
-  res.send(page('구독 확인 중', `<h1 id="t">카드를 확인하고 결제하고 있습니다…</h1><p id="d">창을 닫지 말고 잠시만 기다려 주세요.</p><button id="c" class="sub" hidden>창 닫기</button>`, `
+  res.send(page('결제 확인 중', `<h1 id="t">결제를 확인하고 있습니다…</h1><p id="d">창을 닫지 말고 잠시만 기다려 주세요.</p><button id="c" class="sub" hidden>창 닫기</button>`, `
 <script>
 (async () => {
   const q = new URLSearchParams(location.search), t = document.getElementById('t'), d = document.getElementById('d'), c = document.getElementById('c');
   c.onclick = () => window.close(); c.hidden = false;
   try {
-    const r = await fetch('/api/subscribe', { method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ authKey: q.get('authKey'), customerKey: q.get('customerKey'), order: q.get('order'), plan: q.get('plan') }) });
+    const r = await fetch('/api/confirm-payment', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ paymentKey: q.get('paymentKey'), orderId: q.get('orderId'), amount: q.get('amount') }) });
     const j = await r.json();
     if (j.success) {
-      t.textContent = '구독이 시작되었습니다'; t.className = 'ok'; d.textContent = '프리미엄이 적용되었습니다. 이 창을 닫고 Meow-PDF로 돌아가 주세요.';
-      try { window.opener && window.opener.postMessage({ type: 'meow-paid', ok: true }, '*'); } catch (e) {}
+      t.textContent = '결제가 완료되었습니다'; t.className = 'ok';
+      d.textContent = '프리미엄이 적용되었습니다' + (j.until ? ' (' + new Date(j.until).toLocaleDateString('sv-SE') + '까지)' : '') + '. 이 창을 닫고 Meow-PDF로 돌아가 주세요.';
+      try { window.opener && window.opener.postMessage({ type: 'meow-paid', ok: true, until: j.until || null }, '*'); } catch (e) {}
       setTimeout(() => { try { window.close(); } catch (e) {} }, 2500);
-    } else { t.textContent = '구독을 시작하지 못했습니다'; t.className = 'err'; d.textContent = j.message || '알 수 없는 오류'; }
-  } catch (e) { t.textContent = '서버에 연결하지 못했습니다'; t.className = 'err'; d.textContent = '잠시 후 이 페이지를 새로고침해 주세요. 이미 결제가 완료된 경우 중복 결제되지 않습니다.'; }
+    } else { t.textContent = '결제를 완료하지 못했습니다'; t.className = 'err'; d.textContent = j.message || '알 수 없는 오류'; }
+  } catch (e) { t.textContent = '서버에 연결하지 못했습니다'; t.className = 'err'; d.textContent = '잠시 후 이 페이지를 새로고침해 주세요. 이미 결제가 완료된 경우 중복으로 적용되거나 결제되지 않습니다.'; }
 })();
 </script>`));
 });
 
 app.get('/payment/fail', (req, res) => {
   const esc = s => String(s || '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
-  res.send(page('카드 등록 실패', `<h1 class="err">구독이 완료되지 않았습니다</h1><p>${esc(req.query.message) || '카드 등록이 취소되었거나 실패했습니다.'}</p><p>${esc(req.query.code)}</p><button class="sub" onclick="window.close()">창 닫기</button>`, ''));
+  res.send(page('결제 실패', `<h1 class="err">결제가 완료되지 않았습니다</h1><p>${esc(req.query.message) || '결제가 취소되었거나 실패했습니다.'}</p><p>${esc(req.query.code)}</p><button class="sub" onclick="window.close()">창 닫기</button>`, ''));
 });
 
 // 화면 구성: public/index.html = 소개 페이지(/), public/edit.html = 편집 페이지(/edit, pdf-editor.html 을 그대로 복사)

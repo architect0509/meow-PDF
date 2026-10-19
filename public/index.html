@@ -313,7 +313,7 @@ html.mobile-ua .dlsec,html.mobile-ua .pconly{display:none!important}
     <div class="wrap">
       <div class="eyebrow">요금</div>
       <h2>기본 기능은 무료, 프리미엄은 월 1,200원부터</h2>
-      <p class="lead"><b style="color:var(--text)">월간 구독 1,200원</b> 또는 <b style="color:var(--text)">연간 구독 10,500원</b>(월 875원)을 고를 수 있어요. 결제일마다 <b style="color:var(--text)">자동으로 결제</b>되고, <b style="color:var(--text)">언제든 해지</b>할 수 있으며 해지해도 이미 낸 기간은 끝까지 이용할 수 있습니다. 이용 키는 발급일로부터 3개월간 이용할 수 있습니다.</p>
+      <p class="lead"><b style="color:var(--text)">1개월 이용권 1,200원</b> 또는 <b style="color:var(--text)">1년 이용권 10,500원</b>(월 875원)을 고를 수 있어요. 한 번만 결제되고 자동으로 다시 결제되지 않으며, 이용 기간이 남아 있으면 그 뒤에 이어서 더해집니다. 기간이 3일 이내로 남으면 앱에서 연장할지 알려 드려요. 이용 키는 발급일로부터 3개월간 이용할 수 있습니다.</p>
       <div class="plans">
         <div class="plan">
           <h3>무료</h3>
@@ -328,32 +328,32 @@ html.mobile-ua .dlsec,html.mobile-ua .pconly{display:none!important}
           <a class="btn ghost" href="/edit">무료로 시작</a>
         </div>
         <div class="plan pro">
-          <h3>월간 구독</h3>
-          <div class="price">1,200원<small>/ 월</small></div>
-          <p class="pnote">매달 자동결제 · 언제든 해지</p>
+          <h3>1개월 이용권</h3>
+          <div class="price">1,200원<small>/ 1개월</small></div>
+          <p class="pnote">한 번 결제 · 자동결제 없음</p>
           <ul>
             <li>프리미엄 기능 전체 이용</li>
             <li>광고 없이 깔끔하게 사용</li>
             <li>부담 없이 한 달씩 이용</li>
-            <li>해지하면 다음 결제부터 청구되지 않아요</li>
+            <li>자동으로 다시 결제되지 않아요</li>
           </ul>
-          <a class="btn" href="/edit">월간 구독 시작</a>
+          <a class="btn" href="/edit">1개월 이용권 구매</a>
         </div>
         <div class="plan pro best">
           <span class="ptag">27% 저렴</span>
-          <h3>연간 구독</h3>
-          <div class="price">10,500원<small>/ 년</small></div>
-          <p class="pnote">월 875원 · 매년 자동결제 · 언제든 해지</p>
+          <h3>1년 이용권</h3>
+          <div class="price">10,500원<small>/ 1년</small></div>
+          <p class="pnote">월 875원 · 한 번 결제 · 자동결제 없음</p>
           <ul>
             <li>광고 제거 · 공유작업 만들기 · 관리, 친구 · 메일, 프리미엄 글꼴 · 테마</li>
             <li>파일 압축, 표 삽입, 전체 페이지 디지털화, 메모</li>
             <li>PPTX 내보내기, 음성 녹음, 멀티작업, 페이지 번역, 개발자 콘솔</li>
             <li>대학생 인증(.ac.kr, .edu) 또는 이용 키로도 이용 가능</li>
           </ul>
-          <a class="btn" href="/edit">연간 구독 시작</a>
+          <a class="btn" href="/edit">1년 이용권 구매</a>
         </div>
       </div>
-      <button type="button" class="btn ghost" id="premDetailBtn" style="margin-top:16px">상품 상세 · 구독 · 환불 안내</button>
+      <button type="button" class="btn ghost" id="premDetailBtn" style="margin-top:16px">상품 상세 · 이용권 · 환불 안내</button>
     </div>
   </section>
 
@@ -367,12 +367,11 @@ html.mobile-ua .dlsec,html.mobile-ua .pconly{display:none!important}
 </main>
 
 <dialog id="premDetail" class="pdd"><form method="dialog"><div class="pdh"><h3>프리미엄 상품 상세</h3><button class="pdx" aria-label="닫기">×</button></div></form><div class="pdb"><h4>상품 정보</h4>
-<p>상품명: Meow-PDF 프리미엄 월간 구독 · <b>1,200원 / 월</b> (부가세 포함)<br>상품명: Meow-PDF 프리미엄 연간 구독 · <b>10,500원 / 년</b> (부가세 포함, 월 환산 875원)</p>
+<p>상품명: Meow-PDF 프리미엄 1개월 이용권 · <b>1,200원</b> (부가세 포함)<br>상품명: Meow-PDF 프리미엄 1년 이용권 · <b>10,500원</b> (부가세 포함, 월 환산 875원)</p>
 <h4>이용 기간</h4>
 <ul>
-<li><b>구독(자동결제)</b>: 카드를 등록하면 첫 결제가 바로 이뤄지고, 이후 <b>월간은 매달 · 연간은 매년 같은 날 자동으로 결제</b>됩니다. 결제할 때마다 이용 기간이 1개월 또는 1년씩 더해집니다.</li>
-<li><b>구독 해지</b>: 계정 창의 ‘구독 해지’로 언제든 해지할 수 있습니다. 해지하면 <b>다음 결제부터 청구되지 않으며</b>, 이미 결제한 기간은 만료일까지 계속 이용할 수 있습니다.</li>
-<li><b>결제 실패</b>: 정기결제가 실패하면 하루 간격으로 최대 3번 다시 시도하고, 끝내 실패하면 구독이 종료됩니다. 이미 결제한 기간은 유지됩니다.</li>
+<li><b>이용권(한 번 결제)</b>: <span>결제하면 바로 1개월 또는 1년 동안 프리미엄을 이용할 수 있고, 자동으로 다시 결제되지 않습니다.</span></li>
+<li><b>연장</b>: <span>이용 기간이 남아 있을 때 결제하면 남은 기간 뒤에 이어서 더해집니다. 이용 기간이 3일 이내로 남으면 앱에서 계속 이용할지 알려 드립니다.</span></li>
 <li><b>이용 키</b>: 발급일로부터 <b>3개월</b>간 이용할 수 있습니다. 키를 입력하면 키의 만료일까지 프리미엄이 적용됩니다.</li>
 <li><b>대학생 인증</b>: 학교 이메일(.ac.kr, .edu)로 인증한 계정은 인증이 유지되는 동안 이용할 수 있습니다.</li>
 <li>이용 기간이 끝나면 무료 기능으로 전환되며, 프리미엄 기능만 제한됩니다. 저장해 둔 파일에는 영향이 없습니다.</li>
@@ -384,7 +383,7 @@ html.mobile-ua .dlsec,html.mobile-ua .pconly{display:none!important}
 <li>환불 가능 기간은 결제일로부터 <b>7일</b>입니다.</li>
 <li><b>단순 변심</b>(사용 여부와 관계없이 마음이 바뀐 경우)은 환불되지 않습니다.</li>
 <li>다음의 경우에는 환불할 수 있습니다. ① 시스템 오류로 결제되었으나 프리미엄이 적용되지 않은 경우 ② 안내된 상품 또는 기능이 제공되지 않은 경우</li>
-<li>구독 해지는 <b>다음 결제부터</b> 적용되며, 이미 결제된 금액은 위 ①②에 해당할 때만 환불됩니다.</li>
+<li>이용권은 자동결제가 아니므로 따로 해지할 필요가 없습니다. 이미 결제된 금액은 위 ①②에 해당할 때만 환불됩니다.</li>
 <li>환불 요청: <a href="mailto:contact@meow-pdf.com">contact@meow-pdf.com</a> (결제한 이메일과 주문 내용을 적어 주세요.) 환불이 확정되면 결제 수단으로 취소 처리하며, 처리 시점은 결제 수단에 따라 다를 수 있습니다.</li>
 </ul></div></dialog>
 <footer id="contact">
@@ -456,6 +455,8 @@ html.mobile-ua .dlsec,html.mobile-ua .pconly{display:none!important}
   ;(function(){var X={"en": {"PC 프로그램": "PC app", "컴퓨터에 설치해서 사용하세요": "Install it on your computer", "설치하면 소개 화면 없이 바로 편집 화면이 열리고, 인터넷이 없어도 열립니다. 새 버전이 나오면 프로그램에서 알려 드려요.": "Once installed, it opens straight to the editor — no intro page — and works even without internet. The app lets you know when a new version is out.", "내 OS": "YOUR OS", "Windows용 내려받기": "Download for Windows", "macOS용 내려받기": "Download for macOS", "Linux용 내려받기": "Download for Linux", "Windows 10 · 11 (64비트)": "Windows 10 · 11 (64-bit)", "macOS 11 이상 · Apple 실리콘 · 인텔": "macOS 11 or later · Apple silicon · Intel", "64비트 · AppImage (대부분의 배포판)": "64-bit · AppImage (most distributions)", "처음 실행할 때 보안 경고가 뜨면 Windows는 ‘추가 정보 → 실행’, macOS는 Finder에서 앱을 우클릭한 뒤 ‘열기’를 눌러 주세요.": "If a security warning appears the first time you run it, choose ‘More info → Run anyway’ on Windows, or right-click the app in Finder and choose ‘Open’ on macOS.", "다운로드": "Download"}, "ja": {"PC 프로그램": "PCアプリ", "컴퓨터에 설치해서 사용하세요": "パソコンにインストールして使えます", "설치하면 소개 화면 없이 바로 편집 화면이 열리고, 인터넷이 없어도 열립니다. 새 버전이 나오면 프로그램에서 알려 드려요.": "インストールすると紹介画面なしですぐ編集画面が開き、インターネットがなくても使えます。新しいバージョンが出るとアプリでお知らせします。", "내 OS": "お使いのOS", "Windows용 내려받기": "Windows版をダウンロード", "macOS용 내려받기": "macOS版をダウンロード", "Linux용 내려받기": "Linux版をダウンロード", "Windows 10 · 11 (64비트)": "Windows 10 · 11(64ビット)", "macOS 11 이상 · Apple 실리콘 · 인텔": "macOS 11以降 · Appleシリコン · Intel", "64비트 · AppImage (대부분의 배포판)": "64ビット · AppImage(ほとんどのディストリビューション)", "처음 실행할 때 보안 경고가 뜨면 Windows는 ‘추가 정보 → 실행’, macOS는 Finder에서 앱을 우클릭한 뒤 ‘열기’를 눌러 주세요.": "初めて実行するときにセキュリティ警告が出たら、Windowsは「詳細情報 → 実行」、macOSはFinderでアプリを右クリックして「開く」を押してください。", "다운로드": "ダウンロード"}, "zh": {"PC 프로그램": "PC 程序", "컴퓨터에 설치해서 사용하세요": "安装到电脑上使用", "설치하면 소개 화면 없이 바로 편집 화면이 열리고, 인터넷이 없어도 열립니다. 새 버전이 나오면 프로그램에서 알려 드려요.": "安装后会跳过介绍页直接打开编辑界面,没有网络也能打开。有新版本时程序会通知你。", "내 OS": "你的系统", "Windows용 내려받기": "下载 Windows 版", "macOS용 내려받기": "下载 macOS 版", "Linux용 내려받기": "下载 Linux 版", "Windows 10 · 11 (64비트)": "Windows 10 · 11(64 位)", "macOS 11 이상 · Apple 실리콘 · 인텔": "macOS 11 或更高版本 · Apple 芯片 · Intel", "64비트 · AppImage (대부분의 배포판)": "64 位 · AppImage(适用于大多数发行版)", "처음 실행할 때 보안 경고가 뜨면 Windows는 ‘추가 정보 → 실행’, macOS는 Finder에서 앱을 우클릭한 뒤 ‘열기’를 눌러 주세요.": "首次运行时如果出现安全警告,Windows 请选择“更多信息 → 仍要运行”,macOS 请在访达中右键点按应用后选择“打开”。", "다운로드": "下载"}};for(var k in X){D[k]=D[k]||{};for(var q in X[k])D[k][q]=X[k][q];}})();
   /* v0.11.7 번역 누락분 (광고 문구 · 화면 이미지 설명) */
   ;(function(){var X={"en": {"광고 없이 깔끔하게 사용": "Clean, ad-free use", "광고 제거 · 공유작업 만들기 · 관리, 친구 · 메일, 프리미엄 글꼴 · 테마": "Ad removal · create & manage shared work, Friends · Mail, Premium fonts · themes", "광고 제거, 공유작업 만들기 · 관리(참여는 무료), 친구 · 메일, PDF 압축, PPTX 내보내기, 음성 녹음 및 MP3 내보내기, 메모, 표 삽입, 전체 페이지 디지털화, 멀티작업(계산기 · 번역 · 사전), 페이지 번역, 개발자 콘솔, 프리미엄 글꼴 · 테마": "Ad removal, create & manage shared work (joining is free), Friends · Mail, PDF compression, PPTX export, voice recording and MP3 export, memos, table insertion, all-page digitize, Multitask (calculator · translate · dictionary), page translation, developer console, Premium fonts · themes", "Meow-PDF 편집 화면: 문서에 형광펜 · 도형 · 메모를 넣고, 오른쪽 공유작업 패널에서 참여자와 채팅하며, 다른 참여자의 커서가 보이는 모습": "The Meow-PDF editor: highlighter, shapes and memos on a document, chatting with participants in the Shared work panel on the right, with another participant's cursor visible", "휴대폰에서 연 Meow-PDF: 원형 바로가기 버튼과 오른쪽 작업 패널": "Meow-PDF opened on a phone: the round shortcut button and the right work panel"}, "ja": {"광고 없이 깔끔하게 사용": "広告なしですっきり使える", "광고 제거 · 공유작업 만들기 · 관리, 친구 · 메일, 프리미엄 글꼴 · 테마": "広告の削除 · 共同作業の作成・管理、友達・メール、プレミアムフォント・テーマ", "광고 제거, 공유작업 만들기 · 관리(참여는 무료), 친구 · 메일, PDF 압축, PPTX 내보내기, 음성 녹음 및 MP3 내보내기, 메모, 표 삽입, 전체 페이지 디지털화, 멀티작업(계산기 · 번역 · 사전), 페이지 번역, 개발자 콘솔, 프리미엄 글꼴 · 테마": "広告の削除、共同作業の作成・管理(参加は無料)、友達・メール、PDF圧縮、PPTX書き出し、音声録音とMP3書き出し、メモ、表の挿入、全ページのデジタル化、マルチタスク(電卓・翻訳・辞書)、ページ翻訳、開発者コンソール、プレミアムフォント・テーマ", "Meow-PDF 편집 화면: 문서에 형광펜 · 도형 · 메모를 넣고, 오른쪽 공유작업 패널에서 참여자와 채팅하며, 다른 참여자의 커서가 보이는 모습": "Meow-PDFの編集画面: 文書に蛍光ペン・図形・メモを入れ、右の共同作業パネルで参加者とチャットし、他の参加者のカーソルが見える様子", "휴대폰에서 연 Meow-PDF: 원형 바로가기 버튼과 오른쪽 작업 패널": "スマホで開いたMeow-PDF: 丸いショートカットボタンと右側の作業パネル"}, "zh": {"광고 없이 깔끔하게 사용": "无广告,清爽使用", "광고 제거 · 공유작업 만들기 · 관리, 친구 · 메일, 프리미엄 글꼴 · 테마": "去广告 · 创建与管理协作、好友 · 邮件、高级版字体 · 主题", "광고 제거, 공유작업 만들기 · 관리(참여는 무료), 친구 · 메일, PDF 압축, PPTX 내보내기, 음성 녹음 및 MP3 내보내기, 메모, 표 삽입, 전체 페이지 디지털화, 멀티작업(계산기 · 번역 · 사전), 페이지 번역, 개발자 콘솔, 프리미엄 글꼴 · 테마": "去广告、创建与管理协作(加入免费)、好友 · 邮件、PDF 压缩、PPTX 导出、语音录制及 MP3 导出、便签、插入表格、全部页面数字化、多任务(计算器 · 翻译 · 词典)、页面翻译、开发者控制台、高级版字体 · 主题", "Meow-PDF 편집 화면: 문서에 형광펜 · 도형 · 메모를 넣고, 오른쪽 공유작업 패널에서 참여자와 채팅하며, 다른 참여자의 커서가 보이는 모습": "Meow-PDF 编辑界面:在文档中添加荧光笔 · 形状 · 便签,在右侧协作面板与参与者聊天,并可看到其他参与者的光标", "휴대폰에서 연 Meow-PDF: 원형 바로가기 버튼과 오른쪽 작업 패널": "在手机上打开的 Meow-PDF:圆形快捷按钮和右侧工作面板"}};for(var k in X){D[k]=D[k]||{};for(var q in X[k])D[k][q]=X[k][q];}})();
+  /* v1.0.3 이용권 번역 */
+  ;(function(){var X={"en": {"1개월 이용권 1,200원": "1-month pass ₩1,200", "또는": "or", "1년 이용권 10,500원": "1-year pass ₩10,500", "(월 875원)을 고를 수 있어요. 한 번만 결제되고 자동으로 다시 결제되지 않으며, 이용 기간이 남아 있으면 그 뒤에 이어서 더해집니다. 기간이 3일 이내로 남으면 앱에서 연장할지 알려 드려요. 이용 키는 발급일로부터 3개월간 이용할 수 있습니다.": "(₩875/month) — your choice. You pay once and are never charged again automatically; if time remains, the new period is added after it. When 3 days or less remain, the app asks if you want to extend. Access keys last 3 months from issue.", "1개월 이용권": "1-month pass", "1년 이용권": "1-year pass", "/ 1개월": "/ 1 month", "/ 1년": "/ 1 year", "한 번 결제 · 자동결제 없음": "One-time payment · no auto-renewal", "월 875원 · 한 번 결제 · 자동결제 없음": "₩875/month · one-time payment · no auto-renewal", "자동으로 다시 결제되지 않아요": "Never charged again automatically", "1개월 이용권 구매": "Buy 1-month pass", "1년 이용권 구매": "Buy 1-year pass", "상품 상세 · 이용권 · 환불 안내": "Product details · passes · refunds", "상품명: Meow-PDF 프리미엄 1개월 이용권 ·": "Product: Meow-PDF Premium 1-month pass ·", "상품명: Meow-PDF 프리미엄 1년 이용권 ·": "Product: Meow-PDF Premium 1-year pass ·", "1,200원": "₩1,200", "10,500원": "₩10,500", "이용권(한 번 결제)": "Pass (one-time payment)", "결제하면 바로 1개월 또는 1년 동안 프리미엄을 이용할 수 있고, 자동으로 다시 결제되지 않습니다.": "After paying you can use Premium right away for 1 month or 1 year, and you are never charged again automatically.", "연장": "Extending", "이용 기간이 남아 있을 때 결제하면 남은 기간 뒤에 이어서 더해집니다. 이용 기간이 3일 이내로 남으면 앱에서 계속 이용할지 알려 드립니다.": "If you pay while time remains, the new period is added after it. When 3 days or less remain, the app asks if you want to continue.", "이용권은 자동결제가 아니므로 따로 해지할 필요가 없습니다. 이미 결제된 금액은 위 ①②에 해당할 때만 환불됩니다.": "Passes don't auto-renew, so there's nothing to cancel. Payments already made are refunded only in cases ①② above."}, "ja": {"1개월 이용권 1,200원": "1か月利用券 1,200ウォン", "또는": "または", "1년 이용권 10,500원": "1年利用券 10,500ウォン", "(월 875원)을 고를 수 있어요. 한 번만 결제되고 자동으로 다시 결제되지 않으며, 이용 기간이 남아 있으면 그 뒤에 이어서 더해집니다. 기간이 3일 이내로 남으면 앱에서 연장할지 알려 드려요. 이용 키는 발급일로부터 3개월간 이용할 수 있습니다.": "(月875ウォン)から選べます。1回だけの決済で自動で再決済されず、利用期間が残っていればその後に追加されます。残り3日以内になるとアプリで延長するかお知らせします。利用キーは発行日から3か月間利用できます。", "1개월 이용권": "1か月利用券", "1년 이용권": "1年利用券", "/ 1개월": "/ 1か月", "/ 1년": "/ 1年", "한 번 결제 · 자동결제 없음": "1回決済 · 自動決済なし", "월 875원 · 한 번 결제 · 자동결제 없음": "月875ウォン · 1回決済 · 自動決済なし", "자동으로 다시 결제되지 않아요": "自動で再決済されません", "1개월 이용권 구매": "1か月利用券を購入", "1년 이용권 구매": "1年利用券を購入", "상품 상세 · 이용권 · 환불 안내": "商品詳細 · 利用券 · 返金案内", "상품명: Meow-PDF 프리미엄 1개월 이용권 ·": "商品名:Meow-PDF プレミアム1か月利用券 ·", "상품명: Meow-PDF 프리미엄 1년 이용권 ·": "商品名:Meow-PDF プレミアム1年利用券 ·", "1,200원": "1,200ウォン", "10,500원": "10,500ウォン", "이용권(한 번 결제)": "利用券(1回決済)", "결제하면 바로 1개월 또는 1년 동안 프리미엄을 이용할 수 있고, 자동으로 다시 결제되지 않습니다.": "決済するとすぐに1か月または1年間プレミアムを利用でき、自動で再決済されません。", "연장": "延長", "이용 기간이 남아 있을 때 결제하면 남은 기간 뒤에 이어서 더해집니다. 이용 기간이 3일 이내로 남으면 앱에서 계속 이용할지 알려 드립니다.": "利用期間が残っているときに決済すると、残りの期間の後に追加されます。残り3日以内になると、アプリで続けるかお知らせします。", "이용권은 자동결제가 아니므로 따로 해지할 필요가 없습니다. 이미 결제된 금액은 위 ①②에 해당할 때만 환불됩니다.": "利用券は自動決済ではないため、解約は不要です。決済済みの金額は上記①②に該当する場合のみ返金されます。"}, "zh": {"1개월 이용권 1,200원": "1 个月使用券 1,200 韩元", "또는": "或", "1년 이용권 10,500원": "1 年使用券 10,500 韩元", "(월 875원)을 고를 수 있어요. 한 번만 결제되고 자동으로 다시 결제되지 않으며, 이용 기간이 남아 있으면 그 뒤에 이어서 더해집니다. 기간이 3일 이내로 남으면 앱에서 연장할지 알려 드려요. 이용 키는 발급일로부터 3개월간 이용할 수 있습니다.": "(每月 875 韩元) 任选其一。只需付款一次，不会自动再次扣款；如有剩余期限，会接在其后。剩余 3 天以内时，应用会提醒你是否续期。使用密钥自发放之日起可用 3 个月。", "1개월 이용권": "1 个月使用券", "1년 이용권": "1 年使用券", "/ 1개월": "/ 1 个月", "/ 1년": "/ 1 年", "한 번 결제 · 자동결제 없음": "一次性付款 · 不自动续费", "월 875원 · 한 번 결제 · 자동결제 없음": "每月 875 韩元 · 一次性付款 · 不自动续费", "자동으로 다시 결제되지 않아요": "不会自动再次扣款", "1개월 이용권 구매": "购买 1 个月使用券", "1년 이용권 구매": "购买 1 年使用券", "상품 상세 · 이용권 · 환불 안내": "商品详情 · 使用券 · 退款说明", "상품명: Meow-PDF 프리미엄 1개월 이용권 ·": "商品名称：Meow-PDF 高级版 1 个月使用券 ·", "상품명: Meow-PDF 프리미엄 1년 이용권 ·": "商品名称：Meow-PDF 高级版 1 年使用券 ·", "1,200원": "1,200 韩元", "10,500원": "10,500 韩元", "이용권(한 번 결제)": "使用券 (一次性付款)", "결제하면 바로 1개월 또는 1년 동안 프리미엄을 이용할 수 있고, 자동으로 다시 결제되지 않습니다.": "付款后可立即使用高级版 1 个月或 1 年，不会自动再次扣款。", "연장": "续期", "이용 기간이 남아 있을 때 결제하면 남은 기간 뒤에 이어서 더해집니다. 이용 기간이 3일 이내로 남으면 앱에서 계속 이용할지 알려 드립니다.": "在剩余期限内付款，新期限会接在剩余期限之后。剩余 3 天以内时，应用会提醒你是否继续。", "이용권은 자동결제가 아니므로 따로 해지할 필요가 없습니다. 이미 결제된 금액은 위 ①②에 해당할 때만 환불됩니다.": "使用券不会自动续费，无需取消。已付款项仅在符合上述 ①② 时退还。"}};for(var k in X){D[k]=D[k]||{};for(var q in X[k])D[k][q]=X[k][q];}})();
   try{var v=localStorage.getItem('meowLang'); if(LS.indexOf(v)>=0) cur=v;}catch(e){}
   var norm=function(t){return t.replace(/\s+/g,' ').trim();}, nodes=[], attrs=[], ko=/[\uac00-\ud7a3]/;
   var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode:function(n){var p=n.parentNode;while(p&&p!==document.body){if(/^(SCRIPT|STYLE|SELECT|svg)$/i.test(p.nodeName))return NodeFilter.FILTER_REJECT;p=p.parentNode;}return ko.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;}});
