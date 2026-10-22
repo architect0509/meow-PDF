@@ -1,0 +1,8 @@
+# Meow-PDF (v1.0.6) — 모든 검색엔진이 소개 · 편집기 · 사업자 정보 페이지를 수집할 수 있어요
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /payment
+Disallow: /auth/
+
+Sitemap: https://www.meow-pdf.com/sitemap.xml

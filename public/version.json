@@ -1,6 +1,6 @@
 {
  "name": "Meow-PDF",
- "version": "v1.0.5",
+ "version": "v1.0.6",
  "date": "2026.10.22",
  "site": "https://www.meow-pdf.com/",
  "download": {
@@ -10,6 +10,64 @@
   "page": "https://www.meow-pdf.com/#download"
  },
  "history": [
+  {
+   "v": "v1.0.6",
+   "d": "2026.10.22",
+   "items": {
+    "ko": [
+     "소개 페이지 · 편집기 공유 미리보기 이미지(og-image) 추가 — 주소를 공유하면 Meow-PDF 대표 이미지 · 제목 · 설명이 표시됨",
+     "검색 노출 개선 — 검색에 맞춘 제목 · 설명 · 키워드, 대표 주소(canonical), 구조화 데이터(웹 앱 · 운영자 · 자주 묻는 질문), robots.txt · 사이트맵(이미지 포함) 추가, 소개 페이지에 ‘자주 묻는 질문’ 추가",
+     "소개 페이지 · 편집기에서 외부 코드 저장소로 이동하는 링크 · 버튼 제거 (PC 프로그램 업데이트가 안 될 때도 사이트의 다운로드 안내로 이동)",
+     "인쇄 버튼을 도구 모음에서 헤더의 ‘다른 이름으로 저장’ 오른쪽으로 이동",
+     "인쇄 창 추가 — 인쇄 · 복사본 수 · 프린터 · 페이지(시작 ~ 끝) · 인쇄 방향 · 용지 · 색(컬러 / 흑백) · 확대/축소 배율 · 상하좌우 여백 · 미리 보기",
+     "PC 프로그램: 인쇄할 때 ‘이 앱은 인쇄 미리 보기를 지원하지 않습니다’ 창이 뜨던 문제 해결 — 인쇄 창에서 고른 프린터로 바로 인쇄",
+     "인쇄 화질 개선 · 색이 푸르게 틀어지던 문제 수정 — 300dpi 무손실 이미지로 인쇄하고, 테마의 화면 효과 · 밝기 조절이 인쇄에 섞이지 않게 함",
+     "페이지 패널 썸네일 버튼을 부채꼴 대신 썸네일 가운데를 둘러싼 원으로 펼침, ‘이 페이지 인쇄’ 버튼 추가",
+     "세로 모드 전환을 헤더에서 설정 › 화면 · 레이아웃 › 화면 배치로 이동",
+     "나만의 테마에 배경 이미지 추가 — 시스템 그림 6종 또는 직접 올린 그림, 빈 여백은 이미지 반복 / 시스템 색, 크기(화면 채우기 · 전체 보이기 · 원래 크기 · 직접) · 위치(9칸 · 가로 · 세로 · 끌어서 이동) · 미리 보기 (글꼴 목록은 접어서 표시)",
+     "웹: 개발자 콘솔로 테마를 바꾼 뒤 브라우저 탭을 오가면 테마 스토어에서 고른 테마로 돌아가던 문제 수정"
+    ],
+    "en": [
+     "Added a share preview image (og-image) for the intro page and editor — sharing the link now shows the Meow-PDF image, title and description",
+     "Better search visibility — search-friendly titles, descriptions and keywords, canonical URLs, structured data (web app · operator · FAQ), robots.txt and a sitemap (with images), plus an FAQ section on the intro page",
+     "Removed links and buttons that led to the external code repository from the intro page and editor (the desktop app now opens the site's download guide when auto-update fails)",
+     "Moved the Print button from the toolbar to the header, right of ‘Save as’",
+     "New print window — Print · copies · printer · pages (from ~ to) · orientation · paper · color (color / grayscale) · scale · top/bottom/left/right margins · preview",
+     "Desktop app: fixed the ‘This app doesn't support print preview’ window when printing — prints straight to the printer chosen in the print window",
+     "Better print quality and fixed a bluish color cast — prints lossless 300 dpi images and keeps theme screen effects and brightness out of the printout",
+     "Page panel thumbnail buttons now open in a circle around the thumbnail center instead of a fan, with a new ‘Print this page’ button",
+     "Moved the vertical layout toggle from the header to Settings › Display & layout › Screen layout",
+     "Custom theme background images — 6 system images or your own upload; fill empty space by repeating the image or with the system color; size (cover · contain · original · custom) and position (9-point grid · horizontal · vertical · drag) with a live preview (the font list is now collapsible)",
+     "Web: fixed the theme reverting to the Theme Store choice after changing it in the developer console and switching browser tabs"
+    ],
+    "ja": [
+     "紹介ページ・エディターに共有プレビュー画像(og-image)を追加 — URLを共有するとMeow-PDFの代表画像・タイトル・説明が表示",
+     "検索での表示を改善 — 検索向けのタイトル・説明・キーワード、正規URL(canonical)、構造化データ(Webアプリ・運営者・よくある質問)、robots.txt・サイトマップ(画像含む)を追加、紹介ページに「よくある質問」を追加",
+     "紹介ページ・エディターから外部のコードリポジトリへ移動するリンク・ボタンを削除(PCアプリの更新ができないときもサイトのダウンロード案内へ移動)",
+     "印刷ボタンをツールバーからヘッダーの「名前を付けて保存」の右へ移動",
+     "印刷ウィンドウを追加 — 印刷・部数・プリンター・ページ(開始〜終了)・印刷の向き・用紙・色(カラー / モノクロ)・拡大/縮小・上下左右の余白・プレビュー",
+     "PCアプリ: 印刷時に「このアプリは印刷プレビューをサポートしていません」が表示される問題を解決 — 印刷ウィンドウで選んだプリンターへ直接印刷",
+     "印刷画質を改善し、色が青っぽくずれる問題を修正 — 300dpiの可逆画像で印刷し、テーマの画面効果・明るさ調整が印刷に混ざらないように",
+     "ページパネルのサムネイルボタンを扇形ではなくサムネイル中央を囲む円形に展開、「このページを印刷」ボタンを追加",
+     "縦モードの切り替えをヘッダーから 設定 › 画面・レイアウト › 画面配置 へ移動",
+     "マイテーマに背景画像を追加 — システム画像6種または自分でアップロードした画像、余白は画像の繰り返し / システム色、サイズ(画面いっぱい・全体表示・元のサイズ・指定)・位置(9マス・横・縦・ドラッグで移動)・プレビュー(フォント一覧は折りたたみ表示)",
+     "Web: 開発者コンソールでテーマを変えたあとブラウザのタブを行き来すると、テーマストアで選んだテーマに戻る問題を修正"
+    ],
+    "zh": [
+     "为介绍页 · 编辑器添加分享预览图(og-image) — 分享链接时显示 Meow-PDF 代表图片 · 标题 · 简介",
+     "改进搜索曝光 — 新增面向搜索的标题 · 描述 · 关键词、规范网址(canonical)、结构化数据(网页应用 · 运营者 · 常见问题)、robots.txt · 网站地图(含图片),并在介绍页新增“常见问题”",
+     "移除介绍页 · 编辑器中跳转到外部代码仓库的链接 · 按钮(PC 程序无法更新时也会跳转到网站的下载说明)",
+     "将打印按钮从工具栏移到标题栏“另存为”的右侧",
+     "新增打印窗口 — 打印 · 份数 · 打印机 · 页面(起始 ~ 结束) · 打印方向 · 纸张 · 颜色(彩色 / 黑白) · 缩放比例 · 上下左右边距 · 预览",
+     "PC 程序: 解决打印时出现“此应用不支持打印预览”窗口的问题 — 直接用打印窗口中选择的打印机打印",
+     "提升打印画质并修复颜色偏蓝的问题 — 以 300dpi 无损图像打印,并避免主题的画面效果 · 亮度调节混入打印",
+     "页面面板缩略图按钮改为围绕缩略图中心呈圆形展开,而非扇形,并新增“打印此页”按钮",
+     "将竖向模式切换从标题栏移到 设置 › 画面 · 布局 › 画面布局",
+     "我的主题新增背景图片 — 6 种系统图片或自行上传的图片,空白处可选择重复图片 / 系统颜色,支持大小(铺满 · 完整显示 · 原始大小 · 自定义) · 位置(九宫格 · 水平 · 垂直 · 拖动移动) · 预览(字体列表改为折叠显示)",
+     "网页版: 修复用开发者控制台更换主题后切换浏览器标签页,主题会恢复为主题商店所选主题的问题"
+    ]
+   }
+  },
   {
    "v": "v1.0.5",
    "d": "2026.10.22",
@@ -501,72 +559,6 @@
      "演示模式背景无论主题始终为黑色，并隐藏主题装饰",
      "修复移动端横屏演示时工具栏(presbar)跑到屏幕外的问题 — 旋转屏幕后会自动移回屏幕内，移动端按屏幕宽度换行",
      "演示工具栏不能移动到展开后按钮会被遮挡的位置(屏幕外 · 刘海 · 主屏幕指示条);收起状态下移到边缘后再展开也会自动移向内侧"
-    ]
-   }
-  },
-  {
-   "v": "v0.11.4",
-   "d": "2026.10.18",
-   "items": {
-    "ko": [
-     "도형 · 텍스트 · 링크를 만든 뒤 자동으로 바뀐 선택 도구에서 개체 밖(빈 곳 · PDF 글자 · 페이지 바깥)을 누르면 원래 도구로 복귀 — 도형 · 링크는 누른 채 끌면 바로 새로 그려짐",
-     "도형에 ‘둥근 사각형’ 추가 — 옵션바의 ‘모서리’(0~100%)로 둥근 정도 조절, 그린 뒤에도 선택해서 수정 가능",
-     "공유작업 ‘모두 공개’ 완성 — 공개 프로젝트 목록에 올라가고 프리미엄 회원은 누구나(방장의 친구는 프리미엄이 아니어도) 참여 가능",
-     "공유작업 최대 인원 10명 — 가득 차면 목록 · 방 정보 창에 ‘가득 참’ 표시",
-     "프로젝트 관리에 입장 비밀번호(사용 / 사용 안 함 · 변경) · 장르(교육 · 개발 · 그림 · 디자인 · 공부 · 업무 · 기타) · 입장 기본 권한(관전자 / 편집 허용) 설정 추가",
-     "참여자가 나가기 · 공유 탭 닫기 · 창 닫기로 나가면 프로젝트 관리의 참여자 목록에서 바로 삭제, 3분 넘게 신호가 없는 참여자도 자동 정리",
-     "공유작업 패널 상단 탭 바로 친구 프로젝트 ↔ 공개 프로젝트 이동, 공개 프로젝트 검색(이름 · 장르 · 방장) · 정렬(인원순 / 최신순) · 장르 필터 추가",
-     "친구가 모두 공개로 진행하는 프로젝트는 친구 프로젝트 목록에는 안 보이고 친구 창의 ‘함께 작업’ 버튼으로 표시",
-     "친구 창의 ‘함께 작업’ · 공유작업 패널의 ‘보기’(기존 ‘참여’)를 누르면 방 정보 창 표시 — 방 이름 · 장르 · 방장 · 인원 · 입장 권한 · 참여자 목록과 참여하기 버튼",
-     "공개 프로젝트 신고 버튼 추가(불건전 · 욕설 · 명예훼손 · 범죄 · 기타 + 자세한 내용), 공유작업 채팅 메시지 신고 버튼 추가",
-     "공유작업 채팅 · 접속자 사진을 누르면 프로필 카드 표시 — 친구 추가 버튼(이미 친구면 ‘친구됨’, 요청 중이면 ‘요청됨’)과 신고 버튼",
-     "신고한 방의 이름 · 방장 · 방 정보가 개발자 계정의 ‘고객 문의 관리 › 공유작업 신고’로 전송, 처리 시 공유작업 이용 제한(1개월 · 3개월 · 1년 · 영구) · 진행 중인 방 종료 · 제한 해제 가능",
-     "모바일: 메뉴 아래쪽 목록(새 문서 ~ 개발자 콘솔)이 잘려 보이지 않던 문제 수정 — 메뉴 전체를 위아래로 스크롤 가능"
-    ],
-    "en": [
-     "After creating a shape, text or link, tapping outside an object (empty area · PDF text · outside the page) in the auto-switched Select tool returns to the original tool — for shapes and links, press and drag to draw a new one right away",
-     "Added ‘Rounded rectangle’ to Shapes — adjust the roundness with ‘Corners’ (0–100%) in the option bar, and edit it after drawing by selecting it",
-     "Shared work ‘Public’ completed — listed under Public projects, and any Premium member (or the host's friends, even without Premium) can join",
-     "Shared work allows up to 10 people — when full, ‘Full’ is shown in the list and room info window",
-     "Added settings to the project manager: entry password (on / off · change), genre (Education · Development · Drawing · Design · Study · Work · Other) and default entry role (Viewer / Can edit)",
-     "Participants who leave, close the shared tab or close the window are removed from the project manager's list right away, and participants silent for over 3 minutes are cleaned up automatically",
-     "Switch between Friends' projects ↔ Public projects with the tab bar at the top of the Shared work panel; added public project search (name · genre · host), sorting (Most people / Newest) and a genre filter",
-     "Projects a friend runs as Public don't appear in the Friends' projects list; they show up as the ‘Work together’ button in the Friends window",
-     "Tapping ‘Work together’ in the Friends window or ‘View’ (formerly ‘Join’) in the Shared work panel opens the room info window — room name · genre · host · members · entry role · participant list and a Join button",
-     "Added a report button for public projects (Inappropriate · Abusive language · Defamation · Crime · Other + details) and a report button for shared work chat messages",
-     "Tapping a photo in the shared work chat or online list shows a profile card — with an Add friend button (‘Friends’ if already friends, ‘Requested’ if pending) and a Report button",
-     "The reported room's name, host and info are sent to the developer account's ‘Customer inquiries › Shared work reports’; when handling, shared work can be restricted (1 month · 3 months · 1 year · permanent), active rooms ended and restrictions lifted",
-     "Mobile: fixed the lower part of the menu (New document ~ Developer console) being cut off — the whole menu now scrolls up and down"
-    ],
-    "ja": [
-     "図形・テキスト・リンクを作成した後、自動で切り替わった選択ツールでオブジェクトの外(空いた場所・PDFの文字・ページの外)を押すと元のツールに戻る — 図形・リンクは押したままドラッグするとすぐ新しく描けます",
-     "図形に「角丸四角形」を追加 — オプションバーの「角の丸み」(0〜100%)で丸みを調整、描いた後も選択して変更可能",
-     "共同作業の「全体公開」が完成 — 公開プロジェクト一覧に表示され、プレミアム会員なら誰でも(ホストの友達はプレミアムでなくても)参加可能",
-     "共同作業の最大人数は10人 — 満員になると一覧・ルーム情報ウィンドウに「満員」と表示",
-     "プロジェクト管理に入室パスワード(使用 / 使用しない・変更)・ジャンル(教育・開発・イラスト・デザイン・勉強・仕事・その他)・入室時の基本権限(閲覧者 / 編集可)の設定を追加",
-     "参加者が退出・共有タブを閉じる・ウィンドウを閉じるで抜けると、プロジェクト管理の参加者一覧からすぐに削除し、3分以上応答のない参加者も自動で整理",
-     "共同作業パネル上部のタブバーで友だちのプロジェクト ↔ 公開プロジェクトを切り替え、公開プロジェクトの検索(名前・ジャンル・ホスト)・並べ替え(人数順 / 新しい順)・ジャンルフィルターを追加",
-     "友達が全体公開で進めているプロジェクトは友だちのプロジェクト一覧には表示されず、友達ウィンドウの「一緒に作業」ボタンで表示",
-     "友達ウィンドウの「一緒に作業」・共同作業パネルの「表示」(以前の「参加」)を押すとルーム情報ウィンドウを表示 — ルーム名・ジャンル・ホスト・人数・入室権限・参加者一覧と参加ボタン",
-     "公開プロジェクトの通報ボタンを追加(不健全・暴言・名誉毀損・犯罪・その他+詳しい内容)、共同作業のチャットメッセージ通報ボタンを追加",
-     "共同作業のチャット・接続者の写真を押すとプロフィールカードを表示 — 友達追加ボタン(すでに友達なら「友達」、リクエスト中なら「リクエスト済み」)と通報ボタン",
-     "通報されたルームの名前・ホスト・ルーム情報が開発者アカウントの「お問い合わせ管理 › 共同作業の通報」に送信され、処理時に共同作業の利用制限(1か月・3か月・1年・永久)・進行中のルームの終了・制限解除が可能",
-     "モバイル: メニュー下部の項目(新規文書〜開発者コンソール)が切れて見えない問題を修正 — メニュー全体を上下にスクロール可能"
-    ],
-    "zh": [
-     "创建形状 · 文字 · 链接后，在自动切换的选择工具中点击对象以外的位置(空白处 · PDF 文字 · 页面外)会回到原来的工具 — 形状 · 链接按住拖动即可直接绘制新的",
-     "形状新增“圆角矩形” — 用选项栏中的“圆角”(0~100%)调整圆润程度，绘制后也可选中修改",
-     "协作“公开”功能完成 — 会显示在公开项目列表中，任何高级版会员(房主的好友即使不是高级版)都可加入",
-     "协作最多 10 人 — 满员时在列表 · 房间信息窗口中显示“已满”",
-     "项目管理新增进入密码(使用 / 不使用 · 更改) · 类型(教育 · 开发 · 绘画 · 设计 · 学习 · 工作 · 其他) · 进入时的默认权限(观看者 / 可编辑)设置",
-     "参与者通过退出 · 关闭共享标签页 · 关闭窗口离开时，会立即从项目管理的参与者列表中删除；超过 3 分钟没有信号的参与者也会被自动清理",
-     "可通过协作面板顶部标签栏在好友的项目 ↔ 公开项目间切换，新增公开项目搜索(名称 · 类型 · 房主) · 排序(按人数 / 最新) · 类型筛选",
-     "好友以公开方式进行的项目不会出现在好友的项目列表中，而是在好友窗口中以“一起协作”按钮显示",
-     "点击好友窗口中的“一起协作”或协作面板中的“查看”(原“加入”)会显示房间信息窗口 — 房间名称 · 类型 · 房主 · 人数 · 进入权限 · 参与者列表和加入按钮",
-     "新增公开项目举报按钮(不良内容 · 辱骂 · 诽谤 · 犯罪 · 其他 + 详细内容),新增协作聊天消息举报按钮",
-     "点击协作聊天 · 在线用户的头像会显示个人资料卡 — 包含添加好友按钮(已是好友显示“已是好友”,请求中显示“已请求”)和举报按钮",
-     "被举报房间的名称 · 房主 · 房间信息会发送到开发者账号的“客户咨询管理 › 协作举报”,处理时可限制使用协作(1 个月 · 3 个月 · 1 年 · 永久) · 结束进行中的房间 · 解除限制",
-     "移动端:修复菜单下方列表(新建文档 ~ 开发者控制台)被截断看不到的问题 — 整个菜单可上下滚动"
     ]
    }
   }
