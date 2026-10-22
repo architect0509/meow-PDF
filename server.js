@@ -4,7 +4,7 @@
  *  - 토스페이먼츠 일반 결제로 1개월 1,200원 / 1년 10,500원 이용권 판매. 시크릿 키는 이 서버에만 존재
  *  - v1.0.3 구독(자동결제)에서 이용권(한 번 결제)으로 다시 바꿨어요 — 자동으로 다시 결제되지 않아요.
  *  - 결제가 승인되면 Supabase users_profile.premium_until 을 1개월/1년 연장 (남은 기간이 있으면 그 뒤에 이어 붙여요)
- *  - v1.1.0 프리미엄 1개월 무료 체험(계정당 한 번, POST /api/trial/start) · 네이버 계정으로 로그인(/auth/naver/start → /auth/naver/callback)
+ *  - v1.1.1 프리미엄 1개월 무료 체험(계정당 한 번, POST /api/trial/start) · 네이버 계정으로 로그인(/auth/naver/start → /auth/naver/callback)
  *
  * 흐름: POST /api/create-order {plan} → /pay 팝업(토스 결제창) → /payment/success → POST /api/confirm-payment
  */
@@ -676,7 +676,7 @@ app.post('/api/account/delete', authLimiter(5), async (req, res) => {
   }
 });
 
-/* ─────────── v1.1.0 프리미엄 1개월 무료 체험 (계정당 한 번 · 자동결제 없음) ───────────
+/* ─────────── v1.1.1 프리미엄 1개월 무료 체험 (계정당 한 번 · 자동결제 없음) ───────────
  * 계정(auth.users)의 app_metadata.trial_used_at 에 시작 시각을 남겨요. app_metadata 는 서비스 키로만 바꿀 수 있어서 사용자가 지울 수 없어요.
  * 기록을 먼저 남긴 뒤 이용 기간을 더해서, 같은 계정이 동시에 여러 번 눌러도 한 번만 적용돼요. */
 const TRIAL_MONTHS = 1;
@@ -704,7 +704,7 @@ app.post('/api/trial/start', authLimiter(6), async (req, res) => {
   } finally { trialBusy.delete(user.id); }
 });
 
-/* ─────────── v1.1.0 네이버 계정으로 로그인 ───────────
+/* ─────────── v1.1.1 네이버 계정으로 로그인 ───────────
  * 흐름: 편집기 작은 창 → GET /auth/naver/start?ret=<편집기 주소>/auth-callback → 네이버 로그인 → GET /auth/naver/callback
  *       → 이메일로 Meow-PDF 계정을 찾거나 새로 만들고(인증된 계정) → 로그인 세션을 만들어 ret#access_token=… 으로 돌려보내요.
  * 필요: .env 의 NAVER_CLIENT_ID · NAVER_CLIENT_SECRET (네이버 개발자센터 › 애플리케이션 › 네이버 로그인, Callback URL = PUBLIC_BASE_URL/auth/naver/callback, 이메일 제공 필수)
@@ -868,7 +868,7 @@ app.get('/payment/fail', (req, res) => {
 
 // 화면 구성: public/index.html = 소개 페이지(/), public/edit.html = 편집 페이지(/edit, pdf-editor.html 을 그대로 복사)
 app.get('/edit', (req, res) => res.sendFile(path.join(__dirname, 'public', 'edit.html')));
-app.get('/auth-callback', (req, res) => res.sendFile(path.join(__dirname, 'public', 'auth-callback.html')));   // v1.1.0 소셜 로그인이 돌아오는 곳
+app.get('/auth-callback', (req, res) => res.sendFile(path.join(__dirname, 'public', 'auth-callback.html')));   // v1.1.1 소셜 로그인이 돌아오는 곳
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(PORT, () => {

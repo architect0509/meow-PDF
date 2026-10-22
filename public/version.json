@@ -1,6 +1,6 @@
 {
  "name": "Meow-PDF",
- "version": "v1.1.0",
+ "version": "v1.1.1",
  "date": "2026.10.22",
  "site": "https://www.meow-pdf.com/",
  "download": {
@@ -11,13 +11,14 @@
  },
  "history": [
   {
-   "v": "v1.1.0",
+   "v": "v1.1.1",
    "d": "2026.10.22",
    "items": {
     "ko": [
      "프리미엄 1개월 무료 체험 추가 — 계정당 한 번 · 카드 등록 없이 · 끝나도 자동으로 결제되지 않음, 헤더의 ‘1개월 무료’ 버튼 · 시작 화면 · 계정 창 · 소개 페이지 요금 안내에서 바로 시작",
      "Google 계정으로 로그인 · 네이버 계정으로 로그인 추가 — 계정 창의 로그인 · 회원가입 탭에서 작은 창으로 로그인, 처음이면 그 계정으로 바로 가입",
      "노트에 그림판 추가 (MD · TXT 옆) — 펜 · 형광펜 · 직선 · 지우개 · 도형(사각형 · 원 · 채우기) · 텍스트 상자 · 표, 색 · 굵기 · 실행 취소 · 크게 그리기, 아래쪽 버튼으로 PNG로 내보내기 · 현재 탭에 붙여넣기 · 새 탭으로 열기 (그림은 MPDF에 함께 저장)",
+     "그림판 확대 · 축소 추가 — Ctrl+휠(터치패드 두 손가락 벌리기 포함) · Ctrl+= / Ctrl+- 로 마우스가 있는 자리를 기준으로 100%~400%, 확대 비율 버튼 · Ctrl+0으로 100%",
      "자동 저장 추가 (기본: 꺼짐) — 설정 › 화면 · 레이아웃 › 자동 저장에서 1 · 3 · 5 · 10분 간격 선택, 열었거나 저장한 파일은 그 파일에 바로 덮어쓰고 저장할 파일이 없으면 이 기기에 복구용으로 보관했다가 다음에 열 때 되살리기, 헤더에 자동 저장 상태 표시",
      "형광펜 투명도 조절 추가 — 형광펜 도구와 선택한 형광펜의 옵션바에 ‘불투명’(10~100%) 추가, 형광펜마다 다른 투명도로 칠해도 겹친 곳은 진해지지 않음",
      "새 테마 ‘놀이동산’ 추가 (프리미엄) — 맑은 하늘 아래 천천히 돌아가는 관람차 · 달리는 롤러코스터 · 회전목마 천막 · 떠오르는 풍선 · 알록달록 깃발 줄이 있는 밝은 화면 (테마 스토어에서 관람차 · 풍선 움직임 끄기 가능)",
@@ -37,6 +38,7 @@
      "Added a 1-month free Premium trial — once per account · no card needed · no automatic payment when it ends; start it right away from the header’s “1 month free” button, the start screen, the account window or the pricing section of the intro page",
      "Added Sign in with Google · Sign in with Naver — sign in through a small window from the Login · Sign up tabs of the account window; first-time users are signed up with that account right away",
      "Added Paint to notes (next to MD · TXT) — pen · highlighter · line · eraser · shapes (rectangle · ellipse · fill) · text box · table, with color · width · undo · draw large; buttons below to export as PNG · paste into the current tab · open in a new tab (drawings are saved inside MPDF)",
+     "Added zoom to Paint — Ctrl+wheel (including trackpad pinch) · Ctrl+= / Ctrl+- zooms 100%–400% around the mouse pointer; the zoom button or Ctrl+0 returns to 100%",
      "Added auto-save (off by default) — choose a 1 · 3 · 5 · 10-minute interval in Settings › Display · Layout › Auto-save; files you opened or saved are overwritten directly, otherwise a recovery copy is kept on this device and can be restored next time; auto-save status shown in the header",
      "Added highlighter transparency — “Opacity” (10–100%) in the option bar of the highlighter tool and of a selected highlight; overlapping strokes don’t get darker even with different opacities",
      "Added the new “Theme Park” theme (Premium) — a bright screen with a slowly turning Ferris wheel, a racing roller coaster, a carousel tent, rising balloons and colorful bunting under a clear sky (Ferris wheel · balloon motion can be turned off in the theme store)",
@@ -56,6 +58,7 @@
      "プレミアム1か月無料体験を追加 — アカウントごとに1回・カード登録不要・終了後も自動決済なし。ヘッダーの「1か月無料」ボタン・スタート画面・アカウント画面・紹介ページの料金案内からすぐに開始",
      "Googleアカウントでログイン・NAVERアカウントでログインを追加 — アカウント画面のログイン・会員登録タブから小さなウィンドウでログイン、初めての場合はそのアカウントですぐ登録",
      "ノートにペイントを追加 (MD・TXTの隣) — ペン・蛍光ペン・直線・消しゴム・図形(四角形・円・塗りつぶし)・テキストボックス・表、色・太さ・元に戻す・大きく描く、下のボタンでPNG書き出し・現在のタブに貼り付け・新しいタブで開く (絵はMPDFに一緒に保存)",
+     "ペイントの拡大・縮小を追加 — Ctrl+ホイール(タッチパッドのピンチを含む)・Ctrl+= / Ctrl+- でマウスの位置を基準に100%~400%、倍率ボタン・Ctrl+0で100%",
      "自動保存を追加 (初期設定: オフ) — 設定 › 画面・レイアウト › 自動保存で1・3・5・10分間隔を選択、開いた・保存したファイルにはそのまま上書きし、保存先がない場合はこの端末に復元用として保管して次回開くときに復元、ヘッダーに自動保存の状態を表示",
      "蛍光ペンの透明度調整を追加 — 蛍光ペンツールと選択した蛍光ペンのオプションバーに「不透明度」(10~100%) を追加、蛍光ペンごとに透明度が違っても重なった部分は濃くならない",
      "新テーマ「遊園地」を追加 (プレミアム) — 青空の下でゆっくり回る観覧車・走るジェットコースター・メリーゴーラウンドのテント・浮かぶ風船・カラフルな旗が並ぶ明るい画面 (テーマストアで観覧車・風船の動きをオフにできる)",
@@ -75,6 +78,7 @@
      "新增高级版 1 个月免费试用 — 每个账号一次 · 无需绑卡 · 结束后不会自动扣款,可从标题栏的“1 个月免费”按钮、开始界面、账号窗口和介绍页的价格说明直接开始",
      "新增使用 Google 账号登录 · 使用 Naver 账号登录 — 在账号窗口的登录 · 注册标签中通过小窗口登录,首次使用会直接用该账号注册",
      "笔记新增画板 (位于 MD · TXT 旁) — 钢笔 · 荧光笔 · 直线 · 橡皮擦 · 形状(矩形 · 椭圆 · 填充)· 文本框 · 表格,支持颜色 · 粗细 · 撤销 · 放大绘制,下方按钮可导出为 PNG · 粘贴到当前标签 · 在新标签中打开 (图画随 MPDF 一起保存)",
+     "画板新增放大 · 缩小 — Ctrl+滚轮(含触控板双指缩放)· Ctrl+= / Ctrl+- 以鼠标位置为中心在 100%~400% 间缩放,缩放比例按钮 · Ctrl+0 恢复 100%",
      "新增自动保存 (默认关闭) — 在 设置 › 画面 · 布局 › 自动保存 中选择 1 · 3 · 5 · 10 分钟间隔,已打开或保存过的文件直接覆盖保存,没有保存位置时在本设备保留恢复副本并可在下次打开时恢复,标题栏显示自动保存状态",
      "新增荧光笔透明度调节 — 在荧光笔工具和所选荧光笔的选项栏中新增“不透明度”(10~100%),每条荧光笔透明度不同时重叠处也不会变深",
      "新增主题“游乐园”(高级版)— 晴朗天空下缓缓转动的摩天轮 · 飞驰的过山车 · 旋转木马帐篷 · 升起的气球 · 彩色彩旗的明亮界面 (可在主题商店关闭摩天轮 · 气球动画)",
