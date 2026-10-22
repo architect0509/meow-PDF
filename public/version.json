@@ -1,7 +1,7 @@
 {
  "name": "Meow-PDF",
- "version": "v1.1.1",
- "date": "2026.10.22",
+ "version": "v1.0.4",
+ "date": "2026.10.19",
  "site": "https://www.meow-pdf.com/",
  "download": {
   "win": "https://www.meow-pdf.com/download/windows",
@@ -10,232 +10,6 @@
   "page": "https://www.meow-pdf.com/#download"
  },
  "history": [
-  {
-   "v": "v1.1.1",
-   "d": "2026.10.22",
-   "items": {
-    "ko": [
-     "프리미엄 1개월 무료 체험 추가 — 계정당 한 번 · 카드 등록 없이 · 끝나도 자동으로 결제되지 않음, 헤더의 ‘1개월 무료’ 버튼 · 시작 화면 · 계정 창 · 소개 페이지 요금 안내에서 바로 시작",
-     "Google 계정으로 로그인 · 네이버 계정으로 로그인 추가 — 계정 창의 로그인 · 회원가입 탭에서 작은 창으로 로그인, 처음이면 그 계정으로 바로 가입",
-     "노트에 그림판 추가 (MD · TXT 옆) — 펜 · 형광펜 · 직선 · 지우개 · 도형(사각형 · 원 · 채우기) · 텍스트 상자 · 표, 색 · 굵기 · 실행 취소 · 크게 그리기, 아래쪽 버튼으로 PNG로 내보내기 · 현재 탭에 붙여넣기 · 새 탭으로 열기 (그림은 MPDF에 함께 저장)",
-     "그림판 확대 · 축소 추가 — Ctrl+휠(터치패드 두 손가락 벌리기 포함) · Ctrl+= / Ctrl+- 로 마우스가 있는 자리를 기준으로 100%~400%, 확대 비율 버튼 · Ctrl+0으로 100%",
-     "자동 저장 추가 (기본: 꺼짐) — 설정 › 화면 · 레이아웃 › 자동 저장에서 1 · 3 · 5 · 10분 간격 선택, 열었거나 저장한 파일은 그 파일에 바로 덮어쓰고 저장할 파일이 없으면 이 기기에 복구용으로 보관했다가 다음에 열 때 되살리기, 헤더에 자동 저장 상태 표시",
-     "형광펜 투명도 조절 추가 — 형광펜 도구와 선택한 형광펜의 옵션바에 ‘불투명’(10~100%) 추가, 형광펜마다 다른 투명도로 칠해도 겹친 곳은 진해지지 않음",
-     "새 테마 ‘놀이동산’ 추가 (프리미엄) — 맑은 하늘 아래 천천히 돌아가는 관람차 · 달리는 롤러코스터 · 회전목마 천막 · 떠오르는 풍선 · 알록달록 깃발 줄이 있는 밝은 화면 (테마 스토어에서 관람차 · 풍선 움직임 끄기 가능)",
-     "놀이동산 테마 이스터에그 — 빈 배경을 누르면 색종이가 팡, 빠르게 일곱 번 누르면 불꽃놀이와 풍선 퍼레이드",
-     "새 테마 ‘밤의 수영장’ 추가 (프리미엄) — 파란 네온 전구 줄 · 네온 간판 · 일렁이는 물결에 번지는 불빛 · 옅은 안개가 있는 고요한 밤 (테마 스토어에서 물결 · 안개 움직임 끄기 가능)",
-     "밤의 수영장 테마 이스터에그 — 빈 배경을 누르면 물결이 번지고, 빠르게 일곱 번 누르면 전구가 깜빡인 뒤 간판에 불이 켜지고 오리 튜브가 지나감",
-     "테마 스토어에 즐겨찾기 추가 — 테마 카드의 ☆ 버튼으로 담고, 왼쪽 메뉴의 ‘즐겨찾기’에서 모아 보기",
-     "테마 스토어 왼쪽 메뉴에 ‘최근 사용’ 추가 — 최근에 적용한 테마 6개를 조금 작은 카드로 모아 보기",
-     "PC: 문서 탭이 많아지면 왼쪽 탭이 사라지던 문제 수정 — 한 줄에 다 들어가지 않으면 좌우 화살표(또는 탭 위에서 마우스 휠)로 탭 줄 전체를 이동",
-     "모든 문서 탭의 너비를 똑같이 맞춤 — 탭이 많아지면 다 같이 좁아짐",
-     "모바일: 확대한 상태에서도 화면 왼쪽 · 오른쪽 끝에서 한 번 더 밀면 이전 · 다음 페이지로 이동 (끄는 동안 가장자리에 화살표로 안내)",
-     "도구 모음 기본 위치를 다시 상단 정렬로 변경 (설정 › 화면 · 레이아웃에서 좌측 정렬로 바꿀 수 있음)",
-     "업데이트 내역에서 1.0.x · 1.1.x 버전 묶음에도 오른쪽에 업데이트 요약 표시",
-     "PC 프로그램: Google · 네이버 로그인 창을 앱 안의 작은 창으로 열기"
-    ],
-    "en": [
-     "Added a 1-month free Premium trial — once per account · no card needed · no automatic payment when it ends; start it right away from the header’s “1 month free” button, the start screen, the account window or the pricing section of the intro page",
-     "Added Sign in with Google · Sign in with Naver — sign in through a small window from the Login · Sign up tabs of the account window; first-time users are signed up with that account right away",
-     "Added Paint to notes (next to MD · TXT) — pen · highlighter · line · eraser · shapes (rectangle · ellipse · fill) · text box · table, with color · width · undo · draw large; buttons below to export as PNG · paste into the current tab · open in a new tab (drawings are saved inside MPDF)",
-     "Added zoom to Paint — Ctrl+wheel (including trackpad pinch) · Ctrl+= / Ctrl+- zooms 100%–400% around the mouse pointer; the zoom button or Ctrl+0 returns to 100%",
-     "Added auto-save (off by default) — choose a 1 · 3 · 5 · 10-minute interval in Settings › Display · Layout › Auto-save; files you opened or saved are overwritten directly, otherwise a recovery copy is kept on this device and can be restored next time; auto-save status shown in the header",
-     "Added highlighter transparency — “Opacity” (10–100%) in the option bar of the highlighter tool and of a selected highlight; overlapping strokes don’t get darker even with different opacities",
-     "Added the new “Theme Park” theme (Premium) — a bright screen with a slowly turning Ferris wheel, a racing roller coaster, a carousel tent, rising balloons and colorful bunting under a clear sky (Ferris wheel · balloon motion can be turned off in the theme store)",
-     "Theme Park easter egg — tap the empty background for a confetti pop; tap seven times quickly for fireworks and a balloon parade",
-     "Added the new “Night Pool” theme (Premium) — a quiet night with strings of blue neon bulbs, a neon sign, light spreading over rippling water and a thin mist (ripple · mist motion can be turned off in the theme store)",
-     "Night Pool easter egg — tap the empty background to send out ripples; tap seven times quickly and the bulbs flicker, the sign lights up and a duck float drifts by",
-     "Added favorites to the theme store — add with the ☆ button on a theme card and view them together under “Favorites” in the left menu",
-     "Added “Recent” to the theme store’s left menu — your 6 most recently applied themes shown as slightly smaller cards",
-     "PC: fixed tabs on the left disappearing when there are many document tabs — when they don’t fit on one line, move the whole tab row with the left/right arrows (or the mouse wheel over the tabs)",
-     "All document tabs now have the same width — they all narrow together as more tabs open",
-     "Mobile: even while zoomed in, swiping once more at the left · right edge goes to the previous · next page (an arrow at the edge guides you while dragging)",
-     "Changed the default toolbar position back to the top (you can switch to the left in Settings › Display · Layout)",
-     "The update history now shows a short summary on the right for the 1.0.x · 1.1.x groups too",
-     "Desktop app: Google · Naver sign-in opens in a small window inside the app"
-    ],
-    "ja": [
-     "プレミアム1か月無料体験を追加 — アカウントごとに1回・カード登録不要・終了後も自動決済なし。ヘッダーの「1か月無料」ボタン・スタート画面・アカウント画面・紹介ページの料金案内からすぐに開始",
-     "Googleアカウントでログイン・NAVERアカウントでログインを追加 — アカウント画面のログイン・会員登録タブから小さなウィンドウでログイン、初めての場合はそのアカウントですぐ登録",
-     "ノートにペイントを追加 (MD・TXTの隣) — ペン・蛍光ペン・直線・消しゴム・図形(四角形・円・塗りつぶし)・テキストボックス・表、色・太さ・元に戻す・大きく描く、下のボタンでPNG書き出し・現在のタブに貼り付け・新しいタブで開く (絵はMPDFに一緒に保存)",
-     "ペイントの拡大・縮小を追加 — Ctrl+ホイール(タッチパッドのピンチを含む)・Ctrl+= / Ctrl+- でマウスの位置を基準に100%~400%、倍率ボタン・Ctrl+0で100%",
-     "自動保存を追加 (初期設定: オフ) — 設定 › 画面・レイアウト › 自動保存で1・3・5・10分間隔を選択、開いた・保存したファイルにはそのまま上書きし、保存先がない場合はこの端末に復元用として保管して次回開くときに復元、ヘッダーに自動保存の状態を表示",
-     "蛍光ペンの透明度調整を追加 — 蛍光ペンツールと選択した蛍光ペンのオプションバーに「不透明度」(10~100%) を追加、蛍光ペンごとに透明度が違っても重なった部分は濃くならない",
-     "新テーマ「遊園地」を追加 (プレミアム) — 青空の下でゆっくり回る観覧車・走るジェットコースター・メリーゴーラウンドのテント・浮かぶ風船・カラフルな旗が並ぶ明るい画面 (テーマストアで観覧車・風船の動きをオフにできる)",
-     "遊園地テーマのイースターエッグ — 空いた背景を押すと紙吹雪がポン、素早く7回押すと花火と風船パレード",
-     "新テーマ「夜のプール」を追加 (プレミアム) — 青いネオン電球の列・ネオン看板・揺れる水面ににじむ光・うっすらとした霧のある静かな夜 (テーマストアで水面・霧の動きをオフにできる)",
-     "夜のプールテーマのイースターエッグ — 空いた背景を押すと波紋が広がり、素早く7回押すと電球が点滅した後に看板が灯り、アヒルの浮き輪が通り過ぎる",
-     "テーマストアにお気に入りを追加 — テーマカードの☆ボタンで追加し、左メニューの「お気に入り」でまとめて表示",
-     "テーマストアの左メニューに「最近使用」を追加 — 最近適用したテーマ6個を少し小さなカードでまとめて表示",
-     "PC: 文書タブが多くなると左のタブが消える問題を修正 — 1行に収まらない場合は左右の矢印(またはタブ上のマウスホイール)でタブ列全体を移動",
-     "すべての文書タブの幅を揃えた — タブが増えるとすべて一緒に狭くなる",
-     "モバイル: 拡大した状態でも画面の左・右端でもう一度スワイプすると前・次のページへ移動 (ドラッグ中は端に矢印で案内)",
-     "ツールバーの初期位置を上揃えに戻した (設定 › 画面・レイアウトで左揃えに変更可能)",
-     "更新履歴で1.0.x・1.1.xのバージョングループにも右側に更新の要約を表示",
-     "PCアプリ: Google・NAVERのログイン画面をアプリ内の小さなウィンドウで開く"
-    ],
-    "zh": [
-     "新增高级版 1 个月免费试用 — 每个账号一次 · 无需绑卡 · 结束后不会自动扣款,可从标题栏的“1 个月免费”按钮、开始界面、账号窗口和介绍页的价格说明直接开始",
-     "新增使用 Google 账号登录 · 使用 Naver 账号登录 — 在账号窗口的登录 · 注册标签中通过小窗口登录,首次使用会直接用该账号注册",
-     "笔记新增画板 (位于 MD · TXT 旁) — 钢笔 · 荧光笔 · 直线 · 橡皮擦 · 形状(矩形 · 椭圆 · 填充)· 文本框 · 表格,支持颜色 · 粗细 · 撤销 · 放大绘制,下方按钮可导出为 PNG · 粘贴到当前标签 · 在新标签中打开 (图画随 MPDF 一起保存)",
-     "画板新增放大 · 缩小 — Ctrl+滚轮(含触控板双指缩放)· Ctrl+= / Ctrl+- 以鼠标位置为中心在 100%~400% 间缩放,缩放比例按钮 · Ctrl+0 恢复 100%",
-     "新增自动保存 (默认关闭) — 在 设置 › 画面 · 布局 › 自动保存 中选择 1 · 3 · 5 · 10 分钟间隔,已打开或保存过的文件直接覆盖保存,没有保存位置时在本设备保留恢复副本并可在下次打开时恢复,标题栏显示自动保存状态",
-     "新增荧光笔透明度调节 — 在荧光笔工具和所选荧光笔的选项栏中新增“不透明度”(10~100%),每条荧光笔透明度不同时重叠处也不会变深",
-     "新增主题“游乐园”(高级版)— 晴朗天空下缓缓转动的摩天轮 · 飞驰的过山车 · 旋转木马帐篷 · 升起的气球 · 彩色彩旗的明亮界面 (可在主题商店关闭摩天轮 · 气球动画)",
-     "游乐园主题彩蛋 — 点击空白背景会砰出彩纸,快速点击七次会出现烟花和气球巡游",
-     "新增主题“夜晚泳池”(高级版)— 蓝色霓虹灯串 · 霓虹招牌 · 荡漾水面上晕开的灯光 · 薄雾笼罩的宁静夜晚 (可在主题商店关闭水波 · 雾气动画)",
-     "夜晚泳池主题彩蛋 — 点击空白背景会泛起涟漪,快速点击七次灯泡闪烁后招牌亮起,小黄鸭泳圈漂过",
-     "主题商店新增收藏 — 用主题卡片上的 ☆ 按钮收藏,在左侧菜单的“收藏”中集中查看",
-     "主题商店左侧菜单新增“最近使用” — 以稍小的卡片集中显示最近应用的 6 个主题",
-     "PC:修复文档标签过多时左侧标签消失的问题 — 一行放不下时可用左右箭头(或在标签上滚动鼠标滚轮)移动整排标签",
-     "所有文档标签宽度一致 — 标签增多时一起变窄",
-     "移动端:放大状态下在屏幕左 · 右边缘再滑动一次即可翻到上一页 · 下一页 (拖动时边缘会显示箭头提示)",
-     "工具栏默认位置改回顶部 (可在 设置 › 画面 · 布局 中改为左侧)",
-     "更新记录中 1.0.x · 1.1.x 版本组也在右侧显示更新摘要",
-     "桌面程序:Google · Naver 登录窗口在应用内的小窗口中打开"
-    ]
-   }
-  },
-  {
-   "v": "v1.0.6",
-   "d": "2026.10.22",
-   "items": {
-    "ko": [
-     "소개 페이지 · 편집기 공유 미리보기 이미지(og-image) 추가 — 주소를 공유하면 Meow-PDF 대표 이미지 · 제목 · 설명이 표시됨",
-     "검색 노출 개선 — 검색에 맞춘 제목 · 설명 · 키워드, 대표 주소(canonical), 구조화 데이터(웹 앱 · 운영자 · 자주 묻는 질문), robots.txt · 사이트맵(이미지 포함) 추가, 소개 페이지에 ‘자주 묻는 질문’ 추가",
-     "소개 페이지 · 편집기에서 외부 코드 저장소로 이동하는 링크 · 버튼 제거 (PC 프로그램 업데이트가 안 될 때도 사이트의 다운로드 안내로 이동)",
-     "인쇄 버튼을 도구 모음에서 헤더의 ‘다른 이름으로 저장’ 오른쪽으로 이동",
-     "인쇄 창 추가 — 인쇄 · 복사본 수 · 프린터 · 페이지(시작 ~ 끝) · 인쇄 방향 · 용지 · 색(컬러 / 흑백) · 확대/축소 배율 · 상하좌우 여백 · 미리 보기",
-     "PC 프로그램: 인쇄할 때 ‘이 앱은 인쇄 미리 보기를 지원하지 않습니다’ 창이 뜨던 문제 해결 — 인쇄 창에서 고른 프린터로 바로 인쇄",
-     "인쇄 화질 개선 · 색이 푸르게 틀어지던 문제 수정 — 300dpi 무손실 이미지로 인쇄하고, 테마의 화면 효과 · 밝기 조절이 인쇄에 섞이지 않게 함",
-     "페이지 패널 썸네일 버튼을 부채꼴 대신 썸네일 가운데를 둘러싼 원으로 펼침, ‘이 페이지 인쇄’ 버튼 추가",
-     "세로 모드 전환을 헤더에서 설정 › 화면 · 레이아웃 › 화면 배치로 이동",
-     "나만의 테마에 배경 이미지 추가 — 시스템 그림 6종 또는 직접 올린 그림, 빈 여백은 이미지 반복 / 시스템 색, 크기(화면 채우기 · 전체 보이기 · 원래 크기 · 직접) · 위치(9칸 · 가로 · 세로 · 끌어서 이동) · 미리 보기 (글꼴 목록은 접어서 표시)",
-     "웹: 개발자 콘솔로 테마를 바꾼 뒤 브라우저 탭을 오가면 테마 스토어에서 고른 테마로 돌아가던 문제 수정",
-     "공유 프로젝트: 서버에서도 방장이 5분 넘게 오프라인이면 자동으로 닫힘 — 공개 · 친구 · 내 프로젝트 목록에서 바로 빠지고 입장 · 코드 입장 · 방 정보 보기도 막힘 (supabase-share.sql 다시 실행 필요)"
-    ],
-    "en": [
-     "Added a share preview image (og-image) for the intro page and editor — sharing the link now shows the Meow-PDF image, title and description",
-     "Better search visibility — search-friendly titles, descriptions and keywords, canonical URLs, structured data (web app · operator · FAQ), robots.txt and a sitemap (with images), plus an FAQ section on the intro page",
-     "Removed links and buttons that led to the external code repository from the intro page and editor (the desktop app now opens the site's download guide when auto-update fails)",
-     "Moved the Print button from the toolbar to the header, right of ‘Save as’",
-     "New print window — Print · copies · printer · pages (from ~ to) · orientation · paper · color (color / grayscale) · scale · top/bottom/left/right margins · preview",
-     "Desktop app: fixed the ‘This app doesn't support print preview’ window when printing — prints straight to the printer chosen in the print window",
-     "Better print quality and fixed a bluish color cast — prints lossless 300 dpi images and keeps theme screen effects and brightness out of the printout",
-     "Page panel thumbnail buttons now open in a circle around the thumbnail center instead of a fan, with a new ‘Print this page’ button",
-     "Moved the vertical layout toggle from the header to Settings › Display & layout › Screen layout",
-     "Custom theme background images — 6 system images or your own upload; fill empty space by repeating the image or with the system color; size (cover · contain · original · custom) and position (9-point grid · horizontal · vertical · drag) with a live preview (the font list is now collapsible)",
-     "Web: fixed the theme reverting to the Theme Store choice after changing it in the developer console and switching browser tabs",
-     "Shared projects: the server now also closes a project automatically when the host has been offline for over 5 minutes — it disappears from the public, friends and my-projects lists, and joining, joining by code and viewing room info are blocked (re-run supabase-share.sql)"
-    ],
-    "ja": [
-     "紹介ページ・エディターに共有プレビュー画像(og-image)を追加 — URLを共有するとMeow-PDFの代表画像・タイトル・説明が表示",
-     "検索での表示を改善 — 検索向けのタイトル・説明・キーワード、正規URL(canonical)、構造化データ(Webアプリ・運営者・よくある質問)、robots.txt・サイトマップ(画像含む)を追加、紹介ページに「よくある質問」を追加",
-     "紹介ページ・エディターから外部のコードリポジトリへ移動するリンク・ボタンを削除(PCアプリの更新ができないときもサイトのダウンロード案内へ移動)",
-     "印刷ボタンをツールバーからヘッダーの「名前を付けて保存」の右へ移動",
-     "印刷ウィンドウを追加 — 印刷・部数・プリンター・ページ(開始〜終了)・印刷の向き・用紙・色(カラー / モノクロ)・拡大/縮小・上下左右の余白・プレビュー",
-     "PCアプリ: 印刷時に「このアプリは印刷プレビューをサポートしていません」が表示される問題を解決 — 印刷ウィンドウで選んだプリンターへ直接印刷",
-     "印刷画質を改善し、色が青っぽくずれる問題を修正 — 300dpiの可逆画像で印刷し、テーマの画面効果・明るさ調整が印刷に混ざらないように",
-     "ページパネルのサムネイルボタンを扇形ではなくサムネイル中央を囲む円形に展開、「このページを印刷」ボタンを追加",
-     "縦モードの切り替えをヘッダーから 設定 › 画面・レイアウト › 画面配置 へ移動",
-     "マイテーマに背景画像を追加 — システム画像6種または自分でアップロードした画像、余白は画像の繰り返し / システム色、サイズ(画面いっぱい・全体表示・元のサイズ・指定)・位置(9マス・横・縦・ドラッグで移動)・プレビュー(フォント一覧は折りたたみ表示)",
-     "Web: 開発者コンソールでテーマを変えたあとブラウザのタブを行き来すると、テーマストアで選んだテーマに戻る問題を修正",
-     "共有プロジェクト: サーバー側でもホストが5分以上オフラインなら自動で終了 — 公開・友だち・自分のプロジェクト一覧からすぐに消え、入室・コード入室・ルーム情報の表示もブロック(supabase-share.sql の再実行が必要)"
-    ],
-    "zh": [
-     "为介绍页 · 编辑器添加分享预览图(og-image) — 分享链接时显示 Meow-PDF 代表图片 · 标题 · 简介",
-     "改进搜索曝光 — 新增面向搜索的标题 · 描述 · 关键词、规范网址(canonical)、结构化数据(网页应用 · 运营者 · 常见问题)、robots.txt · 网站地图(含图片),并在介绍页新增“常见问题”",
-     "移除介绍页 · 编辑器中跳转到外部代码仓库的链接 · 按钮(PC 程序无法更新时也会跳转到网站的下载说明)",
-     "将打印按钮从工具栏移到标题栏“另存为”的右侧",
-     "新增打印窗口 — 打印 · 份数 · 打印机 · 页面(起始 ~ 结束) · 打印方向 · 纸张 · 颜色(彩色 / 黑白) · 缩放比例 · 上下左右边距 · 预览",
-     "PC 程序: 解决打印时出现“此应用不支持打印预览”窗口的问题 — 直接用打印窗口中选择的打印机打印",
-     "提升打印画质并修复颜色偏蓝的问题 — 以 300dpi 无损图像打印,并避免主题的画面效果 · 亮度调节混入打印",
-     "页面面板缩略图按钮改为围绕缩略图中心呈圆形展开,而非扇形,并新增“打印此页”按钮",
-     "将竖向模式切换从标题栏移到 设置 › 画面 · 布局 › 画面布局",
-     "我的主题新增背景图片 — 6 种系统图片或自行上传的图片,空白处可选择重复图片 / 系统颜色,支持大小(铺满 · 完整显示 · 原始大小 · 自定义) · 位置(九宫格 · 水平 · 垂直 · 拖动移动) · 预览(字体列表改为折叠显示)",
-     "网页版: 修复用开发者控制台更换主题后切换浏览器标签页,主题会恢复为主题商店所选主题的问题",
-     "共享项目: 服务器端也会在房主离线超过 5 分钟时自动关闭项目 — 立即从公开 · 好友 · 我的项目列表中消失,并阻止加入 · 代码加入 · 查看房间信息(需重新运行 supabase-share.sql)"
-    ]
-   }
-  },
-  {
-   "v": "v1.0.5",
-   "d": "2026.10.22",
-   "items": {
-    "ko": [
-     "새 테마 ‘여름 휴양지’ 추가 (프리미엄) — 눈부신 해 · 뭉게구름 · 반짝이는 에메랄드 바다 · 밀려오는 파도 · 하얀 모래사장 · 야자수 · 파라솔 · 갈매기가 있는 밝은 여름 화면 (테마 스토어에서 파도 · 갈매기 움직임 끄기 가능)",
-     "여름 휴양지 테마 이스터에그 — 빈 배경을 누르면 물방울이 튀고, 빠르게 일곱 번 누르면 큰 파도가 지나간 뒤 수박 깨기",
-     "새 테마 ‘아날로그 호러’ 추가 (기간 한정 · 공포 테마와 같은 매년 9월 1일 ~ 11월 30일 무료, 그 밖에는 프리미엄) — 낡은 비디오테이프처럼 화질을 떨어뜨린 화면: 주사선 · 필름 노이즈 · 번지는 색 · 트래킹 띠 · 화면 구석의 재생 표시 · 페이지를 넘길 때 찢어지는 화면 · 가끔 끼어드는 경고 방송 (적용 전 경고 표시, 노이즈 · 화면 왜곡 끄기 가능)",
-     "아날로그 호러 테마 이스터에그 — 빈 배경을 누르면 그 자리에 잡음, 빠르게 일곱 번 누르면 신호가 끊기고 화면 조정 화면 표시",
-     "PC 프로그램: F11로 전체화면 켜기 · 끄기",
-     "도형의 색상 · 채우기 기본 색을 노랑 · 빨강 · 파랑 · 초록 · 투명으로 변경 — 선 색상에도 투명(선 없음) 추가",
-     "선택 도구로 도형을 골랐을 때도 선 굵기(테두리) 옵션 표시, 선택 도구 옵션바의 레이어 고르기는 제거",
-     "PC 옵션바: 텍스트의 자간 · 줄간격 입력칸을 작게 줄여 위아래로 묶음 (옵션바 길이 단축)",
-     "작은 노트북에서 헤더 오른쪽이 잘리던 문제 수정 — 헤더가 잘리기 시작하면 ‘PDF 전체에서 찾기’ 칸을 먼저 숨김 (자리가 생기면 다시 표시)",
-     "PC: 헤더 · 탭바 접기 / 펼치기 추가 — 탭바 오른쪽 끝 버튼 또는 Ctrl+Shift+H로 접고, 맨 위 가운데 손잡이로 펼침",
-     "‘빈 문서로 시작’에서 가로로 만들기 · 세로로 만들기 · 커스텀(가로 · 세로 mm 직접 입력) 중 선택 (새 탭 · 새 문서 버튼도 같음, 마지막 선택 기억)",
-     "그룹화 추가 — Ctrl · Shift로 여러 개체를 고른 뒤 우클릭 › 그룹화(Ctrl+G) · 그룹화 해제(Ctrl+Shift+G), 묶인 개체는 하나만 눌러도 함께 선택 · 이동 · 크기 조절",
-     "공유 프로젝트: 방장이 오프라인이면 5분 뒤 자동으로 닫힘 — 참여자에게 바로 알리고 남은 시간 표시, 방장이 돌아오면 그대로 계속",
-     "파일을 열면 기본으로 페이지 맞춤(한 쪽 전체가 화면에 보이게) 적용",
-     "소개 페이지의 기능 블록에 마우스를 올리면 살짝 노래지며 위로 떠오르는 효과 추가",
-     "업데이트 내역 v1.0.1 항목의 특정 제품 이름 언급 삭제"
-    ],
-    "en": [
-     "New theme ‘Summer Resort’ (Premium) — a bright summer scene with a dazzling sun, fluffy clouds, a sparkling emerald sea, rolling waves, white sand, palm trees, a parasol and seagulls (waves & seagulls motion can be turned off in the Theme Store)",
-     "Summer Resort easter egg — click the empty background to splash water; click seven times quickly for a giant wave followed by a watermelon smash",
-     "New theme ‘Analog Horror’ (Limited · free every year Sep 1 – Nov 30, same as the Horror theme; Premium otherwise) — a degraded old-videotape look: scanlines, film noise, bleeding colors, a tracking band, playback overlay in the corner, a tearing screen when you turn pages and the occasional emergency broadcast (warning before applying; noise & distortion can be turned off)",
-     "Analog Horror easter egg — click the empty background for a burst of static; click seven times quickly and the signal drops to color bars",
-     "Desktop app: F11 toggles fullscreen",
-     "Default shape stroke & fill colors are now yellow · red · blue · green · transparent — stroke color also gets transparent (no line)",
-     "Selecting a shape with the Select tool now shows the line width (border) option; the layer picker was removed from the Select tool options bar",
-     "PC options bar: letter & line spacing inputs are smaller and stacked to shorten the bar",
-     "Fixed the right side of the header being cut off on small laptops — the ‘Search whole PDF’ box hides first once the header starts to clip (and returns when there is room)",
-     "PC: collapse / expand the header & tab bar — use the button at the right end of the tab bar or Ctrl+Shift+H, and the small handle at the top center to expand",
-     "‘Start with a blank document’ now lets you choose landscape, portrait or custom (enter width & height in mm) (same for New tab · New document; remembers your last choice)",
-     "Grouping — select several objects with Ctrl · Shift, then right-click › Group (Ctrl+G) · Ungroup (Ctrl+Shift+G); grouped objects are selected, moved and resized together with a single click",
-     "Shared projects: closes automatically 5 minutes after the host goes offline — participants are notified right away with a countdown, and it continues if the host returns",
-     "Files now open fitted to the page (the whole page visible) by default",
-     "Feature blocks on the intro page now glow slightly yellow and lift up on hover",
-     "Removed a product name mention from the v1.0.1 update notes"
-    ],
-    "ja": [
-     "新テーマ「夏のリゾート」追加(プレミアム) — まぶしい太陽・わた雲・きらめくエメラルドの海・打ち寄せる波・白い砂浜・ヤシの木・パラソル・カモメのいる明るい夏の画面(テーマストアで波・カモメの動きをオフ可能)",
-     "夏のリゾートのイースターエッグ — 空いた背景をクリックすると水しぶき、素早く7回クリックすると大波のあとにスイカ割り",
-     "新テーマ「アナログホラー」追加(期間限定・ホラーテーマと同じ毎年9月1日〜11月30日は無料、それ以外はプレミアム) — 古いビデオテープのように画質を落とした画面: 走査線・フィルムノイズ・にじむ色・トラッキングの帯・画面隅の再生表示・ページをめくると裂ける画面・ときどき割り込む警告放送(適用前に警告、ノイズ・画面のゆがみはオフ可能)",
-     "アナログホラーのイースターエッグ — 空いた背景をクリックするとその場にノイズ、素早く7回クリックすると信号が途切れてカラーバーを表示",
-     "PCアプリ: F11で全画面のオン・オフ",
-     "図形の色・塗りの基本色を黄・赤・青・緑・透明に変更 — 線の色にも透明(線なし)を追加",
-     "選択ツールで図形を選んだときも線の太さ(枠線)オプションを表示、選択ツールのオプションバーからレイヤー選択を削除",
-     "PCオプションバー: テキストの字間・行間の入力欄を小さくして上下にまとめ、オプションバーを短縮",
-     "小さいノートPCでヘッダーの右側が切れる問題を修正 — ヘッダーが切れ始めると「PDF全体から検索」欄を先に隠す(余裕ができると再表示)",
-     "PC: ヘッダー・タブバーの折りたたみ / 展開を追加 — タブバー右端のボタンまたは Ctrl+Shift+H で折りたたみ、上部中央の小さなつまみで展開",
-     "「空のドキュメントで開始」で横向き・縦向き・カスタム(幅・高さを mm で入力)から選択(新しいタブ・新規ドキュメントボタンも同様、最後の選択を記憶)",
-     "グループ化を追加 — Ctrl・Shift で複数のオブジェクトを選んで右クリック › グループ化(Ctrl+G)・グループ解除(Ctrl+Shift+G)、グループ化したオブジェクトは1つクリックするだけでまとめて選択・移動・サイズ変更",
-     "共有プロジェクト: ホストがオフラインになると5分後に自動で終了 — 参加者にすぐ知らせて残り時間を表示、ホストが戻ればそのまま続行",
-     "ファイルを開くと既定でページに合わせる(1ページ全体が画面に収まる)を適用",
-     "紹介ページの機能ブロックにマウスを乗せると少し黄色くなって浮き上がる効果を追加",
-     "更新履歴 v1.0.1 の項目から特定の製品名の言及を削除"
-    ],
-    "zh": [
-     "新增主题“夏日度假”(高级版) — 耀眼的太阳、蓬松的白云、闪亮的翡翠色大海、涌来的海浪、白色沙滩、椰子树、遮阳伞和海鸥组成的明亮夏日画面(可在主题商店关闭海浪 · 海鸥动画)",
-     "夏日度假彩蛋 — 点击空白背景会溅起水花,快速连点七次会掀起大浪,然后劈开西瓜",
-     "新增主题“模拟恐怖”(限时 · 与恐怖主题相同,每年 9 月 1 日 ~ 11 月 30 日免费,其余时间为高级版) — 像旧录像带一样降低画质的画面: 扫描线、胶片噪点、晕开的颜色、跟踪条纹、角落的播放标识、翻页时撕裂的画面、偶尔插入的紧急广播(应用前显示警告,可关闭噪点 · 画面扭曲)",
-     "模拟恐怖彩蛋 — 点击空白背景会在该处出现雪花噪点,快速连点七次会信号中断并显示彩条测试画面",
-     "桌面程序: 按 F11 开启 · 关闭全屏",
-     "图形的线条颜色 · 填充默认颜色改为黄 · 红 · 蓝 · 绿 · 透明 — 线条颜色也新增透明(无线条)",
-     "用选择工具选中图形时也显示线条粗细(边框)选项,并移除选择工具选项栏中的图层选择",
-     "PC 选项栏: 将文本的字间距 · 行间距输入框缩小并上下排列,缩短选项栏",
-     "修复小尺寸笔记本上标题栏右侧被截断的问题 — 标题栏开始被截断时先隐藏“在整个 PDF 中查找”框(有空间时重新显示)",
-     "PC: 新增标题栏 · 标签栏折叠 / 展开 — 用标签栏最右侧的按钮或 Ctrl+Shift+H 折叠,用顶部中央的小把手展开",
-     "“从空白文档开始”可选择横向、纵向或自定义(以 mm 输入宽 · 高)(新标签页 · 新建文档按钮相同,会记住上次的选择)",
-     "新增组合 — 用 Ctrl · Shift 选择多个对象后右键 › 组合(Ctrl+G) · 取消组合(Ctrl+Shift+G),组合后的对象只需点击一个即可一起选择 · 移动 · 调整大小",
-     "共享项目: 房主离线 5 分钟后自动关闭 — 立即通知参与者并显示剩余时间,房主回来则继续",
-     "打开文件时默认适应页面(整页显示在屏幕上)",
-     "在介绍页的功能卡片上悬停鼠标时,卡片会微微变黄并向上浮起",
-     "删除更新记录 v1.0.1 条目中提及的特定产品名称"
-    ]
-   }
-  },
   {
    "v": "v1.0.4",
    "d": "2026.10.19",
@@ -399,7 +173,7 @@
    "d": "2026.10.18",
    "items": {
     "ko": [
-     "스마트 안내선 추가 — 개체를 옮기거나 크기를 바꿀 때 다른 개체 · 페이지의 양 끝과 가운데가 맞으면 빨간 점선으로 표시하고 딱 맞춤 (Alt를 누르면 끄기)",
+     "스마트 안내선 추가 — 개체를 옮기거나 크기를 바꿀 때 다른 개체 · 페이지의 양 끝과 가운데가 맞으면 파워포인트처럼 빨간 점선으로 표시하고 딱 맞춤 (Alt를 누르면 끄기)",
      "옵션바의 입력칸을 누르면 내용이 모두 선택되어 지우지 않고 바로 고쳐 쓰기 가능 — 입력하는 동안 숫자가 최솟값으로 바뀌던 문제도 수정",
      "PC 프로그램 출시 — 소개 페이지에서 Windows · macOS · Linux용 Meow-PDF를 내려받아 설치 가능 (실행하면 소개 화면 없이 바로 편집 화면 · 인터넷이 없어도 실행)",
      "PC 프로그램: 새 버전이 나오면 알림(버전마다 한 번)과 오른쪽 아래 작은 창으로 안내, 자세히 보기에서 바뀐 내용을 본 뒤 업데이트 버튼으로 바로 업데이트",
@@ -407,7 +181,7 @@
      "앱 아이콘을 금색 테두리의 고양이 아이콘으로 고정 — 휴대폰 홈 화면 · PC 프로그램에서 같은 아이콘으로 표시"
     ],
     "en": [
-     "Smart guides — when you move or resize an object, red dashed lines show up as its edges or center line up with other objects or the page, and it snaps into place (hold Alt to turn off)",
+     "Smart guides — when you move or resize an object, red dashed lines show up PowerPoint-style as its edges or center line up with other objects or the page, and it snaps into place (hold Alt to turn off)",
      "Clicking an input in the options bar now selects its contents, so you can type a new value right away — also fixed numbers jumping to the minimum while typing",
      "PC app released — download and install Meow-PDF for Windows · macOS · Linux from the intro page (it opens straight to the editor, even without internet)",
      "PC app: when a new version is out, you get a notification (once per version) and a small window at the bottom right — see what changed in View details, then update with the Update button",
@@ -415,7 +189,7 @@
      "The app icon is now fixed to the cat icon with a gold border — it looks the same on your phone's home screen and in the PC app"
     ],
     "ja": [
-     "スマートガイド — オブジェクトを移動・サイズ変更するとき、ほかのオブジェクトやページの両端・中央がそろうと赤い点線で知らせ、ぴったり合わせます(Altを押すとオフ)",
+     "スマートガイド — オブジェクトを移動・サイズ変更するとき、ほかのオブジェクトやページの両端・中央がそろうとPowerPointのように赤い点線で知らせ、ぴったり合わせます(Altを押すとオフ)",
      "オプションバーの入力欄を押すと内容がすべて選択され、消さずにそのまま書き直せます — 入力中に数値が最小値に変わる問題も修正",
      "PCアプリを公開 — 紹介ページからWindows・macOS・Linux版のMeow-PDFをダウンロードしてインストールできます(起動すると紹介画面なしですぐ編集画面・インターネットがなくても開けます)",
      "PCアプリ: 新しいバージョンが出ると通知(バージョンごとに1回)と右下の小さなウィンドウでお知らせし、詳しく見るで変更内容を確認してからアップデートボタンですぐにアップデート",
@@ -423,7 +197,7 @@
      "アプリのアイコンを金色の縁取りの猫アイコンに固定 — スマホのホーム画面・PCアプリで同じアイコンで表示されます"
     ],
     "zh": [
-     "智能参考线 — 移动或调整对象大小时,若与其他对象 · 页面的两端或中心对齐,会显示红色虚线并自动吸附(按住 Alt 可关闭)",
+     "智能参考线 — 移动或调整对象大小时,若与其他对象 · 页面的两端或中心对齐,会像 PowerPoint 一样显示红色虚线并自动吸附(按住 Alt 可关闭)",
      "点击选项栏的输入框会全选内容,无需删除即可直接改写 — 同时修复了输入过程中数值被改成最小值的问题",
      "PC 程序发布 — 可在介绍页下载并安装 Windows · macOS · Linux 版 Meow-PDF(启动后直接进入编辑界面 · 没有网络也能打开)",
      "PC 程序:有新版本时会通过通知(每个版本一次)和右下角的小窗口提醒,可在查看详情中查看更新内容,再用更新按钮直接更新",
@@ -595,6 +369,180 @@
      "移动端:演示时左右滑动或轻点屏幕左侧 / 右侧即可切换到上一页 · 下一页",
      "移动端:修复结束演示后底部悬浮导航按钮被移到上方的问题 — 演示中的旋转 · 全屏变化不再改变其位置，结束后回到初始位置",
      "添加 Google AdSense 代码 — 放在介绍页 · 商家信息页的 head 中；编辑器仅在桌面端打开设置 · 账号 · 主题商店窗口时在窗口两侧显示竖幅广告(高级版 · 移动端 · 演示中不显示);在高级版介绍 · 支付窗口 · 介绍页价格说明中加入“去广告”文字；离线服务工作线程不缓存广告脚本和请求"
+    ]
+   }
+  },
+  {
+   "v": "v0.11.5",
+   "d": "2026.10.18",
+   "items": {
+    "ko": [
+     "설정 › 화면 · 레이아웃에 ‘테마 배경 효과’ 추가 — 프리미엄 테마의 배경 클릭 효과 · 이스터에그를 모두 켜기 / 클릭 효과만 / 모두 끄기 중 선택",
+     "테마 이스터에그 상단 문구를 ‘형광등 소리만 들린다.’ 같은 짧은 평서체로 바꾸고 이모티콘 줄임",
+     "공유작업 채팅방에서 신고(메시지 · 참여자)하면 채팅 기록도 함께 전송 — 메시지 신고는 그 메시지 앞 20개 · 뒤 10개, 그 밖에는 최근 30개, 고객 문의 관리 › 공유작업 신고에서 신고 대상의 메시지를 강조해 표시",
+     "모바일: 노치(카메라) 영역을 검은색으로 채움, 상태 표시줄 색도 검은색으로 변경",
+     "모바일: 휴대폰을 가로로 돌리면 노치가 있는 쪽(왼쪽 / 오른쪽)을 자동으로 비우고 위쪽 여백은 없앰",
+     "모바일: 하단 플로팅 네비게이션 버튼의 처음 위치를 더 아래로 이동",
+     "모바일: 발표를 누르면 자동으로 전체화면 · 여백 없이 화면 가득 표시, 가로 모양 페이지는 자동으로 가로 화면으로 전환(지원하는 브라우저)",
+     "발표 모드 배경을 테마와 상관없이 항상 검은색으로 고정, 테마 장식 숨김",
+     "모바일 가로 화면 발표에서 도구 막대(presbar)가 화면 밖으로 사라지던 문제 수정 — 화면을 돌리면 자동으로 화면 안으로 이동, 모바일에서는 화면 폭에 맞춰 줄바꿈",
+     "발표 도구 막대는 펼쳤을 때 버튼이 가려지는 위치(화면 밖 · 노치 · 홈 바)로는 옮길 수 없도록 제한, 접은 상태에서 가장자리로 옮긴 뒤 펼쳐도 안쪽으로 자동 이동"
+    ],
+    "en": [
+     "Added ‘Theme background effects’ to Settings › Display · Layout — choose All on / Click effects only / All off for Premium themes' background click effects and easter eggs",
+     "Theme easter egg banners now use short plain sentences like ‘Only the hum of fluorescent lights.’ with fewer emoji",
+     "Reporting a message or participant in a shared work chat now also sends the chat log — 20 messages before and 10 after for message reports, otherwise the latest 30; reported messages are highlighted in Customer inquiries › Shared work reports",
+     "Mobile: the notch (camera) area is filled with black, and the status bar is black too",
+     "Mobile: when the phone is turned sideways, the notch side (left/right) is automatically kept clear and the top margin is removed",
+     "Mobile: moved the starting position of the bottom floating navigation button further down",
+     "Mobile: Present now goes fullscreen automatically and fills the screen with no margins; landscape pages switch the screen to landscape automatically (in supported browsers)",
+     "The presentation background is always black regardless of theme, and theme decorations are hidden",
+     "Fixed the presentation toolbar (presbar) disappearing off screen in mobile landscape — it moves back on screen automatically when you rotate, and wraps to the screen width on mobile",
+     "The presentation toolbar can't be moved where its buttons would be hidden when expanded (off screen · notch · home bar); if moved to an edge while folded, it shifts inward automatically when expanded"
+    ],
+    "ja": [
+     "設定 › 画面・レイアウトに「テーマ背景エフェクト」を追加 — プレミアムテーマの背景クリック効果・イースターエッグを すべてオン / クリック効果のみ / すべてオフ から選択",
+     "テーマのイースターエッグ上部の文言を「蛍光灯の音だけが聞こえる。」のような短い平叙文にし、絵文字を減らしました",
+     "共同作業のチャットで通報(メッセージ・参加者)するとチャット履歴も一緒に送信 — メッセージ通報はそのメッセージの前20件・後10件、それ以外は最新30件、お問い合わせ管理 › 共同作業の通報で対象のメッセージを強調表示",
+     "モバイル: ノッチ(カメラ)部分を黒で塗りつぶし、ステータスバーの色も黒に変更",
+     "モバイル: スマホを横にするとノッチのある側(左/右)を自動で空け、上の余白はなくします",
+     "モバイル: 下部のフローティングナビゲーションボタンの初期位置をさらに下へ移動",
+     "モバイル: プレゼンを押すと自動で全画面・余白なしで画面いっぱいに表示、横長のページは自動で横画面に切り替え(対応ブラウザー)",
+     "プレゼンモードの背景をテーマに関係なく常に黒に固定し、テーマの装飾を非表示",
+     "モバイル横画面のプレゼンでツールバー(presbar)が画面外に消える問題を修正 — 画面を回すと自動で画面内に移動し、モバイルでは画面幅に合わせて折り返し",
+     "プレゼンツールバーは、展開時にボタンが隠れる位置(画面外・ノッチ・ホームバー)には移動できないよう制限、折りたたんだ状態で端に移動してから展開しても自動で内側に移動"
+    ],
+    "zh": [
+     "在设置 › 显示 · 布局中新增“主题背景效果” — 可为高级版主题的背景点击效果 · 彩蛋选择 全部开启 / 仅点击效果 / 全部关闭",
+     "主题彩蛋顶部文字改为“只听得见日光灯的嗡嗡声。”这类简短陈述句，并减少表情符号",
+     "在协作聊天室举报(消息 · 参与者)时会一并发送聊天记录 — 举报消息时为该消息前 20 条 · 后 10 条，其他情况为最近 30 条；在客户咨询管理 › 协作举报中会高亮显示被举报的消息",
+     "移动端:刘海(摄像头)区域以黑色填充，状态栏也改为黑色",
+     "移动端:手机横置时自动空出刘海所在一侧(左 / 右),并去掉顶部留白",
+     "移动端:将底部悬浮导航按钮的初始位置再往下移",
+     "移动端:点击演示会自动全屏 · 无边距铺满屏幕，横向页面会自动切换为横屏(支持的浏览器)",
+     "演示模式背景无论主题始终为黑色，并隐藏主题装饰",
+     "修复移动端横屏演示时工具栏(presbar)跑到屏幕外的问题 — 旋转屏幕后会自动移回屏幕内，移动端按屏幕宽度换行",
+     "演示工具栏不能移动到展开后按钮会被遮挡的位置(屏幕外 · 刘海 · 主屏幕指示条);收起状态下移到边缘后再展开也会自动移向内侧"
+    ]
+   }
+  },
+  {
+   "v": "v0.11.4",
+   "d": "2026.10.18",
+   "items": {
+    "ko": [
+     "도형 · 텍스트 · 링크를 만든 뒤 자동으로 바뀐 선택 도구에서 개체 밖(빈 곳 · PDF 글자 · 페이지 바깥)을 누르면 원래 도구로 복귀 — 도형 · 링크는 누른 채 끌면 바로 새로 그려짐",
+     "도형에 ‘둥근 사각형’ 추가 — 옵션바의 ‘모서리’(0~100%)로 둥근 정도 조절, 그린 뒤에도 선택해서 수정 가능",
+     "공유작업 ‘모두 공개’ 완성 — 공개 프로젝트 목록에 올라가고 프리미엄 회원은 누구나(방장의 친구는 프리미엄이 아니어도) 참여 가능",
+     "공유작업 최대 인원 10명 — 가득 차면 목록 · 방 정보 창에 ‘가득 참’ 표시",
+     "프로젝트 관리에 입장 비밀번호(사용 / 사용 안 함 · 변경) · 장르(교육 · 개발 · 그림 · 디자인 · 공부 · 업무 · 기타) · 입장 기본 권한(관전자 / 편집 허용) 설정 추가",
+     "참여자가 나가기 · 공유 탭 닫기 · 창 닫기로 나가면 프로젝트 관리의 참여자 목록에서 바로 삭제, 3분 넘게 신호가 없는 참여자도 자동 정리",
+     "공유작업 패널 상단 탭 바로 친구 프로젝트 ↔ 공개 프로젝트 이동, 공개 프로젝트 검색(이름 · 장르 · 방장) · 정렬(인원순 / 최신순) · 장르 필터 추가",
+     "친구가 모두 공개로 진행하는 프로젝트는 친구 프로젝트 목록에는 안 보이고 친구 창의 ‘함께 작업’ 버튼으로 표시",
+     "친구 창의 ‘함께 작업’ · 공유작업 패널의 ‘보기’(기존 ‘참여’)를 누르면 방 정보 창 표시 — 방 이름 · 장르 · 방장 · 인원 · 입장 권한 · 참여자 목록과 참여하기 버튼",
+     "공개 프로젝트 신고 버튼 추가(불건전 · 욕설 · 명예훼손 · 범죄 · 기타 + 자세한 내용), 공유작업 채팅 메시지 신고 버튼 추가",
+     "공유작업 채팅 · 접속자 사진을 누르면 프로필 카드 표시 — 친구 추가 버튼(이미 친구면 ‘친구됨’, 요청 중이면 ‘요청됨’)과 신고 버튼",
+     "신고한 방의 이름 · 방장 · 방 정보가 개발자 계정의 ‘고객 문의 관리 › 공유작업 신고’로 전송, 처리 시 공유작업 이용 제한(1개월 · 3개월 · 1년 · 영구) · 진행 중인 방 종료 · 제한 해제 가능",
+     "모바일: 메뉴 아래쪽 목록(새 문서 ~ 개발자 콘솔)이 잘려 보이지 않던 문제 수정 — 메뉴 전체를 위아래로 스크롤 가능"
+    ],
+    "en": [
+     "After creating a shape, text or link, tapping outside an object (empty area · PDF text · outside the page) in the auto-switched Select tool returns to the original tool — for shapes and links, press and drag to draw a new one right away",
+     "Added ‘Rounded rectangle’ to Shapes — adjust the roundness with ‘Corners’ (0–100%) in the option bar, and edit it after drawing by selecting it",
+     "Shared work ‘Public’ completed — listed under Public projects, and any Premium member (or the host's friends, even without Premium) can join",
+     "Shared work allows up to 10 people — when full, ‘Full’ is shown in the list and room info window",
+     "Added settings to the project manager: entry password (on / off · change), genre (Education · Development · Drawing · Design · Study · Work · Other) and default entry role (Viewer / Can edit)",
+     "Participants who leave, close the shared tab or close the window are removed from the project manager's list right away, and participants silent for over 3 minutes are cleaned up automatically",
+     "Switch between Friends' projects ↔ Public projects with the tab bar at the top of the Shared work panel; added public project search (name · genre · host), sorting (Most people / Newest) and a genre filter",
+     "Projects a friend runs as Public don't appear in the Friends' projects list; they show up as the ‘Work together’ button in the Friends window",
+     "Tapping ‘Work together’ in the Friends window or ‘View’ (formerly ‘Join’) in the Shared work panel opens the room info window — room name · genre · host · members · entry role · participant list and a Join button",
+     "Added a report button for public projects (Inappropriate · Abusive language · Defamation · Crime · Other + details) and a report button for shared work chat messages",
+     "Tapping a photo in the shared work chat or online list shows a profile card — with an Add friend button (‘Friends’ if already friends, ‘Requested’ if pending) and a Report button",
+     "The reported room's name, host and info are sent to the developer account's ‘Customer inquiries › Shared work reports’; when handling, shared work can be restricted (1 month · 3 months · 1 year · permanent), active rooms ended and restrictions lifted",
+     "Mobile: fixed the lower part of the menu (New document ~ Developer console) being cut off — the whole menu now scrolls up and down"
+    ],
+    "ja": [
+     "図形・テキスト・リンクを作成した後、自動で切り替わった選択ツールでオブジェクトの外(空いた場所・PDFの文字・ページの外)を押すと元のツールに戻る — 図形・リンクは押したままドラッグするとすぐ新しく描けます",
+     "図形に「角丸四角形」を追加 — オプションバーの「角の丸み」(0〜100%)で丸みを調整、描いた後も選択して変更可能",
+     "共同作業の「全体公開」が完成 — 公開プロジェクト一覧に表示され、プレミアム会員なら誰でも(ホストの友達はプレミアムでなくても)参加可能",
+     "共同作業の最大人数は10人 — 満員になると一覧・ルーム情報ウィンドウに「満員」と表示",
+     "プロジェクト管理に入室パスワード(使用 / 使用しない・変更)・ジャンル(教育・開発・イラスト・デザイン・勉強・仕事・その他)・入室時の基本権限(閲覧者 / 編集可)の設定を追加",
+     "参加者が退出・共有タブを閉じる・ウィンドウを閉じるで抜けると、プロジェクト管理の参加者一覧からすぐに削除し、3分以上応答のない参加者も自動で整理",
+     "共同作業パネル上部のタブバーで友だちのプロジェクト ↔ 公開プロジェクトを切り替え、公開プロジェクトの検索(名前・ジャンル・ホスト)・並べ替え(人数順 / 新しい順)・ジャンルフィルターを追加",
+     "友達が全体公開で進めているプロジェクトは友だちのプロジェクト一覧には表示されず、友達ウィンドウの「一緒に作業」ボタンで表示",
+     "友達ウィンドウの「一緒に作業」・共同作業パネルの「表示」(以前の「参加」)を押すとルーム情報ウィンドウを表示 — ルーム名・ジャンル・ホスト・人数・入室権限・参加者一覧と参加ボタン",
+     "公開プロジェクトの通報ボタンを追加(不健全・暴言・名誉毀損・犯罪・その他+詳しい内容)、共同作業のチャットメッセージ通報ボタンを追加",
+     "共同作業のチャット・接続者の写真を押すとプロフィールカードを表示 — 友達追加ボタン(すでに友達なら「友達」、リクエスト中なら「リクエスト済み」)と通報ボタン",
+     "通報されたルームの名前・ホスト・ルーム情報が開発者アカウントの「お問い合わせ管理 › 共同作業の通報」に送信され、処理時に共同作業の利用制限(1か月・3か月・1年・永久)・進行中のルームの終了・制限解除が可能",
+     "モバイル: メニュー下部の項目(新規文書〜開発者コンソール)が切れて見えない問題を修正 — メニュー全体を上下にスクロール可能"
+    ],
+    "zh": [
+     "创建形状 · 文字 · 链接后，在自动切换的选择工具中点击对象以外的位置(空白处 · PDF 文字 · 页面外)会回到原来的工具 — 形状 · 链接按住拖动即可直接绘制新的",
+     "形状新增“圆角矩形” — 用选项栏中的“圆角”(0~100%)调整圆润程度，绘制后也可选中修改",
+     "协作“公开”功能完成 — 会显示在公开项目列表中，任何高级版会员(房主的好友即使不是高级版)都可加入",
+     "协作最多 10 人 — 满员时在列表 · 房间信息窗口中显示“已满”",
+     "项目管理新增进入密码(使用 / 不使用 · 更改) · 类型(教育 · 开发 · 绘画 · 设计 · 学习 · 工作 · 其他) · 进入时的默认权限(观看者 / 可编辑)设置",
+     "参与者通过退出 · 关闭共享标签页 · 关闭窗口离开时，会立即从项目管理的参与者列表中删除；超过 3 分钟没有信号的参与者也会被自动清理",
+     "可通过协作面板顶部标签栏在好友的项目 ↔ 公开项目间切换，新增公开项目搜索(名称 · 类型 · 房主) · 排序(按人数 / 最新) · 类型筛选",
+     "好友以公开方式进行的项目不会出现在好友的项目列表中，而是在好友窗口中以“一起协作”按钮显示",
+     "点击好友窗口中的“一起协作”或协作面板中的“查看”(原“加入”)会显示房间信息窗口 — 房间名称 · 类型 · 房主 · 人数 · 进入权限 · 参与者列表和加入按钮",
+     "新增公开项目举报按钮(不良内容 · 辱骂 · 诽谤 · 犯罪 · 其他 + 详细内容),新增协作聊天消息举报按钮",
+     "点击协作聊天 · 在线用户的头像会显示个人资料卡 — 包含添加好友按钮(已是好友显示“已是好友”,请求中显示“已请求”)和举报按钮",
+     "被举报房间的名称 · 房主 · 房间信息会发送到开发者账号的“客户咨询管理 › 协作举报”,处理时可限制使用协作(1 个月 · 3 个月 · 1 年 · 永久) · 结束进行中的房间 · 解除限制",
+     "移动端:修复菜单下方列表(新建文档 ~ 开发者控制台)被截断看不到的问题 — 整个菜单可上下滚动"
+    ]
+   }
+  },
+  {
+   "v": "v0.11.3",
+   "d": "2026.10.18",
+   "items": {
+    "ko": [
+     "글자 줄간격 옵션 추가 — 글자 도구 · 글자 편집 중 · 선택한 글자 개체의 옵션바에 ‘줄간격’(80~300%) 추가, 자간과 함께 여러 줄 글자 모양 조절 가능, Word(DOCX) 내보내기에도 반영",
+     "도형 바탕이 가끔 투명으로 돌아가던 문제 해결 — 도형 · 펜 · 글자 등 도구 설정(색 · 바탕 · 굵기 · 불투명도)을 브라우저에 기억해 새로고침 후에도 유지, 선택한 도형의 바탕 · 색 · 굵기 변경이 다음에 그릴 도형에도 이어지도록 개선",
+     "여러 개체 함께 옮기기 · 크기 조절 추가 — Shift · Ctrl로 여러 개체를 고른 뒤 하나를 끌면 모두 함께 이동, 묶음 오른쪽 아래 손잡이로 한꺼번에 크기 조절 (Shift를 누르면 비율 자유)",
+     "글자 입력 중 다른 곳을 누르면 입력 상태가 바로 끝나도록 개선 (글자 도구에서도 새 글상자 없이 입력만 종료)",
+     "디지털화(이미지 글자 인식) 정확도 대폭 향상 — 표 칸막이 짧은 선까지 찾아 글자와 구분, 칸을 넘지 않게 분리 · 글자를 실제로 그려 원본 잉크에 크기 · 자간 · 위치를 맞추고 번짐까지 보정 · 덮개는 글자 잉크만 감싸고 표 선 쪽 여백을 없애 파란 표 선을 가리지 않음 · 넓게 벌려 쓴 이름표(세 금 계 산 서)는 한 개체 + 넓은 자간으로, 위아래 이름표(상 호 / (법인명), 공 / 급 / 자)는 줄간격을 가진 한 개체로 병합 · 자신 없는 칸과 엔진이 놓친 숫자 칸은 그 부분만 다시 인식 · 문서 안 글자 크기 · 글자색 통일, 제목급 굵은 글자 인식",
+     "선택 도구로 빈 곳을 끌어 영역을 지정하면 영역에 닿은 개체(잠금 · 숨김 제외)를 모두 선택하도록 개선 — 끄는 동안 잡힐 개체 미리 표시, 여러 개면 함께 옮기기 · 크기 조절 가능",
+     "영역 도구로 개체를 고르면(닿은 개체 선택) 선택 도구로 자동 전환",
+     "‘핑크세상’ 테마 무료로 전환",
+     "프리미엄 테마 이스터에그 추가 — 문서 바깥 빈 배경(시작 화면 포함)을 누르면 테마마다 다른 반응(물방울 · 반짝이 · 점수 · 새싹 · 도토리 · 반딧불 · 별 · 탄막 등), 빠르게 연달아 누르면 테마마다 숨은 장면 등장",
+     "새 테마 ‘동방’ 추가 — 홍백 무녀의 신사, 음양옥 · 부적 · 돌아가는 마법진 · 소용돌이와 고리 탄막 · 흩날리는 벚꽃 · 도리이가 있는 환상의 밤 (테마 스토어에서 탄막 · 벚꽃 움직임 끄기 가능)"
+    ],
+    "en": [
+     "Added a line spacing option — ‘Line spacing’ (80–300%) in the option bar for the Text tool, while editing text and for selected text objects; shape multi-line text together with letter spacing, also applied to Word (DOCX) export",
+     "Fixed shape fills sometimes reverting to transparent — tool settings for shapes, pen, text and more (color · fill · width · opacity) are remembered in the browser and kept after reloading, and changing the fill · color · width of a selected shape carries over to the next shape you draw",
+     "Added moving and resizing multiple objects together — pick several with Shift or Ctrl, then drag one to move them all, or use the handle at the bottom right of the group to resize them at once (hold Shift for free proportions)",
+     "Tapping elsewhere while typing now ends text input right away (in the Text tool too, it just ends input without making a new text box)",
+     "Big accuracy boost for Digitize (text recognition in images) — finds even short table divider lines to separate text and keep it within cells · renders the text to match the original ink in size, spacing and position, even compensating for bleed · covers wrap only the text ink, with no margin on the table-line side so blue table lines stay visible · widely spaced labels (e.g. 세 금 계 산 서) become one object with wide letter spacing, and stacked labels become one object with line spacing · low-confidence cells and number cells the engine missed are re-recognized on their own · unified font size and color within a document, with recognition of bold title text",
+     "Dragging over empty space with the Select tool now selects every object the area touches (except locked · hidden) — objects to be picked are previewed while dragging, and several can be moved or resized together",
+     "Picking objects with the Region tool (select touched objects) switches to the Select tool automatically",
+     "The ‘Pink World’ theme is now free",
+     "Added Premium theme easter eggs — tap the empty background outside the document (including the start screen) for a different reaction per theme (bubbles · sparkles · points · sprouts · acorns · fireflies · stars · danmaku and more); tap rapidly to reveal each theme's hidden scene",
+     "New theme ‘Touhou’ — a red-and-white shrine maiden's shrine on a fantastical night with yin-yang orbs, talismans, spinning magic circles, spiral and ring danmaku, drifting cherry petals and a torii (danmaku and petal animation can be turned off in the Theme store)"
+    ],
+    "ja": [
+     "文字の行間オプションを追加 — テキストツール・文字編集中・選択した文字オブジェクトのオプションバーに「行間」(80〜300%)を追加、字間と合わせて複数行の文字の形を調整でき、Word(DOCX)書き出しにも反映",
+     "図形の塗りがときどき透明に戻る問題を解決 — 図形・ペン・文字などのツール設定(色・塗り・太さ・不透明度)をブラウザーに記憶して再読み込み後も維持し、選択した図形の塗り・色・太さの変更が次に描く図形にも引き継がれるよう改善",
+     "複数オブジェクトの一括移動・サイズ変更を追加 — Shift・Ctrlで複数選んでから1つをドラッグするとすべて一緒に移動、まとまりの右下のハンドルで一度にサイズ変更(Shiftを押すと比率自由)",
+     "文字入力中に別の場所を押すとすぐに入力状態が終わるよう改善(テキストツールでも新しいテキストボックスを作らず入力だけ終了)",
+     "デジタル化(画像の文字認識)の精度を大幅に向上 — 表の仕切りの短い線まで見つけて文字と区別し、セルをはみ出さないよう分離・文字を実際に描いて元のインクにサイズ・字間・位置を合わせ、にじみまで補正・カバーは文字のインクだけを囲み、表の線側の余白をなくして青い表の線を隠さない・広く間隔を空けて書いた見出し(세 금 계 산 서)は1つのオブジェクト+広い字間に、上下に分かれた見出しは行間を持つ1つのオブジェクトに結合・自信のないセルやエンジンが見落とした数字のセルはその部分だけ再認識・文書内の文字サイズ・文字色を統一、見出しレベルの太字を認識",
+     "選択ツールで空いた場所をドラッグして範囲を指定すると、範囲に触れたオブジェクト(ロック・非表示を除く)をすべて選択するよう改善 — ドラッグ中に選ばれるオブジェクトをプレビュー、複数なら一緒に移動・サイズ変更可能",
+     "範囲ツールでオブジェクトを選ぶと(触れたオブジェクトを選択)自動で選択ツールに切り替え",
+     "「ピンクワールド」テーマを無料に変更",
+     "プレミアムテーマのイースターエッグを追加 — 文書の外の何もない背景(スタート画面を含む)を押すとテーマごとに違う反応(しゃぼん玉・きらきら・スコア・新芽・どんぐり・蛍・星・弾幕など)、素早く連続で押すとテーマごとの隠しシーンが登場",
+     "新テーマ「東方」追加 — 紅白の巫女の神社、陰陽玉・お札・回る魔法陣・渦巻きとリングの弾幕・舞い散る桜・鳥居がある幻想の夜(テーマストアで弾幕・桜の動きをオフにできます)"
+    ],
+    "zh": [
+     "新增文字行距选项 — 在文字工具 · 编辑文字时 · 选中文字对象的选项栏中新增“行距”(80~300%),可与字间距一起调整多行文字效果，也会反映到 Word(DOCX)导出中",
+     "解决形状填充偶尔变回透明的问题 — 将形状 · 画笔 · 文字等工具设置(颜色 · 填充 · 粗细 · 不透明度)记忆在浏览器中，刷新后依然保留；对所选形状的填充 · 颜色 · 粗细修改也会延续到下一个绘制的形状",
+     "新增多个对象一起移动 · 调整大小 — 用 Shift · Ctrl 选中多个对象后拖动其中一个即可一起移动，用组合右下角的手柄一次调整大小(按住 Shift 可自由比例)",
+     "改进为输入文字时点击其他位置会立即结束输入状态(在文字工具中也只结束输入，不会新建文本框)",
+     "大幅提升数字化(图片文字识别)准确度 — 连表格分隔的短线也能找到并与文字区分，避免文字跨格 · 实际绘制文字，使大小 · 字间距 · 位置与原始笔迹一致，并校正晕染 · 遮罩只包住文字笔迹，去掉表格线一侧的留白，不遮挡蓝色表格线 · 字距很宽的标签(세 금 계 산 서)合并为一个宽字距对象，上下分行的标签合并为带行距的一个对象 · 置信度低的格子和引擎漏掉的数字格只重新识别该部分 · 统一文档内文字大小 · 颜色，识别标题级粗体",
+     "改进为用选择工具在空白处拖动框选时，会选中区域接触到的所有对象(锁定 · 隐藏除外) — 拖动时预览将被选中的对象，多个对象可一起移动 · 调整大小",
+     "用区域工具选择对象(选择接触的对象)后会自动切换到选择工具",
+     "“粉色世界”主题改为免费",
+     "新增高级版主题彩蛋 — 点击文档外的空白背景(含开始界面)会按主题出现不同反应(泡泡 · 闪光 · 分数 · 嫩芽 · 橡果 · 萤火虫 · 星星 · 弹幕等),快速连续点击会出现各主题的隐藏场景",
+     "新增主题“东方” — 红白巫女的神社，有阴阳玉 · 符札 · 旋转的魔法阵 · 漩涡与环形弹幕 · 飞舞的樱花 · 鸟居的幻想之夜(可在主题商店关闭弹幕与樱花动画)"
     ]
    }
   }
