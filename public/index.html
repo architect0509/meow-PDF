@@ -87,6 +87,12 @@ h2{margin:8px 0 0;font-size:clamp(28px,4.2vw,40px);line-height:1.25;letter-spaci
 .card .ic svg{width:20px;height:20px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .card h3{margin:0 0 8px;font-size:18px}
 .card p{margin:0;color:var(--muted);font-size:15px}
+/* v1.0.5 기능 블록: 마우스를 올리면 살짝 노래지면서 위로 떠올라요 */
+#features .card{transition:transform .28s cubic-bezier(.2,.8,.2,1),background-color .28s ease,border-color .28s ease,box-shadow .28s ease}
+#features .card .ic{transition:background-color .28s ease,border-color .28s ease}
+#features .card:hover,#features .card:focus-within{transform:translateY(-6px);background-color:rgba(219,190,67,.09);border-color:rgba(219,190,67,.55);box-shadow:0 14px 34px rgba(0,0,0,.35),0 0 0 1px rgba(219,190,67,.18)}
+#features .card:hover .ic,#features .card:focus-within .ic{background-color:rgba(219,190,67,.16);border-color:rgba(219,190,67,.6)}
+@media (prefers-reduced-motion:reduce){#features .card{transition:background-color .2s ease,border-color .2s ease}#features .card:hover,#features .card:focus-within{transform:none}}
 
 .steps{margin-top:48px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;counter-reset:s}
 .step{padding:26px;border:1px solid var(--line);border-radius:18px;background:var(--bg)}

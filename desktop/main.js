@@ -158,6 +158,14 @@ function makeWindow(url) {
     const r = dialog.showMessageBoxSync(win, { type: 'warning', title: 'Meow-PDF', message: T.message, detail: T.detail, buttons: [T.close, T.cancel], defaultId: 1, cancelId: 1, noLink: true });
     if (r === 0) e.preventDefault();   // preventDefault = 막은 것을 무시하고 닫기
   });
+  /* v1.0.5 F11: 전체화면 켜기 / 끄기 (메뉴가 없는 Windows · Linux 에서도 동작해요)
+     편집 화면의 전체화면 버튼과 같은 방식으로 바꿔서 버튼 모양 · 화면 맞춤도 함께 바뀌어요. 버튼을 쓸 수 없으면 창 전체화면으로 바꿔요. */
+  win.webContents.on('before-input-event', (e, input) => {
+    if (input.type !== 'keyDown' || input.key !== 'F11' || input.alt || input.control || input.meta || input.shift) return;
+    e.preventDefault();
+    const js = `(() => { const b = document.getElementById('fsBtn'); if (b && !b.hidden) { b.click(); return true; } if (document.fullscreenElement) { document.exitFullscreen().catch(() => {}); return true; } return false; })()`;
+    win.webContents.executeJavaScript(js, true).then(ok => { if (!ok) win.setFullScreen(!win.isFullScreen()); }).catch(() => win.setFullScreen(!win.isFullScreen()));
+  });
   /* 새 창: 우리 사이트는 앱 창으로, 다른 사이트는 기본 브라우저로 */
   win.webContents.setWindowOpenHandler(({ url: u }) => {
     try { const h = new URL(u).hostname; if (HOSTS.has(h)) return { action: 'allow', overrideBrowserWindowOptions: { autoHideMenuBar: true, backgroundColor: '#0e0e11', webPreferences: { preload: path.join(__dirname, 'preload.js'), contextIsolation: true, sandbox: true } } }; } catch (e) { /* 무시 */ }
