@@ -156,6 +156,12 @@ html:lang(ja) body,html:lang(zh) body{word-break:normal;line-break:strict}
 .plan li{display:flex;gap:10px}
 .plan li::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-top:10px}
 .plan .btn{margin-top:26px;width:100%}
+/* v1.1.0 1개월 무료 체험 배너 */
+.trialban{display:flex;align-items:center;gap:14px;margin:22px 0 4px;padding:16px 18px;border-radius:18px;color:#fff;text-decoration:none;background:linear-gradient(135deg,#ff5a7a,#ff9f43);box-shadow:0 10px 30px rgba(255,90,122,.35);transition:transform .15s,box-shadow .15s}
+.trialban:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(255,90,122,.45)}
+.trialban .tbn-g{font-size:30px;line-height:1}.trialban .tbn-t{flex:1;display:flex;flex-direction:column;gap:3px;min-width:0}.trialban b{font-size:18px}.trialban small{font-size:13px;opacity:.92}
+.trialban .tbn-go{flex:none;padding:9px 16px;border-radius:999px;background:#fff;color:#e8436f;font-weight:800;font-size:14px;white-space:nowrap}
+@media (max-width:600px){.trialban{flex-wrap:wrap}.trialban .tbn-go{width:100%;text-align:center}}
 /* 요금 블록: 내용 길이와 상관없이 버튼을 같은 높이(맨 아래)에 맞춰요 */
 .plan{display:flex;flex-direction:column}
 .plan ul{margin-bottom:26px}
@@ -369,6 +375,7 @@ html.mobile-ua .dlsec,html.mobile-ua .pconly{display:none!important}
       <div class="eyebrow">요금</div>
       <h2>기본 기능은 무료, 프리미엄은 월 1,200원부터</h2>
       <p class="lead"><b style="color:var(--text)">1개월 이용권 1,200원</b> 또는 <b style="color:var(--text)">1년 이용권 10,500원</b>(월 875원)을 고를 수 있어요. 결제하면 이용 키 없이 바로 내 계정에 적용되고, 한 번만 결제되며 자동으로 다시 결제되지 않아요. 결제일로부터 7일 이내에는 전액, 그 뒤에는 남은 기간만큼 일할 계산해 환불해 드려요.</p>
+      <a class="trialban" href="/edit?trial=1"><span class="tbn-g" aria-hidden="true">🎁</span><span class="tbn-t"><b>프리미엄 1개월 무료 체험</b><small>계정당 한 번 · 카드 등록 없이 · 끝나도 자동으로 결제되지 않아요</small></span><span class="tbn-go">무료로 시작하기</span></a>   <!-- v1.1.0 -->
       <div class="plans">
         <div class="plan">
           <h3>무료</h3>

@@ -1,6 +1,6 @@
 {
  "name": "Meow-PDF",
- "version": "v1.0.6",
+ "version": "v1.1.0",
  "date": "2026.10.22",
  "site": "https://www.meow-pdf.com/",
  "download": {
@@ -10,6 +10,88 @@
   "page": "https://www.meow-pdf.com/#download"
  },
  "history": [
+  {
+   "v": "v1.1.0",
+   "d": "2026.10.22",
+   "items": {
+    "ko": [
+     "프리미엄 1개월 무료 체험 추가 — 계정당 한 번 · 카드 등록 없이 · 끝나도 자동으로 결제되지 않음, 헤더의 ‘1개월 무료’ 버튼 · 시작 화면 · 계정 창 · 소개 페이지 요금 안내에서 바로 시작",
+     "Google 계정으로 로그인 · 네이버 계정으로 로그인 추가 — 계정 창의 로그인 · 회원가입 탭에서 작은 창으로 로그인, 처음이면 그 계정으로 바로 가입",
+     "노트에 그림판 추가 (MD · TXT 옆) — 펜 · 형광펜 · 직선 · 지우개 · 도형(사각형 · 원 · 채우기) · 텍스트 상자 · 표, 색 · 굵기 · 실행 취소 · 크게 그리기, 아래쪽 버튼으로 PNG로 내보내기 · 현재 탭에 붙여넣기 · 새 탭으로 열기 (그림은 MPDF에 함께 저장)",
+     "자동 저장 추가 (기본: 꺼짐) — 설정 › 화면 · 레이아웃 › 자동 저장에서 1 · 3 · 5 · 10분 간격 선택, 열었거나 저장한 파일은 그 파일에 바로 덮어쓰고 저장할 파일이 없으면 이 기기에 복구용으로 보관했다가 다음에 열 때 되살리기, 헤더에 자동 저장 상태 표시",
+     "형광펜 투명도 조절 추가 — 형광펜 도구와 선택한 형광펜의 옵션바에 ‘불투명’(10~100%) 추가, 형광펜마다 다른 투명도로 칠해도 겹친 곳은 진해지지 않음",
+     "새 테마 ‘놀이동산’ 추가 (프리미엄) — 맑은 하늘 아래 천천히 돌아가는 관람차 · 달리는 롤러코스터 · 회전목마 천막 · 떠오르는 풍선 · 알록달록 깃발 줄이 있는 밝은 화면 (테마 스토어에서 관람차 · 풍선 움직임 끄기 가능)",
+     "놀이동산 테마 이스터에그 — 빈 배경을 누르면 색종이가 팡, 빠르게 일곱 번 누르면 불꽃놀이와 풍선 퍼레이드",
+     "새 테마 ‘밤의 수영장’ 추가 (프리미엄) — 파란 네온 전구 줄 · 네온 간판 · 일렁이는 물결에 번지는 불빛 · 옅은 안개가 있는 고요한 밤 (테마 스토어에서 물결 · 안개 움직임 끄기 가능)",
+     "밤의 수영장 테마 이스터에그 — 빈 배경을 누르면 물결이 번지고, 빠르게 일곱 번 누르면 전구가 깜빡인 뒤 간판에 불이 켜지고 오리 튜브가 지나감",
+     "테마 스토어에 즐겨찾기 추가 — 테마 카드의 ☆ 버튼으로 담고, 왼쪽 메뉴의 ‘즐겨찾기’에서 모아 보기",
+     "테마 스토어 왼쪽 메뉴에 ‘최근 사용’ 추가 — 최근에 적용한 테마 6개를 조금 작은 카드로 모아 보기",
+     "PC: 문서 탭이 많아지면 왼쪽 탭이 사라지던 문제 수정 — 한 줄에 다 들어가지 않으면 좌우 화살표(또는 탭 위에서 마우스 휠)로 탭 줄 전체를 이동",
+     "모든 문서 탭의 너비를 똑같이 맞춤 — 탭이 많아지면 다 같이 좁아짐",
+     "모바일: 확대한 상태에서도 화면 왼쪽 · 오른쪽 끝에서 한 번 더 밀면 이전 · 다음 페이지로 이동 (끄는 동안 가장자리에 화살표로 안내)",
+     "도구 모음 기본 위치를 다시 상단 정렬로 변경 (설정 › 화면 · 레이아웃에서 좌측 정렬로 바꿀 수 있음)",
+     "업데이트 내역에서 1.0.x · 1.1.x 버전 묶음에도 오른쪽에 업데이트 요약 표시",
+     "PC 프로그램: Google · 네이버 로그인 창을 앱 안의 작은 창으로 열기"
+    ],
+    "en": [
+     "Added a 1-month free Premium trial — once per account · no card needed · no automatic payment when it ends; start it right away from the header’s “1 month free” button, the start screen, the account window or the pricing section of the intro page",
+     "Added Sign in with Google · Sign in with Naver — sign in through a small window from the Login · Sign up tabs of the account window; first-time users are signed up with that account right away",
+     "Added Paint to notes (next to MD · TXT) — pen · highlighter · line · eraser · shapes (rectangle · ellipse · fill) · text box · table, with color · width · undo · draw large; buttons below to export as PNG · paste into the current tab · open in a new tab (drawings are saved inside MPDF)",
+     "Added auto-save (off by default) — choose a 1 · 3 · 5 · 10-minute interval in Settings › Display · Layout › Auto-save; files you opened or saved are overwritten directly, otherwise a recovery copy is kept on this device and can be restored next time; auto-save status shown in the header",
+     "Added highlighter transparency — “Opacity” (10–100%) in the option bar of the highlighter tool and of a selected highlight; overlapping strokes don’t get darker even with different opacities",
+     "Added the new “Theme Park” theme (Premium) — a bright screen with a slowly turning Ferris wheel, a racing roller coaster, a carousel tent, rising balloons and colorful bunting under a clear sky (Ferris wheel · balloon motion can be turned off in the theme store)",
+     "Theme Park easter egg — tap the empty background for a confetti pop; tap seven times quickly for fireworks and a balloon parade",
+     "Added the new “Night Pool” theme (Premium) — a quiet night with strings of blue neon bulbs, a neon sign, light spreading over rippling water and a thin mist (ripple · mist motion can be turned off in the theme store)",
+     "Night Pool easter egg — tap the empty background to send out ripples; tap seven times quickly and the bulbs flicker, the sign lights up and a duck float drifts by",
+     "Added favorites to the theme store — add with the ☆ button on a theme card and view them together under “Favorites” in the left menu",
+     "Added “Recent” to the theme store’s left menu — your 6 most recently applied themes shown as slightly smaller cards",
+     "PC: fixed tabs on the left disappearing when there are many document tabs — when they don’t fit on one line, move the whole tab row with the left/right arrows (or the mouse wheel over the tabs)",
+     "All document tabs now have the same width — they all narrow together as more tabs open",
+     "Mobile: even while zoomed in, swiping once more at the left · right edge goes to the previous · next page (an arrow at the edge guides you while dragging)",
+     "Changed the default toolbar position back to the top (you can switch to the left in Settings › Display · Layout)",
+     "The update history now shows a short summary on the right for the 1.0.x · 1.1.x groups too",
+     "Desktop app: Google · Naver sign-in opens in a small window inside the app"
+    ],
+    "ja": [
+     "プレミアム1か月無料体験を追加 — アカウントごとに1回・カード登録不要・終了後も自動決済なし。ヘッダーの「1か月無料」ボタン・スタート画面・アカウント画面・紹介ページの料金案内からすぐに開始",
+     "Googleアカウントでログイン・NAVERアカウントでログインを追加 — アカウント画面のログイン・会員登録タブから小さなウィンドウでログイン、初めての場合はそのアカウントですぐ登録",
+     "ノートにペイントを追加 (MD・TXTの隣) — ペン・蛍光ペン・直線・消しゴム・図形(四角形・円・塗りつぶし)・テキストボックス・表、色・太さ・元に戻す・大きく描く、下のボタンでPNG書き出し・現在のタブに貼り付け・新しいタブで開く (絵はMPDFに一緒に保存)",
+     "自動保存を追加 (初期設定: オフ) — 設定 › 画面・レイアウト › 自動保存で1・3・5・10分間隔を選択、開いた・保存したファイルにはそのまま上書きし、保存先がない場合はこの端末に復元用として保管して次回開くときに復元、ヘッダーに自動保存の状態を表示",
+     "蛍光ペンの透明度調整を追加 — 蛍光ペンツールと選択した蛍光ペンのオプションバーに「不透明度」(10~100%) を追加、蛍光ペンごとに透明度が違っても重なった部分は濃くならない",
+     "新テーマ「遊園地」を追加 (プレミアム) — 青空の下でゆっくり回る観覧車・走るジェットコースター・メリーゴーラウンドのテント・浮かぶ風船・カラフルな旗が並ぶ明るい画面 (テーマストアで観覧車・風船の動きをオフにできる)",
+     "遊園地テーマのイースターエッグ — 空いた背景を押すと紙吹雪がポン、素早く7回押すと花火と風船パレード",
+     "新テーマ「夜のプール」を追加 (プレミアム) — 青いネオン電球の列・ネオン看板・揺れる水面ににじむ光・うっすらとした霧のある静かな夜 (テーマストアで水面・霧の動きをオフにできる)",
+     "夜のプールテーマのイースターエッグ — 空いた背景を押すと波紋が広がり、素早く7回押すと電球が点滅した後に看板が灯り、アヒルの浮き輪が通り過ぎる",
+     "テーマストアにお気に入りを追加 — テーマカードの☆ボタンで追加し、左メニューの「お気に入り」でまとめて表示",
+     "テーマストアの左メニューに「最近使用」を追加 — 最近適用したテーマ6個を少し小さなカードでまとめて表示",
+     "PC: 文書タブが多くなると左のタブが消える問題を修正 — 1行に収まらない場合は左右の矢印(またはタブ上のマウスホイール)でタブ列全体を移動",
+     "すべての文書タブの幅を揃えた — タブが増えるとすべて一緒に狭くなる",
+     "モバイル: 拡大した状態でも画面の左・右端でもう一度スワイプすると前・次のページへ移動 (ドラッグ中は端に矢印で案内)",
+     "ツールバーの初期位置を上揃えに戻した (設定 › 画面・レイアウトで左揃えに変更可能)",
+     "更新履歴で1.0.x・1.1.xのバージョングループにも右側に更新の要約を表示",
+     "PCアプリ: Google・NAVERのログイン画面をアプリ内の小さなウィンドウで開く"
+    ],
+    "zh": [
+     "新增高级版 1 个月免费试用 — 每个账号一次 · 无需绑卡 · 结束后不会自动扣款,可从标题栏的“1 个月免费”按钮、开始界面、账号窗口和介绍页的价格说明直接开始",
+     "新增使用 Google 账号登录 · 使用 Naver 账号登录 — 在账号窗口的登录 · 注册标签中通过小窗口登录,首次使用会直接用该账号注册",
+     "笔记新增画板 (位于 MD · TXT 旁) — 钢笔 · 荧光笔 · 直线 · 橡皮擦 · 形状(矩形 · 椭圆 · 填充)· 文本框 · 表格,支持颜色 · 粗细 · 撤销 · 放大绘制,下方按钮可导出为 PNG · 粘贴到当前标签 · 在新标签中打开 (图画随 MPDF 一起保存)",
+     "新增自动保存 (默认关闭) — 在 设置 › 画面 · 布局 › 自动保存 中选择 1 · 3 · 5 · 10 分钟间隔,已打开或保存过的文件直接覆盖保存,没有保存位置时在本设备保留恢复副本并可在下次打开时恢复,标题栏显示自动保存状态",
+     "新增荧光笔透明度调节 — 在荧光笔工具和所选荧光笔的选项栏中新增“不透明度”(10~100%),每条荧光笔透明度不同时重叠处也不会变深",
+     "新增主题“游乐园”(高级版)— 晴朗天空下缓缓转动的摩天轮 · 飞驰的过山车 · 旋转木马帐篷 · 升起的气球 · 彩色彩旗的明亮界面 (可在主题商店关闭摩天轮 · 气球动画)",
+     "游乐园主题彩蛋 — 点击空白背景会砰出彩纸,快速点击七次会出现烟花和气球巡游",
+     "新增主题“夜晚泳池”(高级版)— 蓝色霓虹灯串 · 霓虹招牌 · 荡漾水面上晕开的灯光 · 薄雾笼罩的宁静夜晚 (可在主题商店关闭水波 · 雾气动画)",
+     "夜晚泳池主题彩蛋 — 点击空白背景会泛起涟漪,快速点击七次灯泡闪烁后招牌亮起,小黄鸭泳圈漂过",
+     "主题商店新增收藏 — 用主题卡片上的 ☆ 按钮收藏,在左侧菜单的“收藏”中集中查看",
+     "主题商店左侧菜单新增“最近使用” — 以稍小的卡片集中显示最近应用的 6 个主题",
+     "PC:修复文档标签过多时左侧标签消失的问题 — 一行放不下时可用左右箭头(或在标签上滚动鼠标滚轮)移动整排标签",
+     "所有文档标签宽度一致 — 标签增多时一起变窄",
+     "移动端:放大状态下在屏幕左 · 右边缘再滑动一次即可翻到上一页 · 下一页 (拖动时边缘会显示箭头提示)",
+     "工具栏默认位置改回顶部 (可在 设置 › 画面 · 布局 中改为左侧)",
+     "更新记录中 1.0.x · 1.1.x 版本组也在右侧显示更新摘要",
+     "桌面程序:Google · Naver 登录窗口在应用内的小窗口中打开"
+    ]
+   }
+  },
   {
    "v": "v1.0.6",
    "d": "2026.10.22",
@@ -25,7 +107,8 @@
      "페이지 패널 썸네일 버튼을 부채꼴 대신 썸네일 가운데를 둘러싼 원으로 펼침, ‘이 페이지 인쇄’ 버튼 추가",
      "세로 모드 전환을 헤더에서 설정 › 화면 · 레이아웃 › 화면 배치로 이동",
      "나만의 테마에 배경 이미지 추가 — 시스템 그림 6종 또는 직접 올린 그림, 빈 여백은 이미지 반복 / 시스템 색, 크기(화면 채우기 · 전체 보이기 · 원래 크기 · 직접) · 위치(9칸 · 가로 · 세로 · 끌어서 이동) · 미리 보기 (글꼴 목록은 접어서 표시)",
-     "웹: 개발자 콘솔로 테마를 바꾼 뒤 브라우저 탭을 오가면 테마 스토어에서 고른 테마로 돌아가던 문제 수정"
+     "웹: 개발자 콘솔로 테마를 바꾼 뒤 브라우저 탭을 오가면 테마 스토어에서 고른 테마로 돌아가던 문제 수정",
+     "공유 프로젝트: 서버에서도 방장이 5분 넘게 오프라인이면 자동으로 닫힘 — 공개 · 친구 · 내 프로젝트 목록에서 바로 빠지고 입장 · 코드 입장 · 방 정보 보기도 막힘 (supabase-share.sql 다시 실행 필요)"
     ],
     "en": [
      "Added a share preview image (og-image) for the intro page and editor — sharing the link now shows the Meow-PDF image, title and description",
@@ -38,7 +121,8 @@
      "Page panel thumbnail buttons now open in a circle around the thumbnail center instead of a fan, with a new ‘Print this page’ button",
      "Moved the vertical layout toggle from the header to Settings › Display & layout › Screen layout",
      "Custom theme background images — 6 system images or your own upload; fill empty space by repeating the image or with the system color; size (cover · contain · original · custom) and position (9-point grid · horizontal · vertical · drag) with a live preview (the font list is now collapsible)",
-     "Web: fixed the theme reverting to the Theme Store choice after changing it in the developer console and switching browser tabs"
+     "Web: fixed the theme reverting to the Theme Store choice after changing it in the developer console and switching browser tabs",
+     "Shared projects: the server now also closes a project automatically when the host has been offline for over 5 minutes — it disappears from the public, friends and my-projects lists, and joining, joining by code and viewing room info are blocked (re-run supabase-share.sql)"
     ],
     "ja": [
      "紹介ページ・エディターに共有プレビュー画像(og-image)を追加 — URLを共有するとMeow-PDFの代表画像・タイトル・説明が表示",
@@ -51,7 +135,8 @@
      "ページパネルのサムネイルボタンを扇形ではなくサムネイル中央を囲む円形に展開、「このページを印刷」ボタンを追加",
      "縦モードの切り替えをヘッダーから 設定 › 画面・レイアウト › 画面配置 へ移動",
      "マイテーマに背景画像を追加 — システム画像6種または自分でアップロードした画像、余白は画像の繰り返し / システム色、サイズ(画面いっぱい・全体表示・元のサイズ・指定)・位置(9マス・横・縦・ドラッグで移動)・プレビュー(フォント一覧は折りたたみ表示)",
-     "Web: 開発者コンソールでテーマを変えたあとブラウザのタブを行き来すると、テーマストアで選んだテーマに戻る問題を修正"
+     "Web: 開発者コンソールでテーマを変えたあとブラウザのタブを行き来すると、テーマストアで選んだテーマに戻る問題を修正",
+     "共有プロジェクト: サーバー側でもホストが5分以上オフラインなら自動で終了 — 公開・友だち・自分のプロジェクト一覧からすぐに消え、入室・コード入室・ルーム情報の表示もブロック(supabase-share.sql の再実行が必要)"
     ],
     "zh": [
      "为介绍页 · 编辑器添加分享预览图(og-image) — 分享链接时显示 Meow-PDF 代表图片 · 标题 · 简介",
@@ -64,7 +149,8 @@
      "页面面板缩略图按钮改为围绕缩略图中心呈圆形展开,而非扇形,并新增“打印此页”按钮",
      "将竖向模式切换从标题栏移到 设置 › 画面 · 布局 › 画面布局",
      "我的主题新增背景图片 — 6 种系统图片或自行上传的图片,空白处可选择重复图片 / 系统颜色,支持大小(铺满 · 完整显示 · 原始大小 · 自定义) · 位置(九宫格 · 水平 · 垂直 · 拖动移动) · 预览(字体列表改为折叠显示)",
-     "网页版: 修复用开发者控制台更换主题后切换浏览器标签页,主题会恢复为主题商店所选主题的问题"
+     "网页版: 修复用开发者控制台更换主题后切换浏览器标签页,主题会恢复为主题商店所选主题的问题",
+     "共享项目: 服务器端也会在房主离线超过 5 分钟时自动关闭项目 — 立即从公开 · 好友 · 我的项目列表中消失,并阻止加入 · 代码加入 · 查看房间信息(需重新运行 supabase-share.sql)"
     ]
    }
   },
@@ -505,60 +591,6 @@
      "移动端:演示时左右滑动或轻点屏幕左侧 / 右侧即可切换到上一页 · 下一页",
      "移动端:修复结束演示后底部悬浮导航按钮被移到上方的问题 — 演示中的旋转 · 全屏变化不再改变其位置，结束后回到初始位置",
      "添加 Google AdSense 代码 — 放在介绍页 · 商家信息页的 head 中；编辑器仅在桌面端打开设置 · 账号 · 主题商店窗口时在窗口两侧显示竖幅广告(高级版 · 移动端 · 演示中不显示);在高级版介绍 · 支付窗口 · 介绍页价格说明中加入“去广告”文字；离线服务工作线程不缓存广告脚本和请求"
-    ]
-   }
-  },
-  {
-   "v": "v0.11.5",
-   "d": "2026.10.18",
-   "items": {
-    "ko": [
-     "설정 › 화면 · 레이아웃에 ‘테마 배경 효과’ 추가 — 프리미엄 테마의 배경 클릭 효과 · 이스터에그를 모두 켜기 / 클릭 효과만 / 모두 끄기 중 선택",
-     "테마 이스터에그 상단 문구를 ‘형광등 소리만 들린다.’ 같은 짧은 평서체로 바꾸고 이모티콘 줄임",
-     "공유작업 채팅방에서 신고(메시지 · 참여자)하면 채팅 기록도 함께 전송 — 메시지 신고는 그 메시지 앞 20개 · 뒤 10개, 그 밖에는 최근 30개, 고객 문의 관리 › 공유작업 신고에서 신고 대상의 메시지를 강조해 표시",
-     "모바일: 노치(카메라) 영역을 검은색으로 채움, 상태 표시줄 색도 검은색으로 변경",
-     "모바일: 휴대폰을 가로로 돌리면 노치가 있는 쪽(왼쪽 / 오른쪽)을 자동으로 비우고 위쪽 여백은 없앰",
-     "모바일: 하단 플로팅 네비게이션 버튼의 처음 위치를 더 아래로 이동",
-     "모바일: 발표를 누르면 자동으로 전체화면 · 여백 없이 화면 가득 표시, 가로 모양 페이지는 자동으로 가로 화면으로 전환(지원하는 브라우저)",
-     "발표 모드 배경을 테마와 상관없이 항상 검은색으로 고정, 테마 장식 숨김",
-     "모바일 가로 화면 발표에서 도구 막대(presbar)가 화면 밖으로 사라지던 문제 수정 — 화면을 돌리면 자동으로 화면 안으로 이동, 모바일에서는 화면 폭에 맞춰 줄바꿈",
-     "발표 도구 막대는 펼쳤을 때 버튼이 가려지는 위치(화면 밖 · 노치 · 홈 바)로는 옮길 수 없도록 제한, 접은 상태에서 가장자리로 옮긴 뒤 펼쳐도 안쪽으로 자동 이동"
-    ],
-    "en": [
-     "Added ‘Theme background effects’ to Settings › Display · Layout — choose All on / Click effects only / All off for Premium themes' background click effects and easter eggs",
-     "Theme easter egg banners now use short plain sentences like ‘Only the hum of fluorescent lights.’ with fewer emoji",
-     "Reporting a message or participant in a shared work chat now also sends the chat log — 20 messages before and 10 after for message reports, otherwise the latest 30; reported messages are highlighted in Customer inquiries › Shared work reports",
-     "Mobile: the notch (camera) area is filled with black, and the status bar is black too",
-     "Mobile: when the phone is turned sideways, the notch side (left/right) is automatically kept clear and the top margin is removed",
-     "Mobile: moved the starting position of the bottom floating navigation button further down",
-     "Mobile: Present now goes fullscreen automatically and fills the screen with no margins; landscape pages switch the screen to landscape automatically (in supported browsers)",
-     "The presentation background is always black regardless of theme, and theme decorations are hidden",
-     "Fixed the presentation toolbar (presbar) disappearing off screen in mobile landscape — it moves back on screen automatically when you rotate, and wraps to the screen width on mobile",
-     "The presentation toolbar can't be moved where its buttons would be hidden when expanded (off screen · notch · home bar); if moved to an edge while folded, it shifts inward automatically when expanded"
-    ],
-    "ja": [
-     "設定 › 画面・レイアウトに「テーマ背景エフェクト」を追加 — プレミアムテーマの背景クリック効果・イースターエッグを すべてオン / クリック効果のみ / すべてオフ から選択",
-     "テーマのイースターエッグ上部の文言を「蛍光灯の音だけが聞こえる。」のような短い平叙文にし、絵文字を減らしました",
-     "共同作業のチャットで通報(メッセージ・参加者)するとチャット履歴も一緒に送信 — メッセージ通報はそのメッセージの前20件・後10件、それ以外は最新30件、お問い合わせ管理 › 共同作業の通報で対象のメッセージを強調表示",
-     "モバイル: ノッチ(カメラ)部分を黒で塗りつぶし、ステータスバーの色も黒に変更",
-     "モバイル: スマホを横にするとノッチのある側(左/右)を自動で空け、上の余白はなくします",
-     "モバイル: 下部のフローティングナビゲーションボタンの初期位置をさらに下へ移動",
-     "モバイル: プレゼンを押すと自動で全画面・余白なしで画面いっぱいに表示、横長のページは自動で横画面に切り替え(対応ブラウザー)",
-     "プレゼンモードの背景をテーマに関係なく常に黒に固定し、テーマの装飾を非表示",
-     "モバイル横画面のプレゼンでツールバー(presbar)が画面外に消える問題を修正 — 画面を回すと自動で画面内に移動し、モバイルでは画面幅に合わせて折り返し",
-     "プレゼンツールバーは、展開時にボタンが隠れる位置(画面外・ノッチ・ホームバー)には移動できないよう制限、折りたたんだ状態で端に移動してから展開しても自動で内側に移動"
-    ],
-    "zh": [
-     "在设置 › 显示 · 布局中新增“主题背景效果” — 可为高级版主题的背景点击效果 · 彩蛋选择 全部开启 / 仅点击效果 / 全部关闭",
-     "主题彩蛋顶部文字改为“只听得见日光灯的嗡嗡声。”这类简短陈述句，并减少表情符号",
-     "在协作聊天室举报(消息 · 参与者)时会一并发送聊天记录 — 举报消息时为该消息前 20 条 · 后 10 条，其他情况为最近 30 条；在客户咨询管理 › 协作举报中会高亮显示被举报的消息",
-     "移动端:刘海(摄像头)区域以黑色填充，状态栏也改为黑色",
-     "移动端:手机横置时自动空出刘海所在一侧(左 / 右),并去掉顶部留白",
-     "移动端:将底部悬浮导航按钮的初始位置再往下移",
-     "移动端:点击演示会自动全屏 · 无边距铺满屏幕，横向页面会自动切换为横屏(支持的浏览器)",
-     "演示模式背景无论主题始终为黑色，并隐藏主题装饰",
-     "修复移动端横屏演示时工具栏(presbar)跑到屏幕外的问题 — 旋转屏幕后会自动移回屏幕内，移动端按屏幕宽度换行",
-     "演示工具栏不能移动到展开后按钮会被遮挡的位置(屏幕外 · 刘海 · 主屏幕指示条);收起状态下移到边缘后再展开也会自动移向内侧"
     ]
    }
   }

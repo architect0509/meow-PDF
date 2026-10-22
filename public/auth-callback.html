@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Meow-PDF 로그인</title>
+<style>
+  :root{color-scheme:dark}
+  body{margin:0;min-height:100vh;display:grid;place-items:center;background:#16161a;color:#e8e8ec;font:15px/1.6 'Noto Sans KR',system-ui,sans-serif}
+  .box{width:min(380px,calc(100vw - 40px));padding:28px 24px;border-radius:18px;background:#202026;border:1px solid #33333c;text-align:center;box-shadow:0 18px 50px rgba(0,0,0,.45)}
+  h1{margin:0 0 8px;font-size:19px}
+  p{margin:0 0 16px;color:#a9a9b4;font-size:13.5px}
+  .ok{color:#7ee2a8}.err{color:#ff8a8a}
+  button,a.b{display:inline-block;padding:10px 18px;border-radius:10px;border:0;background:#dbbe43;color:#2a2200;font-weight:700;font-size:14px;text-decoration:none;cursor:pointer}
+  .sp{width:34px;height:34px;margin:0 auto 14px;border-radius:50%;border:3px solid #3a3a44;border-top-color:#dbbe43;animation:s 1s linear infinite}
+  @keyframes s{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div class="box"><div class="sp" id="sp"></div><h1 id="t">로그인하는 중…</h1><p id="d">잠시만 기다려 주세요.</p><div id="act"></div></div>
+<script>
+/* Meow-PDF v1.1.0 소셜 로그인(Google · 네이버)이 돌아오는 곳.
+   받은 로그인 정보를 편집기 창에 넘기고(같은 사이트끼리만) 이 창을 닫아요. 주소창에 남은 로그인 정보는 바로 지워요. */
+(function () {
+  var h = new URLSearchParams(location.hash.slice(1)), q = new URLSearchParams(location.search);
+  var at = h.get('access_token'), rt = h.get('refresh_token'), code = q.get('code');
+  var err = h.get('error_description') || q.get('error_description') || h.get('error') || q.get('error');
+  var prov = h.get('provider') || q.get('provider') || 'google';
+  var $ = function (id) { return document.getElementById(id); };
+  try { history.replaceState(null, '', location.pathname); } catch (e) {}
+  var data = (at && rt) ? { type: 'meow-oauth', ok: true, access_token: at, refresh_token: rt, provider: prov, ts: Date.now() }
+    : code ? { type: 'meow-oauth', ok: true, code: code, provider: prov, ts: Date.now() }
+    : { type: 'meow-oauth', ok: false, message: err ? String(err).replace(/\+/g, ' ') : '로그인을 완료하지 못했어요.', provider: prov, ts: Date.now() };
+  try { localStorage.setItem('meowOAuthDone', JSON.stringify(data)); } catch (e) {}
+  var op = null; try { op = window.opener && window.opener !== window ? window.opener : null; } catch (e) { op = null; }
+  try { if (op) op.postMessage(data, location.origin); } catch (e) {}
+  $('sp').style.display = 'none';
+  var back = '/edit'; try { back = localStorage.getItem('meowOAuthBack') || '/edit'; localStorage.removeItem('meowOAuthBack'); } catch (e) {}
+  if (!/^\/[^/]/.test(back)) back = '/edit';
+  if (data.ok) {
+    $('t').textContent = '로그인했어요'; $('t').className = 'ok';
+    $('d').textContent = op ? '이 창은 곧 닫혀요. Meow-PDF로 돌아가 주세요.' : 'Meow-PDF 편집기로 돌아가는 중…';
+    if (op) { setTimeout(function () { try { window.close(); } catch (e) {} }, 400); $('act').innerHTML = '<button onclick="window.close()">창 닫기</button>'; }
+    else setTimeout(function () { location.replace(back); }, 300);
+  } else {
+    $('t').textContent = '로그인하지 못했어요'; $('t').className = 'err';
+    $('d').textContent = data.message;
+    $('act').innerHTML = op ? '<button onclick="window.close()">창 닫기</button>' : '<a class="b" href="' + back + '">편집기로 돌아가기</a>';
+  }
+})();
+</script>
+</body>
+</html>

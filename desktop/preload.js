@@ -18,6 +18,10 @@ contextBridge.exposeInMainWorld('meowDesktop', {
     status: () => ipcRenderer.invoke('meow:assoc-status'),
     open: () => ipcRenderer.invoke('meow:assoc-open')
   },
+  print: {   // v1.0.6 인쇄 창에서 고른 프린터로 바로 인쇄
+    printers: () => ipcRenderer.invoke('meow:printers'),
+    run: o => ipcRenderer.invoke('meow:print', o || {})
+  },
   onFocus: cb => { if (typeof cb === 'function') ipcRenderer.on('meow:focus', () => { try { cb(); } catch (er) { /* 무시 */ } }); },
   update: {
     start: () => ipcRenderer.invoke('meow:update-start'),

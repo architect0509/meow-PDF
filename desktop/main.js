@@ -16,8 +16,7 @@ const START = SITE + '/edit';
 const HOSTS = new Set(['www.meow-pdf.com', 'meow-pdf.com']);
 const APP_DIR = path.join(__dirname, 'app');
 const NET_ONLY = /^\/(api|payment|download|auth)(\/|$)|^\/version\.json$/;   // 늘 인터넷에서 받아요
-const RELEASES = 'https://github.com/architect0509/meow-PDF/releases/latest';   // v1.0.2 자동 업데이트가 안 되면 릴리스 페이지를 열어요 (설치 파일 주소는 아직 없을 수 있어서)
-const DOWNLOAD = { win32: RELEASES, darwin: SITE + '/download/mac', linux: RELEASES };
+const DOWNLOAD = { win32: SITE + '/#download', darwin: SITE + '/#download', linux: SITE + '/#download' };   // v1.0.6 자동 업데이트가 안 되면 GitHub 대신 사이트의 다운로드 안내로
 const STAY_HOSTS = /(^|\.)(meow-pdf\.com|tosspayments\.com|toss\.im)$/;   // 앱 창 안에서 열어 둘 주소 (결제 화면은 끝나면 돌아와요)
 const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.mjs': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.json': 'application/json; charset=utf-8', '.webmanifest': 'application/manifest+json', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.gif': 'image/gif', '.ico': 'image/x-icon', '.txt': 'text/plain; charset=utf-8', '.xml': 'application/xml', '.woff2': 'font/woff2', '.woff': 'font/woff', '.mp3': 'audio/mpeg', '.wasm': 'application/wasm' };
 
@@ -167,7 +166,9 @@ function makeWindow(url) {
     win.webContents.executeJavaScript(js, true).then(ok => { if (!ok) win.setFullScreen(!win.isFullScreen()); }).catch(() => win.setFullScreen(!win.isFullScreen()));
   });
   /* 새 창: 우리 사이트는 앱 창으로, 다른 사이트는 기본 브라우저로 */
-  win.webContents.setWindowOpenHandler(({ url: u }) => {
+  win.webContents.setWindowOpenHandler(({ url: u, frameName }) => {
+    /* v1.1.0 소셜 로그인(Google · 네이버) 작은 창은 앱 안에서 열어요 — 로그인이 끝나면 www.meow-pdf.com/auth-callback 이 이 창에 로그인 정보를 넘기고 스스로 닫혀요 */
+    if (frameName === 'meowlogin') return { action: 'allow', overrideBrowserWindowOptions: { width: 480, height: 680, minWidth: 360, minHeight: 480, parent: win, autoHideMenuBar: true, backgroundColor: '#16161a', title: 'Meow-PDF 로그인', webPreferences: { contextIsolation: true, sandbox: true, nodeIntegration: false } } };
     try { const h = new URL(u).hostname; if (HOSTS.has(h)) return { action: 'allow', overrideBrowserWindowOptions: { autoHideMenuBar: true, backgroundColor: '#0e0e11', webPreferences: { preload: path.join(__dirname, 'preload.js'), contextIsolation: true, sandbox: true } } }; } catch (e) { /* 무시 */ }
     if (u && u !== 'about:blank') openExternal(u);
     return { action: 'deny' };
@@ -206,6 +207,18 @@ function wireUpdater(u) {
   u.on('error', e => sendStatus({ state: 'error', message: String(e && e.message || e) }));
 }
 
+/* ── v1.0.6 인쇄: 편집 화면의 인쇄 창(미리 보기 · 용지 · 여백)에서 고른 대로, 운영체제 인쇄 창 없이 바로 프린터로 보내요.
+   (window.print() 는 Windows 인쇄 창에 ‘이 앱은 인쇄 미리 보기를 지원하지 않습니다’가 떠서 쓰지 않아요) ── */
+ipcMain.handle('meow:printers', async e => {
+  try { const list = await e.sender.getPrintersAsync(); return (list || []).map(p => ({ name: p.name, displayName: p.displayName || p.name, isDefault: !!p.isDefault, status: p.status })); } catch (er) { return []; }
+});
+ipcMain.handle('meow:print', (e, o) => new Promise(res => {
+  o = o || {};
+  const w = Math.max(10000, Math.round(+o.width || 210000)), h = Math.max(10000, Math.round(+o.height || 297000));
+  const opts = { silent: true, printBackground: true, color: o.color !== false, copies: Math.min(99, Math.max(1, Math.round(+o.copies || 1))), collate: true, margins: { marginType: 'none' }, landscape: false, pageSize: { width: w, height: h }, scaleFactor: 100 };
+  if (o.deviceName) opts.deviceName = String(o.deviceName);
+  try { e.sender.print(opts, (ok, why) => res({ ok: !!ok, why: why || '' })); } catch (er) { res({ ok: false, why: String(er && er.message || er) }); }
+}));
 ipcMain.on('meow:info', e => { e.returnValue = { version: app.getVersion(), platform: process.platform, arch: process.arch, autoUpdate: canAutoUpdate() }; });
 ipcMain.on('meow:open-external', (e, url) => openExternal(String(url || '')));
 ipcMain.handle('meow:update-start', async () => {

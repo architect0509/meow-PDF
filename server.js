@@ -4,6 +4,7 @@
  *  - 토스페이먼츠 일반 결제로 1개월 1,200원 / 1년 10,500원 이용권 판매. 시크릿 키는 이 서버에만 존재
  *  - v1.0.3 구독(자동결제)에서 이용권(한 번 결제)으로 다시 바꿨어요 — 자동으로 다시 결제되지 않아요.
  *  - 결제가 승인되면 Supabase users_profile.premium_until 을 1개월/1년 연장 (남은 기간이 있으면 그 뒤에 이어 붙여요)
+ *  - v1.1.0 프리미엄 1개월 무료 체험(계정당 한 번, POST /api/trial/start) · 네이버 계정으로 로그인(/auth/naver/start → /auth/naver/callback)
  *
  * 흐름: POST /api/create-order {plan} → /pay 팝업(토스 결제창) → /payment/success → POST /api/confirm-payment
  */
@@ -675,6 +676,111 @@ app.post('/api/account/delete', authLimiter(5), async (req, res) => {
   }
 });
 
+/* ─────────── v1.1.0 프리미엄 1개월 무료 체험 (계정당 한 번 · 자동결제 없음) ───────────
+ * 계정(auth.users)의 app_metadata.trial_used_at 에 시작 시각을 남겨요. app_metadata 는 서비스 키로만 바꿀 수 있어서 사용자가 지울 수 없어요.
+ * 기록을 먼저 남긴 뒤 이용 기간을 더해서, 같은 계정이 동시에 여러 번 눌러도 한 번만 적용돼요. */
+const TRIAL_MONTHS = 1;
+const trialBusy = new Set();
+app.post('/api/trial/start', authLimiter(6), async (req, res) => {
+  const user = await authed(req, res, false); if (!user) return;
+  if (trialBusy.has(user.id)) return res.status(429).json({ success: false, message: '처리 중이에요. 잠시만 기다려 주세요.' });
+  trialBusy.add(user.id);
+  try {
+    const au = (await axios.get(`${SUPABASE_URL}/auth/v1/admin/users/${user.id}`, { headers: sbAdmin, timeout: 10000 })).data || {};
+    const am = au.app_metadata || {};
+    if (am.trial_used_at) return res.status(409).json({ success: false, code: 'TRIAL_USED', message: '1개월 무료 체험은 계정당 한 번만 쓸 수 있어요. 이미 사용한 계정이에요.' });
+    const row = await profileRow(user.id), now = new Date();
+    const cur = row && row.premium_until ? new Date(row.premium_until) : null;
+    const base = cur && !isNaN(cur) && cur > now ? cur : now, end = addMonths(base, TRIAL_MONTHS);
+    await axios.put(`${SUPABASE_URL}/auth/v1/admin/users/${user.id}`, { app_metadata: { ...am, trial_used_at: now.toISOString(), trial_until: end.toISOString() } }, { headers: { ...sbAdmin, 'Content-Type': 'application/json' }, timeout: 10000 });
+    const body = { id: user.id, email: au.email || user.email, premium_until: end.toISOString() };
+    if (!(cur && cur > now)) body.premium_source = 'trial';   // 남은 이용권 기간이 있으면 원래 구분(결제 등)을 그대로 둬요
+    await upsertProfile(body);
+    console.log('[무료 체험]', user.id, '→', end.toISOString());
+    res.json({ success: true, until: end.toISOString(), message: '프리미엄 1개월 무료 체험을 시작했어요.' });
+  } catch (e) {
+    console.error('[무료 체험 실패]', e.response?.data || e.message);
+    res.status(502).json({ success: false, message: '무료 체험을 시작하지 못했어요. 잠시 뒤 다시 시도해 주세요.' });
+  } finally { trialBusy.delete(user.id); }
+});
+
+/* ─────────── v1.1.0 네이버 계정으로 로그인 ───────────
+ * 흐름: 편집기 작은 창 → GET /auth/naver/start?ret=<편집기 주소>/auth-callback → 네이버 로그인 → GET /auth/naver/callback
+ *       → 이메일로 Meow-PDF 계정을 찾거나 새로 만들고(인증된 계정) → 로그인 세션을 만들어 ret#access_token=… 으로 돌려보내요.
+ * 필요: .env 의 NAVER_CLIENT_ID · NAVER_CLIENT_SECRET (네이버 개발자센터 › 애플리케이션 › 네이버 로그인, Callback URL = PUBLIC_BASE_URL/auth/naver/callback, 이메일 제공 필수)
+ * 안전: 같은 이메일로 이미 가입한 계정은 네이버 메일(@naver.com)이거나 전에 네이버로 연결한 계정일 때만 이어서 로그인해요. */
+const NAVER_ID = (process.env.NAVER_CLIENT_ID || '').trim(), NAVER_SECRET = (process.env.NAVER_CLIENT_SECRET || '').trim();
+const naverReady = () => !!(NAVER_ID && NAVER_SECRET && ready());
+const b64u = s => Buffer.from(s).toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+const unb64u = s => Buffer.from(String(s).replace(/-/g, '+').replace(/_/g, '/'), 'base64').toString('utf8');
+function retOk(u) {
+  try {
+    const x = new URL(u); if (!/^https?:$/.test(x.protocol) || x.pathname.replace(/\.html$/, '') !== '/auth-callback') return false;
+    if (/^(www\.)?meow-pdf\.com$/.test(x.hostname)) return x.protocol === 'https:';
+    if (x.hostname === 'localhost' || x.hostname === '127.0.0.1') return true;
+    return ALLOWED_ORIGINS.length > 0 && originOk(x.origin);
+  } catch (e) { return false; }
+}
+const backTo = (ret, params) => ret + '#' + Object.entries(params).map(([k, v]) => k + '=' + encodeURIComponent(v)).join('&');
+app.get('/api/auth/naver-ready', (req, res) => res.json({ success: true, ready: naverReady() }));
+app.get('/auth/naver/start', authLimiter(20), (req, res) => {
+  res.setHeader('Cache-Control', 'no-store');
+  const ret = String(req.query.ret || '');
+  if (!retOk(ret)) return res.status(400).send(page('네이버 로그인', '<h1 class="err">잘못된 요청이에요</h1><p>Meow-PDF 편집기에서 다시 시도해 주세요.</p>', ''));
+  if (!naverReady()) return res.redirect(backTo(ret, { error: 'not_ready', error_description: '네이버 로그인이 아직 준비되지 않았어요.', provider: 'naver' }));
+  const st = b64u(JSON.stringify({ r: ret, t: Date.now(), n: crypto.randomBytes(8).toString('hex') })), state = st + '.' + sign('naver:' + st);
+  res.redirect('https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=' + encodeURIComponent(NAVER_ID) + '&redirect_uri=' + encodeURIComponent(PUBLIC_BASE_URL + '/auth/naver/callback') + '&state=' + encodeURIComponent(state));
+});
+async function sessionForEmail(email) {   // 관리자 키로 일회용 로그인 링크를 만들고 바로 확인해서 세션을 받아요 (메일은 보내지 않아요)
+  const g = await axios.post(`${SUPABASE_URL}/auth/v1/admin/generate_link`, { type: 'magiclink', email }, { headers: { ...sbAdmin, 'Content-Type': 'application/json' }, timeout: 12000 });
+  const d = g.data || {}, hashed = d.hashed_token || (d.properties && d.properties.hashed_token), otp = d.email_otp || (d.properties && d.properties.email_otp);
+  const verify = b => axios.post(`${SUPABASE_URL}/auth/v1/verify`, b, { headers: { apikey: SUPABASE_PUBLISHABLE_KEY, 'Content-Type': 'application/json' }, timeout: 12000 });
+  let v;
+  try { v = await verify({ type: 'magiclink', token_hash: hashed }); }
+  catch (e) { if (!otp) throw e; v = await verify({ type: 'magiclink', email, token: otp }); }
+  if (!v.data || !v.data.access_token) throw new Error('세션을 만들지 못했어요');
+  return { access_token: v.data.access_token, refresh_token: v.data.refresh_token };
+}
+app.get('/auth/naver/callback', authLimiter(20), async (req, res) => {
+  res.setHeader('Cache-Control', 'no-store');
+  const [st, sig] = String(req.query.state || '').split('.');
+  let S = null; try { if (st && sig && sig === sign('naver:' + st)) S = JSON.parse(unb64u(st)); } catch (e) { S = null; }
+  if (!S || !retOk(S.r) || Date.now() - S.t > 10 * 60 * 1000) return res.status(400).send(page('네이버 로그인', '<h1 class="err">로그인 요청이 만료되었어요</h1><p>Meow-PDF 편집기에서 다시 시도해 주세요.</p><button class="sub" onclick="window.close()">창 닫기</button>', ''));
+  const fail = (code, msg) => res.redirect(backTo(S.r, { error: code, error_description: msg, provider: 'naver' }));
+  if (req.query.error || !req.query.code) return fail(String(req.query.error || 'cancel'), req.query.error === 'access_denied' ? '네이버 로그인을 취소했어요.' : '네이버 로그인을 완료하지 못했어요.');
+  if (!naverReady()) return fail('not_ready', '네이버 로그인이 아직 준비되지 않았어요.');
+  try {
+    const tk = await axios.get('https://nid.naver.com/oauth2.0/token', { params: { grant_type: 'authorization_code', client_id: NAVER_ID, client_secret: NAVER_SECRET, code: String(req.query.code), state: String(req.query.state) }, timeout: 12000 });
+    if (!tk.data || !tk.data.access_token) return fail('token', '네이버 로그인 정보를 받지 못했어요.');
+    const me = await axios.get('https://openapi.naver.com/v1/nid/me', { headers: { Authorization: 'Bearer ' + tk.data.access_token }, timeout: 12000 });
+    const p = (me.data && me.data.response) || {}, nid = String(p.id || ''), email = String(p.email || '').trim().toLowerCase();
+    if (!nid) return fail('profile', '네이버 계정 정보를 받지 못했어요.');
+    if (!EMAIL_RE.test(email)) return fail('email', '네이버 로그인에서 이메일 제공에 동의해 주세요. (Meow-PDF 계정을 이메일로 구분해요)');
+    const nick = String(p.nickname || p.name || email.split('@')[0]).trim().slice(0, 20);
+    let au = await adminUserByEmail(email);
+    if (au && au.id && !au.app_metadata) au = (await axios.get(`${SUPABASE_URL}/auth/v1/admin/users/${au.id}`, { headers: sbAdmin, timeout: 10000 })).data;
+    if (au && au.id) {
+      const am = au.app_metadata || {};
+      if (am.naver_id && am.naver_id !== nid) return fail('mismatch', '이 이메일은 다른 네이버 계정과 연결되어 있어요.');
+      if (!am.naver_id) {
+        if (!/@naver\.com$/i.test(email)) return fail('email_taken', '이 이메일로 이미 가입된 Meow-PDF 계정이 있어요. 아이디 · 비밀번호로 로그인해 주세요.');
+        await axios.put(`${SUPABASE_URL}/auth/v1/admin/users/${au.id}`, { app_metadata: { ...am, naver_id: nid, providers: [...new Set([].concat(am.providers || [], 'naver'))] }, email_confirm: true }, { headers: { ...sbAdmin, 'Content-Type': 'application/json' }, timeout: 10000 });
+      }
+    } else {
+      const r = await axios.post(`${SUPABASE_URL}/auth/v1/admin/users`, { email, email_confirm: true, user_metadata: { nickname: nick, provider: 'naver' }, app_metadata: { provider: 'naver', providers: ['naver'], naver_id: nid } },
+        { headers: { ...sbAdmin, 'Content-Type': 'application/json' }, timeout: 15000 });
+      au = r.data && (r.data.user || r.data);
+      if (au && au.id) { try { await upsertProfile({ id: au.id, email, nickname: nick }); } catch (e) { console.warn('[naver] 프로필 기록 실패', e.response?.data || e.message); } }
+      console.log('[naver 가입]', au && au.id);
+    }
+    const s = await sessionForEmail(email);
+    res.redirect(backTo(S.r, { access_token: s.access_token, refresh_token: s.refresh_token, token_type: 'bearer', provider: 'naver' }));
+  } catch (e) {
+    console.error('[naver 로그인 실패]', e.response?.data || e.message);
+    fail('server', '네이버 로그인을 처리하지 못했어요. 잠시 뒤 다시 시도해 주세요.');
+  }
+});
+
 app.get('/pay', (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   const o = parseOrderId(req.query.order), plan = (o && o.plan) || PLANS.monthly, won = n => n.toLocaleString('ko-KR') + '원';
@@ -762,6 +868,7 @@ app.get('/payment/fail', (req, res) => {
 
 // 화면 구성: public/index.html = 소개 페이지(/), public/edit.html = 편집 페이지(/edit, pdf-editor.html 을 그대로 복사)
 app.get('/edit', (req, res) => res.sendFile(path.join(__dirname, 'public', 'edit.html')));
+app.get('/auth-callback', (req, res) => res.sendFile(path.join(__dirname, 'public', 'auth-callback.html')));   // v1.1.0 소셜 로그인이 돌아오는 곳
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(PORT, () => {
