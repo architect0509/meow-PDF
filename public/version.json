@@ -1,6 +1,6 @@
 {
  "name": "Meow-PDF",
- "version": "v1.1.2",
+ "version": "v1.1.3",
  "date": "2026.10.23",
  "site": "https://www.meow-pdf.com/",
  "download": {
@@ -10,6 +10,48 @@
   "page": "https://www.meow-pdf.com/#download"
  },
  "history": [
+  {
+   "v": "v1.1.3",
+   "d": "2026.10.23",
+   "items": {
+    "ko": [
+     "페이지 패널의 상세보기(…) 버튼을 없애고 우클릭 메뉴로 변경 — 썸네일을 우클릭(모바일: 길게 누르기)하면 아래로 목록이 내려오고 새 페이지 · 페이지 복제 · 이름 바꾸기 · 북마크 · 주석 · 프린트 · 삭제 순서로 선택",
+     "페이지 추가를 빈 페이지 열기 · 기존 파일 불러오기로 나눔 — 기존 파일은 PDF · PNG(JPG)를 고른 페이지 바로 뒤 중간에 끼워 넣기, 여러 파일은 고른 순서대로 (페이지 메뉴의 ‘새 페이지’ · 페이지 패널 아래 ‘페이지 추가’)",
+     "디지털화 정확도 · 인식 범위 개선 — 한 페이지를 세 가지 읽기 방식으로 반복해 읽고 더 깨끗한 결과를 바탕으로 합침, 자신 없는 칸은 2배 · 3배로 키워 여러 번 다시 읽어 같은 답이 나오면 그 답을 씀, 한국어 인식에 영어 모델을 함께 써서 영문 문장이 깨지던 문제 해결, 회색 바탕 · 옅은 글자 · 어두운 상자 위 흰 글자도 읽도록 대비 맞춤, 엔진이 놓친 낱말 덩어리도 다시 읽음, 글자 PDF 안에 섞인 그림 · 스캔 글자도 함께 인식, 각주 같은 작은 글자도 남김",
+     "스크롤바 색이 테마 색을 따라 바뀜",
+     "메모에 제목 추가 — 머리글에서 바로 입력(비우면 첫 줄이 제목), 접으면 작은 동그라미 하나만 남고 누르면 펼쳐짐 · 끌어서 옮기기 · 마우스를 올리면 메모 제목 표시",
+     "모바일 발표에 도구 줄 추가 — 리모컨의 ▲ 단추로 펼치고 접는 도구 줄에서 강조표시 · 그리기 · 직선 · 지우개 · 도형 · 텍스트 · 레이저 포인터 · 실행 취소 사용 (접거나 도구를 끄면 다시 밀어서 넘기기)",
+     "설정 › 버전 정보에 Thaniya.co.kr로 이동하는 단추 추가 (설정 왼쪽 아래 버전 표시 옆에도 링크)"
+    ],
+    "en": [
+     "Replaced the page panel’s details (…) button with a right-click menu — right-click a thumbnail (mobile: long-press) and a list drops down with New page · Duplicate page · Rename · Bookmark · Note · Print · Delete, in that order",
+     "Adding a page is now split into Open blank page · Import existing file — an existing PDF · PNG (JPG) is inserted right after the chosen page, in the middle of the document; multiple files go in the order you picked them (‘New page’ in the page menu · ‘Add page’ under the page panel)",
+     "Improved digitize accuracy and coverage — each page is read repeatedly in three reading modes and merged on top of the cleanest result; unsure cells are reread several times at 2× · 3× and an answer that comes up more than once wins; Korean recognition now also uses the English model, fixing garbled English sentences; contrast normalization reads gray backgrounds · faint text · white text on dark boxes; word clusters the engine missed are reread; text inside images · scans mixed into text PDFs is recognized too; small text such as footnotes is kept",
+     "Scrollbar colors now follow the theme",
+     "Added titles to memos — type directly in the header (empty: the first line is used); a collapsed memo becomes a single small circle — click to expand · drag to move · hover to see the memo title",
+     "Added a toolbar to mobile presentations — open and fold it with the ▲ button on the remote to use Highlight · Draw · Line · Eraser · Shape · Text · Laser pointer · Undo (fold it or turn the tool off to swipe pages again)",
+     "Added a button to go to Thaniya.co.kr in Settings › Version info (also linked next to the version at the bottom left of Settings)"
+    ],
+    "ja": [
+     "ページパネルの詳細(…)ボタンをなくし右クリックメニューに変更 — サムネイルを右クリック(モバイル: 長押し)すると下にリストが開き、新しいページ · ページを複製 · 名前を変更 · ブックマーク · 注釈 · 印刷 · 削除の順に選択",
+     "ページ追加を空白ページを開く · 既存ファイルを読み込むに分割 — 既存ファイルは PDF · PNG(JPG)を選んだページのすぐ後ろ(途中)に挿入、複数ファイルは選んだ順に(ページメニューの「新しいページ」· ページパネル下の「ページ追加」)",
+     "デジタル化の精度 · 認識範囲を改善 — 1ページを3つの読み取り方式で繰り返し読み、よりきれいな結果を基に統合、自信のないセルは 2倍 · 3倍に拡大して何度も読み直し同じ答えが出ればその答えを採用、韓国語認識に英語モデルも併用し英文が崩れる問題を解決、灰色の背景 · 薄い文字 · 暗い箱の上の白文字も読めるようコントラストを調整、エンジンが見落とした単語の塊も読み直し、文字PDFに混ざった画像 · スキャンの文字も一緒に認識、脚注のような小さな文字も残す",
+     "スクロールバーの色がテーマの色に合わせて変わる",
+     "メモにタイトルを追加 — ヘッダーで直接入力(空欄なら1行目がタイトル)、折りたたむと小さな丸だけが残り、押すと展開 · ドラッグで移動 · マウスを乗せるとメモのタイトルを表示",
+     "モバイル発表にツールバーを追加 — リモコンの ▲ ボタンで開閉するツール列で強調表示 · 描画 · 直線 · 消しゴム · 図形 · テキスト · レーザーポインター · 元に戻すを使用(折りたたむかツールを切ると再びスワイプでページ送り)",
+     "設定 › バージョン情報に Thaniya.co.kr へ移動するボタンを追加(設定左下のバージョン表示の横にもリンク)"
+    ],
+    "zh": [
+     "去掉页面面板的详细(…)按钮,改为右键菜单 — 右键点击缩略图(移动端: 长按)会向下展开列表,按 新页面 · 复制页面 · 重命名 · 书签 · 注释 · 打印 · 删除 的顺序选择",
+     "添加页面分为 打开空白页 · 导入现有文件 — 现有文件可将 PDF · PNG(JPG)插入到所选页面紧后方(文档中间),多个文件按选择顺序插入(页面菜单的「新页面」· 页面面板下方的「添加页面」)",
+     "改进数字化的准确度 · 识别范围 — 每页用三种读取方式反复读取,并以更干净的结果为基础合并;没把握的格子放大 2 倍 · 3 倍多次重读,出现相同答案时采用该答案;韩语识别同时使用英语模型,解决英文句子乱码问题;调整对比度,可读取灰色背景 · 浅色文字 · 深色框上的白字;引擎漏掉的词块也会重读;文字 PDF 中混有的图片 · 扫描文字也一并识别;保留脚注等小字",
+     "滚动条颜色随主题颜色变化",
+     "便签新增标题 — 在标题栏直接输入(留空则以第一行为标题),折叠后只剩一个小圆点,点击展开 · 拖动移动 · 鼠标悬停显示便签标题",
+     "移动端演示新增工具栏 — 用遥控器的 ▲ 按钮展开和折叠工具栏,可使用 高亮 · 绘图 · 直线 · 橡皮擦 · 形状 · 文本 · 激光笔 · 撤销(折叠或关闭工具后可再次滑动翻页)",
+     "在 设置 › 版本信息 中新增前往 Thaniya.co.kr 的按钮(设置左下角版本号旁也有链接)"
+    ]
+   }
+  },
   {
    "v": "v1.1.2",
    "d": "2026.10.23",
@@ -537,64 +579,6 @@
      "工具快捷键变更:高亮 2 · 绘制 3 · 直线 4 · 橡皮擦 5 · 马赛克 6(Q · W · E · R · T · Y 为 Gizmo 模式的变换工具)",
      "修复点击已填充星形内部无法选中的问题",
      "用选择工具移动对象时按住 Shift,只沿水平或垂直一个方向移动"
-    ]
-   }
-  },
-  {
-   "v": "v0.11.7",
-   "d": "2026.10.18",
-   "items": {
-    "ko": [
-     "모바일 가로 화면: 시작 화면의 4개 버튼(파일 열기 · 빈 문서로 시작 · 파일 병합 · 파일 압축)을 더 작게 줄여 한 줄로 가운데에 가지런히 배열 — 비어 있는 페이지 패널을 숨겨 화면 정가운데에 표시",
-     "새 테마 ‘동화’ 추가 (프리미엄) — 그림책 속 포근한 마을, 무지개 · 웃는 해 · 몽실몽실 구름 · 꽃 언덕 · 말랑한 친구들이 있는 만화 같은 화면 (테마 스토어에서 구름 · 친구들 움직임 끄기 가능)",
-     "동화 테마 이스터에그 — 빈 배경을 누르면 하트 · 꽃 · 별이 퐁퐁, 빠르게 일곱 번 누르면 숨은 장면",
-     "모바일: 하단 + 플로팅 네비게이션 버튼을 더 잘 보이게 — 접혀 있을 때도 보조색 · 밝은 테두리 · 그림자로 표시, 펼친 버튼의 글자도 더 선명하게",
-     "모바일: + 플로팅 네비게이션 버튼의 자리를 세로 화면 · 가로 화면에서 따로 기억 — 세로는 아래 가운데, 가로는 오른쪽 아래가 처음 자리이고, 옮겨 둔 자리는 방향마다 따로 유지",
-     "버튼을 누를 때 버튼 글자가 선택(파란 강조)되거나 포커스 테두리가 생기던 문제 수정 — 키보드로 이동할 때만 테두리 표시",
-     "음성 도구를 드롭다운으로 변경 — 음성 녹음 / MP3 파일 넣기(신규) 중에서 선택, MP3 파일(최대 30MB)을 골라 녹음처럼 페이지에 넣고 재생 · 이름 바꾸기 · MP3 내보내기 가능 (V 단축키는 바로 녹음)",
-     "PC: 테마 스토어 오른쪽 아래에 시즌 테마(기간 한정) 알림을 작은 팝업으로 표시 — 남은 기간 · 다음 무료 기간과 ‘기간 한정 테마 보기’ 버튼, 닫으면 이번 접속 동안 숨김",
-     "공유작업 패널 아래쪽 ‘지금 탭 공유하기’ 안내를 깔끔한 카드로 바꾸고 누르면 프로젝트 관리 창이 열리도록 개선",
-     "인쇄한 뒤 일부 테마 화면 꾸밈이 사라지던 문제 수정",
-     "영어 · 일본어 · 중국어 화면에서 번역이 빠져 있던 문구 채움 (지금까지의 기능 · 업데이트 내역 포함)"
-    ],
-    "en": [
-     "Mobile landscape: the 4 start-screen buttons (Open file · Start blank · Merge files · Compress file) are smaller and neatly lined up in one centered row — the empty page panel is hidden so they sit right in the middle of the screen",
-     "New theme ‘Fairy Tale’ (Premium) — a cozy picture-book village with a rainbow, a smiling sun, fluffy clouds, flower hills and squishy little friends, drawn like a cartoon (clouds & friends animation can be turned off in the Theme store)",
-     "Fairy Tale theme easter egg — tap the empty background for popping hearts, flowers and stars; tap seven times quickly for a hidden scene",
-     "Mobile: the bottom + floating navigation button is easier to see — shown with the accent color, a bright border and a shadow even when folded, and labels on the expanded buttons are clearer",
-     "Mobile: the + floating navigation button remembers its position separately for portrait and landscape — it starts at the bottom center in portrait and the bottom right in landscape, and wherever you move it is kept per orientation",
-     "Fixed button labels getting selected (blue highlight) or showing a focus outline when tapped — the outline now appears only when moving with the keyboard",
-     "The Voice tool is now a dropdown — choose Voice recording or Insert MP3 file (new); pick an MP3 (up to 30MB) to place it on the page like a recording, with play · rename · MP3 export (the V shortcut still records right away)",
-     "PC: the Theme store shows a small seasonal-theme (limited-time) popup in the bottom-right corner — with time left, the next free period and a ‘View limited-time themes’ button; closing it hides it for this visit",
-     "The ‘Share this tab’ hint at the bottom of the Shared work panel is now a clean card that opens the project manager when tapped",
-     "Fixed some theme decorations disappearing after printing",
-     "Filled in missing translations in the English, Japanese and Chinese UI (including all features and the update history so far)"
-    ],
-    "ja": [
-     "モバイル横画面: スタート画面の4つのボタン(ファイルを開く・空の文書で開始・ファイル結合・ファイル圧縮)を小さくして1列で中央にきれいに配置 — 空のページパネルを隠して画面のちょうど中央に表示",
-     "新テーマ「童話」追加(プレミアム) — 絵本の中のほっこりした村。虹・笑う太陽・ふわふわの雲・花の丘・もちもちの仲間たちがいる漫画のような画面(テーマストアで雲・仲間たちの動きをオフにできます)",
-     "童話テーマのイースターエッグ — 何もない背景を押すとハート・花・星がぽんぽん、素早く7回押すと隠しシーン",
-     "モバイル: 下部の + フローティングナビゲーションボタンを見やすく — 折りたたんだ状態でもアクセント色・明るい枠線・影で表示し、展開したボタンの文字もくっきり",
-     "モバイル: + フローティングナビゲーションボタンの位置を縦画面・横画面で別々に記憶 — 縦は下中央、横は右下が初期位置で、動かした位置は向きごとに保持",
-     "ボタンを押したときにボタンの文字が選択(青いハイライト)されたりフォーカス枠が出たりする問題を修正 — 枠はキーボードで移動したときだけ表示",
-     "音声ツールをドロップダウンに変更 — 音声録音 / MP3ファイルを挿入(新機能)から選択、MP3ファイル(最大30MB)を選んで録音と同じようにページに挿入し、再生・名前変更・MP3書き出しが可能(Vショートカットはすぐ録音)",
-     "PC: テーマストアの右下にシーズンテーマ(期間限定)のお知らせを小さなポップアップで表示 — 残り期間・次の無料期間と「期間限定テーマを見る」ボタン、閉じると今回の接続中は非表示",
-     "共同作業パネル下部の「このタブを共有」の案内をすっきりしたカードにし、押すとプロジェクト管理ウィンドウが開くように改善",
-     "印刷後に一部のテーマの画面装飾が消える問題を修正",
-     "英語・日本語・中国語の画面で翻訳が抜けていた文言を補完(これまでの機能・更新履歴を含む)"
-    ],
-    "zh": [
-     "移动端横屏:将开始界面的 4 个按钮(打开文件 · 从空白文档开始 · 合并文件 · 压缩文件)缩小并整齐地排成居中的一行 — 隐藏空白的页面面板，使其正好显示在屏幕中央",
-     "新增主题“童话”(高级版) — 绘本里温馨的小镇，有彩虹 · 微笑的太阳 · 蓬松的云朵 · 花丘 · 软乎乎的小伙伴，像漫画一样的画面(可在主题商店关闭云朵与小伙伴动画)",
-     "童话主题彩蛋 — 点击空白背景会冒出爱心 · 花朵 · 星星，快速点击七次会出现隐藏场景",
-     "移动端:底部 + 悬浮导航按钮更醒目 — 收起时也以强调色 · 亮色边框 · 阴影显示，展开后按钮文字也更清晰",
-     "移动端:+ 悬浮导航按钮的位置按竖屏 · 横屏分别记忆 — 竖屏初始位置为底部中央，横屏为右下角，移动后的位置按方向分别保留",
-     "修复点击按钮时按钮文字被选中(蓝色高亮)或出现焦点边框的问题 — 仅在用键盘移动时显示边框",
-     "语音工具改为下拉菜单 — 可选择语音录制 / 插入 MP3 文件(新功能),选择 MP3 文件(最大 30MB)像录音一样插入页面，并可播放 · 重命名 · 导出 MP3(V 快捷键直接录音)",
-     "PC:主题商店右下角以小弹窗显示季节主题(限时)提示 — 包含剩余时间 · 下次免费期间和“查看限时主题”按钮，关闭后本次访问期间不再显示",
-     "将协作面板底部的“共享当前标签页”提示改为简洁的卡片，点击即可打开项目管理窗口",
-     "修复打印后部分主题界面装饰消失的问题",
-     "补全英语 · 日语 · 中文界面中缺失的翻译(包括迄今为止的功能和更新记录)"
     ]
    }
   }
