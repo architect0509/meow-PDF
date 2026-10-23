@@ -167,7 +167,7 @@ function makeWindow(url) {
   });
   /* 새 창: 우리 사이트는 앱 창으로, 다른 사이트는 기본 브라우저로 */
   win.webContents.setWindowOpenHandler(({ url: u, frameName }) => {
-    /* v1.1.0 소셜 로그인(Google · 네이버) 작은 창은 앱 안에서 열어요 — 로그인이 끝나면 www.meow-pdf.com/auth-callback 이 이 창에 로그인 정보를 넘기고 스스로 닫혀요 */
+    /* v1.1.1 소셜 로그인(Google · 네이버) 작은 창은 앱 안에서 열어요 — 로그인이 끝나면 www.meow-pdf.com/auth-callback 이 이 창에 로그인 정보를 넘기고 스스로 닫혀요 */
     if (frameName === 'meowlogin') return { action: 'allow', overrideBrowserWindowOptions: { width: 480, height: 680, minWidth: 360, minHeight: 480, parent: win, autoHideMenuBar: true, backgroundColor: '#16161a', title: 'Meow-PDF 로그인', webPreferences: { contextIsolation: true, sandbox: true, nodeIntegration: false } } };
     try { const h = new URL(u).hostname; if (HOSTS.has(h)) return { action: 'allow', overrideBrowserWindowOptions: { autoHideMenuBar: true, backgroundColor: '#0e0e11', webPreferences: { preload: path.join(__dirname, 'preload.js'), contextIsolation: true, sandbox: true } } }; } catch (e) { /* 무시 */ }
     if (u && u !== 'about:blank') openExternal(u);
