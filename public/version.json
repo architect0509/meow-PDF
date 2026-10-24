@@ -1,6 +1,6 @@
 {
  "name": "Meow-PDF",
- "version": "v1.1.4",
+ "version": "v1.1.5",
  "date": "2026.10.24",
  "site": "https://www.meow-pdf.com/",
  "download": {
@@ -10,6 +10,44 @@
   "page": "https://www.meow-pdf.com/#download"
  },
  "history": [
+  {
+   "v": "v1.1.5",
+   "d": "2026.10.24",
+   "items": {
+    "ko": [
+     "스크롤바를 더 두껍게 바꿈 — 페이지 패널의 크기 조절 경계를 패널 바깥으로 옮겨 페이지 패널 스크롤바를 잡기 쉬워짐",
+     "페이지 패널의 그룹 머리가 마우스를 올리지 않아도 늘 같은 모습(설정 · 해제/삭제 버튼과 페이지 수)으로 보이고, 패널 좌우로 넓게 펼쳐짐 — 그룹 해제(페이지 유지)와 그룹 · 페이지 삭제는 한 버튼에서 눌러 고름",
+     "우측 패널 설정에 ‘길게 보기’ 추가 — 탭 · 도구바 · 옵션바 옆까지 우측 패널을 위로 올려 따로 세움",
+     "도구 모음의 ‘닿은선택’ 이름을 ‘선택’으로 바꿈",
+     "펼친 메모의 제목과 버튼 사이 빈 곳을 끌어서 메모를 옮길 수 있게 함 (제목 칸은 글자 길이만큼)",
+     "디지털화 · 전체 디지털화 중에 ‘취소’ 버튼(또는 Esc)으로 멈출 수 있음 — 취소하면 문서는 그대로"
+    ],
+    "en": [
+     "Made scrollbars thicker — moved the page panel’s resize edge outside the panel so its scrollbar is easy to grab",
+     "Group headers in the page panel now always look the same without hovering (settings · ungroup/delete button and page count) and stretch across the panel — ungroup (keep pages) and delete group with pages are now chosen from one button",
+     "Added ‘Tall view’ to the right panel settings — the right panel extends up beside the tabs, toolbar and options bar as its own column",
+     "Renamed the ‘Touch select’ tool to ‘Select’",
+     "You can now drag an open memo by the empty space between its title and buttons (the title field is only as wide as its text)",
+     "Digitize and Digitize all pages can now be stopped with the ‘Cancel’ button (or Esc) — cancelling leaves the document unchanged"
+    ],
+    "ja": [
+     "スクロールバーを太く — ページパネルのサイズ調整の境界をパネルの外に移し、ページパネルのスクロールバーをつかみやすく",
+     "ページパネルのグループ見出しが、マウスを乗せなくても常に同じ表示（設定・解除/削除ボタンとページ数）になり、パネルの左右いっぱいに広がるように — グループ解除（ページは残す）とグループ・ページ削除は1つのボタンから選択",
+     "右パネルの設定に「縦長表示」を追加 — タブ・ツールバー・オプションバーの横まで右パネルを上に伸ばして独立させます",
+     "ツールバーの「接触選択」の名前を「選択」に変更",
+     "開いたメモは、タイトルとボタンの間の空いた部分をドラッグして移動できるように（タイトル欄は文字の長さだけ）",
+     "デジタル化・全ページのデジタル化の途中で「キャンセル」ボタン（またはEsc）で止められるように — キャンセルすると文書はそのまま"
+    ],
+    "zh": [
+     "滚动条加粗 — 将页面面板的调整大小边界移到面板外侧，更容易拖动页面面板的滚动条",
+     "页面面板的分组标题无需悬停也始终显示完整（设置 · 取消分组/删除按钮和页数），并横向铺满面板 — 取消分组（保留页面）与删除分组及页面合并为一个按钮，点击后选择",
+     "右侧面板设置新增“加长显示”— 右侧面板向上延伸到标签栏、工具栏和选项栏旁边，独立成一列",
+     "将工具栏中的“接触选择”更名为“选择”",
+     "展开的便签可拖动标题与按钮之间的空白处来移动（标题栏宽度随文字长度）",
+     "数字化和全部数字化过程中可用“取消”按钮（或 Esc）中止 — 取消后文档保持不变"
+    ]
+   }
+  },
   {
    "v": "v1.1.4",
    "d": "2026.10.24",
@@ -23,7 +61,8 @@
      "둥근 사각형 모서리를 PPT처럼 조절 — 도형을 고르면 위쪽 변에 생기는 노란 점을 좌우로 끌어 둥근 정도를 바꿈 (옵션바 슬라이더 대신)",
      "페이지 패널 우클릭 메뉴에 ‘배경 색 바꾸기’ 추가 — 화면 · 썸네일 · 저장한 PDF · 인쇄에 모두 반영되고, 원래 글자와 그림은 그대로 보이게 칠함",
      "페이지 패널 우클릭 메뉴에 ‘그룹에 넣기’(그룹을 골라 넣기) · ‘그룹에서 빼기’ 추가 — 여러 페이지를 골라 둔 상태면 한꺼번에",
-     "그룹 설정 추가 (그룹 머리의 톱니 · 우클릭) — 폴더 색 바꾸기, 페이지 패널 맨 위에 고정",
+     "그룹 설정 추가 (그룹 머리의 톱니 · 우클릭) — 이름 바꾸기 · 폴더 색 바꾸기 · 페이지 패널 맨 위에 고정을 한곳에서 (고정은 패널에서만 위에 보이고 문서의 페이지 순서는 그대로)",
+     "그룹을 펼쳤을 때 그룹 안 페이지 썸네일을 작게 표시해 그룹과 나머지 페이지가 한눈에 구분되게 함",
      "빈 페이지 추가 · 기존 파일 불러오기: 그룹이 닫혀 있으면 그룹 밖(그룹 바로 뒤)에 페이지를 추가",
      "메인 탭에 ‘최근에 연 파일’ 추가 — 최근 파일을 다시 열고, 기록에서 삭제하고, PC 프로그램에서는 파일 위치(탐색기 · Finder)를 열 수 있음",
      "모바일 시작 화면의 파일 열기 · 빈 문서로 시작 · 파일 병합 · 파일 압축 버튼을 조금 작게 줄임",
@@ -38,7 +77,8 @@
      "Rounded rectangle corners now work like PowerPoint — select the shape and drag the yellow dot on its top edge left or right to change the roundness (replaces the options bar slider)",
      "Added ‘Change background color’ to the page panel right-click menu — applied on screen, in thumbnails, saved PDFs and printouts, while the original text and images stay visible",
      "Added ‘Add to group’ (choose a group) and ‘Remove from group’ to the page panel right-click menu — works on all selected pages at once",
-     "Added group settings (gear on the group header · right-click) — change the folder color, pin the group to the top of the page panel",
+     "Added group settings (gear on the group header · right-click) — rename, change the folder color and pin the group to the top of the page panel (only the panel shows it on top; the page order in the document stays the same)",
+     "When a group is expanded, the page thumbnails inside it are shown smaller so groups stand out from the other pages",
      "Add blank page · Import existing file: if the group is collapsed, the page is added outside the group (right after it)",
      "Added ‘Recent files’ to the main tab — reopen recent files, remove them from the history, and in the desktop app open the file location (Explorer · Finder)",
      "Made the Open file · Start blank · Merge files · Compress file buttons a bit smaller on the mobile start screen",
@@ -53,7 +93,8 @@
      "角丸四角形の角をPPTのように調整 — 図形を選ぶと上辺に出る黄色い点を左右にドラッグして丸みを変更（オプションバーのスライダーの代わり）",
      "ページパネルの右クリックメニューに「背景色を変更」を追加 — 画面・サムネイル・保存したPDF・印刷すべてに反映され、元の文字や画像はそのまま見えるように塗ります",
      "ページパネルの右クリックメニューに「グループに入れる」（グループを選択）・「グループから出す」を追加 — 複数ページを選んでいればまとめて",
-     "グループ設定を追加（グループ見出しの歯車・右クリック）— フォルダーの色を変更、ページパネルの一番上に固定",
+     "グループ設定を追加（グループ見出しの歯車・右クリック）— 名前の変更・フォルダーの色の変更・ページパネルの一番上に固定（パネルでだけ上に表示され、文書のページ順はそのまま）",
+     "グループを開いたとき、グループ内のページのサムネイルを小さく表示して、ほかのページと一目で区別できるように",
      "空白ページを追加・既存ファイルを読み込む：グループが閉じていれば、グループの外（グループの直後）にページを追加",
      "メインタブに「最近開いたファイル」を追加 — 最近のファイルを再び開いたり、履歴から削除したり、PCアプリではファイルの場所（エクスプローラー・Finder）を開けます",
      "モバイルのスタート画面の「ファイルを開く・空白から始める・ファイル結合・ファイル圧縮」ボタンを少し小さく",
@@ -68,7 +109,8 @@
      "圆角矩形的圆角可像 PPT 一样调整 — 选中形状后，左右拖动上边缘的黄色圆点即可改变圆角程度（取代选项栏滑块）",
      "页面面板右键菜单新增“更改背景颜色”— 屏幕、缩略图、保存的 PDF 和打印均会生效，原有文字和图片仍清晰可见",
      "页面面板右键菜单新增“加入分组”（选择分组）和“移出分组”— 选中多页时可一次处理",
-     "新增分组设置（分组标题上的齿轮 · 右键）— 更改文件夹颜色、固定到页面面板顶部",
+     "新增分组设置（分组标题上的齿轮 · 右键）— 重命名、更改文件夹颜色、固定到页面面板顶部（仅在面板中显示在顶部，文档页面顺序不变）",
+     "展开分组时，分组内的页面缩略图显示得更小，便于与其他页面区分",
      "添加空白页 · 导入现有文件：分组折叠时，页面会添加到分组外（紧接分组之后）",
      "主标签页新增“最近打开的文件”— 可重新打开最近的文件、从记录中删除，在桌面程序中还可打开文件位置（资源管理器 · Finder）",
      "移动端开始界面的“打开文件 · 从空白文档开始 · 合并文件 · 压缩文件”按钮略微缩小",
@@ -533,44 +575,6 @@
      "应用图标恢复为原来的猫咪图标(手机主屏幕 · PC 程序)",
      "PC 程序:PDF · MPDF 文件使用 Meow-PDF 文件图标,双击文件或拖到应用图标上即可在 Meow-PDF 中打开",
      "PC 程序:如果 Meow-PDF 不是 PDF 的默认程序,会在右下角显示“设为默认打开程序吧!”窗口,点击设置即可打开设置界面(也可在设置 › 版本信息中更改)"
-    ]
-   }
-  },
-  {
-   "v": "v1.0.1",
-   "d": "2026.10.18",
-   "items": {
-    "ko": [
-     "스마트 안내선 추가 — 개체를 옮기거나 크기를 바꿀 때 다른 개체 · 페이지의 양 끝과 가운데가 맞으면 빨간 점선으로 표시하고 딱 맞춤 (Alt를 누르면 끄기)",
-     "옵션바의 입력칸을 누르면 내용이 모두 선택되어 지우지 않고 바로 고쳐 쓰기 가능 — 입력하는 동안 숫자가 최솟값으로 바뀌던 문제도 수정",
-     "PC 프로그램 출시 — 소개 페이지에서 Windows · macOS · Linux용 Meow-PDF를 내려받아 설치 가능 (실행하면 소개 화면 없이 바로 편집 화면 · 인터넷이 없어도 실행)",
-     "PC 프로그램: 새 버전이 나오면 알림(버전마다 한 번)과 오른쪽 아래 작은 창으로 안내, 자세히 보기에서 바뀐 내용을 본 뒤 업데이트 버튼으로 바로 업데이트",
-     "PC 프로그램: 설정 › 버전 정보에 업데이트 버튼(최신 버전이면 ‘최신 버전이에요’)과 meow-pdf.com 가기 버튼",
-     "앱 아이콘을 금색 테두리의 고양이 아이콘으로 고정 — 휴대폰 홈 화면 · PC 프로그램에서 같은 아이콘으로 표시"
-    ],
-    "en": [
-     "Smart guides — when you move or resize an object, red dashed lines show up as its edges or center line up with other objects or the page, and it snaps into place (hold Alt to turn off)",
-     "Clicking an input in the options bar now selects its contents, so you can type a new value right away — also fixed numbers jumping to the minimum while typing",
-     "PC app released — download and install Meow-PDF for Windows · macOS · Linux from the intro page (it opens straight to the editor, even without internet)",
-     "PC app: when a new version is out, you get a notification (once per version) and a small window at the bottom right — see what changed in View details, then update with the Update button",
-     "PC app: Settings › Version info now has an Update button (shows ‘You're up to date’ when on the latest version) and a Go to meow-pdf.com button",
-     "The app icon is now fixed to the cat icon with a gold border — it looks the same on your phone's home screen and in the PC app"
-    ],
-    "ja": [
-     "スマートガイド — オブジェクトを移動・サイズ変更するとき、ほかのオブジェクトやページの両端・中央がそろうと赤い点線で知らせ、ぴったり合わせます(Altを押すとオフ)",
-     "オプションバーの入力欄を押すと内容がすべて選択され、消さずにそのまま書き直せます — 入力中に数値が最小値に変わる問題も修正",
-     "PCアプリを公開 — 紹介ページからWindows・macOS・Linux版のMeow-PDFをダウンロードしてインストールできます(起動すると紹介画面なしですぐ編集画面・インターネットがなくても開けます)",
-     "PCアプリ: 新しいバージョンが出ると通知(バージョンごとに1回)と右下の小さなウィンドウでお知らせし、詳しく見るで変更内容を確認してからアップデートボタンですぐにアップデート",
-     "PCアプリ: 設定 › バージョン情報にアップデートボタン(最新バージョンなら「最新バージョンです」)とmeow-pdf.comへ移動ボタン",
-     "アプリのアイコンを金色の縁取りの猫アイコンに固定 — スマホのホーム画面・PCアプリで同じアイコンで表示されます"
-    ],
-    "zh": [
-     "智能参考线 — 移动或调整对象大小时,若与其他对象 · 页面的两端或中心对齐,会显示红色虚线并自动吸附(按住 Alt 可关闭)",
-     "点击选项栏的输入框会全选内容,无需删除即可直接改写 — 同时修复了输入过程中数值被改成最小值的问题",
-     "PC 程序发布 — 可在介绍页下载并安装 Windows · macOS · Linux 版 Meow-PDF(启动后直接进入编辑界面 · 没有网络也能打开)",
-     "PC 程序:有新版本时会通过通知(每个版本一次)和右下角的小窗口提醒,可在查看详情中查看更新内容,再用更新按钮直接更新",
-     "PC 程序:设置 › 版本信息中新增更新按钮(已是最新版本时显示“已是最新版本”)和前往 meow-pdf.com 按钮",
-     "应用图标固定为带金色边框的猫咪图标 — 在手机主屏幕和 PC 程序中显示相同的图标"
     ]
    }
   }
