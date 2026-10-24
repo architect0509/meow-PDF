@@ -28,12 +28,22 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Meow-PDF — 설치 없이 바로 쓰는 무료 PDF 편집기">
+<!-- v1.1.4 검색 결과용 정사각형 썸네일 -->
+<meta property="og:image" content="https://www.meow-pdf.com/assets/search-thumb.png?v=1.1.4">
+<meta property="og:image:secure_url" content="https://www.meow-pdf.com/assets/search-thumb.png?v=1.1.4">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="1200">
+<meta property="og:image:alt" content="Meow-PDF — 설치 없이 쓰는 무료 PDF 편집기">
+<meta name="thumbnail" content="https://www.meow-pdf.com/assets/search-thumb.png?v=1.1.4">
+<link rel="image_src" href="https://www.meow-pdf.com/assets/search-thumb.png?v=1.1.4">
+<!--<PageMap><DataObject type="thumbnail"><Attribute name="src" value="https://www.meow-pdf.com/assets/search-thumb.png?v=1.1.4"/><Attribute name="width" value="1200"/><Attribute name="height" value="1200"/></DataObject></PageMap>-->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="PDF 편집기 — Meow-PDF (무료 · 설치 없이 바로 편집)">
 <meta name="twitter:description" content="브라우저에서 바로 여는 무료 PDF 편집기. PDF를 끌어다 놓고 글자 수정, 형광펜 · 도형 · 서명 · 이미지 넣기, 페이지 합치기 · 정리, Word · 한글 · PPTX · 이미지 변환, 인쇄까지 한 화면에서. HWP · PPTX · DOCX도 열 수 있습니다.">
 <meta name="twitter:image" content="https://www.meow-pdf.com/assets/og-image.png?v=1.0.6">
 <meta name="twitter:image:alt" content="Meow-PDF — 설치 없이 바로 쓰는 무료 PDF 편집기">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Meow-PDF 편집기", "url": "https://www.meow-pdf.com/edit", "applicationCategory": "BusinessApplication", "operatingSystem": "Web, Windows, macOS, Linux, Android, iOS", "isAccessibleForFree": true, "inLanguage": "ko", "image": "https://www.meow-pdf.com/assets/og-image.png", "description": "브라우저에서 바로 여는 무료 PDF 편집기. PDF를 끌어다 놓고 글자 수정, 형광펜 · 도형 · 서명 · 이미지 넣기, 페이지 합치기 · 정리, Word · 한글 · PPTX · 이미지 변환, 인쇄까지 한 화면에서. HWP · PPTX · DOCX도 열 수 있습니다.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "KRW"}, "publisher": {"@type": "Organization", "name": "Meow-PDF", "url": "https://www.meow-pdf.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Meow-PDF 편집기", "url": "https://www.meow-pdf.com/edit", "applicationCategory": "BusinessApplication", "operatingSystem": "Web, Windows, macOS, Linux, Android, iOS", "isAccessibleForFree": true, "inLanguage": "ko", "image": ["https://www.meow-pdf.com/assets/search-thumb.png", "https://www.meow-pdf.com/assets/og-image.png"], "thumbnailUrl": "https://www.meow-pdf.com/assets/search-thumb.png", "description": "브라우저에서 바로 여는 무료 PDF 편집기. PDF를 끌어다 놓고 글자 수정, 형광펜 · 도형 · 서명 · 이미지 넣기, 페이지 합치기 · 정리, Word · 한글 · PPTX · 이미지 변환, 인쇄까지 한 화면에서. HWP · PPTX · DOCX도 열 수 있습니다.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "KRW"}, "publisher": {"@type": "Organization", "name": "Meow-PDF", "url": "https://www.meow-pdf.com/"}}</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23dbbe43' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 5c.67 0 1.35.09 2 .26 1.78-2 5.03-2.84 6.42-2.26 1.4.58-.42 7-.42 7 .57 1.07 1 2.24 1 3.44C21 17.9 16.97 21 12 21s-9-3-9-7.56c0-1.25.5-2.4 1-3.44 0 0-1.89-6.42-.5-7 1.39-.58 4.72.23 6.5 2.23A9.04 9.04 0 0 1 12 5Z'/%3E%3C/svg%3E">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=1.0.2">
@@ -200,6 +210,8 @@ body.scrubbing,body.scrubbing *{cursor:ew-resize!important;user-select:none!impo
 .page canvas{position:absolute;inset:0;width:100%;height:100%}
 .page .over{touch-action:pan-y}
 .page .hlc{pointer-events:none;mix-blend-mode:multiply;z-index:5}
+.page .pbg,.thumb-page .tpbg{position:absolute;inset:0;pointer-events:none;mix-blend-mode:multiply}   /* v1.1.4 페이지 배경색 */
+.page .pbg[hidden],.thumb-page .tpbg[hidden]{display:none}
 .tool-pen .page .over,.tool-line .page .over,.tool-highlight .page .over,.tool-shape .page .over,.tool-eraser .page .over{touch-action:none}
 .tool-shape .over{cursor:crosshair}
 .tool-pen .over,.tool-line .over,.tool-highlight .over{cursor:var(--brush-cursor,crosshair)}
@@ -288,7 +300,7 @@ body.lyr-sorting,body.lyr-sorting *{cursor:grabbing!important}
 .ghead.drop-into{outline:2px solid var(--accent);outline-offset:1px}
 .gtoggle{display:grid;place-items:center;width:20px;height:20px;border-radius:5px;color:var(--muted);flex:none}
 .gtoggle svg{width:14px;height:14px}
-.gico{display:grid;color:var(--accent);flex:none}
+.gico{display:grid;color:var(--gc,var(--accent));flex:none}
 .gico svg{width:15px;height:15px}
 .gname{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500}
 .gcount{color:var(--muted);font-size:11px;padding:0 4px}
@@ -349,6 +361,10 @@ body.mobile .pres-opts{white-space:normal;flex-wrap:wrap;justify-content:center;
 .pres-opts .seg button{color:#f1f1f1;padding:4px 9px}
 .pres-opts .seg button.on{background:var(--main);color:var(--on-main)}
 .pres-opts .val{min-width:34px;font-variant-numeric:tabular-nums}
+.pres-opts.rows{flex-direction:column;align-items:stretch;gap:7px}   /* v1.1.4 도형: 모양 · 굵기 / 선 색 / 배경색 세 줄 */
+.pres-opts.rows .po-row{display:flex;align-items:center;gap:9px}
+.pres-opts .po-lb{min-width:28px;font-size:12px;opacity:.75}
+body.mobile .pres-opts.rows .po-row{gap:7px;overflow-x:auto;scrollbar-width:none}
 #presBar.fold .ptl,#presBar.fold #presOpts{display:none!important}
 #presBar{position:fixed;left:50%;bottom:calc(26px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:150;display:flex;align-items:center;gap:4px;padding:5px 9px;background:rgba(30,30,30,.93);color:#f1f1f1;border:1px solid rgba(255,255,255,.18);border-radius:999px;box-shadow:0 6px 24px rgba(0,0,0,.55);cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
 .pres-grip{display:grid;place-items:center;color:#9a9a9a;padding:0 2px}
@@ -1582,6 +1598,41 @@ body.mobile #empty .row{grid-template-columns:1fr 1fr;gap:12px;width:min(300px,8
 body.mobile #empty .etile{width:100%;height:auto;aspect-ratio:1/1;min-height:0;font-size:13px;border-radius:20px;padding:8px}
 body.mobile #empty .etile svg{width:30px;height:30px}
 body.mobile #empty .etile .pro{top:6px;right:6px;font-size:10px;padding:1px 6px}
+/* v1.1.4 메인 탭: 최근에 연 파일 (가로로 긴 버튼, 위 타일 줄과 같은 너비) */
+#empty .erecent{display:flex;align-items:center;gap:12px;width:560px;max-width:calc(100vw - 32px);height:52px;padding:0 18px;margin-top:-2px;border-radius:16px;border:1px solid var(--border);background:var(--panel,var(--bar));color:var(--text);font-size:13.5px;font-weight:600;cursor:pointer;transition:transform .15s,border-color .15s,box-shadow .15s;box-sizing:border-box}
+#empty .erecent:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 8px 20px rgba(0,0,0,.24)}
+#empty .erecent:active{transform:translateY(0)}
+#empty .erecent svg{width:22px;height:22px;stroke-width:1.7;flex:none;color:var(--accent)}
+#empty .erecent span{flex:1;text-align:left}
+#empty .erecent .er-go svg,#empty .erecent svg:last-child{width:16px;height:16px;color:var(--muted)}
+body.mobile #empty .row{grid-template-columns:1fr 1fr;gap:10px;width:min(232px,62vw)}   /* v1.1.4 모바일: 위 네 버튼을 조금 작게 */
+body.mobile #empty .etile{border-radius:18px;font-size:12.5px;gap:8px}
+body.mobile #empty .etile svg{width:26px;height:26px}
+body.mobile #empty .erecent{width:min(232px,62vw);height:46px;padding:0 14px;border-radius:14px;font-size:13px;margin-top:0}
+body.mobile #empty .erecent svg{width:19px;height:19px}
+/* 최근에 연 파일 창 */
+.rcwin{min-height:120px}
+.rc-list{display:flex;flex-direction:column;gap:4px;max-height:min(60vh,520px);overflow:auto;margin:0 -6px;padding:2px 6px}
+.rc-i{display:flex;align-items:center;gap:12px;padding:8px 10px;border-radius:12px;cursor:pointer;border:1px solid transparent}
+.rc-i:hover,.rc-i:focus-visible{background:var(--hover);outline:0;border-color:var(--border)}
+.rc-th{display:grid;place-items:center;width:44px;height:56px;flex:none;border-radius:6px;overflow:hidden;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.35)}
+.rc-th img{width:100%;height:100%;object-fit:contain;display:block}
+.rc-th i{font-style:normal;font-size:10.5px;font-weight:700;color:#7a6418;letter-spacing:.02em}
+.rc-tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.rc-tx b{font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rc-tx small{display:flex;flex-wrap:wrap;gap:2px 10px;font-size:11.5px;color:var(--muted);min-width:0}
+.rc-tx .rc-where{flex:1 1 100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;direction:ltr}
+.rc-i.miss .rc-th{opacity:.45}.rc-i.miss .rc-where{color:#e5484d}
+.rc-acts{display:flex;gap:2px;flex:none;opacity:.55;transition:opacity .15s}
+.rc-i:hover .rc-acts,.rc-i:focus-within .rc-acts{opacity:1}
+body.mobile .rc-acts{opacity:1}
+.rc-acts button{display:grid;place-items:center;width:32px;height:32px;border-radius:9px;color:var(--muted)}
+.rc-acts button:hover{background:var(--accent-bg);color:var(--accent)}
+.rc-acts button[data-rcdel]:hover{background:rgba(229,72,77,.14);color:#e5484d}
+.rc-acts svg{width:16px;height:16px}
+.rc-empty{display:flex;flex-direction:column;align-items:center;gap:6px;padding:28px 10px;color:var(--muted);text-align:center}
+.rc-empty svg{width:34px;height:34px;opacity:.6}.rc-empty b{color:var(--text);font-size:14px}
+.rc-note{margin:10px 2px 0;font-size:11.5px;color:var(--muted)}
 .fmt svg{width:16px;height:16px;display:block;margin:auto}
 #app.tb-left>.toolbar{width:64px;padding:6px 6px;gap:2px}
 #app.tb-left>.toolbar .tool{height:48px}
@@ -2400,6 +2451,23 @@ body.mobile .optbar .seg.shpgrid button svg{width:22px;height:22px}
 .pgm-subs[hidden]{display:none}
 .pgm-subs button{height:28px}
 .pgm-s{height:1px;margin:4px 6px;background:var(--border)}
+/* v1.1.4 페이지 메뉴 · 그룹 설정: 색 고르기 */
+.pgm .pgm-sw{display:flex;flex-wrap:wrap;gap:6px;max-width:210px;padding:6px 6px 6px 4px}
+.pgm .pgm-sw .pgm-c{position:relative;display:grid;place-items:center;width:22px;height:22px;padding:0;flex:none;border-radius:50%;background:var(--c);border:2px solid var(--border);cursor:pointer;box-sizing:border-box}
+.pgm .pgm-sw .pgm-c:hover{transform:scale(1.1);background:var(--c)}
+.pgm .pgm-sw .pgm-c.on{outline:2px solid var(--accent);outline-offset:1px}
+.pgm .pgm-sw .pgm-c.none{background:repeating-conic-gradient(#bbb 0 25%,#fff 0 50%) 0 0/8px 8px}
+.pgm .pgm-sw .pgm-c.none::after{content:'';position:absolute;inset:-2px;border-radius:50%;background:linear-gradient(135deg,transparent calc(50% - 1px),#e53935 calc(50% - 1px) calc(50% + 1px),transparent calc(50% + 1px))}
+.pgm .pgm-sw .pgm-cc{background:var(--bar2);color:var(--muted)}
+.pgm .pgm-sw .pgm-cc svg{width:12px;height:12px}
+.pgm .pgm-sw .pgm-cc input{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer}
+.pgm .pgm-dot{width:11px;height:11px;border-radius:50%;background:var(--c);border:1px solid var(--border);flex:none}
+.pgm .pgm-gi{display:grid;flex:none !important;color:var(--gc,var(--accent))}
+.pgm .pgm-gi svg{width:15px;height:15px}
+.pgm-subs button span:last-child{overflow:hidden;text-overflow:ellipsis;max-width:180px}
+.ghead.gcol{border-left:3px solid var(--gc)}
+.ghead .gpin{display:grid;color:var(--gc,var(--accent));flex:none;opacity:.85}
+.ghead .gpin svg{width:12px;height:12px}
 .thumb-actions{display:none!important}
 /* 접힌 메모: 작은 동그라미 하나 (누르면 펼치기 · 마우스를 올리면 제목) */
 .memo-dot{display:none}
@@ -2564,6 +2632,7 @@ body.mobile .pres-opts .swatch{width:26px;height:26px;flex:none}
           <button class="btn etile" id="emptyMerge"><i data-i="merge"></i><span>파일 병합</span></button>
           <button class="btn etile" id="emptyCompress"><i data-i="compress"></i><span>파일 압축</span><em class="pro">프리미엄</em></button>
         </div>
+        <button type="button" class="btn erecent" id="emptyRecent"><i data-i="history"></i><span>최근에 연 파일</span><i data-i="chevR" class="er-go"></i></button>   <!-- v1.1.4 -->
         <button type="button" class="trial-hero" id="emptyTrial" hidden><span class="th-g" aria-hidden="true">🎁</span><span class="th-t"><b>프리미엄 1개월 무료 체험</b><small>계정당 한 번 · 카드 등록 없이 · 자동결제 없음</small></span><span class="th-go">시작하기</span></button>   <!-- v1.1.1 -->
         <span class="ehint">PDF · PPTX · HWP · DOCX · PNG · MPDF 파일을 끌어다 놓거나, 캡처한 이미지를 Ctrl+V로 바로 열 수도 있습니다</span>
       </div>
@@ -4586,6 +4655,11 @@ ICONS.exit = '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17
 ICONS.user = '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>';
 ICONS.compress = '<path d="M4 14h6v6"/><path d="M20 10h-6V4"/><path d="m14 10 7-7"/><path d="m3 21 7-7"/>';
 /* v1.1.2 획 보정 · 화살표 도형 · 노트 종류 아이콘 */
+ICONS.pin = '<path d="M12 17v5"/><path d="M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z"/>';   // v1.1.4 그룹 고정
+ICONS.history = '<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/>';   // v1.1.4 최근 파일
+ICONS.folderOpen = '<path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"/>';
+ICONS.groupIn = '<path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/><path d="M12 10v6"/><path d="m9 13 3 3 3-3"/>';
+ICONS.groupOut = '<path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/><path d="M12 16v-6"/><path d="m9 13 3-3 3 3"/>';
 ICONS.wand = '<path d="m14.5 5.5 4 4L8 20H4v-4z"/><path d="m12.5 7.5 4 4"/><path d="M6 3v3M4.5 4.5h3M19 14v3M17.5 15.5h3"/>';
 ICONS.shArrR = '<path d="M3 9h10V5l8 7-8 7v-4H3z"/>';
 ICONS.shArrL = '<path d="M21 9H11V5l-8 7 8 7v-4h10z"/>';
@@ -4642,7 +4716,7 @@ const state = {
   dirty: false
 };
 const settings = {
-  pen:       { color: '#e53935', width: 3, alpha: 100, smooth: true },   // v1.1.2 smooth: 획 보정
+  pen:       { color: '#e53935', width: 3, alpha: 100, smooth: false, stab: 0 },   // v1.1.2 smooth: 획 보정 (v1.1.4 기본: 끄기) · v1.1.4 stab: 손떨림 보정 0 끔 · 1 약 · 2 중 · 3 강
   line:      { color: '#111111', width: 3, alpha: 100, arrow: false },
   highlight: { color: '#ffeb3b', width: 16, style: 'brush', snap: true, alpha: 45 },   // v1.1.1 alpha: 형광펜 투명도(불투명도 %)
   shape:     { kind: 'rect', color: '#1e88e5', width: 3, fill: null, fillAlpha: 100, round: 25 },   // v0.11.4 round: 둥근 사각형 모서리(짧은 변 절반의 %)
@@ -4655,6 +4729,20 @@ const lsGet = (k, d) => { try { const v = localStorage.getItem(k); return v == n
 /* v0.11.3 도구 설정(색 · 굵기 · 채우기 등)을 기억해요 — 새로고침하면 도형 채우기가 투명으로 돌아가던 문제 */
 const TOOLSET_KEYS = ['pen', 'line', 'highlight', 'shape', 'text', 'eraser', 'mosaic'];
 try { const sv = JSON.parse(lsGet('meowToolSet', 'null')); if (sv) for (const k of TOOLSET_KEYS) if (sv[k] && typeof sv[k] === 'object') for (const f in settings[k]) if (f in sv[k] && (sv[k][f] === null || typeof sv[k][f] === typeof settings[k][f] || (settings[k][f] === null && typeof sv[k][f] === 'string'))) settings[k][f] = sv[k][f]; } catch (e) { /* 무시 */ }
+/* v1.1.4 획 보정 기본값을 '끄기'로 바꿨어요 — 예전 기본값(켜짐)으로 저장된 설정도 한 번만 끄기로 맞춰요 */
+try { if (lsGet('meowSmoothV114', '') !== '1') { settings.pen.smooth = false; localStorage.setItem('meowSmoothV114', '1'); const sv = JSON.parse(lsGet('meowToolSet', 'null')); if (sv && sv.pen) { sv.pen.smooth = false; localStorage.setItem('meowToolSet', JSON.stringify(sv)); } } } catch (e) { /* 무시 */ }
+settings.pen.stab = clamp(Math.round(+settings.pen.stab || 0), 0, 3);
+/* v1.1.4 손떨림 보정: 펜 끝이 손가락 · 마우스를 고무줄처럼 천천히 따라가서 잔떨림이 걸러져요 (단계가 높을수록 더 부드럽고 조금 더 늦게 따라와요) */
+const STAB_K = [1, 0.42, 0.24, 0.13];
+const stabStep = (s, q, lv) => lv > 0 ? [s[0] + (q[0] - s[0]) * STAB_K[lv], s[1] + (q[1] - s[1]) * STAB_K[lv]] : q;
+function stabTail(d, q) {   // 손을 뗄 때 이어 그릴 끝점: 마지막 몇 점의 평균 (끝에서 손이 떨려 꼬리가 휘지 않게)
+  const b = d.rawBuf || (d.rawBuf = []); b.push(q); if (b.length > 2 + d.stab) b.shift();
+  return [b.reduce((a, p) => a + p[0], 0) / b.length, b.reduce((a, p) => a + p[1], 0) / b.length];
+}
+function stabCatchUp(s, q, lv, minD, push) {   // 손을 떼면 펜 끝이 남은 거리를 마저 따라가 마지막 점까지 이어 그려요
+  for (let i = 0; i < 60 && Math.hypot(q[0] - s[0], q[1] - s[1]) > minD; i++) { s = stabStep(s, q, lv); push(s); }
+  if (Math.hypot(q[0] - s[0], q[1] - s[1]) > 0) push(q);
+}
 let toolSetT = 0;
 function saveToolSet() { clearTimeout(toolSetT); toolSetT = setTimeout(() => { try { const o = {}; for (const k of TOOLSET_KEYS) o[k] = settings[k]; localStorage.setItem('meowToolSet', JSON.stringify(o)); } catch (e) { /* 무시 */ } }, 400); }
 settings.layerMode = lsGet('meowLayerMode', 'auto') === 'manual' ? 'manual' : 'auto';
@@ -4718,7 +4806,7 @@ function modal({ title, message, input, multiline, ok = '확인', cancel = '취�
 
 /* ════════════ 히스토리 (실행 취소 / 다시 실행) ════════════ */
 const hist = { stack: [], idx: -1 };
-const snapshot = () => JSON.stringify({ pages: state.pages.map(p => ({ id: p.id, src: p.src, w: p.w, h: p.h, annots: p.annots, memos: p.memos || [], group: p.group || null, name: p.name || null, note: p.note || null, bookmark: p.bookmark || null, rot: p.rot || 0 })), groups: state.groups });
+const snapshot = () => JSON.stringify({ pages: state.pages.map(p => ({ id: p.id, src: p.src, w: p.w, h: p.h, annots: p.annots, memos: p.memos || [], group: p.group || null, name: p.name || null, note: p.note || null, bookmark: p.bookmark || null, rot: p.rot || 0, bg: p.bg || null })), groups: state.groups });
 function resetHistory() { hist.stack = [snapshot()]; hist.idx = 0; updateHistoryButtons(); }
 function commit() {
   if (shRO()) { shPatchHist(); if (hist.idx >= 0) restore(hist.stack[hist.idx]); toast('관전자는 문서를 고칠 수 없어요. 방장이 편집을 허용하면 고칠 수 있어요.'); return; }   // v0.11.1
@@ -5347,15 +5435,16 @@ function createView(p) {
   const base = document.createElement('canvas'), over = document.createElement('canvas'), hl = document.createElement('canvas'); over.className = 'over'; hl.className = 'hlc';
   const tl = document.createElement('div'); tl.className = 'textLayer';
   const trl = document.createElement('div'); trl.className = 'trl';
-  el.append(base, tl, trl, over, hl);   // 형광펜은 항상 맨 앞(곱하기)
+  const pbg = document.createElement('div'); pbg.className = 'pbg'; pbg.hidden = true;   // v1.1.4 페이지 배경색 (곱하기로 칠해 글자는 그대로 보여요)
+  el.append(base, pbg, tl, trl, over, hl);   // 형광펜은 항상 맨 앞(곱하기)
 
   const tEl = document.createElement('div'); tEl.className = 'thumb'; tEl.dataset.id = p.id; tEl.draggable = true;
-  tEl.innerHTML = `<div class="thumb-page"><canvas class="tbase"></canvas><canvas class="tover"></canvas><span class="thumb-flag" hidden>${svg('note')}</span></div>
+  tEl.innerHTML = `<div class="thumb-page"><canvas class="tbase"></canvas><i class="tpbg" hidden></i><canvas class="tover"></canvas><span class="thumb-flag" hidden>${svg('note')}</span></div>
     <div class="thumb-num"></div>
     <div class="thumb-name"><span class="tn-flag" hidden>${svg('note')}</span><span class="tn-text"></span></div>
 `;   // v1.1.3 상세보기(…) 버튼 대신 우클릭(모바일: 길게 누르기) 메뉴
   const v = {
-    id: p.id, el, base, hl, tl, trl, tlTask: null, over, q: 1, rendered: null, token: 0, task: null,
+    id: p.id, el, base, hl, tl, trl, tlTask: null, over, q: 1, rendered: null, token: 0, task: null, pbg,
     tEl, tPage: tEl.querySelector('.thumb-page'), tBase: tEl.querySelector('.tbase'), tOver: tEl.querySelector('.tover'),
     tNum: tEl.querySelector('.thumb-num'), tKey: null,
     tNameText: tEl.querySelector('.tn-text'), tFlagL: tEl.querySelector('.tn-flag'), tFlagG: tEl.querySelector('.thumb-flag')
@@ -5466,6 +5555,7 @@ function sizeView(p) {
 }
 
 function syncDOM() {
+  try { pinOrder(); } catch (e) { /* 그룹 준비 전 */ }   // v1.1.4 고정한 그룹은 늘 맨 앞
   const ids = new Set(state.pages.map(p => p.id));
   for (const id of [...views.keys()]) if (!ids.has(id)) removeView(id);
   state.pages.forEach((p, i) => {
@@ -5573,8 +5663,17 @@ async function renderThumb(id) {
   }
   drawThumbOverlay(id);
 }
+/* v1.1.4 페이지 배경색: 화면 · 썸네일에 곱하기 층으로 칠해요 */
+function pageBgFill(ctx, p, w, h) { if (!/^#[0-9a-f]{6}$/i.test(p.bg || '')) return; ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalCompositeOperation = 'multiply'; ctx.fillStyle = p.bg; ctx.fillRect(0, 0, w, h); ctx.restore(); }
+function syncPageBg(p, v) {
+  v = v || views.get(p.id); if (!v) return;
+  const c = /^#[0-9a-f]{6}$/i.test(p.bg || '') ? p.bg : '';
+  if (v.pbg) { v.pbg.hidden = !c; v.pbg.style.background = c; }
+  const t = v.tEl && v.tEl.querySelector('.tpbg'); if (t) { t.hidden = !c; t.style.background = c; }
+}
 function drawThumbOverlay(id) {
   const p = pageById(id), v = views.get(id); if (!p || !v || !v.tKey) return;
+  syncPageBg(p, v);
   const ctx = v.tOver.getContext('2d');
   ctx.clearRect(0, 0, v.tOver.width, v.tOver.height);
   drawAnnots(ctx, p.annots, v.tOver.width / p.w);
@@ -5731,20 +5830,30 @@ function bbKind(o) {
   return { corner: true, edge: true, rot: true };
 }
 const BB_ROT_GAP = 30;   // 회전 손잡이: 위쪽 가운데에서 떨어진 거리 (화면 px)
+const rrHasHandle = o => !!o && !o.group && o.type === 'rect' && o.round != null && !o.mosaic && !o.locked;   // v1.1.4 둥근 사각형 모서리 손잡이
+const RR_MIN_OFF = 14;   // 모서리가 각질 때도 크기 손잡이와 겹치지 않게 모서리에서 떨어뜨리는 최소 거리 (화면 px)
+/* 손잡이 자리 p(왼쪽 모서리에서 떨어진 거리) ↔ 반지름 r: r = 0 이면 p = 최소 거리, r = 최대(짧은 변의 절반)면 p = r 과 같아요 */
+const rrMinOff = m => Math.min(RR_MIN_OFF / state.scale, m * 0.5);
+const rrHandleX = (o, b) => { const m = Math.min(b.w, b.h) / 2, mo = rrMinOff(m); return m > 0 ? mo + rrRad(o) / m * (m - mo) : 0; };
 function bbHandles(o) {
   const b = bbox(o), S = state.scale, K = bbKind(o), cx = b.x + b.w / 2, cy = b.y + b.h / 2, L = [];
+  if (rrHasHandle(o) && Math.min(b.w, b.h) * S > 24) L.push(['rad', b.x + rrHandleX(o, b), b.y]);   // v1.1.4 노란 점: 위쪽 변, 둥글수록 오른쪽으로
   if (K.rot) L.push(['rot', cx, b.y - BB_ROT_GAP / S]);
   if (K.corner) L.push(['nw', b.x, b.y], ['se', b.x + b.w, b.y + b.h], ['sw', b.x, b.y + b.h]);
   if (K.edge && b.w * S > 26) L.push(['n', cx, b.y], ['s', cx, b.y + b.h]);
   if (K.edge && b.h * S > 26) L.push(['w', b.x, cy], ['e', b.x + b.w, cy]);
   return L.map(([k, x, y]) => { const q = toPage(o, x, y); return { k, x: q[0], y: q[1] }; });
 }
+function rrDrawHandle(ctx, o, s, q) {   // v1.1.4 기즈모 모드: 노란 점만 따로 그려요
+  const h = bbHandles(o).find(x => x.k === 'rad'); if (!h) return;
+  ctx.save(); ctx.beginPath(); ctx.arc(h.x * s, h.y * s, (mMode ? 7 : 5.5) * q * 0.95, 0, Math.PI * 2); ctx.fillStyle = '#ffd43b'; ctx.fill(); ctx.strokeStyle = '#8a6a00'; ctx.lineWidth = 1.3 * q; ctx.stroke(); ctx.restore();
+}
 function bbHit(o, pt, touchy) {
   const S = state.scale, r = (touchy ? 16 : 9) / S;
   for (const h of bbHandles(o)) if (Math.hypot(pt[0] - h.x, pt[1] - h.y) <= r) return h.k;
   return null;
 }
-const BB_CUR = { nw: 'nwse-resize', se: 'nwse-resize', sw: 'nesw-resize', n: 'ns-resize', s: 'ns-resize', e: 'ew-resize', w: 'ew-resize', rot: 'grab' };
+const BB_CUR = { nw: 'nwse-resize', se: 'nwse-resize', sw: 'nesw-resize', n: 'ns-resize', s: 'ns-resize', e: 'ew-resize', w: 'ew-resize', rot: 'grab', rad: 'pointer' };
 function drawSelection(ctx, o, s, q, del) {
   const b = bbox(o), rr = rotOf(o), P = [[b.x, b.y], [b.x + b.w, b.y], [b.x + b.w, b.y + b.h], [b.x, b.y + b.h]].map(p => { const t = toPage(o, p[0], p[1]); return [t[0] * s, t[1] * s]; });
   ctx.save();
@@ -5767,6 +5876,10 @@ function drawSelection(ctx, o, s, q, del) {
       ctx.beginPath(); ctx.moveTo(ex + al * 0.9, ey - al * 0.2); ctx.lineTo(ex, ey); ctx.lineTo(ex + al * 0.15, ey + al); ctx.stroke();
       continue;
     }
+    if (h.k === 'rad') {   // v1.1.4 둥근 사각형 모서리 손잡이 (PPT처럼 노란 점)
+      ctx.beginPath(); ctx.arc(x, y, hr * 0.95, 0, Math.PI * 2); ctx.fillStyle = '#ffd43b'; ctx.fill(); ctx.strokeStyle = '#8a6a00'; ctx.lineWidth = 1.3 * q; ctx.stroke();
+      continue;
+    }
     ctx.beginPath(); ctx.arc(x, y, hr, 0, Math.PI * 2); ctx.fillStyle = '#fff'; ctx.fill(); ctx.strokeStyle = '#5f5f66'; ctx.lineWidth = 1.4 * q; ctx.stroke();
   }
   ctx.restore();
@@ -5782,6 +5895,13 @@ function bbMove(e, d, pt) {
   if (!d.moved && Math.hypot(pt[0] - d.start[0], pt[1] - d.start[1]) * S < 2) return;
   d.moved = true;
   if (!d.items) { for (const kk of Object.keys(o)) if (!(kk in O)) delete o[kk]; Object.assign(o, clone(O)); }
+  if (k === 'rad') {   // v1.1.4 노란 점을 좌우로 끌어 둥근 정도 조절 (누른 자리에서 움직인 만큼)
+    const ob = bbox(O), m = Math.min(ob.w, ob.h) / 2, mo = rrMinOff(m), a = toLocal(O, d.start[0], d.start[1]), c = toLocal(O, pt[0], pt[1]);
+    const p = rrHandleX(O, ob) + (c[0] - a[0]);   // 손잡이가 손가락 · 마우스를 그대로 따라와요
+    o.round = m > mo ? clamp(Math.round((p - mo) / (m - mo) * 100), 0, 100) : 0;
+    settings.shape.round = o.round; saveToolSet();
+    d.rad = o.round; return;
+  }
   if (k === 'rot') {
     let deg = (Math.atan2(pt[1] - d.c[1], pt[0] - d.c[0]) - d.a0) * 180 / Math.PI;
     if (e.shiftKey) deg = Math.round(deg / 15) * 15;
@@ -6016,6 +6136,7 @@ function gzSync() {
 function drawOverlay(id, draft) {
   const p = pageById(id), v = views.get(id);
   if (!p || !v || !v.rendered) return;
+  syncPageBg(p, v);
   const ctx = v.over.getContext('2d');
   const s = v.over.width / p.w;
   ctx.clearRect(0, 0, v.over.width, v.over.height);
@@ -6032,7 +6153,7 @@ function drawOverlay(id, draft) {
     drawSelection(ctx, gFake(G), s, v.q, true);
   } else if (state.selected && state.selected.pageId === id) {
     const o = p.annots.find(a => a.id === state.selected.objId);
-    if (o && !o.hidden && o.id !== state.editingId) { if (gzOn(o)) gzDraw(ctx, o, s, v.q); else drawSelection(ctx, o, s, v.q, true); }
+    if (o && !o.hidden && o.id !== state.editingId) { if (gzOn(o)) { gzDraw(ctx, o, s, v.q); rrDrawHandle(ctx, o, s, v.q); } else drawSelection(ctx, o, s, v.q, true); }
     if (state.layerSel.size > 1) for (const a of p.annots) if (a !== o && state.layerSel.has(a.id) && !a.hidden && a.id !== state.editingId) drawSelection(ctx, a, s, v.q);
   }
   sgDraw(ctx, id, s, v.q);   // v1.0.1 스마트 안내선
@@ -6236,7 +6357,8 @@ function onDown(e, id) {
     if (sel) {
       { const dh = delHandlePt(sel, p.w); if (Math.hypot(pt[0] - dh[0], pt[1] - dh[1]) <= 15 / s) { e.preventDefault(); deleteSelected(); return; } }
       if (gzOn(sel)) { const part = gzHit(sel, pt); if (part) { e.preventDefault(); gzStart(e, id, v, sel, part, pt); return; } }   // v0.11.8 유니티식 변형 도구
-      if (!gzOn(sel)) { const hk = bbHit(sel, pt, e.pointerType !== 'mouse'); if (hk) { e.preventDefault(); bbStart(e, id, v, sel, hk, pt); return; } }   // v0.11.8 바운딩 박스: 크기 · 회전 손잡이
+      if (!gzOn(sel)) { const hk = bbHit(sel, pt, e.pointerType !== 'mouse'); if (hk) { e.preventDefault(); bbStart(e, id, v, sel, hk, pt); return; } }
+      else if (bbHit(sel, pt, e.pointerType !== 'mouse') === 'rad') { e.preventDefault(); bbStart(e, id, v, sel, 'rad', pt); return; }   // v1.1.4 기즈모 모드에서도 둥근 모서리 노란 점   // v0.11.8 바운딩 박스: 크기 · 회전 손잡이
     }
     let found = null;
     for (let i = p.annots.length - 1; i >= 0; i--) if (hit(p.annots[i], pt[0], pt[1], 6 / s)) { found = p.annots[i]; break; }
@@ -6285,7 +6407,7 @@ function onDown(e, id) {
       if (ARROW_SK.has(st.kind)) draft.sk = st.kind;   // v1.1.2 화살표 = 방향(sk)을 가진 다각형 도형
       if (st.kind === 'rrect') draft.round = clamp(+st.round || 0, 0, 100);   // v0.11.4 둥근 사각형 = 모서리 값을 가진 사각형
     }
-    drag = { kind: 'draw', id, draft, start: pt, straight };
+    drag = { kind: 'draw', id, draft, start: pt, straight, stab: t === 'pen' ? settings.pen.stab | 0 : 0 };
     v.over.setPointerCapture(e.pointerId);
     drawOverlay(id, draft);
   }
@@ -6415,6 +6537,7 @@ function onMove(e, id) {
         o.pts[1] = q;
       } else if (o.type === 'pen' || o.type === 'highlight') {
         const last = o.pts[o.pts.length - 1];
+        if (o.type === 'pen' && d.stab) { d.raw = stabTail(d, pt); d.sp = stabStep(d.sp || o.pts[0], pt, d.stab); const q = d.sp; if (Math.hypot(q[0] - last[0], q[1] - last[1]) * state.scale >= 1.2) o.pts.push(q); continue; }   // v1.1.4 손떨림 보정
         if (Math.hypot(pt[0] - last[0], pt[1] - last[1]) * state.scale >= 1.2) o.pts.push(pt);
       } else {
         let w = pt[0] - d.start[0], h = pt[1] - d.start[1];
@@ -6480,6 +6603,7 @@ function onUp(e, id) {
       askLinkTarget(null).then(tg => { if (!tg) { touch(id); return; } Object.assign(o, tg); p.annots.push(o); commit(); setTool('select'); autoBack = 'link'; selectObj(id, o.id); touch(id); });
       return;
     }
+    if (ok && o.type === 'pen' && d.stab && d.sp && d.raw) stabCatchUp(d.sp, d.raw, d.stab, 1.2 / state.scale, q => o.pts.push(q));   // v1.1.4 손떨림 보정: 끝점까지 이어요
     if (ok && o.type === 'pen' && settings.pen.smooth !== false && !d.straight) o.pts = strokeFix(o.pts, state.scale);   // v1.1.2 획 보정
     if (ok) { const sn = (o.type === 'highlight' && settings.highlight.snap !== false) ? snapHighlight(v, o) : null; if (sn) p.annots.push(...sn); else p.annots.push(o); commit(); }
     if (ok && state.tool === 'shape' && !state.present && !o.mosaic) { setTool('select'); selectObj(id, o.id); }   // v1.0.3 그린 뒤 도형 밖을 누르면 선택 도구 그대로 (도형 도구로 돌아가지 않아요)
@@ -7527,6 +7651,7 @@ function renderOptions() {
   if (t === 'pen') {
     const sm = settings.pen.smooth !== false;
     h = seg('data-psmooth', [['on', svg('wand') + '획 보정'], ['off', '끄기']], sm ? 'on' : 'off', '획 보정') +
+      `<div class="grp pstab" title="손떨림 보정 — 펜 끝이 천천히 따라오며 손떨림을 걸러요 (단계가 높을수록 더 부드럽게)"><label>손떨림 보정</label>${seg('data-pstab', [['0', '끔'], ['1', '약'], ['2', '중'], ['3', '강']], String(settings.pen.stab | 0), '손떨림 보정')}</div>` +
       colorGrp(PALETTE, settings.pen.color) + range('굵기', 'pen.width', 1, 24, settings.pen.width, 'pt') +
       range('불투명', 'pen.alpha', 10, 100, settings.pen.alpha, '%') + hint(sm ? '획 보정: 손을 떼면 ㅇ은 반듯한 원으로, ㅁ · ㄷ · ㄹ처럼 꺾인 획은 곧게, 곡선은 부드럽게 다듬어요 (영문 e는 그대로). 커서의 원이 붓 굵기예요.' : '그린 그대로 남겨요. 커서의 원이 붓 굵기예요.');
   } else if (t === 'line') {
@@ -7543,8 +7668,7 @@ function renderOptions() {
     h = `<div class="seg shpgrid" role="group" aria-label="도형 종류">${SHAPES.map(([k, n]) => `<button data-shape="${k}" class="${settings.shape.kind === k ? 'on' : ''}" title="${n}" aria-label="${n}" aria-pressed="${settings.shape.kind === k}">${svg(SHAPE_IC[k])}</button>`).join('')}</div>` +   // v1.1.2 모양만 있는 4×2 단추 표
       shapeColorGrp(settings.shape.color) + shapeFillGrp(settings.shape.fill) +
       range('불투명도', 'shape.fillAlpha', 10, 100, settings.shape.fillAlpha, '%') +
-      (settings.shape.kind === 'rrect' ? range('모서리', 'shape.round', 0, 100, settings.shape.round, '%') : '') +
-      range('선 굵기', 'shape.width', 0, 20, settings.shape.width, 'pt') + hint('선 굵기 0 = 선 없음 · Shift: 정사각형 · 정원');
+      range('선 굵기', 'shape.width', 0, 20, settings.shape.width, 'pt') + hint(settings.shape.kind === 'rrect' ? '그린 뒤 위쪽 모서리의 노란 점을 좌우로 끌어 둥근 정도를 조절해요 · 선 굵기 0 = 선 없음 · Shift: 정사각형' : '선 굵기 0 = 선 없음 · Shift: 정사각형 · 정원');
   } else if (t === 'text') {
     h = fontCtl(settings.text) + colorGrp(PALETTE, settings.text.color) + fillGrp(settings.text.fill, '글자 배경') +
       range('크기', 'text.size', 3, 120, +(+settings.text.size).toFixed(1), 'pt', 0.1) + lsLh('text', settings.text.ls || 0, Math.round((lhOf(settings.text)) * 100)) + hint('페이지를 클릭해 입력 · Esc 또는 바깥 클릭으로 완료');
@@ -7583,7 +7707,7 @@ function renderOptions() {
         if (o.color && !o.mosaic) h += colorGrp(o.type === 'highlight' ? HL_PALETTE : PALETTE, o.color);
         if (!o.mosaic && (o.type === 'text' || o.type === 'table')) h += fillGrp(o.fill, o.type === 'text' ? '글자 배경' : '채우기');
       }
-      if (o.type === 'rect' && o.round != null && !o.mosaic) h += range('모서리', 'sel.round', 0, 100, Math.round(o.round), '%');   // v0.11.4 둥근 사각형 모서리
+      // v1.1.4 둥근 사각형 모서리는 PPT처럼 상자 위쪽의 노란 점을 끌어 조절해요 (옵션바 슬라이더 대신)
       if (isShapeObj(o)) h += range('불투명도', 'sel.fillAlpha', 10, 100, Math.round((o.fillAlpha == null ? 1 : o.fillAlpha) * 100), '%') + range('선 굵기', 'sel.width', 0, 20, +(+(o.width || 0)).toFixed(1), 'pt');   // v1.0.5 선택한 도형에도 테두리(선 굵기)
       if (strokeLike) h += range('불투명', 'sel.alpha', 10, 100, Math.round((o.alpha == null ? 1 : o.alpha) * 100), '%');
       if (o.type === 'highlight') h += range('불투명', 'sel.hla', 10, 100, Math.round(hlOf(o) * 100), '%');   // v1.1.1 형광펜 투명도
@@ -7668,6 +7792,7 @@ optbar.addEventListener('click', e => {
   if ((el = q('[data-lstyle]'))) { settings.line.arrow = el.dataset.lstyle === 'arrow'; renderOptions(); return; }
   if ((el = q('[data-hsnap]'))) { settings.highlight.snap = el.dataset.hsnap === 'on'; renderOptions(); return; }
   if ((el = q('[data-psmooth]'))) { settings.pen.smooth = el.dataset.psmooth === 'on'; saveToolSet(); renderOptions(); return; }   // v1.1.2 획 보정
+  if ((el = q('[data-pstab]'))) { settings.pen.stab = clamp(+el.dataset.pstab | 0, 0, 3); saveToolSet(); renderOptions(); return; }   // v1.1.4 손떨림 보정
   if ((el = q('[data-hstyle]'))) { settings.highlight.style = el.dataset.hstyle; renderOptions(); return; }
   if ((el = q('[data-align]'))) { setTextProp('align', el.dataset.align); return; }
   if ((el = q('[data-fmt]'))) { const cur = currentTextProps(); if (cur) setTextProp(el.dataset.fmt, !cur[el.dataset.fmt]); return; }
@@ -7841,9 +7966,9 @@ function deletePage(id) {
 function addBlankAfter(id) {
   finishEditor();
   let i = idxOf(id || state.currentId); if (i < 0) i = state.pages.length - 1;
-  const ref = state.pages[i];
-  const np = { id: uid('p'), src: null, w: ref ? ref.w : 595.28, h: ref ? ref.h : 841.89, annots: [], memos: [], group: ref ? ref.group || null : null };
-  state.pages.splice(i + 1, 0, np);
+  const ref = state.pages[i], spot = insertSpot(i);   // v1.1.4 접힌 그룹 안이면 그룹 밖(그룹 바로 뒤)에
+  const np = { id: uid('p'), src: null, w: ref ? ref.w : 595.28, h: ref ? ref.h : 841.89, annots: [], memos: [], group: spot.group };
+  state.pages.splice(spot.at + 1, 0, np);
   syncDOM(); commit();
   setTimeout(() => goToPage(np.id), 30);
   toast('빈 페이지를 추가했어요.');
@@ -8126,13 +8251,80 @@ function pgmItems(id) {
     `<div class="pgm-subs" hidden>${it('blank', 'filePlus', '빈 페이지 열기')}${it('file', 'folder', '기존 파일 불러오기 <small>PDF · PNG</small>')}</div>` +
     it('dup', 'copy', '페이지 복제') + it('ren', 'pen', '이름 바꾸기') +
     it('bm', 'bookmark', p.bookmark ? '북마크 해제' : '북마크', p.bookmark ? ' class="on"' : '') + it('note', 'note', p.note ? '주석 수정' : '주석') +
+    pgmBgItems(p) + pgmGroupItems(p) +
     it('prt', 'printer', '프린트') + '<div class="pgm-s"></div>' + it('del', 'trash', '삭제', ' class="danger"');
+}
+/* v1.1.4 페이지 메뉴: 배경 색 바꾸기 · 그룹에 넣기 · 그룹에서 빼기 */
+const PAGE_BGS = ['#fff8e1', '#fdecef', '#e8f5e9', '#e3f2fd', '#efe9fb', '#fdf0e1', '#e0f4f2', '#f1f1f1', '#fff3b0', '#ffd6d6', '#cdeccf', '#cfe3ff'];
+const GROUP_COLORS = ['#e5484d', '#f76b15', '#f5c518', '#30a46c', '#12a594', '#0090ff', '#8e4ec6', '#e93d82', '#8d8d8d'];
+const pgmSw = (attr, list, cur, none, noneLabel) => `<div class="pgm-sw" role="group">${none ? `<button type="button" class="pgm-c none${cur ? '' : ' on'}" ${attr}="none" title="${noneLabel}" aria-label="${noneLabel}"></button>` : ''}${list.map(c => `<button type="button" class="pgm-c${cur && cur.toLowerCase() === c ? ' on' : ''}" ${attr}="${c}" style="--c:${c}" title="${c}" aria-label="${c}"></button>`).join('')}<label class="pgm-c pgm-cc" title="다른 색"><input type="color" ${attr}-custom value="${/^#[0-9a-f]{6}$/i.test(cur || '') ? cur : '#fff3b0'}" aria-label="다른 색">${svg('plus')}</label></div>`;
+function pgmBgItems(p) {
+  return `<button type="button" role="menuitem" data-pg="bgsub" class="pgm-sub" aria-expanded="false">${svg('bucket')}<span>배경 색 바꾸기</span>${p.bg ? `<i class="pgm-dot" style="--c:${p.bg}"></i>` : ''}${svg('chevD')}</button>` +
+    `<div class="pgm-subs" data-sub="bgsub" hidden>${pgmSw('data-pgbg', PAGE_BGS, p.bg, true, '배경 없음 (원래대로)')}</div>`;
+}
+function pgmGroupItems(p) {
+  const it = (a, ic, t, extra) => `<button type="button" role="menuitem" data-pg="${a}"${extra || ''}>${svg(ic)}<span>${t}</span></button>`;
+  const gs = state.groups.filter(g => g.id !== p.group);
+  let h = '';
+  if (gs.length) h += `<button type="button" role="menuitem" data-pg="gsub" class="pgm-sub" aria-expanded="false">${svg('groupIn')}<span>그룹에 넣기</span>${svg('chevD')}</button>` +
+    `<div class="pgm-subs" data-sub="gsub" hidden>${gs.map(g => `<button type="button" role="menuitem" data-pgin="${g.id}"><span class="pgm-gi" style="${g.color ? '--gc:' + g.color : ''}">${svg('groupf')}</span><span></span></button>`).join('')}${it('gnew', 'plus', '새 그룹으로 묶기')}</div>`;
+  else h += it('gnew', 'groupIn', '그룹으로 묶기');
+  if (p.group) h += it('gout', 'groupOut', '그룹에서 빼기');
+  return h;
+}
+/* 페이지 메뉴에서 고른 대상: 여러 장을 골라 둔 상태에서 그중 한 장을 우클릭했으면 고른 페이지 모두 */
+const pgmTargets = id => (state.pageSel.size > 1 && state.pageSel.has(id) ? state.pages.filter(p => state.pageSel.has(p.id)) : [pageById(id)]).filter(Boolean);
+function setPagesBg(id, c) {
+  const L = pgmTargets(id), v = /^#[0-9a-f]{6}$/i.test(c || '') ? c.toLowerCase() : null;
+  L.forEach(p => { if (v) p.bg = v; else delete p.bg; syncPageBg(p); });
+  commit();
+  toast(v ? (L.length > 1 ? `${L.length}쪽의 배경 색을 바꿨어요.` : '배경 색을 바꿨어요.') : '배경 색을 지웠어요.');
+}
+/* 그룹에 넣기: 그룹의 맨 끝으로 옮겨 넣어요 (그룹은 이어진 페이지로 이루어져요) */
+function pagesIntoGroup(id, gid) {
+  const g = groupById(gid); if (!g) return;
+  finishEditor();
+  const L = pgmTargets(id).filter(p => p.group !== gid); if (!L.length) return;
+  state.pages = state.pages.filter(p => !L.includes(p));
+  let last = -1; state.pages.forEach((p, i) => { if (inGroup(p.group, gid)) last = i; });
+  L.forEach(p => { p.group = gid; });
+  state.pages.splice(last < 0 ? state.pages.length : last + 1, 0, ...L);
+  syncDOM(); commit(); setCurrent(L[0].id);
+  toast(`${L.length > 1 ? L.length + '쪽을 ' : ''}‘${g.name}’ 그룹에 넣었어요.`);
+}
+/* 그룹에서 빼기: 그룹 바로 뒤(한 단계 바깥)로 꺼내요 */
+function pagesOutOfGroup(id) {
+  finishEditor();
+  const L = pgmTargets(id).filter(p => p.group); if (!L.length) return;
+  for (const p of L.slice().reverse()) {
+    const g = groupById(p.group); if (!g) { p.group = null; continue; }
+    const at = idxOf(p.id); state.pages.splice(at, 1);
+    let last = -1; state.pages.forEach((q, i) => { if (inGroup(q.group, g.id)) last = i; });
+    p.group = g.parent || null;
+    state.pages.splice(last < 0 ? at : last + 1, 0, p);
+  }
+  syncDOM(); commit(); setCurrent(L[0].id);
+  toast(L.length > 1 ? `${L.length}쪽을 그룹에서 뺐어요.` : '페이지를 그룹에서 뺐어요.');
+}
+function pagesNewGroup(id) {
+  const L = pgmTargets(id);
+  if (!(state.pageSel.size > 1 && state.pageSel.has(id))) { state.pageSel = new Set([id]); }
+  setCurrent(L[0].id); groupSelected();
+}
+/* 빈 페이지 · 기존 파일을 넣을 자리: 그 페이지가 닫혀 있는(접힌) 그룹 안이면 그룹 밖, 그룹 바로 뒤에 넣어요 */
+function insertSpot(i) {
+  const ref = state.pages[i]; if (!ref) return { at: i, group: null };
+  const chain = groupChain(ref.group), k = chain.findIndex(g => state.gCollapsed.has(g.id));
+  if (k < 0) return { at: i, group: ref.group || null };
+  const outer = chain[k]; let last = i; state.pages.forEach((p, j) => { if (inGroup(p.group, outer.id)) last = j; });
+  return { at: last, group: outer.parent || null };
 }
 function openPageMenu(id, x, y, anchorUp) {
   if (shRO() || state.present) return;
   if (!pgm.hidden && pgm.dataset.id === id && Date.now() - pgmAt < 700) return;   // 길게 누르기 + 브라우저 우클릭이 겹칠 때
   cxClose(); fmtMenu.hidden = true;
-  pgm.dataset.id = id; pgm.innerHTML = pgmItems(id); pgmAt = Date.now();
+  pgm.dataset.id = id; delete pgm.dataset.gid; pgm.innerHTML = pgmItems(id); pgmAt = Date.now();
+  pgm.querySelectorAll('[data-pgin]').forEach(b => { const g = groupById(b.dataset.pgin), ch = g ? groupChain(g.id).map(x => x.name).join(' › ') : ''; b.lastElementChild.textContent = ch; b.title = ch; });   // v1.1.4 그룹 이름
   pgm.hidden = false; pgm.classList.remove('up', 'drop'); pgm.style.left = '0px'; pgm.style.top = '0px';
   const w = pgm.offsetWidth, h = pgm.offsetHeight, W = window.innerWidth, H = window.innerHeight;
   const up = anchorUp || y + h + 8 > H;
@@ -8142,13 +8334,66 @@ function openPageMenu(id, x, y, anchorUp) {
   void pgm.offsetWidth; pgm.classList.add('drop');
   const f = pgm.querySelector('button'); if (f) try { f.focus({ preventScroll: true }); } catch (e) { /* 무시 */ }
 }
-const pgmClose = () => { if (!pgm.hidden) { pgm.hidden = true; pgm.innerHTML = ''; } };
+const pgmClose = () => { if (!pgm.hidden) { pgm.hidden = true; pgm.innerHTML = ''; delete pgm.dataset.gid; } };
+/* v1.1.4 그룹 설정 (그룹 머리의 톱니 · 우클릭 · 길게 누르기): 이름 · 폴더 색 · 맨 위에 고정 · 그룹 해제 · 삭제 */
+function openGroupMenu(gid, x, y) {
+  const g = groupById(gid); if (!g || shRO() || state.present) return;
+  cxClose(); fmtMenu.hidden = true;
+  const it = (a, ic, t, extra) => `<button type="button" role="menuitem" data-gm="${a}"${extra || ''}>${svg(ic)}<span>${t}</span></button>`;
+  pgm.dataset.id = ''; pgm.dataset.gid = gid;
+  pgm.innerHTML = `<div class="pgm-h"><span></span></div>` + it('ren', 'pen', '이름 바꾸기') +
+    `<button type="button" role="menuitem" data-gm="colsub" class="pgm-sub open" aria-expanded="true">${svg('palette')}<span>폴더 색</span>${svg('chevD')}</button>` +
+    `<div class="pgm-subs" data-sub="colsub">${pgmSw('data-gcol', GROUP_COLORS, g.color, true, '기본 색 (색 지정 안 함)')}</div>` +
+    (g.parent ? '' : it('pin', 'pin', g.pin ? '맨 위 고정 해제' : '페이지 패널 맨 위에 고정', g.pin ? ' class="on"' : '')) +
+    '<div class="pgm-s"></div>' + it('ungroup', 'ungroup', '그룹 해제 (페이지는 유지)') + it('delete', 'trash', '그룹과 페이지 삭제', ' class="danger"');
+  pgm.querySelector('.pgm-h span').textContent = groupChain(gid).map(x => x.name).join(' › ');
+  pgmAt = Date.now();
+  pgm.hidden = false; pgm.classList.remove('up', 'drop'); pgm.style.left = '0px'; pgm.style.top = '0px';
+  const w = pgm.offsetWidth, h = pgm.offsetHeight, W = window.innerWidth, H = window.innerHeight, up = y + h + 8 > H;
+  pgm.classList.toggle('up', up);
+  pgm.style.left = clamp(x, 8, Math.max(8, W - w - 8)) + 'px';
+  pgm.style.top = (up ? clamp(y - h, 8, H - h - 8) : clamp(y, 8, Math.max(8, H - h - 8))) + 'px';
+  void pgm.offsetWidth; pgm.classList.add('drop');
+  const f = pgm.querySelector('button'); if (f) try { f.focus({ preventScroll: true }); } catch (e) { /* 무시 */ }
+}
+function gmClick(e) {
+  const g = groupById(pgm.dataset.gid); if (!g) { pgmClose(); return; }
+  const c = e.target.closest('[data-gcol]');
+  if (c) { pgmClose(); if (c.dataset.gcol === 'none') delete g.color; else g.color = c.dataset.gcol; buildSidebar(); commit(); return; }
+  const b = e.target.closest('[data-gm]'); if (!b) return;
+  const a = b.dataset.gm;
+  if (a === 'colsub') { const sub = pgm.querySelector('.pgm-subs[data-sub="colsub"]'), open = sub.hidden; sub.hidden = !open; b.classList.toggle('open', open); b.setAttribute('aria-expanded', String(open)); return; }
+  pgmClose();
+  if (a === 'ren') renameGroup(g);
+  else if (a === 'pin') setGroupPin(g, !g.pin);
+  else if (a === 'ungroup') ungroup(g);
+  else if (a === 'delete') deleteGroup(g);
+}
+/* 맨 위에 고정한 그룹은 페이지 패널(문서) 맨 앞에 머물러요. 고정한 그룹이 여럿이면 고정한 순서대로 */
+function setGroupPin(g, on) {
+  if (on) { if (g.parent) return; g.pin = Date.now(); } else delete g.pin;
+  syncDOM(); commit();
+  const first = state.pages.find(p => inGroup(p.group, g.id)); if (first && on) { const v = views.get(first.id); if (v && v.tEl) thumbsEl.scrollTop = 0; }
+  toast(on ? `‘${g.name}’ 그룹을 맨 위에 고정했어요. 고정한 그룹의 페이지는 문서 맨 앞에 와요.` : `‘${g.name}’ 그룹 고정을 풀었어요.`);
+}
+function pinOrder() {
+  if (!state.groups || !state.groups.some(g => g.pin)) return;
+  for (const g of state.groups) if (g.pin && g.parent) delete g.pin;
+  const top = p => { const c = groupChain(p.group); return c[0] && c[0].pin ? c[0] : null; };
+  const pinned = state.pages.filter(top), rest = state.pages.filter(p => !top(p));
+  const ord = [...new Set(pinned.map(top))].sort((a, b) => a.pin - b.pin), sorted = ord.flatMap(g => pinned.filter(p => top(p) === g));
+  const next = sorted.concat(rest);
+  if (next.some((p, i) => state.pages[i] !== p)) state.pages = next;
+}
 pgm.addEventListener('contextmenu', e => e.preventDefault());
 pgm.addEventListener('click', e => {
+  if (pgm.dataset.gid) { gmClick(e); return; }   // v1.1.4 그룹 설정 메뉴
+  { const c = e.target.closest('[data-pgbg]'); if (c) { const id = pgm.dataset.id; pgmClose(); if (pageById(id)) setPagesBg(id, c.dataset.pgbg); return; } }   // v1.1.4 배경 색
+  { const c = e.target.closest('[data-pgin]'); if (c) { const id = pgm.dataset.id; pgmClose(); if (pageById(id)) pagesIntoGroup(id, c.dataset.pgin); return; } }   // v1.1.4 그룹에 넣기
   const b = e.target.closest('[data-pg]'); if (!b) return;
   const id = pgm.dataset.id, a = b.dataset.pg;
-  if (a === 'new') {   // 새 페이지 → 빈 페이지 열기 · 기존 파일 불러오기
-    const sub = pgm.querySelector('.pgm-subs'), open = sub.hidden; sub.hidden = !open; b.setAttribute('aria-expanded', String(open)); b.classList.toggle('open', open);
+  if (a === 'new' || a === 'bgsub' || a === 'gsub') {   // 새 페이지 → 빈 페이지 열기 · 기존 파일 불러오기 (v1.1.4 배경 색 · 그룹에 넣기도 아래로 펼쳐요)
+    const sub = a === 'new' ? pgm.querySelector('.pgm-subs') : pgm.querySelector(`.pgm-subs[data-sub="${a}"]`), open = sub.hidden; sub.hidden = !open; b.setAttribute('aria-expanded', String(open)); b.classList.toggle('open', open);
     const r = pgm.getBoundingClientRect(); if (r.bottom > window.innerHeight - 8) pgm.style.top = Math.max(8, window.innerHeight - r.height - 8) + 'px';
     if (open) { const f = sub.querySelector('button'); if (f) f.focus({ preventScroll: true }); }
     return;
@@ -8163,6 +8408,18 @@ pgm.addEventListener('click', e => {
   else if (a === 'note') editPageNote(id);
   else if (a === 'prt') openPrint({ pageId: id });
   else if (a === 'del') deletePage(id);
+  else if (a === 'gnew') pagesNewGroup(id);
+  else if (a === 'gout') pagesOutOfGroup(id);
+});
+pgm.addEventListener('input', e => {   // v1.1.4 다른 색: 고르는 동안 미리 보기
+  const t = e.target;
+  if (t.matches('[data-pgbg-custom]')) { const p = pageById(pgm.dataset.id); if (p) { p.bg = t.value.toLowerCase(); syncPageBg(p); } }
+  else if (t.matches('[data-gcol-custom]')) { const g = groupById(pgm.dataset.gid); if (g) { g.color = t.value.toLowerCase(); buildSidebar(); } }
+});
+pgm.addEventListener('change', e => {
+  const t = e.target;
+  if (t.matches('[data-pgbg-custom]')) { const id = pgm.dataset.id; pgmClose(); if (pageById(id)) setPagesBg(id, t.value); }
+  else if (t.matches('[data-gcol-custom]')) { const g = groupById(pgm.dataset.gid); pgmClose(); if (g) { g.color = t.value.toLowerCase(); buildSidebar(); commit(); } }
 });
 pgm.addEventListener('keydown', e => {
   const bs = [...pgm.querySelectorAll('button')].filter(b => b.offsetParent), i = bs.indexOf(document.activeElement);
@@ -8187,7 +8444,7 @@ async function insertFilesAfter(id) {
       const src = await loadMergeSource(files[i]); if (!isPdfFile(files[i])) imgs = true;
       regMergeSource(src); added.push(...src.pages);
     }
-    const ref = state.pages[at]; if (ref && ref.group) added.forEach(pg => { pg.group = ref.group; });   // 그룹 안 페이지 뒤면 같은 그룹으로
+    const spot = insertSpot(at); at = spot.at; if (spot.group) added.forEach(pg => { pg.group = spot.group; });   // 그룹 안 페이지 뒤면 같은 그룹으로 (v1.1.4 접힌 그룹이면 그룹 밖에)
     state.pages.splice(at + 1, 0, ...added);
     syncDOM(); commit();
     if (imgs) { setDirty(true); requestAnimationFrame(() => requestAnimationFrame(() => { try { redrawAll(); } catch (e) { /* 무시 */ } })); }
@@ -9307,7 +9564,14 @@ async function newBlank(size) {
   setSaveFormat('pdf');
   afterLoad('새 문서.pdf');
 }
+/* v1.1.4 문서를 새 탭으로 열면 ‘최근에 연 파일’에 남겨요 */
 async function handleFiles(files, handle, asDoc) {
+  const f = files && files[0], before = activeTab;
+  const r = await handleFiles0(files, handle, asDoc);
+  try { if (f && activeTab && activeTab !== before && !activeTab.main && state.pages.length) rcRecord(f, handle, activeTab); } catch (e) { console.warn(e); }
+  return r;
+}
+async function handleFiles0(files, handle, asDoc) {
   const f = files && files[0]; if (!f) return;
   const n = f.name || '';
   if (mMode && !f.type.startsWith('image/') && /\.(pdf|mpdf|zip|pptx|hwpx?|docx)$/i.test(n)) mSetAccess(await mPickMode());
@@ -9336,6 +9600,117 @@ async function openDialog() {
 $('#openBtn').onclick = openDialog; $('#emptyOpen').onclick = openDialog;
 $('#newBtn').onclick = () => newBlank(); $('#emptyNew').onclick = () => newBlank();
 $('#fileInput').addEventListener('change', e => { const f = [...e.target.files]; openMany(f, null).finally(() => { e.target.value = ''; }); });
+
+/* ═══ v1.1.4 최근에 연 파일 (메인 탭의 ‘최근에 연 파일’) ═══
+   · PC 프로그램: 파일 경로를 기억해서 그 자리의 파일을 다시 열고, 파일 위치(탐색기 · Finder)를 열 수 있어요.
+   · 브라우저(Chrome · Edge): 파일 접근 권한(핸들)을 기억해서 원본 파일을 다시 열어요 (처음 다시 열 때 허용을 물어요).
+   · 그 밖(모바일 · 다른 브라우저): 원본에 다시 닿을 수 없어서, 25MB 이하 파일은 이 기기에 사본을 보관해 열어요.
+   기록은 이 기기(브라우저)에만 남아요. 기록에서 지우면 보관한 사본도 함께 지워요. */
+const RC_PATH = new WeakMap(), RC_MAX = 30, RC_COPY_MAX = 25 * 1048576, RC_COPIES = 10;
+let rcDbP = null;
+function rcDb() {
+  if (rcDbP) return rcDbP;
+  rcDbP = new Promise(res => {
+    try { const r = indexedDB.open('meowRecent', 1); r.onupgradeneeded = () => { try { r.result.createObjectStore('files', { keyPath: 'id' }); } catch (e) { /* 무시 */ } }; r.onsuccess = () => res(r.result); r.onerror = () => res(null); r.onblocked = () => res(null); }
+    catch (e) { res(null); }
+  });
+  return rcDbP;
+}
+async function rcTx(mode, fn) {
+  const db = await rcDb(); if (!db) return null;
+  return new Promise(res => { try { const tx = db.transaction('files', mode), st = tx.objectStore('files'), r = fn(st); tx.oncomplete = () => res(r && 'result' in r ? r.result : true); tx.onerror = () => res(null); tx.onabort = () => res(null); } catch (e) { res(null); } });
+}
+const rcList = async () => ((await rcTx('readonly', st => st.getAll())) || []).sort((a, b) => b.at - a.at);
+const rcPut = rec => rcTx('readwrite', st => st.put(rec));
+const rcDel = id => rcTx('readwrite', st => st.delete(id));
+const rcDeskPath = f => { try { return RC_PATH.get(f) || (DESK && DESK.recent && DESK.recent.pathOf ? DESK.recent.pathOf(f) : '') || ''; } catch (e) { return ''; } };
+async function rcRecord(f, handle, tab) {
+  const path = rcDeskPath(f), list = await rcList();
+  let old = null;
+  if (path) old = list.find(r => r.path === path);
+  else if (handle) { for (const r of list) { if (r.handle && r.handle.isSameEntry) { try { if (await r.handle.isSameEntry(handle)) { old = r; break; } } catch (e) { /* 무시 */ } } } }
+  if (!old) old = list.find(r => !r.path && !r.handle && r.name === f.name && r.size === f.size);
+  const rec = { id: old ? old.id : uid('rc'), name: f.name || '문서', size: f.size || 0, at: Date.now(), path: path || null, handle: path ? null : (handle || null), thumb: old && old.thumb || '' };
+  if (!rec.path && !rec.handle && f.size <= RC_COPY_MAX) { try { rec.blob = new Blob([await f.arrayBuffer()], { type: f.type || '' }); } catch (e) { /* 보관 못 함 */ } }
+  await rcPut(rec);
+  /* 오래된 기록 · 사본 정리 */
+  const all = await rcList(); let copies = 0;
+  for (let i = 0; i < all.length; i++) {
+    const r = all[i];
+    if (i >= RC_MAX) { await rcDel(r.id); continue; }
+    if (r.blob) { copies++; if (copies > RC_COPIES) { delete r.blob; await rcPut(r); } }
+  }
+  /* 첫 페이지 미리 보기 (작게) */
+  setTimeout(async () => {
+    try {
+      if (activeTab !== tab || !state.pages.length) return;
+      const p = state.pages[0], c = await renderPageCanvas(p, 132 / Math.max(p.w, p.h));
+      const t = c.toDataURL('image/jpeg', 0.72), cur = (await rcList()).find(x => x.id === rec.id);
+      if (cur) { cur.thumb = t; await rcPut(cur); }
+    } catch (e) { /* 미리 보기 없이 */ }
+  }, 900);
+}
+async function rcOpen(r) {
+  try {
+    if (r.path && DESK && DESK.recent) {
+      const x = await DESK.recent.read(r.path);
+      if (!x) { toast('파일을 찾지 못했어요. 옮기거나 지웠을 수 있어요.'); return false; }
+      const f = new File([x.data], x.name || r.name, { type: /\.pdf$/i.test(x.name || '') ? 'application/pdf' : '' }); RC_PATH.set(f, x.path || r.path);
+      await openMany([f], null); return true;
+    }
+    if (r.handle) {
+      let ok = true;
+      try { if (r.handle.queryPermission && (await r.handle.queryPermission({ mode: 'read' })) !== 'granted') ok = (await r.handle.requestPermission({ mode: 'read' })) === 'granted'; } catch (e) { ok = false; }
+      if (!ok) { toast('파일을 열 권한이 없어요. 파일 열기로 다시 골라 주세요.'); return false; }
+      let f; try { f = await r.handle.getFile(); } catch (e) { toast('파일을 찾지 못했어요. 옮기거나 지웠을 수 있어요.'); return false; }
+      await openMany([f], [r.handle]); return true;
+    }
+    if (r.blob) { await openMany([new File([r.blob], r.name, { type: r.blob.type || '' })], null); return true; }
+    toast('이 기록은 원본 파일에 다시 닿을 수 없어요. 파일 열기로 다시 골라 주세요.'); openDialog(); return false;
+  } catch (e) { console.error(e); toast('파일을 열지 못했어요.'); return false; }
+}
+function rcWhere(r) {
+  if (r.path) return r.path;
+  if (r.handle) return '이 브라우저에서 연 파일';
+  if (r.blob) return '이 기기에 보관한 사본';
+  return '다시 열려면 파일을 선택해 주세요';
+}
+async function openRecent() {
+  let list = await rcList(), miss = new Set();
+  if (DESK && DESK.recent && DESK.recent.exists) { try { const ps = list.filter(r => r.path), ex = await DESK.recent.exists(ps.map(r => r.path)); ps.forEach((r, i) => { if (ex && ex[i] === false) miss.add(r.id); }); } catch (e) { /* 확인 못 함 */ } }
+  const canReveal = !!(DESK && DESK.recent && DESK.recent.reveal);
+  let body = null;
+  const draw = () => {
+    if (!list.length) { body.innerHTML = `<div class="rc-empty">${svg('history')}<b>최근에 연 파일이 없어요</b><span>파일을 열면 여기에 차례로 모여요.</span></div>`; const cb = document.querySelector('#mActions [data-rcclear]'); if (cb) cb.disabled = true; return; }
+    body.innerHTML = `<div class="rc-list" role="list">${list.map((r, i) => {
+      const ext = (/\.([a-z0-9]+)$/i.exec(r.name) || [, ''])[1].toUpperCase().slice(0, 5) || 'FILE', ms = miss.has(r.id);
+      return `<div class="rc-i${ms ? ' miss' : ''}" role="listitem" data-rci="${i}" tabindex="0" title="${escH(r.path || r.name)}">
+        <span class="rc-th">${r.thumb ? `<img src="${r.thumb}" alt="">` : `<i>${escH(ext)}</i>`}</span>
+        <span class="rc-tx"><b>${escH(r.name)}</b><small><span>${escH(socAgo(new Date(r.at).toISOString()))}</span>${r.size ? `<span>${fmtSize(r.size)}</span>` : ''}<span class="rc-where">${escH(ms ? '파일을 찾을 수 없어요' : rcWhere(r))}</span></small></span>
+        <span class="rc-acts">${canReveal && r.path ? `<button type="button" data-rcloc="${i}" title="파일 위치 열기" aria-label="파일 위치 열기">${svg('folderOpen')}</button>` : ''}<button type="button" data-rcdel="${i}" title="기록에서 삭제" aria-label="기록에서 삭제">${svg('x')}</button></span>
+      </div>`; }).join('')}</div><p class="rc-note">${DESK ? '목록은 이 컴퓨터에만 남아요. 기록에서 지워도 원본 파일은 그대로예요.' : '목록은 이 브라우저에만 남아요. 기록에서 지워도 원본 파일은 그대로예요.'}</p>`;
+  };
+  const pick = await customModal({ title: '최근에 연 파일', wide: true, closeX: true, build: b => {
+    body = b; b.classList.add('rcwin'); draw();
+    b.addEventListener('click', async e => {
+      const d = e.target.closest('[data-rcdel]');
+      if (d) { e.stopPropagation(); const r = list[+d.dataset.rcdel]; if (!r) return; await rcDel(r.id); list = list.filter(x => x !== r); draw(); toast('기록에서 지웠어요.'); return; }
+      const l = e.target.closest('[data-rcloc]');
+      if (l) { e.stopPropagation(); const r = list[+l.dataset.rcloc]; if (!r) return; const ok = await DESK.recent.reveal(r.path); if (!ok) toast('파일 위치를 찾지 못했어요. 옮기거나 지웠을 수 있어요.'); else if (ok === 'dir') toast('파일은 없지만 원래 있던 폴더를 열었어요.'); return; }
+      const it = e.target.closest('[data-rci]'); if (!it) return;
+      b._pick = list[+it.dataset.rci]; const ok = document.querySelector('#mActions .ok'); if (ok) ok.click();
+    });
+    b.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.matches('[data-rci]')) { e.preventDefault(); e.target.click(); } if (e.key === 'Delete' && e.target.matches('[data-rci]')) { e.preventDefault(); const x = e.target.querySelector('[data-rcdel]'); if (x) x.click(); } });
+    setTimeout(() => { const c = document.querySelector('#mActions button'); if (c) c.dataset.rcclear = '1'; if (c && !list.length) c.disabled = true; }, 0);
+  }, buttons: [{ label: '기록 모두 지우기', value: 'clear' }, { label: '닫기', ok: true, value: () => (body && body._pick) || null }] });
+  if (pick === 'clear') {
+    const ok = await modal({ title: '기록 모두 지우기', message: '최근에 연 파일 기록을 모두 지울까요? 원본 파일은 지워지지 않아요.', ok: '모두 지우기' });
+    if (ok) { for (const r of list) await rcDel(r.id); toast('최근에 연 파일 기록을 모두 지웠어요.'); } else openRecent();
+    return;
+  }
+  if (pick && pick.id) await rcOpen(pick);
+}
+$('#emptyRecent').onclick = () => openRecent();
 /* v0.10.3 여러 파일을 한 번에 열기: 하나면 지금처럼, 여러 개면 각각 새 탭으로 (파일 핸들이 있으면 같이 넘겨서 저장할 때 원래 파일에 덮어써요) */
 async function openMany(files, handles) {
   files = [...(files || [])]; if (!files.length) return;
@@ -10337,7 +10712,7 @@ const SH_VIS = [['public', '모두 공개'], ['friends', '친구 공개'], ['pri
 const SH_GENRES = ['교육', '개발', '그림', '디자인', '공부', '업무', '기타'], SH_MAX = 10, SH_REASONS = ['불건전', '욕설', '명예훼손', '범죄', '기타'];   // v0.11.4
 
 /* ── 문서 상태 ↔ 비교용 기준(base) ── */
-const shMeta = p => JSON.stringify({ src: p.src || null, w: p.w, h: p.h, memos: p.memos || [], group: p.group || null, name: p.name || null, note: p.note || null, bookmark: p.bookmark || null, rot: p.rot || 0, layers: p.layers || null });
+const shMeta = p => JSON.stringify({ src: p.src || null, w: p.w, h: p.h, memos: p.memos || [], group: p.group || null, name: p.name || null, note: p.note || null, bookmark: p.bookmark || null, rot: p.rot || 0, layers: p.layers || null, bg: p.bg || null });
 function shBase() {
   const b = { order: state.pages.map(p => p.id), groups: JSON.stringify(state.groups || []), pages: new Map() };
   for (const p of state.pages) {
@@ -10385,7 +10760,7 @@ async function shUploadState(force) {
   try {
     await shUploadAssets(state.pages);
     const am = shAssetMeta(state.pages);
-    const js = { v: 1, fileName: state.fileName, pages: state.pages.map(p => ({ id: p.id, src: p.src || null, w: p.w, h: p.h, annots: p.annots, memos: p.memos || [], group: p.group || null, name: p.name || null, note: p.note || null, bookmark: p.bookmark || null, rot: p.rot || 0, layers: p.layers || null })), groups: state.groups || [], collapsed: [...(state.gCollapsed || [])], audios: am.au, clock: S.clock };
+    const js = { v: 1, fileName: state.fileName, pages: state.pages.map(p => ({ id: p.id, src: p.src || null, w: p.w, h: p.h, annots: p.annots, memos: p.memos || [], group: p.group || null, name: p.name || null, note: p.note || null, bookmark: p.bookmark || null, rot: p.rot || 0, layers: p.layers || null, bg: p.bg || null })), groups: state.groups || [], collapsed: [...(state.gCollapsed || [])], audios: am.au, clock: S.clock };
     await shPut(`${S.id}/state.json`, new Blob([JSON.stringify(js)], { type: 'application/json' }), 'application/json', true);
     const ver = await shRpc('share_bump_snap', { p_project: S.id });
     S.ver = ver; S.dirtyUp = false;
@@ -11721,6 +12096,10 @@ async function buildPdf() {
       if (p.rot) page.setRotation(degrees((((page.getRotation().angle || 0) + p.rot) % 360 + 360) % 360));
       R = ((page.getRotation().angle % 360) + 360) % 360;
     } else page = out.addPage([p.w, p.h]);
+    if (/^#[0-9a-f]{6}$/i.test(p.bg || '')) {   // v1.1.4 페이지 배경색: 곱하기로 칠해 원래 글자 · 그림이 그대로 보여요
+      const b = page.getCropBox(), hx = n => parseInt(p.bg.slice(n, n + 2), 16) / 255;
+      page.drawRectangle({ x: b.x, y: b.y, width: b.width, height: b.height, color: PDFLib.rgb(hx(1), hx(3), hx(5)), borderWidth: 0, blendMode: BlendMode ? BlendMode.Multiply : undefined });
+    }
     if (p.annots.length || (p.memos && p.memos.length)) {
       const b = page.getCropBox();
       let ax = b.x, ay = b.y;
@@ -11829,7 +12208,7 @@ async function buildProject() {
   }
   zip.file('project.json', JSON.stringify({
     format: 'meow-pdf', version: 1, fileName: state.fileName, docs: [...usedDocs], images: imgMeta, audios: audMeta,
-    pages: state.pages.map(p => ({ id: p.id, src: p.src, w: p.w, h: p.h, annots: p.annots, memos: p.memos || [], group: p.group || null, name: p.name || null, note: p.note || null, bookmark: p.bookmark || null, rot: p.rot || 0 })),
+    pages: state.pages.map(p => ({ id: p.id, src: p.src, w: p.w, h: p.h, annots: p.annots, memos: p.memos || [], group: p.group || null, name: p.name || null, note: p.note || null, bookmark: p.bookmark || null, rot: p.rot || 0, bg: p.bg || null })),
     groups: state.groups, collapsed: [...state.gCollapsed], notes: state.notes, noteIdx: state.noteIdx
   }));
   return zip.generateAsync({ type: 'uint8array', compression: 'DEFLATE', compressionOptions: { level: 6 } });
@@ -12469,11 +12848,12 @@ function pruneGroups() {
 function groupHeader(g, depth, anc) {
   const n = document.createElement('div');
   const collapsed = state.gCollapsed.has(g.id);
-  n.className = 'ghead'; n.dataset.gid = g.id; n.draggable = true; n.style.setProperty('--d', depth);
+  n.className = 'ghead' + (g.color ? ' gcol' : '') + (g.pin ? ' gpinned' : ''); n.dataset.gid = g.id; n.draggable = true; n.style.setProperty('--d', depth);
+  if (g.color) n.style.setProperty('--gc', g.color);   // v1.1.4 폴더 색
   n.hidden = anc.some(a => state.gCollapsed.has(a.id));
   const count = state.pages.filter(p => inGroup(p.group, g.id)).length;
-  n.innerHTML = `<button class="gtoggle" data-g="toggle" aria-label="접기/펼치기" aria-expanded="${!collapsed}">${svg(collapsed ? 'chevR' : 'chevD')}</button><span class="gico">${svg('groupf')}</span><span class="gname"></span><span class="gcount">${count}</span>` +
-    `<span class="gacts"><button data-g="rename" title="이름 바꾸기" aria-label="이름 바꾸기">${svg('pen')}</button><button data-g="ungroup" title="그룹 해제 (페이지는 유지)" aria-label="그룹 해제">${svg('x')}</button><button data-g="delete" title="그룹과 페이지 삭제" aria-label="그룹과 페이지 삭제">${svg('trash')}</button></span>`;
+  n.innerHTML = `<button class="gtoggle" data-g="toggle" aria-label="접기/펼치기" aria-expanded="${!collapsed}">${svg(collapsed ? 'chevR' : 'chevD')}</button><span class="gico">${svg('groupf')}</span><span class="gname"></span>${g.pin ? `<span class="gpin" title="맨 위에 고정됨">${svg('pin')}</span>` : ''}<span class="gcount">${count}</span>` +
+    `<span class="gacts"><button data-g="set" title="그룹 설정 (폴더 색 · 맨 위 고정)" aria-label="그룹 설정">${svg('settings')}</button><button data-g="rename" title="이름 바꾸기" aria-label="이름 바꾸기">${svg('pen')}</button><button data-g="ungroup" title="그룹 해제 (페이지는 유지)" aria-label="그룹 해제">${svg('x')}</button><button data-g="delete" title="그룹과 페이지 삭제" aria-label="그룹과 페이지 삭제">${svg('trash')}</button></span>`;
   n.querySelector('.gname').textContent = g.name;
   return n;
 }
@@ -12497,7 +12877,7 @@ function buildSidebar() {
     v.tEl.title = p.note ? '주석: ' + p.note : '';
     v.tFlagL.hidden = !p.note; v.tFlagG.hidden = !p.note;
     v.tEl.classList.toggle('bm', !!p.bookmark);
-    syncPageNote(p);
+    syncPageNote(p); syncPageBg(p, v);
     v.tEl.classList.toggle('msel', state.pageSel.has(p.id));
     seq.push(v.tEl);
     prev = chain;
@@ -12564,7 +12944,15 @@ thumbsEl.addEventListener('click', e => {
   else if (a === 'rename') renameGroup(g);
   else if (a === 'ungroup') ungroup(g);
   else if (a === 'delete') deleteGroup(g);
+  else if (a === 'set') { const r = act.getBoundingClientRect(); openGroupMenu(g.id, r.left, r.bottom + 4); }
 });
+/* v1.1.4 그룹 머리 우클릭(모바일: 길게 누르기) → 그룹 설정 */
+thumbsEl.addEventListener('contextmenu', e => { const h = e.target.closest('.ghead'); if (!h) return; e.preventDefault(); e.stopPropagation(); openGroupMenu(h.dataset.gid, e.clientX, e.clientY); });
+{ let lp = null; const stop = () => { if (lp) { clearTimeout(lp.t); lp = null; } };
+  thumbsEl.addEventListener('pointerdown', e => { const h = e.target.closest('.ghead'); if (!h || e.pointerType === 'mouse') return; stop(); const x = e.clientX, y = e.clientY, gid = h.dataset.gid; lp = { x, y, t: setTimeout(() => { lp = null; h.dataset.lp = '1'; openGroupMenu(gid, x, y); setTimeout(() => { delete h.dataset.lp; }, 700); }, 520) }; });
+  thumbsEl.addEventListener('pointermove', e => { if (lp && Math.hypot(e.clientX - lp.x, e.clientY - lp.y) > 10) stop(); });
+  ['pointerup', 'pointercancel'].forEach(t => thumbsEl.addEventListener(t, stop));
+  thumbsEl.addEventListener('click', e => { const h = e.target.closest('.ghead'); if (h && h.dataset.lp) { e.stopImmediatePropagation(); e.preventDefault(); } }, true); }
 thumbsEl.addEventListener('dblclick', e => { const n = e.target.closest('.gname'); if (!n) return; const g = groupById(n.closest('.ghead').dataset.gid); if (g) renameGroup(g); });
 thumbsEl.addEventListener('dragstart', e => {
   const h = e.target.closest('.ghead'); if (!h) return;
@@ -12934,6 +13322,7 @@ async function enterPresentation(from) {
   finishEditor(); selectObj(null);
   fmtMenu.hidden = true;
   pres.prev = { zoom: state.zoom, spread: state.spread, tool: state.tool };
+  pres.snap = snapshot(); pres.tab = activeTab;   // v1.1.4 발표가 끝나면 추가한 내용을 반영할지 물어봐요
   setTool('select');
   state.present = true; state.spread = false;
   app.classList.remove('spread-on');
@@ -12964,6 +13353,20 @@ function exitPresentation() {
     setZoom(pv.zoom);
     const v = views.get(state.currentId); if (v) viewer.scrollTop = Math.max(0, v.el.offsetTop - 16);
   });
+  presAskKeep();
+}
+/* v1.1.4 발표 중에 그리거나 적은 내용이 있으면, 나갈 때 문서에 반영할지 물어봐요 (반영하지 않으면 발표 전으로 되돌려요 · 실행 취소로 다시 살릴 수 있어요) */
+async function presAskKeep() {
+  const snap = pres.snap, tab = pres.tab; pres.snap = null;
+  if (!snap || tab !== activeTab || !state.pages.length || shRO()) return;
+  finishEditor();
+  if (snapshot() === snap) return;
+  const r = await customModal({ title: '발표 중 추가한 내용', build: b => { const p = document.createElement('p'); p.textContent = '발표하면서 그리거나 적은 내용을 문서에 반영할까요?'; const q = document.createElement('p'); q.className = 'muted'; q.style.cssText = 'font-size:12.5px;opacity:.75;margin-top:6px'; q.textContent = '반영하지 않으면 발표를 시작하기 전 상태로 되돌려요. (실행 취소로 다시 살릴 수 있어요)'; b.append(p, q); },
+    buttons: [{ label: '반영하지 않기', value: 'drop' }, { label: '반영하기', ok: true, value: 'keep' }] });
+  if (r !== 'drop' || tab !== activeTab) return;
+  if (state.selected) selectObj(null);
+  restore(snap); commit();
+  toast('발표 중 추가한 내용을 반영하지 않았어요.');
 }
 const togglePresentation = from => (state.present ? exitPresentation() : enterPresentation(from));
 /* 레이저 잔상: 지나간 자리에 붉은 빛이 잠깐 남았다가 사라져요 */
@@ -13041,20 +13444,29 @@ function renderPresOpts() {
     if (t === 'highlight') h += seg('data-phstyle', [['brush', '붓형'], ['line', '직선형']], st.style);
     if (t === 'shape') h += seg('data-pshape', SHAPES.map(([k]) => [k, svg(SHAPE_IC[k])]), st.kind);   // v1.1.2 모양 아이콘
     const colors = t === 'highlight' ? HL_PALETTE : PALETTE.concat(PASTEL.slice(0, 4));
+    const cur0 = h; h = '';
     h += colors.map(c => sw(c, st.color)).join('');
     h += `<input type="color" data-pcustom value="${/^#[0-9a-f]{6}$/i.test(st.color) ? st.color : '#ff0000'}" title="사용자 지정 색상" aria-label="사용자 지정 색상">`;
+    if (t === 'shape') {   // v1.1.4 발표 중에도 도형 배경색(채우기)을 골라요
+      const fc = st.fill, fsw = c => `<button class="swatch${fc && String(fc).toLowerCase() === c.toLowerCase() ? ' on' : ''}" data-pfill="${c}" style="--c:${c}" title="${c}" aria-label="배경색 ${c}"></button>`;
+      const fills = `<button class="swatch none${fc ? '' : ' on'}" data-pfill="none" title="배경 없음 (투명)" aria-label="배경 없음 (투명)"></button>` + PALETTE.concat(PASTEL.slice(0, 4)).map(fsw).join('') +
+        `<input type="color" data-pfcustom value="${/^#[0-9a-f]{6}$/i.test(fc || '') ? fc : '#ffeb3b'}" title="사용자 지정 배경색" aria-label="사용자 지정 배경색">`;
+      h = `<div class="po-row">${cur0}${range('width', '선 굵기', 0, 20, st.width)}</div><div class="po-row"><span class="po-lb">선</span>${h}</div><div class="po-row"><span class="po-lb">배경</span>${fills}</div>`;
+      presOpts.classList.add('rows'); presOpts.innerHTML = h; presOpts.hidden = false; placePresOpts(); return;
+    }
+    h = cur0 + h;
     if (t === 'text') h += range('size', '크기', 8, 96, st.size);
-    else if (t === 'shape') h += range('width', '선 굵기', 0, 20, st.width);
     else if (t === 'highlight') h += range('width', '굵기', 6, 44, st.width);
     else h += range('width', '굵기', 1, 24, st.width);
   }
-  presOpts.innerHTML = h; presOpts.hidden = false;
+  presOpts.classList.remove('rows'); presOpts.innerHTML = h; presOpts.hidden = false;
   placePresOpts();
 }
 presOpts.addEventListener('mousedown', e => { if (editor && e.target.closest('button')) e.preventDefault(); });
 presOpts.addEventListener('click', e => {
   const q = sel => e.target.closest(sel); let el;
   if ((el = q('[data-pc]'))) { applyColor(el.dataset.pc); renderPresOpts(); return; }
+  if ((el = q('[data-pfill]'))) { applyFill(el.dataset.pfill); renderPresOpts(); return; }   // v1.1.4 도형 배경색
   if ((el = q('[data-pemode]'))) { settings.eraser.mode = el.dataset.pemode; updateEraserCursor(); renderPresOpts(); return; }
   if ((el = q('[data-plstyle]'))) { settings.line.arrow = el.dataset.plstyle === 'arrow'; renderPresOpts(); return; }
   if ((el = q('[data-phstyle]'))) { settings.highlight.style = el.dataset.phstyle; renderPresOpts(); return; }
@@ -13062,6 +13474,7 @@ presOpts.addEventListener('click', e => {
 });
 presOpts.addEventListener('input', e => {
   if (e.target.matches('[data-pcustom]')) { applyColor(e.target.value, true); return; }
+  if (e.target.matches('[data-pfcustom]')) { applyFill(e.target.value, true); return; }
   if (!e.target.matches('[data-pr]')) return;
   const key = e.target.dataset.pr, val = +e.target.value, t = state.tool;
   settings[t][key] = val;
@@ -13069,7 +13482,7 @@ presOpts.addEventListener('input', e => {
   if (t === 'text' && editor) { editor.size = val; editor.fit(); }
   if (t === 'eraser') updateEraserCursor(); else updateBrushCursor();
 });
-presOpts.addEventListener('change', e => { if (e.target.matches('[data-pcustom]')) { applyColor(e.target.value); renderPresOpts(); } });
+presOpts.addEventListener('change', e => { if (e.target.matches('[data-pcustom]')) { applyColor(e.target.value); renderPresOpts(); } if (e.target.matches('[data-pfcustom]')) { applyFill(e.target.value); renderPresOpts(); } });
 presBar.querySelectorAll('[data-ptool]').forEach(b => b.addEventListener('click', () => presSetTool(b.dataset.ptool)));
 $('#presUndo').onclick = undo;
 
@@ -13488,6 +13901,7 @@ async function renderPageCanvas(p, scale) {   // v1.0.6 scale: 1pt 당 화소 (�
   const ctx = c.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, c.width, c.height);
   const k = c.width / p.w;
   if (p.src) { const pg = await getPdfPage(p.src); await pg.render({ canvasContext: ctx, viewport: pvp(pg, p, k) }).promise; }
+  pageBgFill(ctx, p, c.width, c.height);   // v1.1.4 페이지 배경색
   drawAnnots(ctx, p.annots, k, { exp: true });
   for (const m of p.memos || []) drawMemoCanvas(ctx, m, k, 20 * k);
   return c;
@@ -13847,6 +14261,7 @@ function drawFlat(p) {   // 편집기 상태의 한 페이지(배경 + 주석 + 
   return async (cv, s) => {
     const ctx = cv.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, cv.width, cv.height);
     if (p.src) { const pg = await getPdfPage(p.src); await pg.render({ canvasContext: ctx, viewport: pvp(pg, p, cv.width / p.w) }).promise; }
+    pageBgFill(ctx, p, cv.width, cv.height);   // v1.1.4 페이지 배경색
     drawAnnots(ctx, p.annots, cv.width / p.w, { exp: true });
     for (const m of p.memos || []) drawMemoCanvas(ctx, m, cv.width / p.w, 20 * cv.width / p.w);
   };
@@ -14103,6 +14518,7 @@ async function docxPageData(p, withText) {
   ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, cv.width, cv.height);
   const k = cv.width / p.w; let frames = [];
   if (p.src) { const pg = await getPdfPage(p.src); await pg.render({ canvasContext: ctx, viewport: pvp(pg, p, k) }).promise; }
+  pageBgFill(ctx, p, cv.width, cv.height);   // v1.1.4 페이지 배경색
   if (!withText) { drawAnnots(ctx, p.annots, k, { exp: true }); for (const m of p.memos || []) drawMemoCanvas(ctx, m, k, 20 * k); return { cv, frames }; }
   let nat = []; if (p.src) { try { nat = await digiNative(p, ctx, k); } catch (err) { console.error(err); } }
   const cover = o => paintCover(ctx, o, k);
@@ -14501,10 +14917,10 @@ $('#manageBtn').onclick = openPageManager;
 
 /* ════════════ 설정 창 · 단축키 사용자 지정 · 도구 모음 위치 ════════════ */
 const SEO_TITLE = document.title;   // v1.0.6 <title> 그대로 (검색 결과 · 탭 제목)
-const APP_VERSION = 'v1.1.3';
+const APP_VERSION = 'v1.1.4';
 /* 업데이트 내역(CHANGELOG · README) 작성 규칙: 모든 항목은 음슴체(~함 · ~됨 · ~음) 또는 명사형(~추가 · ~완료 · ~개선 · ~수정 · ~해결 · ~변경)으로 끝맺기. ‘~해요 · ~돼요 · ~합니다’ 같은 높임 · 대화체는 쓰지 않기
    v1.0.5 규칙 추가: 특정 회사 · 제품 · 서비스 이름을 쓰지 않기. ‘○○처럼 · ○○식 · ○○ 스타일’처럼 다른 회사 제품에 빗대는 표현도 쓰지 않고, 기능이 하는 일을 그대로 설명하기 (화면 문구 · 번역 · 주석도 같음) */
-const CHANGELOG = [{"v": "v1.1.3", "d": "2026.10.23", "items": ["페이지 패널의 상세보기(…) 버튼을 없애고 우클릭 메뉴로 변경 — 썸네일을 우클릭(모바일: 길게 누르기)하면 아래로 목록이 내려오고 새 페이지 · 페이지 복제 · 이름 바꾸기 · 북마크 · 주석 · 프린트 · 삭제 순서로 선택", "페이지 추가를 빈 페이지 열기 · 기존 파일 불러오기로 나눔 — 기존 파일은 PDF · PNG(JPG)를 고른 페이지 바로 뒤 중간에 끼워 넣기, 여러 파일은 고른 순서대로 (페이지 메뉴의 ‘새 페이지’ · 페이지 패널 아래 ‘페이지 추가’)", "디지털화 정확도 · 인식 범위 개선 — 한 페이지를 세 가지 읽기 방식으로 반복해 읽고 더 깨끗한 결과를 바탕으로 합침, 자신 없는 칸은 2배 · 3배로 키워 여러 번 다시 읽어 같은 답이 나오면 그 답을 씀, 한국어 인식에 영어 모델을 함께 써서 영문 문장이 깨지던 문제 해결, 회색 바탕 · 옅은 글자 · 어두운 상자 위 흰 글자도 읽도록 대비 맞춤, 엔진이 놓친 낱말 덩어리도 다시 읽음, 글자 PDF 안에 섞인 그림 · 스캔 글자도 함께 인식, 각주 같은 작은 글자도 남김", "스크롤바 색이 테마 색을 따라 바뀜", "메모에 제목 추가 — 머리글에서 바로 입력(비우면 첫 줄이 제목), 접으면 작은 동그라미 하나만 남고 누르면 펼쳐짐 · 끌어서 옮기기 · 마우스를 올리면 메모 제목 표시", "모바일 발표에 도구 줄 추가 — 리모컨의 ▲ 단추로 펼치고 접는 도구 줄에서 강조표시 · 그리기 · 직선 · 지우개 · 도형 · 텍스트 · 레이저 포인터 · 실행 취소 사용 (접거나 도구를 끄면 다시 밀어서 넘기기)", "설정 › 버전 정보에 Thaniya.co.kr로 이동하는 단추 추가 (설정 왼쪽 아래 버전 표시 옆에도 링크)"]}, {"v": "v1.1.2", "d": "2026.10.23", "items": ["그리기 도구에 획 보정 추가 (기본: 켜짐) — 손을 떼면 ‘ㅇ’처럼 닫힌 고리는 반듯한 원으로, ㅁ · ㄷ · ㄹ처럼 꺾인 획은 곧은 선과 뾰족한 모서리로, 그 밖의 곡선은 부드럽게 다듬음 (영문 ‘e’는 원으로 바꾸지 않음), 옵션바의 ‘획 보정 / 끄기’로 켜고 끄기 · 노트 그림판의 펜에도 ‘보정’ 단추 추가", "옵션바의 색상 · 채우기를 작은 색 단추로 변경 — 누르면 색 선택 창이 열리고 추천 색 · 기본 색 96가지 · 최근 사용 10개 · 사용자 지정 · HEX 입력 · 스포이드 사용 가능 (스포이드로 찍는 동안에는 창이 잠깐 숨음), 옵션바가 차지하는 너비가 크게 줄어듦", "도형 도구의 도형 고르기를 모양만 있는 4×2 단추 표로 변경, 왼쪽 · 오른쪽 · 위쪽 · 아래쪽 화살표 도형 추가 (색상 · 채우기 · 선 굵기 · 불투명도 · 회전 그대로 사용)", "헤더 접기 변경 — 탭바 오른쪽 끝 버튼(Ctrl+Shift+H)이 헤더만 접고 탭바는 그대로 남김, 같은 버튼으로 다시 펼침", "노트 위쪽 번호 탭에 노트 종류 아이콘 추가 — 번호 앞 아이콘으로 마크다운 · 텍스트 · 그림판 구분"]}, {"v": "v1.1.1", "d": "2026.10.22", "items": ["프리미엄 1개월 무료 체험 추가 — 계정당 한 번 · 카드 등록 없이 · 끝나도 자동으로 결제되지 않음, 헤더의 ‘1개월 무료’ 버튼 · 시작 화면 · 계정 창 · 소개 페이지 요금 안내에서 바로 시작", "Google 계정으로 로그인 · 네이버 계정으로 로그인 추가 — 계정 창의 로그인 · 회원가입 탭에서 작은 창으로 로그인, 처음이면 그 계정으로 바로 가입", "노트에 그림판 추가 (MD · TXT 옆) — 펜 · 형광펜 · 직선 · 지우개 · 도형(사각형 · 원 · 채우기) · 텍스트 상자 · 표, 색 · 굵기 · 실행 취소 · 크게 그리기, 아래쪽 버튼으로 PNG로 내보내기 · 현재 탭에 붙여넣기 · 새 탭으로 열기 (그림은 MPDF에 함께 저장)", "그림판 확대 · 축소 추가 — Ctrl+휠(터치패드 두 손가락 벌리기 포함) · Ctrl+= / Ctrl+- 로 마우스가 있는 자리를 기준으로 100%~400%, 확대 비율 버튼 · Ctrl+0으로 100%", "자동 저장 추가 (기본: 꺼짐) — 설정 › 화면 · 레이아웃 › 자동 저장에서 1 · 3 · 5 · 10분 간격 선택, 열었거나 저장한 파일은 그 파일에 바로 덮어쓰고 저장할 파일이 없으면 이 기기에 복구용으로 보관했다가 다음에 열 때 되살리기, 헤더에 자동 저장 상태 표시", "형광펜 투명도 조절 추가 — 형광펜 도구와 선택한 형광펜의 옵션바에 ‘불투명’(10~100%) 추가, 형광펜마다 다른 투명도로 칠해도 겹친 곳은 진해지지 않음", "새 테마 ‘놀이동산’ 추가 (프리미엄) — 맑은 하늘 아래 천천히 돌아가는 관람차 · 달리는 롤러코스터 · 회전목마 천막 · 떠오르는 풍선 · 알록달록 깃발 줄이 있는 밝은 화면 (테마 스토어에서 관람차 · 풍선 움직임 끄기 가능)", "놀이동산 테마 이스터에그 — 빈 배경을 누르면 색종이가 팡, 빠르게 일곱 번 누르면 불꽃놀이와 풍선 퍼레이드", "새 테마 ‘밤의 수영장’ 추가 (프리미엄) — 파란 네온 전구 줄 · 네온 간판 · 일렁이는 물결에 번지는 불빛 · 옅은 안개가 있는 고요한 밤 (테마 스토어에서 물결 · 안개 움직임 끄기 가능)", "밤의 수영장 테마 이스터에그 — 빈 배경을 누르면 물결이 번지고, 빠르게 일곱 번 누르면 전구가 깜빡인 뒤 간판에 불이 켜지고 오리 튜브가 지나감", "테마 스토어에 즐겨찾기 추가 — 테마 카드의 ☆ 버튼으로 담고, 왼쪽 메뉴의 ‘즐겨찾기’에서 모아 보기", "테마 스토어 왼쪽 메뉴에 ‘최근 사용’ 추가 — 최근에 적용한 테마 6개를 조금 작은 카드로 모아 보기", "PC: 문서 탭이 많아지면 왼쪽 탭이 사라지던 문제 수정 — 한 줄에 다 들어가지 않으면 좌우 화살표(또는 탭 위에서 마우스 휠)로 탭 줄 전체를 이동", "모든 문서 탭의 너비를 똑같이 맞춤 — 탭이 많아지면 다 같이 좁아짐", "모바일: 확대한 상태에서도 화면 왼쪽 · 오른쪽 끝에서 한 번 더 밀면 이전 · 다음 페이지로 이동 (끄는 동안 가장자리에 화살표로 안내)", "도구 모음 기본 위치를 다시 상단 정렬로 변경 (설정 › 화면 · 레이아웃에서 좌측 정렬로 바꿀 수 있음)", "업데이트 내역에서 1.0.x · 1.1.x 버전 묶음에도 오른쪽에 업데이트 요약 표시", "PC 프로그램: Google · 네이버 로그인 창을 앱 안의 작은 창으로 열기"]}, {"v": "v1.0.6", "d": "2026.10.22", "items": ["소개 페이지 · 편집기 공유 미리보기 이미지(og-image) 추가 — 주소를 공유하면 Meow-PDF 대표 이미지 · 제목 · 설명이 표시됨", "검색 노출 개선 — 검색에 맞춘 제목 · 설명 · 키워드, 대표 주소(canonical), 구조화 데이터(웹 앱 · 운영자 · 자주 묻는 질문), robots.txt · 사이트맵(이미지 포함) 추가, 소개 페이지에 ‘자주 묻는 질문’ 추가", "소개 페이지 · 편집기에서 외부 코드 저장소로 이동하는 링크 · 버튼 제거 (PC 프로그램 업데이트가 안 될 때도 사이트의 다운로드 안내로 이동)", "인쇄 버튼을 도구 모음에서 헤더의 ‘다른 이름으로 저장’ 오른쪽으로 이동", "인쇄 창 추가 — 인쇄 · 복사본 수 · 프린터 · 페이지(시작 ~ 끝) · 인쇄 방향 · 용지 · 색(컬러 / 흑백) · 확대/축소 배율 · 상하좌우 여백 · 미리 보기", "PC 프로그램: 인쇄할 때 ‘이 앱은 인쇄 미리 보기를 지원하지 않습니다’ 창이 뜨던 문제 해결 — 인쇄 창에서 고른 프린터로 바로 인쇄", "인쇄 화질 개선 · 색이 푸르게 틀어지던 문제 수정 — 300dpi 무손실 이미지로 인쇄하고, 테마의 화면 효과 · 밝기 조절이 인쇄에 섞이지 않게 함", "페이지 패널 썸네일 버튼을 부채꼴 대신 썸네일 가운데를 둘러싼 원으로 펼침, ‘이 페이지 인쇄’ 버튼 추가", "세로 모드 전환을 헤더에서 설정 › 화면 · 레이아웃 › 화면 배치로 이동", "나만의 테마에 배경 이미지 추가 — 시스템 그림 6종 또는 직접 올린 그림, 빈 여백은 이미지 반복 / 시스템 색, 크기(화면 채우기 · 전체 보이기 · 원래 크기 · 직접) · 위치(9칸 · 가로 · 세로 · 끌어서 이동) · 미리 보기 (글꼴 목록은 접어서 표시)", "웹: 개발자 콘솔로 테마를 바꾼 뒤 브라우저 탭을 오가면 테마 스토어에서 고른 테마로 돌아가던 문제 수정", "공유 프로젝트: 서버에서도 방장이 5분 넘게 오프라인이면 자동으로 닫힘 — 공개 · 친구 · 내 프로젝트 목록에서 바로 빠지고 입장 · 코드 입장 · 방 정보 보기도 막힘 (supabase-share.sql 다시 실행 필요)"]}, {"v": "v1.0.5", "d": "2026.10.22", "items": ["새 테마 ‘여름 휴양지’ 추가 (프리미엄) — 눈부신 해 · 뭉게구름 · 반짝이는 에메랄드 바다 · 밀려오는 파도 · 하얀 모래사장 · 야자수 · 파라솔 · 갈매기가 있는 밝은 여름 화면 (테마 스토어에서 파도 · 갈매기 움직임 끄기 가능)", "여름 휴양지 테마 이스터에그 — 빈 배경을 누르면 물방울이 튀고, 빠르게 일곱 번 누르면 큰 파도가 지나간 뒤 수박 깨기", "새 테마 ‘아날로그 호러’ 추가 (기간 한정 · 공포 테마와 같은 매년 9월 1일 ~ 11월 30일 무료, 그 밖에는 프리미엄) — 낡은 비디오테이프처럼 화질을 떨어뜨린 화면: 주사선 · 필름 노이즈 · 번지는 색 · 트래킹 띠 · 화면 구석의 재생 표시 · 페이지를 넘길 때 찢어지는 화면 · 가끔 끼어드는 경고 방송 (적용 전 경고 표시, 노이즈 · 화면 왜곡 끄기 가능)", "아날로그 호러 테마 이스터에그 — 빈 배경을 누르면 그 자리에 잡음, 빠르게 일곱 번 누르면 신호가 끊기고 화면 조정 화면 표시", "PC 프로그램: F11로 전체화면 켜기 · 끄기", "도형의 색상 · 채우기 기본 색을 노랑 · 빨강 · 파랑 · 초록 · 투명으로 변경 — 선 색상에도 투명(선 없음) 추가", "선택 도구로 도형을 골랐을 때도 선 굵기(테두리) 옵션 표시, 선택 도구 옵션바의 레이어 고르기는 제거", "PC 옵션바: 텍스트의 자간 · 줄간격 입력칸을 작게 줄여 위아래로 묶음 (옵션바 길이 단축)", "작은 노트북에서 헤더 오른쪽이 잘리던 문제 수정 — 헤더가 잘리기 시작하면 ‘PDF 전체에서 찾기’ 칸을 먼저 숨김 (자리가 생기면 다시 표시)", "PC: 헤더 · 탭바 접기 / 펼치기 추가 — 탭바 오른쪽 끝 버튼 또는 Ctrl+Shift+H로 접고, 맨 위 가운데 손잡이로 펼침", "‘빈 문서로 시작’에서 가로로 만들기 · 세로로 만들기 · 커스텀(가로 · 세로 mm 직접 입력) 중 선택 (새 탭 · 새 문서 버튼도 같음, 마지막 선택 기억)", "그룹화 추가 — Ctrl · Shift로 여러 개체를 고른 뒤 우클릭 › 그룹화(Ctrl+G) · 그룹화 해제(Ctrl+Shift+G), 묶인 개체는 하나만 눌러도 함께 선택 · 이동 · 크기 조절", "공유 프로젝트: 방장이 오프라인이면 5분 뒤 자동으로 닫힘 — 참여자에게 바로 알리고 남은 시간 표시, 방장이 돌아오면 그대로 계속", "파일을 열면 기본으로 페이지 맞춤(한 쪽 전체가 화면에 보이게) 적용", "소개 페이지의 기능 블록에 마우스를 올리면 살짝 노래지며 위로 떠오르는 효과 추가", "업데이트 내역 v1.0.1 항목의 특정 제품 이름 언급 삭제"]}, {"v": "v1.0.4", "d": "2026.10.19", "items": ["토스페이 입점 심사 보완: 이용권은 결제하면 이용 키 없이 바로 내 계정에 적용 — 상품 상세 · 결제 창 · 소개 페이지에 제공 방식을 명시하고, 이용 키는 판매하지 않는 무료 키로 분리", "모든 이용권은 결제일로부터 1년 안에 제공이 끝나도록 변경 — 이어 붙여서 끝나는 날이 결제일 + 1년을 넘으면 결제를 막음 (1년 이용권은 지금 기간이 끝난 뒤 결제)", "환불 규정 개정 — 결제일로부터 7일 이내 전액, 그 뒤에는 사용하지 않은 남은 기간만큼 일할 계산해 부분 환불 (1개월 · 1년 이용권 공통, 위약금 없음), 계산식 · 예시 명시", "계정 창에 ‘환불 요청’ 버튼 추가 — 아이디 · 결제 이메일 · 이용 기간을 채운 환불 요청 메일 작성", "회원가입을 이메일 인증번호 없이 바로 가입 · 로그인되도록 변경 (대학생 인증은 학교 메일 인증번호로 따로)", "계정 창이 처음에 학생 인증 탭으로 열려 일반 이메일로는 가입이 막힌 것처럼 보이던 문제 수정 — 처음에는 로그인 탭, 구매 버튼으로 들어오면 회원가입 탭으로 열기", "이메일로도 로그인 가능 · 예전에 인증번호를 입력하지 못해 로그인이 안 되던 계정도 비밀번호로 로그인", "소개 페이지 요금 안내에 구매 방법(구매 버튼 → 회원가입 → 토스페이먼츠 결제 → 바로 적용) 추가, 구매 버튼을 누르면 그 이용권을 골라 둔 채로 계정 창 열기", "결제 서버가 잠들어 있으면 가입 · 로그인 중 ‘서버를 깨우는 중’ 안내, 계정 창을 열 때 미리 깨우기", "결제 창을 넓혀 토스페이먼츠 결제창이 좌우로 잘리던 문제 수정"]}, {"v": "v1.0.3", "d": "2026.10.19", "items": ["PC 프로그램: 앱 아이콘을 모서리가 둥근 정사각형으로 변경", "PC 프로그램: 저장하지 않은 상태에서 X를 누르면 아무 알림 없이 창이 닫히지 않던 문제 수정 — ‘저장하지 않고 닫을까요?’ 확인 창 표시", "‘PNG 내보내기’를 ‘이미지로 내보내기’로 변경 — PNG · JPG · JPEG · WEBP 중 형식을 고르고 현재 쪽 또는 전체 페이지(ZIP)로 내보내기", "프리미엄 결제를 구독(자동결제)에서 이용권으로 다시 전환 — 1개월 이용권 1,200원 · 1년 이용권 10,500원, 한 번만 결제되고 남은 기간이 있으면 그 뒤에 이어서 연장", "프리미엄 이용 기간이 3일 이내로 남으면 계속 결제할지 알림 — 알림 창 · 오른쪽 아래 작은 창(PC 프로그램은 운영체제 알림도)에서 바로 이용권 연장", "공유작업 프로젝트 관리에 방 설명 입력 추가 (500자까지, 방 정보 창에 표시)", "우클릭 메뉴에 앞으로 보내기 · 뒤로 보내기 · 맨 앞으로 보내기 · 맨 뒤로 보내기 추가 — 개체 순서를 레이어에 자동 반영 (수동 레이어는 같은 레이어 안에서 이동)", "음성 도구에 드롭다운 버튼(▾) 추가 — 버튼은 고른 방식(음성 녹음 · MP3 파일 넣기)을 바로 실행, ▾에서 방식 전환 (V는 바로 녹음)", "도형 · 텍스트를 만든 뒤 개체 밖을 누르면 선택 도구로 전환 — 텍스트가 선택 도구로 바뀐 뒤 바깥을 한 번 더 누르면 텍스트 도구로 돌아가던 문제 수정", "발표 버튼에 드롭다운 추가 — 현재 페이지부터(기본) · 첫 페이지부터 중에서 시작 위치 선택", "v1.0.1 · v1.0.2 업데이트 내역의 말투를 이전 내역과 같게 정리"]}, {"v": "v1.0.2", "d": "2026.10.19", "items": ["헤더의 설정 버튼과 전체화면 버튼 자리를 바꿔 전체화면 버튼이 맨 오른쪽에 오게 함 (튜토리얼도 반영)", "PC 프로그램: PDF · MPDF 파일 아이콘을 새 모양으로 변경 — 큰 아이콘은 금색 라벨(PDF · MPDF), 작은 아이콘은 고양이 아이콘(MPDF는 M 배지)", "화면 맞춤 상태에서 좌우 패널을 끌어 좁힐 때 캔버스가 덜덜 떨리던 문제 수정 — 끄는 동안에는 그대로 두고, 멈추거나 놓으면 한 번에 맞춤", "안내 문구 · 소개 페이지의 글자가 끌어도 선택되지 않게 바꿈 (입력칸 · PDF 글자 복사 · 노트 · 채팅 · 메일은 그대로 선택 가능)", "공유 프로젝트 관리에서 공개 여부 · 고유 코드로 입장 · 장르 · 입장 기본 권한을 눌러도 화면에 바로 보이지 않던 문제 수정", "앱 아이콘을 원래 고양이 아이콘으로 되돌림 (휴대폰 홈 화면 · PC 프로그램)", "PC 프로그램: PDF · MPDF 파일에 Meow-PDF 파일 아이콘 적용, 파일을 두 번 누르거나 앱 아이콘에 끌어 놓으면 Meow-PDF에서 열림", "PC 프로그램: Meow-PDF가 PDF 기본 연결 프로그램이 아니면 오른쪽 아래 ‘기본 연결 프로그램으로 설정해보세요!’ 창으로 안내, 설정하기를 누르면 설정 화면 열기 (설정 › 버전 정보에서도 변경 가능)"]}, {"v": "v1.0.1", "d": "2026.10.18", "items": ["스마트 안내선 추가 — 개체를 옮기거나 크기를 바꿀 때 다른 개체 · 페이지의 양 끝과 가운데가 맞으면 빨간 점선으로 표시하고 딱 맞춤 (Alt를 누르면 끄기)", "옵션바의 입력칸을 누르면 내용이 모두 선택되어 지우지 않고 바로 고쳐 쓰기 가능 — 입력하는 동안 숫자가 최솟값으로 바뀌던 문제도 수정", "PC 프로그램 출시 — 소개 페이지에서 Windows · macOS · Linux용 Meow-PDF를 내려받아 설치 가능 (실행하면 소개 화면 없이 바로 편집 화면 · 인터넷이 없어도 실행)", "PC 프로그램: 새 버전이 나오면 알림(버전마다 한 번)과 오른쪽 아래 작은 창으로 안내, 자세히 보기에서 바뀐 내용을 본 뒤 업데이트 버튼으로 바로 업데이트", "PC 프로그램: 설정 › 버전 정보에 업데이트 버튼(최신 버전이면 ‘최신 버전이에요’)과 meow-pdf.com 가기 버튼", "앱 아이콘을 금색 테두리의 고양이 아이콘으로 고정 — 휴대폰 홈 화면 · PC 프로그램에서 같은 아이콘으로 표시"]}, {"v": "v0.11.8", "d": "2026.10.18", "items": ["전체 페이지 관리에서 페이지를 돌리면 글자 · 이미지 · 도형 · 표 등 페이지의 내용도 모두 함께 통째로 회전", "개체 회전 지원 — 돌린 개체도 선택 · 이동 · 크기 조절 · 글자 수정이 개체 방향 그대로 동작하고, PDF 저장 · 인쇄에도 반영", "파일 병합에 PNG 추가 — PNG+PNG · PNG+PDF를 원하는 순서로 한 문서로 병합 (PNG는 한 장이 한 페이지)", "페이지 패널 썸네일 메뉴(⋯)의 버튼이 눌리지 않던 문제 수정 — 보이지 않는 덮개가 클릭을 가로채던 것을 해결", "페이지 패널 썸네일 메뉴에 ‘페이지 복제’ 추가 (그린 것 · 메모 · 레이어까지 그대로 복사해 바로 뒤에), 버튼을 더 크고 잘 보이게, 마우스를 올리면 커지며 강조", "자동 레이어 · 수동 레이어에 복제 추가 — 자동은 줄의 복제 버튼, 수동은 복제 버튼과 더보기 › 레이어 복제", "개체 선택 방식 추가 (설정 › 화면 · 레이아웃) — 바운딩 박스(기본)와 기즈모(PC) 중에서 고르고, 모바일은 바운딩 박스로 고정", "바운딩 박스 모드: 모서리 · 변의 흰 점을 끌어 크기 조절, 위쪽 손잡이로 회전(Shift: 15° 단위), 오른쪽 위는 삭제 — 이미지 · 글자 · 묶음은 모서리를 끌면 비율 유지(Shift: 자유롭게), 펜 선도 통째로 회전", "PC 기즈모 모드: 유니티식 변형 도구 — 화면 왼쪽 위의 도구 막대(끌어서 이동 · 접기 가능)에서 화면 이동(Q) · 이동(W) · 회전(E) · 크기 조절(R) · 사각형 변형(T) · 통합 변형(Y)", "기즈모 모드에서 개체(이미지 · 도형 · 글자 · 선 등)를 선택하면 고른 도구에 맞춰 축 화살표(빨강 · 초록) · 평면 이동(파랑) · 회전 고리 · 크기 큐브 · 모서리 점이 나타나고, 마우스를 올린 축은 노랗게 강조 · 끄는 동안 각도와 크기를 표시", "옵션바에 ‘기울기’ 추가 — 도형 · 이미지 · 글자 · 표의 회전 각도를 숫자로 입력하거나 글자 위에서 좌우로 끌어 조절 (0–360°)", "기즈모 모드 조작 — Shift: 한 방향 고정 · 비율 · 15°, Ctrl: 회전 스냅, 마우스 가운데 버튼 끌기: 화면 이동", "도구 단축키 변경: 강조 2 · 그리기 3 · 직선 4 · 지우개 5 · 모자이크 6 (Q · W · E · R · T · Y는 기즈모 모드의 변형 도구)", "채운 별 도형의 안쪽을 눌러도 선택되지 않던 문제 수정", "선택 도구로 개체를 옮길 때 Shift를 누르면 가로 · 세로 한 방향으로만 이동"]}, {"v": "v0.11.7", "d": "2026.10.18", "items": ["모바일 가로 화면: 시작 화면의 4개 버튼(파일 열기 · 빈 문서로 시작 · 파일 병합 · 파일 압축)을 더 작게 줄여 한 줄로 가운데에 가지런히 배열 — 비어 있는 페이지 패널을 숨겨 화면 정가운데에 표시", "새 테마 ‘동화’ 추가 (프리미엄) — 그림책 속 포근한 마을, 무지개 · 웃는 해 · 몽실몽실 구름 · 꽃 언덕 · 말랑한 친구들이 있는 만화 같은 화면 (테마 스토어에서 구름 · 친구들 움직임 끄기 가능)", "동화 테마 이스터에그 — 빈 배경을 누르면 하트 · 꽃 · 별이 퐁퐁, 빠르게 일곱 번 누르면 숨은 장면", "모바일: 하단 + 플로팅 네비게이션 버튼을 더 잘 보이게 — 접혀 있을 때도 보조색 · 밝은 테두리 · 그림자로 표시, 펼친 버튼의 글자도 더 선명하게", "모바일: + 플로팅 네비게이션 버튼의 자리를 세로 화면 · 가로 화면에서 따로 기억 — 세로는 아래 가운데, 가로는 오른쪽 아래가 처음 자리이고, 옮겨 둔 자리는 방향마다 따로 유지", "버튼을 누를 때 버튼 글자가 선택(파란 강조)되거나 포커스 테두리가 생기던 문제 수정 — 키보드로 이동할 때만 테두리 표시", "음성 도구를 드롭다운으로 변경 — 음성 녹음 / MP3 파일 넣기(신규) 중에서 선택, MP3 파일(최대 30MB)을 골라 녹음처럼 페이지에 넣고 재생 · 이름 바꾸기 · MP3 내보내기 가능 (V 단축키는 바로 녹음)", "PC: 테마 스토어 오른쪽 아래에 시즌 테마(기간 한정) 알림을 작은 팝업으로 표시 — 남은 기간 · 다음 무료 기간과 ‘기간 한정 테마 보기’ 버튼, 닫으면 이번 접속 동안 숨김", "공유작업 패널 아래쪽 ‘지금 탭 공유하기’ 안내를 깔끔한 카드로 바꾸고 누르면 프로젝트 관리 창이 열리도록 개선", "인쇄한 뒤 일부 테마 화면 꾸밈이 사라지던 문제 수정", "영어 · 일본어 · 중국어 화면에서 번역이 빠져 있던 문구 채움 (지금까지의 기능 · 업데이트 내역 포함)"]}, {"v": "v0.11.6", "d": "2026.10.18", "items": ["모바일: 발표 중 다음 페이지로 넘길 때 화면이 검게 변하던 문제 수정 — 발표 페이지로 바로 전환하고 짧게 페이드", "모바일: 발표 중 화면 편집 막기 — 밀어서 넘길 때 개체가 옮겨지던 문제 해결, 발표 도구 막대에는 이전 · 다음 · 나가기만 표시 (링크는 눌러서 열 수 있음)", "모바일: 발표 중 좌우로 밀거나 화면 왼쪽 / 오른쪽을 짧게 눌러 이전 · 다음 페이지로 이동", "모바일: 발표를 마치고 돌아오면 하단 플로팅 네비게이션 버튼이 위쪽으로 옮겨져 있던 문제 수정 — 발표 중 회전 · 전체화면 변화에는 자리를 바꾸지 않고, 끝나면 처음 자리로 복귀", "구글 애드센스 코드 추가 — 소개 페이지 · 사업자 정보 페이지의 head에 넣음, 편집기는 데스크톱에서 설정 · 계정 · 테마 스토어 창이 열렸을 때만 창 좌우에 세로 광고 표시(프리미엄 · 모바일 · 발표 중에는 표시 안 함), 프리미엄 안내 · 결제 창 · 소개 페이지 요금 안내에 ‘광고 제거’ 문구 추가, 오프라인용 서비스 워커는 광고 스크립트 · 요청을 저장하지 않도록 제외"]}, {"v": "v0.11.5", "d": "2026.10.18", "items": ["설정 › 화면 · 레이아웃에 ‘테마 배경 효과’ 추가 — 프리미엄 테마의 배경 클릭 효과 · 이스터에그를 모두 켜기 / 클릭 효과만 / 모두 끄기 중 선택", "테마 이스터에그 상단 문구를 ‘형광등 소리만 들린다.’ 같은 짧은 평서체로 바꾸고 이모티콘 줄임", "공유작업 채팅방에서 신고(메시지 · 참여자)하면 채팅 기록도 함께 전송 — 메시지 신고는 그 메시지 앞 20개 · 뒤 10개, 그 밖에는 최근 30개, 고객 문의 관리 › 공유작업 신고에서 신고 대상의 메시지를 강조해 표시", "모바일: 노치(카메라) 영역을 검은색으로 채움, 상태 표시줄 색도 검은색으로 변경", "모바일: 휴대폰을 가로로 돌리면 노치가 있는 쪽(왼쪽 / 오른쪽)을 자동으로 비우고 위쪽 여백은 없앰", "모바일: 하단 플로팅 네비게이션 버튼의 처음 위치를 더 아래로 이동", "모바일: 발표를 누르면 자동으로 전체화면 · 여백 없이 화면 가득 표시, 가로 모양 페이지는 자동으로 가로 화면으로 전환(지원하는 브라우저)", "발표 모드 배경을 테마와 상관없이 항상 검은색으로 고정, 테마 장식 숨김", "모바일 가로 화면 발표에서 도구 막대(presbar)가 화면 밖으로 사라지던 문제 수정 — 화면을 돌리면 자동으로 화면 안으로 이동, 모바일에서는 화면 폭에 맞춰 줄바꿈", "발표 도구 막대는 펼쳤을 때 버튼이 가려지는 위치(화면 밖 · 노치 · 홈 바)로는 옮길 수 없도록 제한, 접은 상태에서 가장자리로 옮긴 뒤 펼쳐도 안쪽으로 자동 이동"]}, {"v": "v0.11.4", "d": "2026.10.18", "items": ["도형 · 텍스트 · 링크를 만든 뒤 자동으로 바뀐 선택 도구에서 개체 밖(빈 곳 · PDF 글자 · 페이지 바깥)을 누르면 원래 도구로 복귀 — 도형 · 링크는 누른 채 끌면 바로 새로 그려짐", "도형에 ‘둥근 사각형’ 추가 — 옵션바의 ‘모서리’(0~100%)로 둥근 정도 조절, 그린 뒤에도 선택해서 수정 가능", "공유작업 ‘모두 공개’ 완성 — 공개 프로젝트 목록에 올라가고 프리미엄 회원은 누구나(방장의 친구는 프리미엄이 아니어도) 참여 가능", "공유작업 최대 인원 10명 — 가득 차면 목록 · 방 정보 창에 ‘가득 참’ 표시", "프로젝트 관리에 입장 비밀번호(사용 / 사용 안 함 · 변경) · 장르(교육 · 개발 · 그림 · 디자인 · 공부 · 업무 · 기타) · 입장 기본 권한(관전자 / 편집 허용) 설정 추가", "참여자가 나가기 · 공유 탭 닫기 · 창 닫기로 나가면 프로젝트 관리의 참여자 목록에서 바로 삭제, 3분 넘게 신호가 없는 참여자도 자동 정리", "공유작업 패널 상단 탭 바로 친구 프로젝트 ↔ 공개 프로젝트 이동, 공개 프로젝트 검색(이름 · 장르 · 방장) · 정렬(인원순 / 최신순) · 장르 필터 추가", "친구가 모두 공개로 진행하는 프로젝트는 친구 프로젝트 목록에는 안 보이고 친구 창의 ‘함께 작업’ 버튼으로 표시", "친구 창의 ‘함께 작업’ · 공유작업 패널의 ‘보기’(기존 ‘참여’)를 누르면 방 정보 창 표시 — 방 이름 · 장르 · 방장 · 인원 · 입장 권한 · 참여자 목록과 참여하기 버튼", "공개 프로젝트 신고 버튼 추가(불건전 · 욕설 · 명예훼손 · 범죄 · 기타 + 자세한 내용), 공유작업 채팅 메시지 신고 버튼 추가", "공유작업 채팅 · 접속자 사진을 누르면 프로필 카드 표시 — 친구 추가 버튼(이미 친구면 ‘친구됨’, 요청 중이면 ‘요청됨’)과 신고 버튼", "신고한 방의 이름 · 방장 · 방 정보가 개발자 계정의 ‘고객 문의 관리 › 공유작업 신고’로 전송, 처리 시 공유작업 이용 제한(1개월 · 3개월 · 1년 · 영구) · 진행 중인 방 종료 · 제한 해제 가능", "모바일: 메뉴 아래쪽 목록(새 문서 ~ 개발자 콘솔)이 잘려 보이지 않던 문제 수정 — 메뉴 전체를 위아래로 스크롤 가능"]}, {"v": "v0.11.3", "d": "2026.10.18", "items": ["글자 줄간격 옵션 추가 — 글자 도구 · 글자 편집 중 · 선택한 글자 개체의 옵션바에 ‘줄간격’(80~300%) 추가, 자간과 함께 여러 줄 글자 모양 조절 가능, Word(DOCX) 내보내기에도 반영", "도형 바탕이 가끔 투명으로 돌아가던 문제 해결 — 도형 · 펜 · 글자 등 도구 설정(색 · 바탕 · 굵기 · 불투명도)을 브라우저에 기억해 새로고침 후에도 유지, 선택한 도형의 바탕 · 색 · 굵기 변경이 다음에 그릴 도형에도 이어지도록 개선", "여러 개체 함께 옮기기 · 크기 조절 추가 — Shift · Ctrl로 여러 개체를 고른 뒤 하나를 끌면 모두 함께 이동, 묶음 오른쪽 아래 손잡이로 한꺼번에 크기 조절 (Shift를 누르면 비율 자유)", "글자 입력 중 다른 곳을 누르면 입력 상태가 바로 끝나도록 개선 (글자 도구에서도 새 글상자 없이 입력만 종료)", "디지털화(이미지 글자 인식) 정확도 대폭 향상 — 표 칸막이 짧은 선까지 찾아 글자와 구분, 칸을 넘지 않게 분리 · 글자를 실제로 그려 원본 잉크에 크기 · 자간 · 위치를 맞추고 번짐까지 보정 · 덮개는 글자 잉크만 감싸고 표 선 쪽 여백을 없애 파란 표 선을 가리지 않음 · 넓게 벌려 쓴 이름표(세 금 계 산 서)는 한 개체 + 넓은 자간으로, 위아래 이름표(상 호 / (법인명), 공 / 급 / 자)는 줄간격을 가진 한 개체로 병합 · 자신 없는 칸과 엔진이 놓친 숫자 칸은 그 부분만 다시 인식 · 문서 안 글자 크기 · 글자색 통일, 제목급 굵은 글자 인식", "선택 도구로 빈 곳을 끌어 영역을 지정하면 영역에 닿은 개체(잠금 · 숨김 제외)를 모두 선택하도록 개선 — 끄는 동안 잡힐 개체 미리 표시, 여러 개면 함께 옮기기 · 크기 조절 가능", "영역 도구로 개체를 고르면(닿은 개체 선택) 선택 도구로 자동 전환", "‘핑크세상’ 테마 무료로 전환", "프리미엄 테마 이스터에그 추가 — 문서 바깥 빈 배경(시작 화면 포함)을 누르면 테마마다 다른 반응(물방울 · 반짝이 · 점수 · 새싹 · 도토리 · 반딧불 · 별 · 탄막 등), 빠르게 연달아 누르면 테마마다 숨은 장면 등장", "새 테마 ‘동방’ 추가 — 홍백 무녀의 신사, 음양옥 · 부적 · 돌아가는 마법진 · 소용돌이와 고리 탄막 · 흩날리는 벚꽃 · 도리이가 있는 환상의 밤 (테마 스토어에서 탄막 · 벚꽃 움직임 끄기 가능)"]}, {"v": "v0.11.2", "d": "2026.10.17", "items": ["오프라인 작업 지원 — 한 번 연 편집기와 PDF · 압축 라이브러리를 브라우저에 저장해 두어 인터넷이 끊겨도 열기 · 편집 · 저장 가능, 헤더에 오프라인 표시, 앱처럼 설치 가능(PWA)", "PC: 글자 밖에서 눌러 끌면 처음 누른 점과 지금 점을 대각으로 하는 사각형에 닿은 글자만 선택 (엉뚱한 글자까지 함께 선택되던 문제 해결) — Ctrl+C · ‘선택한 글자 복사’로 복사", "PC: 페이지 패널의 페이지 옵션(방사형) 버튼에 마우스를 올리면 강조 효과", "친구 창 · 공유작업 패널에 새로고침 버튼 추가", "자동 레이어에도 자물쇠 추가 — 잠근 개체는 선택 · 이동 · 지우기 불가", "PC: 글상자 · PDF 글자를 한 번 클릭하면 선택만(입력 불가, 복사 가능), 두 번 클릭하면 입력 — 선택한 개체는 Ctrl+C / Ctrl+V로 복사 · 붙여넣기 (글상자의 글자는 일반 글자로도 복사)", "자간을 100%까지 늘릴 수 있도록 확대", "모바일: 공유(프로젝트 관리) · 프로필 버튼을 헤더에서 메뉴로 옮기고, 전체화면 버튼을 헤더로, 더보기 버튼을 점 9개 아이콘으로 변경", "모바일: 오른쪽 작업 패널(노트 · 멀티작업 · 공유작업)을 오른쪽 가장자리 손잡이나 메뉴로 열고 닫을 수 있도록 추가", "모바일: 하단 플로팅 네비게이션 바를 원형 버튼으로 바꾸고 누르면 부채꼴로 펼쳐지도록 개선 — 펼쳤을 때 모든 버튼이 화면 안에 보이는 범위까지만 옮길 수 있고, 편집기에 들어올 때마다 처음 위치로", "모바일: 플로팅 버튼이 계정 창 등 다른 창 위로 올라오던 문제 수정", "모바일: 하단 페이지 패널 가장자리를 끌어 크기 조절 (가로 화면은 오른쪽 가장자리)", "모바일: 친구 · 메일 창을 열 때 아이디 입력칸에 바로 포커스되어 자판이 뜨던 문제 수정", "모바일: 계정 창이 화면 밖으로 넘치지 않도록 크기 조절, 시작 화면 버튼 아래 설명이 화면 밖으로 나가던 문제 수정", "모바일: 전체화면에서 메뉴가 스크롤되지 않던 문제 수정", "모바일: 오른쪽 작업 패널 안을 눌러도 닫히거나 화면이 어두워지던 문제, 메뉴 아래쪽이 잘리고 스크롤되지 않던 문제 수정", "소개 페이지 개편 — ‘온라인 · 오프라인 어디서나 쓰는 종합 문서 편집기’, 새 화면 이미지(함께 편집 · 휴대폰), ‘어디서나’ 섹션, 기능 12가지, 요금 안내 갱신, 휴대폰에서 헤더 글자가 밖으로 넘치던 문제 수정, PC에서도 항상 어두운 화면으로 고정, 첫 화면 문구를 짧게 정리 (노란 문구: 온라인 • 오프라인 종합 문서 편집기)"]}, {"v": "v0.11.1", "d": "2026.10.17", "items": ["공유작업 추가 (프리미엄) — 헤더의 ‘프로젝트 관리’ 버튼으로 지금 탭을 공유 프로젝트로 만들고 고유 코드 · 공유할 이름 · 공개 여부(모두 공개 / 친구 공개 / 비공개) · 고유 코드로 입장(허용 / 허용 안 함)을 설정", "프로젝트 관리 창에서 참여자 권한(관전자 / 편집 허용) 변경과 추방, 공유 종료", "여러 사람이 같은 문서를 동시에 편집 — 개체 단위로 실시간 반영되고, 같은 개체를 동시에 고치면 마지막 변경이 남음. 실행 취소는 내 변경만 되돌림", "참여자의 마우스 포인터와 작업 중인 페이지를 프로필 사진으로 표시 (페이지 오른쪽 위 · 페이지 패널 썸네일)", "공유작업 패널: 고유 코드로 참여하기, 친구 프로젝트(친구 공개로 진행 중인 프로젝트) 목록, 내 프로젝트 다시 열기, 공개 프로젝트(준비 중)", "공유작업 중에는 공유작업 패널에 참여자 채팅방 표시", "친구 창의 내 친구 목록에서 친구 공개 프로젝트를 진행 중인 친구 옆에 ‘함께 작업’ 버튼 표시", "참여자 화면에서는 저장 · 프로젝트 관리 버튼을 숨기고 ‘다른 이름으로 저장’만 표시, 관전자는 보기만 가능", "공유 프로젝트 접속 링크(…/edit?join=고유코드) — 프로젝트 관리 창 · 공유작업 패널에서 복사, 받은 사람이 열고 로그인하면 바로 참여 (고유 코드로 입장을 허용했을 때)"]}, {"v": "v0.10.4", "d": "2026.10.17", "items": ["표 내용 편집: 행 · 열 숫자가 입력칸 위쪽으로 치우쳐 보이던 문제 수정", "표 내용 편집: 칸 글자의 왼쪽 · 가운데 · 오른쪽 정렬과 글자 크기 설정 — 선택한 칸 · 행 · 열 · 표 전체 단위로 적용 (PC는 Shift+클릭으로 여러 칸 선택)", "알림을 무료 플랜에서도 사용할 수 있도록 변경 (친구 · 메일은 계속 프리미엄)", "무료 플랜에서 헤더의 개발자 콘솔 버튼을 다른 프리미엄 버튼처럼 흐리게 표시", "모바일 옵션바 재디자인 — 설정 항목을 아이콘 탭(예: 모양 · 불투명도 · 선 굵기 · 색 · 바탕)으로 나열하고, 누른 항목의 옵션만 아래로 펼쳐 화면을 덜 가리도록 개선", "선택 도구를 눌러도 옵션바가 닫히지 않도록 변경", "글꼴 절반 정도(블랙한산스 · 감자꽃 · 독도 · Pacifico 등 19종)를 프리미엄 전용으로 — 글꼴 목록에 ‘프리미엄 글꼴’ 구역으로 표시, 이미 문서에 쓰인 글꼴은 그대로 보임", "업데이트 내역의 버전 묶음(0.3.x · 0.10.x 등) 오른쪽에 그 묶음의 가장 큰 변화를 짧은 부제목으로 표시"]}, {"v": "v0.10.3", "d": "2026.10.17", "items": ["한 페이지씩 보기에서 페이지 바깥을 휠로 굴리면 스크롤바가 없어도 화면이 위아래로 움직이도록 개선 — 설정 › 페이지 보기에서 ‘화면 위아래로 이동 / 페이지 넘기기’ 선택", "펜 · 태블릿 · 터치로 그리다가 길게 누를 때 컨텍스트 메뉴가 뜨지 않도록 수정 (마우스 우클릭 메뉴는 그대로)", "표 삽입 창과 표 내용 편집 창을 하나로 통합, 행 · 열 입력 높이를 낮춤", "표 내용 편집에서 배경색 컬러 피커를 누르면 바로 닫히던 문제 수정", "모바일 플로팅 바: 화면 왼쪽에 두면 오른쪽으로, 오른쪽에 두면 왼쪽으로 펼쳐지도록 개선", "여러 파일을 끌어다 놓거나 한 번에 골라 열면 각각 새 탭으로 열기 (PDF가 아닌 형식이 섞여도)", "여러 PDF를 새 탭으로 열었을 때 저장을 누르면 원래 파일에 바로 덮어쓰도록 수정 (다른 이름으로 저장으로 넘어가던 문제)", "친구 버튼을 멀티작업 패널에서 공유작업 패널로 옮김", "PDF에 있는 글자를 눌러 편집할 때 PDF 안의 실제 글자 정보(크기 · 굵기 · 글꼴 · 글자 간격)를 써서 띄어쓰기가 원본 그대로 유지되도록 개선, 덮개는 실제 글자 자리만 덮음", "글자 편집 중 오른쪽 위 삭제 버튼 추가 (PDF 원래 글자도 지울 수 있음)", "PDF 글자 편집 중 일부 글자색을 바꾸면 나머지 글자가 가려지던 문제 수정"]}, {"v": "v0.10.2", "d": "2026.10.17", "items": ["소개 페이지 기능 블록이 언어(일본어 · 중국어 등)에 따라 옆으로 늘어나던 문제 수정, 휴대폰 폭에서 사업자 주소가 화면 밖으로 넘치던 문제 수정", "선택 도구 옵션바: 아무 개체도 선택하지 않았을 때만 닫히고, 개체를 선택하면 원래 자리에 다시 보이도록 수정", "우측 패널 탭(레이어 · 노트 · 멀티작업 · 공유작업)을 기본으로 아이콘으로 표시하고 가로 공간에 꽉 맞게 배치 — 설정 › 패널 탭 표시 또는 패널 설정(톱니바퀴)에서 텍스트로 바꿀 수 있음", "계정 창의 프로필 · 비밀번호 · 이용 키를 정사각형 블록 버튼으로 가로 정렬, 누르면 각각의 창이 열림", "표 삽입 · 편집 창 디자인 개선 — 행 · 열 +/− 버튼, ‘첫 줄을 제목으로’ 스위치, 표 미리보기, 제목 줄 강조, 휴대폰 화면에 맞춤", "편집기 전체에서 빠져 있던 영어 · 일본어 · 중국어 번역을 채움", "공포 테마에서 언어를 바꾼 뒤 테마와 언어를 되돌리면 일부 글자가 원래 언어로 돌아오지 않던 문제 수정", "모바일 하단 플로팅 네비게이션 바를 길게 눌러 옮기기가 잘 안 되던 문제 수정 — 손가락 떨림 허용, 화면 어디로 끌어도 따라옴, 바로 끌 수 있는 손잡이(⠿) 추가"]}, {"v": "v0.10.1", "d": "2026.10.17", "items": ["도구 모음 기본 위치를 좌측 정렬로 변경", "선택 도구에서 아무 개체도 선택하지 않았을 때는 옵션바를 닫아 두도록 변경 — 개체를 선택하거나 다른 도구를 고르면 다시 보임 (직접 접어 둔 경우에는 계속 숨김)", "영역 선택 도구의 기본 방식을 ‘닿은 개체 선택’으로 변경", "선택 도구에서 빈 곳을 길게 누른 채 끌면 ‘닿은 개체 선택’ 영역 지정으로 바뀌어 여러 개체를 한 번에 선택", "페이지(캔버스) 바깥을 눌러도 선택이 해제되도록 개선", "소개 페이지 헤더에 언어 설정 추가 — 소개 페이지가 바로 번역되고, 고른 언어가 편집기에도 적용", "친구 기능 추가 (프리미엄) — 헤더의 친구 버튼, 아이디로 친구 추가, 요청 관리(받은 요청 · 보낸 요청), 내 친구 목록(프로필 사진 · 닉네임 · 아이디, 메일 보내기 · 친구 삭제), 친구 요청 받지 않기 설정", "메일 기능 추가 (프리미엄) — 친구에게 제목과 내용으로 메일 보내기, 받은 메일 · 보낸 메일함, 답장 · 삭제", "알림 기능 추가 — 헤더의 종 버튼, 친구 요청 · 수락 · 메일 알림 목록과 바로가기, 종류별 알림 켜기/끄기", "멀티작업 패널 위쪽에 친구 창 버튼 추가", "모바일: 헤더에 알림 버튼, 메뉴에 친구 · 메일함 추가, 메뉴를 자주 쓰는 기능 위주(큰 버튼 4개 + 한 줄 목록)로 다시 디자인", "무료 플랜에서는 친구 · 메일 · 알림과 프리미엄 기능을 PC · 모바일 모두 흐리게 표시 (모바일 메뉴에는 PRO 표시)", "수동 레이어 목록에 삭제 버튼 추가", "새 문구 영어 · 일본어 · 중국어 번역 추가"]}, {"v": "v0.9.5", "d": "2026.10.17", "items": ["디지털화 정확도 향상 — 글자 배경이 실제 글자 자리만 덮어서 주변 선 · 도형 · 그림을 가리지 않고, 붙어 있는 글자도 크기가 다르면 각각 다른 글자 개체로 나눔", "모바일 하단 플로팅 네비게이션 바를 길게 눌러 원하는 위치로 옮길 수 있도록 개선 (위치 기억)", "모바일 노치 · 카메라 홀 여백을 더 넓히고, 전체화면일 때만 여백이 생기도록 변경", "우측 패널에 설정(톱니바퀴) 추가 — 레이어 · 노트 · 멀티작업 · 공유작업을 켜고 끄거나 좌우로 나눠 두 개를 나란히 볼 수 있음 (기본: 모두 켜짐 · 나누지 않음)", "공유작업 탭 추가 (준비 중)", "프로필의 비밀번호 변경을 ‘비밀번호 변경’ 버튼으로 여는 별도 창으로 변경", "로그아웃 전에 ‘로그아웃 하시겠습니까?’ 확인 창 표시", "비밀번호 변경 · 회원가입 · 비밀번호 재설정의 비밀번호 칸이 브라우저 자동 완성으로 채워지지 않도록 개선", "인증번호 메일 안내에 Outlook(Hotmail) 정크 메일함 확인 문구 추가", "‘PDF 전체에서 찾기’ 입력칸을 넓혀 안내 글자가 잘리지 않도록 개선", "소개 페이지 요금 블록의 버튼 높이를 모두 같게 맞춤", "서버에 아직 없는 기능을 부를 때 ‘서버에 연결할 수 없습니다’ 대신 다시 배포가 필요하다는 안내를 표시"]}, {"v": "v0.9.4", "d": "2026.10.17", "items": ["도형 · 텍스트를 넣으면 바로 선택 도구로 바뀌고 넣은 개체가 선택된 상태가 되도록 개선", "글자 배경 칠하기: 글 입력 중 일부만 드래그한 뒤 배경색을 고르면 그 부분만 칠해지도록 변경 (docx 내보내기에도 반영)", "상단 탭의 + 버튼을 누르면 파일이 없을 때의 시작 화면이 ‘메인’ 탭으로 열리도록 변경 (메인 탭에서 연 문서는 그 자리에 열림)", "번역 버튼을 도구 모음 · 더보기에서 상단 헤더로 이동", "레이어 보기 기본값: 자동 레이어는 간단히 보기, 수동 레이어는 썸네일 보기 (방식마다 따로 기억)", "페이지 패널 썸네일 크기를 줄이고 좌우 여백을 넓힘", "요금제 카드의 ‘월 875원 꼴’ 문구를 ‘월 875원’으로 바꾸고, 계정 창의 구독 블록 가로폭을 넓힘", "멀티작업 빈 화면 가운데의 ‘멀티작업’ 제목을 단순한 글자로 변경", "모바일: 상단 노치 · 하단 홈 바 영역에 맞춰 위아래를 살짝 띄우고, 화면이 아래로 넘치던 문제 수정", "모바일: 프레젠테이션 · 번역 · 찾기 · 보기/편집 · 북마크를 접고 펼 수 있는 하단 플로팅 네비게이션 바로 이동 (메뉴의 ‘문서’ 항목 삭제)", "홈페이지 요금 안내의 프리미엄 블록을 월간 구독 · 연간 구독으로 나눔", "디지털화의 ‘전체 페이지’를 프리미엄 기능으로 변경하고, 무료 플랜에서 표 버튼이 다른 프리미엄 도구처럼 흐리게 보이도록 수정", "나만의 테마 만들기의 글꼴 미리보기가 모두 같은 글꼴로 보이던 문제 수정 (글꼴마다 실제 모양으로 표시)", "계정 창을 여러 번 열면 버튼 한 번에 요청이 여러 번 나가던 문제 수정 (비밀번호 찾기 인증메일 중복 발송 등)", "인증메일 문구를 ‘대학생 인증 번호’에서 ‘인증번호’로 변경 (비밀번호 찾기 · 회원가입에도 같은 메일 사용)", "프루티거 에어로 테마 강화 — 하늘 · 햇살 · 오로라 스우시 · 초록 언덕 · 떠오르는 물방울, 유리 광택 도구 모음 · 탭 · 버튼 (‘물방울 · 빛 움직임’ 끄기 지원)", "PDF에 원래 있던 글자를 수정할 때 일부만 고른 글자색 · 배경색이 저장되지 않던 문제 수정", "드림코어 테마 강화 — 파스텔 무지개 · 움직이는 체크무늬 바닥 · 떠다니는 문 · 하늘의 눈 · 반짝이 · 하트, 홀로그램 제목 · 버튼 (‘구름 · 반짝임 움직임’ 끄기 지원)"]}, {"v": "v0.9.3", "d": "2026.10.17", "items": ["프리미엄 테마 ‘우주’ 추가 — 달 · 고리 행성 · 푸른 행성 · 반짝이는 별 · 성운 · 유성 (콘솔 set theme 16, ‘별 · 유성 움직임’ 끄기 지원)", "신규 테마 NEW 배지를 가장 최근에 나온 3개 기준으로 변경하고, 테마 스토어의 ‘새로 나온 테마’는 가로로 스크롤해 볼 수 있도록 개선", "결제를 구독으로 전환 — 월간 구독 1,200원/월, 연간 구독 10,500원/년 (결제일마다 자동 결제, 요금제 선택 카드 추가)", "계정 창에 구독 상태(요금제 · 다음 결제일 · 카드)와 ‘구독 해지’ 추가 — 해지하면 다음 결제부터 청구되지 않고 낸 기간은 유지", "정기결제가 실패하면 하루 간격으로 최대 3번 다시 시도하고, 끝내 실패하면 구독이 종료되도록 개선", "상품 상세 · 환불 안내 · 탈퇴 안내 문구를 구독 기준으로 수정하고, 홈페이지 요금 안내도 월간/연간으로 변경", "모바일 안전 영역(카메라 홀 · 노치 · 홈 바)을 비워 두도록 개선하고 하단도 살짝 띄움", "모바일에서 프레젠테이션 · 번역 버튼을 더보기 밖으로 꺼내 도구 모음의 ⋯ 버튼 왼쪽에 배치", "상단 헤더의 북마크 목록 · 주석 버튼 제거", "레이어 패널의 레이어 이름이 너무 왼쪽에 붙어 보이던 문제 수정 (왼쪽 여백 추가)", "PC에서 옵션바를 접거나 펼 때 화면이 덜덜 떨리던 문제 수정 (화면 크기와 맞춤 배율을 한 프레임에 함께 바꾸도록 변경)"]}, {"v": "v0.9.2", "d": "2026.10.17", "items": ["PC에서 옵션바를 위로 접었다 펼 수 있도록 개선 (화면 위쪽 가운데 작은 토글 버튼, 접은 상태는 기억)", "토글 버튼에 마우스가 가까워지면 점점 밝아지도록 개선 (어두운 테마에서도 잘 보이도록 기본 밝기도 올림)", "디지털화를 실행하면 새로 만들어진 글자가 잠깐 반짝이는 효과 추가 (‘동작 줄이기’ 설정을 따름)", "모바일 메뉴에 PDF · MPDF 저장, PNG(현재 쪽 · 전체 ZIP) 내보내기 추가", "모자이크 도구 추가 — 영역을 드래그해 네모 블록으로 가리고, 만든 뒤에도 크기 · 블록 크기를 바꿀 수 있음 (PC 도구 모음 · 모바일은 더보기, 단축키 G)", "모바일에서 표 삽입 · 영역 선택 · 이미지 삽입을 더보기로 옮기고, 더보기를 아이콘 타일 시트로 새로 디자인", "회원 탈퇴 기능 추가 — ‘정말 탈퇴하시겠습니까? 계정 복구는 불가능합니다.’ 안내와 ‘확인했습니다’ 입력으로 진행, 프리미엄 계정은 환불이 되지 않는다는 안내 포함", "도형의 ‘채움 투명도’ 명칭을 ‘불투명도’로 변경", "PC 옵션바의 슬라이드바를 없애고 숫자 입력과 글자 끌기로 조절하도록 바꾸고, 옵션 사이 간격을 넓힘", "프리미엄 테마 ‘안개 숲’ 추가 — 짙은 초록 숲 실루엣과 달빛, 흐르는 흰 안개, 반딧불 (콘솔 `set theme 15`, 움직임은 테마 스토어에서 끌 수 있음)"]}, {"v": "v0.9.1", "d": "2026.10.16", "items": ["레이어 패널 상단 레이어 이름 입력창을 아래 블록과 구분되도록 더 밝게 개선", "좌우 패널에 붙은 작은 토글 버튼으로 열기/닫기 추가, 패널 크기를 크게 줄이면 자동으로 닫히도록 개선 (PC 상단 헤더의 패널 버튼 제거)", "페이지 썸네일 ⋯ 메뉴를 버튼 기준으로 펼쳐지는 방사형 메뉴로 변경", "노트 삭제 버튼을 노트 탭 줄 오른쪽의 빨간 휴지통 아이콘으로 이동", "타자연습 Enter 시작 지원, 플레이 중 나가기 버튼 · Esc 추가, 메뉴에 탭 닫기 버튼 추가", "페이지 패널 정렬 개선 (썸네일 보기는 가운데, 목록 보기는 왼쪽), 불필요한 검색 버튼 제거", "설정의 테마 설명 문구 간소화", "설정 콘솔 명령어 도움말을 묶음별로 접고 펼 수 있도록 정리", "헤더 시간에 마우스를 올리면 년월일 · 요일 · 시분초를 보여주는 작은 창 추가", "캡처 방식 선택 추가 (화면 캡처 기본 / 카메라 캡처), 카메라 캡처는 촬영한 사진을 바로 페이지에 삽입", "카메라 · 음성 녹음 장치 선택 기능 추가 (선택한 장치 기억)", "공포 테마 글자 깨짐 연출을 더 많이, 더 자주 나오도록 강화하고 경고 문구 간소화", "공포 테마에서 다른 테마로 바꿨을 때 깨진 글자가 그대로 남던 문제 수정 (글자 원본 복구)", "영역 도구의 ‘닿은 개체 삭제’를 ‘닿은 개체 선택’으로 변경, 선택한 여러 개체를 Delete로 한 번에 삭제 가능", "백룸 테마 화면 깜빡임을 약하고 드물게 조정, 테마 스토어에서 깜빡임 켜기/끄기 추가", "튜토리얼의 고양이 이모지를 사이트 파비콘 모양 아이콘으로 단순화", "튜토리얼 후반부에 전체화면 사용 추천 단계 추가 (실제 전체화면 버튼을 빛나는 테두리와 말풍선으로 안내)", "업데이트 내역을 개발 일지 형식(추가 · 개선 · 수정)으로 정리"]}, {"v": "v0.8.6", "d": "2026.10.16", "items": ["프리미엄 ‘백룸’ 테마 추가 (노란 벽지 · 형광등 깜빡임 · 필름 노이즈, 콘솔 set theme 14)", "마우스 오른쪽 클릭 컨텍스트 메뉴 추가 (선택한 글자 한국어 번역, 잘라내기 · 복사 · 붙여넣기 · 모두 선택, 이미지 · 표 · 메모 삽입, 프리미엄 음성 삽입)", "영역 도구에 범위에 닿은 개체를 한꺼번에 다루는 방식 추가 (드롭다운 · 옵션바에서 선택)", "형광펜이 모든 개체(PPTX 글자 포함) 위, 맨 앞에 그려지도록 수정", "멀티작업 개선 — 제목 글씨체를 통통하고 둥근 폰트로 고정, 탭 + 버튼은 홈 화면을 새 탭으로 열도록 변경, 편집기의 버튼 줄 제거, 웹페이지 주소줄 접기/펼치기 추가, 안내 문구 닫기 추가", "회원가입 시 이메일 인증번호 확인 필수화 (서버 설정과 무관하게 인증번호 단계 적용)", "로그인 · 서버 연결 · 불러오는 중 화면 중앙 로딩 UI 추가 및 다른 버튼 입력 차단"]}, {"v": "v0.8.5", "d": "2026.10.16", "items": ["첫 방문 시작 튜토리얼 추가 (PC / 모바일 구분, 설정 → 정보에서 다시 보기)", "DOCX 가져오기 전면 개선 (글자 크기 · 서식 · 줄/문단 간격 · 정렬 · 번호/글머리 · 표 · 그림 · 쪽 크기와 여백 반영)", "PNG 열기 시 흰 페이지가 나오던 문제 수정, 문서 없을 때 Ctrl+V로 클립보드 이미지 열기 추가", "모바일 도구 모음 접기/펼치기 추가, 프레젠테이션 버튼 추가, 메모 · 링크 · 디지털화 · 프레젠테이션 · 번역을 더보기 도구로 이동", "계정 · 프리미엄 창(PC) 좌우 분할 레이아웃, 비밀번호 보기/숨기기 버튼 추가, 중복 가입 안내 오류 수정", "페이지 패널 썸네일 크기 확대"]}, {"v": "v0.8.4", "d": "2026.10.16", "items": ["테마 선택 창을 ‘테마 스토어’로 개편 — 넓은 창에서 실제 화면 모양 미리보기 · 분류(전체 · 새로 나온 · 무료 · 프리미엄 · 기간 한정 · 나만의 테마) · 설명 · 적용 버튼으로 한눈에 고를 수 있음", "무료 테마에 키위 다크 추가 (배경 #000000 · 보조색 #407252 · IBM 플렉스 산스)", "공포 테마 추가 — 페이지를 넘길 때 붉은 글자가 잠깐 깜빡이고 화면 글자가 순간 깨져 보이는 연출 (적용 전 경고 문구 표시, 연출 끄기 · ‘동작 줄이기’ 설정 자동 반영)", "공포 테마는 매년 9월 1일 ~ 11월 30일에만 무료인 기간 한정 테마이며, 그 밖의 기간에는 프리미엄으로 전환됨 (남은 기간 · 다음 무료 기간 표시)", "가장 최근에 나온 테마에는 NEW 딱지 표시 (더 새로운 테마가 나오면 자동으로 이전 딱지는 사라짐)", "좌측 도구 모음에서 메모 · 음성 · 캡처 · 인쇄 · 발표 · 번역을 ‘더보기’ 도구 안으로 이동하고, 좌측 도구 버튼을 조금 더 크게 조정", "발표 모드의 나가기 버튼을 빨간색으로, 아이콘을 X 대신 나가기 아이콘으로 변경", "도구 단축키를 키보드 줄 순서로 정리 — QWER: 강조표시 · 그리기 · 직선 · 지우개 / ASDF: 도형 · 텍스트 · 링크 · 표 / ZXCV: 영역 · 이미지 · 메모 · 음성 (나머지 도구는 그 오른쪽에 배치)", "노트에서 마크다운(.md)과 텍스트(.txt) 형식을 고를 수 있고, + 버튼으로 새 노트를 만들 때도 형식을 선택", "마크다운 노트를 윈도우 메모장처럼 서식이 바로 반영된 ‘서식 보기’(기본)와 기존 ‘원문’으로 나눠 볼 수 있음 (‘# ’ · ‘- ’ · ‘1. ’ · ‘[] ’ 입력 시 바로 서식 적용)", "디지털화 정확도 개선 — 표 테두리 · 밑줄 · 도형을 글자로 읽지 않도록 걸러내고, 글자를 칸 · 단어 간격별로 나눠 원본 모양 그대로 수정할 수 있게 하며 글자 크기가 비정상적으로 커지던 문제 수정", "이메일 인증 오류 메시지를 알기 쉬운 말로 변경 (인증번호 만료 · 잘못 입력, 너무 빨리 다시 요청 등)"]}, {"v": "v0.8.3", "d": "2026.10.16", "items": ["프리미엄은 구독이 아닌 ‘1년 이용권’이라는 점을 계정 창 · 상품 상세 · 홈페이지 요금 안내에 명시, 매년 자동결제가 되지 않는다는 점을 강조해 안내 추가", "멀티작업 패널 제목을 아이콘이 들어간 그라데이션 디자인으로 개선", "페이지 패널 썸네일 좌우 여백을 줄여 썸네일이 더 크게 보이도록 개선", "표 / 도형 / 그리기 등 선택한 모든 개체의 오른쪽 위에 삭제 버튼 추가", "표 편집에서 행 · 열 배경색을 바꿀 수 있도록 추가", "전체 페이지 관리 상단 바를 아이콘이 들어간 묶음 구성으로 개선", "커스텀 테마 만들기를 별도 화면으로 분리하고 큰 미리보기 · 색상 견본 · 글꼴 목록 추가, 커스텀 테마 버튼은 세로를 줄이고 가로를 전체 폭에 맞춤", "커스텀 테마 글꼴 39종을 각 글꼴로 미리 볼 수 있도록 추가", "홈페이지 푸터에 사업자 정보 페이지 링크 추가, 사업장 주소(상세) · 전화번호를 사업자 정보 페이지에 게시", "아이디 · 비밀번호 로그인 추가 (회원가입: 닉네임 · 아이디(중복 불가) · 비밀번호 · 이메일 인증번호 확인, 이후 아이디와 비밀번호만으로 로그인)", "로그인 후 비밀번호 변경(현재 비밀번호 확인), 로그인 전 등록된 이메일 인증번호로 비밀번호 재설정 추가", "프로필 사진 변경 · 삭제와 닉네임 수정 추가, 상단 계정 버튼에 프로필 사진 표시", "로그인 · 회원가입 창의 폭을 고정하고 오른쪽 결제 카드가 늘었다 줄지 않도록 개선, 결제 카드 디자인 정리"]}, {"v": "v0.8.2", "d": "2026.10.15", "items": ["프리미엄 기능으로 커스텀 테마를 추가 — 배경색 · 보조색 · 글꼴을 직접 골라 나만의 테마를 만들 수 있고, 글자색과 밝기는 배경색에 맞춰 자동으로 정해짐", "글꼴을 6종에서 39종으로 확대 (고딕 A1 · IBM 플렉스 산스 · 블랙한산스 · 도현 · 주아 · 개구 · 고운바탕 · Roboto · Playfair Display 등) — 사이트와 텍스트 모두에 적용", "디지털화 도구 추가 — PNG 같은 이미지, 스캔 페이지, PDF의 글자를 클릭해서 수정할 수 있는 글자 개체로 바꿔줌 (글자가 있는 PDF는 인식 없이 바로, 이미지는 글자 인식으로 변환하며 원래 글자의 위치 · 크기 · 색 · 배경색을 맞춤)", "디지털화 도구 옆 드롭다운에서 ‘현재 페이지’와 ‘전체 페이지’ 범위를 바꿀 수 있고, 이미지 글자 인식 언어(한국어 · 영어)도 고를 수 있음", "글자 크기를 소수점(0.1 단위)까지 지정할 수 있고, 자간도 0.1% 단위로 조절 가능. 디지털화할 때 크기는 소수점으로, 폭은 자간으로 맞춰서 띄어쓰기가 사라지지 않음", "docx · HWP(HWPX) 내보내기에서 쪽 크기와 가로/세로 방향을 쪽마다 그대로 맞춰 내용이 쪽 밖으로 나가지 않게 개선", "docx ‘글자 편집용’ 내보내기가 이미지 · 도형 · 그림 · 배경색은 쪽 배경으로 그대로 보존하고, 글자는 원래 자리의 글상자로 담아 바로 수정할 수 있게 개선", "레이어 이름은 목록을 더블클릭(더블탭)해도 바꿀 수 있도록 수정 (자동 · 수동 모두)", "멀티작업 버튼을 3×3으로 고정하고, 화면이 작아지면 버튼이 가려지지 않고 함께 작아지도록 개선", "PNG 파일을 열면 빈 흰 페이지로 보이던 문제를 수정", "업데이트 내역의 버전마다 업데이트 날짜를 표시"]}, {"v": "v0.8.1", "items": ["계정 · 프리미엄 창의 닫기 버튼을 오른쪽 위 X 버튼으로 변경", "테마 중 어두운 · 밝은 · 한국 · 일본 · 커피를 제외한 프루티거 에어로 · 핑크세상 · 드림코어 · 레트로게임 · 새싹은 프리미엄 전용 (선택 창에 표시, 프리미엄이 아니면 어두운 테마로 표시)", "개발자 콘솔에 game 명령어 추가 — 바로 타자연습으로 이동", "모바일에서 소개 페이지(index)는 항상 어두운 테마로 고정", "페이지 패널의 썸네일 좌우 여백을 줄이고 가운데 정렬", "상단 개발자 콘솔 버튼 또는 / 키로 여는 빠른 콘솔에 추천 명령어를 아래에 표시 (입력하면 이어지는 명령어와 인자를 추천, ↑↓ 선택 · Tab 채우기 · Enter 실행)", "개발자 계정의 키 발급 내역 보기에 진행 표시줄 추가 (불러오는 동안 진행 표시, 각 키의 남은 기간 막대)", "멀티작업 화면 위에 큰 \"멀티작업\" 제목을 넣고, 파일 버튼은 뷰어로, 빈 문서 버튼은 meow-pdf.com 편집기로 바꿈", "멀티작업 넓게 보기 버튼 추가 (탭 줄을 숨기고 패널을 넓힘)", "전체 페이지 관리에 PDF 회전(왼쪽 · 오른쪽) 추가, 전체 페이지 관리는 이제 무료", "PPTX · HWP · MPDF 열기를 프리미엄에서 제외하고, PNG · DOCX 열기를 추가", "상단 탭의 \"불러오기\" 버튼을 없애고 + 버튼에서 새 탭 · 불러오기를 고르게 변경", "링크 도구 추가: 영역을 드래그해 웹 주소 또는 문서 안 페이지로 연결 (PDF에도 링크로 저장)", "왼쪽 도구 모음에서 모든 도구가 화면에 들어오도록 간격을 자동 조절", "한 페이지씩 보기에서 화면에 맞추면 오른쪽 스크롤바가 생기지 않도록 수정", "노트에 서식 도구 추가 (제목 · 목록 · 굵게 · 기울임 · 취소선 · 링크 · 표 · 서식 지우기), 서식을 쓰면 .md로 저장할지 확인", "도구에 표 삽입 추가 (프리미엄) · 붙여넣기 버튼은 도구에서 제거 (Ctrl+V는 그대로)", "텍스트 일부만 다른 색으로 바꾸기 추가 — 글자를 선택하고 색을 고르면 그 부분만 변경, 다시 수정할 때도 유지", "새 테마 \"미니홈피\" 추가 (프리미엄) · 앞으로 추가되는 테마는 모두 프리미엄, 테마 창에서 무료 / 프리미엄을 나눠 표시", "내보내기에 HWP(HWPX) 추가, Word 이름을 docx로 변경"], "d": "2026.10.15"}, {"v": "v0.7.5", "items": ["커피 테마 추가 (따뜻한 크림색 · 갈색 종이 느낌, 눈이 편한 밝은 테마, 콘솔: set theme 8)", "모바일에서 개체 · 글상자를 선택하거나 영역을 지정하면 오른쪽 위에 삭제 버튼 표시", "타자연습에 난이도 추가 (쉬움 · 보통 · 어려움, 난이도별 최고 점수와 점수 배율)", "타자연습에 아이템 추가 (얼음: 낱말 정지 · 폭탄: 화면 정리 · 느림: 속도 감소 · 두배: 점수 2배 · 금빛 냥: 목숨 +1)", "레트로게임 테마 추가 (픽셀 · 네온 · 스캔라인, 콘솔: set theme 9)", "새싹 테마 추가 (옛날 포털 사이트 느낌의 연두색 · 흰색 디자인, 콘솔: set theme 10)", "멀티작업에서 연 PDF · PPTX · HWP · 빈 문서 · 병합 문서를 'Meow-PDF로 편집하기' 버튼으로 바로 편집기로 가져와 수정 (콘솔: work edit)"], "d": "2026.10.14"}, {"v": "v0.7.4", "items": ["결제 프리미엄과 이용 키 사용자를 구분해서 표시 (상단 버튼 · 계정 창 · 모바일 더보기), 이용 키 사용자도 남은 기간 표시", "프리미엄 남은 이용 기간 표시 — 상단 계정 버튼(예: 프리미엄 | 120일), 계정 창(만료일 · 남은 일수), 모바일 더보기. 만료 7일 전 안내, 30일 이내에는 계정 창에서 바로 연장 가능, 사용 중 기간이 끝나면 자동으로 해제", "모바일에서 파일을 불러올 때 전체화면이 풀리던 문제 개선 (선택이 끝나면 전체화면으로 복귀)", "멀티작업에 타자연습 게임 '타자 비' 추가 (떨어지는 낱말을 입력해 없애기 · 한글 / 영어 / 섞어서 · 최고 점수 저장, 콘솔: work type)", "숨은 재미 요소(이스터에그) 추가 — 직접 찾아보기", "개발자 콘솔에도 숨은 명령어 1개 추가"], "d": "2026.10.14"}, {"v": "v0.7.3", "items": ["한국 · 일본 테마 추가 (태극기 · 일장기 색)", "드림코어 테마 추가 (파스텔 하늘 · 구름 · 별빛 · 필름 입자 분위기, 콘솔: set theme 7)", "테마를 별도 선택 창에서 둥근 정사각형 버튼으로 고름 (테마별 아이콘 포함, 콘솔: set theme 5 / 6 · theme picker)", "발표 모드 레이저에 잔상 추가", "멀티작업의 빈 문서 · 병합을 멀티작업 탭으로 열기", "개발자 콘솔에 화면 맞춤 명령어 추가 (fit · fit page)", "모바일 헤더 크기를 조금 키움", "모바일 더보기 바텀 시트를 아이콘 타일 형태로 정리", "소개 페이지(index)에 지금까지의 개선 사항 반영"], "d": "2026.10.14"}, {"v": "v0.7.2", "items": ["영역 지정 도구에 드롭다운 추가 (사각형 / 자유 선택 전환)", "영역 위에 마우스를 올리면 이동 커서, 가장자리 8개 점으로 늘리기 · 크기 조정 (Shift: 비율 유지)", "설정에서 페이지 이동 연출 켜기 / 끄기 (콘솔: set pageanim off)", "개발자 콘솔 도움말을 다시 표시하고 설명을 보기 쉽게 정리", "레이어를 클릭-드래그해 순서를 바꿀 수 있음 (자동 · 수동 레이어 공통, 터치는 길게 누른 뒤)", "프리미엄 상품 상세 창 추가: 결제 1년 · 이용 키 3개월 · 환불 7일 규정 안내", "옵션바의 굵기 · 크기 · 불투명에 숫자 입력칸 추가, 글자 위에서 좌우로 끌어 조절 (유니티식)", "캡처 시 어두운 뷰어 배경을 빼고 페이지 영역만 캡처 (붙여넣었을 때 어둡게 보이던 문제)", "Ctrl+클릭으로 글상자를 여러 개 골라 동시에 수정"], "d": "2026.10.13"}, {"v": "v0.7.1", "items": ["상단 탭과 멀티작업 탭을 마우스로 끌어서 순서를 바꿀 수 있음", "개발자 콘솔 추가 (설정 > 개발자 콘솔, 단축키 Ctrl+`) — 예: set theme darktheme · set theme 1 · tool pen · zoom 150 · export docx", "개발자 콘솔의 전체 명령어와 도움말을 설정의 새 탭에 정리 (대부분의 기능을 콘솔로 실행 가능)", "멀티작업의 최근 접속 사이트를 하나씩 또는 모두 삭제할 수 있음", "Word(.docx)와 PNG로 내보내기 추가 — Word는 글자 편집용 / 페이지 이미지용, PNG는 현재 쪽 / 전체(ZIP)", "내보내기 목록을 작고 보기 쉽게 정리", "상단 헤더에 개발자 콘솔 버튼 추가 (프리미엄 전용)", "모바일 설정창 상단 메뉴를 아이콘 위주로 정리해 잘리지 않게 개선", "개발자 콘솔 도움말을 ? 에 마우스를 올리면 표시되도록 개선", "핑크세상 테마 추가 (연한 핑크, 콘솔: set theme 4)", "상단 개발자 콘솔 버튼 또는 / 키로 작은 입력 칸을 열어 바로 명령 실행 (Enter 실행 · Esc 닫기)"], "d": "2026.10.13"}, {"v": "v0.6.5", "items": ["레이어 방식 선택 추가 — 개체마다 자동으로 만드는 ‘자동’과, 그림판처럼 레이어를 직접 추가·이름 변경·순서 변경·숨김·잠금·병합하는 ‘수동’ 중에서 고를 수 있음", "PC에서는 연속 스크롤 / 한 페이지씩 보기, 모바일에서는 한 페이지씩 넘기기 / 세로로 넘기기를 설정에서 선택 가능", "한 페이지씩 보기에서는 방향키·PageUp/Down·마우스 휠(끝에서)·페이지 목록으로 페이지를 넘김"], "d": "2026.10.13"}, {"v": "v0.6.4", "items": ["형광펜이 글자를 흐리게 하던 문제 개선 — 곱하기(multiply) 방식으로 칠해 글자가 선명하게 보이고(저장 PDF 포함), 글자 위에 칠하면 글자 줄에 맞는 깔끔한 띠로 자동 정리(‘글자 맞춤’, 끄면 자유롭게)", "헤더에 전체화면 / 해제 버튼 추가", "모바일 확대·축소(핀치) 중에는 이미지를 다시 그리지 않고 손을 뗀 뒤 한 번만 선명하게 그려 끊김을 줄임", "도구에 영역 지정 추가 — 사각형 또는 자유 선택으로 지정해 펜 그림·도형의 일부만 잘라 이동·복사·붙여넣기·삭제(그림판 방식), 영역 이미지 복사·저장·글자 복사 (단축키 R)", "업데이트 내역을 0.1.x · 0.2.x … 처럼 버전 두 번째 자리(y)별로 묶어 표시", "설정에서 버전 정보와 고객센터를 별도 메뉴로 분리", "모바일 상단 버튼 간격과 크기를 줄여 비좁게 보이던 문제를 완화(계정 버튼은 더보기 메뉴에도 추가)", "멀티작업의 8번째 버튼으로 계산기 추가 (키보드 입력 · 괄호 · % · 제곱근 · 기록 · 복사 · 노트 · 페이지 삽입)", "줌 바를 마우스로 끌어 옮길 수 있게 함. 위·아래 가장자리에서는 가로로, 왼쪽·오른쪽 가장자리에서는 세로로 자동 전환되고 위치는 저장됨", "고객센터 이메일 보내기 링크도 contact@meow-pdf.com으로 변경"], "d": "2026.10.13"}, {"v": "v0.6.3", "items": ["멀티작업 첫 화면에 빈 문서 · 파일 병합 · 파일 압축 버튼을 추가하고, 버튼 줄은 패널 크기에 따라 한 줄에 1개 · 2개 · 4개로만 배치", "설정에 편집기 언어 변경 추가: 한국어 / English / 日本語 / 中文", "PDF 글자를 끌어서 옮길 때 뒤에 있는 원래 글자가 잠깐 보이던 문제를 수정", "업데이트 내역을 버전 묶음(beta / 0.0.1~0.5.3 / 0.6.1~)으로 나눠 계층형으로 표시", "설정의 테마에 프루티거 에어로 테마 추가(하늘색 · 연두색 유리 질감)"], "d": "2026.10.13"}, {"v": "v0.6.2", "items": ["소개 페이지 푸터에 상호(타니아)와 주소(경기도 부천시 중동로 108)를 표기", "소개 페이지에 환불정책 추가: 결제일로부터 3일 이내에 요청하면 환불", "소개 페이지에 GitHub 링크 추가", "소개 페이지와 안내 문서의 문의 이메일을 contact@meow-pdf.com으로 변경", "메모와 번역 도구(페이지 번역, 멀티작업의 번역 · 사전)를 프리미엄 기능으로 전환", "프리미엄 전용 기능의 자물쇠 표시를 없애고, 대신 버튼을 흐리게(밝기를 낮춰) 표시"], "d": "2026.10.12"}, {"v": "v0.6.1", "items": ["멀티작업에 번역 · 사전 도구 추가: 글을 붙여넣어 번역하고, 단어를 찾으면 뜻을 보여주며 원하는 언어로 함께 번역", "번역 · 사전 결과를 복사하거나 노트에 추가, 현재 페이지에 텍스트로 삽입. 파파고 · 구글 번역 · DeepL · 네이버 사전 바로가기 제공", "번역 창 문구를 줄이고 디자인을 새로 다듬음(언어 바꾸기 버튼, 둥근 선택 버튼, 부드러운 그림자)", "Chrome 번역 모델을 내려받는 동안 진행률(%)을 표시하고, 45초 넘게 진행이 없으면 멈춤 안내와 '서버 번역만 사용' 선택지 표시", "모바일에서 파일을 열 때 용도에 맞는 모드를 고를 수 있음: 보기(읽기 전용) / 간편 수정(글자 수정 제외) / 기본(모든 기능). 더보기 메뉴에서 언제든 바꿀 수 있음", "PDF 글자를 클릭해 수정할 때 원본 글자의 자간을 읽어와 같은 간격으로 반영", "텍스트 도구, 수정 중인 글자, 선택한 글자에서 자간(-10% ~ 50%)을 직접 설정할 수 있음. 저장 · 인쇄 · 내보내기에도 반영", "멀티작업 첫 화면을 새로 디자인: 글자를 최소화하고 둥근 타일 버튼(파일 · 웹 · 번역 · OneCompiler)과 간결한 바로가기 칩으로 정리", "개체나 텍스트를 선택하면 왼쪽 위에 이동 핸들이 나타나 끌어서 옮길 수 있음", "PDF 글자를 클릭해 수정할 때, 텍스트 도구로 입력할 때도 왼쪽 위에 이동 핸들이 나타나 글자 위치를 끌어서 옮길 수 있음"], "d": "2026.10.12"}, {"v": "v0.5.3", "items": ["소개 페이지(index)와 편집기의 파비콘을 같은 고양이 아이콘으로 통일", "페이지 번역 추가: 도구 모음 가장 오른쪽의 번역 버튼으로 현재 보고 있는 페이지만 번역", "번역 방식 선택: 원문 / 전체 번역 / 마우스 오버 번역(글자에 마우스를 올리면 그 문단만 번역)", "원본 언어 자동 감지, 번역할 언어 선택(기본 한국어). 크롬 내장 번역을 우선 사용하고, 없으면 서버 번역(키 없이도 쓰는 무료 엔진 포함)으로 대체", "번역에 실패하면 원인(서버 미배포, 사용량 초과, Chrome 내장 번역 사용 불가 사유)을 안내", "Chrome 번역 모델 준비가 오래 걸리면 기다리지 않고 서버 번역으로 먼저 번역하고, 준비되면 다음부터 내장 번역 사용", "서버 번역: 한국어 등 긴 글이 무료 엔진의 글자 수(바이트) 제한에 걸려 실패하던 문제 수정", "HWP 파일이 열리지 않던 문제 수정(압축 해제 오류) — 실제 HWP 샘플 파일로 확인"], "d": "2026.10.12"}, {"v": "v0.5.2", "items": ["편집 화면 상단의 고양이 아이콘을 누르면 소개 페이지로 돌아가도록 변경"], "d": "2026.10.12"}, {"v": "v0.5.1", "items": ["서비스 소개 페이지(meow-pdf.com)를 새로 만들고, 기존 편집 화면은 /edit 주소로 이동", "소개 페이지 하단에 사업자 정보(Thaniya project, 사업자 등록번호) 표기", "옵션바의 색상 영역이 밖으로 튀어나오거나 잘리던 문제를 수정", "텍스트 정렬의 기본값을 왼쪽 정렬로 변경", "도형에 별 추가", "도형의 원 버튼에 그래픽이 비어 있던 문제를 수정"], "d": "2026.10.12"}, {"v": "v0.4.5", "items": ["시작 화면의 버튼(파일 열기, 빈 문서로 시작, 파일 병합, 파일 압축)을 모서리가 둥근 정사각형 타일 형태로 변경", "텍스트 왼쪽 정렬 / 가운데 정렬(기본) / 오른쪽 정렬 설정 추가 (새 텍스트, 편집 중, 선택한 텍스트에 적용)", "도구 모음을 좌측에 배치했을 때 도구 버튼 크기를 줄임", "캡처, 인쇄, 프레젠테이션 버튼을 다시 도구 모음으로 이동"], "d": "2026.10.12"}, {"v": "v0.4.4", "items": ["헤더의 테마 변경 버튼과 GitHub 버튼을 제거하고, 화면 밝기 조절을 설정의 화면 · 레이아웃 항목으로 이동", "도구 툴바의 저장 관련 버튼(저장, 다른 이름으로 저장)을 헤더로 이동", "헤더의 새 문서, 열기 버튼을 제거하고 실행 취소, 다시 실행, 캡처, 인쇄, 발표 버튼을 헤더로 이동", "결제 안내에 최초 1회만 결제하면 계속 이용할 수 있다는 내용을 깔끔한 카드 UI로 명시", "옵션바의 크기(내용)에 따라 화면이 재조정되지 않도록 옵션바 높이를 고정"], "d": "2026.10.12"}, {"v": "v0.4.3", "items": ["사이드 메뉴 방식의 UI 기반 설정 창을 열 수 있는 버튼 아이콘을 상단 레이아웃에 추가, 해당 설정 창 내에서 애플리케이션 버전 정보 확인과 고객센터 피드백 제출이 가능하도록 구현", "이때 접수된 불편사항은 개발자 계정의 관리자 대시보드나 DB로 수집되어 일괄 조회 및 관리가 가능", "사용자가 주요 기능의 단축키를 직접 매핑하고 변경할 수 있는 커스터마이징 기능과 함께 기존 상단에 고정되어 있던 도구 툴바 배치를 좌측 정렬 또는 상단 정렬로 선택할 수 있는 레이아웃 옵션을 제공", "반응형 UX 개선을 위해 모바일 환경에서 가로보기(Landscape) 모드로 전환될 경우, 페이지 패널이 자동으로 화면 좌측에 정렬되도록 미디어 쿼리 및 Flex/Grid 레이아웃 구조를 보완"], "d": "2026.10.12"}, {"v": "v0.4.2", "items": ["모바일 화면 크기에 맞춰 반응형 뷰포트 및 레이아웃 적용", "모바일 환경에서 레이어, 노트, 멀티작업 등 부가 기능 숨기고 최소한의 핵심 기능만 남기도록 개선", "모바일 화면에서 스와이프 및 드래그로 페이지 넘기기 기능 추가 (두 손가락 확대/축소 가능)", "모바일에서 페이지 패널을 화면 하단으로 배치", "상단 편집 버튼들을 깔끔하게 재배치하고, 계정 버튼을 저장 버튼 왼쪽으로 이동", "텍스트 직접 수정 기능 유지", "텍스트 선택 시 뜨는 옵션바(optbar)가 화면 밖으로 나가지 않도록 두 줄로 예쁘게 배치하고, 옵션바 표시 여부에 따라 화면 페이지가 밀리거나 재조정되지 않도록 수정"], "d": "2026.10.11"}, {"v": "v0.4.1", "items": ["모바일 화면 크기에 맞춰 반응형 뷰포트 및 레이아웃 적용", "모바일 환경에서 레이어, 노트, 멀티작업 등 부가 기능 숨기고 최소한의 핵심 기능만 남기도록 개선", "모바일 화면에서 스와이프 및 드래그로 페이지 넘기기 기능 추가 (두 손가락 확대/축소 가능)", "모바일에서 페이지 패널을 화면 하단으로 배치", "상단 편집 버튼들을 깔끔하게 재배치하고, 계정 버튼을 저장 버튼 왼쪽으로 이동", "텍스트 직접 수정 기능 유지", "텍스트 선택 시 뜨는 옵션바(optbar)가 화면 밖으로 나가지 않도록 두 줄로 예쁘게 배치하고, 옵션바 표시 여부에 따라 화면 페이지가 밀리거나 재조정되지 않도록 수정"], "d": "2026.10.11"}, {"v": "v0.3.3", "items": ["키 발급 관련 일부 로직 수정"], "d": "2026.10.10"}, {"v": "v0.3.2", "items": ["키 발급 관련 서버 연결 문제 해결"], "d": "2026.10.10"}, {"v": "v0.3.1", "items": ["파일이 없는 화면에서 파일 열기, 빈 문서로 시작 옆에 파일 병합, 파일 압축 기능을 배치", "파일이 없는 화면에서 안내 텍스트를 최소화하여 UI 깔끔하게 수정", "저장 버튼에 파일 압축해서 내보내기(10%, 20%, 40%)옵션 추가 - 프리미엄 사용자 한정, PPTX파일로 내보내기 옵션 추가", "화면에 다른 PDF를 드래그해서 넣으면 멀티 탭으로 넣기, 현재 파일에 병합하기 옵션이 나타나도록 기능 추가 (병합하기 시 두 파일의 병합순서 드래그로 결정 가능)", "페이지 패널에 전체 페이지 관리하기 버튼 추가-프리미엄", "전체 페이지 관리하기 시 그리드형태로(크기조절 가능) 각 페이지가 화면에 가득 차게 나타나며 드래그하여 페이지 순서를 바꿀 수도 있도 여러 페이지를 삭제하거나 이름을 바꾸거나 계층구조 수정 가능하도록 기능 추가", "페이지 패널의 버튼 UI 전반적으로 깔끔하게 수정", "헤더에 있는 PDF제목 클릭하여 직접 수정 가능하도록 개선"], "d": "2026.10.09"}, {"v": "v0.2.2", "items": ["로그인시스템 및 결제 시스템 문제 해결"], "d": "2026.10.09"}, {"v": "v0.2.1", "items": ["일부 기능 유료화 도입"], "d": "2026.10.08"}, {"v": "v0.1.3", "items": ["온라인 컴파일러 프로그램 원컴파일러(OneCompiler) 바로가기가 멀티작업에서 제공되도록 개선"], "d": "2026.10.08"}, {"v": "v0.1.2", "items": ["음성 이름 편집 및 음성 내보내기 기능 추가"], "d": "2026.10.08"}, {"v": "v0.1.1", "items": ["음성녹음 및 재생 기능 추가", "음성녹음 MPDF에 삽입 기능 추가 (따로 내보내기 가능, MPDF 확장자 파일에 삽입된 상태로 저장 가능)"], "d": "2026.10.06"}, {"v": "v0.0.1", "items": ["멀티작업에서 웹페이지를 열 수 있도록 편의 향상", "화면맞춤 상태에서 PDF내 텍스트상자 클릭 시 텍스트 수정이 진행되지 않는 문제 해결", "멀티작업 화면에 파일 드래그 시 일반 편집기 화면에 파일이 닿으면 파일 드롭 안내가 사라지지 않는 문제 해결", "페이지 패널의 크기 조절 시 썸네일로 보기의 각 썸네일 크기도 패널의 크기에 맞게 조절되도록 개선", "페이지 북마크기능 추가, 페이지 패널 상단에 북마크 바로가기 드롭다운 리스트 버튼 추가", "텍스트의 글꼴 드롭다운 버튼에서 각 버튼의 글꼴 모양을 이름과 함께 미리보기 제공", "PDF전체에서 특정 글자 빠르게 찾는 검색기능 제공", "PDF 내에서 기존에 있는 텍스트를 수정하는 로직 개편 (기존에 비해 많은 양의 텍스트를 한 번에 수정 가능하도록)", "Meow-PDF 파비콘 추가"], "d": "2026.10.06"}, {"v": "beta 0.0.5", "items": ["세로모드 시 페이지, 레이어, 노트를 모두 하단 사이드바에서 전환 가능한 형태로 변경", "모든 사이드바를 테두리 마우스 드래그를 통해 크기 조절 가능하도록 변경 (기본 좌우, 세로모드는 상하)", "페이지 맞춤 시 사이드바를 고려하여 페이지가 화면에 모두 들어오게 조절되도록 개선 (화면 비율이 작은 경우)", "검은 고양이 스티커를 넣는 기능을 추가 (이미지 버튼을 전환 가능)", "레이어/노트 패널에 탭전환 방식으로 멀티작업 탭 추가 (파일탐색기를 여는 버튼이 중앙에 있으며 누르면 파일을 불러옴, 불러온 파일은 해당 패널에 가득 차도록 띄워지며 PDF를 보며 작업 가능), 멀티작업 패널은 또한 내부에서 멀티테스킹탭으로 관리 가능", "레이어/노트/멀티작업 여닫기 패널 버튼을 작업 사이드바 버튼으로 이미지 변경", "PDF 업로드 전 나타나는 화면 문구에서 PDF뿐만 아니라 PPTX파일도 수정 가능하다고 명시", "스프라이트시트, HWP 파일도 삽입/편집 가능하도록 제공"], "d": "2026.10.06"}, {"v": "beta 0.0.4", "items": ["페이지 계층관리 시 페이지를 끈 상태에서 마우스 휠을 굴리면 페이지가 올라갔다 내려갔다 하게 되도록 변경", "도형을 그리고 Ctrl+Z를 누르면 간혹 기능이 먹히지 않는 문제 해결", "화면 밝기 조절 바 시간 표시 부분 왼쪽에 추가", "페이지에 주석달기 기능 추가 (주석을 달면 그 페이지는 눈에 잘 띄도록 변경)", "페이지 목록으로보기 기능 추가 (기본적으로 페이지1 ... 로 표시되며 페이지이름 변경 가능)", "인쇄기능 추가", "레이어 병합 기능 추가", "편집화면 및 프리젠테이션 화면에서 Ctrl+스크롤 하면 마우스 커서를 중심으로 화면이 줌아웃되도록 변경", "작게 https://github.com/architect0509/meow-PDF페이지로 이동되는 버튼을 방해되지 않도록 배치", "텍스트나 도형 그리기에서 상단 optbar가 가로로 너무 길어지는 문제 색상 팔레트의 크기를 줄이고 슬라이더들을 정리하여 화면 내에 기능이 모두 들어오도록 개선", "글자선택을 개체와 통일시키고 PDF내 모든 텍스트상자를 클릭만으로 수정 가능하도록 개선", "색상 버튼의 개수를 5개로 줄이고 우측에 색상 팔레트를 크게 배치하며 5개의 작은 색상 버튼 아래에는 최근에 사용한 색상 5개가 나타나게 되도록 개선", "UI의 배치가 전부 상하로 이동하는 세로모드 변환 기능을 제공", "멀티테스킹탭 기능을 지원 (툴바 위에 삭제 및 불러오기, 추가 가능한 형식으로)", "레이어가 있는 위치에 탭전환 방식으로 노트를 작성할 수 있도록 기능 추가(노트는 다중 페이지로 관리 가능하며 .txt확장자 파일로 내보낼 수 있음)"], "d": "2026.10.06"}, {"v": "beta 0.0.3", "items": ["현재화면 캡쳐기능 제공(버튼의 위치는 저장버튼 좌측)", "상단 레이어버튼 옆에 현재시간,분 표시", "저장버튼 좌측 프리젠테이션모드 버튼 추가 -단축키 여닫기 p(프리젠테이션 내에는 마찬가지로 강조표시, 그리기, 직선, 도형, 지우개, 텍스트툴, 그리고 레이저를 사용가능한 마우스로 끌어서 옮길 수 있는 조작 도구창이 존재)", "레이저는 프리젠테이션중에만 사용 가능하며 L키로 생성/제거 가능", "이미지 버튼 우측에 C단축키로 메모 생성기능", "메모는 위치이동 및 크기조절 가능, 다중줄 글쓰기 가능, 접기 가능, 글씨 크기조절 가능", "ppt를 pdf로 가져오기 가능하도록 개선", "페이지 그룹화를 통한 계층관리 가능하도록 개선", "편집기록을 가진 프로젝트 파일인 mpdf확장자로 내보내기&불러오기 기능 추가", "(저장 및 다른이름으로 저장에 옵션 표시- pdf of mpdf) 확장자가 달라도 일반 저장의 기본옵션은 덮어쓰기", "텍스트에 채우기 옵션 추가 (기본 투명), 도형에 채우기 옵션 추가 (기본 투명, 투명도 조절 가능)", "페이지 넘기기 단축키에 Pg Up 과 Pg Down도 추가", "각 도구의 색깔은 그림판 팔레트 UI처럼 줄바꿈 이용, 사용자 지정 색상은 크기 증가, 스포이드버튼도 추가", "프로그램 내의 황색은 #dbbe43로, 배경의 어두운 색은 좀 더 무채색에 가깝게 변경"], "d": "2026.10.04"}, {"v": "beta 0.0.2", "items": ["전반적인 테마 변경, 개선 항목: 글자의 폰트 및 굵기, 기울임꼴 추가,", "화면맞춤 버튼 하단에 추가", "처음 저장버튼 누를때 파일을 불러온 경로에 자동 덮어씌우기 개선", "프로그램 테마색깔 황색으로 변경", "페이지 패널 버튼 좌측에 아이콘 추가, 패널 버튼과 거리 두기", "자 툴을 직선 그리기 툴로 변경", "펜 및 직선 그리기 툴 사용 시 붓 영역 화면 내에 표시", "펜 및 직선 그리기 툴 팔레트에 파스텔톤의 색상 추가", "강조표시는 직선형, 붓형 선택 가능하게 개선", "상단 툴을 분리 ( 글자선택과 개체 | 강조표시, 그리기, 직선 | 도형, 지우개, 텍스트 | 붙여넣기, 이미지 )", "각각의 버튼에 단축키 부여 ( 1, 2 | q, w, e | a, s, d | z, x )"], "d": "2026.10.04"}];
+const CHANGELOG = [{"v": "v1.1.4", "d": "2026.10.24", "items": ["모바일: 확대한 채로 페이지를 넘기면 보던 위치 그대로 이전 · 다음 페이지로 넘어가게 개선 (예전: 다음 장은 위로, 이전 장은 아래로 화면이 튀었음)", "발표 모드: 도형을 그릴 때 배경색(채우기)도 고를 수 있게 함 — 도형 도구의 ‘배경’ 줄에서 색 · 투명 · 다른 색 선택", "발표를 마치고 나갈 때 발표 중 그리거나 적은 내용을 문서에 반영할지 물어봄 — 반영하지 않으면 발표 전 상태로 되돌리고, 실행 취소로 다시 살릴 수 있음", "그리기 도구에 손떨림 보정 추가 (끔 · 약 · 중 · 강) — 펜 끝이 천천히 따라오며 잔떨림을 걸러 줌, 그림판 노트에도 추가", "그리기 도구의 획 보정 기본값을 ‘끄기’로 변경", "둥근 사각형 모서리를 PPT처럼 조절 — 도형을 고르면 위쪽 변에 생기는 노란 점을 좌우로 끌어 둥근 정도를 바꿈 (옵션바 슬라이더 대신)", "페이지 패널 우클릭 메뉴에 ‘배경 색 바꾸기’ 추가 — 화면 · 썸네일 · 저장한 PDF · 인쇄에 모두 반영되고, 원래 글자와 그림은 그대로 보이게 칠함", "페이지 패널 우클릭 메뉴에 ‘그룹에 넣기’(그룹을 골라 넣기) · ‘그룹에서 빼기’ 추가 — 여러 페이지를 골라 둔 상태면 한꺼번에", "그룹 설정 추가 (그룹 머리의 톱니 · 우클릭) — 폴더 색 바꾸기, 페이지 패널 맨 위에 고정", "빈 페이지 추가 · 기존 파일 불러오기: 그룹이 닫혀 있으면 그룹 밖(그룹 바로 뒤)에 페이지를 추가", "메인 탭에 ‘최근에 연 파일’ 추가 — 최근 파일을 다시 열고, 기록에서 삭제하고, PC 프로그램에서는 파일 위치(탐색기 · Finder)를 열 수 있음", "모바일 시작 화면의 파일 열기 · 빈 문서로 시작 · 파일 병합 · 파일 압축 버튼을 조금 작게 줄임", "검색 결과에 보일 정사각형 썸네일 추가"]}, {"v": "v1.1.3", "d": "2026.10.23", "items": ["페이지 패널의 상세보기(…) 버튼을 없애고 우클릭 메뉴로 변경 — 썸네일을 우클릭(모바일: 길게 누르기)하면 아래로 목록이 내려오고 새 페이지 · 페이지 복제 · 이름 바꾸기 · 북마크 · 주석 · 프린트 · 삭제 순서로 선택", "페이지 추가를 빈 페이지 열기 · 기존 파일 불러오기로 나눔 — 기존 파일은 PDF · PNG(JPG)를 고른 페이지 바로 뒤 중간에 끼워 넣기, 여러 파일은 고른 순서대로 (페이지 메뉴의 ‘새 페이지’ · 페이지 패널 아래 ‘페이지 추가’)", "디지털화 정확도 · 인식 범위 개선 — 한 페이지를 세 가지 읽기 방식으로 반복해 읽고 더 깨끗한 결과를 바탕으로 합침, 자신 없는 칸은 2배 · 3배로 키워 여러 번 다시 읽어 같은 답이 나오면 그 답을 씀, 한국어 인식에 영어 모델을 함께 써서 영문 문장이 깨지던 문제 해결, 회색 바탕 · 옅은 글자 · 어두운 상자 위 흰 글자도 읽도록 대비 맞춤, 엔진이 놓친 낱말 덩어리도 다시 읽음, 글자 PDF 안에 섞인 그림 · 스캔 글자도 함께 인식, 각주 같은 작은 글자도 남김", "스크롤바 색이 테마 색을 따라 바뀜", "메모에 제목 추가 — 머리글에서 바로 입력(비우면 첫 줄이 제목), 접으면 작은 동그라미 하나만 남고 누르면 펼쳐짐 · 끌어서 옮기기 · 마우스를 올리면 메모 제목 표시", "모바일 발표에 도구 줄 추가 — 리모컨의 ▲ 단추로 펼치고 접는 도구 줄에서 강조표시 · 그리기 · 직선 · 지우개 · 도형 · 텍스트 · 레이저 포인터 · 실행 취소 사용 (접거나 도구를 끄면 다시 밀어서 넘기기)", "설정 › 버전 정보에 Thaniya.co.kr로 이동하는 단추 추가 (설정 왼쪽 아래 버전 표시 옆에도 링크)"]}, {"v": "v1.1.2", "d": "2026.10.23", "items": ["그리기 도구에 획 보정 추가 (기본: 켜짐) — 손을 떼면 ‘ㅇ’처럼 닫힌 고리는 반듯한 원으로, ㅁ · ㄷ · ㄹ처럼 꺾인 획은 곧은 선과 뾰족한 모서리로, 그 밖의 곡선은 부드럽게 다듬음 (영문 ‘e’는 원으로 바꾸지 않음), 옵션바의 ‘획 보정 / 끄기’로 켜고 끄기 · 노트 그림판의 펜에도 ‘보정’ 단추 추가", "옵션바의 색상 · 채우기를 작은 색 단추로 변경 — 누르면 색 선택 창이 열리고 추천 색 · 기본 색 96가지 · 최근 사용 10개 · 사용자 지정 · HEX 입력 · 스포이드 사용 가능 (스포이드로 찍는 동안에는 창이 잠깐 숨음), 옵션바가 차지하는 너비가 크게 줄어듦", "도형 도구의 도형 고르기를 모양만 있는 4×2 단추 표로 변경, 왼쪽 · 오른쪽 · 위쪽 · 아래쪽 화살표 도형 추가 (색상 · 채우기 · 선 굵기 · 불투명도 · 회전 그대로 사용)", "헤더 접기 변경 — 탭바 오른쪽 끝 버튼(Ctrl+Shift+H)이 헤더만 접고 탭바는 그대로 남김, 같은 버튼으로 다시 펼침", "노트 위쪽 번호 탭에 노트 종류 아이콘 추가 — 번호 앞 아이콘으로 마크다운 · 텍스트 · 그림판 구분"]}, {"v": "v1.1.1", "d": "2026.10.22", "items": ["프리미엄 1개월 무료 체험 추가 — 계정당 한 번 · 카드 등록 없이 · 끝나도 자동으로 결제되지 않음, 헤더의 ‘1개월 무료’ 버튼 · 시작 화면 · 계정 창 · 소개 페이지 요금 안내에서 바로 시작", "Google 계정으로 로그인 · 네이버 계정으로 로그인 추가 — 계정 창의 로그인 · 회원가입 탭에서 작은 창으로 로그인, 처음이면 그 계정으로 바로 가입", "노트에 그림판 추가 (MD · TXT 옆) — 펜 · 형광펜 · 직선 · 지우개 · 도형(사각형 · 원 · 채우기) · 텍스트 상자 · 표, 색 · 굵기 · 실행 취소 · 크게 그리기, 아래쪽 버튼으로 PNG로 내보내기 · 현재 탭에 붙여넣기 · 새 탭으로 열기 (그림은 MPDF에 함께 저장)", "그림판 확대 · 축소 추가 — Ctrl+휠(터치패드 두 손가락 벌리기 포함) · Ctrl+= / Ctrl+- 로 마우스가 있는 자리를 기준으로 100%~400%, 확대 비율 버튼 · Ctrl+0으로 100%", "자동 저장 추가 (기본: 꺼짐) — 설정 › 화면 · 레이아웃 › 자동 저장에서 1 · 3 · 5 · 10분 간격 선택, 열었거나 저장한 파일은 그 파일에 바로 덮어쓰고 저장할 파일이 없으면 이 기기에 복구용으로 보관했다가 다음에 열 때 되살리기, 헤더에 자동 저장 상태 표시", "형광펜 투명도 조절 추가 — 형광펜 도구와 선택한 형광펜의 옵션바에 ‘불투명’(10~100%) 추가, 형광펜마다 다른 투명도로 칠해도 겹친 곳은 진해지지 않음", "새 테마 ‘놀이동산’ 추가 (프리미엄) — 맑은 하늘 아래 천천히 돌아가는 관람차 · 달리는 롤러코스터 · 회전목마 천막 · 떠오르는 풍선 · 알록달록 깃발 줄이 있는 밝은 화면 (테마 스토어에서 관람차 · 풍선 움직임 끄기 가능)", "놀이동산 테마 이스터에그 — 빈 배경을 누르면 색종이가 팡, 빠르게 일곱 번 누르면 불꽃놀이와 풍선 퍼레이드", "새 테마 ‘밤의 수영장’ 추가 (프리미엄) — 파란 네온 전구 줄 · 네온 간판 · 일렁이는 물결에 번지는 불빛 · 옅은 안개가 있는 고요한 밤 (테마 스토어에서 물결 · 안개 움직임 끄기 가능)", "밤의 수영장 테마 이스터에그 — 빈 배경을 누르면 물결이 번지고, 빠르게 일곱 번 누르면 전구가 깜빡인 뒤 간판에 불이 켜지고 오리 튜브가 지나감", "테마 스토어에 즐겨찾기 추가 — 테마 카드의 ☆ 버튼으로 담고, 왼쪽 메뉴의 ‘즐겨찾기’에서 모아 보기", "테마 스토어 왼쪽 메뉴에 ‘최근 사용’ 추가 — 최근에 적용한 테마 6개를 조금 작은 카드로 모아 보기", "PC: 문서 탭이 많아지면 왼쪽 탭이 사라지던 문제 수정 — 한 줄에 다 들어가지 않으면 좌우 화살표(또는 탭 위에서 마우스 휠)로 탭 줄 전체를 이동", "모든 문서 탭의 너비를 똑같이 맞춤 — 탭이 많아지면 다 같이 좁아짐", "모바일: 확대한 상태에서도 화면 왼쪽 · 오른쪽 끝에서 한 번 더 밀면 이전 · 다음 페이지로 이동 (끄는 동안 가장자리에 화살표로 안내)", "도구 모음 기본 위치를 다시 상단 정렬로 변경 (설정 › 화면 · 레이아웃에서 좌측 정렬로 바꿀 수 있음)", "업데이트 내역에서 1.0.x · 1.1.x 버전 묶음에도 오른쪽에 업데이트 요약 표시", "PC 프로그램: Google · 네이버 로그인 창을 앱 안의 작은 창으로 열기"]}, {"v": "v1.0.6", "d": "2026.10.22", "items": ["소개 페이지 · 편집기 공유 미리보기 이미지(og-image) 추가 — 주소를 공유하면 Meow-PDF 대표 이미지 · 제목 · 설명이 표시됨", "검색 노출 개선 — 검색에 맞춘 제목 · 설명 · 키워드, 대표 주소(canonical), 구조화 데이터(웹 앱 · 운영자 · 자주 묻는 질문), robots.txt · 사이트맵(이미지 포함) 추가, 소개 페이지에 ‘자주 묻는 질문’ 추가", "소개 페이지 · 편집기에서 외부 코드 저장소로 이동하는 링크 · 버튼 제거 (PC 프로그램 업데이트가 안 될 때도 사이트의 다운로드 안내로 이동)", "인쇄 버튼을 도구 모음에서 헤더의 ‘다른 이름으로 저장’ 오른쪽으로 이동", "인쇄 창 추가 — 인쇄 · 복사본 수 · 프린터 · 페이지(시작 ~ 끝) · 인쇄 방향 · 용지 · 색(컬러 / 흑백) · 확대/축소 배율 · 상하좌우 여백 · 미리 보기", "PC 프로그램: 인쇄할 때 ‘이 앱은 인쇄 미리 보기를 지원하지 않습니다’ 창이 뜨던 문제 해결 — 인쇄 창에서 고른 프린터로 바로 인쇄", "인쇄 화질 개선 · 색이 푸르게 틀어지던 문제 수정 — 300dpi 무손실 이미지로 인쇄하고, 테마의 화면 효과 · 밝기 조절이 인쇄에 섞이지 않게 함", "페이지 패널 썸네일 버튼을 부채꼴 대신 썸네일 가운데를 둘러싼 원으로 펼침, ‘이 페이지 인쇄’ 버튼 추가", "세로 모드 전환을 헤더에서 설정 › 화면 · 레이아웃 › 화면 배치로 이동", "나만의 테마에 배경 이미지 추가 — 시스템 그림 6종 또는 직접 올린 그림, 빈 여백은 이미지 반복 / 시스템 색, 크기(화면 채우기 · 전체 보이기 · 원래 크기 · 직접) · 위치(9칸 · 가로 · 세로 · 끌어서 이동) · 미리 보기 (글꼴 목록은 접어서 표시)", "웹: 개발자 콘솔로 테마를 바꾼 뒤 브라우저 탭을 오가면 테마 스토어에서 고른 테마로 돌아가던 문제 수정", "공유 프로젝트: 서버에서도 방장이 5분 넘게 오프라인이면 자동으로 닫힘 — 공개 · 친구 · 내 프로젝트 목록에서 바로 빠지고 입장 · 코드 입장 · 방 정보 보기도 막힘 (supabase-share.sql 다시 실행 필요)"]}, {"v": "v1.0.5", "d": "2026.10.22", "items": ["새 테마 ‘여름 휴양지’ 추가 (프리미엄) — 눈부신 해 · 뭉게구름 · 반짝이는 에메랄드 바다 · 밀려오는 파도 · 하얀 모래사장 · 야자수 · 파라솔 · 갈매기가 있는 밝은 여름 화면 (테마 스토어에서 파도 · 갈매기 움직임 끄기 가능)", "여름 휴양지 테마 이스터에그 — 빈 배경을 누르면 물방울이 튀고, 빠르게 일곱 번 누르면 큰 파도가 지나간 뒤 수박 깨기", "새 테마 ‘아날로그 호러’ 추가 (기간 한정 · 공포 테마와 같은 매년 9월 1일 ~ 11월 30일 무료, 그 밖에는 프리미엄) — 낡은 비디오테이프처럼 화질을 떨어뜨린 화면: 주사선 · 필름 노이즈 · 번지는 색 · 트래킹 띠 · 화면 구석의 재생 표시 · 페이지를 넘길 때 찢어지는 화면 · 가끔 끼어드는 경고 방송 (적용 전 경고 표시, 노이즈 · 화면 왜곡 끄기 가능)", "아날로그 호러 테마 이스터에그 — 빈 배경을 누르면 그 자리에 잡음, 빠르게 일곱 번 누르면 신호가 끊기고 화면 조정 화면 표시", "PC 프로그램: F11로 전체화면 켜기 · 끄기", "도형의 색상 · 채우기 기본 색을 노랑 · 빨강 · 파랑 · 초록 · 투명으로 변경 — 선 색상에도 투명(선 없음) 추가", "선택 도구로 도형을 골랐을 때도 선 굵기(테두리) 옵션 표시, 선택 도구 옵션바의 레이어 고르기는 제거", "PC 옵션바: 텍스트의 자간 · 줄간격 입력칸을 작게 줄여 위아래로 묶음 (옵션바 길이 단축)", "작은 노트북에서 헤더 오른쪽이 잘리던 문제 수정 — 헤더가 잘리기 시작하면 ‘PDF 전체에서 찾기’ 칸을 먼저 숨김 (자리가 생기면 다시 표시)", "PC: 헤더 · 탭바 접기 / 펼치기 추가 — 탭바 오른쪽 끝 버튼 또는 Ctrl+Shift+H로 접고, 맨 위 가운데 손잡이로 펼침", "‘빈 문서로 시작’에서 가로로 만들기 · 세로로 만들기 · 커스텀(가로 · 세로 mm 직접 입력) 중 선택 (새 탭 · 새 문서 버튼도 같음, 마지막 선택 기억)", "그룹화 추가 — Ctrl · Shift로 여러 개체를 고른 뒤 우클릭 › 그룹화(Ctrl+G) · 그룹화 해제(Ctrl+Shift+G), 묶인 개체는 하나만 눌러도 함께 선택 · 이동 · 크기 조절", "공유 프로젝트: 방장이 오프라인이면 5분 뒤 자동으로 닫힘 — 참여자에게 바로 알리고 남은 시간 표시, 방장이 돌아오면 그대로 계속", "파일을 열면 기본으로 페이지 맞춤(한 쪽 전체가 화면에 보이게) 적용", "소개 페이지의 기능 블록에 마우스를 올리면 살짝 노래지며 위로 떠오르는 효과 추가", "업데이트 내역 v1.0.1 항목의 특정 제품 이름 언급 삭제"]}, {"v": "v1.0.4", "d": "2026.10.19", "items": ["토스페이 입점 심사 보완: 이용권은 결제하면 이용 키 없이 바로 내 계정에 적용 — 상품 상세 · 결제 창 · 소개 페이지에 제공 방식을 명시하고, 이용 키는 판매하지 않는 무료 키로 분리", "모든 이용권은 결제일로부터 1년 안에 제공이 끝나도록 변경 — 이어 붙여서 끝나는 날이 결제일 + 1년을 넘으면 결제를 막음 (1년 이용권은 지금 기간이 끝난 뒤 결제)", "환불 규정 개정 — 결제일로부터 7일 이내 전액, 그 뒤에는 사용하지 않은 남은 기간만큼 일할 계산해 부분 환불 (1개월 · 1년 이용권 공통, 위약금 없음), 계산식 · 예시 명시", "계정 창에 ‘환불 요청’ 버튼 추가 — 아이디 · 결제 이메일 · 이용 기간을 채운 환불 요청 메일 작성", "회원가입을 이메일 인증번호 없이 바로 가입 · 로그인되도록 변경 (대학생 인증은 학교 메일 인증번호로 따로)", "계정 창이 처음에 학생 인증 탭으로 열려 일반 이메일로는 가입이 막힌 것처럼 보이던 문제 수정 — 처음에는 로그인 탭, 구매 버튼으로 들어오면 회원가입 탭으로 열기", "이메일로도 로그인 가능 · 예전에 인증번호를 입력하지 못해 로그인이 안 되던 계정도 비밀번호로 로그인", "소개 페이지 요금 안내에 구매 방법(구매 버튼 → 회원가입 → 토스페이먼츠 결제 → 바로 적용) 추가, 구매 버튼을 누르면 그 이용권을 골라 둔 채로 계정 창 열기", "결제 서버가 잠들어 있으면 가입 · 로그인 중 ‘서버를 깨우는 중’ 안내, 계정 창을 열 때 미리 깨우기", "결제 창을 넓혀 토스페이먼츠 결제창이 좌우로 잘리던 문제 수정"]}, {"v": "v1.0.3", "d": "2026.10.19", "items": ["PC 프로그램: 앱 아이콘을 모서리가 둥근 정사각형으로 변경", "PC 프로그램: 저장하지 않은 상태에서 X를 누르면 아무 알림 없이 창이 닫히지 않던 문제 수정 — ‘저장하지 않고 닫을까요?’ 확인 창 표시", "‘PNG 내보내기’를 ‘이미지로 내보내기’로 변경 — PNG · JPG · JPEG · WEBP 중 형식을 고르고 현재 쪽 또는 전체 페이지(ZIP)로 내보내기", "프리미엄 결제를 구독(자동결제)에서 이용권으로 다시 전환 — 1개월 이용권 1,200원 · 1년 이용권 10,500원, 한 번만 결제되고 남은 기간이 있으면 그 뒤에 이어서 연장", "프리미엄 이용 기간이 3일 이내로 남으면 계속 결제할지 알림 — 알림 창 · 오른쪽 아래 작은 창(PC 프로그램은 운영체제 알림도)에서 바로 이용권 연장", "공유작업 프로젝트 관리에 방 설명 입력 추가 (500자까지, 방 정보 창에 표시)", "우클릭 메뉴에 앞으로 보내기 · 뒤로 보내기 · 맨 앞으로 보내기 · 맨 뒤로 보내기 추가 — 개체 순서를 레이어에 자동 반영 (수동 레이어는 같은 레이어 안에서 이동)", "음성 도구에 드롭다운 버튼(▾) 추가 — 버튼은 고른 방식(음성 녹음 · MP3 파일 넣기)을 바로 실행, ▾에서 방식 전환 (V는 바로 녹음)", "도형 · 텍스트를 만든 뒤 개체 밖을 누르면 선택 도구로 전환 — 텍스트가 선택 도구로 바뀐 뒤 바깥을 한 번 더 누르면 텍스트 도구로 돌아가던 문제 수정", "발표 버튼에 드롭다운 추가 — 현재 페이지부터(기본) · 첫 페이지부터 중에서 시작 위치 선택", "v1.0.1 · v1.0.2 업데이트 내역의 말투를 이전 내역과 같게 정리"]}, {"v": "v1.0.2", "d": "2026.10.19", "items": ["헤더의 설정 버튼과 전체화면 버튼 자리를 바꿔 전체화면 버튼이 맨 오른쪽에 오게 함 (튜토리얼도 반영)", "PC 프로그램: PDF · MPDF 파일 아이콘을 새 모양으로 변경 — 큰 아이콘은 금색 라벨(PDF · MPDF), 작은 아이콘은 고양이 아이콘(MPDF는 M 배지)", "화면 맞춤 상태에서 좌우 패널을 끌어 좁힐 때 캔버스가 덜덜 떨리던 문제 수정 — 끄는 동안에는 그대로 두고, 멈추거나 놓으면 한 번에 맞춤", "안내 문구 · 소개 페이지의 글자가 끌어도 선택되지 않게 바꿈 (입력칸 · PDF 글자 복사 · 노트 · 채팅 · 메일은 그대로 선택 가능)", "공유 프로젝트 관리에서 공개 여부 · 고유 코드로 입장 · 장르 · 입장 기본 권한을 눌러도 화면에 바로 보이지 않던 문제 수정", "앱 아이콘을 원래 고양이 아이콘으로 되돌림 (휴대폰 홈 화면 · PC 프로그램)", "PC 프로그램: PDF · MPDF 파일에 Meow-PDF 파일 아이콘 적용, 파일을 두 번 누르거나 앱 아이콘에 끌어 놓으면 Meow-PDF에서 열림", "PC 프로그램: Meow-PDF가 PDF 기본 연결 프로그램이 아니면 오른쪽 아래 ‘기본 연결 프로그램으로 설정해보세요!’ 창으로 안내, 설정하기를 누르면 설정 화면 열기 (설정 › 버전 정보에서도 변경 가능)"]}, {"v": "v1.0.1", "d": "2026.10.18", "items": ["스마트 안내선 추가 — 개체를 옮기거나 크기를 바꿀 때 다른 개체 · 페이지의 양 끝과 가운데가 맞으면 빨간 점선으로 표시하고 딱 맞춤 (Alt를 누르면 끄기)", "옵션바의 입력칸을 누르면 내용이 모두 선택되어 지우지 않고 바로 고쳐 쓰기 가능 — 입력하는 동안 숫자가 최솟값으로 바뀌던 문제도 수정", "PC 프로그램 출시 — 소개 페이지에서 Windows · macOS · Linux용 Meow-PDF를 내려받아 설치 가능 (실행하면 소개 화면 없이 바로 편집 화면 · 인터넷이 없어도 실행)", "PC 프로그램: 새 버전이 나오면 알림(버전마다 한 번)과 오른쪽 아래 작은 창으로 안내, 자세히 보기에서 바뀐 내용을 본 뒤 업데이트 버튼으로 바로 업데이트", "PC 프로그램: 설정 › 버전 정보에 업데이트 버튼(최신 버전이면 ‘최신 버전이에요’)과 meow-pdf.com 가기 버튼", "앱 아이콘을 금색 테두리의 고양이 아이콘으로 고정 — 휴대폰 홈 화면 · PC 프로그램에서 같은 아이콘으로 표시"]}, {"v": "v0.11.8", "d": "2026.10.18", "items": ["전체 페이지 관리에서 페이지를 돌리면 글자 · 이미지 · 도형 · 표 등 페이지의 내용도 모두 함께 통째로 회전", "개체 회전 지원 — 돌린 개체도 선택 · 이동 · 크기 조절 · 글자 수정이 개체 방향 그대로 동작하고, PDF 저장 · 인쇄에도 반영", "파일 병합에 PNG 추가 — PNG+PNG · PNG+PDF를 원하는 순서로 한 문서로 병합 (PNG는 한 장이 한 페이지)", "페이지 패널 썸네일 메뉴(⋯)의 버튼이 눌리지 않던 문제 수정 — 보이지 않는 덮개가 클릭을 가로채던 것을 해결", "페이지 패널 썸네일 메뉴에 ‘페이지 복제’ 추가 (그린 것 · 메모 · 레이어까지 그대로 복사해 바로 뒤에), 버튼을 더 크고 잘 보이게, 마우스를 올리면 커지며 강조", "자동 레이어 · 수동 레이어에 복제 추가 — 자동은 줄의 복제 버튼, 수동은 복제 버튼과 더보기 › 레이어 복제", "개체 선택 방식 추가 (설정 › 화면 · 레이아웃) — 바운딩 박스(기본)와 기즈모(PC) 중에서 고르고, 모바일은 바운딩 박스로 고정", "바운딩 박스 모드: 모서리 · 변의 흰 점을 끌어 크기 조절, 위쪽 손잡이로 회전(Shift: 15° 단위), 오른쪽 위는 삭제 — 이미지 · 글자 · 묶음은 모서리를 끌면 비율 유지(Shift: 자유롭게), 펜 선도 통째로 회전", "PC 기즈모 모드: 유니티식 변형 도구 — 화면 왼쪽 위의 도구 막대(끌어서 이동 · 접기 가능)에서 화면 이동(Q) · 이동(W) · 회전(E) · 크기 조절(R) · 사각형 변형(T) · 통합 변형(Y)", "기즈모 모드에서 개체(이미지 · 도형 · 글자 · 선 등)를 선택하면 고른 도구에 맞춰 축 화살표(빨강 · 초록) · 평면 이동(파랑) · 회전 고리 · 크기 큐브 · 모서리 점이 나타나고, 마우스를 올린 축은 노랗게 강조 · 끄는 동안 각도와 크기를 표시", "옵션바에 ‘기울기’ 추가 — 도형 · 이미지 · 글자 · 표의 회전 각도를 숫자로 입력하거나 글자 위에서 좌우로 끌어 조절 (0–360°)", "기즈모 모드 조작 — Shift: 한 방향 고정 · 비율 · 15°, Ctrl: 회전 스냅, 마우스 가운데 버튼 끌기: 화면 이동", "도구 단축키 변경: 강조 2 · 그리기 3 · 직선 4 · 지우개 5 · 모자이크 6 (Q · W · E · R · T · Y는 기즈모 모드의 변형 도구)", "채운 별 도형의 안쪽을 눌러도 선택되지 않던 문제 수정", "선택 도구로 개체를 옮길 때 Shift를 누르면 가로 · 세로 한 방향으로만 이동"]}, {"v": "v0.11.7", "d": "2026.10.18", "items": ["모바일 가로 화면: 시작 화면의 4개 버튼(파일 열기 · 빈 문서로 시작 · 파일 병합 · 파일 압축)을 더 작게 줄여 한 줄로 가운데에 가지런히 배열 — 비어 있는 페이지 패널을 숨겨 화면 정가운데에 표시", "새 테마 ‘동화’ 추가 (프리미엄) — 그림책 속 포근한 마을, 무지개 · 웃는 해 · 몽실몽실 구름 · 꽃 언덕 · 말랑한 친구들이 있는 만화 같은 화면 (테마 스토어에서 구름 · 친구들 움직임 끄기 가능)", "동화 테마 이스터에그 — 빈 배경을 누르면 하트 · 꽃 · 별이 퐁퐁, 빠르게 일곱 번 누르면 숨은 장면", "모바일: 하단 + 플로팅 네비게이션 버튼을 더 잘 보이게 — 접혀 있을 때도 보조색 · 밝은 테두리 · 그림자로 표시, 펼친 버튼의 글자도 더 선명하게", "모바일: + 플로팅 네비게이션 버튼의 자리를 세로 화면 · 가로 화면에서 따로 기억 — 세로는 아래 가운데, 가로는 오른쪽 아래가 처음 자리이고, 옮겨 둔 자리는 방향마다 따로 유지", "버튼을 누를 때 버튼 글자가 선택(파란 강조)되거나 포커스 테두리가 생기던 문제 수정 — 키보드로 이동할 때만 테두리 표시", "음성 도구를 드롭다운으로 변경 — 음성 녹음 / MP3 파일 넣기(신규) 중에서 선택, MP3 파일(최대 30MB)을 골라 녹음처럼 페이지에 넣고 재생 · 이름 바꾸기 · MP3 내보내기 가능 (V 단축키는 바로 녹음)", "PC: 테마 스토어 오른쪽 아래에 시즌 테마(기간 한정) 알림을 작은 팝업으로 표시 — 남은 기간 · 다음 무료 기간과 ‘기간 한정 테마 보기’ 버튼, 닫으면 이번 접속 동안 숨김", "공유작업 패널 아래쪽 ‘지금 탭 공유하기’ 안내를 깔끔한 카드로 바꾸고 누르면 프로젝트 관리 창이 열리도록 개선", "인쇄한 뒤 일부 테마 화면 꾸밈이 사라지던 문제 수정", "영어 · 일본어 · 중국어 화면에서 번역이 빠져 있던 문구 채움 (지금까지의 기능 · 업데이트 내역 포함)"]}, {"v": "v0.11.6", "d": "2026.10.18", "items": ["모바일: 발표 중 다음 페이지로 넘길 때 화면이 검게 변하던 문제 수정 — 발표 페이지로 바로 전환하고 짧게 페이드", "모바일: 발표 중 화면 편집 막기 — 밀어서 넘길 때 개체가 옮겨지던 문제 해결, 발표 도구 막대에는 이전 · 다음 · 나가기만 표시 (링크는 눌러서 열 수 있음)", "모바일: 발표 중 좌우로 밀거나 화면 왼쪽 / 오른쪽을 짧게 눌러 이전 · 다음 페이지로 이동", "모바일: 발표를 마치고 돌아오면 하단 플로팅 네비게이션 버튼이 위쪽으로 옮겨져 있던 문제 수정 — 발표 중 회전 · 전체화면 변화에는 자리를 바꾸지 않고, 끝나면 처음 자리로 복귀", "구글 애드센스 코드 추가 — 소개 페이지 · 사업자 정보 페이지의 head에 넣음, 편집기는 데스크톱에서 설정 · 계정 · 테마 스토어 창이 열렸을 때만 창 좌우에 세로 광고 표시(프리미엄 · 모바일 · 발표 중에는 표시 안 함), 프리미엄 안내 · 결제 창 · 소개 페이지 요금 안내에 ‘광고 제거’ 문구 추가, 오프라인용 서비스 워커는 광고 스크립트 · 요청을 저장하지 않도록 제외"]}, {"v": "v0.11.5", "d": "2026.10.18", "items": ["설정 › 화면 · 레이아웃에 ‘테마 배경 효과’ 추가 — 프리미엄 테마의 배경 클릭 효과 · 이스터에그를 모두 켜기 / 클릭 효과만 / 모두 끄기 중 선택", "테마 이스터에그 상단 문구를 ‘형광등 소리만 들린다.’ 같은 짧은 평서체로 바꾸고 이모티콘 줄임", "공유작업 채팅방에서 신고(메시지 · 참여자)하면 채팅 기록도 함께 전송 — 메시지 신고는 그 메시지 앞 20개 · 뒤 10개, 그 밖에는 최근 30개, 고객 문의 관리 › 공유작업 신고에서 신고 대상의 메시지를 강조해 표시", "모바일: 노치(카메라) 영역을 검은색으로 채움, 상태 표시줄 색도 검은색으로 변경", "모바일: 휴대폰을 가로로 돌리면 노치가 있는 쪽(왼쪽 / 오른쪽)을 자동으로 비우고 위쪽 여백은 없앰", "모바일: 하단 플로팅 네비게이션 버튼의 처음 위치를 더 아래로 이동", "모바일: 발표를 누르면 자동으로 전체화면 · 여백 없이 화면 가득 표시, 가로 모양 페이지는 자동으로 가로 화면으로 전환(지원하는 브라우저)", "발표 모드 배경을 테마와 상관없이 항상 검은색으로 고정, 테마 장식 숨김", "모바일 가로 화면 발표에서 도구 막대(presbar)가 화면 밖으로 사라지던 문제 수정 — 화면을 돌리면 자동으로 화면 안으로 이동, 모바일에서는 화면 폭에 맞춰 줄바꿈", "발표 도구 막대는 펼쳤을 때 버튼이 가려지는 위치(화면 밖 · 노치 · 홈 바)로는 옮길 수 없도록 제한, 접은 상태에서 가장자리로 옮긴 뒤 펼쳐도 안쪽으로 자동 이동"]}, {"v": "v0.11.4", "d": "2026.10.18", "items": ["도형 · 텍스트 · 링크를 만든 뒤 자동으로 바뀐 선택 도구에서 개체 밖(빈 곳 · PDF 글자 · 페이지 바깥)을 누르면 원래 도구로 복귀 — 도형 · 링크는 누른 채 끌면 바로 새로 그려짐", "도형에 ‘둥근 사각형’ 추가 — 옵션바의 ‘모서리’(0~100%)로 둥근 정도 조절, 그린 뒤에도 선택해서 수정 가능", "공유작업 ‘모두 공개’ 완성 — 공개 프로젝트 목록에 올라가고 프리미엄 회원은 누구나(방장의 친구는 프리미엄이 아니어도) 참여 가능", "공유작업 최대 인원 10명 — 가득 차면 목록 · 방 정보 창에 ‘가득 참’ 표시", "프로젝트 관리에 입장 비밀번호(사용 / 사용 안 함 · 변경) · 장르(교육 · 개발 · 그림 · 디자인 · 공부 · 업무 · 기타) · 입장 기본 권한(관전자 / 편집 허용) 설정 추가", "참여자가 나가기 · 공유 탭 닫기 · 창 닫기로 나가면 프로젝트 관리의 참여자 목록에서 바로 삭제, 3분 넘게 신호가 없는 참여자도 자동 정리", "공유작업 패널 상단 탭 바로 친구 프로젝트 ↔ 공개 프로젝트 이동, 공개 프로젝트 검색(이름 · 장르 · 방장) · 정렬(인원순 / 최신순) · 장르 필터 추가", "친구가 모두 공개로 진행하는 프로젝트는 친구 프로젝트 목록에는 안 보이고 친구 창의 ‘함께 작업’ 버튼으로 표시", "친구 창의 ‘함께 작업’ · 공유작업 패널의 ‘보기’(기존 ‘참여’)를 누르면 방 정보 창 표시 — 방 이름 · 장르 · 방장 · 인원 · 입장 권한 · 참여자 목록과 참여하기 버튼", "공개 프로젝트 신고 버튼 추가(불건전 · 욕설 · 명예훼손 · 범죄 · 기타 + 자세한 내용), 공유작업 채팅 메시지 신고 버튼 추가", "공유작업 채팅 · 접속자 사진을 누르면 프로필 카드 표시 — 친구 추가 버튼(이미 친구면 ‘친구됨’, 요청 중이면 ‘요청됨’)과 신고 버튼", "신고한 방의 이름 · 방장 · 방 정보가 개발자 계정의 ‘고객 문의 관리 › 공유작업 신고’로 전송, 처리 시 공유작업 이용 제한(1개월 · 3개월 · 1년 · 영구) · 진행 중인 방 종료 · 제한 해제 가능", "모바일: 메뉴 아래쪽 목록(새 문서 ~ 개발자 콘솔)이 잘려 보이지 않던 문제 수정 — 메뉴 전체를 위아래로 스크롤 가능"]}, {"v": "v0.11.3", "d": "2026.10.18", "items": ["글자 줄간격 옵션 추가 — 글자 도구 · 글자 편집 중 · 선택한 글자 개체의 옵션바에 ‘줄간격’(80~300%) 추가, 자간과 함께 여러 줄 글자 모양 조절 가능, Word(DOCX) 내보내기에도 반영", "도형 바탕이 가끔 투명으로 돌아가던 문제 해결 — 도형 · 펜 · 글자 등 도구 설정(색 · 바탕 · 굵기 · 불투명도)을 브라우저에 기억해 새로고침 후에도 유지, 선택한 도형의 바탕 · 색 · 굵기 변경이 다음에 그릴 도형에도 이어지도록 개선", "여러 개체 함께 옮기기 · 크기 조절 추가 — Shift · Ctrl로 여러 개체를 고른 뒤 하나를 끌면 모두 함께 이동, 묶음 오른쪽 아래 손잡이로 한꺼번에 크기 조절 (Shift를 누르면 비율 자유)", "글자 입력 중 다른 곳을 누르면 입력 상태가 바로 끝나도록 개선 (글자 도구에서도 새 글상자 없이 입력만 종료)", "디지털화(이미지 글자 인식) 정확도 대폭 향상 — 표 칸막이 짧은 선까지 찾아 글자와 구분, 칸을 넘지 않게 분리 · 글자를 실제로 그려 원본 잉크에 크기 · 자간 · 위치를 맞추고 번짐까지 보정 · 덮개는 글자 잉크만 감싸고 표 선 쪽 여백을 없애 파란 표 선을 가리지 않음 · 넓게 벌려 쓴 이름표(세 금 계 산 서)는 한 개체 + 넓은 자간으로, 위아래 이름표(상 호 / (법인명), 공 / 급 / 자)는 줄간격을 가진 한 개체로 병합 · 자신 없는 칸과 엔진이 놓친 숫자 칸은 그 부분만 다시 인식 · 문서 안 글자 크기 · 글자색 통일, 제목급 굵은 글자 인식", "선택 도구로 빈 곳을 끌어 영역을 지정하면 영역에 닿은 개체(잠금 · 숨김 제외)를 모두 선택하도록 개선 — 끄는 동안 잡힐 개체 미리 표시, 여러 개면 함께 옮기기 · 크기 조절 가능", "영역 도구로 개체를 고르면(닿은 개체 선택) 선택 도구로 자동 전환", "‘핑크세상’ 테마 무료로 전환", "프리미엄 테마 이스터에그 추가 — 문서 바깥 빈 배경(시작 화면 포함)을 누르면 테마마다 다른 반응(물방울 · 반짝이 · 점수 · 새싹 · 도토리 · 반딧불 · 별 · 탄막 등), 빠르게 연달아 누르면 테마마다 숨은 장면 등장", "새 테마 ‘동방’ 추가 — 홍백 무녀의 신사, 음양옥 · 부적 · 돌아가는 마법진 · 소용돌이와 고리 탄막 · 흩날리는 벚꽃 · 도리이가 있는 환상의 밤 (테마 스토어에서 탄막 · 벚꽃 움직임 끄기 가능)"]}, {"v": "v0.11.2", "d": "2026.10.17", "items": ["오프라인 작업 지원 — 한 번 연 편집기와 PDF · 압축 라이브러리를 브라우저에 저장해 두어 인터넷이 끊겨도 열기 · 편집 · 저장 가능, 헤더에 오프라인 표시, 앱처럼 설치 가능(PWA)", "PC: 글자 밖에서 눌러 끌면 처음 누른 점과 지금 점을 대각으로 하는 사각형에 닿은 글자만 선택 (엉뚱한 글자까지 함께 선택되던 문제 해결) — Ctrl+C · ‘선택한 글자 복사’로 복사", "PC: 페이지 패널의 페이지 옵션(방사형) 버튼에 마우스를 올리면 강조 효과", "친구 창 · 공유작업 패널에 새로고침 버튼 추가", "자동 레이어에도 자물쇠 추가 — 잠근 개체는 선택 · 이동 · 지우기 불가", "PC: 글상자 · PDF 글자를 한 번 클릭하면 선택만(입력 불가, 복사 가능), 두 번 클릭하면 입력 — 선택한 개체는 Ctrl+C / Ctrl+V로 복사 · 붙여넣기 (글상자의 글자는 일반 글자로도 복사)", "자간을 100%까지 늘릴 수 있도록 확대", "모바일: 공유(프로젝트 관리) · 프로필 버튼을 헤더에서 메뉴로 옮기고, 전체화면 버튼을 헤더로, 더보기 버튼을 점 9개 아이콘으로 변경", "모바일: 오른쪽 작업 패널(노트 · 멀티작업 · 공유작업)을 오른쪽 가장자리 손잡이나 메뉴로 열고 닫을 수 있도록 추가", "모바일: 하단 플로팅 네비게이션 바를 원형 버튼으로 바꾸고 누르면 부채꼴로 펼쳐지도록 개선 — 펼쳤을 때 모든 버튼이 화면 안에 보이는 범위까지만 옮길 수 있고, 편집기에 들어올 때마다 처음 위치로", "모바일: 플로팅 버튼이 계정 창 등 다른 창 위로 올라오던 문제 수정", "모바일: 하단 페이지 패널 가장자리를 끌어 크기 조절 (가로 화면은 오른쪽 가장자리)", "모바일: 친구 · 메일 창을 열 때 아이디 입력칸에 바로 포커스되어 자판이 뜨던 문제 수정", "모바일: 계정 창이 화면 밖으로 넘치지 않도록 크기 조절, 시작 화면 버튼 아래 설명이 화면 밖으로 나가던 문제 수정", "모바일: 전체화면에서 메뉴가 스크롤되지 않던 문제 수정", "모바일: 오른쪽 작업 패널 안을 눌러도 닫히거나 화면이 어두워지던 문제, 메뉴 아래쪽이 잘리고 스크롤되지 않던 문제 수정", "소개 페이지 개편 — ‘온라인 · 오프라인 어디서나 쓰는 종합 문서 편집기’, 새 화면 이미지(함께 편집 · 휴대폰), ‘어디서나’ 섹션, 기능 12가지, 요금 안내 갱신, 휴대폰에서 헤더 글자가 밖으로 넘치던 문제 수정, PC에서도 항상 어두운 화면으로 고정, 첫 화면 문구를 짧게 정리 (노란 문구: 온라인 • 오프라인 종합 문서 편집기)"]}, {"v": "v0.11.1", "d": "2026.10.17", "items": ["공유작업 추가 (프리미엄) — 헤더의 ‘프로젝트 관리’ 버튼으로 지금 탭을 공유 프로젝트로 만들고 고유 코드 · 공유할 이름 · 공개 여부(모두 공개 / 친구 공개 / 비공개) · 고유 코드로 입장(허용 / 허용 안 함)을 설정", "프로젝트 관리 창에서 참여자 권한(관전자 / 편집 허용) 변경과 추방, 공유 종료", "여러 사람이 같은 문서를 동시에 편집 — 개체 단위로 실시간 반영되고, 같은 개체를 동시에 고치면 마지막 변경이 남음. 실행 취소는 내 변경만 되돌림", "참여자의 마우스 포인터와 작업 중인 페이지를 프로필 사진으로 표시 (페이지 오른쪽 위 · 페이지 패널 썸네일)", "공유작업 패널: 고유 코드로 참여하기, 친구 프로젝트(친구 공개로 진행 중인 프로젝트) 목록, 내 프로젝트 다시 열기, 공개 프로젝트(준비 중)", "공유작업 중에는 공유작업 패널에 참여자 채팅방 표시", "친구 창의 내 친구 목록에서 친구 공개 프로젝트를 진행 중인 친구 옆에 ‘함께 작업’ 버튼 표시", "참여자 화면에서는 저장 · 프로젝트 관리 버튼을 숨기고 ‘다른 이름으로 저장’만 표시, 관전자는 보기만 가능", "공유 프로젝트 접속 링크(…/edit?join=고유코드) — 프로젝트 관리 창 · 공유작업 패널에서 복사, 받은 사람이 열고 로그인하면 바로 참여 (고유 코드로 입장을 허용했을 때)"]}, {"v": "v0.10.4", "d": "2026.10.17", "items": ["표 내용 편집: 행 · 열 숫자가 입력칸 위쪽으로 치우쳐 보이던 문제 수정", "표 내용 편집: 칸 글자의 왼쪽 · 가운데 · 오른쪽 정렬과 글자 크기 설정 — 선택한 칸 · 행 · 열 · 표 전체 단위로 적용 (PC는 Shift+클릭으로 여러 칸 선택)", "알림을 무료 플랜에서도 사용할 수 있도록 변경 (친구 · 메일은 계속 프리미엄)", "무료 플랜에서 헤더의 개발자 콘솔 버튼을 다른 프리미엄 버튼처럼 흐리게 표시", "모바일 옵션바 재디자인 — 설정 항목을 아이콘 탭(예: 모양 · 불투명도 · 선 굵기 · 색 · 바탕)으로 나열하고, 누른 항목의 옵션만 아래로 펼쳐 화면을 덜 가리도록 개선", "선택 도구를 눌러도 옵션바가 닫히지 않도록 변경", "글꼴 절반 정도(블랙한산스 · 감자꽃 · 독도 · Pacifico 등 19종)를 프리미엄 전용으로 — 글꼴 목록에 ‘프리미엄 글꼴’ 구역으로 표시, 이미 문서에 쓰인 글꼴은 그대로 보임", "업데이트 내역의 버전 묶음(0.3.x · 0.10.x 등) 오른쪽에 그 묶음의 가장 큰 변화를 짧은 부제목으로 표시"]}, {"v": "v0.10.3", "d": "2026.10.17", "items": ["한 페이지씩 보기에서 페이지 바깥을 휠로 굴리면 스크롤바가 없어도 화면이 위아래로 움직이도록 개선 — 설정 › 페이지 보기에서 ‘화면 위아래로 이동 / 페이지 넘기기’ 선택", "펜 · 태블릿 · 터치로 그리다가 길게 누를 때 컨텍스트 메뉴가 뜨지 않도록 수정 (마우스 우클릭 메뉴는 그대로)", "표 삽입 창과 표 내용 편집 창을 하나로 통합, 행 · 열 입력 높이를 낮춤", "표 내용 편집에서 배경색 컬러 피커를 누르면 바로 닫히던 문제 수정", "모바일 플로팅 바: 화면 왼쪽에 두면 오른쪽으로, 오른쪽에 두면 왼쪽으로 펼쳐지도록 개선", "여러 파일을 끌어다 놓거나 한 번에 골라 열면 각각 새 탭으로 열기 (PDF가 아닌 형식이 섞여도)", "여러 PDF를 새 탭으로 열었을 때 저장을 누르면 원래 파일에 바로 덮어쓰도록 수정 (다른 이름으로 저장으로 넘어가던 문제)", "친구 버튼을 멀티작업 패널에서 공유작업 패널로 옮김", "PDF에 있는 글자를 눌러 편집할 때 PDF 안의 실제 글자 정보(크기 · 굵기 · 글꼴 · 글자 간격)를 써서 띄어쓰기가 원본 그대로 유지되도록 개선, 덮개는 실제 글자 자리만 덮음", "글자 편집 중 오른쪽 위 삭제 버튼 추가 (PDF 원래 글자도 지울 수 있음)", "PDF 글자 편집 중 일부 글자색을 바꾸면 나머지 글자가 가려지던 문제 수정"]}, {"v": "v0.10.2", "d": "2026.10.17", "items": ["소개 페이지 기능 블록이 언어(일본어 · 중국어 등)에 따라 옆으로 늘어나던 문제 수정, 휴대폰 폭에서 사업자 주소가 화면 밖으로 넘치던 문제 수정", "선택 도구 옵션바: 아무 개체도 선택하지 않았을 때만 닫히고, 개체를 선택하면 원래 자리에 다시 보이도록 수정", "우측 패널 탭(레이어 · 노트 · 멀티작업 · 공유작업)을 기본으로 아이콘으로 표시하고 가로 공간에 꽉 맞게 배치 — 설정 › 패널 탭 표시 또는 패널 설정(톱니바퀴)에서 텍스트로 바꿀 수 있음", "계정 창의 프로필 · 비밀번호 · 이용 키를 정사각형 블록 버튼으로 가로 정렬, 누르면 각각의 창이 열림", "표 삽입 · 편집 창 디자인 개선 — 행 · 열 +/− 버튼, ‘첫 줄을 제목으로’ 스위치, 표 미리보기, 제목 줄 강조, 휴대폰 화면에 맞춤", "편집기 전체에서 빠져 있던 영어 · 일본어 · 중국어 번역을 채움", "공포 테마에서 언어를 바꾼 뒤 테마와 언어를 되돌리면 일부 글자가 원래 언어로 돌아오지 않던 문제 수정", "모바일 하단 플로팅 네비게이션 바를 길게 눌러 옮기기가 잘 안 되던 문제 수정 — 손가락 떨림 허용, 화면 어디로 끌어도 따라옴, 바로 끌 수 있는 손잡이(⠿) 추가"]}, {"v": "v0.10.1", "d": "2026.10.17", "items": ["도구 모음 기본 위치를 좌측 정렬로 변경", "선택 도구에서 아무 개체도 선택하지 않았을 때는 옵션바를 닫아 두도록 변경 — 개체를 선택하거나 다른 도구를 고르면 다시 보임 (직접 접어 둔 경우에는 계속 숨김)", "영역 선택 도구의 기본 방식을 ‘닿은 개체 선택’으로 변경", "선택 도구에서 빈 곳을 길게 누른 채 끌면 ‘닿은 개체 선택’ 영역 지정으로 바뀌어 여러 개체를 한 번에 선택", "페이지(캔버스) 바깥을 눌러도 선택이 해제되도록 개선", "소개 페이지 헤더에 언어 설정 추가 — 소개 페이지가 바로 번역되고, 고른 언어가 편집기에도 적용", "친구 기능 추가 (프리미엄) — 헤더의 친구 버튼, 아이디로 친구 추가, 요청 관리(받은 요청 · 보낸 요청), 내 친구 목록(프로필 사진 · 닉네임 · 아이디, 메일 보내기 · 친구 삭제), 친구 요청 받지 않기 설정", "메일 기능 추가 (프리미엄) — 친구에게 제목과 내용으로 메일 보내기, 받은 메일 · 보낸 메일함, 답장 · 삭제", "알림 기능 추가 — 헤더의 종 버튼, 친구 요청 · 수락 · 메일 알림 목록과 바로가기, 종류별 알림 켜기/끄기", "멀티작업 패널 위쪽에 친구 창 버튼 추가", "모바일: 헤더에 알림 버튼, 메뉴에 친구 · 메일함 추가, 메뉴를 자주 쓰는 기능 위주(큰 버튼 4개 + 한 줄 목록)로 다시 디자인", "무료 플랜에서는 친구 · 메일 · 알림과 프리미엄 기능을 PC · 모바일 모두 흐리게 표시 (모바일 메뉴에는 PRO 표시)", "수동 레이어 목록에 삭제 버튼 추가", "새 문구 영어 · 일본어 · 중국어 번역 추가"]}, {"v": "v0.9.5", "d": "2026.10.17", "items": ["디지털화 정확도 향상 — 글자 배경이 실제 글자 자리만 덮어서 주변 선 · 도형 · 그림을 가리지 않고, 붙어 있는 글자도 크기가 다르면 각각 다른 글자 개체로 나눔", "모바일 하단 플로팅 네비게이션 바를 길게 눌러 원하는 위치로 옮길 수 있도록 개선 (위치 기억)", "모바일 노치 · 카메라 홀 여백을 더 넓히고, 전체화면일 때만 여백이 생기도록 변경", "우측 패널에 설정(톱니바퀴) 추가 — 레이어 · 노트 · 멀티작업 · 공유작업을 켜고 끄거나 좌우로 나눠 두 개를 나란히 볼 수 있음 (기본: 모두 켜짐 · 나누지 않음)", "공유작업 탭 추가 (준비 중)", "프로필의 비밀번호 변경을 ‘비밀번호 변경’ 버튼으로 여는 별도 창으로 변경", "로그아웃 전에 ‘로그아웃 하시겠습니까?’ 확인 창 표시", "비밀번호 변경 · 회원가입 · 비밀번호 재설정의 비밀번호 칸이 브라우저 자동 완성으로 채워지지 않도록 개선", "인증번호 메일 안내에 Outlook(Hotmail) 정크 메일함 확인 문구 추가", "‘PDF 전체에서 찾기’ 입력칸을 넓혀 안내 글자가 잘리지 않도록 개선", "소개 페이지 요금 블록의 버튼 높이를 모두 같게 맞춤", "서버에 아직 없는 기능을 부를 때 ‘서버에 연결할 수 없습니다’ 대신 다시 배포가 필요하다는 안내를 표시"]}, {"v": "v0.9.4", "d": "2026.10.17", "items": ["도형 · 텍스트를 넣으면 바로 선택 도구로 바뀌고 넣은 개체가 선택된 상태가 되도록 개선", "글자 배경 칠하기: 글 입력 중 일부만 드래그한 뒤 배경색을 고르면 그 부분만 칠해지도록 변경 (docx 내보내기에도 반영)", "상단 탭의 + 버튼을 누르면 파일이 없을 때의 시작 화면이 ‘메인’ 탭으로 열리도록 변경 (메인 탭에서 연 문서는 그 자리에 열림)", "번역 버튼을 도구 모음 · 더보기에서 상단 헤더로 이동", "레이어 보기 기본값: 자동 레이어는 간단히 보기, 수동 레이어는 썸네일 보기 (방식마다 따로 기억)", "페이지 패널 썸네일 크기를 줄이고 좌우 여백을 넓힘", "요금제 카드의 ‘월 875원 꼴’ 문구를 ‘월 875원’으로 바꾸고, 계정 창의 구독 블록 가로폭을 넓힘", "멀티작업 빈 화면 가운데의 ‘멀티작업’ 제목을 단순한 글자로 변경", "모바일: 상단 노치 · 하단 홈 바 영역에 맞춰 위아래를 살짝 띄우고, 화면이 아래로 넘치던 문제 수정", "모바일: 프레젠테이션 · 번역 · 찾기 · 보기/편집 · 북마크를 접고 펼 수 있는 하단 플로팅 네비게이션 바로 이동 (메뉴의 ‘문서’ 항목 삭제)", "홈페이지 요금 안내의 프리미엄 블록을 월간 구독 · 연간 구독으로 나눔", "디지털화의 ‘전체 페이지’를 프리미엄 기능으로 변경하고, 무료 플랜에서 표 버튼이 다른 프리미엄 도구처럼 흐리게 보이도록 수정", "나만의 테마 만들기의 글꼴 미리보기가 모두 같은 글꼴로 보이던 문제 수정 (글꼴마다 실제 모양으로 표시)", "계정 창을 여러 번 열면 버튼 한 번에 요청이 여러 번 나가던 문제 수정 (비밀번호 찾기 인증메일 중복 발송 등)", "인증메일 문구를 ‘대학생 인증 번호’에서 ‘인증번호’로 변경 (비밀번호 찾기 · 회원가입에도 같은 메일 사용)", "프루티거 에어로 테마 강화 — 하늘 · 햇살 · 오로라 스우시 · 초록 언덕 · 떠오르는 물방울, 유리 광택 도구 모음 · 탭 · 버튼 (‘물방울 · 빛 움직임’ 끄기 지원)", "PDF에 원래 있던 글자를 수정할 때 일부만 고른 글자색 · 배경색이 저장되지 않던 문제 수정", "드림코어 테마 강화 — 파스텔 무지개 · 움직이는 체크무늬 바닥 · 떠다니는 문 · 하늘의 눈 · 반짝이 · 하트, 홀로그램 제목 · 버튼 (‘구름 · 반짝임 움직임’ 끄기 지원)"]}, {"v": "v0.9.3", "d": "2026.10.17", "items": ["프리미엄 테마 ‘우주’ 추가 — 달 · 고리 행성 · 푸른 행성 · 반짝이는 별 · 성운 · 유성 (콘솔 set theme 16, ‘별 · 유성 움직임’ 끄기 지원)", "신규 테마 NEW 배지를 가장 최근에 나온 3개 기준으로 변경하고, 테마 스토어의 ‘새로 나온 테마’는 가로로 스크롤해 볼 수 있도록 개선", "결제를 구독으로 전환 — 월간 구독 1,200원/월, 연간 구독 10,500원/년 (결제일마다 자동 결제, 요금제 선택 카드 추가)", "계정 창에 구독 상태(요금제 · 다음 결제일 · 카드)와 ‘구독 해지’ 추가 — 해지하면 다음 결제부터 청구되지 않고 낸 기간은 유지", "정기결제가 실패하면 하루 간격으로 최대 3번 다시 시도하고, 끝내 실패하면 구독이 종료되도록 개선", "상품 상세 · 환불 안내 · 탈퇴 안내 문구를 구독 기준으로 수정하고, 홈페이지 요금 안내도 월간/연간으로 변경", "모바일 안전 영역(카메라 홀 · 노치 · 홈 바)을 비워 두도록 개선하고 하단도 살짝 띄움", "모바일에서 프레젠테이션 · 번역 버튼을 더보기 밖으로 꺼내 도구 모음의 ⋯ 버튼 왼쪽에 배치", "상단 헤더의 북마크 목록 · 주석 버튼 제거", "레이어 패널의 레이어 이름이 너무 왼쪽에 붙어 보이던 문제 수정 (왼쪽 여백 추가)", "PC에서 옵션바를 접거나 펼 때 화면이 덜덜 떨리던 문제 수정 (화면 크기와 맞춤 배율을 한 프레임에 함께 바꾸도록 변경)"]}, {"v": "v0.9.2", "d": "2026.10.17", "items": ["PC에서 옵션바를 위로 접었다 펼 수 있도록 개선 (화면 위쪽 가운데 작은 토글 버튼, 접은 상태는 기억)", "토글 버튼에 마우스가 가까워지면 점점 밝아지도록 개선 (어두운 테마에서도 잘 보이도록 기본 밝기도 올림)", "디지털화를 실행하면 새로 만들어진 글자가 잠깐 반짝이는 효과 추가 (‘동작 줄이기’ 설정을 따름)", "모바일 메뉴에 PDF · MPDF 저장, PNG(현재 쪽 · 전체 ZIP) 내보내기 추가", "모자이크 도구 추가 — 영역을 드래그해 네모 블록으로 가리고, 만든 뒤에도 크기 · 블록 크기를 바꿀 수 있음 (PC 도구 모음 · 모바일은 더보기, 단축키 G)", "모바일에서 표 삽입 · 영역 선택 · 이미지 삽입을 더보기로 옮기고, 더보기를 아이콘 타일 시트로 새로 디자인", "회원 탈퇴 기능 추가 — ‘정말 탈퇴하시겠습니까? 계정 복구는 불가능합니다.’ 안내와 ‘확인했습니다’ 입력으로 진행, 프리미엄 계정은 환불이 되지 않는다는 안내 포함", "도형의 ‘채움 투명도’ 명칭을 ‘불투명도’로 변경", "PC 옵션바의 슬라이드바를 없애고 숫자 입력과 글자 끌기로 조절하도록 바꾸고, 옵션 사이 간격을 넓힘", "프리미엄 테마 ‘안개 숲’ 추가 — 짙은 초록 숲 실루엣과 달빛, 흐르는 흰 안개, 반딧불 (콘솔 `set theme 15`, 움직임은 테마 스토어에서 끌 수 있음)"]}, {"v": "v0.9.1", "d": "2026.10.16", "items": ["레이어 패널 상단 레이어 이름 입력창을 아래 블록과 구분되도록 더 밝게 개선", "좌우 패널에 붙은 작은 토글 버튼으로 열기/닫기 추가, 패널 크기를 크게 줄이면 자동으로 닫히도록 개선 (PC 상단 헤더의 패널 버튼 제거)", "페이지 썸네일 ⋯ 메뉴를 버튼 기준으로 펼쳐지는 방사형 메뉴로 변경", "노트 삭제 버튼을 노트 탭 줄 오른쪽의 빨간 휴지통 아이콘으로 이동", "타자연습 Enter 시작 지원, 플레이 중 나가기 버튼 · Esc 추가, 메뉴에 탭 닫기 버튼 추가", "페이지 패널 정렬 개선 (썸네일 보기는 가운데, 목록 보기는 왼쪽), 불필요한 검색 버튼 제거", "설정의 테마 설명 문구 간소화", "설정 콘솔 명령어 도움말을 묶음별로 접고 펼 수 있도록 정리", "헤더 시간에 마우스를 올리면 년월일 · 요일 · 시분초를 보여주는 작은 창 추가", "캡처 방식 선택 추가 (화면 캡처 기본 / 카메라 캡처), 카메라 캡처는 촬영한 사진을 바로 페이지에 삽입", "카메라 · 음성 녹음 장치 선택 기능 추가 (선택한 장치 기억)", "공포 테마 글자 깨짐 연출을 더 많이, 더 자주 나오도록 강화하고 경고 문구 간소화", "공포 테마에서 다른 테마로 바꿨을 때 깨진 글자가 그대로 남던 문제 수정 (글자 원본 복구)", "영역 도구의 ‘닿은 개체 삭제’를 ‘닿은 개체 선택’으로 변경, 선택한 여러 개체를 Delete로 한 번에 삭제 가능", "백룸 테마 화면 깜빡임을 약하고 드물게 조정, 테마 스토어에서 깜빡임 켜기/끄기 추가", "튜토리얼의 고양이 이모지를 사이트 파비콘 모양 아이콘으로 단순화", "튜토리얼 후반부에 전체화면 사용 추천 단계 추가 (실제 전체화면 버튼을 빛나는 테두리와 말풍선으로 안내)", "업데이트 내역을 개발 일지 형식(추가 · 개선 · 수정)으로 정리"]}, {"v": "v0.8.6", "d": "2026.10.16", "items": ["프리미엄 ‘백룸’ 테마 추가 (노란 벽지 · 형광등 깜빡임 · 필름 노이즈, 콘솔 set theme 14)", "마우스 오른쪽 클릭 컨텍스트 메뉴 추가 (선택한 글자 한국어 번역, 잘라내기 · 복사 · 붙여넣기 · 모두 선택, 이미지 · 표 · 메모 삽입, 프리미엄 음성 삽입)", "영역 도구에 범위에 닿은 개체를 한꺼번에 다루는 방식 추가 (드롭다운 · 옵션바에서 선택)", "형광펜이 모든 개체(PPTX 글자 포함) 위, 맨 앞에 그려지도록 수정", "멀티작업 개선 — 제목 글씨체를 통통하고 둥근 폰트로 고정, 탭 + 버튼은 홈 화면을 새 탭으로 열도록 변경, 편집기의 버튼 줄 제거, 웹페이지 주소줄 접기/펼치기 추가, 안내 문구 닫기 추가", "회원가입 시 이메일 인증번호 확인 필수화 (서버 설정과 무관하게 인증번호 단계 적용)", "로그인 · 서버 연결 · 불러오는 중 화면 중앙 로딩 UI 추가 및 다른 버튼 입력 차단"]}, {"v": "v0.8.5", "d": "2026.10.16", "items": ["첫 방문 시작 튜토리얼 추가 (PC / 모바일 구분, 설정 → 정보에서 다시 보기)", "DOCX 가져오기 전면 개선 (글자 크기 · 서식 · 줄/문단 간격 · 정렬 · 번호/글머리 · 표 · 그림 · 쪽 크기와 여백 반영)", "PNG 열기 시 흰 페이지가 나오던 문제 수정, 문서 없을 때 Ctrl+V로 클립보드 이미지 열기 추가", "모바일 도구 모음 접기/펼치기 추가, 프레젠테이션 버튼 추가, 메모 · 링크 · 디지털화 · 프레젠테이션 · 번역을 더보기 도구로 이동", "계정 · 프리미엄 창(PC) 좌우 분할 레이아웃, 비밀번호 보기/숨기기 버튼 추가, 중복 가입 안내 오류 수정", "페이지 패널 썸네일 크기 확대"]}, {"v": "v0.8.4", "d": "2026.10.16", "items": ["테마 선택 창을 ‘테마 스토어’로 개편 — 넓은 창에서 실제 화면 모양 미리보기 · 분류(전체 · 새로 나온 · 무료 · 프리미엄 · 기간 한정 · 나만의 테마) · 설명 · 적용 버튼으로 한눈에 고를 수 있음", "무료 테마에 키위 다크 추가 (배경 #000000 · 보조색 #407252 · IBM 플렉스 산스)", "공포 테마 추가 — 페이지를 넘길 때 붉은 글자가 잠깐 깜빡이고 화면 글자가 순간 깨져 보이는 연출 (적용 전 경고 문구 표시, 연출 끄기 · ‘동작 줄이기’ 설정 자동 반영)", "공포 테마는 매년 9월 1일 ~ 11월 30일에만 무료인 기간 한정 테마이며, 그 밖의 기간에는 프리미엄으로 전환됨 (남은 기간 · 다음 무료 기간 표시)", "가장 최근에 나온 테마에는 NEW 딱지 표시 (더 새로운 테마가 나오면 자동으로 이전 딱지는 사라짐)", "좌측 도구 모음에서 메모 · 음성 · 캡처 · 인쇄 · 발표 · 번역을 ‘더보기’ 도구 안으로 이동하고, 좌측 도구 버튼을 조금 더 크게 조정", "발표 모드의 나가기 버튼을 빨간색으로, 아이콘을 X 대신 나가기 아이콘으로 변경", "도구 단축키를 키보드 줄 순서로 정리 — QWER: 강조표시 · 그리기 · 직선 · 지우개 / ASDF: 도형 · 텍스트 · 링크 · 표 / ZXCV: 영역 · 이미지 · 메모 · 음성 (나머지 도구는 그 오른쪽에 배치)", "노트에서 마크다운(.md)과 텍스트(.txt) 형식을 고를 수 있고, + 버튼으로 새 노트를 만들 때도 형식을 선택", "마크다운 노트를 윈도우 메모장처럼 서식이 바로 반영된 ‘서식 보기’(기본)와 기존 ‘원문’으로 나눠 볼 수 있음 (‘# ’ · ‘- ’ · ‘1. ’ · ‘[] ’ 입력 시 바로 서식 적용)", "디지털화 정확도 개선 — 표 테두리 · 밑줄 · 도형을 글자로 읽지 않도록 걸러내고, 글자를 칸 · 단어 간격별로 나눠 원본 모양 그대로 수정할 수 있게 하며 글자 크기가 비정상적으로 커지던 문제 수정", "이메일 인증 오류 메시지를 알기 쉬운 말로 변경 (인증번호 만료 · 잘못 입력, 너무 빨리 다시 요청 등)"]}, {"v": "v0.8.3", "d": "2026.10.16", "items": ["프리미엄은 구독이 아닌 ‘1년 이용권’이라는 점을 계정 창 · 상품 상세 · 홈페이지 요금 안내에 명시, 매년 자동결제가 되지 않는다는 점을 강조해 안내 추가", "멀티작업 패널 제목을 아이콘이 들어간 그라데이션 디자인으로 개선", "페이지 패널 썸네일 좌우 여백을 줄여 썸네일이 더 크게 보이도록 개선", "표 / 도형 / 그리기 등 선택한 모든 개체의 오른쪽 위에 삭제 버튼 추가", "표 편집에서 행 · 열 배경색을 바꿀 수 있도록 추가", "전체 페이지 관리 상단 바를 아이콘이 들어간 묶음 구성으로 개선", "커스텀 테마 만들기를 별도 화면으로 분리하고 큰 미리보기 · 색상 견본 · 글꼴 목록 추가, 커스텀 테마 버튼은 세로를 줄이고 가로를 전체 폭에 맞춤", "커스텀 테마 글꼴 39종을 각 글꼴로 미리 볼 수 있도록 추가", "홈페이지 푸터에 사업자 정보 페이지 링크 추가, 사업장 주소(상세) · 전화번호를 사업자 정보 페이지에 게시", "아이디 · 비밀번호 로그인 추가 (회원가입: 닉네임 · 아이디(중복 불가) · 비밀번호 · 이메일 인증번호 확인, 이후 아이디와 비밀번호만으로 로그인)", "로그인 후 비밀번호 변경(현재 비밀번호 확인), 로그인 전 등록된 이메일 인증번호로 비밀번호 재설정 추가", "프로필 사진 변경 · 삭제와 닉네임 수정 추가, 상단 계정 버튼에 프로필 사진 표시", "로그인 · 회원가입 창의 폭을 고정하고 오른쪽 결제 카드가 늘었다 줄지 않도록 개선, 결제 카드 디자인 정리"]}, {"v": "v0.8.2", "d": "2026.10.15", "items": ["프리미엄 기능으로 커스텀 테마를 추가 — 배경색 · 보조색 · 글꼴을 직접 골라 나만의 테마를 만들 수 있고, 글자색과 밝기는 배경색에 맞춰 자동으로 정해짐", "글꼴을 6종에서 39종으로 확대 (고딕 A1 · IBM 플렉스 산스 · 블랙한산스 · 도현 · 주아 · 개구 · 고운바탕 · Roboto · Playfair Display 등) — 사이트와 텍스트 모두에 적용", "디지털화 도구 추가 — PNG 같은 이미지, 스캔 페이지, PDF의 글자를 클릭해서 수정할 수 있는 글자 개체로 바꿔줌 (글자가 있는 PDF는 인식 없이 바로, 이미지는 글자 인식으로 변환하며 원래 글자의 위치 · 크기 · 색 · 배경색을 맞춤)", "디지털화 도구 옆 드롭다운에서 ‘현재 페이지’와 ‘전체 페이지’ 범위를 바꿀 수 있고, 이미지 글자 인식 언어(한국어 · 영어)도 고를 수 있음", "글자 크기를 소수점(0.1 단위)까지 지정할 수 있고, 자간도 0.1% 단위로 조절 가능. 디지털화할 때 크기는 소수점으로, 폭은 자간으로 맞춰서 띄어쓰기가 사라지지 않음", "docx · HWP(HWPX) 내보내기에서 쪽 크기와 가로/세로 방향을 쪽마다 그대로 맞춰 내용이 쪽 밖으로 나가지 않게 개선", "docx ‘글자 편집용’ 내보내기가 이미지 · 도형 · 그림 · 배경색은 쪽 배경으로 그대로 보존하고, 글자는 원래 자리의 글상자로 담아 바로 수정할 수 있게 개선", "레이어 이름은 목록을 더블클릭(더블탭)해도 바꿀 수 있도록 수정 (자동 · 수동 모두)", "멀티작업 버튼을 3×3으로 고정하고, 화면이 작아지면 버튼이 가려지지 않고 함께 작아지도록 개선", "PNG 파일을 열면 빈 흰 페이지로 보이던 문제를 수정", "업데이트 내역의 버전마다 업데이트 날짜를 표시"]}, {"v": "v0.8.1", "items": ["계정 · 프리미엄 창의 닫기 버튼을 오른쪽 위 X 버튼으로 변경", "테마 중 어두운 · 밝은 · 한국 · 일본 · 커피를 제외한 프루티거 에어로 · 핑크세상 · 드림코어 · 레트로게임 · 새싹은 프리미엄 전용 (선택 창에 표시, 프리미엄이 아니면 어두운 테마로 표시)", "개발자 콘솔에 game 명령어 추가 — 바로 타자연습으로 이동", "모바일에서 소개 페이지(index)는 항상 어두운 테마로 고정", "페이지 패널의 썸네일 좌우 여백을 줄이고 가운데 정렬", "상단 개발자 콘솔 버튼 또는 / 키로 여는 빠른 콘솔에 추천 명령어를 아래에 표시 (입력하면 이어지는 명령어와 인자를 추천, ↑↓ 선택 · Tab 채우기 · Enter 실행)", "개발자 계정의 키 발급 내역 보기에 진행 표시줄 추가 (불러오는 동안 진행 표시, 각 키의 남은 기간 막대)", "멀티작업 화면 위에 큰 \"멀티작업\" 제목을 넣고, 파일 버튼은 뷰어로, 빈 문서 버튼은 meow-pdf.com 편집기로 바꿈", "멀티작업 넓게 보기 버튼 추가 (탭 줄을 숨기고 패널을 넓힘)", "전체 페이지 관리에 PDF 회전(왼쪽 · 오른쪽) 추가, 전체 페이지 관리는 이제 무료", "PPTX · HWP · MPDF 열기를 프리미엄에서 제외하고, PNG · DOCX 열기를 추가", "상단 탭의 \"불러오기\" 버튼을 없애고 + 버튼에서 새 탭 · 불러오기를 고르게 변경", "링크 도구 추가: 영역을 드래그해 웹 주소 또는 문서 안 페이지로 연결 (PDF에도 링크로 저장)", "왼쪽 도구 모음에서 모든 도구가 화면에 들어오도록 간격을 자동 조절", "한 페이지씩 보기에서 화면에 맞추면 오른쪽 스크롤바가 생기지 않도록 수정", "노트에 서식 도구 추가 (제목 · 목록 · 굵게 · 기울임 · 취소선 · 링크 · 표 · 서식 지우기), 서식을 쓰면 .md로 저장할지 확인", "도구에 표 삽입 추가 (프리미엄) · 붙여넣기 버튼은 도구에서 제거 (Ctrl+V는 그대로)", "텍스트 일부만 다른 색으로 바꾸기 추가 — 글자를 선택하고 색을 고르면 그 부분만 변경, 다시 수정할 때도 유지", "새 테마 \"미니홈피\" 추가 (프리미엄) · 앞으로 추가되는 테마는 모두 프리미엄, 테마 창에서 무료 / 프리미엄을 나눠 표시", "내보내기에 HWP(HWPX) 추가, Word 이름을 docx로 변경"], "d": "2026.10.15"}, {"v": "v0.7.5", "items": ["커피 테마 추가 (따뜻한 크림색 · 갈색 종이 느낌, 눈이 편한 밝은 테마, 콘솔: set theme 8)", "모바일에서 개체 · 글상자를 선택하거나 영역을 지정하면 오른쪽 위에 삭제 버튼 표시", "타자연습에 난이도 추가 (쉬움 · 보통 · 어려움, 난이도별 최고 점수와 점수 배율)", "타자연습에 아이템 추가 (얼음: 낱말 정지 · 폭탄: 화면 정리 · 느림: 속도 감소 · 두배: 점수 2배 · 금빛 냥: 목숨 +1)", "레트로게임 테마 추가 (픽셀 · 네온 · 스캔라인, 콘솔: set theme 9)", "새싹 테마 추가 (옛날 포털 사이트 느낌의 연두색 · 흰색 디자인, 콘솔: set theme 10)", "멀티작업에서 연 PDF · PPTX · HWP · 빈 문서 · 병합 문서를 'Meow-PDF로 편집하기' 버튼으로 바로 편집기로 가져와 수정 (콘솔: work edit)"], "d": "2026.10.14"}, {"v": "v0.7.4", "items": ["결제 프리미엄과 이용 키 사용자를 구분해서 표시 (상단 버튼 · 계정 창 · 모바일 더보기), 이용 키 사용자도 남은 기간 표시", "프리미엄 남은 이용 기간 표시 — 상단 계정 버튼(예: 프리미엄 | 120일), 계정 창(만료일 · 남은 일수), 모바일 더보기. 만료 7일 전 안내, 30일 이내에는 계정 창에서 바로 연장 가능, 사용 중 기간이 끝나면 자동으로 해제", "모바일에서 파일을 불러올 때 전체화면이 풀리던 문제 개선 (선택이 끝나면 전체화면으로 복귀)", "멀티작업에 타자연습 게임 '타자 비' 추가 (떨어지는 낱말을 입력해 없애기 · 한글 / 영어 / 섞어서 · 최고 점수 저장, 콘솔: work type)", "숨은 재미 요소(이스터에그) 추가 — 직접 찾아보기", "개발자 콘솔에도 숨은 명령어 1개 추가"], "d": "2026.10.14"}, {"v": "v0.7.3", "items": ["한국 · 일본 테마 추가 (태극기 · 일장기 색)", "드림코어 테마 추가 (파스텔 하늘 · 구름 · 별빛 · 필름 입자 분위기, 콘솔: set theme 7)", "테마를 별도 선택 창에서 둥근 정사각형 버튼으로 고름 (테마별 아이콘 포함, 콘솔: set theme 5 / 6 · theme picker)", "발표 모드 레이저에 잔상 추가", "멀티작업의 빈 문서 · 병합을 멀티작업 탭으로 열기", "개발자 콘솔에 화면 맞춤 명령어 추가 (fit · fit page)", "모바일 헤더 크기를 조금 키움", "모바일 더보기 바텀 시트를 아이콘 타일 형태로 정리", "소개 페이지(index)에 지금까지의 개선 사항 반영"], "d": "2026.10.14"}, {"v": "v0.7.2", "items": ["영역 지정 도구에 드롭다운 추가 (사각형 / 자유 선택 전환)", "영역 위에 마우스를 올리면 이동 커서, 가장자리 8개 점으로 늘리기 · 크기 조정 (Shift: 비율 유지)", "설정에서 페이지 이동 연출 켜기 / 끄기 (콘솔: set pageanim off)", "개발자 콘솔 도움말을 다시 표시하고 설명을 보기 쉽게 정리", "레이어를 클릭-드래그해 순서를 바꿀 수 있음 (자동 · 수동 레이어 공통, 터치는 길게 누른 뒤)", "프리미엄 상품 상세 창 추가: 결제 1년 · 이용 키 3개월 · 환불 7일 규정 안내", "옵션바의 굵기 · 크기 · 불투명에 숫자 입력칸 추가, 글자 위에서 좌우로 끌어 조절 (유니티식)", "캡처 시 어두운 뷰어 배경을 빼고 페이지 영역만 캡처 (붙여넣었을 때 어둡게 보이던 문제)", "Ctrl+클릭으로 글상자를 여러 개 골라 동시에 수정"], "d": "2026.10.13"}, {"v": "v0.7.1", "items": ["상단 탭과 멀티작업 탭을 마우스로 끌어서 순서를 바꿀 수 있음", "개발자 콘솔 추가 (설정 > 개발자 콘솔, 단축키 Ctrl+`) — 예: set theme darktheme · set theme 1 · tool pen · zoom 150 · export docx", "개발자 콘솔의 전체 명령어와 도움말을 설정의 새 탭에 정리 (대부분의 기능을 콘솔로 실행 가능)", "멀티작업의 최근 접속 사이트를 하나씩 또는 모두 삭제할 수 있음", "Word(.docx)와 PNG로 내보내기 추가 — Word는 글자 편집용 / 페이지 이미지용, PNG는 현재 쪽 / 전체(ZIP)", "내보내기 목록을 작고 보기 쉽게 정리", "상단 헤더에 개발자 콘솔 버튼 추가 (프리미엄 전용)", "모바일 설정창 상단 메뉴를 아이콘 위주로 정리해 잘리지 않게 개선", "개발자 콘솔 도움말을 ? 에 마우스를 올리면 표시되도록 개선", "핑크세상 테마 추가 (연한 핑크, 콘솔: set theme 4)", "상단 개발자 콘솔 버튼 또는 / 키로 작은 입력 칸을 열어 바로 명령 실행 (Enter 실행 · Esc 닫기)"], "d": "2026.10.13"}, {"v": "v0.6.5", "items": ["레이어 방식 선택 추가 — 개체마다 자동으로 만드는 ‘자동’과, 그림판처럼 레이어를 직접 추가·이름 변경·순서 변경·숨김·잠금·병합하는 ‘수동’ 중에서 고를 수 있음", "PC에서는 연속 스크롤 / 한 페이지씩 보기, 모바일에서는 한 페이지씩 넘기기 / 세로로 넘기기를 설정에서 선택 가능", "한 페이지씩 보기에서는 방향키·PageUp/Down·마우스 휠(끝에서)·페이지 목록으로 페이지를 넘김"], "d": "2026.10.13"}, {"v": "v0.6.4", "items": ["형광펜이 글자를 흐리게 하던 문제 개선 — 곱하기(multiply) 방식으로 칠해 글자가 선명하게 보이고(저장 PDF 포함), 글자 위에 칠하면 글자 줄에 맞는 깔끔한 띠로 자동 정리(‘글자 맞춤’, 끄면 자유롭게)", "헤더에 전체화면 / 해제 버튼 추가", "모바일 확대·축소(핀치) 중에는 이미지를 다시 그리지 않고 손을 뗀 뒤 한 번만 선명하게 그려 끊김을 줄임", "도구에 영역 지정 추가 — 사각형 또는 자유 선택으로 지정해 펜 그림·도형의 일부만 잘라 이동·복사·붙여넣기·삭제(그림판 방식), 영역 이미지 복사·저장·글자 복사 (단축키 R)", "업데이트 내역을 0.1.x · 0.2.x … 처럼 버전 두 번째 자리(y)별로 묶어 표시", "설정에서 버전 정보와 고객센터를 별도 메뉴로 분리", "모바일 상단 버튼 간격과 크기를 줄여 비좁게 보이던 문제를 완화(계정 버튼은 더보기 메뉴에도 추가)", "멀티작업의 8번째 버튼으로 계산기 추가 (키보드 입력 · 괄호 · % · 제곱근 · 기록 · 복사 · 노트 · 페이지 삽입)", "줌 바를 마우스로 끌어 옮길 수 있게 함. 위·아래 가장자리에서는 가로로, 왼쪽·오른쪽 가장자리에서는 세로로 자동 전환되고 위치는 저장됨", "고객센터 이메일 보내기 링크도 contact@meow-pdf.com으로 변경"], "d": "2026.10.13"}, {"v": "v0.6.3", "items": ["멀티작업 첫 화면에 빈 문서 · 파일 병합 · 파일 압축 버튼을 추가하고, 버튼 줄은 패널 크기에 따라 한 줄에 1개 · 2개 · 4개로만 배치", "설정에 편집기 언어 변경 추가: 한국어 / English / 日本語 / 中文", "PDF 글자를 끌어서 옮길 때 뒤에 있는 원래 글자가 잠깐 보이던 문제를 수정", "업데이트 내역을 버전 묶음(beta / 0.0.1~0.5.3 / 0.6.1~)으로 나눠 계층형으로 표시", "설정의 테마에 프루티거 에어로 테마 추가(하늘색 · 연두색 유리 질감)"], "d": "2026.10.13"}, {"v": "v0.6.2", "items": ["소개 페이지 푸터에 상호(타니아)와 주소(경기도 부천시 중동로 108)를 표기", "소개 페이지에 환불정책 추가: 결제일로부터 3일 이내에 요청하면 환불", "소개 페이지에 GitHub 링크 추가", "소개 페이지와 안내 문서의 문의 이메일을 contact@meow-pdf.com으로 변경", "메모와 번역 도구(페이지 번역, 멀티작업의 번역 · 사전)를 프리미엄 기능으로 전환", "프리미엄 전용 기능의 자물쇠 표시를 없애고, 대신 버튼을 흐리게(밝기를 낮춰) 표시"], "d": "2026.10.12"}, {"v": "v0.6.1", "items": ["멀티작업에 번역 · 사전 도구 추가: 글을 붙여넣어 번역하고, 단어를 찾으면 뜻을 보여주며 원하는 언어로 함께 번역", "번역 · 사전 결과를 복사하거나 노트에 추가, 현재 페이지에 텍스트로 삽입. 파파고 · 구글 번역 · DeepL · 네이버 사전 바로가기 제공", "번역 창 문구를 줄이고 디자인을 새로 다듬음(언어 바꾸기 버튼, 둥근 선택 버튼, 부드러운 그림자)", "Chrome 번역 모델을 내려받는 동안 진행률(%)을 표시하고, 45초 넘게 진행이 없으면 멈춤 안내와 '서버 번역만 사용' 선택지 표시", "모바일에서 파일을 열 때 용도에 맞는 모드를 고를 수 있음: 보기(읽기 전용) / 간편 수정(글자 수정 제외) / 기본(모든 기능). 더보기 메뉴에서 언제든 바꿀 수 있음", "PDF 글자를 클릭해 수정할 때 원본 글자의 자간을 읽어와 같은 간격으로 반영", "텍스트 도구, 수정 중인 글자, 선택한 글자에서 자간(-10% ~ 50%)을 직접 설정할 수 있음. 저장 · 인쇄 · 내보내기에도 반영", "멀티작업 첫 화면을 새로 디자인: 글자를 최소화하고 둥근 타일 버튼(파일 · 웹 · 번역 · OneCompiler)과 간결한 바로가기 칩으로 정리", "개체나 텍스트를 선택하면 왼쪽 위에 이동 핸들이 나타나 끌어서 옮길 수 있음", "PDF 글자를 클릭해 수정할 때, 텍스트 도구로 입력할 때도 왼쪽 위에 이동 핸들이 나타나 글자 위치를 끌어서 옮길 수 있음"], "d": "2026.10.12"}, {"v": "v0.5.3", "items": ["소개 페이지(index)와 편집기의 파비콘을 같은 고양이 아이콘으로 통일", "페이지 번역 추가: 도구 모음 가장 오른쪽의 번역 버튼으로 현재 보고 있는 페이지만 번역", "번역 방식 선택: 원문 / 전체 번역 / 마우스 오버 번역(글자에 마우스를 올리면 그 문단만 번역)", "원본 언어 자동 감지, 번역할 언어 선택(기본 한국어). 크롬 내장 번역을 우선 사용하고, 없으면 서버 번역(키 없이도 쓰는 무료 엔진 포함)으로 대체", "번역에 실패하면 원인(서버 미배포, 사용량 초과, Chrome 내장 번역 사용 불가 사유)을 안내", "Chrome 번역 모델 준비가 오래 걸리면 기다리지 않고 서버 번역으로 먼저 번역하고, 준비되면 다음부터 내장 번역 사용", "서버 번역: 한국어 등 긴 글이 무료 엔진의 글자 수(바이트) 제한에 걸려 실패하던 문제 수정", "HWP 파일이 열리지 않던 문제 수정(압축 해제 오류) — 실제 HWP 샘플 파일로 확인"], "d": "2026.10.12"}, {"v": "v0.5.2", "items": ["편집 화면 상단의 고양이 아이콘을 누르면 소개 페이지로 돌아가도록 변경"], "d": "2026.10.12"}, {"v": "v0.5.1", "items": ["서비스 소개 페이지(meow-pdf.com)를 새로 만들고, 기존 편집 화면은 /edit 주소로 이동", "소개 페이지 하단에 사업자 정보(Thaniya project, 사업자 등록번호) 표기", "옵션바의 색상 영역이 밖으로 튀어나오거나 잘리던 문제를 수정", "텍스트 정렬의 기본값을 왼쪽 정렬로 변경", "도형에 별 추가", "도형의 원 버튼에 그래픽이 비어 있던 문제를 수정"], "d": "2026.10.12"}, {"v": "v0.4.5", "items": ["시작 화면의 버튼(파일 열기, 빈 문서로 시작, 파일 병합, 파일 압축)을 모서리가 둥근 정사각형 타일 형태로 변경", "텍스트 왼쪽 정렬 / 가운데 정렬(기본) / 오른쪽 정렬 설정 추가 (새 텍스트, 편집 중, 선택한 텍스트에 적용)", "도구 모음을 좌측에 배치했을 때 도구 버튼 크기를 줄임", "캡처, 인쇄, 프레젠테이션 버튼을 다시 도구 모음으로 이동"], "d": "2026.10.12"}, {"v": "v0.4.4", "items": ["헤더의 테마 변경 버튼과 GitHub 버튼을 제거하고, 화면 밝기 조절을 설정의 화면 · 레이아웃 항목으로 이동", "도구 툴바의 저장 관련 버튼(저장, 다른 이름으로 저장)을 헤더로 이동", "헤더의 새 문서, 열기 버튼을 제거하고 실행 취소, 다시 실행, 캡처, 인쇄, 발표 버튼을 헤더로 이동", "결제 안내에 최초 1회만 결제하면 계속 이용할 수 있다는 내용을 깔끔한 카드 UI로 명시", "옵션바의 크기(내용)에 따라 화면이 재조정되지 않도록 옵션바 높이를 고정"], "d": "2026.10.12"}, {"v": "v0.4.3", "items": ["사이드 메뉴 방식의 UI 기반 설정 창을 열 수 있는 버튼 아이콘을 상단 레이아웃에 추가, 해당 설정 창 내에서 애플리케이션 버전 정보 확인과 고객센터 피드백 제출이 가능하도록 구현", "이때 접수된 불편사항은 개발자 계정의 관리자 대시보드나 DB로 수집되어 일괄 조회 및 관리가 가능", "사용자가 주요 기능의 단축키를 직접 매핑하고 변경할 수 있는 커스터마이징 기능과 함께 기존 상단에 고정되어 있던 도구 툴바 배치를 좌측 정렬 또는 상단 정렬로 선택할 수 있는 레이아웃 옵션을 제공", "반응형 UX 개선을 위해 모바일 환경에서 가로보기(Landscape) 모드로 전환될 경우, 페이지 패널이 자동으로 화면 좌측에 정렬되도록 미디어 쿼리 및 Flex/Grid 레이아웃 구조를 보완"], "d": "2026.10.12"}, {"v": "v0.4.2", "items": ["모바일 화면 크기에 맞춰 반응형 뷰포트 및 레이아웃 적용", "모바일 환경에서 레이어, 노트, 멀티작업 등 부가 기능 숨기고 최소한의 핵심 기능만 남기도록 개선", "모바일 화면에서 스와이프 및 드래그로 페이지 넘기기 기능 추가 (두 손가락 확대/축소 가능)", "모바일에서 페이지 패널을 화면 하단으로 배치", "상단 편집 버튼들을 깔끔하게 재배치하고, 계정 버튼을 저장 버튼 왼쪽으로 이동", "텍스트 직접 수정 기능 유지", "텍스트 선택 시 뜨는 옵션바(optbar)가 화면 밖으로 나가지 않도록 두 줄로 예쁘게 배치하고, 옵션바 표시 여부에 따라 화면 페이지가 밀리거나 재조정되지 않도록 수정"], "d": "2026.10.11"}, {"v": "v0.4.1", "items": ["모바일 화면 크기에 맞춰 반응형 뷰포트 및 레이아웃 적용", "모바일 환경에서 레이어, 노트, 멀티작업 등 부가 기능 숨기고 최소한의 핵심 기능만 남기도록 개선", "모바일 화면에서 스와이프 및 드래그로 페이지 넘기기 기능 추가 (두 손가락 확대/축소 가능)", "모바일에서 페이지 패널을 화면 하단으로 배치", "상단 편집 버튼들을 깔끔하게 재배치하고, 계정 버튼을 저장 버튼 왼쪽으로 이동", "텍스트 직접 수정 기능 유지", "텍스트 선택 시 뜨는 옵션바(optbar)가 화면 밖으로 나가지 않도록 두 줄로 예쁘게 배치하고, 옵션바 표시 여부에 따라 화면 페이지가 밀리거나 재조정되지 않도록 수정"], "d": "2026.10.11"}, {"v": "v0.3.3", "items": ["키 발급 관련 일부 로직 수정"], "d": "2026.10.10"}, {"v": "v0.3.2", "items": ["키 발급 관련 서버 연결 문제 해결"], "d": "2026.10.10"}, {"v": "v0.3.1", "items": ["파일이 없는 화면에서 파일 열기, 빈 문서로 시작 옆에 파일 병합, 파일 압축 기능을 배치", "파일이 없는 화면에서 안내 텍스트를 최소화하여 UI 깔끔하게 수정", "저장 버튼에 파일 압축해서 내보내기(10%, 20%, 40%)옵션 추가 - 프리미엄 사용자 한정, PPTX파일로 내보내기 옵션 추가", "화면에 다른 PDF를 드래그해서 넣으면 멀티 탭으로 넣기, 현재 파일에 병합하기 옵션이 나타나도록 기능 추가 (병합하기 시 두 파일의 병합순서 드래그로 결정 가능)", "페이지 패널에 전체 페이지 관리하기 버튼 추가-프리미엄", "전체 페이지 관리하기 시 그리드형태로(크기조절 가능) 각 페이지가 화면에 가득 차게 나타나며 드래그하여 페이지 순서를 바꿀 수도 있도 여러 페이지를 삭제하거나 이름을 바꾸거나 계층구조 수정 가능하도록 기능 추가", "페이지 패널의 버튼 UI 전반적으로 깔끔하게 수정", "헤더에 있는 PDF제목 클릭하여 직접 수정 가능하도록 개선"], "d": "2026.10.09"}, {"v": "v0.2.2", "items": ["로그인시스템 및 결제 시스템 문제 해결"], "d": "2026.10.09"}, {"v": "v0.2.1", "items": ["일부 기능 유료화 도입"], "d": "2026.10.08"}, {"v": "v0.1.3", "items": ["온라인 컴파일러 프로그램 원컴파일러(OneCompiler) 바로가기가 멀티작업에서 제공되도록 개선"], "d": "2026.10.08"}, {"v": "v0.1.2", "items": ["음성 이름 편집 및 음성 내보내기 기능 추가"], "d": "2026.10.08"}, {"v": "v0.1.1", "items": ["음성녹음 및 재생 기능 추가", "음성녹음 MPDF에 삽입 기능 추가 (따로 내보내기 가능, MPDF 확장자 파일에 삽입된 상태로 저장 가능)"], "d": "2026.10.06"}, {"v": "v0.0.1", "items": ["멀티작업에서 웹페이지를 열 수 있도록 편의 향상", "화면맞춤 상태에서 PDF내 텍스트상자 클릭 시 텍스트 수정이 진행되지 않는 문제 해결", "멀티작업 화면에 파일 드래그 시 일반 편집기 화면에 파일이 닿으면 파일 드롭 안내가 사라지지 않는 문제 해결", "페이지 패널의 크기 조절 시 썸네일로 보기의 각 썸네일 크기도 패널의 크기에 맞게 조절되도록 개선", "페이지 북마크기능 추가, 페이지 패널 상단에 북마크 바로가기 드롭다운 리스트 버튼 추가", "텍스트의 글꼴 드롭다운 버튼에서 각 버튼의 글꼴 모양을 이름과 함께 미리보기 제공", "PDF전체에서 특정 글자 빠르게 찾는 검색기능 제공", "PDF 내에서 기존에 있는 텍스트를 수정하는 로직 개편 (기존에 비해 많은 양의 텍스트를 한 번에 수정 가능하도록)", "Meow-PDF 파비콘 추가"], "d": "2026.10.06"}, {"v": "beta 0.0.5", "items": ["세로모드 시 페이지, 레이어, 노트를 모두 하단 사이드바에서 전환 가능한 형태로 변경", "모든 사이드바를 테두리 마우스 드래그를 통해 크기 조절 가능하도록 변경 (기본 좌우, 세로모드는 상하)", "페이지 맞춤 시 사이드바를 고려하여 페이지가 화면에 모두 들어오게 조절되도록 개선 (화면 비율이 작은 경우)", "검은 고양이 스티커를 넣는 기능을 추가 (이미지 버튼을 전환 가능)", "레이어/노트 패널에 탭전환 방식으로 멀티작업 탭 추가 (파일탐색기를 여는 버튼이 중앙에 있으며 누르면 파일을 불러옴, 불러온 파일은 해당 패널에 가득 차도록 띄워지며 PDF를 보며 작업 가능), 멀티작업 패널은 또한 내부에서 멀티테스킹탭으로 관리 가능", "레이어/노트/멀티작업 여닫기 패널 버튼을 작업 사이드바 버튼으로 이미지 변경", "PDF 업로드 전 나타나는 화면 문구에서 PDF뿐만 아니라 PPTX파일도 수정 가능하다고 명시", "스프라이트시트, HWP 파일도 삽입/편집 가능하도록 제공"], "d": "2026.10.06"}, {"v": "beta 0.0.4", "items": ["페이지 계층관리 시 페이지를 끈 상태에서 마우스 휠을 굴리면 페이지가 올라갔다 내려갔다 하게 되도록 변경", "도형을 그리고 Ctrl+Z를 누르면 간혹 기능이 먹히지 않는 문제 해결", "화면 밝기 조절 바 시간 표시 부분 왼쪽에 추가", "페이지에 주석달기 기능 추가 (주석을 달면 그 페이지는 눈에 잘 띄도록 변경)", "페이지 목록으로보기 기능 추가 (기본적으로 페이지1 ... 로 표시되며 페이지이름 변경 가능)", "인쇄기능 추가", "레이어 병합 기능 추가", "편집화면 및 프리젠테이션 화면에서 Ctrl+스크롤 하면 마우스 커서를 중심으로 화면이 줌아웃되도록 변경", "작게 https://github.com/architect0509/meow-PDF페이지로 이동되는 버튼을 방해되지 않도록 배치", "텍스트나 도형 그리기에서 상단 optbar가 가로로 너무 길어지는 문제 색상 팔레트의 크기를 줄이고 슬라이더들을 정리하여 화면 내에 기능이 모두 들어오도록 개선", "글자선택을 개체와 통일시키고 PDF내 모든 텍스트상자를 클릭만으로 수정 가능하도록 개선", "색상 버튼의 개수를 5개로 줄이고 우측에 색상 팔레트를 크게 배치하며 5개의 작은 색상 버튼 아래에는 최근에 사용한 색상 5개가 나타나게 되도록 개선", "UI의 배치가 전부 상하로 이동하는 세로모드 변환 기능을 제공", "멀티테스킹탭 기능을 지원 (툴바 위에 삭제 및 불러오기, 추가 가능한 형식으로)", "레이어가 있는 위치에 탭전환 방식으로 노트를 작성할 수 있도록 기능 추가(노트는 다중 페이지로 관리 가능하며 .txt확장자 파일로 내보낼 수 있음)"], "d": "2026.10.06"}, {"v": "beta 0.0.3", "items": ["현재화면 캡쳐기능 제공(버튼의 위치는 저장버튼 좌측)", "상단 레이어버튼 옆에 현재시간,분 표시", "저장버튼 좌측 프리젠테이션모드 버튼 추가 -단축키 여닫기 p(프리젠테이션 내에는 마찬가지로 강조표시, 그리기, 직선, 도형, 지우개, 텍스트툴, 그리고 레이저를 사용가능한 마우스로 끌어서 옮길 수 있는 조작 도구창이 존재)", "레이저는 프리젠테이션중에만 사용 가능하며 L키로 생성/제거 가능", "이미지 버튼 우측에 C단축키로 메모 생성기능", "메모는 위치이동 및 크기조절 가능, 다중줄 글쓰기 가능, 접기 가능, 글씨 크기조절 가능", "ppt를 pdf로 가져오기 가능하도록 개선", "페이지 그룹화를 통한 계층관리 가능하도록 개선", "편집기록을 가진 프로젝트 파일인 mpdf확장자로 내보내기&불러오기 기능 추가", "(저장 및 다른이름으로 저장에 옵션 표시- pdf of mpdf) 확장자가 달라도 일반 저장의 기본옵션은 덮어쓰기", "텍스트에 채우기 옵션 추가 (기본 투명), 도형에 채우기 옵션 추가 (기본 투명, 투명도 조절 가능)", "페이지 넘기기 단축키에 Pg Up 과 Pg Down도 추가", "각 도구의 색깔은 그림판 팔레트 UI처럼 줄바꿈 이용, 사용자 지정 색상은 크기 증가, 스포이드버튼도 추가", "프로그램 내의 황색은 #dbbe43로, 배경의 어두운 색은 좀 더 무채색에 가깝게 변경"], "d": "2026.10.04"}, {"v": "beta 0.0.2", "items": ["전반적인 테마 변경, 개선 항목: 글자의 폰트 및 굵기, 기울임꼴 추가,", "화면맞춤 버튼 하단에 추가", "처음 저장버튼 누를때 파일을 불러온 경로에 자동 덮어씌우기 개선", "프로그램 테마색깔 황색으로 변경", "페이지 패널 버튼 좌측에 아이콘 추가, 패널 버튼과 거리 두기", "자 툴을 직선 그리기 툴로 변경", "펜 및 직선 그리기 툴 사용 시 붓 영역 화면 내에 표시", "펜 및 직선 그리기 툴 팔레트에 파스텔톤의 색상 추가", "강조표시는 직선형, 붓형 선택 가능하게 개선", "상단 툴을 분리 ( 글자선택과 개체 | 강조표시, 그리기, 직선 | 도형, 지우개, 텍스트 | 붙여넣기, 이미지 )", "각각의 버튼에 단축키 부여 ( 1, 2 | q, w, e | a, s, d | z, x )"], "d": "2026.10.04"}];
 /* ═══ v1.0.1 데스크톱 앱(Windows · macOS · Linux): 새 버전 확인 · 알림(버전마다 한 번) · 오른쪽 아래 새 버전 창 · 버전 정보의 업데이트 / 사이트 버튼 ═══
    · 앱은 window.meowDesktop 을 넣어 줘요 (desktop/preload.js). 웹에서는 아무것도 하지 않아요.
    · 최신 버전 정보는 사이트의 /version.json 에서 읽어요 (scripts/make-version-json.js 로 CHANGELOG에서 만들어요). */
@@ -14666,7 +15082,7 @@ function deskVerHtml() {
 function deskStack() { let s = $('#deskStack'); if (!s) { s = document.createElement('div'); s.id = 'deskStack'; document.body.appendChild(s); } return s; }
 async function deskOpenFiles(list) {
   if (!list || !list.length) return;
-  const files = list.map(x => new File([x.data], x.name || 'document.pdf', { type: /\.pdf$/i.test(x.name || '') ? 'application/pdf' : '' }));
+  const files = list.map(x => { const f = new File([x.data], x.name || 'document.pdf', { type: /\.pdf$/i.test(x.name || '') ? 'application/pdf' : '' }); if (x.path) RC_PATH.set(f, x.path); return f; });   // v1.1.4 최근 파일: 경로 기억
   try { await openMany(files, null); } catch (e) { toast('파일을 열지 못했어요.'); }
 }
 const ASSOC = { st: null, off: false };
@@ -15097,6 +15513,7 @@ const SETKEYS = {
   zoom: { h: ['25 ~ 300', '확대 비율(%)', 'Zoom (%)'], get: () => Math.round(state.zoom * 100), set: v => { conNeedDoc(); setZoom(conNum(v, 25, 300) / 100); return 'zoom = ' + Math.round(state.zoom * 100) + '%'; } },
   tool: { h: [CON_TOOLS.join(' | '), '현재 도구', 'Current tool'], get: () => state.tool, set: v => { const x = conNorm(v); if (!CON_TOOLS.includes(x)) throw new Error(CON_TOOLS.join(' | ')); conNeedDoc(); setTool(x); return 'tool = ' + x; } },
   'pen.smooth': { h: ['on | off', '그리기 획 보정', 'Pen stroke correction'], get: () => settings.pen.smooth !== false, set: v => { settings.pen.smooth = conBool(v); saveToolSet(); renderOptions(); return 'pen.smooth = ' + settings.pen.smooth; } },   // v1.1.2
+  'pen.stab': { h: ['0 ~ 3', '그리기 손떨림 보정 (0 끔 · 1 약 · 2 중 · 3 강)', 'Pen stabilizer (0 off · 1 low · 2 mid · 3 high)'], get: () => settings.pen.stab | 0, set: v => { settings.pen.stab = conNum(v, 0, 3) | 0; saveToolSet(); renderOptions(); return 'pen.stab = ' + settings.pen.stab; } },   // v1.1.4
   'highlight.snap': { h: ['on | off', '형광펜 글자 맞춤', 'Highlighter snap to text'], get: () => settings.highlight.snap !== false, set: v => { settings.highlight.snap = conBool(v); renderOptions(); return 'highlight.snap = ' + settings.highlight.snap; } }
 };
 function conSet(key, val) {
@@ -15320,6 +15737,8 @@ try { if (DESK && DESK.setLang) DESK.setLang(LANG); } catch (e) { /* 무시 */ }
 [["en", {"그리기 도구에 획 보정 추가 (기본: 켜짐) — 손을 떼면 ‘ㅇ’처럼 닫힌 고리는 반듯한 원으로, ㅁ · ㄷ · ㄹ처럼 꺾인 획은 곧은 선과 뾰족한 모서리로, 그 밖의 곡선은 부드럽게 다듬음 (영문 ‘e’는 원으로 바꾸지 않음), 옵션바의 ‘획 보정 / 끄기’로 켜고 끄기 · 노트 그림판의 펜에도 ‘보정’ 단추 추가": "Added stroke correction to the Pen tool (on by default) — when you lift the pen, closed loops like ‘ㅇ’ become clean circles, angular strokes like ㅁ · ㄷ · ㄹ become straight lines with sharp corners, and other curves are smoothed (a handwritten ‘e’ is never turned into a circle); toggle it with ‘Stroke correction / Off’ in the options bar · also added a ‘Correct’ button to the Paint note’s pen", "옵션바의 색상 · 채우기를 작은 색 단추로 변경 — 누르면 색 선택 창이 열리고 추천 색 · 기본 색 96가지 · 최근 사용 10개 · 사용자 지정 · HEX 입력 · 스포이드 사용 가능 (스포이드로 찍는 동안에는 창이 잠깐 숨음), 옵션바가 차지하는 너비가 크게 줄어듦": "Color and fill in the options bar are now a small color button — it opens a color window with suggested colors · 96 basic colors · 10 recent colors · custom color · HEX input · eyedropper (the window hides briefly while you pick with the eyedropper), so the options bar takes up much less width", "도형 도구의 도형 고르기를 모양만 있는 4×2 단추 표로 변경, 왼쪽 · 오른쪽 · 위쪽 · 아래쪽 화살표 도형 추가 (색상 · 채우기 · 선 굵기 · 불투명도 · 회전 그대로 사용)": "The shape picker in the Shape tool is now a 4×2 grid of icon-only buttons, and left · right · up · down arrow shapes were added (color · fill · line width · opacity · rotation all work as usual)", "헤더 접기 변경 — 탭바 오른쪽 끝 버튼(Ctrl+Shift+H)이 헤더만 접고 탭바는 그대로 남김, 같은 버튼으로 다시 펼침": "Changed header folding — the button at the right end of the tab bar (Ctrl+Shift+H) now folds only the header and keeps the tab bar; press the same button to unfold", "노트 위쪽 번호 탭에 노트 종류 아이콘 추가 — 번호 앞 아이콘으로 마크다운 · 텍스트 · 그림판 구분": "Added note-type icons to the numbered note tabs — an icon before each number shows Markdown · Text · Paint", "획 보정": "Stroke correction", "보정": "Correct", "그리기 획 보정": "Pen stroke correction", "획 보정: 손을 떼면 ㅇ은 반듯한 원으로, ㅁ · ㄷ · ㄹ처럼 꺾인 획은 곧게, 곡선은 부드럽게 다듬어요 (영문 e는 그대로). 커서의 원이 붓 굵기예요.": "Stroke correction: when you lift the pen, ㅇ becomes a clean circle, angular strokes like ㅁ · ㄷ · ㄹ become straight, and curves are smoothed (a handwritten e stays as is). The cursor circle shows the brush width.", "그린 그대로 남겨요. 커서의 원이 붓 굵기예요.": "Strokes stay exactly as drawn. The cursor circle shows the brush width.", "획 보정 — 손을 떼면 ㅇ은 반듯한 원으로, 꺾인 획은 곧게, 곡선은 부드럽게": "Stroke correction — when you lift the pen, ㅇ becomes a clean circle, angular strokes become straight and curves are smoothed", "획 보정을 켰어요.": "Stroke correction is on.", "획 보정을 껐어요.": "Stroke correction is off.", "헤더 접기 (Ctrl+Shift+H)": "Fold header (Ctrl+Shift+H)", "헤더 펼치기 (Ctrl+Shift+H)": "Unfold header (Ctrl+Shift+H)", "헤더 접기": "Fold header", "헤더 펼치기": "Unfold header", "헤더 접기 / 펼치기": "Fold / unfold header", "헤더를 접었어요. 탭바 오른쪽 끝 버튼(또는 Ctrl+Shift+H)으로 다시 펼칠 수 있어요.": "Header folded. Use the button at the right end of the tab bar (or Ctrl+Shift+H) to unfold it.", "마크다운": "Markdown", "{0} · 마크다운": "{0} · Markdown", "{0} · 텍스트": "{0} · Text", "{0} · 그림판": "{0} · Paint", "추천": "Suggested", "기본 색": "Basic colors", "사용자 지정 색": "Custom color", "HEX 색상 코드": "HEX color code", "스포이드 — 화면에서 색 추출 (찍는 동안 창이 잠깐 숨어요)": "Eyedropper — pick a color from the screen (this window hides while you pick)", "색상 선택": "Choose color", "채우기 선택": "Choose fill", "글자 배경 선택": "Choose text background", "색상 선택 — {0}": "Choose color — {0}", "채우기 선택 — {0}": "Choose fill — {0}", "글자 배경 선택 — {0}": "Choose text background — {0}", "왼쪽 화살표": "Left arrow", "오른쪽 화살표": "Right arrow", "위쪽 화살표": "Up arrow", "아래쪽 화살표": "Down arrow"}], ["ja", {"그리기 도구에 획 보정 추가 (기본: 켜짐) — 손을 떼면 ‘ㅇ’처럼 닫힌 고리는 반듯한 원으로, ㅁ · ㄷ · ㄹ처럼 꺾인 획은 곧은 선과 뾰족한 모서리로, 그 밖의 곡선은 부드럽게 다듬음 (영문 ‘e’는 원으로 바꾸지 않음), 옵션바의 ‘획 보정 / 끄기’로 켜고 끄기 · 노트 그림판의 펜에도 ‘보정’ 단추 추가": "描画ツールにストローク補正を追加(既定: オン)— ペンを離すと「ㅇ」のような閉じた輪はきれいな円に、ㅁ · ㄷ · ㄹ のように折れる線はまっすぐな線と鋭い角に、その他の曲線はなめらかに整える(英字「e」は円にしない)、オプションバーの「ストローク補正 / オフ」で切り替え · ノートのペイントのペンにも「補正」ボタンを追加", "옵션바의 색상 · 채우기를 작은 색 단추로 변경 — 누르면 색 선택 창이 열리고 추천 색 · 기본 색 96가지 · 최근 사용 10개 · 사용자 지정 · HEX 입력 · 스포이드 사용 가능 (스포이드로 찍는 동안에는 창이 잠깐 숨음), 옵션바가 차지하는 너비가 크게 줄어듦": "オプションバーの色 · 塗りつぶしを小さな色ボタンに変更 — 押すと色選択ウィンドウが開き、おすすめの色 · 基本色96色 · 最近使った色10個 · ユーザー設定 · HEX入力 · スポイトが使える(スポイトで取る間はウィンドウが一時的に隠れる)、オプションバーの幅が大きく縮小", "도형 도구의 도형 고르기를 모양만 있는 4×2 단추 표로 변경, 왼쪽 · 오른쪽 · 위쪽 · 아래쪽 화살표 도형 추가 (색상 · 채우기 · 선 굵기 · 불투명도 · 회전 그대로 사용)": "図形ツールの図形選択を形だけの 4×2 ボタン表に変更、左 · 右 · 上 · 下 矢印の図形を追加(色 · 塗りつぶし · 線の太さ · 不透明度 · 回転もそのまま使用可能)", "헤더 접기 변경 — 탭바 오른쪽 끝 버튼(Ctrl+Shift+H)이 헤더만 접고 탭바는 그대로 남김, 같은 버튼으로 다시 펼침": "ヘッダーの折りたたみを変更 — タブバー右端のボタン(Ctrl+Shift+H)はヘッダーだけを折りたたみ、タブバーはそのまま、同じボタンで再び展開", "노트 위쪽 번호 탭에 노트 종류 아이콘 추가 — 번호 앞 아이콘으로 마크다운 · 텍스트 · 그림판 구분": "ノート上部の番号タブにノートの種類アイコンを追加 — 番号の前のアイコンでマークダウン · テキスト · ペイントを区別", "획 보정": "ストローク補正", "보정": "補正", "그리기 획 보정": "描画のストローク補正", "획 보정: 손을 떼면 ㅇ은 반듯한 원으로, ㅁ · ㄷ · ㄹ처럼 꺾인 획은 곧게, 곡선은 부드럽게 다듬어요 (영문 e는 그대로). 커서의 원이 붓 굵기예요.": "ストローク補正: ペンを離すと ㅇ はきれいな円に、ㅁ · ㄷ · ㄹ のような折れる線はまっすぐに、曲線はなめらかに整えます(英字 e はそのまま)。カーソルの円がブラシの太さです。", "그린 그대로 남겨요. 커서의 원이 붓 굵기예요.": "描いたまま残します。カーソルの円がブラシの太さです。", "획 보정 — 손을 떼면 ㅇ은 반듯한 원으로, 꺾인 획은 곧게, 곡선은 부드럽게": "ストローク補正 — ペンを離すと ㅇ はきれいな円に、折れる線はまっすぐに、曲線はなめらかに", "획 보정을 켰어요.": "ストローク補正をオンにしました。", "획 보정을 껐어요.": "ストローク補正をオフにしました。", "헤더 접기 (Ctrl+Shift+H)": "ヘッダーを折りたたむ (Ctrl+Shift+H)", "헤더 펼치기 (Ctrl+Shift+H)": "ヘッダーを展開 (Ctrl+Shift+H)", "헤더 접기": "ヘッダーを折りたたむ", "헤더 펼치기": "ヘッダーを展開", "헤더 접기 / 펼치기": "ヘッダーの折りたたみ / 展開", "헤더를 접었어요. 탭바 오른쪽 끝 버튼(또는 Ctrl+Shift+H)으로 다시 펼칠 수 있어요.": "ヘッダーを折りたたみました。タブバー右端のボタン(または Ctrl+Shift+H)で再び展開できます。", "마크다운": "マークダウン", "{0} · 마크다운": "{0} · マークダウン", "{0} · 텍스트": "{0} · テキスト", "{0} · 그림판": "{0} · ペイント", "추천": "おすすめ", "기본 색": "基本色", "사용자 지정 색": "ユーザー設定の色", "HEX 색상 코드": "HEX カラーコード", "스포이드 — 화면에서 색 추출 (찍는 동안 창이 잠깐 숨어요)": "スポイト — 画面から色を取得(取る間はこのウィンドウが隠れます)", "색상 선택": "色を選択", "채우기 선택": "塗りつぶしを選択", "글자 배경 선택": "文字の背景を選択", "색상 선택 — {0}": "色を選択 — {0}", "채우기 선택 — {0}": "塗りつぶしを選択 — {0}", "글자 배경 선택 — {0}": "文字の背景を選択 — {0}", "왼쪽 화살표": "左矢印", "오른쪽 화살표": "右矢印", "위쪽 화살표": "上矢印", "아래쪽 화살표": "下矢印"}], ["zh", {"그리기 도구에 획 보정 추가 (기본: 켜짐) — 손을 떼면 ‘ㅇ’처럼 닫힌 고리는 반듯한 원으로, ㅁ · ㄷ · ㄹ처럼 꺾인 획은 곧은 선과 뾰족한 모서리로, 그 밖의 곡선은 부드럽게 다듬음 (영문 ‘e’는 원으로 바꾸지 않음), 옵션바의 ‘획 보정 / 끄기’로 켜고 끄기 · 노트 그림판의 펜에도 ‘보정’ 단추 추가": "绘图工具新增笔画校正(默认: 开启)— 抬笔时,像「ㅇ」这样的闭合圈会变成标准的圆,像 ㅁ · ㄷ · ㄹ 这样有转折的笔画会变成直线和尖角,其他曲线会变得平滑(英文「e」不会变成圆),可用选项栏的「笔画校正 / 关闭」切换 · 笔记画板的笔也新增「校正」按钮", "옵션바의 색상 · 채우기를 작은 색 단추로 변경 — 누르면 색 선택 창이 열리고 추천 색 · 기본 색 96가지 · 최근 사용 10개 · 사용자 지정 · HEX 입력 · 스포이드 사용 가능 (스포이드로 찍는 동안에는 창이 잠깐 숨음), 옵션바가 차지하는 너비가 크게 줄어듦": "选项栏的颜色 · 填充改为小的颜色按钮 — 点击后打开颜色选择窗口,可使用推荐颜色 · 96 种基本颜色 · 最近使用的 10 种 · 自定义 · HEX 输入 · 吸管(用吸管取色时窗口会暂时隐藏),选项栏占用的宽度大幅减少", "도형 도구의 도형 고르기를 모양만 있는 4×2 단추 표로 변경, 왼쪽 · 오른쪽 · 위쪽 · 아래쪽 화살표 도형 추가 (색상 · 채우기 · 선 굵기 · 불투명도 · 회전 그대로 사용)": "形状工具的形状选择改为只有图形的 4×2 按钮表,新增左 · 右 · 上 · 下箭头形状(颜色 · 填充 · 线宽 · 不透明度 · 旋转照常可用)", "헤더 접기 변경 — 탭바 오른쪽 끝 버튼(Ctrl+Shift+H)이 헤더만 접고 탭바는 그대로 남김, 같은 버튼으로 다시 펼침": "更改页眉折叠 — 标签栏右端的按钮(Ctrl+Shift+H)只折叠页眉,保留标签栏,再按同一按钮即可展开", "노트 위쪽 번호 탭에 노트 종류 아이콘 추가 — 번호 앞 아이콘으로 마크다운 · 텍스트 · 그림판 구분": "笔记上方的编号标签新增笔记类型图标 — 用编号前的图标区分 Markdown · 文本 · 画板", "획 보정": "笔画校正", "보정": "校正", "그리기 획 보정": "绘图笔画校正", "획 보정: 손을 떼면 ㅇ은 반듯한 원으로, ㅁ · ㄷ · ㄹ처럼 꺾인 획은 곧게, 곡선은 부드럽게 다듬어요 (영문 e는 그대로). 커서의 원이 붓 굵기예요.": "笔画校正: 抬笔时 ㅇ 会变成标准的圆,像 ㅁ · ㄷ · ㄹ 这样有转折的笔画会变直,曲线会变平滑(英文 e 保持原样)。光标圆圈表示笔刷粗细。", "그린 그대로 남겨요. 커서의 원이 붓 굵기예요.": "保留原样笔画。光标圆圈表示笔刷粗细。", "획 보정 — 손을 떼면 ㅇ은 반듯한 원으로, 꺾인 획은 곧게, 곡선은 부드럽게": "笔画校正 — 抬笔时 ㅇ 变成标准的圆,转折笔画变直,曲线变平滑", "획 보정을 켰어요.": "已开启笔画校正。", "획 보정을 껐어요.": "已关闭笔画校正。", "헤더 접기 (Ctrl+Shift+H)": "折叠页眉 (Ctrl+Shift+H)", "헤더 펼치기 (Ctrl+Shift+H)": "展开页眉 (Ctrl+Shift+H)", "헤더 접기": "折叠页眉", "헤더 펼치기": "展开页眉", "헤더 접기 / 펼치기": "折叠 / 展开页眉", "헤더를 접었어요. 탭바 오른쪽 끝 버튼(또는 Ctrl+Shift+H)으로 다시 펼칠 수 있어요.": "已折叠页眉。可用标签栏右端的按钮(或 Ctrl+Shift+H)重新展开。", "마크다운": "Markdown", "{0} · 마크다운": "{0} · Markdown", "{0} · 텍스트": "{0} · 文本", "{0} · 그림판": "{0} · 画板", "추천": "推荐", "기본 색": "基本颜色", "사용자 지정 색": "自定义颜色", "HEX 색상 코드": "HEX 颜色代码", "스포이드 — 화면에서 색 추출 (찍는 동안 창이 잠깐 숨어요)": "吸管 — 从屏幕取色(取色时此窗口会暂时隐藏)", "색상 선택": "选择颜色", "채우기 선택": "选择填充", "글자 배경 선택": "选择文字背景", "색상 선택 — {0}": "选择颜色 — {0}", "채우기 선택 — {0}": "选择填充 — {0}", "글자 배경 선택 — {0}": "选择文字背景 — {0}", "왼쪽 화살표": "左箭头", "오른쪽 화살표": "右箭头", "위쪽 화살표": "上箭头", "아래쪽 화살표": "下箭头"}]].forEach(([l,d])=>{I18N[l]=Object.assign(I18N[l]||{},d);});
 /* v1.1.3 새 문구 번역: 페이지 메뉴 · 디지털화 · 메모 제목 · 모바일 발표 도구 · Thaniya */
 [["en", {"페이지 패널의 상세보기(…) 버튼을 없애고 우클릭 메뉴로 변경 — 썸네일을 우클릭(모바일: 길게 누르기)하면 아래로 목록이 내려오고 새 페이지 · 페이지 복제 · 이름 바꾸기 · 북마크 · 주석 · 프린트 · 삭제 순서로 선택": "Replaced the page panel’s details (…) button with a right-click menu — right-click a thumbnail (mobile: long-press) and a list drops down with New page · Duplicate page · Rename · Bookmark · Note · Print · Delete, in that order", "페이지 추가를 빈 페이지 열기 · 기존 파일 불러오기로 나눔 — 기존 파일은 PDF · PNG(JPG)를 고른 페이지 바로 뒤 중간에 끼워 넣기, 여러 파일은 고른 순서대로 (페이지 메뉴의 ‘새 페이지’ · 페이지 패널 아래 ‘페이지 추가’)": "Adding a page is now split into Open blank page · Import existing file — an existing PDF · PNG (JPG) is inserted right after the chosen page, in the middle of the document; multiple files go in the order you picked them (‘New page’ in the page menu · ‘Add page’ under the page panel)", "디지털화 정확도 · 인식 범위 개선 — 한 페이지를 세 가지 읽기 방식으로 반복해 읽고 더 깨끗한 결과를 바탕으로 합침, 자신 없는 칸은 2배 · 3배로 키워 여러 번 다시 읽어 같은 답이 나오면 그 답을 씀, 한국어 인식에 영어 모델을 함께 써서 영문 문장이 깨지던 문제 해결, 회색 바탕 · 옅은 글자 · 어두운 상자 위 흰 글자도 읽도록 대비 맞춤, 엔진이 놓친 낱말 덩어리도 다시 읽음, 글자 PDF 안에 섞인 그림 · 스캔 글자도 함께 인식, 각주 같은 작은 글자도 남김": "Improved digitize accuracy and coverage — each page is read repeatedly in three reading modes and merged on top of the cleanest result; unsure cells are reread several times at 2× · 3× and an answer that comes up more than once wins; Korean recognition now also uses the English model, fixing garbled English sentences; contrast normalization reads gray backgrounds · faint text · white text on dark boxes; word clusters the engine missed are reread; text inside images · scans mixed into text PDFs is recognized too; small text such as footnotes is kept", "스크롤바 색이 테마 색을 따라 바뀜": "Scrollbar colors now follow the theme", "메모에 제목 추가 — 머리글에서 바로 입력(비우면 첫 줄이 제목), 접으면 작은 동그라미 하나만 남고 누르면 펼쳐짐 · 끌어서 옮기기 · 마우스를 올리면 메모 제목 표시": "Added titles to memos — type directly in the header (empty: the first line is used); a collapsed memo becomes a single small circle — click to expand · drag to move · hover to see the memo title", "모바일 발표에 도구 줄 추가 — 리모컨의 ▲ 단추로 펼치고 접는 도구 줄에서 강조표시 · 그리기 · 직선 · 지우개 · 도형 · 텍스트 · 레이저 포인터 · 실행 취소 사용 (접거나 도구를 끄면 다시 밀어서 넘기기)": "Added a toolbar to mobile presentations — open and fold it with the ▲ button on the remote to use Highlight · Draw · Line · Eraser · Shape · Text · Laser pointer · Undo (fold it or turn the tool off to swipe pages again)", "설정 › 버전 정보에 Thaniya.co.kr로 이동하는 단추 추가 (설정 왼쪽 아래 버전 표시 옆에도 링크)": "Added a button to go to Thaniya.co.kr in Settings › Version info (also linked next to the version at the bottom left of Settings)", "새 페이지": "New page", "빈 페이지 열기": "Open blank page", "기존 파일 불러오기": "Import existing file", "페이지 복제": "Duplicate page", "이름 바꾸기": "Rename", "북마크": "Bookmark", "북마크 해제": "Remove bookmark", "주석": "Note", "주석 수정": "Edit note", "프린트": "Print", "삭제": "Delete", "페이지 메뉴": "Page menu", "현재 페이지 뒤에 추가": "Add after the current page", "현재 페이지와 같은 크기": "Same size as the current page", "PDF · PNG를 중간에 끼워 넣기": "Insert a PDF · PNG in the middle", "파일을 불러오는 중…": "Loading files…", "그림 속 글자 인식": "Recognizing text in images", "메모 제목": "Memo title", "메모 펼치기": "Expand memo", "메모 접기": "Fold memo", "접기 (작은 동그라미로)": "Fold (into a small circle)", "메모": "Memo", "도구 펼치기": "Show tools", "도구 접기": "Hide tools", "Meow-PDF를 만든 Thaniya 홈페이지로 이동": "Go to the website of Thaniya, the maker of Meow-PDF", "Thaniya 홈페이지로 이동": "Go to the Thaniya website"}], ["ja", {"페이지 패널의 상세보기(…) 버튼을 없애고 우클릭 메뉴로 변경 — 썸네일을 우클릭(모바일: 길게 누르기)하면 아래로 목록이 내려오고 새 페이지 · 페이지 복제 · 이름 바꾸기 · 북마크 · 주석 · 프린트 · 삭제 순서로 선택": "ページパネルの詳細(…)ボタンをなくし右クリックメニューに変更 — サムネイルを右クリック(モバイル: 長押し)すると下にリストが開き、新しいページ · ページを複製 · 名前を変更 · ブックマーク · 注釈 · 印刷 · 削除の順に選択", "페이지 추가를 빈 페이지 열기 · 기존 파일 불러오기로 나눔 — 기존 파일은 PDF · PNG(JPG)를 고른 페이지 바로 뒤 중간에 끼워 넣기, 여러 파일은 고른 순서대로 (페이지 메뉴의 ‘새 페이지’ · 페이지 패널 아래 ‘페이지 추가’)": "ページ追加を空白ページを開く · 既存ファイルを読み込むに分割 — 既存ファイルは PDF · PNG(JPG)を選んだページのすぐ後ろ(途中)に挿入、複数ファイルは選んだ順に(ページメニューの「新しいページ」· ページパネル下の「ページ追加」)", "디지털화 정확도 · 인식 범위 개선 — 한 페이지를 세 가지 읽기 방식으로 반복해 읽고 더 깨끗한 결과를 바탕으로 합침, 자신 없는 칸은 2배 · 3배로 키워 여러 번 다시 읽어 같은 답이 나오면 그 답을 씀, 한국어 인식에 영어 모델을 함께 써서 영문 문장이 깨지던 문제 해결, 회색 바탕 · 옅은 글자 · 어두운 상자 위 흰 글자도 읽도록 대비 맞춤, 엔진이 놓친 낱말 덩어리도 다시 읽음, 글자 PDF 안에 섞인 그림 · 스캔 글자도 함께 인식, 각주 같은 작은 글자도 남김": "デジタル化の精度 · 認識範囲を改善 — 1ページを3つの読み取り方式で繰り返し読み、よりきれいな結果を基に統合、自信のないセルは 2倍 · 3倍に拡大して何度も読み直し同じ答えが出ればその答えを採用、韓国語認識に英語モデルも併用し英文が崩れる問題を解決、灰色の背景 · 薄い文字 · 暗い箱の上の白文字も読めるようコントラストを調整、エンジンが見落とした単語の塊も読み直し、文字PDFに混ざった画像 · スキャンの文字も一緒に認識、脚注のような小さな文字も残す", "스크롤바 색이 테마 색을 따라 바뀜": "スクロールバーの色がテーマの色に合わせて変わる", "메모에 제목 추가 — 머리글에서 바로 입력(비우면 첫 줄이 제목), 접으면 작은 동그라미 하나만 남고 누르면 펼쳐짐 · 끌어서 옮기기 · 마우스를 올리면 메모 제목 표시": "メモにタイトルを追加 — ヘッダーで直接入力(空欄なら1行目がタイトル)、折りたたむと小さな丸だけが残り、押すと展開 · ドラッグで移動 · マウスを乗せるとメモのタイトルを表示", "모바일 발표에 도구 줄 추가 — 리모컨의 ▲ 단추로 펼치고 접는 도구 줄에서 강조표시 · 그리기 · 직선 · 지우개 · 도형 · 텍스트 · 레이저 포인터 · 실행 취소 사용 (접거나 도구를 끄면 다시 밀어서 넘기기)": "モバイル発表にツールバーを追加 — リモコンの ▲ ボタンで開閉するツール列で強調表示 · 描画 · 直線 · 消しゴム · 図形 · テキスト · レーザーポインター · 元に戻すを使用(折りたたむかツールを切ると再びスワイプでページ送り)", "설정 › 버전 정보에 Thaniya.co.kr로 이동하는 단추 추가 (설정 왼쪽 아래 버전 표시 옆에도 링크)": "設定 › バージョン情報に Thaniya.co.kr へ移動するボタンを追加(設定左下のバージョン表示の横にもリンク)", "새 페이지": "新しいページ", "빈 페이지 열기": "空白ページを開く", "기존 파일 불러오기": "既存ファイルを読み込む", "페이지 복제": "ページを複製", "이름 바꾸기": "名前を変更", "북마크": "ブックマーク", "북마크 해제": "ブックマークを解除", "주석": "注釈", "주석 수정": "注釈を編集", "프린트": "印刷", "삭제": "削除", "페이지 메뉴": "ページメニュー", "현재 페이지 뒤에 추가": "現在のページの後ろに追加", "현재 페이지와 같은 크기": "現在のページと同じサイズ", "PDF · PNG를 중간에 끼워 넣기": "PDF · PNG を途中に挿入", "파일을 불러오는 중…": "ファイルを読み込み中…", "그림 속 글자 인식": "画像内の文字を認識", "메모 제목": "メモのタイトル", "메모 펼치기": "メモを展開", "메모 접기": "メモを折りたたむ", "접기 (작은 동그라미로)": "折りたたむ(小さな丸に)", "메모": "メモ", "도구 펼치기": "ツールを表示", "도구 접기": "ツールを隠す", "Meow-PDF를 만든 Thaniya 홈페이지로 이동": "Meow-PDF を作った Thaniya のホームページへ", "Thaniya 홈페이지로 이동": "Thaniya のホームページへ"}], ["zh", {"페이지 패널의 상세보기(…) 버튼을 없애고 우클릭 메뉴로 변경 — 썸네일을 우클릭(모바일: 길게 누르기)하면 아래로 목록이 내려오고 새 페이지 · 페이지 복제 · 이름 바꾸기 · 북마크 · 주석 · 프린트 · 삭제 순서로 선택": "去掉页面面板的详细(…)按钮,改为右键菜单 — 右键点击缩略图(移动端: 长按)会向下展开列表,按 新页面 · 复制页面 · 重命名 · 书签 · 注释 · 打印 · 删除 的顺序选择", "페이지 추가를 빈 페이지 열기 · 기존 파일 불러오기로 나눔 — 기존 파일은 PDF · PNG(JPG)를 고른 페이지 바로 뒤 중간에 끼워 넣기, 여러 파일은 고른 순서대로 (페이지 메뉴의 ‘새 페이지’ · 페이지 패널 아래 ‘페이지 추가’)": "添加页面分为 打开空白页 · 导入现有文件 — 现有文件可将 PDF · PNG(JPG)插入到所选页面紧后方(文档中间),多个文件按选择顺序插入(页面菜单的「新页面」· 页面面板下方的「添加页面」)", "디지털화 정확도 · 인식 범위 개선 — 한 페이지를 세 가지 읽기 방식으로 반복해 읽고 더 깨끗한 결과를 바탕으로 합침, 자신 없는 칸은 2배 · 3배로 키워 여러 번 다시 읽어 같은 답이 나오면 그 답을 씀, 한국어 인식에 영어 모델을 함께 써서 영문 문장이 깨지던 문제 해결, 회색 바탕 · 옅은 글자 · 어두운 상자 위 흰 글자도 읽도록 대비 맞춤, 엔진이 놓친 낱말 덩어리도 다시 읽음, 글자 PDF 안에 섞인 그림 · 스캔 글자도 함께 인식, 각주 같은 작은 글자도 남김": "改进数字化的准确度 · 识别范围 — 每页用三种读取方式反复读取,并以更干净的结果为基础合并;没把握的格子放大 2 倍 · 3 倍多次重读,出现相同答案时采用该答案;韩语识别同时使用英语模型,解决英文句子乱码问题;调整对比度,可读取灰色背景 · 浅色文字 · 深色框上的白字;引擎漏掉的词块也会重读;文字 PDF 中混有的图片 · 扫描文字也一并识别;保留脚注等小字", "스크롤바 색이 테마 색을 따라 바뀜": "滚动条颜色随主题颜色变化", "메모에 제목 추가 — 머리글에서 바로 입력(비우면 첫 줄이 제목), 접으면 작은 동그라미 하나만 남고 누르면 펼쳐짐 · 끌어서 옮기기 · 마우스를 올리면 메모 제목 표시": "便签新增标题 — 在标题栏直接输入(留空则以第一行为标题),折叠后只剩一个小圆点,点击展开 · 拖动移动 · 鼠标悬停显示便签标题", "모바일 발표에 도구 줄 추가 — 리모컨의 ▲ 단추로 펼치고 접는 도구 줄에서 강조표시 · 그리기 · 직선 · 지우개 · 도형 · 텍스트 · 레이저 포인터 · 실행 취소 사용 (접거나 도구를 끄면 다시 밀어서 넘기기)": "移动端演示新增工具栏 — 用遥控器的 ▲ 按钮展开和折叠工具栏,可使用 高亮 · 绘图 · 直线 · 橡皮擦 · 形状 · 文本 · 激光笔 · 撤销(折叠或关闭工具后可再次滑动翻页)", "설정 › 버전 정보에 Thaniya.co.kr로 이동하는 단추 추가 (설정 왼쪽 아래 버전 표시 옆에도 링크)": "在 设置 › 版本信息 中新增前往 Thaniya.co.kr 的按钮(设置左下角版本号旁也有链接)", "새 페이지": "新页面", "빈 페이지 열기": "打开空白页", "기존 파일 불러오기": "导入现有文件", "페이지 복제": "复制页面", "이름 바꾸기": "重命名", "북마크": "书签", "북마크 해제": "取消书签", "주석": "注释", "주석 수정": "编辑注释", "프린트": "打印", "삭제": "删除", "페이지 메뉴": "页面菜单", "현재 페이지 뒤에 추가": "添加到当前页面之后", "현재 페이지와 같은 크기": "与当前页面相同大小", "PDF · PNG를 중간에 끼워 넣기": "将 PDF · PNG 插入到中间", "파일을 불러오는 중…": "正在导入文件…", "그림 속 글자 인식": "识别图片中的文字", "메모 제목": "便签标题", "메모 펼치기": "展开便签", "메모 접기": "折叠便签", "접기 (작은 동그라미로)": "折叠(变成小圆点)", "메모": "便签", "도구 펼치기": "显示工具", "도구 접기": "隐藏工具", "Meow-PDF를 만든 Thaniya 홈페이지로 이동": "前往 Meow-PDF 的开发者 Thaniya 的主页", "Thaniya 홈페이지로 이동": "前往 Thaniya 主页"}]].forEach(([l,d])=>{I18N[l]=Object.assign(I18N[l]||{},d);});
+/* v1.1.4 새 문구 번역: 확대 넘김 · 발표 배경색 · 발표 반영 · 손떨림 보정 · 둥근 모서리 손잡이 · 페이지 배경색 · 그룹 넣기/빼기 · 그룹 설정 · 최근에 연 파일 */
+[["en", {"발표 중 추가한 내용": "Added during presentation", "발표하면서 그리거나 적은 내용을 문서에 반영할까요?": "Keep what you drew or wrote during the presentation in the document?", "반영하지 않으면 발표를 시작하기 전 상태로 되돌려요. (실행 취소로 다시 살릴 수 있어요)": "If you don’t, the document goes back to how it was before the presentation. (Undo brings it back)", "반영하지 않기": "Discard", "반영하기": "Keep", "발표 중 추가한 내용을 반영하지 않았어요.": "Discarded what was added during the presentation.", "배경 없음 (투명)": "No fill (transparent)", "사용자 지정 배경색": "Custom fill color", "배경색 {0}": "Fill {0}", "선": "Line", "배경": "Fill", "손떨림 보정": "Stabilizer", "손떨림 보정 — 펜 끝이 천천히 따라오며 손떨림을 걸러요 (단계가 높을수록 더 부드럽게)": "Stabilizer — the pen tip follows smoothly and filters out hand jitter (higher = smoother)", "약": "Low", "중": "Mid", "강": "High", "손떨림 보정 — 누를 때마다 끔 → 약 → 중 → 강": "Stabilizer — each tap cycles Off → Low → Mid → High", "떨림 끔": "Stab. off", "떨림 약": "Stab. low", "떨림 중": "Stab. mid", "떨림 강": "Stab. high", "손떨림 보정 끔": "Stabilizer off", "손떨림 보정 약": "Stabilizer low", "손떨림 보정 중": "Stabilizer mid", "손떨림 보정 강": "Stabilizer high", "손떨림 보정: 끔": "Stabilizer: off", "손떨림 보정: 약": "Stabilizer: low", "손떨림 보정: 중": "Stabilizer: mid", "손떨림 보정: 강": "Stabilizer: high", "그린 뒤 위쪽 모서리의 노란 점을 좌우로 끌어 둥근 정도를 조절해요 · 선 굵기 0 = 선 없음 · Shift: 정사각형": "After drawing, drag the yellow dot on the top edge left or right to set the roundness · Line width 0 = no line · Shift: square", "배경 색 바꾸기": "Change background color", "배경 없음 (원래대로)": "No background (original)", "그룹에 넣기": "Add to group", "새 그룹으로 묶기": "Group into a new group", "그룹에서 빼기": "Remove from group", "{0}쪽의 배경 색을 바꿨어요.": "Changed the background color of {0} pages.", "배경 색을 바꿨어요.": "Background color changed.", "배경 색을 지웠어요.": "Background color removed.", "‘{0}’ 그룹에 넣었어요.": "Added to the ‘{0}’ group.", "{0}쪽을 ‘{1}’ 그룹에 넣었어요.": "Added {0} pages to the ‘{1}’ group.", "{0}쪽을 그룹에서 뺐어요.": "Removed {0} pages from the group.", "페이지를 그룹에서 뺐어요.": "Removed the page from the group.", "폴더 색": "Folder color", "맨 위 고정 해제": "Unpin from top", "페이지 패널 맨 위에 고정": "Pin to top of page panel", "그룹 설정 (폴더 색 · 맨 위 고정)": "Group settings (folder color · pin to top)", "그룹 설정": "Group settings", "맨 위에 고정됨": "Pinned to top", "‘{0}’ 그룹을 맨 위에 고정했어요. 고정한 그룹의 페이지는 문서 맨 앞에 와요.": "Pinned the ‘{0}’ group to the top. Pages in pinned groups come first in the document.", "‘{0}’ 그룹 고정을 풀었어요.": "Unpinned the ‘{0}’ group.", "최근에 연 파일": "Recent files", "최근에 연 파일이 없어요": "No recent files yet", "파일을 열면 여기에 차례로 모여요.": "Files you open will show up here.", "파일 위치 열기": "Open file location", "기록에서 삭제": "Remove from history", "목록은 이 컴퓨터에만 남아요. 기록에서 지워도 원본 파일은 그대로예요.": "This list stays on this computer only. Removing an entry doesn’t delete the original file.", "목록은 이 브라우저에만 남아요. 기록에서 지워도 원본 파일은 그대로예요.": "This list stays in this browser only. Removing an entry doesn’t delete the original file.", "기록 모두 지우기": "Clear history", "최근에 연 파일 기록을 모두 지울까요? 원본 파일은 지워지지 않아요.": "Clear all recent file history? The original files won’t be deleted.", "최근에 연 파일 기록을 모두 지웠어요.": "Cleared the recent file history.", "기록에서 지웠어요.": "Removed from history.", "파일 위치를 찾지 못했어요. 옮기거나 지웠을 수 있어요.": "Couldn’t find the file location. It may have been moved or deleted.", "파일은 없지만 원래 있던 폴더를 열었어요.": "The file is gone, so the folder it was in has been opened.", "파일을 찾지 못했어요. 옮기거나 지웠을 수 있어요.": "Couldn’t find the file. It may have been moved or deleted.", "파일을 열 권한이 없어요. 파일 열기로 다시 골라 주세요.": "No permission to open the file. Please choose it again with Open file.", "이 기록은 원본 파일에 다시 닿을 수 없어요. 파일 열기로 다시 골라 주세요.": "This entry can’t reach the original file anymore. Please choose it again with Open file.", "이 브라우저에서 연 파일": "Opened in this browser", "이 기기에 보관한 사본": "Copy kept on this device", "다시 열려면 파일을 선택해 주세요": "Choose the file again to reopen it", "파일을 찾을 수 없어요": "File not found", "모바일: 확대한 채로 페이지를 넘기면 보던 위치 그대로 이전 · 다음 페이지로 넘어가게 개선 (예전: 다음 장은 위로, 이전 장은 아래로 화면이 튀었음)": "Mobile: flipping pages while zoomed in now keeps your current view position on the next or previous page (before, the next page jumped to the top and the previous page to the bottom)", "발표 모드: 도형을 그릴 때 배경색(채우기)도 고를 수 있게 함 — 도형 도구의 ‘배경’ 줄에서 색 · 투명 · 다른 색 선택": "Presentation mode: you can now pick a background (fill) color when drawing shapes — choose a color, transparent or a custom color in the shape tool’s ‘Fill’ row", "발표를 마치고 나갈 때 발표 중 그리거나 적은 내용을 문서에 반영할지 물어봄 — 반영하지 않으면 발표 전 상태로 되돌리고, 실행 취소로 다시 살릴 수 있음": "When you leave a presentation, you’re asked whether to keep what you drew or wrote during it — if you don’t, the document goes back to how it was before the presentation (Undo brings it back)", "그리기 도구에 손떨림 보정 추가 (끔 · 약 · 중 · 강) — 펜 끝이 천천히 따라오며 잔떨림을 걸러 줌, 그림판 노트에도 추가": "Added a stabilizer to the Draw tool (Off · Low · Mid · High) — the pen tip follows smoothly and filters out hand jitter; also added to Paint notes", "그리기 도구의 획 보정 기본값을 ‘끄기’로 변경": "Stroke correction in the Draw tool is now off by default", "둥근 사각형 모서리를 PPT처럼 조절 — 도형을 고르면 위쪽 변에 생기는 노란 점을 좌우로 끌어 둥근 정도를 바꿈 (옵션바 슬라이더 대신)": "Rounded rectangle corners now work like PowerPoint — select the shape and drag the yellow dot on its top edge left or right to change the roundness (replaces the options bar slider)", "페이지 패널 우클릭 메뉴에 ‘배경 색 바꾸기’ 추가 — 화면 · 썸네일 · 저장한 PDF · 인쇄에 모두 반영되고, 원래 글자와 그림은 그대로 보이게 칠함": "Added ‘Change background color’ to the page panel right-click menu — applied on screen, in thumbnails, saved PDFs and printouts, while the original text and images stay visible", "페이지 패널 우클릭 메뉴에 ‘그룹에 넣기’(그룹을 골라 넣기) · ‘그룹에서 빼기’ 추가 — 여러 페이지를 골라 둔 상태면 한꺼번에": "Added ‘Add to group’ (choose a group) and ‘Remove from group’ to the page panel right-click menu — works on all selected pages at once", "그룹 설정 추가 (그룹 머리의 톱니 · 우클릭) — 폴더 색 바꾸기, 페이지 패널 맨 위에 고정": "Added group settings (gear on the group header · right-click) — change the folder color, pin the group to the top of the page panel", "빈 페이지 추가 · 기존 파일 불러오기: 그룹이 닫혀 있으면 그룹 밖(그룹 바로 뒤)에 페이지를 추가": "Add blank page · Import existing file: if the group is collapsed, the page is added outside the group (right after it)", "메인 탭에 ‘최근에 연 파일’ 추가 — 최근 파일을 다시 열고, 기록에서 삭제하고, PC 프로그램에서는 파일 위치(탐색기 · Finder)를 열 수 있음": "Added ‘Recent files’ to the main tab — reopen recent files, remove them from the history, and in the desktop app open the file location (Explorer · Finder)", "모바일 시작 화면의 파일 열기 · 빈 문서로 시작 · 파일 병합 · 파일 압축 버튼을 조금 작게 줄임": "Made the Open file · Start blank · Merge files · Compress file buttons a bit smaller on the mobile start screen", "검색 결과에 보일 정사각형 썸네일 추가": "Added a square thumbnail for search results", "기본 색 (색 지정 안 함)": "Default (no color)"}], ["ja", {"발표 중 추가한 내용": "発表中に追加した内容", "발표하면서 그리거나 적은 내용을 문서에 반영할까요?": "発表中に描いたり書いたりした内容を文書に反映しますか？", "반영하지 않으면 발표를 시작하기 전 상태로 되돌려요. (실행 취소로 다시 살릴 수 있어요)": "反映しない場合は、発表を始める前の状態に戻します。（元に戻すで復元できます）", "반영하지 않기": "反映しない", "반영하기": "反映する", "발표 중 추가한 내용을 반영하지 않았어요.": "発表中に追加した内容は反映しませんでした。", "배경 없음 (투명)": "背景なし（透明）", "사용자 지정 배경색": "カスタム背景色", "배경색 {0}": "背景色 {0}", "선": "線", "배경": "背景", "손떨림 보정": "手ぶれ補正", "손떨림 보정 — 펜 끝이 천천히 따라오며 손떨림을 걸러요 (단계가 높을수록 더 부드럽게)": "手ぶれ補正 — ペン先がゆっくり追従して手ぶれを抑えます（強いほど滑らか）", "약": "弱", "중": "中", "강": "強", "손떨림 보정 — 누를 때마다 끔 → 약 → 중 → 강": "手ぶれ補正 — 押すたびにオフ → 弱 → 中 → 強", "떨림 끔": "補正 オフ", "떨림 약": "補正 弱", "떨림 중": "補正 中", "떨림 강": "補正 強", "손떨림 보정 끔": "手ぶれ補正 オフ", "손떨림 보정 약": "手ぶれ補正 弱", "손떨림 보정 중": "手ぶれ補正 中", "손떨림 보정 강": "手ぶれ補正 強", "손떨림 보정: 끔": "手ぶれ補正：オフ", "손떨림 보정: 약": "手ぶれ補正：弱", "손떨림 보정: 중": "手ぶれ補正：中", "손떨림 보정: 강": "手ぶれ補正：強", "그린 뒤 위쪽 모서리의 노란 점을 좌우로 끌어 둥근 정도를 조절해요 · 선 굵기 0 = 선 없음 · Shift: 정사각형": "描いたあと、上辺の黄色い点を左右にドラッグして丸みを調整 · 線の太さ0 = 線なし · Shift：正方形", "배경 색 바꾸기": "背景色を変更", "배경 없음 (원래대로)": "背景なし（元のまま）", "그룹에 넣기": "グループに入れる", "새 그룹으로 묶기": "新しいグループにまとめる", "그룹에서 빼기": "グループから出す", "{0}쪽의 배경 색을 바꿨어요.": "{0}ページの背景色を変更しました。", "배경 색을 바꿨어요.": "背景色を変更しました。", "배경 색을 지웠어요.": "背景色を消しました。", "‘{0}’ 그룹에 넣었어요.": "「{0}」グループに入れました。", "{0}쪽을 ‘{1}’ 그룹에 넣었어요.": "{0}ページを「{1}」グループに入れました。", "{0}쪽을 그룹에서 뺐어요.": "{0}ページをグループから出しました。", "페이지를 그룹에서 뺐어요.": "ページをグループから出しました。", "폴더 색": "フォルダーの色", "맨 위 고정 해제": "一番上への固定を解除", "페이지 패널 맨 위에 고정": "ページパネルの一番上に固定", "그룹 설정 (폴더 색 · 맨 위 고정)": "グループ設定（フォルダーの色・一番上に固定）", "그룹 설정": "グループ設定", "맨 위에 고정됨": "一番上に固定中", "‘{0}’ 그룹을 맨 위에 고정했어요. 고정한 그룹의 페이지는 문서 맨 앞에 와요.": "「{0}」グループを一番上に固定しました。固定したグループのページは文書の先頭に来ます。", "‘{0}’ 그룹 고정을 풀었어요.": "「{0}」グループの固定を解除しました。", "최근에 연 파일": "最近開いたファイル", "최근에 연 파일이 없어요": "最近開いたファイルはありません", "파일을 열면 여기에 차례로 모여요.": "ファイルを開くとここに順に並びます。", "파일 위치 열기": "ファイルの場所を開く", "기록에서 삭제": "履歴から削除", "목록은 이 컴퓨터에만 남아요. 기록에서 지워도 원본 파일은 그대로예요.": "一覧はこのコンピューターにだけ残ります。履歴から消しても元のファイルはそのままです。", "목록은 이 브라우저에만 남아요. 기록에서 지워도 원본 파일은 그대로예요.": "一覧はこのブラウザーにだけ残ります。履歴から消しても元のファイルはそのままです。", "기록 모두 지우기": "履歴をすべて消去", "최근에 연 파일 기록을 모두 지울까요? 원본 파일은 지워지지 않아요.": "最近開いたファイルの履歴をすべて消去しますか？元のファイルは削除されません。", "최근에 연 파일 기록을 모두 지웠어요.": "最近開いたファイルの履歴をすべて消去しました。", "기록에서 지웠어요.": "履歴から削除しました。", "파일 위치를 찾지 못했어요. 옮기거나 지웠을 수 있어요.": "ファイルの場所が見つかりません。移動または削除された可能性があります。", "파일은 없지만 원래 있던 폴더를 열었어요.": "ファイルはありませんが、元のフォルダーを開きました。", "파일을 찾지 못했어요. 옮기거나 지웠을 수 있어요.": "ファイルが見つかりません。移動または削除された可能性があります。", "파일을 열 권한이 없어요. 파일 열기로 다시 골라 주세요.": "ファイルを開く権限がありません。「ファイルを開く」でもう一度選んでください。", "이 기록은 원본 파일에 다시 닿을 수 없어요. 파일 열기로 다시 골라 주세요.": "この履歴からは元のファイルを開けません。「ファイルを開く」でもう一度選んでください。", "이 브라우저에서 연 파일": "このブラウザーで開いたファイル", "이 기기에 보관한 사본": "この端末に保存したコピー", "다시 열려면 파일을 선택해 주세요": "開き直すにはファイルを選んでください", "파일을 찾을 수 없어요": "ファイルが見つかりません", "모바일: 확대한 채로 페이지를 넘기면 보던 위치 그대로 이전 · 다음 페이지로 넘어가게 개선 (예전: 다음 장은 위로, 이전 장은 아래로 화면이 튀었음)": "モバイル：拡大したままページをめくると、見ていた位置のまま前後のページに移るよう改善（以前は次のページは上、前のページは下に画面が飛んでいました）", "발표 모드: 도형을 그릴 때 배경색(채우기)도 고를 수 있게 함 — 도형 도구의 ‘배경’ 줄에서 색 · 투명 · 다른 색 선택": "プレゼンモード：図形を描くときに背景色（塗りつぶし）も選べるように — 図形ツールの「背景」行で色・透明・その他の色を選択", "발표를 마치고 나갈 때 발표 중 그리거나 적은 내용을 문서에 반영할지 물어봄 — 반영하지 않으면 발표 전 상태로 되돌리고, 실행 취소로 다시 살릴 수 있음": "プレゼンを終えて出るときに、発表中に描いたり書いたりした内容を文書に反映するか確認 — 反映しない場合は発表前の状態に戻し、元に戻すで復元できます", "그리기 도구에 손떨림 보정 추가 (끔 · 약 · 중 · 강) — 펜 끝이 천천히 따라오며 잔떨림을 걸러 줌, 그림판 노트에도 추가": "描画ツールに手ぶれ補正を追加（オフ・弱・中・強）— ペン先がゆっくり追従して細かな手ぶれを抑えます。ペイントノートにも追加", "그리기 도구의 획 보정 기본값을 ‘끄기’로 변경": "描画ツールのストローク補正の初期値を「オフ」に変更", "둥근 사각형 모서리를 PPT처럼 조절 — 도형을 고르면 위쪽 변에 생기는 노란 점을 좌우로 끌어 둥근 정도를 바꿈 (옵션바 슬라이더 대신)": "角丸四角形の角をPPTのように調整 — 図形を選ぶと上辺に出る黄色い点を左右にドラッグして丸みを変更（オプションバーのスライダーの代わり）", "페이지 패널 우클릭 메뉴에 ‘배경 색 바꾸기’ 추가 — 화면 · 썸네일 · 저장한 PDF · 인쇄에 모두 반영되고, 원래 글자와 그림은 그대로 보이게 칠함": "ページパネルの右クリックメニューに「背景色を変更」を追加 — 画面・サムネイル・保存したPDF・印刷すべてに反映され、元の文字や画像はそのまま見えるように塗ります", "페이지 패널 우클릭 메뉴에 ‘그룹에 넣기’(그룹을 골라 넣기) · ‘그룹에서 빼기’ 추가 — 여러 페이지를 골라 둔 상태면 한꺼번에": "ページパネルの右クリックメニューに「グループに入れる」（グループを選択）・「グループから出す」を追加 — 複数ページを選んでいればまとめて", "그룹 설정 추가 (그룹 머리의 톱니 · 우클릭) — 폴더 색 바꾸기, 페이지 패널 맨 위에 고정": "グループ設定を追加（グループ見出しの歯車・右クリック）— フォルダーの色を変更、ページパネルの一番上に固定", "빈 페이지 추가 · 기존 파일 불러오기: 그룹이 닫혀 있으면 그룹 밖(그룹 바로 뒤)에 페이지를 추가": "空白ページを追加・既存ファイルを読み込む：グループが閉じていれば、グループの外（グループの直後）にページを追加", "메인 탭에 ‘최근에 연 파일’ 추가 — 최근 파일을 다시 열고, 기록에서 삭제하고, PC 프로그램에서는 파일 위치(탐색기 · Finder)를 열 수 있음": "メインタブに「最近開いたファイル」を追加 — 最近のファイルを再び開いたり、履歴から削除したり、PCアプリではファイルの場所（エクスプローラー・Finder）を開けます", "모바일 시작 화면의 파일 열기 · 빈 문서로 시작 · 파일 병합 · 파일 압축 버튼을 조금 작게 줄임": "モバイルのスタート画面の「ファイルを開く・空白から始める・ファイル結合・ファイル圧縮」ボタンを少し小さく", "검색 결과에 보일 정사각형 썸네일 추가": "検索結果に表示される正方形のサムネイルを追加", "기본 색 (색 지정 안 함)": "既定（色なし）"}], ["zh", {"발표 중 추가한 내용": "演示中添加的内容", "발표하면서 그리거나 적은 내용을 문서에 반영할까요?": "要将演示中绘制或书写的内容保留到文档吗？", "반영하지 않으면 발표를 시작하기 전 상태로 되돌려요. (실행 취소로 다시 살릴 수 있어요)": "如不保留，将恢复到开始演示前的状态。（可用撤销找回）", "반영하지 않기": "不保留", "반영하기": "保留", "발표 중 추가한 내용을 반영하지 않았어요.": "未保留演示中添加的内容。", "배경 없음 (투명)": "无背景（透明）", "사용자 지정 배경색": "自定义背景色", "배경색 {0}": "背景色 {0}", "선": "线条", "배경": "背景", "손떨림 보정": "防抖", "손떨림 보정 — 펜 끝이 천천히 따라오며 손떨림을 걸러요 (단계가 높을수록 더 부드럽게)": "防抖 — 笔尖平滑跟随，过滤手部抖动（越高越平滑）", "약": "弱", "중": "中", "강": "强", "손떨림 보정 — 누를 때마다 끔 → 약 → 중 → 강": "防抖 — 每次点击依次切换 关 → 弱 → 中 → 强", "떨림 끔": "防抖 关", "떨림 약": "防抖 弱", "떨림 중": "防抖 中", "떨림 강": "防抖 强", "손떨림 보정 끔": "防抖 关", "손떨림 보정 약": "防抖 弱", "손떨림 보정 중": "防抖 中", "손떨림 보정 강": "防抖 强", "손떨림 보정: 끔": "防抖：关", "손떨림 보정: 약": "防抖：弱", "손떨림 보정: 중": "防抖：中", "손떨림 보정: 강": "防抖：强", "그린 뒤 위쪽 모서리의 노란 점을 좌우로 끌어 둥근 정도를 조절해요 · 선 굵기 0 = 선 없음 · Shift: 정사각형": "绘制后左右拖动上边缘的黄色圆点调整圆角 · 线宽 0 = 无线条 · Shift：正方形", "배경 색 바꾸기": "更改背景颜色", "배경 없음 (원래대로)": "无背景（恢复原样）", "그룹에 넣기": "加入分组", "새 그룹으로 묶기": "组成新分组", "그룹에서 빼기": "移出分组", "{0}쪽의 배경 색을 바꿨어요.": "已更改 {0} 页的背景颜色。", "배경 색을 바꿨어요.": "已更改背景颜色。", "배경 색을 지웠어요.": "已移除背景颜色。", "‘{0}’ 그룹에 넣었어요.": "已加入“{0}”分组。", "{0}쪽을 ‘{1}’ 그룹에 넣었어요.": "已将 {0} 页加入“{1}”分组。", "{0}쪽을 그룹에서 뺐어요.": "已将 {0} 页移出分组。", "페이지를 그룹에서 뺐어요.": "已将页面移出分组。", "폴더 색": "文件夹颜色", "맨 위 고정 해제": "取消置顶", "페이지 패널 맨 위에 고정": "固定到页面面板顶部", "그룹 설정 (폴더 색 · 맨 위 고정)": "分组设置（文件夹颜色 · 置顶）", "그룹 설정": "分组设置", "맨 위에 고정됨": "已置顶", "‘{0}’ 그룹을 맨 위에 고정했어요. 고정한 그룹의 페이지는 문서 맨 앞에 와요.": "已将“{0}”分组置顶。置顶分组的页面会排在文档最前面。", "‘{0}’ 그룹 고정을 풀었어요.": "已取消“{0}”分组的置顶。", "최근에 연 파일": "最近打开的文件", "최근에 연 파일이 없어요": "暂无最近打开的文件", "파일을 열면 여기에 차례로 모여요.": "打开的文件会依次显示在这里。", "파일 위치 열기": "打开文件位置", "기록에서 삭제": "从记录中删除", "목록은 이 컴퓨터에만 남아요. 기록에서 지워도 원본 파일은 그대로예요.": "列表仅保存在这台电脑上。从记录中删除不会删除原文件。", "목록은 이 브라우저에만 남아요. 기록에서 지워도 원본 파일은 그대로예요.": "列表仅保存在此浏览器中。从记录中删除不会删除原文件。", "기록 모두 지우기": "清除全部记录", "최근에 연 파일 기록을 모두 지울까요? 원본 파일은 지워지지 않아요.": "要清除全部最近文件记录吗？原文件不会被删除。", "최근에 연 파일 기록을 모두 지웠어요.": "已清除全部最近文件记录。", "기록에서 지웠어요.": "已从记录中删除。", "파일 위치를 찾지 못했어요. 옮기거나 지웠을 수 있어요.": "找不到文件位置。文件可能已被移动或删除。", "파일은 없지만 원래 있던 폴더를 열었어요.": "文件已不存在，已打开其原所在文件夹。", "파일을 찾지 못했어요. 옮기거나 지웠을 수 있어요.": "找不到文件。文件可能已被移动或删除。", "파일을 열 권한이 없어요. 파일 열기로 다시 골라 주세요.": "没有打开该文件的权限。请通过“打开文件”重新选择。", "이 기록은 원본 파일에 다시 닿을 수 없어요. 파일 열기로 다시 골라 주세요.": "此记录无法再访问原文件。请通过“打开文件”重新选择。", "이 브라우저에서 연 파일": "在此浏览器中打开的文件", "이 기기에 보관한 사본": "保存在此设备上的副本", "다시 열려면 파일을 선택해 주세요": "重新打开请再次选择文件", "파일을 찾을 수 없어요": "找不到文件", "모바일: 확대한 채로 페이지를 넘기면 보던 위치 그대로 이전 · 다음 페이지로 넘어가게 개선 (예전: 다음 장은 위로, 이전 장은 아래로 화면이 튀었음)": "移动端：放大状态下翻页时，会保持当前查看位置切换到上一页或下一页（以前下一页会跳到顶部、上一页会跳到底部）", "발표 모드: 도형을 그릴 때 배경색(채우기)도 고를 수 있게 함 — 도형 도구의 ‘배경’ 줄에서 색 · 투명 · 다른 색 선택": "演示模式：绘制形状时也可以选择背景色（填充）— 在形状工具的“背景”一行中选择颜色、透明或其他颜色", "발표를 마치고 나갈 때 발표 중 그리거나 적은 내용을 문서에 반영할지 물어봄 — 반영하지 않으면 발표 전 상태로 되돌리고, 실행 취소로 다시 살릴 수 있음": "结束演示退出时，会询问是否将演示中绘制或书写的内容保留到文档 — 不保留则恢复到演示前的状态，可用撤销找回", "그리기 도구에 손떨림 보정 추가 (끔 · 약 · 중 · 강) — 펜 끝이 천천히 따라오며 잔떨림을 걸러 줌, 그림판 노트에도 추가": "绘图工具新增防抖（关 · 弱 · 中 · 强）— 笔尖平滑跟随，过滤手部抖动；画板笔记也已加入", "그리기 도구의 획 보정 기본값을 ‘끄기’로 변경": "绘图工具的笔画校正默认改为“关闭”", "둥근 사각형 모서리를 PPT처럼 조절 — 도형을 고르면 위쪽 변에 생기는 노란 점을 좌우로 끌어 둥근 정도를 바꿈 (옵션바 슬라이더 대신)": "圆角矩形的圆角可像 PPT 一样调整 — 选中形状后，左右拖动上边缘的黄色圆点即可改变圆角程度（取代选项栏滑块）", "페이지 패널 우클릭 메뉴에 ‘배경 색 바꾸기’ 추가 — 화면 · 썸네일 · 저장한 PDF · 인쇄에 모두 반영되고, 원래 글자와 그림은 그대로 보이게 칠함": "页面面板右键菜单新增“更改背景颜色”— 屏幕、缩略图、保存的 PDF 和打印均会生效，原有文字和图片仍清晰可见", "페이지 패널 우클릭 메뉴에 ‘그룹에 넣기’(그룹을 골라 넣기) · ‘그룹에서 빼기’ 추가 — 여러 페이지를 골라 둔 상태면 한꺼번에": "页面面板右键菜单新增“加入分组”（选择分组）和“移出分组”— 选中多页时可一次处理", "그룹 설정 추가 (그룹 머리의 톱니 · 우클릭) — 폴더 색 바꾸기, 페이지 패널 맨 위에 고정": "新增分组设置（分组标题上的齿轮 · 右键）— 更改文件夹颜色、固定到页面面板顶部", "빈 페이지 추가 · 기존 파일 불러오기: 그룹이 닫혀 있으면 그룹 밖(그룹 바로 뒤)에 페이지를 추가": "添加空白页 · 导入现有文件：分组折叠时，页面会添加到分组外（紧接分组之后）", "메인 탭에 ‘최근에 연 파일’ 추가 — 최근 파일을 다시 열고, 기록에서 삭제하고, PC 프로그램에서는 파일 위치(탐색기 · Finder)를 열 수 있음": "主标签页新增“最近打开的文件”— 可重新打开最近的文件、从记录中删除，在桌面程序中还可打开文件位置（资源管理器 · Finder）", "모바일 시작 화면의 파일 열기 · 빈 문서로 시작 · 파일 병합 · 파일 압축 버튼을 조금 작게 줄임": "移动端开始界面的“打开文件 · 从空白文档开始 · 合并文件 · 压缩文件”按钮略微缩小", "검색 결과에 보일 정사각형 썸네일 추가": "新增用于搜索结果的正方形缩略图", "기본 색 (색 지정 안 함)": "默认（不设颜色）"}]].forEach(([l,d])=>{I18N[l]=Object.assign(I18N[l]||{},d);});
 const i18n = (() => {
   const HG = /[가-힣]/, SKIP = '.textLayer,.trl,.trtip,.text-editor,textarea,input,script,style,.wtres,.wtext,[data-no-i18n]', SKIPA = '.textLayer,.trl,.trtip,script,style,[data-no-i18n]', ATTRS = ['title', 'aria-label', 'placeholder', 'alt'];
   const tpls = {}, nrm = t => t.replace(/\s+/g, ' ').trim();
@@ -19004,7 +19423,7 @@ function mPlace(el, parent, before) {
 function mRestore() {
   while (mMoved.length) { const m = mMoved.pop(); m.p.insertBefore(m.el, m.n && m.n.parentNode === m.p ? m.n : null); }
 }
-let mLast = null;
+let mLast = null, mKeep = null;
 function mFit() {
   if (state.present) { presFit(); return; }   // v0.11.5 발표 중에는 발표 맞춤
   const p = pageById(state.currentId) || state.pages[0]; if (!p) return;
@@ -19026,7 +19445,9 @@ function mSync() {
     mLast = id;
     if (!mMode) { viewer.scrollTop = 0; viewer.scrollLeft = 0; if (fitMode === 'page') fitPage(); }
     else if (fitMode === 'page' || fitMode === 'width' || fitMode === null && state.zoom <= 0) mFit();
+    else if (mMode && mKeep) { const k = mKeep; mKeep = null; viewer.scrollLeft = k.l; viewer.scrollTop = k.t; requestAnimationFrame(() => { viewer.scrollLeft = k.l; viewer.scrollTop = k.t; }); }   // v1.1.4 확대한 채로 넘기면 보던 자리 그대로
     else { viewer.scrollTop = 0; viewer.scrollLeft = 0; }
+    mKeep = null;
     mWide();
   }
   const i = idxOf(id);
@@ -19039,6 +19460,7 @@ function mGo(id, dir) {
   const a = idxOf(state.currentId), b = idxOf(id);
   if (dir === undefined) dir = a === b ? 0 : (b > a ? 1 : -1);
   mLast = null;
+  mKeep = mMode && a !== b && fitMode !== 'page' && fitMode !== 'width' ? { l: viewer.scrollLeft, t: viewer.scrollTop } : null;   // v1.1.4 확대 상태: 넘겨도 지금 보던 위치(가로 · 세로) 그대로
   setCurrent(id);
   const el = views.get(id).el;
   if (dir && pageAnim && el.animate && !matchMedia('(prefers-reduced-motion: reduce)').matches)
@@ -19668,9 +20090,11 @@ trialUi();
 const PT_W = 600, PT_H = 800, PT_K = 2;   // 논리 크기(3:4)와 해상도 배율 — 캔버스는 1200×1600
 const PT_COLORS = ['#222222', '#e53935', '#1e88e5', '#43a047', '#fb8c00', '#8e24aa', '#ffffff'];
 const PT_TOOLS = [['pen', 'pen', '펜'], ['hl', 'highlighter', '형광펜'], ['line', 'line', '직선'], ['eraser', 'eraser', '지우개'], ['shape', 'shapes', '도형'], ['text', 'type', '텍스트 상자'], ['table', 'table', '표']];
-const PNT = Object.assign({ tool: 'pen', color: '#222222', size: 4, shape: 'rect', fill: false, rows: 3, cols: 3, smooth: true }, (() => { try { return JSON.parse(safeStore.getItem('meowPaint') || '{}') || {}; } catch (e) { return {}; } })());
+const PNT = Object.assign({ tool: 'pen', color: '#222222', size: 4, shape: 'rect', fill: false, rows: 3, cols: 3, smooth: false, stab: 0 }, (() => { try { return JSON.parse(safeStore.getItem('meowPaint') || '{}') || {}; } catch (e) { return {}; } })());
+try { if (safeStore.getItem('meowPaintSmoothV114') !== '1') { PNT.smooth = false; safeStore.setItem('meowPaintSmoothV114', '1'); } } catch (e) { /* 무시 */ }   // v1.1.4 획 보정 기본: 끄기
+PNT.stab = clamp(Math.round(+PNT.stab || 0), 0, 3);
 PNT.zoom = 1; PNT.hist = new Map(); PNT.noteId = null; PNT.cur = null; PNT.big = false; PNT.textBox = null;
-const ptSavePref = () => safeStore.setItem('meowPaint', JSON.stringify({ tool: PNT.tool, color: PNT.color, size: PNT.size, shape: PNT.shape, fill: PNT.fill, rows: PNT.rows, cols: PNT.cols, smooth: PNT.smooth !== false }));
+const ptSavePref = () => safeStore.setItem('meowPaint', JSON.stringify({ tool: PNT.tool, color: PNT.color, size: PNT.size, shape: PNT.shape, fill: PNT.fill, rows: PNT.rows, cols: PNT.cols, smooth: PNT.smooth !== false, stab: PNT.stab | 0 }));
 const ptPane = $('#notePaint'), ptCv = $('#ptCanvas'), ptPv = $('#ptPrev'), ptStage = $('#ptStage');
 ptCv.width = ptPv.width = PT_W * PT_K; ptCv.height = ptPv.height = PT_H * PT_K;
 const ptCtx = ptCv.getContext('2d'), ptPx = ptPv.getContext('2d');
@@ -19684,7 +20108,7 @@ function ptDrawTools() {
   const tb = PT_TOOLS.map(([k, ic, n]) => `<button type="button" class="pt-b${PNT.tool === k ? ' on' : ''}" data-pt="${k}" title="${n}" aria-label="${n}" aria-pressed="${PNT.tool === k}">${svg(ic)}</button>`).join('');
   let ex = '';
   if (PNT.tool === 'shape') ex = `<div class="pt-seg">${[['rect', 'rect', '사각형'], ['ellipse', 'ellipse', '원형']].map(([k, ic, n]) => `<button type="button" class="pt-b sm${PNT.shape === k ? ' on' : ''}" data-pshp="${k}" title="${n}" aria-label="${n}">${svg(ic)}</button>`).join('')}<button type="button" class="pt-b sm wide${PNT.fill ? ' on' : ''}" data-pfill="1" title="안쪽 채우기" aria-pressed="${PNT.fill}">채우기</button></div>`;
-  if (PNT.tool === 'pen') ex = `<div class="pt-seg"><button type="button" class="pt-b sm wide pt-ic${PNT.smooth !== false ? ' on' : ''}" data-psmooth="1" title="획 보정 — 손을 떼면 ㅇ은 반듯한 원으로, 꺾인 획은 곧게, 곡선은 부드럽게" aria-pressed="${PNT.smooth !== false}">${svg('wand')}<span>보정</span></button></div>`;   // v1.1.2
+  if (PNT.tool === 'pen') ex = `<div class="pt-seg"><button type="button" class="pt-b sm wide pt-ic${PNT.smooth !== false ? ' on' : ''}" data-psmooth="1" title="획 보정 — 손을 떼면 ㅇ은 반듯한 원으로, 꺾인 획은 곧게, 곡선은 부드럽게" aria-pressed="${PNT.smooth !== false}">${svg('wand')}<span>보정</span></button><button type="button" class="pt-b sm wide${PNT.stab ? ' on' : ''}" data-pstab="1" title="손떨림 보정 — 누를 때마다 끔 → 약 → 중 → 강" aria-label="손떨림 보정 ${['끔', '약', '중', '강'][PNT.stab | 0]}">떨림 ${['끔', '약', '중', '강'][PNT.stab | 0]}</button></div>`;   // v1.1.2 · v1.1.4 손떨림 보정
   if (PNT.tool === 'table') ex = `<div class="pt-seg pt-tbl"><label>행<input type="number" min="1" max="20" value="${PNT.rows}" data-prc="rows" aria-label="행 수"></label><label>열<input type="number" min="1" max="12" value="${PNT.cols}" data-prc="cols" aria-label="열 수"></label></div>`;
   const cols = PT_COLORS.map(c => `<button type="button" class="pt-sw${PNT.color.toLowerCase() === c ? ' on' : ''}" data-pcol="${c}" style="--c:${c}" title="${c}" aria-label="색 ${c}"></button>`).join('') + `<input type="color" class="pt-cc" data-pcc value="${/^#[0-9a-f]{6}$/i.test(PNT.color) ? PNT.color : '#222222'}" title="다른 색" aria-label="다른 색">`;
   const lab = PNT.tool === 'text' ? '글자 크기' : '굵기';
@@ -19744,7 +20168,7 @@ ptCv.addEventListener('pointerdown', e => {
   const p = ptPt(e);
   if (PNT.tool === 'text') { ptTextStart(p); return; }
   try { ptCv.setPointerCapture(e.pointerId); } catch (er) { /* 무시 */ }
-  const d = PNT.cur = { tool: PNT.tool, a: p, last: p, pts: [p], id: e.pointerId, moved: false };
+  const d = PNT.cur = { tool: PNT.tool, a: p, last: p, pts: [p], id: e.pointerId, moved: false, stab: PNT.tool === 'pen' ? PNT.stab | 0 : 0 };
   if (d.tool === 'pen' || d.tool === 'eraser') {
     ptStyle(ptCtx, d.tool === 'eraser' ? PNT.size * 3 + 4 : PNT.size);
     ptCtx.globalCompositeOperation = d.tool === 'eraser' ? 'destination-out' : 'source-over';
@@ -19758,19 +20182,24 @@ ptCv.addEventListener('pointermove', e => {
   const d = PNT.cur; if (!d || d.id !== e.pointerId) return;
   const evs = e.getCoalescedEvents ? e.getCoalescedEvents() : [e];
   for (const ev of evs.length ? evs : [e]) {
-    const q = ptPt(ev); d.moved = true;
+    let q = ptPt(ev); d.moved = true;
     if (d.tool === 'pen' || d.tool === 'eraser') {
-      ptStyle(ptCtx, d.tool === 'eraser' ? PNT.size * 3 + 4 : PNT.size); ptCtx.globalCompositeOperation = d.tool === 'eraser' ? 'destination-out' : 'source-over';
-      const m = [(d.last[0] + q[0]) / 2, (d.last[1] + q[1]) / 2];
-      ptCtx.beginPath(); ptCtx.moveTo(d.mid ? d.mid[0] : d.last[0], d.mid ? d.mid[1] : d.last[1]); ptCtx.quadraticCurveTo(d.last[0], d.last[1], m[0], m[1]); ptCtx.stroke();
-      ptCtx.globalCompositeOperation = 'source-over'; d.mid = m; d.last = q; if (d.snap) d.pts.push(q);
+      if (d.tool === 'pen' && d.stab) { d.raw = stabTail(d, q); q = d.sp = stabStep(d.sp || d.a, q, d.stab); }   // v1.1.4 손떨림 보정
+      ptPenSeg(d, q);
     } else if (d.tool === 'hl') { d.pts.push(q); ptPrevDraw(d); }
     else { d.q = d.tool === 'line' ? ptSnap15(d.a, q, ev.shiftKey) : q; ptPrevDraw(d, d.q); }
   }
 });
+function ptPenSeg(d, q) {
+  ptStyle(ptCtx, d.tool === 'eraser' ? PNT.size * 3 + 4 : PNT.size); ptCtx.globalCompositeOperation = d.tool === 'eraser' ? 'destination-out' : 'source-over';
+  const m = [(d.last[0] + q[0]) / 2, (d.last[1] + q[1]) / 2];
+  ptCtx.beginPath(); ptCtx.moveTo(d.mid ? d.mid[0] : d.last[0], d.mid ? d.mid[1] : d.last[1]); ptCtx.quadraticCurveTo(d.last[0], d.last[1], m[0], m[1]); ptCtx.stroke();
+  ptCtx.globalCompositeOperation = 'source-over'; d.mid = m; d.last = q; if (d.snap) d.pts.push(q);
+}
 function ptUp(e) {
   const d = PNT.cur; if (!d || d.id !== e.pointerId) return; PNT.cur = null;
   const c = ptCtx;
+  if (d.tool === 'pen' && d.stab && d.sp && d.raw) stabCatchUp(d.sp, d.raw, d.stab, 0.8, q => ptPenSeg(d, q));   // v1.1.4 손떨림 보정: 끝점까지 이어요
   if (d.tool === 'pen' || d.tool === 'eraser') {
     if (d.mid) { ptStyle(c, d.tool === 'eraser' ? PNT.size * 3 + 4 : PNT.size); c.globalCompositeOperation = d.tool === 'eraser' ? 'destination-out' : 'source-over'; c.beginPath(); c.moveTo(d.mid[0], d.mid[1]); c.lineTo(d.last[0], d.last[1]); c.stroke(); c.globalCompositeOperation = 'source-over'; }
     /* v1.1.2 획 보정: 그리기 전 모습으로 되돌리고 다듬은 획을 다시 그려요 */
@@ -19817,6 +20246,7 @@ $('#ptTools').addEventListener('click', e => {
   if ((b = q('[data-pshp]'))) { PNT.shape = b.dataset.pshp; ptSavePref(); ptDrawTools(); return; }
   if (q('[data-pfill]')) { PNT.fill = !PNT.fill; ptSavePref(); ptDrawTools(); return; }
   if (q('[data-psmooth]')) { PNT.smooth = PNT.smooth === false; ptSavePref(); ptDrawTools(); toast(PNT.smooth ? '획 보정을 켰어요.' : '획 보정을 껐어요.'); return; }   // v1.1.2
+  if (q('[data-pstab]')) { PNT.stab = ((PNT.stab | 0) + 1) % 4; ptSavePref(); ptDrawTools(); toast('손떨림 보정: ' + ['끔', '약', '중', '강'][PNT.stab]); return; }   // v1.1.4
   if ((b = q('[data-pcol]'))) { PNT.color = b.dataset.pcol; ptSavePref(); ptDrawTools(); if (PNT.textBox) PNT.textBox.ta.style.color = PNT.textBox.color = PNT.color; return; }
   if ((b = q('[data-pa]'))) {
     const a = b.dataset.pa;
@@ -20041,8 +20471,7 @@ asBadge();
     const dir = S.dx <= -NEED && S.atR && sl >= max - 2 ? 1 : S.dx >= NEED && S.atL && sl <= 2 ? -1 : 0;
     if (!dir || Math.abs(S.dx) < Math.abs(S.dy) * 1.2) return;
     const i = idxOf(state.currentId), t = state.pages[i + dir]; if (!t) return;
-    mGo(t.id, dir);
-    requestAnimationFrame(() => { if (!zoomed()) return; viewer.scrollLeft = dir > 0 ? 0 : viewer.scrollWidth; viewer.scrollTop = dir > 0 ? 0 : viewer.scrollHeight; });   // 확대 그대로 — 다음 장은 왼쪽 위부터, 이전 장은 오른쪽 아래부터
+    mGo(t.id, dir);   // v1.1.4 확대 그대로 · 보던 위치 그대로 넘겨요 (예전: 다음 장은 왼쪽 위, 이전 장은 오른쪽 아래로 화면이 튀었어요)
   };
   viewer.addEventListener('touchend', end, { passive: true, capture: true });
   viewer.addEventListener('touchcancel', end, { passive: true, capture: true });

@@ -1,7 +1,7 @@
 {
  "name": "Meow-PDF",
- "version": "v1.1.3",
- "date": "2026.10.23",
+ "version": "v1.1.4",
+ "date": "2026.10.24",
  "site": "https://www.meow-pdf.com/",
  "download": {
   "win": "https://www.meow-pdf.com/download/windows",
@@ -10,6 +10,72 @@
   "page": "https://www.meow-pdf.com/#download"
  },
  "history": [
+  {
+   "v": "v1.1.4",
+   "d": "2026.10.24",
+   "items": {
+    "ko": [
+     "모바일: 확대한 채로 페이지를 넘기면 보던 위치 그대로 이전 · 다음 페이지로 넘어가게 개선 (예전: 다음 장은 위로, 이전 장은 아래로 화면이 튀었음)",
+     "발표 모드: 도형을 그릴 때 배경색(채우기)도 고를 수 있게 함 — 도형 도구의 ‘배경’ 줄에서 색 · 투명 · 다른 색 선택",
+     "발표를 마치고 나갈 때 발표 중 그리거나 적은 내용을 문서에 반영할지 물어봄 — 반영하지 않으면 발표 전 상태로 되돌리고, 실행 취소로 다시 살릴 수 있음",
+     "그리기 도구에 손떨림 보정 추가 (끔 · 약 · 중 · 강) — 펜 끝이 천천히 따라오며 잔떨림을 걸러 줌, 그림판 노트에도 추가",
+     "그리기 도구의 획 보정 기본값을 ‘끄기’로 변경",
+     "둥근 사각형 모서리를 PPT처럼 조절 — 도형을 고르면 위쪽 변에 생기는 노란 점을 좌우로 끌어 둥근 정도를 바꿈 (옵션바 슬라이더 대신)",
+     "페이지 패널 우클릭 메뉴에 ‘배경 색 바꾸기’ 추가 — 화면 · 썸네일 · 저장한 PDF · 인쇄에 모두 반영되고, 원래 글자와 그림은 그대로 보이게 칠함",
+     "페이지 패널 우클릭 메뉴에 ‘그룹에 넣기’(그룹을 골라 넣기) · ‘그룹에서 빼기’ 추가 — 여러 페이지를 골라 둔 상태면 한꺼번에",
+     "그룹 설정 추가 (그룹 머리의 톱니 · 우클릭) — 폴더 색 바꾸기, 페이지 패널 맨 위에 고정",
+     "빈 페이지 추가 · 기존 파일 불러오기: 그룹이 닫혀 있으면 그룹 밖(그룹 바로 뒤)에 페이지를 추가",
+     "메인 탭에 ‘최근에 연 파일’ 추가 — 최근 파일을 다시 열고, 기록에서 삭제하고, PC 프로그램에서는 파일 위치(탐색기 · Finder)를 열 수 있음",
+     "모바일 시작 화면의 파일 열기 · 빈 문서로 시작 · 파일 병합 · 파일 압축 버튼을 조금 작게 줄임",
+     "검색 결과에 보일 정사각형 썸네일 추가"
+    ],
+    "en": [
+     "Mobile: flipping pages while zoomed in now keeps your current view position on the next or previous page (before, the next page jumped to the top and the previous page to the bottom)",
+     "Presentation mode: you can now pick a background (fill) color when drawing shapes — choose a color, transparent or a custom color in the shape tool’s ‘Fill’ row",
+     "When you leave a presentation, you’re asked whether to keep what you drew or wrote during it — if you don’t, the document goes back to how it was before the presentation (Undo brings it back)",
+     "Added a stabilizer to the Draw tool (Off · Low · Mid · High) — the pen tip follows smoothly and filters out hand jitter; also added to Paint notes",
+     "Stroke correction in the Draw tool is now off by default",
+     "Rounded rectangle corners now work like PowerPoint — select the shape and drag the yellow dot on its top edge left or right to change the roundness (replaces the options bar slider)",
+     "Added ‘Change background color’ to the page panel right-click menu — applied on screen, in thumbnails, saved PDFs and printouts, while the original text and images stay visible",
+     "Added ‘Add to group’ (choose a group) and ‘Remove from group’ to the page panel right-click menu — works on all selected pages at once",
+     "Added group settings (gear on the group header · right-click) — change the folder color, pin the group to the top of the page panel",
+     "Add blank page · Import existing file: if the group is collapsed, the page is added outside the group (right after it)",
+     "Added ‘Recent files’ to the main tab — reopen recent files, remove them from the history, and in the desktop app open the file location (Explorer · Finder)",
+     "Made the Open file · Start blank · Merge files · Compress file buttons a bit smaller on the mobile start screen",
+     "Added a square thumbnail for search results"
+    ],
+    "ja": [
+     "モバイル：拡大したままページをめくると、見ていた位置のまま前後のページに移るよう改善（以前は次のページは上、前のページは下に画面が飛んでいました）",
+     "プレゼンモード：図形を描くときに背景色（塗りつぶし）も選べるように — 図形ツールの「背景」行で色・透明・その他の色を選択",
+     "プレゼンを終えて出るときに、発表中に描いたり書いたりした内容を文書に反映するか確認 — 反映しない場合は発表前の状態に戻し、元に戻すで復元できます",
+     "描画ツールに手ぶれ補正を追加（オフ・弱・中・強）— ペン先がゆっくり追従して細かな手ぶれを抑えます。ペイントノートにも追加",
+     "描画ツールのストローク補正の初期値を「オフ」に変更",
+     "角丸四角形の角をPPTのように調整 — 図形を選ぶと上辺に出る黄色い点を左右にドラッグして丸みを変更（オプションバーのスライダーの代わり）",
+     "ページパネルの右クリックメニューに「背景色を変更」を追加 — 画面・サムネイル・保存したPDF・印刷すべてに反映され、元の文字や画像はそのまま見えるように塗ります",
+     "ページパネルの右クリックメニューに「グループに入れる」（グループを選択）・「グループから出す」を追加 — 複数ページを選んでいればまとめて",
+     "グループ設定を追加（グループ見出しの歯車・右クリック）— フォルダーの色を変更、ページパネルの一番上に固定",
+     "空白ページを追加・既存ファイルを読み込む：グループが閉じていれば、グループの外（グループの直後）にページを追加",
+     "メインタブに「最近開いたファイル」を追加 — 最近のファイルを再び開いたり、履歴から削除したり、PCアプリではファイルの場所（エクスプローラー・Finder）を開けます",
+     "モバイルのスタート画面の「ファイルを開く・空白から始める・ファイル結合・ファイル圧縮」ボタンを少し小さく",
+     "検索結果に表示される正方形のサムネイルを追加"
+    ],
+    "zh": [
+     "移动端：放大状态下翻页时，会保持当前查看位置切换到上一页或下一页（以前下一页会跳到顶部、上一页会跳到底部）",
+     "演示模式：绘制形状时也可以选择背景色（填充）— 在形状工具的“背景”一行中选择颜色、透明或其他颜色",
+     "结束演示退出时，会询问是否将演示中绘制或书写的内容保留到文档 — 不保留则恢复到演示前的状态，可用撤销找回",
+     "绘图工具新增防抖（关 · 弱 · 中 · 强）— 笔尖平滑跟随，过滤手部抖动；画板笔记也已加入",
+     "绘图工具的笔画校正默认改为“关闭”",
+     "圆角矩形的圆角可像 PPT 一样调整 — 选中形状后，左右拖动上边缘的黄色圆点即可改变圆角程度（取代选项栏滑块）",
+     "页面面板右键菜单新增“更改背景颜色”— 屏幕、缩略图、保存的 PDF 和打印均会生效，原有文字和图片仍清晰可见",
+     "页面面板右键菜单新增“加入分组”（选择分组）和“移出分组”— 选中多页时可一次处理",
+     "新增分组设置（分组标题上的齿轮 · 右键）— 更改文件夹颜色、固定到页面面板顶部",
+     "添加空白页 · 导入现有文件：分组折叠时，页面会添加到分组外（紧接分组之后）",
+     "主标签页新增“最近打开的文件”— 可重新打开最近的文件、从记录中删除，在桌面程序中还可打开文件位置（资源管理器 · Finder）",
+     "移动端开始界面的“打开文件 · 从空白文档开始 · 合并文件 · 压缩文件”按钮略微缩小",
+     "新增用于搜索结果的正方形缩略图"
+    ]
+   }
+  },
   {
    "v": "v1.1.3",
    "d": "2026.10.23",
@@ -505,80 +571,6 @@
      "PC 程序:有新版本时会通过通知(每个版本一次)和右下角的小窗口提醒,可在查看详情中查看更新内容,再用更新按钮直接更新",
      "PC 程序:设置 › 版本信息中新增更新按钮(已是最新版本时显示“已是最新版本”)和前往 meow-pdf.com 按钮",
      "应用图标固定为带金色边框的猫咪图标 — 在手机主屏幕和 PC 程序中显示相同的图标"
-    ]
-   }
-  },
-  {
-   "v": "v0.11.8",
-   "d": "2026.10.18",
-   "items": {
-    "ko": [
-     "전체 페이지 관리에서 페이지를 돌리면 글자 · 이미지 · 도형 · 표 등 페이지의 내용도 모두 함께 통째로 회전",
-     "개체 회전 지원 — 돌린 개체도 선택 · 이동 · 크기 조절 · 글자 수정이 개체 방향 그대로 동작하고, PDF 저장 · 인쇄에도 반영",
-     "파일 병합에 PNG 추가 — PNG+PNG · PNG+PDF를 원하는 순서로 한 문서로 병합 (PNG는 한 장이 한 페이지)",
-     "페이지 패널 썸네일 메뉴(⋯)의 버튼이 눌리지 않던 문제 수정 — 보이지 않는 덮개가 클릭을 가로채던 것을 해결",
-     "페이지 패널 썸네일 메뉴에 ‘페이지 복제’ 추가 (그린 것 · 메모 · 레이어까지 그대로 복사해 바로 뒤에), 버튼을 더 크고 잘 보이게, 마우스를 올리면 커지며 강조",
-     "자동 레이어 · 수동 레이어에 복제 추가 — 자동은 줄의 복제 버튼, 수동은 복제 버튼과 더보기 › 레이어 복제",
-     "개체 선택 방식 추가 (설정 › 화면 · 레이아웃) — 바운딩 박스(기본)와 기즈모(PC) 중에서 고르고, 모바일은 바운딩 박스로 고정",
-     "바운딩 박스 모드: 모서리 · 변의 흰 점을 끌어 크기 조절, 위쪽 손잡이로 회전(Shift: 15° 단위), 오른쪽 위는 삭제 — 이미지 · 글자 · 묶음은 모서리를 끌면 비율 유지(Shift: 자유롭게), 펜 선도 통째로 회전",
-     "PC 기즈모 모드: 유니티식 변형 도구 — 화면 왼쪽 위의 도구 막대(끌어서 이동 · 접기 가능)에서 화면 이동(Q) · 이동(W) · 회전(E) · 크기 조절(R) · 사각형 변형(T) · 통합 변형(Y)",
-     "기즈모 모드에서 개체(이미지 · 도형 · 글자 · 선 등)를 선택하면 고른 도구에 맞춰 축 화살표(빨강 · 초록) · 평면 이동(파랑) · 회전 고리 · 크기 큐브 · 모서리 점이 나타나고, 마우스를 올린 축은 노랗게 강조 · 끄는 동안 각도와 크기를 표시",
-     "옵션바에 ‘기울기’ 추가 — 도형 · 이미지 · 글자 · 표의 회전 각도를 숫자로 입력하거나 글자 위에서 좌우로 끌어 조절 (0–360°)",
-     "기즈모 모드 조작 — Shift: 한 방향 고정 · 비율 · 15°, Ctrl: 회전 스냅, 마우스 가운데 버튼 끌기: 화면 이동",
-     "도구 단축키 변경: 강조 2 · 그리기 3 · 직선 4 · 지우개 5 · 모자이크 6 (Q · W · E · R · T · Y는 기즈모 모드의 변형 도구)",
-     "채운 별 도형의 안쪽을 눌러도 선택되지 않던 문제 수정",
-     "선택 도구로 개체를 옮길 때 Shift를 누르면 가로 · 세로 한 방향으로만 이동"
-    ],
-    "en": [
-     "Rotating pages in All pages now rotates everything on the page with it — text, images, shapes, tables and more",
-     "Object rotation support — rotated objects can still be selected, moved, resized and edited along their own direction, and rotation is kept when saving to PDF and printing",
-     "Added PNG to Merge files — merge PNG+PNG or PNG+PDF into one document in any order (each PNG becomes one page)",
-     "Fixed the buttons in the page panel thumbnail menu (⋯) not responding — an invisible overlay was swallowing the clicks",
-     "Added ‘Duplicate page’ to the thumbnail menu (copies drawings · memos · layers and places it right after), with larger, clearer buttons that grow and highlight on hover",
-     "Added duplicate to auto and manual layers — the duplicate button on each row for auto layers, and the duplicate button or More › Duplicate layer for manual layers",
-     "Added Object selection (Settings › Display · Layout) — choose Bounding box (default) or Gizmo (PC); mobile is fixed to Bounding box",
-     "Bounding box mode: drag the white points on the corners and edges to resize, the handle on top to rotate (Shift: 15° steps), and the top-right button deletes — images · text · groups keep their ratio when dragging a corner (Shift: free), and pen strokes rotate as a whole",
-     "PC Gizmo mode: Unity-style transform tools — a toolbar at the top left (drag to move, collapsible) with Pan (Q) · Move (W) · Rotate (E) · Scale (R) · Rect (T) · Transform (Y)",
-     "In Gizmo mode, selecting any object (image · shape · text · line, etc.) shows gizmos for the chosen tool — axis arrows (red · green), plane move (blue), rotation rings, scale cubes and corner dots; the hovered axis turns yellow, and the angle and size are shown while dragging",
-     "Added ‘Tilt’ to the options bar — type the rotation angle of shapes · images · text · tables, or drag left and right on the label to adjust it (0–360°)",
-     "Gizmo mode controls — Shift: lock one direction · keep ratio · 15°, Ctrl: rotation snap, drag with the middle mouse button: pan",
-     "Tool shortcuts changed: Highlight 2 · Draw 3 · Line 4 · Eraser 5 · Mosaic 6 (Q · W · E · R · T · Y are the Gizmo mode transform tools)",
-     "Fixed filled star shapes not being selectable by clicking inside them",
-     "Holding Shift while moving an object with the Select tool keeps it to one direction (horizontal or vertical)"
-    ],
-    "ja": [
-     "全ページ管理でページを回転すると、文字・画像・図形・表などページの内容もすべて一緒に丸ごと回転",
-     "オブジェクトの回転に対応 — 回転したオブジェクトも選択・移動・サイズ調整・文字修正がオブジェクトの向きのまま動作し、PDF保存・印刷にも反映",
-     "ファイル結合にPNGを追加 — PNG+PNG・PNG+PDFを好きな順番で1つの文書に結合(PNGは1枚が1ページ)",
-     "ページパネルのサムネイルメニュー(⋯)のボタンが押せない問題を修正 — 見えないカバーがクリックを横取りしていたのを解決",
-     "サムネイルメニューに「ページを複製」を追加(描いたもの・メモ・レイヤーまでそのままコピーしてすぐ後ろに)、ボタンを大きく見やすく、マウスを乗せると大きくなって強調",
-     "自動レイヤー・手動レイヤーに複製を追加 — 自動は行の複製ボタン、手動は複製ボタンとその他 › レイヤーを複製",
-     "オブジェクトの選択方式を追加(設定 › 画面・レイアウト)— バウンディングボックス(既定)とギズモ(PC)から選べ、モバイルはバウンディングボックスに固定",
-     "バウンディングボックスモード: 角・辺の白い点をドラッグしてサイズ調整、上のハンドルで回転(Shift: 15°単位)、右上は削除 — 画像・文字・グループは角をドラッグすると比率を維持(Shift: 自由に)、ペンの線も丸ごと回転",
-     "PCギズモモード: Unity風の変形ツール — 画面左上のツールバー(ドラッグで移動・折りたたみ可)で画面移動(Q)・移動(W)・回転(E)・サイズ調整(R)・矩形変形(T)・統合変形(Y)",
-     "ギズモモードでオブジェクト(画像・図形・文字・線など)を選ぶと選んだツールに合わせて軸の矢印(赤・緑)・平面移動(青)・回転リング・サイズキューブ・角の点が表示され、マウスを乗せた軸は黄色く強調・ドラッグ中は角度とサイズを表示",
-     "オプションバーに「傾き」を追加 — 図形・画像・文字・表の回転角度を数値で入力するか、ラベルの上で左右にドラッグして調整(0–360°)",
-     "ギズモモードの操作 — Shift: 一方向に固定・比率・15°、Ctrl: 回転スナップ、マウスの中ボタンでドラッグ: 画面移動",
-     "ツールのショートカットを変更: 強調 2・描画 3・直線 4・消しゴム 5・モザイク 6(Q・W・E・R・T・Yはギズモモードの変形ツール)",
-     "塗りつぶした星の図形の内側を押しても選択されない問題を修正",
-     "選択ツールでオブジェクトを動かすときShiftを押すと、横・縦の一方向だけに移動"
-    ],
-    "zh": [
-     "在全部页面管理中旋转页面时，文字 · 图片 · 形状 · 表格等页面内容也会整体一起旋转",
-     "支持对象旋转 — 旋转后的对象也能按自身方向选择 · 移动 · 调整大小 · 修改文字，并会反映到 PDF 保存 · 打印中",
-     "合并文件新增 PNG — 可按任意顺序将 PNG+PNG · PNG+PDF 合并为一个文档(每张 PNG 为一页)",
-     "修复页面面板缩略图菜单(⋯)中的按钮无法点击的问题 — 解决了不可见的遮罩拦截点击的情况",
-     "缩略图菜单新增“复制页面”(连同绘制内容 · 便签 · 图层一起复制并放在其后),按钮更大更醒目，鼠标悬停时放大并高亮",
-     "自动图层 · 手动图层新增复制 — 自动图层用每行的复制按钮，手动图层用复制按钮或更多 › 复制图层",
-     "新增对象选择方式(设置 › 显示 · 布局)— 可在边界框(默认)和 Gizmo(PC)之间选择,移动端固定为边界框",
-     "边界框模式:拖动角和边上的白点调整大小,拖动上方手柄旋转(Shift:按 15°),右上角为删除 — 图片 · 文字 · 组合拖动角时保持比例(Shift:自由),笔迹也能整体旋转",
-     "PC Gizmo 模式:Unity 风格的变换工具 — 在屏幕左上角的工具栏(可拖动、可收起)中使用平移视图(Q) · 移动(W) · 旋转(E) · 缩放(R) · 矩形变换(T) · 综合变换(Y)",
-     "在 Gizmo 模式下选中对象(图片 · 形状 · 文字 · 线条等)时会按所选工具显示坐标轴箭头(红 · 绿) · 平面移动(蓝) · 旋转环 · 缩放方块 · 角点,鼠标悬停的轴会以黄色高亮,拖动时显示角度和尺寸",
-     "选项栏新增“倾斜” — 可输入形状 · 图片 · 文字 · 表格的旋转角度,或在标签上左右拖动调整(0–360°)",
-     "Gizmo 模式操作 — Shift:锁定单一方向 · 保持比例 · 15°,Ctrl:旋转吸附,按住鼠标中键拖动:平移视图",
-     "工具快捷键变更:高亮 2 · 绘制 3 · 直线 4 · 橡皮擦 5 · 马赛克 6(Q · W · E · R · T · Y 为 Gizmo 模式的变换工具)",
-     "修复点击已填充星形内部无法选中的问题",
-     "用选择工具移动对象时按住 Shift,只沿水平或垂直一个方向移动"
     ]
    }
   }

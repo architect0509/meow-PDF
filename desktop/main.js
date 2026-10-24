@@ -46,6 +46,17 @@ async function queueFiles(paths) {
 pendingFiles = filesFromArgv(process.argv);
 app.on('open-file', (e, f) => { e.preventDefault(); queueFiles([f]); });   // macOS: Finder에서 열기
 ipcMain.handle('meow:take-files', async () => { rendererReady = true; const p = pendingFiles; pendingFiles = []; return readForRenderer(p); });
+/* ── v1.1.4 최근에 연 파일: 경로로 다시 열기 · 탐색기(Finder)에서 파일 위치 열기 · 아직 있는지 확인 ── */
+ipcMain.handle('meow:read-path', async (e, p) => {
+  p = String(p || ''); if (!p || !path.isAbsolute(p) || !OPEN_EXT.test(p)) return null;
+  try { if (!(await fs.promises.stat(p)).isFile()) return null; } catch (er) { return null; }
+  const [r] = await readForRenderer([p]); return r || null;
+});
+ipcMain.handle('meow:show-in-folder', async (e, p) => {
+  p = String(p || ''); if (!p || !path.isAbsolute(p)) return false;
+  try { if (!fs.existsSync(p)) { const d = path.dirname(p); if (fs.existsSync(d)) { await shell.openPath(d); return 'dir'; } return false; } shell.showItemInFolder(p); return true; } catch (er) { return false; }
+});
+ipcMain.handle('meow:paths-exist', async (e, list) => (Array.isArray(list) ? list.slice(0, 200) : []).map(p => { try { return fs.statSync(String(p)).isFile(); } catch (er) { return false; } }));
 
 /* ── v1.0.2 기본 연결 프로그램: 지금 PDF를 Meow-PDF가 여는지 확인하고, 설정 화면을 열어요 ── */
 const run = (cmd, args, ms) => new Promise(res => { try { execFile(cmd, args, { timeout: ms || 4000, windowsHide: true }, (err, out) => res(err ? '' : String(out || ''))); } catch (e) { res(''); } });
