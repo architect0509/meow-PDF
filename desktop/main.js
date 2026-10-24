@@ -239,7 +239,18 @@ ipcMain.handle('meow:update-start', async () => {
   try { await u.checkForUpdates(); return { state: 'checking' }; }   // 이후 상태는 meow:update-status 로 알려요
   catch (e) { openExternal(DOWNLOAD[process.platform] || SITE + '/#download'); return { state: 'external' }; }
 });
-ipcMain.on('meow:update-install', () => { const u = getUpdater(); if (u) setImmediate(() => u.quitAndInstall(false, true)); });
+ipcMain.on('meow:update-install', async () => { const u = getUpdater(); try { await session.defaultSession.flushStorageData(); } catch (e) { /* 무시 */ } if (u) setImmediate(() => u.quitAndInstall(false, true)); });   // v1.1.6 설치하려고 끄기 전에 화면 설정(localStorage)을 디스크에 먼저 써요
+/* ── v1.1.6 나만의 테마 · 배경 이미지 같은 화면 설정을 앱 데이터 폴더의 파일에도 따로 보관해요 (업데이트 · 강제 종료로 브라우저 저장소가 비어도 되살려요) ── */
+const PREFS_FILE = () => path.join(app.getPath('userData'), 'meow-prefs.json');
+const PREF_KEYS = new Set(['meowCustomTheme', 'meowCustomBg', 'pdfEditorTheme']);
+function prefsRead() { try { const o = JSON.parse(fs.readFileSync(PREFS_FILE(), 'utf8')); return o && typeof o === 'object' ? o : {}; } catch (e) { return {}; } }
+ipcMain.handle('meow:prefs-get', () => prefsRead());
+ipcMain.handle('meow:prefs-set', async (e, k, v) => {
+  k = String(k || ''); if (!PREF_KEYS.has(k)) return false;
+  const o = prefsRead(); if (v == null) delete o[k]; else o[k] = String(v).slice(0, 12 * 1024 * 1024);
+  try { const f = PREFS_FILE(), tmp = f + '.tmp'; await fs.promises.writeFile(tmp, JSON.stringify(o)); await fs.promises.rename(tmp, f); return true; } catch (er) { return false; }
+});
+app.on('before-quit', () => { try { session.defaultSession.flushStorageData(); } catch (e) { /* 무시 */ } });
 
 /* macOS 는 메뉴가 있어야 복사 · 붙여넣기 단축키가 동작해요 */
 function setMenu() {

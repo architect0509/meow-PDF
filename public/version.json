@@ -1,7 +1,7 @@
 {
  "name": "Meow-PDF",
- "version": "v1.1.5",
- "date": "2026.10.24",
+ "version": "v1.1.6",
+ "date": "2026.10.25",
  "site": "https://www.meow-pdf.com/",
  "download": {
   "win": "https://www.meow-pdf.com/download/windows",
@@ -10,6 +10,56 @@
   "page": "https://www.meow-pdf.com/#download"
  },
  "history": [
+  {
+   "v": "v1.1.6",
+   "d": "2026.10.25",
+   "items": {
+    "ko": [
+     "단축키 Z 도구 이름을 ‘영역지정’으로 바꿈",
+     "모바일에서 + 버튼을 누르면 나오는 버튼(발표 · 번역 · 찾기 · 보기·편집 · 북마크)을 키워 글자가 잘리지 않게 함",
+     "‘버전으로 업데이트했어요’ 알림에 ‘자세히 보기’ 버튼 추가 — 그 버전에서 바뀐 내용을 바로 보여 줌",
+     "도구 모음 기본 위치를 상단 정렬로 — 예전에 저장된 좌측 정렬도 한 번 상단 정렬로 되돌림 (설정 › 화면 · 레이아웃에서 다시 바꿀 수 있음)",
+     "개체를 고른 채 화살표 키로 1pt씩(Shift: 10pt) 옮기기 — 여러 개를 골랐으면 함께 움직이고, 손을 떼면 실행 취소 한 번으로 기록",
+     "확대했을 때 문서 화면의 상하 · 좌우 스크롤바를 더 잘 보이게 — 어두운 테마는 밝게, 밝은 테마는 어둡게",
+     "마지막으로 추가한 텍스트의 양식(글꼴 · 크기 · 굵게 · 기울임 · 색 · 배경 · 정렬 · 자간 · 줄간격)을 기억해 다음 텍스트에도 그대로 씀",
+     "PC 프로그램: 업데이트한 뒤에도 나만의 테마 · 배경 이미지가 그대로 남도록 앱 데이터 폴더에도 따로 보관하고, 설치 전에 설정을 먼저 저장",
+     "여러 개를 고른 채 옵션바에서 색 · 채우기 · 굵기 · 불투명도 · 글꼴 · 굵게 · 정렬 등을 바꾸면 고른 개체 모두에 한꺼번에 반영"
+    ],
+    "en": [
+     "Renamed the Z-key tool to ‘Region’",
+     "On mobile, the buttons that open from the + button (Present · Translate · Find · View/Edit · Bookmarks) are bigger so their labels aren’t cut off",
+     "Added a ‘View details’ button to the ‘Updated to version’ notification — shows what changed in that version",
+     "The toolbar now defaults to the top — a previously saved left layout is reset to the top once (you can change it again in Settings › Display · Layout)",
+     "Move selected objects with the arrow keys by 1 pt (Shift: 10 pt) — multiple selected objects move together, and each burst is one Undo step",
+     "The document view’s vertical and horizontal scrollbars stand out more when zoomed — light on dark themes, dark on light themes",
+     "Remembers the style of the last text you added (font · size · bold · italic · color · background · alignment · letter spacing · line spacing) for your next text",
+     "Desktop app: your custom theme and background image now survive updates — they’re also kept in the app data folder, and settings are saved before installing",
+     "With multiple objects selected, changing color · fill · width · opacity · font · bold · alignment and more in the options bar applies to all of them"
+    ],
+    "ja": [
+     "ショートカットZのツール名を「範囲指定」に変更",
+     "モバイルで＋ボタンを押すと出るボタン（発表・翻訳・検索・表示/編集・ブックマーク）を大きくして、文字が切れないように",
+     "「バージョンにアップデートしました」通知に「詳しく見る」ボタンを追加 — そのバージョンの変更内容をすぐに表示",
+     "ツールバーの既定位置を上部に — 以前保存された左側配置も一度だけ上部に戻します（設定 › 画面・レイアウトで変更できます）",
+     "オブジェクトを選んだまま矢印キーで1ptずつ（Shift：10pt）移動 — 複数選択時は一緒に動き、キーを離すと元に戻す1回分として記録",
+     "拡大時の文書画面の上下・左右スクロールバーを見やすく — 暗いテーマでは明るく、明るいテーマでは暗く",
+     "最後に追加したテキストの書式（フォント・サイズ・太字・斜体・色・背景・配置・字間・行間）を記憶して次のテキストにも使用",
+     "PCアプリ：アップデート後もマイテーマ・背景画像がそのまま残るよう、アプリのデータフォルダーにも保存し、インストール前に設定を先に保存",
+     "複数選択したままオプションバーで色・塗りつぶし・太さ・不透明度・フォント・太字・配置などを変えると、選んだオブジェクトすべてに一括反映"
+    ],
+    "zh": [
+     "将快捷键 Z 的工具名称改为“区域选择”",
+     "移动端点 + 按钮弹出的按钮（演示 · 翻译 · 查找 · 查看/编辑 · 书签）变大，文字不再被截断",
+     "“已更新到版本”通知中新增“查看详情”按钮 — 直接显示该版本的更新内容",
+     "工具栏默认位置改为顶部 — 以前保存的左侧布局也会恢复为顶部一次（可在 设置 › 界面 · 布局 中再次更改）",
+     "选中对象后可用方向键每次移动 1pt（Shift：10pt）— 多选时一起移动，松开按键后记录为一次撤销",
+     "放大时文档区域的上下、左右滚动条更醒目 — 深色主题为浅色，浅色主题为深色",
+     "记住最后添加的文字样式（字体 · 字号 · 粗体 · 斜体 · 颜色 · 背景 · 对齐 · 字距 · 行距），下次添加文字时沿用",
+     "桌面程序：更新后自定义主题和背景图片会保留 — 同时保存在应用数据文件夹中，并在安装前先保存设置",
+     "多选后在选项栏中更改颜色 · 填充 · 粗细 · 不透明度 · 字体 · 粗体 · 对齐等，会一次性应用到所有选中对象"
+    ]
+   }
+  },
   {
    "v": "v1.1.5",
    "d": "2026.10.24",
@@ -529,52 +579,6 @@
      "创建形状 · 文字后点击对象外部会切换到选择工具 — 修复文字切换到选择工具后再次点击外部又回到文字工具的问题",
      "演示按钮新增下拉菜单 — 可选择从当前页 (默认) 或第一页开始",
      "统一 v1.0.1 · v1.0.2 更新记录的措辞，与之前的记录保持一致"
-    ]
-   }
-  },
-  {
-   "v": "v1.0.2",
-   "d": "2026.10.19",
-   "items": {
-    "ko": [
-     "헤더의 설정 버튼과 전체화면 버튼 자리를 바꿔 전체화면 버튼이 맨 오른쪽에 오게 함 (튜토리얼도 반영)",
-     "PC 프로그램: PDF · MPDF 파일 아이콘을 새 모양으로 변경 — 큰 아이콘은 금색 라벨(PDF · MPDF), 작은 아이콘은 고양이 아이콘(MPDF는 M 배지)",
-     "화면 맞춤 상태에서 좌우 패널을 끌어 좁힐 때 캔버스가 덜덜 떨리던 문제 수정 — 끄는 동안에는 그대로 두고, 멈추거나 놓으면 한 번에 맞춤",
-     "안내 문구 · 소개 페이지의 글자가 끌어도 선택되지 않게 바꿈 (입력칸 · PDF 글자 복사 · 노트 · 채팅 · 메일은 그대로 선택 가능)",
-     "공유 프로젝트 관리에서 공개 여부 · 고유 코드로 입장 · 장르 · 입장 기본 권한을 눌러도 화면에 바로 보이지 않던 문제 수정",
-     "앱 아이콘을 원래 고양이 아이콘으로 되돌림 (휴대폰 홈 화면 · PC 프로그램)",
-     "PC 프로그램: PDF · MPDF 파일에 Meow-PDF 파일 아이콘 적용, 파일을 두 번 누르거나 앱 아이콘에 끌어 놓으면 Meow-PDF에서 열림",
-     "PC 프로그램: Meow-PDF가 PDF 기본 연결 프로그램이 아니면 오른쪽 아래 ‘기본 연결 프로그램으로 설정해보세요!’ 창으로 안내, 설정하기를 누르면 설정 화면 열기 (설정 › 버전 정보에서도 변경 가능)"
-    ],
-    "en": [
-     "Swapped the Settings and Fullscreen buttons in the header so Fullscreen is at the far right (tutorial updated too)",
-     "PC app: new PDF · MPDF file icons — large icons have a gold PDF · MPDF label, small icons show the cat icon (with an M badge for MPDF)",
-     "Fixed the canvas shaking when narrowing the side panels while fit to screen — it now stays put while you drag and fits once when you pause or let go",
-     "Guide text and intro page text no longer get selected when dragged (inputs, PDF text copying, notes, chat and mail can still be selected)",
-     "Fixed Visibility, Join by code, Genre and Default role in project management not updating on screen when clicked",
-     "Restored the original cat app icon (phone home screen · PC app)",
-     "PC app: PDF · MPDF files get the Meow-PDF file icon, and double-clicking a file or dropping it on the app icon opens it in Meow-PDF",
-     "PC app: if Meow-PDF isn't the default app for PDFs, a ‘Set it as your default app!’ window appears at the bottom right — Set up opens the settings screen (you can also change it in Settings › Version info)"
-    ],
-    "ja": [
-     "ヘッダーの設定ボタンと全画面ボタンの位置を入れ替え、全画面ボタンを一番右に(チュートリアルにも反映)",
-     "PCアプリ: PDF・MPDFファイルのアイコンを新しいデザインに — 大きいアイコンは金色のラベル(PDF・MPDF)、小さいアイコンは猫アイコン(MPDFはMバッジ)",
-     "画面に合わせた状態で左右のパネルを狭めるとキャンバスががたがた揺れる問題を修正 — ドラッグ中はそのままにして、止めるか離すと一度で合わせます",
-     "案内文・紹介ページの文字はドラッグしても選択されないように変更(入力欄・PDFの文字のコピー・ノート・チャット・メールはそのまま選択できます)",
-     "共有プロジェクト管理で公開範囲・コードで参加・ジャンル・参加時の基本権限を押しても画面にすぐ反映されない問題を修正",
-     "アプリのアイコンを元の猫アイコンに戻しました(スマホのホーム画面・PCアプリ)",
-     "PCアプリ: PDF・MPDFファイルにMeow-PDFのファイルアイコンを使い、ファイルをダブルクリックするかアプリのアイコンにドロップするとMeow-PDFで開きます",
-     "PCアプリ: Meow-PDFがPDFの既定のアプリでない場合、右下の「既定のアプリに設定してみましょう!」ウィンドウでお知らせし、設定するを押すと設定画面を開きます(設定 › バージョン情報でも変更できます)"
-    ],
-    "zh": [
-     "交换标题栏中设置按钮和全屏按钮的位置,全屏按钮位于最右侧(教程也已更新)",
-     "PC 程序:PDF · MPDF 文件图标换成新样式 — 大图标带金色标签(PDF · MPDF),小图标为猫咪图标(MPDF 带 M 标记)",
-     "修复在适应屏幕状态下拖动缩窄左右面板时画布抖动的问题 — 拖动时保持不变,停下或松开后一次性适配",
-     "提示文字和介绍页的文字拖动时不再被选中(输入框 · PDF 文字复制 · 笔记 · 聊天 · 邮件仍可选择)",
-     "修复共享项目管理中点击公开范围 · 用代码加入 · 类型 · 加入默认权限后界面没有立即更新的问题",
-     "应用图标恢复为原来的猫咪图标(手机主屏幕 · PC 程序)",
-     "PC 程序:PDF · MPDF 文件使用 Meow-PDF 文件图标,双击文件或拖到应用图标上即可在 Meow-PDF 中打开",
-     "PC 程序:如果 Meow-PDF 不是 PDF 的默认程序,会在右下角显示“设为默认打开程序吧!”窗口,点击设置即可打开设置界面(也可在设置 › 版本信息中更改)"
     ]
    }
   }

@@ -24,6 +24,10 @@ contextBridge.exposeInMainWorld('meowDesktop', {
     reveal: p => ipcRenderer.invoke('meow:show-in-folder', String(p || '')),
     exists: list => ipcRenderer.invoke('meow:paths-exist', Array.isArray(list) ? list.map(String) : [])
   },
+  prefs: {   // v1.1.6 화면 설정(나만의 테마 · 배경 이미지) 보관
+    get: () => ipcRenderer.invoke('meow:prefs-get'),
+    set: (k, v) => ipcRenderer.invoke('meow:prefs-set', String(k || ''), v == null ? null : String(v))
+  },
   print: {   // v1.0.6 인쇄 창에서 고른 프린터로 바로 인쇄
     printers: () => ipcRenderer.invoke('meow:printers'),
     run: o => ipcRenderer.invoke('meow:print', o || {})
