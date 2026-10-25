@@ -1,6 +1,6 @@
 {
  "name": "Meow-PDF",
- "version": "v1.1.6",
+ "version": "v1.1.7",
  "date": "2026.10.25",
  "site": "https://www.meow-pdf.com/",
  "download": {
@@ -10,6 +10,60 @@
   "page": "https://www.meow-pdf.com/#download"
  },
  "history": [
+  {
+   "v": "v1.1.7",
+   "d": "2026.10.25",
+   "items": {
+    "ko": [
+     "텍스트를 한 번 눌러 고른 채 바로 입력하면 원래 내용을 지우고 새로 입력 시작 — 한글도 첫 글자부터 그대로, Enter는 원래 내용 고치기",
+     "텍스트를 두 번 클릭하면 글자 전체가 선택된 채로 편집 시작",
+     "표 내용 편집에서 글자색 설정 (선택한 칸 · 행 · 열 · 표 전체) — 옵션바의 표 색상은 이제 선 색만 바꿈",
+     "둥근 사각형을 영역으로 잘라 선택하면 둥근 모서리가 사라지던 문제 수정",
+     "페이지 패널의 현재 페이지를 더 눈에 띄게 — 굵은 테두리 · 배경 카드 · 번호 배지",
+     "모자이크 도구를 프리미엄 기능으로 변경",
+     "도구 모음에 마우스를 올리면 나오는 설명에서 ‘~요’로 끝나는 설명 문장을 뺌",
+     "탭을 우클릭해 탭 색 바꾸기",
+     "스페이스 키를 누른 채 마우스로 끌면 화면 이동 — 확대했을 때 편하게",
+     "메일함에서 메일을 바로 삭제 — 줄마다 휴지통 버튼, 체크해서 여러 개 한꺼번에 삭제(전체 선택 지원)"
+    ],
+    "en": [
+     "Type right away on a text you selected with one click to replace its content — Korean input works from the first letter, and Enter edits the existing text",
+     "Double-clicking a text starts editing with all of its text selected",
+     "Set the text color in Edit table contents (selected cells · row · column · whole table) — the table color in the options bar now changes only the line color",
+     "Fixed rounded rectangles losing their rounded corners when cut with a region selection",
+     "The current page stands out more in the Pages panel — thicker outline · background card · number badge",
+     "The Mosaic tool is now a Premium feature",
+     "Removed the long explanatory sentences from the toolbar tooltips",
+     "Right-click a tab to change its color",
+     "Hold Space and drag with the mouse to pan the view — handy when zoomed in",
+     "Delete mails right from the mailbox — a trash button on each row, and check several to delete them at once (Select all supported)"
+    ],
+    "ja": [
+     "1回クリックで選んだテキストにそのまま入力すると、元の内容を消して新しく入力 — 韓国語も最初の文字からそのまま、Enterは元の内容を編集",
+     "テキストをダブルクリックすると、文字全体を選択した状態で編集開始",
+     "表の内容編集で文字色を設定（選択したセル・行・列・表全体） — オプションバーの表の色は線の色だけを変更",
+     "角丸四角形を範囲で切り取って選択すると角の丸みが消える問題を修正",
+     "ページパネルの現在のページをより目立つように — 太い枠・背景カード・番号バッジ",
+     "モザイクツールをプレミアム機能に変更",
+     "ツールバーにマウスを乗せると出る説明から長い説明文を削除",
+     "タブを右クリックしてタブの色を変更",
+     "スペースキーを押したままマウスでドラッグすると画面を移動 — 拡大時に便利",
+     "メールボックスからメールをすぐ削除 — 行ごとのゴミ箱ボタン、チェックして複数をまとめて削除（すべて選択に対応）"
+    ],
+    "zh": [
+     "单击选中文本后直接输入，会删除原内容并开始新输入 — 韩文从第一个字起正常输入，按 Enter 则编辑原内容",
+     "双击文本时以全选状态开始编辑",
+     "在编辑表格内容中设置文字颜色（所选单元格 · 行 · 列 · 整个表格）— 选项栏中的表格颜色现在只更改线条颜色",
+     "修复用区域裁切选择圆角矩形时圆角消失的问题",
+     "页面面板中的当前页面更醒目 — 粗边框 · 背景卡片 · 页码徽标",
+     "马赛克工具改为高级版功能",
+     "删除了工具栏悬停提示中的长说明句",
+     "右键单击标签页可更改标签颜色",
+     "按住空格键并用鼠标拖动即可移动画面 — 放大时更方便",
+     "可直接在邮箱中删除邮件 — 每行都有删除按钮，勾选后可批量删除（支持全选）"
+    ]
+   }
+  },
   {
    "v": "v1.1.6",
    "d": "2026.10.25",
@@ -521,64 +575,6 @@
      "在介绍页价格说明中新增购买方法(购买按钮 → 注册 → Toss Payments 付款 → 立即生效)，点击购买按钮会在已选好该使用券的状态下打开账号窗口",
      "付款服务器休眠时，注册 · 登录过程中显示“正在唤醒服务器”，打开账号窗口时提前唤醒",
      "加宽支付窗口，修复 Toss Payments 支付页面左右被截断的问题"
-    ]
-   }
-  },
-  {
-   "v": "v1.0.3",
-   "d": "2026.10.19",
-   "items": {
-    "ko": [
-     "PC 프로그램: 앱 아이콘을 모서리가 둥근 정사각형으로 변경",
-     "PC 프로그램: 저장하지 않은 상태에서 X를 누르면 아무 알림 없이 창이 닫히지 않던 문제 수정 — ‘저장하지 않고 닫을까요?’ 확인 창 표시",
-     "‘PNG 내보내기’를 ‘이미지로 내보내기’로 변경 — PNG · JPG · JPEG · WEBP 중 형식을 고르고 현재 쪽 또는 전체 페이지(ZIP)로 내보내기",
-     "프리미엄 결제를 구독(자동결제)에서 이용권으로 다시 전환 — 1개월 이용권 1,200원 · 1년 이용권 10,500원, 한 번만 결제되고 남은 기간이 있으면 그 뒤에 이어서 연장",
-     "프리미엄 이용 기간이 3일 이내로 남으면 계속 결제할지 알림 — 알림 창 · 오른쪽 아래 작은 창(PC 프로그램은 운영체제 알림도)에서 바로 이용권 연장",
-     "공유작업 프로젝트 관리에 방 설명 입력 추가 (500자까지, 방 정보 창에 표시)",
-     "우클릭 메뉴에 앞으로 보내기 · 뒤로 보내기 · 맨 앞으로 보내기 · 맨 뒤로 보내기 추가 — 개체 순서를 레이어에 자동 반영 (수동 레이어는 같은 레이어 안에서 이동)",
-     "음성 도구에 드롭다운 버튼(▾) 추가 — 버튼은 고른 방식(음성 녹음 · MP3 파일 넣기)을 바로 실행, ▾에서 방식 전환 (V는 바로 녹음)",
-     "도형 · 텍스트를 만든 뒤 개체 밖을 누르면 선택 도구로 전환 — 텍스트가 선택 도구로 바뀐 뒤 바깥을 한 번 더 누르면 텍스트 도구로 돌아가던 문제 수정",
-     "발표 버튼에 드롭다운 추가 — 현재 페이지부터(기본) · 첫 페이지부터 중에서 시작 위치 선택",
-     "v1.0.1 · v1.0.2 업데이트 내역의 말투를 이전 내역과 같게 정리"
-    ],
-    "en": [
-     "PC app: the app icon is now a rounded square",
-     "PC app: fixed the window silently refusing to close when you pressed X with unsaved changes — it now asks whether to close without saving",
-     "‘PNG export’ is now ‘Export as image’ — choose PNG · JPG · JPEG · WEBP and export the current page or all pages (ZIP)",
-     "Premium payments switched back from subscriptions (auto-renewal) to passes — 1-month pass ₩1,200 · 1-year pass ₩10,500, charged once and added after any remaining time",
-     "When 3 days or less of Premium remain, you're asked whether to keep paying — extend with a pass right from the notifications panel or the small bottom-right window (plus an OS notification in the PC app)",
-     "Added a room description field to shared project management (up to 500 characters, shown in the room info window)",
-     "Added Bring forward · Send backward · Bring to front · Send to back to the right-click menu — the order is reflected in layers automatically (manual layers move within the same layer)",
-     "Added a dropdown button (▾) to the Voice tool — the button runs the chosen mode (voice recording · insert MP3 file) right away, switch modes from ▾ (V records right away)",
-     "After creating a shape or text, clicking outside it switches to the Select tool — fixed text going back to the Text tool when you clicked outside once more",
-     "Added a dropdown to the Present button — choose to start from the current page (default) or the first page",
-     "Made the wording of the v1.0.1 · v1.0.2 update notes consistent with earlier notes"
-    ],
-    "ja": [
-     "PCアプリ: アプリアイコンを角の丸い正方形に変更",
-     "PCアプリ: 保存していない状態でXを押すと何の通知もなくウィンドウが閉じなかった問題を修正 — 「保存せずに閉じますか？」の確認を表示",
-     "「PNG書き出し」を「画像として書き出し」に変更 — PNG · JPG · JPEG · WEBPから形式を選び、現在のページまたは全ページ(ZIP)で書き出し",
-     "プレミアムの決済をサブスクリプション(自動決済)から利用券に戻す — 1か月利用券 1,200ウォン · 1年利用券 10,500ウォン、1回だけ決済され、残りの期間があればその後に延長",
-     "プレミアムの利用期間が残り3日以内になると、続けて決済するかお知らせ — 通知パネル · 右下の小さなウィンドウ(PCアプリはOSの通知も)からすぐに利用券で延長",
-     "共有作業のプロジェクト管理にルームの説明入力を追加 (500文字まで、ルーム情報に表示)",
-     "右クリックメニューに前面へ移動 · 背面へ移動 · 最前面へ移動 · 最背面へ移動を追加 — オブジェクトの順序をレイヤーに自動反映 (手動レイヤーは同じレイヤー内で移動)",
-     "音声ツールにドロップダウンボタン(▾)を追加 — ボタンは選んだ方式(音声録音 · MP3ファイル挿入)をすぐ実行、▾で方式を切り替え (Vはすぐ録音)",
-     "図形 · テキストを作成した後、オブジェクトの外を押すと選択ツールに切り替え — テキストが選択ツールに変わった後、外をもう一度押すとテキストツールに戻っていた問題を修正",
-     "発表ボタンにドロップダウンを追加 — 現在のページから(既定) · 最初のページからの中から開始位置を選択",
-     "v1.0.1 · v1.0.2 の更新履歴の文体を以前の履歴と揃えて整理"
-    ],
-    "zh": [
-     "PC 程序：应用图标改为圆角正方形",
-     "PC 程序：修复未保存时点击 X 窗口没有任何提示也关不掉的问题 — 现在会显示“不保存就关闭吗？”确认窗口",
-     "“导出 PNG”改为“导出为图片” — 可选择 PNG · JPG · JPEG · WEBP 格式，导出当前页或全部页面 (ZIP)",
-     "高级版付款由订阅 (自动续费) 改回使用券 — 1 个月使用券 1,200 韩元 · 1 年使用券 10,500 韩元，只扣款一次，如有剩余期限则接在其后续期",
-     "高级版使用期限剩余 3 天以内时提醒是否继续付款 — 可在通知面板 · 右下角小窗口 (PC 程序还有系统通知) 中直接用使用券续期",
-     "共享协作的项目管理中新增房间说明 (最多 500 字，显示在房间信息窗口中)",
-     "右键菜单新增上移一层 · 下移一层 · 置于顶层 · 置于底层 — 对象顺序自动反映到图层 (手动图层在同一图层内移动)",
-     "语音工具新增下拉按钮 (▾) — 按钮直接执行所选方式 (语音录制 · 插入 MP3 文件)，在 ▾ 中切换方式 (V 直接录音)",
-     "创建形状 · 文字后点击对象外部会切换到选择工具 — 修复文字切换到选择工具后再次点击外部又回到文字工具的问题",
-     "演示按钮新增下拉菜单 — 可选择从当前页 (默认) 或第一页开始",
-     "统一 v1.0.1 · v1.0.2 更新记录的措辞，与之前的记录保持一致"
     ]
    }
   }
