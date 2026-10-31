@@ -1,7 +1,7 @@
 {
  "name": "Meow-PDF",
- "version": "v1.1.7",
- "date": "2026.10.25",
+ "version": "v1.1.8",
+ "date": "2026.10.31",
  "site": "https://www.meow-pdf.com/",
  "download": {
   "win": "https://www.meow-pdf.com/download/windows",
@@ -10,6 +10,64 @@
   "page": "https://www.meow-pdf.com/#download"
  },
  "history": [
+  {
+   "v": "v1.1.8",
+   "d": "2026.10.31",
+   "items": {
+    "ko": [
+     "페이지 패널의 빈 곳을 우클릭해 새 페이지 추가 — 빈 페이지 · 기존 파일을 문서 맨 끝에",
+     "도형에 자유형 추가 — 자유형: 도형(클릭으로 점 잇기 · 누른 채 끌면 손그림 · 시작점을 누르면 닫힘)과 자유형: 자유 곡선, 파워포인트와 같은 방식",
+     "영역 도구에 ‘색 채우기’ 추가 — 지정한 영역을 고른 색 · 불투명도로 채우기 (자유 선택은 그린 모양 그대로)",
+     "Shift + 화살표 키로 고른 개체를 0.1pt씩 더 세밀하게 옮기기",
+     "텍스트 일부만 선택하고 크기를 바꾸면 그 글자만 크기가 바뀜",
+     "멀티작업의 + 버튼이 ‘메인’ 탭을 열고, 메인 탭에서 연 항목은 메인 탭 자리를 대신함",
+     "멀티작업을 누른 뒤 화살표 키 · PageUp/PageDown을 누르면 문서 대신 멀티작업의 페이지를 넘김",
+     "레이어 패널: 타블릿 화면에서 펜으로 끌어 레이어 순서 바꾸기 (터치 화면에는 줄 왼쪽에 손잡이 표시)",
+     "수동 레이어에서 Ctrl+Z를 누르면 모든 레이어가 하나로 합쳐지던 문제 수정",
+     "상단 도구 모음이 창 너비에 다 들어가지 않으면 오른쪽 도구부터 ‘더보기’ 안으로 — 좌우 스크롤 없이",
+     "그리기 도구에 펜 종류 추가 — 붓(기본, 필압 없음) · 펜(필압과 속도로 굵기) · 스프레이"
+    ],
+    "en": [
+     "Right-click an empty spot in the page panel to add a new page — a blank page or an existing file at the end of the document",
+     "Freeform added to Shapes — Freeform: Shape (click to connect points, drag to draw by hand, click the start point to close) and Freeform: Scribble, just like PowerPoint",
+     "‘Fill with color’ added to the Region tool — fill the selected area with a chosen color and opacity (Lasso keeps the shape you drew)",
+     "Shift + arrow keys now move the selected object in finer 0.1pt steps",
+     "Select part of a text and change the size to resize only those characters",
+     "The + button in Multitask now opens a ‘Main’ tab, and anything you open from it takes the Main tab’s place",
+     "After clicking Multitask, the arrow keys and PageUp/PageDown turn Multitask pages instead of the document",
+     "Layers panel: drag with a pen on a tablet screen to reorder layers (touch screens show a handle on the left of each row)",
+     "Fixed Ctrl+Z merging all layers into one in manual layer mode",
+     "When the top toolbar doesn’t fit the window, tools on the right move into ‘More’ — no sideways scrolling",
+     "Pen types added to the Draw tool — Brush (default, no pressure), Pen (width follows pressure and speed) and Spray"
+    ],
+    "ja": [
+     "ページパネルの空いた所を右クリックして新しいページを追加 — 空白ページ・既存ファイルを文書の最後に",
+     "図形にフリーフォームを追加 — フリーフォーム: 図形(クリックで点をつなぐ・押したままドラッグで手描き・始点を押すと閉じる)とフリーフォーム: 自由曲線、PowerPointと同じ操作",
+     "範囲ツールに「色で塗りつぶし」を追加 — 指定した範囲を選んだ色・不透明度で塗りつぶし (自由選択は描いた形のまま)",
+     "Shift + 矢印キーで選んだオブジェクトを0.1ptずつより細かく移動",
+     "テキストの一部だけを選んでサイズを変えると、その文字だけサイズが変わる",
+     "マルチタスクの + ボタンで「メイン」タブを開き、メインタブから開いた項目はメインタブの位置に入れ替わる",
+     "マルチタスクをクリックした後は、矢印キー・PageUp/PageDownで文書ではなくマルチタスクのページをめくる",
+     "レイヤーパネル: タブレット画面でペンでドラッグしてレイヤーの順序を変更 (タッチ画面では各行の左にハンドルを表示)",
+     "手動レイヤーでCtrl+Zを押すとすべてのレイヤーが1つにまとまってしまう問題を修正",
+     "上部のツールバーがウィンドウ幅に収まらないときは右側のツールから「その他」の中へ — 左右スクロール不要",
+     "描画ツールにペンの種類を追加 — 筆(既定・筆圧なし)・ペン(筆圧と速度で太さが変化)・スプレー"
+    ],
+    "zh": [
+     "在页面面板空白处右键添加新页面 — 在文档末尾添加空白页或现有文件",
+     "形状新增任意多边形 — 任意多边形：形状（点击连接各点・按住拖动手绘・点击起点闭合）和任意多边形：自由曲线，操作与 PowerPoint 相同",
+     "区域工具新增“填充颜色” — 用所选颜色和不透明度填充指定区域（自由选择保持所画形状）",
+     "Shift + 方向键以 0.1pt 为单位更精细地移动所选对象",
+     "选中部分文字后更改字号，只会改变所选文字的大小",
+     "多任务的 + 按钮会打开“主页”标签，从主页标签打开的项目会替换主页标签的位置",
+     "点击多任务后，方向键和 PageUp/PageDown 会翻动多任务中的页面而不是文档",
+     "图层面板：在平板屏幕上用笔拖动即可调整图层顺序（触摸屏会在每行左侧显示拖动手柄）",
+     "修复了手动图层模式下按 Ctrl+Z 会把所有图层合并为一个的问题",
+     "顶部工具栏放不下时，右侧工具会移入“更多” — 无需左右滚动",
+     "绘图工具新增笔类型 — 毛笔（默认，无压感）、钢笔（粗细随压力和速度变化）、喷枪"
+    ]
+   }
+  },
   {
    "v": "v1.1.7",
    "d": "2026.10.25",
@@ -521,60 +579,6 @@
      "打开文件时默认适应页面(整页显示在屏幕上)",
      "在介绍页的功能卡片上悬停鼠标时,卡片会微微变黄并向上浮起",
      "删除更新记录 v1.0.1 条目中提及的特定产品名称"
-    ]
-   }
-  },
-  {
-   "v": "v1.0.4",
-   "d": "2026.10.19",
-   "items": {
-    "ko": [
-     "토스페이 입점 심사 보완: 이용권은 결제하면 이용 키 없이 바로 내 계정에 적용 — 상품 상세 · 결제 창 · 소개 페이지에 제공 방식을 명시하고, 이용 키는 판매하지 않는 무료 키로 분리",
-     "모든 이용권은 결제일로부터 1년 안에 제공이 끝나도록 변경 — 이어 붙여서 끝나는 날이 결제일 + 1년을 넘으면 결제를 막음 (1년 이용권은 지금 기간이 끝난 뒤 결제)",
-     "환불 규정 개정 — 결제일로부터 7일 이내 전액, 그 뒤에는 사용하지 않은 남은 기간만큼 일할 계산해 부분 환불 (1개월 · 1년 이용권 공통, 위약금 없음), 계산식 · 예시 명시",
-     "계정 창에 ‘환불 요청’ 버튼 추가 — 아이디 · 결제 이메일 · 이용 기간을 채운 환불 요청 메일 작성",
-     "회원가입을 이메일 인증번호 없이 바로 가입 · 로그인되도록 변경 (대학생 인증은 학교 메일 인증번호로 따로)",
-     "계정 창이 처음에 학생 인증 탭으로 열려 일반 이메일로는 가입이 막힌 것처럼 보이던 문제 수정 — 처음에는 로그인 탭, 구매 버튼으로 들어오면 회원가입 탭으로 열기",
-     "이메일로도 로그인 가능 · 예전에 인증번호를 입력하지 못해 로그인이 안 되던 계정도 비밀번호로 로그인",
-     "소개 페이지 요금 안내에 구매 방법(구매 버튼 → 회원가입 → 토스페이먼츠 결제 → 바로 적용) 추가, 구매 버튼을 누르면 그 이용권을 골라 둔 채로 계정 창 열기",
-     "결제 서버가 잠들어 있으면 가입 · 로그인 중 ‘서버를 깨우는 중’ 안내, 계정 창을 열 때 미리 깨우기",
-     "결제 창을 넓혀 토스페이먼츠 결제창이 좌우로 잘리던 문제 수정"
-    ],
-    "en": [
-     "Toss Pay review fixes: passes are applied to your account right after payment with no access key — the delivery method is stated in product details, the payment window and the landing page, and access keys are separated as free keys that are never sold",
-     "Every pass is now fully provided within 1 year of payment — purchases that would end more than 1 year after the payment date are blocked (buy the 1-year pass after your current period ends)",
-     "Refund policy revised — full refund within 7 days of payment, then a prorated partial refund for unused time (both 1-month and 1-year passes, no penalty), with the formula and examples",
-     "Added a ‘Request refund’ button to the account window — opens a refund email pre-filled with your ID, payment email and period",
-     "Sign-up now completes instantly without an email code and signs you in (student verification still uses a school email code separately)",
-     "Fixed the account window opening on the Student tab, which made sign-up with a regular email look impossible — it now opens on Sign in, or on Sign up when you come from a Buy button",
-     "You can sign in with your email too · accounts that couldn't sign in because the email code was never entered can now sign in with their password",
-     "Added how to buy (Buy button → Sign up → Toss Payments → applied instantly) to the landing page pricing, and the Buy buttons open the account window with that pass already selected",
-     "If the payment server is asleep, sign-up and sign-in show ‘Waking up the server’, and opening the account window wakes it in advance",
-     "Widened the payment window so the Toss Payments checkout is no longer cut off on the sides"
-    ],
-    "ja": [
-     "Toss Pay審査への対応:利用券は決済すると利用キーなしですぐアカウントに適用 — 商品詳細 · 決済画面 · 紹介ページに提供方法を明記し、利用キーは販売しない無料キーとして分離",
-     "すべての利用券を決済日から1年以内に提供し終えるよう変更 — 追加後の終了日が決済日 + 1年を超える場合は決済不可(1年券は現在の期間終了後に決済)",
-     "返金規定を改定 — 決済日から7日以内は全額、その後は使っていない残り期間分を日割りで部分返金(1か月券 · 1年券共通、違約金なし)、計算式 · 例を明記",
-     "アカウント画面に「返金申請」ボタンを追加 — ID · 決済メール · 利用期間を入力済みの返金申請メールを作成",
-     "会員登録をメールの認証番号なしですぐ登録 · ログインできるよう変更(大学生認証は学校メールの認証番号で別途)",
-     "アカウント画面が最初に学生認証タブで開き、一般メールでは登録できないように見えた問題を修正 — 最初はログインタブ、購入ボタンから来たときは会員登録タブで開く",
-     "メールでもログイン可能 · 以前認証番号を入力できずログインできなかったアカウントもパスワードでログイン",
-     "紹介ページの料金案内に購入方法(購入ボタン → 会員登録 → TossPayments決済 → すぐ適用)を追加し、購入ボタンを押すとその利用券を選んだ状態でアカウント画面を開く",
-     "決済サーバーがスリープ中なら登録 · ログイン中に「サーバーを起動中」と表示し、アカウント画面を開いたときに事前に起動",
-     "決済ウィンドウを広げ、Toss Paymentsの決済画面の左右が切れていた問題を修正"
-    ],
-    "zh": [
-     "Toss Pay 审核补充:使用券付款后无需使用密钥即应用到账号 — 在商品详情 · 付款窗口 · 介绍页注明提供方式，使用密钥作为不出售的免费密钥单独区分",
-     "所有使用券改为在付款后1年内提供完毕 — 叠加后结束日期超过付款日 + 1年时禁止付款(1年券需在当前期限结束后购买)",
-     "修订退款规定 — 付款后7天内全额退款，之后按未使用的剩余天数比例部分退款(1个月券 · 1年券通用，无违约金)，并注明计算方式 · 示例",
-     "账号窗口新增“申请退款”按钮 — 生成已填好账号 · 付款邮箱 · 使用期限的退款申请邮件",
-     "注册改为无需邮箱验证码即可立即注册并登录(大学生认证仍通过学校邮箱验证码单独进行)",
-     "修复账号窗口默认打开学生认证标签、看起来无法用普通邮箱注册的问题 — 默认打开登录标签，从购买按钮进入时打开注册标签",
-     "也可用邮箱登录 · 以前因未输入验证码而无法登录的账号也可用密码登录",
-     "在介绍页价格说明中新增购买方法(购买按钮 → 注册 → Toss Payments 付款 → 立即生效)，点击购买按钮会在已选好该使用券的状态下打开账号窗口",
-     "付款服务器休眠时，注册 · 登录过程中显示“正在唤醒服务器”，打开账号窗口时提前唤醒",
-     "加宽支付窗口，修复 Toss Payments 支付页面左右被截断的问题"
     ]
    }
   }
