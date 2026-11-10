@@ -1,7 +1,7 @@
 {
  "name": "Meow-PDF",
- "version": "v1.1.8",
- "date": "2026.10.31",
+ "version": "v1.1.9",
+ "date": "2026.11.10",
  "site": "https://www.meow-pdf.com/",
  "download": {
   "win": "https://www.meow-pdf.com/download/windows",
@@ -10,6 +10,72 @@
   "page": "https://www.meow-pdf.com/#download"
  },
  "history": [
+  {
+   "v": "v1.1.9",
+   "d": "2026.11.10",
+   "items": {
+    "ko": [
+     "도형 채우기에 ‘이미지로 채우기’ 추가 — 채우기 옆 이미지 버튼으로 도형 안을 고른 이미지로 꽉 채움 (채우기 색을 고르면 해제)",
+     "Ctrl+X로 고른 이미지 · 개체 잘라내기 — Ctrl+V로 잘라낸 자리에 다시 붙여넣기",
+     "이미지를 고르면 모서리 둥글기 조절 — 옵션바의 ‘모서리’ 또는 위쪽의 노란 점을 끌어 조절",
+     "이미지 편집 창 추가 — 옵션바의 ‘이미지 편집’ 또는 이미지를 두 번 클릭: 색조 · 색온도 · 채도 · 밝기 · 대비 · 하이라이트 · 그림자 · 선명도를 조절해 원래 이미지에 덮어쓰기",
+     "이미지 편집 창에 빠른 보정 14가지 추가 — 지금 이미지로 만든 둥근 정사각형 미리보기를 옆으로 넘기며 고르기 (휠 · 끌기 · 화살표 버튼)",
+     "이미지 편집 창에 원근 보정 자르기 추가 — 네 모서리 점을 비스듬히 찍힌 문서 · 화면의 모서리에 맞추면 반듯한 직사각형으로 펴서 자름",
+     "새 문서 만들기에 ‘워드 양식’ 추가 — 여백(2.54 cm)이 있는 A4에서 바로 입력, 오른쪽 여백에 닿으면 자동 줄바꿈",
+     "워드 양식에서 빈 곳을 누르면 마지막 글의 끝에 이어서 입력, 글상자는 늘 왼쪽 여백부터 오른쪽 여백까지 꽉 찬 너비로 유지",
+     "페이지 패널의 페이지 추가 · 새 페이지 메뉴를 ‘빈 양식’과 ‘워드 양식’으로 분리",
+     "왼쪽 페이지 패널의 너비에 따라 썸네일이 간혹 깜빡이던 문제 해결",
+     "그룹을 누른 뒤 F2를 누르면 그 자리에서 그룹 이름 변경",
+     "프리미엄 테마 ‘안개 온천’ 추가 — 구름 사이로 비치는 빛 · 바위 온천에서 피어오르는 김 · 흐릿한 야자수 사이로 낮게 흐르는 안개",
+     "무료 테마 ‘도스’ 추가 — 까만 화면 · 파란 창 · 회색 메뉴줄 · 고정폭 글꼴 · 깜빡이는 커서가 있는 옛날 컴퓨터 화면"
+    ],
+    "en": [
+     "‘Fill with image’ added to shape fill — use the image button next to Fill to fill a shape with a picture (choosing a fill color removes it)",
+     "Cut the selected image or object with Ctrl+X — paste it back in the same spot with Ctrl+V",
+     "Adjust corner rounding when an image is selected — use ‘Corners’ in the option bar or drag the yellow dot on top",
+     "Image editor added — ‘Edit image’ in the option bar or double-click an image: adjust hue, temperature, saturation, brightness, contrast, highlights, shadows and sharpness and overwrite the original",
+     "14 quick filters added to the image editor — pick from rounded-square previews made from your image, scrolling sideways (wheel, drag or arrow buttons)",
+     "Perspective crop added to the image editor — match the four corner points to the corners of a document or screen shot at an angle to flatten it into a straight rectangle",
+     "‘Word template’ added to New document — type right away on an A4 page with 2.54 cm margins, with automatic line wrapping at the right margin",
+     "In a Word template, clicking an empty spot continues typing at the end of the last text, and text boxes always keep the full width from the left margin to the right margin",
+     "The page panel’s Add page and New page menus are now split into ‘Blank template’ and ‘Word template’",
+     "Fixed thumbnails sometimes flickering depending on the width of the left page panel",
+     "Click a group and press F2 to rename it in place",
+     "Premium theme ‘Misty Hot Spring’ added — light through the clouds, steam rising from a rocky hot spring and low fog drifting among hazy palm trees",
+     "Free theme ‘DOS’ added — a classic computer screen with a black background, blue windows, a gray menu bar, monospaced type and a blinking cursor"
+    ],
+    "ja": [
+     "図形の塗りつぶしに「画像で塗りつぶし」を追加 — 塗りつぶしの横の画像ボタンで図形の中を選んだ画像で埋める (塗りつぶしの色を選ぶと解除)",
+     "Ctrl+Xで選んだ画像・オブジェクトを切り取り — Ctrl+Vで切り取った位置に貼り付け",
+     "画像を選ぶと角の丸みを調整 — オプションバーの「角」または上の黄色い点をドラッグ",
+     "画像編集ウィンドウを追加 — オプションバーの「画像編集」または画像をダブルクリック: 色相・色温度・彩度・明るさ・コントラスト・ハイライト・シャドウ・シャープネスを調整して元の画像に上書き",
+     "画像編集ウィンドウにクイック補正14種を追加 — 今の画像で作った角の丸い正方形のプレビューを横にスクロールして選ぶ (ホイール・ドラッグ・矢印ボタン)",
+     "画像編集ウィンドウに遠近補正切り抜きを追加 — 4つの角の点を斜めに撮った文書・画面の角に合わせると、まっすぐな長方形に補正して切り抜く",
+     "新規文書に「Word様式」を追加 — 余白(2.54 cm)のあるA4ですぐに入力、右の余白で自動改行",
+     "Word様式で空いた所を押すと最後の文の末尾から続けて入力、テキストボックスは常に左の余白から右の余白までの幅いっぱいに",
+     "ページパネルのページ追加・新しいページメニューを「空白の様式」と「Word様式」に分割",
+     "左のページパネルの幅によってサムネイルがときどきちらつく問題を解決",
+     "グループを押してからF2を押すと、その場でグループ名を変更",
+     "プレミアムテーマ「霧の温泉」を追加 — 雲間から差す光・岩の温泉から立ちのぼる湯気・かすんだヤシの木の間を低く流れる霧",
+     "無料テーマ「DOS」を追加 — 黒い画面・青いウィンドウ・灰色のメニューバー・等幅フォント・点滅するカーソルの昔のコンピューター画面"
+    ],
+    "zh": [
+     "形状填充新增“用图片填充” — 用填充旁的图片按钮以所选图片填满形状（选择填充颜色即取消）",
+     "可用 Ctrl+X 剪切所选图片 · 对象 — 用 Ctrl+V 粘贴回原位置",
+     "选中图片时可调整圆角 — 使用选项栏的“圆角”或拖动上方的黄色圆点",
+     "新增图片编辑窗口 — 选项栏的“编辑图片”或双击图片：调整色相 · 色温 · 饱和度 · 亮度 · 对比度 · 高光 · 阴影 · 锐度并覆盖原图",
+     "图片编辑窗口新增 14 种快速滤镜 — 用当前图片生成的圆角方形预览横向滑动选择（滚轮 · 拖动 · 箭头按钮）",
+     "图片编辑窗口新增透视校正裁剪 — 将四个角点对准斜拍的文档 · 屏幕的四角，即可拉正为规整的矩形并裁剪",
+     "新建文档新增“Word 模板” — 在带边距（2.54 cm）的 A4 上直接输入，到右边距自动换行",
+     "在 Word 模板中点击空白处会接着最后一段文字的末尾继续输入，文本框始终保持从左边距到右边距的全宽",
+     "页面面板的添加页面 · 新建页面菜单拆分为“空白模板”和“Word 模板”",
+     "修复了左侧页面面板在某些宽度下缩略图偶尔闪烁的问题",
+     "点击分组后按 F2 即可就地重命名分组",
+     "新增高级主题“雾之温泉” — 云间透下的光 · 岩石温泉升起的热气 · 在朦胧椰树间低低飘动的雾",
+     "新增免费主题“DOS” — 黑色屏幕 · 蓝色窗口 · 灰色菜单栏 · 等宽字体 · 闪烁光标的老式电脑画面"
+    ]
+   }
+  },
   {
    "v": "v1.1.8",
    "d": "2026.10.31",
@@ -501,84 +567,6 @@
      "我的主题新增背景图片 — 6 种系统图片或自行上传的图片,空白处可选择重复图片 / 系统颜色,支持大小(铺满 · 完整显示 · 原始大小 · 自定义) · 位置(九宫格 · 水平 · 垂直 · 拖动移动) · 预览(字体列表改为折叠显示)",
      "网页版: 修复用开发者控制台更换主题后切换浏览器标签页,主题会恢复为主题商店所选主题的问题",
      "共享项目: 服务器端也会在房主离线超过 5 分钟时自动关闭项目 — 立即从公开 · 好友 · 我的项目列表中消失,并阻止加入 · 代码加入 · 查看房间信息(需重新运行 supabase-share.sql)"
-    ]
-   }
-  },
-  {
-   "v": "v1.0.5",
-   "d": "2026.10.22",
-   "items": {
-    "ko": [
-     "새 테마 ‘여름 휴양지’ 추가 (프리미엄) — 눈부신 해 · 뭉게구름 · 반짝이는 에메랄드 바다 · 밀려오는 파도 · 하얀 모래사장 · 야자수 · 파라솔 · 갈매기가 있는 밝은 여름 화면 (테마 스토어에서 파도 · 갈매기 움직임 끄기 가능)",
-     "여름 휴양지 테마 이스터에그 — 빈 배경을 누르면 물방울이 튀고, 빠르게 일곱 번 누르면 큰 파도가 지나간 뒤 수박 깨기",
-     "새 테마 ‘아날로그 호러’ 추가 (기간 한정 · 공포 테마와 같은 매년 9월 1일 ~ 11월 30일 무료, 그 밖에는 프리미엄) — 낡은 비디오테이프처럼 화질을 떨어뜨린 화면: 주사선 · 필름 노이즈 · 번지는 색 · 트래킹 띠 · 화면 구석의 재생 표시 · 페이지를 넘길 때 찢어지는 화면 · 가끔 끼어드는 경고 방송 (적용 전 경고 표시, 노이즈 · 화면 왜곡 끄기 가능)",
-     "아날로그 호러 테마 이스터에그 — 빈 배경을 누르면 그 자리에 잡음, 빠르게 일곱 번 누르면 신호가 끊기고 화면 조정 화면 표시",
-     "PC 프로그램: F11로 전체화면 켜기 · 끄기",
-     "도형의 색상 · 채우기 기본 색을 노랑 · 빨강 · 파랑 · 초록 · 투명으로 변경 — 선 색상에도 투명(선 없음) 추가",
-     "선택 도구로 도형을 골랐을 때도 선 굵기(테두리) 옵션 표시, 선택 도구 옵션바의 레이어 고르기는 제거",
-     "PC 옵션바: 텍스트의 자간 · 줄간격 입력칸을 작게 줄여 위아래로 묶음 (옵션바 길이 단축)",
-     "작은 노트북에서 헤더 오른쪽이 잘리던 문제 수정 — 헤더가 잘리기 시작하면 ‘PDF 전체에서 찾기’ 칸을 먼저 숨김 (자리가 생기면 다시 표시)",
-     "PC: 헤더 · 탭바 접기 / 펼치기 추가 — 탭바 오른쪽 끝 버튼 또는 Ctrl+Shift+H로 접고, 맨 위 가운데 손잡이로 펼침",
-     "‘빈 문서로 시작’에서 가로로 만들기 · 세로로 만들기 · 커스텀(가로 · 세로 mm 직접 입력) 중 선택 (새 탭 · 새 문서 버튼도 같음, 마지막 선택 기억)",
-     "그룹화 추가 — Ctrl · Shift로 여러 개체를 고른 뒤 우클릭 › 그룹화(Ctrl+G) · 그룹화 해제(Ctrl+Shift+G), 묶인 개체는 하나만 눌러도 함께 선택 · 이동 · 크기 조절",
-     "공유 프로젝트: 방장이 오프라인이면 5분 뒤 자동으로 닫힘 — 참여자에게 바로 알리고 남은 시간 표시, 방장이 돌아오면 그대로 계속",
-     "파일을 열면 기본으로 페이지 맞춤(한 쪽 전체가 화면에 보이게) 적용",
-     "소개 페이지의 기능 블록에 마우스를 올리면 살짝 노래지며 위로 떠오르는 효과 추가",
-     "업데이트 내역 v1.0.1 항목의 특정 제품 이름 언급 삭제"
-    ],
-    "en": [
-     "New theme ‘Summer Resort’ (Premium) — a bright summer scene with a dazzling sun, fluffy clouds, a sparkling emerald sea, rolling waves, white sand, palm trees, a parasol and seagulls (waves & seagulls motion can be turned off in the Theme Store)",
-     "Summer Resort easter egg — click the empty background to splash water; click seven times quickly for a giant wave followed by a watermelon smash",
-     "New theme ‘Analog Horror’ (Limited · free every year Sep 1 – Nov 30, same as the Horror theme; Premium otherwise) — a degraded old-videotape look: scanlines, film noise, bleeding colors, a tracking band, playback overlay in the corner, a tearing screen when you turn pages and the occasional emergency broadcast (warning before applying; noise & distortion can be turned off)",
-     "Analog Horror easter egg — click the empty background for a burst of static; click seven times quickly and the signal drops to color bars",
-     "Desktop app: F11 toggles fullscreen",
-     "Default shape stroke & fill colors are now yellow · red · blue · green · transparent — stroke color also gets transparent (no line)",
-     "Selecting a shape with the Select tool now shows the line width (border) option; the layer picker was removed from the Select tool options bar",
-     "PC options bar: letter & line spacing inputs are smaller and stacked to shorten the bar",
-     "Fixed the right side of the header being cut off on small laptops — the ‘Search whole PDF’ box hides first once the header starts to clip (and returns when there is room)",
-     "PC: collapse / expand the header & tab bar — use the button at the right end of the tab bar or Ctrl+Shift+H, and the small handle at the top center to expand",
-     "‘Start with a blank document’ now lets you choose landscape, portrait or custom (enter width & height in mm) (same for New tab · New document; remembers your last choice)",
-     "Grouping — select several objects with Ctrl · Shift, then right-click › Group (Ctrl+G) · Ungroup (Ctrl+Shift+G); grouped objects are selected, moved and resized together with a single click",
-     "Shared projects: closes automatically 5 minutes after the host goes offline — participants are notified right away with a countdown, and it continues if the host returns",
-     "Files now open fitted to the page (the whole page visible) by default",
-     "Feature blocks on the intro page now glow slightly yellow and lift up on hover",
-     "Removed a product name mention from the v1.0.1 update notes"
-    ],
-    "ja": [
-     "新テーマ「夏のリゾート」追加(プレミアム) — まぶしい太陽・わた雲・きらめくエメラルドの海・打ち寄せる波・白い砂浜・ヤシの木・パラソル・カモメのいる明るい夏の画面(テーマストアで波・カモメの動きをオフ可能)",
-     "夏のリゾートのイースターエッグ — 空いた背景をクリックすると水しぶき、素早く7回クリックすると大波のあとにスイカ割り",
-     "新テーマ「アナログホラー」追加(期間限定・ホラーテーマと同じ毎年9月1日〜11月30日は無料、それ以外はプレミアム) — 古いビデオテープのように画質を落とした画面: 走査線・フィルムノイズ・にじむ色・トラッキングの帯・画面隅の再生表示・ページをめくると裂ける画面・ときどき割り込む警告放送(適用前に警告、ノイズ・画面のゆがみはオフ可能)",
-     "アナログホラーのイースターエッグ — 空いた背景をクリックするとその場にノイズ、素早く7回クリックすると信号が途切れてカラーバーを表示",
-     "PCアプリ: F11で全画面のオン・オフ",
-     "図形の色・塗りの基本色を黄・赤・青・緑・透明に変更 — 線の色にも透明(線なし)を追加",
-     "選択ツールで図形を選んだときも線の太さ(枠線)オプションを表示、選択ツールのオプションバーからレイヤー選択を削除",
-     "PCオプションバー: テキストの字間・行間の入力欄を小さくして上下にまとめ、オプションバーを短縮",
-     "小さいノートPCでヘッダーの右側が切れる問題を修正 — ヘッダーが切れ始めると「PDF全体から検索」欄を先に隠す(余裕ができると再表示)",
-     "PC: ヘッダー・タブバーの折りたたみ / 展開を追加 — タブバー右端のボタンまたは Ctrl+Shift+H で折りたたみ、上部中央の小さなつまみで展開",
-     "「空のドキュメントで開始」で横向き・縦向き・カスタム(幅・高さを mm で入力)から選択(新しいタブ・新規ドキュメントボタンも同様、最後の選択を記憶)",
-     "グループ化を追加 — Ctrl・Shift で複数のオブジェクトを選んで右クリック › グループ化(Ctrl+G)・グループ解除(Ctrl+Shift+G)、グループ化したオブジェクトは1つクリックするだけでまとめて選択・移動・サイズ変更",
-     "共有プロジェクト: ホストがオフラインになると5分後に自動で終了 — 参加者にすぐ知らせて残り時間を表示、ホストが戻ればそのまま続行",
-     "ファイルを開くと既定でページに合わせる(1ページ全体が画面に収まる)を適用",
-     "紹介ページの機能ブロックにマウスを乗せると少し黄色くなって浮き上がる効果を追加",
-     "更新履歴 v1.0.1 の項目から特定の製品名の言及を削除"
-    ],
-    "zh": [
-     "新增主题“夏日度假”(高级版) — 耀眼的太阳、蓬松的白云、闪亮的翡翠色大海、涌来的海浪、白色沙滩、椰子树、遮阳伞和海鸥组成的明亮夏日画面(可在主题商店关闭海浪 · 海鸥动画)",
-     "夏日度假彩蛋 — 点击空白背景会溅起水花,快速连点七次会掀起大浪,然后劈开西瓜",
-     "新增主题“模拟恐怖”(限时 · 与恐怖主题相同,每年 9 月 1 日 ~ 11 月 30 日免费,其余时间为高级版) — 像旧录像带一样降低画质的画面: 扫描线、胶片噪点、晕开的颜色、跟踪条纹、角落的播放标识、翻页时撕裂的画面、偶尔插入的紧急广播(应用前显示警告,可关闭噪点 · 画面扭曲)",
-     "模拟恐怖彩蛋 — 点击空白背景会在该处出现雪花噪点,快速连点七次会信号中断并显示彩条测试画面",
-     "桌面程序: 按 F11 开启 · 关闭全屏",
-     "图形的线条颜色 · 填充默认颜色改为黄 · 红 · 蓝 · 绿 · 透明 — 线条颜色也新增透明(无线条)",
-     "用选择工具选中图形时也显示线条粗细(边框)选项,并移除选择工具选项栏中的图层选择",
-     "PC 选项栏: 将文本的字间距 · 行间距输入框缩小并上下排列,缩短选项栏",
-     "修复小尺寸笔记本上标题栏右侧被截断的问题 — 标题栏开始被截断时先隐藏“在整个 PDF 中查找”框(有空间时重新显示)",
-     "PC: 新增标题栏 · 标签栏折叠 / 展开 — 用标签栏最右侧的按钮或 Ctrl+Shift+H 折叠,用顶部中央的小把手展开",
-     "“从空白文档开始”可选择横向、纵向或自定义(以 mm 输入宽 · 高)(新标签页 · 新建文档按钮相同,会记住上次的选择)",
-     "新增组合 — 用 Ctrl · Shift 选择多个对象后右键 › 组合(Ctrl+G) · 取消组合(Ctrl+Shift+G),组合后的对象只需点击一个即可一起选择 · 移动 · 调整大小",
-     "共享项目: 房主离线 5 分钟后自动关闭 — 立即通知参与者并显示剩余时间,房主回来则继续",
-     "打开文件时默认适应页面(整页显示在屏幕上)",
-     "在介绍页的功能卡片上悬停鼠标时,卡片会微微变黄并向上浮起",
-     "删除更新记录 v1.0.1 条目中提及的特定产品名称"
     ]
    }
   }
