@@ -1,0 +1,606 @@
+{
+ "name": "Meow-PDF",
+ "version": "v1.2.2",
+ "date": "2026.11.13",
+ "site": "https://www.meow-pdf.com/",
+ "download": {
+  "win": "https://www.meow-pdf.com/download/windows",
+  "mac": "https://www.meow-pdf.com/download/mac",
+  "linux": "https://www.meow-pdf.com/download/linux",
+  "page": "https://www.meow-pdf.com/#download"
+ },
+ "history": [
+  {
+   "v": "v1.2.2",
+   "d": "2026.11.13",
+   "items": {
+    "ko": [
+     "탭 여러 개 고르기 — Ctrl+클릭으로 하나씩 · Shift+클릭으로 범위를 골라, 우클릭 › ‘고른 탭 병합’으로 순서를 정해 새 탭 하나로 합치기 (원래 탭은 그대로)",
+     "페이지 패널 아래쪽 배치 추가 — 설정 › 화면 배치 › 페이지 패널 위치에서 ‘아래쪽’을 고르면 썸네일이 문서 아래에 가로로 늘어서고, 경계를 끌어 높이 조절",
+     "설정 › 테마 · 글자 › UI 글자 크기 추가 — 작게 · 보통 · 조금 크게 · 크게 · 아주 크게 (문서 글자는 그대로)",
+     "이미지 · 도형 자르기 — 옵션바의 자르기 아이콘으로 손잡이를 끌어 자르고(Shift: 비율 유지), ‘도형으로 자르기’로 원 · 둥근 사각형 · 삼각형 · 마름모 · 육각형 · 별 · 하트 · 말풍선 모양으로 자르기",
+     "야외 · 하늘 배경 테마(여름 휴양지 · 놀이동산 · 동화 · 안개 온천 · 밤의 수영장 · 안개 숲 · 겨울)에 시간대 옵션 — 테마 스토어의 사용 중 카드 또는 설정에서 낮 · 노을 · 밤 고르기",
+     "무료 테마 ‘겨울’ 추가 — 눈 덮인 언덕과 소나무, 맑은 겨울 하늘에 조용히 눈이 내리는 깔끔한 화면 (눈 내리기 끄기 가능)",
+     "상단 헤더 정돈 — 버튼을 살짝 작게, 묶음 사이에 구분선을 넣어 한눈에 보기 쉽게",
+     "설정 창을 화면 배치 · 테마 · 글자 · 편집 · 저장으로 나누고, 항목을 주제별 묶음 상자로 정리",
+     "PPTX 애니메이션 가져오기 개선 — 한 개체에 나타내기 · 끝내기가 여러 번 겹친 깜빡임 연출, 그룹 · 글자 있는 도형이 흩어지지 않고 한 덩어리로 움직이도록, 슬라이드 소리(효과음) 재생, 화면 전환(페이드 · 밀어내기 · 닦아내기 · 확대 · 플래시 등) 그대로 가져오기",
+     "그룹으로 묶은 개체에 애니메이션을 넣으면 효과 하나로 함께 움직임"
+    ],
+    "en": [
+     "Select multiple tabs — Ctrl+click one by one or Shift+click a range, then right-click › ‘Merge selected tabs’ to set the order and combine them into one new tab (the original tabs stay)",
+     "Page panel can now sit at the bottom — choose ‘Bottom’ in Settings › Layout › Page panel position to line thumbnails up horizontally under the document; drag the edge to change its height",
+     "Added Settings › Theme · Text › UI text size — Small · Normal · Slightly larger · Large · Extra large (document text is unchanged)",
+     "Crop images and shapes — use the crop icon in the options bar and drag the handles (Shift: keep ratio), or ‘Crop to shape’ for circle · rounded rectangle · triangle · diamond · hexagon · star · heart · speech bubble",
+     "Time-of-day option for outdoor/sky themes (Summer Resort · Theme Park · Fairy Tale · Misty Hot Spring · Night Pool · Misty Forest · Winter) — pick Day · Sunset · Night on the in-use card in the Theme Store or in Settings",
+     "New free theme ‘Winter’ — snowy hills and pine trees with snow falling quietly from a clear winter sky (snowfall can be turned off)",
+     "Tidied the top header — slightly smaller buttons with dividers between groups so it's easier to scan",
+     "Split Settings into Layout · Theme · Text · Editing · Saving, with items grouped into boxes by topic",
+     "Better PPTX animation import — flicker effects with many overlapping entrances/exits on one object, groups and shapes with text now move as one piece instead of falling apart, slide sounds (sound effects) play, and slide transitions (fade · push · wipe · zoom · flash, etc.) carry over",
+     "Adding an animation to grouped objects now moves them together as one effect"
+    ],
+    "ja": [
+     "複数タブの選択 — Ctrl+クリックで一つずつ、Shift+クリックで範囲を選び、右クリック › 「選んだタブを結合」で順番を決めて一つの新しいタブにまとめる（元のタブはそのまま）",
+     "ページパネルを下に配置できるように — 設定 › 画面配置 › ページパネルの位置で「下」を選ぶと、サムネイルが文書の下に横並びになり、境界をドラッグして高さを調整",
+     "設定 › テーマ・文字 › UIの文字サイズを追加 — 小さく・標準・少し大きく・大きく・とても大きく（文書の文字はそのまま）",
+     "画像・図形のトリミング — オプションバーのトリミングアイコンでハンドルをドラッグして切り取り（Shift: 比率を維持）、「図形に合わせてトリミング」で円・角丸四角形・三角形・ひし形・六角形・星・ハート・吹き出しの形に",
+     "屋外・空の背景のテーマ（夏のリゾート・遊園地・童話・霧の温泉・夜のプール・霧の森・冬）に時間帯オプション — テーマストアの使用中カードまたは設定で昼・夕焼け・夜を選択",
+     "無料テーマ「冬」を追加 — 雪の丘と松の木、澄んだ冬空から静かに雪が降るすっきりした画面（雪はオフにできます）",
+     "上部ヘッダーを整理 — ボタンを少し小さくし、グループの間に区切り線を入れて見やすく",
+     "設定を画面配置・テーマ・文字・編集・保存に分け、項目をテーマごとのボックスにまとめました",
+     "PPTXアニメーションの読み込みを改善 — 一つのオブジェクトに開始・終了が何度も重なる点滅演出、グループや文字入り図形がばらけず一つにまとまって動くように、スライドのサウンド（効果音）の再生、画面切り替え（フェード・プッシュ・ワイプ・ズーム・フラッシュなど）をそのまま読み込み",
+     "グループ化したオブジェクトにアニメーションを付けると、一つの効果としてまとめて動きます"
+    ],
+    "zh": [
+     "可选择多个标签页 — Ctrl+单击逐个选择、Shift+单击选择范围，右键 › “合并所选标签页”即可设定顺序合并为一个新标签页（原标签页保留）",
+     "页面面板可放在底部 — 在 设置 › 布局 › 页面面板位置 中选择“底部”，缩略图会横向排列在文档下方，拖动边界可调整高度",
+     "新增 设置 › 主题 · 文字 › 界面文字大小 — 小 · 标准 · 稍大 · 大 · 特大（文档文字不变）",
+     "裁剪图片和形状 — 用选项栏的裁剪图标拖动控制点裁剪（Shift：保持比例），或用“裁剪为形状”裁成圆形 · 圆角矩形 · 三角形 · 菱形 · 六边形 · 星形 · 心形 · 对话框形状",
+     "户外 · 天空背景主题（夏日度假地 · 游乐园 · 童话 · 雾中温泉 · 夜晚泳池 · 雾之森 · 冬天）新增时段选项 — 在主题商店的使用中卡片或设置中选择白天 · 晚霞 · 夜晚",
+     "新增免费主题“冬天” — 积雪的山丘和松树，晴朗冬空中静静飘雪的简洁界面（可关闭下雪）",
+     "整理顶部标题栏 — 按钮略微缩小，并在各组之间加入分隔线，更易浏览",
+     "将设置拆分为 布局 · 主题 · 文字 · 编辑 · 保存，并按主题将项目分组到框中",
+     "改进 PPTX 动画导入 — 同一对象多次叠加的进入 · 退出闪烁效果、组合和带文字的形状整体移动不再散开、播放幻灯片声音（音效）、原样导入切换效果（淡入 · 推入 · 擦除 · 缩放 · 闪光等）",
+     "给组合对象添加动画时，作为一个效果整体移动"
+    ]
+   }
+  },
+  {
+   "v": "v1.2.1",
+   "d": "2026.11.13",
+   "items": {
+    "ko": [
+     "오른쪽 패널에 ‘애니메이션’ 탭 추가 — 고른 개체 정보 · 애니메이션 고르기(마우스를 올리면 미리 보기) · 추가 · 옵션 · 순서 창을 한곳에서",
+     "애니메이션 48가지 — 나타내기 17 · 강조 12 · 끝내기 15 · 이동 경로 4 (날아오기 · 번지듯 닦아내기 · 흐릿하게 · 팝 · 빛나기 · 젤리 · 아치 · 타자기 등)",
+     "애니메이션 옵션 — 효과 방향 · 재생 시간(매우 빠르게 ~ 매우 느리게 · 직접 입력) · 시작(클릭할 때 / 이전 효과와 함께 / 이전 효과 다음에) · 지연",
+     "세부 옵션 창 추가 — 부드럽게 시작 · 부드럽게 종료 · 바운드 종료 · 자동 반복 · 소리 9가지 · 애니메이션 후(반투명 · 회색 · 숨기기) · 텍스트를 단어 · 문자 단위로(문자 사이 지연) · 반복 · 재생 후 되감기",
+     "애니메이션 순서 창 — 위에서 아래로 재생, 끌어서 순서 바꾸기, 시간 막대로 겹침 확인, 개체 옆에 순서 번호 표시, ‘모두 재생’으로 편집 화면에서 미리 보기",
+     "발표 모드에서 클릭 · → · 스페이스로 애니메이션을 하나씩 재생하고 ← 로 한 단계 되돌리기 — 애니메이션은 MPDF로 저장하면 함께 저장",
+     "음성 개체 아래에 재생바 추가 — 재생 · 일시정지 · 0.25초 앞뒤 · 끌어서 위치 이동 · 음소거, 다른 개체를 눌러도 끊기지 않고 계속 재생 (발표 중에도 마우스를 올리면 표시)",
+     "좌측 정렬 도구 모음에서 메모 · 음성을 ‘더보기’ 밖으로 꺼내 바로 누를 수 있게 함",
+     "크기를 바꿀 때 글자 · 이미지처럼 비율을 지키는 개체와 글상자 폭에도 스마트 안내선 표시",
+     "일부 테마에서 저장 버튼의 ▾ 칸만 다른 색으로 튀어나와 보이던 문제 수정",
+     "프리미엄 테마 배경을 한 번 누를 때 뜨던 효과 글자(+100 · 첨벙! 등) 제거 — 반짝이는 효과만 남김",
+     "스프레이를 뿌옇게 번지는 에어브러시로 개선 — 누르고 있으면 그 자리가 점점 진해짐",
+     "굵기 · 크기 · 불투명도 등 수치 조절 한도 확대 — 펜 · 직선 1~100pt, 형광펜 2~120pt, 도형 선 0~60pt, 글자 1~400pt, 지우개 2~300, 모자이크 2~150, 불투명 1~100%, 자간 -50~300%, 줄간격 50~500%",
+     "애니메이션 세부 옵션 창이 화면 밖으로 넘치던 문제 수정 — 창이 화면 높이에 맞고 내용은 창 안에서 스크롤",
+     "세부 옵션 창 오른쪽에 미리 보기 추가 — 페이지를 작게 그려 지금 고른 옵션 그대로 재생, 옵션을 바꿀 때마다 자동 재생(끌 수 있음)",
+     "PPTX를 가져오면 슬라이드의 애니메이션(효과 · 방향 · 재생 시간 · 시작 방식 · 지연 · 반복 · 부드럽게 시작/종료 · 이동 경로)도 함께 불러오기",
+     "PPTX로 내보낼 때 애니메이션 유지 — 애니메이션이 있는 개체는 따로 그림으로 넣고 순서 · 시작 방식 · 시간 그대로 PowerPoint에서 재생",
+     "PPTX 가져오기 정확도 개선 — 회전 · 뒤집기 · 그림 자르기 · 그림 투명도, 화살표 · 삼각형 · 원형 화살표 · 구름 · 별 · 말풍선 등 여러 도형과 사용자 정의 도형, 선 끝 화살표, 그라데이션 · 그룹 · 그림 채우기, 명암(shade · tint) 색, 글자의 일부 색 · 크기 · 줄간격까지 그대로",
+     "PPTX 애니메이션 가져오기 개선 — 클릭 묶음 안의 실제 시작 시각, 슬라이드가 열리면 바로 시작하는 효과, 이동 경로 모양 그대로(사용자 경로), 가로 · 세로 따로 확대/축소, 바운드 종료까지 반영하고 같은 개체의 이동 · 강조가 다른 효과와 함께 재생",
+     "이동 경로에 ‘자유 경로’ 추가 — 페이지 위에 끌어서 개체가 움직일 길을 직접 그림 (경로 다시 그리기 가능), 고른 애니메이션의 이동 경로를 편집 화면에 점선으로 표시",
+     "발표 중 애니메이션이 있는 페이지로 넘어갈 때 하얀 화면이나 나중에 나타날 개체가 잠깐 보였다 사라지던 깜빡임 수정, 이동 · 강조가 다른 효과와 겹칠 때 한 프레임씩 튀던 문제 수정",
+     "애니메이션이 있는 문서를 PDF로 저장하면 MPDF(편집 상태 · 애니메이션 유지) 또는 PPTX(PowerPoint에서 재생)로 저장하도록 안내",
+     "애니메이션 패널의 ‘애니메이션 옵션’을 접고 펼칠 수 있게 함(상태 기억), 재생 시간의 속도 단추를 없애고 재생 시작 · 지연을 한 줄에 배치",
+     "효과 옵션(방향 등)을 애니메이션 고르기와 추가 단추 사이로 옮기고, 누르면 작은 그리드 창에서 고르게 함 · 재생 시작 · 재생 시간 · 지연을 한 줄에 배치",
+     "두 번 눌러 고치고 있는 글자(이미 있는 텍스트)에도 바로 애니메이션을 넣을 수 있게 함",
+     "‘재생 시간(초)’ · ‘지연(초)’ 글자를 누른 채 좌우로 끌어 값 조절 (유니티처럼, Shift: 미세 조절)",
+     "미리 보기가 중간에 끊기던 문제 수정 — 끝까지 재생, 재생 중에는 미리 보기 단추가 게이지로 진행 정도를 보여 주고 누르면 정지"
+    ],
+    "en": [
+     "Added an ‘Animation’ tab to the right panel — selected object info, effect picker (hover to preview), add, options and the order list in one place",
+     "48 animations — 17 entrance · 12 emphasis · 15 exit · 4 motion paths (fly in, feathered wipe, blur, pop, glow, jelly, arc, typewriter and more)",
+     "Animation options — direction, duration (very fast to very slow, or custom), start (on click / with previous / after previous) and delay",
+     "New effect options window — smooth start, smooth end, bounce end, auto-reverse, 9 sounds, after animation (semi-transparent, gray, hide), animate text by word or letter (with delay between letters), repeat and rewind when done",
+     "Animation order list — plays top to bottom, drag to reorder, timing bars show overlaps, order numbers next to objects, and ‘Play all’ previews right in the editor",
+     "In presentation mode, click, → or Space plays the next animation and ← steps back — animations are saved with MPDF files",
+     "Added a player bar under audio objects — play, pause, ±0.25 s, drag to seek and mute; playback keeps going when you select other objects (also appears on hover while presenting)",
+     "Memo and Audio are now directly on the left-aligned toolbar instead of inside ‘More’",
+     "Smart guides now also appear when resizing text and other aspect-locked objects such as images, and when changing a text box width",
+     "Fixed the Save button's ▾ part showing in a different color and sticking out in some themes",
+     "Removed the pop-up words (+100, Splash! etc.) when clicking a premium theme background once — only the sparkle effect remains",
+     "The spray is now a soft, misty airbrush — holding still builds up the color",
+     "Raised the limits for width, size, opacity and other values — pen and line 1–100 pt, highlighter 2–120 pt, shape outline 0–60 pt, text 1–400 pt, eraser 2–300, mosaic 2–150, opacity 1–100%, letter spacing -50–300%, line spacing 50–500%",
+     "Fixed the animation options window overflowing the screen — it now fits the screen height and scrolls inside",
+     "Added a preview to the right of the options window — plays the effect on a small copy of the page with the current settings, replaying whenever you change an option (can be turned off)",
+     "Importing a PPTX now brings in its slide animations too (effect, direction, duration, start, delay, repeat, smooth start/end and motion paths)",
+     "Animations are kept when exporting to PPTX — animated objects are placed as separate pictures and play in PowerPoint with the same order, start and timing",
+     "More accurate PPTX import — rotation, flips, picture cropping and transparency; arrows, triangles, circular arrows, clouds, stars, callouts and custom shapes; line arrowheads; gradient, group and picture fills; shade/tint colors; and per-run text color, size and line spacing",
+     "Better PPTX animation import — exact start times within each click, effects that start when the slide opens, motion paths with their real shape (custom path), separate horizontal/vertical scaling and bounce end; motion and emphasis now play together with other effects on the same object",
+     "Added ‘Freeform path’ to motion paths — drag on the page to draw the path the object follows (can be redrawn), and the selected animation's motion path is shown as a dashed line in the editor",
+     "Fixed flicker in presentations — a blank white page or objects that should appear later briefly showing when moving to an animated page, and one-frame jumps when motion or emphasis overlapped other effects",
+     "When saving a document with animations as PDF, you're now offered MPDF (keeps editing state and animations) or PPTX (plays in PowerPoint) instead",
+     "‘Animation options’ in the animation panel can now be collapsed (remembered); removed the duration speed buttons and put Start and Delay on one row",
+     "Moved effect options (direction etc.) between the animation picker and the Add button — click it to choose from a small grid; Start, Duration and Delay now sit on one row",
+     "You can now add animations to existing text you're editing after a double-click",
+     "Drag the ‘Duration (s)’ or ‘Delay (s)’ label left or right to change the value (like Unity; Shift for fine control)",
+     "Fixed previews stopping partway — they now play to the end, and while playing the preview button fills like a gauge to show progress; click it to stop"
+    ],
+    "ja": [
+     "右パネルに「アニメーション」タブを追加 — 選んだオブジェクトの情報 · アニメーションの選択 (マウスを乗せるとプレビュー) · 追加 · オプション · 順序を一か所で",
+     "アニメーション48種類 — 開始17 · 強調12 · 終了15 · 軌跡4 (スライドイン · ぼかしワイプ · ぼかし · ポップ · 光彩 · ゼリー · アーチ · タイプライターなど)",
+     "アニメーションのオプション — 方向 · 継続時間 (非常に速く〜非常に遅く · 直接入力) · 開始 (クリック時 / 直前の動作と同時 / 直前の動作の後) · 遅延",
+     "詳細オプション画面を追加 — 滑らかに開始 · 滑らかに終了 · 弾んで終了 · 自動で元に戻す · サウンド9種 · アニメーションの後 (半透明 · グレー · 非表示) · テキストを単語 · 文字単位で (文字間の遅延) · 繰り返し · 再生後に巻き戻す",
+     "アニメーションの順序 — 上から順に再生、ドラッグで並べ替え、時間バーで重なりを確認、オブジェクトの横に順番を表示、「すべて再生」で編集画面でプレビュー",
+     "発表モードでクリック · → · スペースでアニメーションを1つずつ再生し、← で1段階戻る — アニメーションはMPDFで保存すると一緒に保存",
+     "音声オブジェクトの下に再生バーを追加 — 再生 · 一時停止 · 0.25秒前後 · ドラッグでシーク · ミュート。他のオブジェクトを選んでも途切れずに再生 (発表中もマウスを乗せると表示)",
+     "左揃えのツールバーでメモ · 音声を「その他」から出して、すぐ押せるようにしました",
+     "サイズ変更時、テキストや画像など比率を保つオブジェクトとテキストボックスの幅にもスマートガイドを表示",
+     "一部のテーマで保存ボタンの ▾ 部分だけ色が違って飛び出して見える問題を修正",
+     "プレミアムテーマの背景を1回押したときに出ていた効果の文字 (+100 · ザブン! など) を削除 — キラキラした効果だけ残しました",
+     "スプレーをふんわりぼかすエアブラシに改善 — 押したままにするとその場所が徐々に濃くなります",
+     "太さ · サイズ · 不透明度などの調整範囲を拡大 — ペン · 直線 1〜100pt、蛍光ペン 2〜120pt、図形の線 0〜60pt、文字 1〜400pt、消しゴム 2〜300、モザイク 2〜150、不透明度 1〜100%、字間 -50〜300%、行間 50〜500%",
+     "アニメーションの詳細オプション画面が画面からはみ出す問題を修正 — 画面の高さに合わせ、内容は画面内でスクロール",
+     "詳細オプション画面の右側にプレビューを追加 — ページを小さく描き、選んだオプションのまま再生。オプションを変えるたびに自動再生 (オフにできます)",
+     "PPTXを読み込むとスライドのアニメーション (効果 · 方向 · 継続時間 · 開始 · 遅延 · 繰り返し · 滑らかに開始/終了 · 軌跡) も一緒に読み込み",
+     "PPTXに書き出すときもアニメーションを維持 — アニメーションのあるオブジェクトは別の画像として入れ、順序 · 開始 · 時間そのままPowerPointで再生",
+     "PPTX読み込みの精度を改善 — 回転 · 反転 · 画像のトリミング · 透明度、矢印 · 三角形 · 円形矢印 · 雲 · 星 · 吹き出しなどの図形とユーザー定義図形、線の矢印、グラデーション · グループ · 画像の塗りつぶし、明暗 (shade · tint) の色、文字の一部の色 · サイズ · 行間までそのまま",
+     "PPTXアニメーションの読み込みを改善 — クリックごとの実際の開始時刻、スライド表示と同時に始まる効果、軌跡の形そのまま (ユーザー設定パス)、縦横別の拡大/縮小、弾んで終了まで反映し、同じオブジェクトの移動 · 強調が他の効果と同時に再生",
+     "軌跡に「自由な軌跡」を追加 — ページ上をドラッグしてオブジェクトが動く道を直接描く (描き直し可)。選んだアニメーションの軌跡を編集画面に点線で表示",
+     "発表中、アニメーションのあるページに移るときに白い画面や後で現れるオブジェクトが一瞬見えて消えるちらつき、および移動 · 強調が他の効果と重なると1フレームずつ跳ねる問題を修正",
+     "アニメーションのあるドキュメントをPDFで保存しようとすると、MPDF (編集状態 · アニメーションを維持) またはPPTX (PowerPointで再生) での保存を案内",
+     "アニメーションパネルの「アニメーションのオプション」を折りたたみ可能に (状態を記憶)、継続時間の速さボタンを削除し、開始 · 遅延を1行に配置",
+     "効果のオプション (方向など) をアニメーションの選択と追加ボタンの間に移し、押すと小さなグリッドから選べるように · 開始 · 継続時間 · 遅延を1行に配置",
+     "ダブルクリックで編集中の文字 (既存のテキスト) にもすぐアニメーションを追加できるように",
+     "「継続時間 (秒)」 · 「遅延 (秒)」の文字を押したまま左右にドラッグして値を調整 (Unityのように、Shift: 細かく調整)",
+     "プレビューが途中で止まる問題を修正 — 最後まで再生し、再生中はプレビューボタンがゲージで進み具合を表示、押すと停止"
+    ],
+    "zh": [
+     "右侧面板新增“动画”标签 — 所选对象信息 · 选择动画 (悬停即可预览) · 添加 · 选项 · 顺序列表集中在一处",
+     "48 种动画 — 进入 17 · 强调 12 · 退出 15 · 动作路径 4 (飞入 · 柔边擦除 · 模糊 · 弹出 · 发光 · 果冻 · 弧形 · 打字机等)",
+     "动画选项 — 方向 · 持续时间 (非常快 ~ 非常慢 · 自定义) · 开始 (单击时 / 与上一动画同时 / 上一动画之后) · 延迟",
+     "新增效果选项窗口 — 平滑开始 · 平滑结束 · 弹跳结束 · 自动翻转 · 9 种声音 · 动画播放后 (半透明 · 灰色 · 隐藏) · 按字/词或字母播放文本 (字母间延迟) · 重复 · 播完后快退",
+     "动画顺序列表 — 从上到下播放，拖动调整顺序，时间条显示重叠，对象旁显示序号，“全部播放”可在编辑界面预览",
+     "演示模式下单击 · → · 空格逐个播放动画，← 后退一步 — 动画随 MPDF 文件一起保存",
+     "音频对象下方新增播放条 — 播放 · 暂停 · 前后 0.25 秒 · 拖动定位 · 静音，选择其他对象时不中断继续播放 (演示时悬停也会显示)",
+     "左对齐工具栏中，备注和音频已从“更多”中移出，可直接点击",
+     "调整文本、图片等保持比例的对象大小以及文本框宽度时，也会显示智能参考线",
+     "修复部分主题中保存按钮的 ▾ 部分颜色不同、显得突出的问题",
+     "去除单击高级主题背景时出现的效果文字 (+100 · 扑通! 等) — 只保留闪光效果",
+     "喷枪改为柔和雾状的喷笔 — 按住不动颜色会逐渐加深",
+     "扩大粗细 · 大小 · 不透明度等数值的调节范围 — 笔 · 直线 1~100pt，荧光笔 2~120pt，形状线条 0~60pt，文字 1~400pt，橡皮擦 2~300，马赛克 2~150，不透明度 1~100%，字间距 -50~300%，行距 50~500%",
+     "修复动画效果选项窗口超出屏幕的问题 — 窗口适应屏幕高度，内容在窗口内滚动",
+     "效果选项窗口右侧新增预览 — 以缩小的页面按当前选项播放，每次更改选项都会自动播放 (可关闭)",
+     "导入 PPTX 时一并读取幻灯片动画 (效果 · 方向 · 持续时间 · 开始方式 · 延迟 · 重复 · 平滑开始/结束 · 动作路径)",
+     "导出 PPTX 时保留动画 — 带动画的对象作为单独图片放入，在 PowerPoint 中按相同顺序 · 开始方式 · 时间播放",
+     "提升 PPTX 导入的准确度 — 旋转 · 翻转 · 图片裁剪 · 图片透明度，箭头 · 三角形 · 环形箭头 · 云形 · 星形 · 标注等形状和自定义形状，线条箭头，渐变 · 组合 · 图片填充，明暗 (shade · tint) 颜色，以及文字局部的颜色 · 大小 · 行距",
+     "改进 PPTX 动画导入 — 还原每次单击内的实际开始时间、幻灯片打开即开始的效果、动作路径的原始形状 (自定义路径)、横向/纵向分别缩放和弹跳结束，同一对象的移动 · 强调可与其他效果同时播放",
+     "动作路径新增“自由路径” — 在页面上拖动直接绘制对象移动的路线 (可重新绘制)，并在编辑界面以虚线显示所选动画的路径",
+     "修复演示时的闪烁 — 切换到含动画的页面时短暂出现白屏或稍后才出现的对象，以及移动 · 强调与其他效果重叠时逐帧跳动的问题",
+     "将含动画的文档保存为 PDF 时，会建议改存为 MPDF (保留编辑状态和动画) 或 PPTX (可在 PowerPoint 中播放)",
+     "动画面板的“动画选项”可折叠 (记住状态)，去掉持续时间的速度按钮，并将开始 · 延迟放在同一行",
+     "将效果选项 (方向等) 移到动画选择与添加按钮之间，单击后在小网格窗口中选择 · 开始 · 持续时间 · 延迟排在同一行",
+     "双击正在编辑的文字 (已有文本) 也可以直接添加动画",
+     "按住“持续时间 (秒)” · “延迟 (秒)”文字左右拖动即可调整数值 (类似 Unity，Shift: 微调)",
+     "修复预览中途中断的问题 — 现在会播放到结束，播放时预览按钮像进度条一样显示进度，单击即可停止"
+    ]
+   }
+  },
+  {
+   "v": "v1.1.9",
+   "d": "2026.11.10",
+   "items": {
+    "ko": [
+     "도형 채우기에 ‘이미지로 채우기’ 추가 — 채우기 옆 이미지 버튼으로 도형 안을 고른 이미지로 꽉 채움 (채우기 색을 고르면 해제)",
+     "Ctrl+X로 고른 이미지 · 개체 잘라내기 — Ctrl+V로 잘라낸 자리에 다시 붙여넣기",
+     "이미지를 고르면 모서리 둥글기 조절 — 옵션바의 ‘모서리’ 또는 위쪽의 노란 점을 끌어 조절",
+     "이미지 편집 창 추가 — 옵션바의 ‘이미지 편집’ 또는 이미지를 두 번 클릭: 색조 · 색온도 · 채도 · 밝기 · 대비 · 하이라이트 · 그림자 · 선명도를 조절해 원래 이미지에 덮어쓰기",
+     "이미지 편집 창에 빠른 보정 14가지 추가 — 지금 이미지로 만든 둥근 정사각형 미리보기를 옆으로 넘기며 고르기 (휠 · 끌기 · 화살표 버튼)",
+     "이미지 편집 창에 원근 보정 자르기 추가 — 네 모서리 점을 비스듬히 찍힌 문서 · 화면의 모서리에 맞추면 반듯한 직사각형으로 펴서 자름",
+     "새 문서 만들기에 ‘워드 양식’ 추가 — 여백(2.54 cm)이 있는 A4에서 바로 입력, 오른쪽 여백에 닿으면 자동 줄바꿈",
+     "워드 양식에서 빈 곳을 누르면 마지막 글의 끝에 이어서 입력, 글상자는 늘 왼쪽 여백부터 오른쪽 여백까지 꽉 찬 너비로 유지",
+     "페이지 패널의 페이지 추가 · 새 페이지 메뉴를 ‘빈 양식’과 ‘워드 양식’으로 분리",
+     "왼쪽 페이지 패널의 너비에 따라 썸네일이 간혹 깜빡이던 문제 해결",
+     "그룹을 누른 뒤 F2를 누르면 그 자리에서 그룹 이름 변경",
+     "글상자 기본 폭을 넓히고 폭을 고정 — 입력하면 상자는 그대로 두고 글자가 그 안에서 움직이며 가운데 · 오른쪽 정렬이 유지됨, 한 번 눌러 고른 뒤 좌우 손잡이로 폭 조절 (글자 크기는 그대로)",
+     "프리미엄 테마 ‘안개 온천’ 추가 — 구름 사이로 비치는 빛 · 바위 온천에서 피어오르는 김 · 흐릿한 야자수 사이로 낮게 흐르는 안개",
+     "무료 테마 ‘도스’ 추가 — 까만 화면 · 파란 창 · 회색 메뉴줄 · 고정폭 글꼴 · 깜빡이는 커서가 있는 옛날 컴퓨터 화면"
+    ],
+    "en": [
+     "‘Fill with image’ added to shape fill — use the image button next to Fill to fill a shape with a picture (choosing a fill color removes it)",
+     "Cut the selected image or object with Ctrl+X — paste it back in the same spot with Ctrl+V",
+     "Adjust corner rounding when an image is selected — use ‘Corners’ in the option bar or drag the yellow dot on top",
+     "Image editor added — ‘Edit image’ in the option bar or double-click an image: adjust hue, temperature, saturation, brightness, contrast, highlights, shadows and sharpness and overwrite the original",
+     "14 quick filters added to the image editor — pick from rounded-square previews made from your image, scrolling sideways (wheel, drag or arrow buttons)",
+     "Perspective crop added to the image editor — match the four corner points to the corners of a document or screen shot at an angle to flatten it into a straight rectangle",
+     "‘Word template’ added to New document — type right away on an A4 page with 2.54 cm margins, with automatic line wrapping at the right margin",
+     "In a Word template, clicking an empty spot continues typing at the end of the last text, and text boxes always keep the full width from the left margin to the right margin",
+     "The page panel’s Add page and New page menus are now split into ‘Blank template’ and ‘Word template’",
+     "Fixed thumbnails sometimes flickering depending on the width of the left page panel",
+     "Click a group and press F2 to rename it in place",
+     "Wider default text boxes with a fixed width — the box stays put while you type and the text moves inside it, keeping center and right alignment; click once to select and drag the left or right handle to change the width (font size stays the same)",
+     "Premium theme ‘Misty Hot Spring’ added — light through the clouds, steam rising from a rocky hot spring and low fog drifting among hazy palm trees",
+     "Free theme ‘DOS’ added — a classic computer screen with a black background, blue windows, a gray menu bar, monospaced type and a blinking cursor"
+    ],
+    "ja": [
+     "図形の塗りつぶしに「画像で塗りつぶし」を追加 — 塗りつぶしの横の画像ボタンで図形の中を選んだ画像で埋める (塗りつぶしの色を選ぶと解除)",
+     "Ctrl+Xで選んだ画像・オブジェクトを切り取り — Ctrl+Vで切り取った位置に貼り付け",
+     "画像を選ぶと角の丸みを調整 — オプションバーの「角」または上の黄色い点をドラッグ",
+     "画像編集ウィンドウを追加 — オプションバーの「画像編集」または画像をダブルクリック: 色相・色温度・彩度・明るさ・コントラスト・ハイライト・シャドウ・シャープネスを調整して元の画像に上書き",
+     "画像編集ウィンドウにクイック補正14種を追加 — 今の画像で作った角の丸い正方形のプレビューを横にスクロールして選ぶ (ホイール・ドラッグ・矢印ボタン)",
+     "画像編集ウィンドウに遠近補正切り抜きを追加 — 4つの角の点を斜めに撮った文書・画面の角に合わせると、まっすぐな長方形に補正して切り抜く",
+     "新規文書に「Word様式」を追加 — 余白(2.54 cm)のあるA4ですぐに入力、右の余白で自動改行",
+     "Word様式で空いた所を押すと最後の文の末尾から続けて入力、テキストボックスは常に左の余白から右の余白までの幅いっぱいに",
+     "ページパネルのページ追加・新しいページメニューを「空白の様式」と「Word様式」に分割",
+     "左のページパネルの幅によってサムネイルがときどきちらつく問題を解決",
+     "グループを押してからF2を押すと、その場でグループ名を変更",
+     "テキストボックスの既定の幅を広げて固定 — 入力してもボックスはそのままで文字が中で動き、中央・右揃えが保たれる。一度押して選んだ後、左右のハンドルで幅を調整 (文字サイズはそのまま)",
+     "プレミアムテーマ「霧の温泉」を追加 — 雲間から差す光・岩の温泉から立ちのぼる湯気・かすんだヤシの木の間を低く流れる霧",
+     "無料テーマ「DOS」を追加 — 黒い画面・青いウィンドウ・灰色のメニューバー・等幅フォント・点滅するカーソルの昔のコンピューター画面"
+    ],
+    "zh": [
+     "形状填充新增“用图片填充” — 用填充旁的图片按钮以所选图片填满形状（选择填充颜色即取消）",
+     "可用 Ctrl+X 剪切所选图片 · 对象 — 用 Ctrl+V 粘贴回原位置",
+     "选中图片时可调整圆角 — 使用选项栏的“圆角”或拖动上方的黄色圆点",
+     "新增图片编辑窗口 — 选项栏的“编辑图片”或双击图片：调整色相 · 色温 · 饱和度 · 亮度 · 对比度 · 高光 · 阴影 · 锐度并覆盖原图",
+     "图片编辑窗口新增 14 种快速滤镜 — 用当前图片生成的圆角方形预览横向滑动选择（滚轮 · 拖动 · 箭头按钮）",
+     "图片编辑窗口新增透视校正裁剪 — 将四个角点对准斜拍的文档 · 屏幕的四角，即可拉正为规整的矩形并裁剪",
+     "新建文档新增“Word 模板” — 在带边距（2.54 cm）的 A4 上直接输入，到右边距自动换行",
+     "在 Word 模板中点击空白处会接着最后一段文字的末尾继续输入，文本框始终保持从左边距到右边距的全宽",
+     "页面面板的添加页面 · 新建页面菜单拆分为“空白模板”和“Word 模板”",
+     "修复了左侧页面面板在某些宽度下缩略图偶尔闪烁的问题",
+     "点击分组后按 F2 即可就地重命名分组",
+     "文本框默认宽度加宽并固定 — 输入时框不动、文字在框内移动，居中 · 右对齐保持不变；单击选中后拖动左右手柄调整宽度（字号不变）",
+     "新增高级主题“雾之温泉” — 云间透下的光 · 岩石温泉升起的热气 · 在朦胧椰树间低低飘动的雾",
+     "新增免费主题“DOS” — 黑色屏幕 · 蓝色窗口 · 灰色菜单栏 · 等宽字体 · 闪烁光标的老式电脑画面"
+    ]
+   }
+  },
+  {
+   "v": "v1.1.8",
+   "d": "2026.10.31",
+   "items": {
+    "ko": [
+     "페이지 패널의 빈 곳을 우클릭해 새 페이지 추가 — 빈 페이지 · 기존 파일을 문서 맨 끝에",
+     "도형에 자유형 추가 — 자유형: 도형(클릭으로 점 잇기 · 누른 채 끌면 손그림 · 시작점을 누르면 닫힘)과 자유형: 자유 곡선, 파워포인트와 같은 방식",
+     "영역 도구에 ‘색 채우기’ 추가 — 지정한 영역을 고른 색 · 불투명도로 채우기 (자유 선택은 그린 모양 그대로)",
+     "Shift + 화살표 키로 고른 개체를 0.1pt씩 더 세밀하게 옮기기",
+     "텍스트 일부만 선택하고 크기를 바꾸면 그 글자만 크기가 바뀜",
+     "멀티작업의 + 버튼이 ‘메인’ 탭을 열고, 메인 탭에서 연 항목은 메인 탭 자리를 대신함",
+     "멀티작업을 누른 뒤 화살표 키 · PageUp/PageDown을 누르면 문서 대신 멀티작업의 페이지를 넘김",
+     "레이어 패널: 타블릿 화면에서 펜으로 끌어 레이어 순서 바꾸기 (터치 화면에는 줄 왼쪽에 손잡이 표시)",
+     "수동 레이어에서 Ctrl+Z를 누르면 모든 레이어가 하나로 합쳐지던 문제 수정",
+     "상단 도구 모음이 창 너비에 다 들어가지 않으면 오른쪽 도구부터 ‘더보기’ 안으로 — 좌우 스크롤 없이",
+     "그리기 도구에 펜 종류 추가 — 붓(기본, 필압 없음) · 펜(필압과 속도로 굵기) · 스프레이"
+    ],
+    "en": [
+     "Right-click an empty spot in the page panel to add a new page — a blank page or an existing file at the end of the document",
+     "Freeform added to Shapes — Freeform: Shape (click to connect points, drag to draw by hand, click the start point to close) and Freeform: Scribble, just like PowerPoint",
+     "‘Fill with color’ added to the Region tool — fill the selected area with a chosen color and opacity (Lasso keeps the shape you drew)",
+     "Shift + arrow keys now move the selected object in finer 0.1pt steps",
+     "Select part of a text and change the size to resize only those characters",
+     "The + button in Multitask now opens a ‘Main’ tab, and anything you open from it takes the Main tab’s place",
+     "After clicking Multitask, the arrow keys and PageUp/PageDown turn Multitask pages instead of the document",
+     "Layers panel: drag with a pen on a tablet screen to reorder layers (touch screens show a handle on the left of each row)",
+     "Fixed Ctrl+Z merging all layers into one in manual layer mode",
+     "When the top toolbar doesn’t fit the window, tools on the right move into ‘More’ — no sideways scrolling",
+     "Pen types added to the Draw tool — Brush (default, no pressure), Pen (width follows pressure and speed) and Spray"
+    ],
+    "ja": [
+     "ページパネルの空いた所を右クリックして新しいページを追加 — 空白ページ・既存ファイルを文書の最後に",
+     "図形にフリーフォームを追加 — フリーフォーム: 図形(クリックで点をつなぐ・押したままドラッグで手描き・始点を押すと閉じる)とフリーフォーム: 自由曲線、PowerPointと同じ操作",
+     "範囲ツールに「色で塗りつぶし」を追加 — 指定した範囲を選んだ色・不透明度で塗りつぶし (自由選択は描いた形のまま)",
+     "Shift + 矢印キーで選んだオブジェクトを0.1ptずつより細かく移動",
+     "テキストの一部だけを選んでサイズを変えると、その文字だけサイズが変わる",
+     "マルチタスクの + ボタンで「メイン」タブを開き、メインタブから開いた項目はメインタブの位置に入れ替わる",
+     "マルチタスクをクリックした後は、矢印キー・PageUp/PageDownで文書ではなくマルチタスクのページをめくる",
+     "レイヤーパネル: タブレット画面でペンでドラッグしてレイヤーの順序を変更 (タッチ画面では各行の左にハンドルを表示)",
+     "手動レイヤーでCtrl+Zを押すとすべてのレイヤーが1つにまとまってしまう問題を修正",
+     "上部のツールバーがウィンドウ幅に収まらないときは右側のツールから「その他」の中へ — 左右スクロール不要",
+     "描画ツールにペンの種類を追加 — 筆(既定・筆圧なし)・ペン(筆圧と速度で太さが変化)・スプレー"
+    ],
+    "zh": [
+     "在页面面板空白处右键添加新页面 — 在文档末尾添加空白页或现有文件",
+     "形状新增任意多边形 — 任意多边形：形状（点击连接各点・按住拖动手绘・点击起点闭合）和任意多边形：自由曲线，操作与 PowerPoint 相同",
+     "区域工具新增“填充颜色” — 用所选颜色和不透明度填充指定区域（自由选择保持所画形状）",
+     "Shift + 方向键以 0.1pt 为单位更精细地移动所选对象",
+     "选中部分文字后更改字号，只会改变所选文字的大小",
+     "多任务的 + 按钮会打开“主页”标签，从主页标签打开的项目会替换主页标签的位置",
+     "点击多任务后，方向键和 PageUp/PageDown 会翻动多任务中的页面而不是文档",
+     "图层面板：在平板屏幕上用笔拖动即可调整图层顺序（触摸屏会在每行左侧显示拖动手柄）",
+     "修复了手动图层模式下按 Ctrl+Z 会把所有图层合并为一个的问题",
+     "顶部工具栏放不下时，右侧工具会移入“更多” — 无需左右滚动",
+     "绘图工具新增笔类型 — 毛笔（默认，无压感）、钢笔（粗细随压力和速度变化）、喷枪"
+    ]
+   }
+  },
+  {
+   "v": "v1.1.7",
+   "d": "2026.10.25",
+   "items": {
+    "ko": [
+     "텍스트를 한 번 눌러 고른 채 바로 입력하면 원래 내용을 지우고 새로 입력 시작 — 한글도 첫 글자부터 그대로, Enter는 원래 내용 고치기",
+     "텍스트를 두 번 클릭하면 글자 전체가 선택된 채로 편집 시작",
+     "표 내용 편집에서 글자색 설정 (선택한 칸 · 행 · 열 · 표 전체) — 옵션바의 표 색상은 이제 선 색만 바꿈",
+     "둥근 사각형을 영역으로 잘라 선택하면 둥근 모서리가 사라지던 문제 수정",
+     "페이지 패널의 현재 페이지를 더 눈에 띄게 — 굵은 테두리 · 배경 카드 · 번호 배지",
+     "모자이크 도구를 프리미엄 기능으로 변경",
+     "도구 모음에 마우스를 올리면 나오는 설명에서 ‘~요’로 끝나는 설명 문장을 뺌",
+     "탭을 우클릭해 탭 색 바꾸기",
+     "스페이스 키를 누른 채 마우스로 끌면 화면 이동 — 확대했을 때 편하게",
+     "메일함에서 메일을 바로 삭제 — 줄마다 휴지통 버튼, 체크해서 여러 개 한꺼번에 삭제(전체 선택 지원)"
+    ],
+    "en": [
+     "Type right away on a text you selected with one click to replace its content — Korean input works from the first letter, and Enter edits the existing text",
+     "Double-clicking a text starts editing with all of its text selected",
+     "Set the text color in Edit table contents (selected cells · row · column · whole table) — the table color in the options bar now changes only the line color",
+     "Fixed rounded rectangles losing their rounded corners when cut with a region selection",
+     "The current page stands out more in the Pages panel — thicker outline · background card · number badge",
+     "The Mosaic tool is now a Premium feature",
+     "Removed the long explanatory sentences from the toolbar tooltips",
+     "Right-click a tab to change its color",
+     "Hold Space and drag with the mouse to pan the view — handy when zoomed in",
+     "Delete mails right from the mailbox — a trash button on each row, and check several to delete them at once (Select all supported)"
+    ],
+    "ja": [
+     "1回クリックで選んだテキストにそのまま入力すると、元の内容を消して新しく入力 — 韓国語も最初の文字からそのまま、Enterは元の内容を編集",
+     "テキストをダブルクリックすると、文字全体を選択した状態で編集開始",
+     "表の内容編集で文字色を設定（選択したセル・行・列・表全体） — オプションバーの表の色は線の色だけを変更",
+     "角丸四角形を範囲で切り取って選択すると角の丸みが消える問題を修正",
+     "ページパネルの現在のページをより目立つように — 太い枠・背景カード・番号バッジ",
+     "モザイクツールをプレミアム機能に変更",
+     "ツールバーにマウスを乗せると出る説明から長い説明文を削除",
+     "タブを右クリックしてタブの色を変更",
+     "スペースキーを押したままマウスでドラッグすると画面を移動 — 拡大時に便利",
+     "メールボックスからメールをすぐ削除 — 行ごとのゴミ箱ボタン、チェックして複数をまとめて削除（すべて選択に対応）"
+    ],
+    "zh": [
+     "单击选中文本后直接输入，会删除原内容并开始新输入 — 韩文从第一个字起正常输入，按 Enter 则编辑原内容",
+     "双击文本时以全选状态开始编辑",
+     "在编辑表格内容中设置文字颜色（所选单元格 · 行 · 列 · 整个表格）— 选项栏中的表格颜色现在只更改线条颜色",
+     "修复用区域裁切选择圆角矩形时圆角消失的问题",
+     "页面面板中的当前页面更醒目 — 粗边框 · 背景卡片 · 页码徽标",
+     "马赛克工具改为高级版功能",
+     "删除了工具栏悬停提示中的长说明句",
+     "右键单击标签页可更改标签颜色",
+     "按住空格键并用鼠标拖动即可移动画面 — 放大时更方便",
+     "可直接在邮箱中删除邮件 — 每行都有删除按钮，勾选后可批量删除（支持全选）"
+    ]
+   }
+  },
+  {
+   "v": "v1.1.6",
+   "d": "2026.10.25",
+   "items": {
+    "ko": [
+     "단축키 Z 도구 이름을 ‘영역지정’으로 바꿈",
+     "모바일에서 + 버튼을 누르면 나오는 버튼(발표 · 번역 · 찾기 · 보기·편집 · 북마크)을 키워 글자가 잘리지 않게 함",
+     "‘버전으로 업데이트했어요’ 알림에 ‘자세히 보기’ 버튼 추가 — 그 버전에서 바뀐 내용을 바로 보여 줌",
+     "도구 모음 기본 위치를 상단 정렬로 — 예전에 저장된 좌측 정렬도 한 번 상단 정렬로 되돌림 (설정 › 화면 · 레이아웃에서 다시 바꿀 수 있음)",
+     "개체를 고른 채 화살표 키로 1pt씩(Shift: 10pt) 옮기기 — 여러 개를 골랐으면 함께 움직이고, 손을 떼면 실행 취소 한 번으로 기록",
+     "확대했을 때 문서 화면의 상하 · 좌우 스크롤바를 더 잘 보이게 — 어두운 테마는 밝게, 밝은 테마는 어둡게",
+     "마지막으로 추가한 텍스트의 양식(글꼴 · 크기 · 굵게 · 기울임 · 색 · 배경 · 정렬 · 자간 · 줄간격)을 기억해 다음 텍스트에도 그대로 씀",
+     "PC 프로그램: 업데이트한 뒤에도 나만의 테마 · 배경 이미지가 그대로 남도록 앱 데이터 폴더에도 따로 보관하고, 설치 전에 설정을 먼저 저장",
+     "여러 개를 고른 채 옵션바에서 색 · 채우기 · 굵기 · 불투명도 · 글꼴 · 굵게 · 정렬 등을 바꾸면 고른 개체 모두에 한꺼번에 반영"
+    ],
+    "en": [
+     "Renamed the Z-key tool to ‘Region’",
+     "On mobile, the buttons that open from the + button (Present · Translate · Find · View/Edit · Bookmarks) are bigger so their labels aren’t cut off",
+     "Added a ‘View details’ button to the ‘Updated to version’ notification — shows what changed in that version",
+     "The toolbar now defaults to the top — a previously saved left layout is reset to the top once (you can change it again in Settings › Display · Layout)",
+     "Move selected objects with the arrow keys by 1 pt (Shift: 10 pt) — multiple selected objects move together, and each burst is one Undo step",
+     "The document view’s vertical and horizontal scrollbars stand out more when zoomed — light on dark themes, dark on light themes",
+     "Remembers the style of the last text you added (font · size · bold · italic · color · background · alignment · letter spacing · line spacing) for your next text",
+     "Desktop app: your custom theme and background image now survive updates — they’re also kept in the app data folder, and settings are saved before installing",
+     "With multiple objects selected, changing color · fill · width · opacity · font · bold · alignment and more in the options bar applies to all of them"
+    ],
+    "ja": [
+     "ショートカットZのツール名を「範囲指定」に変更",
+     "モバイルで＋ボタンを押すと出るボタン（発表・翻訳・検索・表示/編集・ブックマーク）を大きくして、文字が切れないように",
+     "「バージョンにアップデートしました」通知に「詳しく見る」ボタンを追加 — そのバージョンの変更内容をすぐに表示",
+     "ツールバーの既定位置を上部に — 以前保存された左側配置も一度だけ上部に戻します（設定 › 画面・レイアウトで変更できます）",
+     "オブジェクトを選んだまま矢印キーで1ptずつ（Shift：10pt）移動 — 複数選択時は一緒に動き、キーを離すと元に戻す1回分として記録",
+     "拡大時の文書画面の上下・左右スクロールバーを見やすく — 暗いテーマでは明るく、明るいテーマでは暗く",
+     "最後に追加したテキストの書式（フォント・サイズ・太字・斜体・色・背景・配置・字間・行間）を記憶して次のテキストにも使用",
+     "PCアプリ：アップデート後もマイテーマ・背景画像がそのまま残るよう、アプリのデータフォルダーにも保存し、インストール前に設定を先に保存",
+     "複数選択したままオプションバーで色・塗りつぶし・太さ・不透明度・フォント・太字・配置などを変えると、選んだオブジェクトすべてに一括反映"
+    ],
+    "zh": [
+     "将快捷键 Z 的工具名称改为“区域选择”",
+     "移动端点 + 按钮弹出的按钮（演示 · 翻译 · 查找 · 查看/编辑 · 书签）变大，文字不再被截断",
+     "“已更新到版本”通知中新增“查看详情”按钮 — 直接显示该版本的更新内容",
+     "工具栏默认位置改为顶部 — 以前保存的左侧布局也会恢复为顶部一次（可在 设置 › 界面 · 布局 中再次更改）",
+     "选中对象后可用方向键每次移动 1pt（Shift：10pt）— 多选时一起移动，松开按键后记录为一次撤销",
+     "放大时文档区域的上下、左右滚动条更醒目 — 深色主题为浅色，浅色主题为深色",
+     "记住最后添加的文字样式（字体 · 字号 · 粗体 · 斜体 · 颜色 · 背景 · 对齐 · 字距 · 行距），下次添加文字时沿用",
+     "桌面程序：更新后自定义主题和背景图片会保留 — 同时保存在应用数据文件夹中，并在安装前先保存设置",
+     "多选后在选项栏中更改颜色 · 填充 · 粗细 · 不透明度 · 字体 · 粗体 · 对齐等，会一次性应用到所有选中对象"
+    ]
+   }
+  },
+  {
+   "v": "v1.1.5",
+   "d": "2026.10.24",
+   "items": {
+    "ko": [
+     "스크롤바를 더 두껍게 바꿈 — 페이지 패널의 크기 조절 경계를 패널 바깥으로 옮겨 페이지 패널 스크롤바를 잡기 쉬워짐",
+     "페이지 패널의 그룹 머리가 마우스를 올리지 않아도 늘 같은 모습(설정 · 해제/삭제 버튼과 페이지 수)으로 보이고, 패널 좌우로 넓게 펼쳐짐 — 그룹 해제(페이지 유지)와 그룹 · 페이지 삭제는 한 버튼에서 눌러 고름",
+     "우측 패널 설정에 ‘길게 보기’ 추가 — 탭 · 도구바 · 옵션바 옆까지 우측 패널을 위로 올려 따로 세움",
+     "도구 모음의 ‘닿은선택’ 이름을 ‘선택’으로 바꿈",
+     "펼친 메모의 제목과 버튼 사이 빈 곳을 끌어서 메모를 옮길 수 있게 함 (제목 칸은 글자 길이만큼)",
+     "디지털화 · 전체 디지털화 중에 ‘취소’ 버튼(또는 Esc)으로 멈출 수 있음 — 취소하면 문서는 그대로"
+    ],
+    "en": [
+     "Made scrollbars thicker — moved the page panel’s resize edge outside the panel so its scrollbar is easy to grab",
+     "Group headers in the page panel now always look the same without hovering (settings · ungroup/delete button and page count) and stretch across the panel — ungroup (keep pages) and delete group with pages are now chosen from one button",
+     "Added ‘Tall view’ to the right panel settings — the right panel extends up beside the tabs, toolbar and options bar as its own column",
+     "Renamed the ‘Touch select’ tool to ‘Select’",
+     "You can now drag an open memo by the empty space between its title and buttons (the title field is only as wide as its text)",
+     "Digitize and Digitize all pages can now be stopped with the ‘Cancel’ button (or Esc) — cancelling leaves the document unchanged"
+    ],
+    "ja": [
+     "スクロールバーを太く — ページパネルのサイズ調整の境界をパネルの外に移し、ページパネルのスクロールバーをつかみやすく",
+     "ページパネルのグループ見出しが、マウスを乗せなくても常に同じ表示（設定・解除/削除ボタンとページ数）になり、パネルの左右いっぱいに広がるように — グループ解除（ページは残す）とグループ・ページ削除は1つのボタンから選択",
+     "右パネルの設定に「縦長表示」を追加 — タブ・ツールバー・オプションバーの横まで右パネルを上に伸ばして独立させます",
+     "ツールバーの「接触選択」の名前を「選択」に変更",
+     "開いたメモは、タイトルとボタンの間の空いた部分をドラッグして移動できるように（タイトル欄は文字の長さだけ）",
+     "デジタル化・全ページのデジタル化の途中で「キャンセル」ボタン（またはEsc）で止められるように — キャンセルすると文書はそのまま"
+    ],
+    "zh": [
+     "滚动条加粗 — 将页面面板的调整大小边界移到面板外侧，更容易拖动页面面板的滚动条",
+     "页面面板的分组标题无需悬停也始终显示完整（设置 · 取消分组/删除按钮和页数），并横向铺满面板 — 取消分组（保留页面）与删除分组及页面合并为一个按钮，点击后选择",
+     "右侧面板设置新增“加长显示”— 右侧面板向上延伸到标签栏、工具栏和选项栏旁边，独立成一列",
+     "将工具栏中的“接触选择”更名为“选择”",
+     "展开的便签可拖动标题与按钮之间的空白处来移动（标题栏宽度随文字长度）",
+     "数字化和全部数字化过程中可用“取消”按钮（或 Esc）中止 — 取消后文档保持不变"
+    ]
+   }
+  },
+  {
+   "v": "v1.1.4",
+   "d": "2026.10.24",
+   "items": {
+    "ko": [
+     "모바일: 확대한 채로 페이지를 넘기면 보던 위치 그대로 이전 · 다음 페이지로 넘어가게 개선 (예전: 다음 장은 위로, 이전 장은 아래로 화면이 튀었음)",
+     "발표 모드: 도형을 그릴 때 배경색(채우기)도 고를 수 있게 함 — 도형 도구의 ‘배경’ 줄에서 색 · 투명 · 다른 색 선택",
+     "발표를 마치고 나갈 때 발표 중 그리거나 적은 내용을 문서에 반영할지 물어봄 — 반영하지 않으면 발표 전 상태로 되돌리고, 실행 취소로 다시 살릴 수 있음",
+     "그리기 도구에 손떨림 보정 추가 (끔 · 약 · 중 · 강) — 펜 끝이 천천히 따라오며 잔떨림을 걸러 줌, 그림판 노트에도 추가",
+     "그리기 도구의 획 보정 기본값을 ‘끄기’로 변경",
+     "둥근 사각형 모서리를 PPT처럼 조절 — 도형을 고르면 위쪽 변에 생기는 노란 점을 좌우로 끌어 둥근 정도를 바꿈 (옵션바 슬라이더 대신)",
+     "페이지 패널 우클릭 메뉴에 ‘배경 색 바꾸기’ 추가 — 화면 · 썸네일 · 저장한 PDF · 인쇄에 모두 반영되고, 원래 글자와 그림은 그대로 보이게 칠함",
+     "페이지 패널 우클릭 메뉴에 ‘그룹에 넣기’(그룹을 골라 넣기) · ‘그룹에서 빼기’ 추가 — 여러 페이지를 골라 둔 상태면 한꺼번에",
+     "그룹 설정 추가 (그룹 머리의 톱니 · 우클릭) — 이름 바꾸기 · 폴더 색 바꾸기 · 페이지 패널 맨 위에 고정을 한곳에서 (고정은 패널에서만 위에 보이고 문서의 페이지 순서는 그대로)",
+     "그룹을 펼쳤을 때 그룹 안 페이지 썸네일을 작게 표시해 그룹과 나머지 페이지가 한눈에 구분되게 함",
+     "빈 페이지 추가 · 기존 파일 불러오기: 그룹이 닫혀 있으면 그룹 밖(그룹 바로 뒤)에 페이지를 추가",
+     "메인 탭에 ‘최근에 연 파일’ 추가 — 최근 파일을 다시 열고, 기록에서 삭제하고, PC 프로그램에서는 파일 위치(탐색기 · Finder)를 열 수 있음",
+     "모바일 시작 화면의 파일 열기 · 빈 문서로 시작 · 파일 병합 · 파일 압축 버튼을 조금 작게 줄임",
+     "검색 결과에 보일 정사각형 썸네일 추가"
+    ],
+    "en": [
+     "Mobile: flipping pages while zoomed in now keeps your current view position on the next or previous page (before, the next page jumped to the top and the previous page to the bottom)",
+     "Presentation mode: you can now pick a background (fill) color when drawing shapes — choose a color, transparent or a custom color in the shape tool’s ‘Fill’ row",
+     "When you leave a presentation, you’re asked whether to keep what you drew or wrote during it — if you don’t, the document goes back to how it was before the presentation (Undo brings it back)",
+     "Added a stabilizer to the Draw tool (Off · Low · Mid · High) — the pen tip follows smoothly and filters out hand jitter; also added to Paint notes",
+     "Stroke correction in the Draw tool is now off by default",
+     "Rounded rectangle corners now work like PowerPoint — select the shape and drag the yellow dot on its top edge left or right to change the roundness (replaces the options bar slider)",
+     "Added ‘Change background color’ to the page panel right-click menu — applied on screen, in thumbnails, saved PDFs and printouts, while the original text and images stay visible",
+     "Added ‘Add to group’ (choose a group) and ‘Remove from group’ to the page panel right-click menu — works on all selected pages at once",
+     "Added group settings (gear on the group header · right-click) — rename, change the folder color and pin the group to the top of the page panel (only the panel shows it on top; the page order in the document stays the same)",
+     "When a group is expanded, the page thumbnails inside it are shown smaller so groups stand out from the other pages",
+     "Add blank page · Import existing file: if the group is collapsed, the page is added outside the group (right after it)",
+     "Added ‘Recent files’ to the main tab — reopen recent files, remove them from the history, and in the desktop app open the file location (Explorer · Finder)",
+     "Made the Open file · Start blank · Merge files · Compress file buttons a bit smaller on the mobile start screen",
+     "Added a square thumbnail for search results"
+    ],
+    "ja": [
+     "モバイル：拡大したままページをめくると、見ていた位置のまま前後のページに移るよう改善（以前は次のページは上、前のページは下に画面が飛んでいました）",
+     "プレゼンモード：図形を描くときに背景色（塗りつぶし）も選べるように — 図形ツールの「背景」行で色・透明・その他の色を選択",
+     "プレゼンを終えて出るときに、発表中に描いたり書いたりした内容を文書に反映するか確認 — 反映しない場合は発表前の状態に戻し、元に戻すで復元できます",
+     "描画ツールに手ぶれ補正を追加（オフ・弱・中・強）— ペン先がゆっくり追従して細かな手ぶれを抑えます。ペイントノートにも追加",
+     "描画ツールのストローク補正の初期値を「オフ」に変更",
+     "角丸四角形の角をPPTのように調整 — 図形を選ぶと上辺に出る黄色い点を左右にドラッグして丸みを変更（オプションバーのスライダーの代わり）",
+     "ページパネルの右クリックメニューに「背景色を変更」を追加 — 画面・サムネイル・保存したPDF・印刷すべてに反映され、元の文字や画像はそのまま見えるように塗ります",
+     "ページパネルの右クリックメニューに「グループに入れる」（グループを選択）・「グループから出す」を追加 — 複数ページを選んでいればまとめて",
+     "グループ設定を追加（グループ見出しの歯車・右クリック）— 名前の変更・フォルダーの色の変更・ページパネルの一番上に固定（パネルでだけ上に表示され、文書のページ順はそのまま）",
+     "グループを開いたとき、グループ内のページのサムネイルを小さく表示して、ほかのページと一目で区別できるように",
+     "空白ページを追加・既存ファイルを読み込む：グループが閉じていれば、グループの外（グループの直後）にページを追加",
+     "メインタブに「最近開いたファイル」を追加 — 最近のファイルを再び開いたり、履歴から削除したり、PCアプリではファイルの場所（エクスプローラー・Finder）を開けます",
+     "モバイルのスタート画面の「ファイルを開く・空白から始める・ファイル結合・ファイル圧縮」ボタンを少し小さく",
+     "検索結果に表示される正方形のサムネイルを追加"
+    ],
+    "zh": [
+     "移动端：放大状态下翻页时，会保持当前查看位置切换到上一页或下一页（以前下一页会跳到顶部、上一页会跳到底部）",
+     "演示模式：绘制形状时也可以选择背景色（填充）— 在形状工具的“背景”一行中选择颜色、透明或其他颜色",
+     "结束演示退出时，会询问是否将演示中绘制或书写的内容保留到文档 — 不保留则恢复到演示前的状态，可用撤销找回",
+     "绘图工具新增防抖（关 · 弱 · 中 · 强）— 笔尖平滑跟随，过滤手部抖动；画板笔记也已加入",
+     "绘图工具的笔画校正默认改为“关闭”",
+     "圆角矩形的圆角可像 PPT 一样调整 — 选中形状后，左右拖动上边缘的黄色圆点即可改变圆角程度（取代选项栏滑块）",
+     "页面面板右键菜单新增“更改背景颜色”— 屏幕、缩略图、保存的 PDF 和打印均会生效，原有文字和图片仍清晰可见",
+     "页面面板右键菜单新增“加入分组”（选择分组）和“移出分组”— 选中多页时可一次处理",
+     "新增分组设置（分组标题上的齿轮 · 右键）— 重命名、更改文件夹颜色、固定到页面面板顶部（仅在面板中显示在顶部，文档页面顺序不变）",
+     "展开分组时，分组内的页面缩略图显示得更小，便于与其他页面区分",
+     "添加空白页 · 导入现有文件：分组折叠时，页面会添加到分组外（紧接分组之后）",
+     "主标签页新增“最近打开的文件”— 可重新打开最近的文件、从记录中删除，在桌面程序中还可打开文件位置（资源管理器 · Finder）",
+     "移动端开始界面的“打开文件 · 从空白文档开始 · 合并文件 · 压缩文件”按钮略微缩小",
+     "新增用于搜索结果的正方形缩略图"
+    ]
+   }
+  },
+  {
+   "v": "v1.1.3",
+   "d": "2026.10.23",
+   "items": {
+    "ko": [
+     "페이지 패널의 상세보기(…) 버튼을 없애고 우클릭 메뉴로 변경 — 썸네일을 우클릭(모바일: 길게 누르기)하면 아래로 목록이 내려오고 새 페이지 · 페이지 복제 · 이름 바꾸기 · 북마크 · 주석 · 프린트 · 삭제 순서로 선택",
+     "페이지 추가를 빈 페이지 열기 · 기존 파일 불러오기로 나눔 — 기존 파일은 PDF · PNG(JPG)를 고른 페이지 바로 뒤 중간에 끼워 넣기, 여러 파일은 고른 순서대로 (페이지 메뉴의 ‘새 페이지’ · 페이지 패널 아래 ‘페이지 추가’)",
+     "디지털화 정확도 · 인식 범위 개선 — 한 페이지를 세 가지 읽기 방식으로 반복해 읽고 더 깨끗한 결과를 바탕으로 합침, 자신 없는 칸은 2배 · 3배로 키워 여러 번 다시 읽어 같은 답이 나오면 그 답을 씀, 한국어 인식에 영어 모델을 함께 써서 영문 문장이 깨지던 문제 해결, 회색 바탕 · 옅은 글자 · 어두운 상자 위 흰 글자도 읽도록 대비 맞춤, 엔진이 놓친 낱말 덩어리도 다시 읽음, 글자 PDF 안에 섞인 그림 · 스캔 글자도 함께 인식, 각주 같은 작은 글자도 남김",
+     "스크롤바 색이 테마 색을 따라 바뀜",
+     "메모에 제목 추가 — 머리글에서 바로 입력(비우면 첫 줄이 제목), 접으면 작은 동그라미 하나만 남고 누르면 펼쳐짐 · 끌어서 옮기기 · 마우스를 올리면 메모 제목 표시",
+     "모바일 발표에 도구 줄 추가 — 리모컨의 ▲ 단추로 펼치고 접는 도구 줄에서 강조표시 · 그리기 · 직선 · 지우개 · 도형 · 텍스트 · 레이저 포인터 · 실행 취소 사용 (접거나 도구를 끄면 다시 밀어서 넘기기)",
+     "설정 › 버전 정보에 Thaniya.co.kr로 이동하는 단추 추가 (설정 왼쪽 아래 버전 표시 옆에도 링크)"
+    ],
+    "en": [
+     "Replaced the page panel’s details (…) button with a right-click menu — right-click a thumbnail (mobile: long-press) and a list drops down with New page · Duplicate page · Rename · Bookmark · Note · Print · Delete, in that order",
+     "Adding a page is now split into Open blank page · Import existing file — an existing PDF · PNG (JPG) is inserted right after the chosen page, in the middle of the document; multiple files go in the order you picked them (‘New page’ in the page menu · ‘Add page’ under the page panel)",
+     "Improved digitize accuracy and coverage — each page is read repeatedly in three reading modes and merged on top of the cleanest result; unsure cells are reread several times at 2× · 3× and an answer that comes up more than once wins; Korean recognition now also uses the English model, fixing garbled English sentences; contrast normalization reads gray backgrounds · faint text · white text on dark boxes; word clusters the engine missed are reread; text inside images · scans mixed into text PDFs is recognized too; small text such as footnotes is kept",
+     "Scrollbar colors now follow the theme",
+     "Added titles to memos — type directly in the header (empty: the first line is used); a collapsed memo becomes a single small circle — click to expand · drag to move · hover to see the memo title",
+     "Added a toolbar to mobile presentations — open and fold it with the ▲ button on the remote to use Highlight · Draw · Line · Eraser · Shape · Text · Laser pointer · Undo (fold it or turn the tool off to swipe pages again)",
+     "Added a button to go to Thaniya.co.kr in Settings › Version info (also linked next to the version at the bottom left of Settings)"
+    ],
+    "ja": [
+     "ページパネルの詳細(…)ボタンをなくし右クリックメニューに変更 — サムネイルを右クリック(モバイル: 長押し)すると下にリストが開き、新しいページ · ページを複製 · 名前を変更 · ブックマーク · 注釈 · 印刷 · 削除の順に選択",
+     "ページ追加を空白ページを開く · 既存ファイルを読み込むに分割 — 既存ファイルは PDF · PNG(JPG)を選んだページのすぐ後ろ(途中)に挿入、複数ファイルは選んだ順に(ページメニューの「新しいページ」· ページパネル下の「ページ追加」)",
+     "デジタル化の精度 · 認識範囲を改善 — 1ページを3つの読み取り方式で繰り返し読み、よりきれいな結果を基に統合、自信のないセルは 2倍 · 3倍に拡大して何度も読み直し同じ答えが出ればその答えを採用、韓国語認識に英語モデルも併用し英文が崩れる問題を解決、灰色の背景 · 薄い文字 · 暗い箱の上の白文字も読めるようコントラストを調整、エンジンが見落とした単語の塊も読み直し、文字PDFに混ざった画像 · スキャンの文字も一緒に認識、脚注のような小さな文字も残す",
+     "スクロールバーの色がテーマの色に合わせて変わる",
+     "メモにタイトルを追加 — ヘッダーで直接入力(空欄なら1行目がタイトル)、折りたたむと小さな丸だけが残り、押すと展開 · ドラッグで移動 · マウスを乗せるとメモのタイトルを表示",
+     "モバイル発表にツールバーを追加 — リモコンの ▲ ボタンで開閉するツール列で強調表示 · 描画 · 直線 · 消しゴム · 図形 · テキスト · レーザーポインター · 元に戻すを使用(折りたたむかツールを切ると再びスワイプでページ送り)",
+     "設定 › バージョン情報に Thaniya.co.kr へ移動するボタンを追加(設定左下のバージョン表示の横にもリンク)"
+    ],
+    "zh": [
+     "去掉页面面板的详细(…)按钮,改为右键菜单 — 右键点击缩略图(移动端: 长按)会向下展开列表,按 新页面 · 复制页面 · 重命名 · 书签 · 注释 · 打印 · 删除 的顺序选择",
+     "添加页面分为 打开空白页 · 导入现有文件 — 现有文件可将 PDF · PNG(JPG)插入到所选页面紧后方(文档中间),多个文件按选择顺序插入(页面菜单的「新页面」· 页面面板下方的「添加页面」)",
+     "改进数字化的准确度 · 识别范围 — 每页用三种读取方式反复读取,并以更干净的结果为基础合并;没把握的格子放大 2 倍 · 3 倍多次重读,出现相同答案时采用该答案;韩语识别同时使用英语模型,解决英文句子乱码问题;调整对比度,可读取灰色背景 · 浅色文字 · 深色框上的白字;引擎漏掉的词块也会重读;文字 PDF 中混有的图片 · 扫描文字也一并识别;保留脚注等小字",
+     "滚动条颜色随主题颜色变化",
+     "便签新增标题 — 在标题栏直接输入(留空则以第一行为标题),折叠后只剩一个小圆点,点击展开 · 拖动移动 · 鼠标悬停显示便签标题",
+     "移动端演示新增工具栏 — 用遥控器的 ▲ 按钮展开和折叠工具栏,可使用 高亮 · 绘图 · 直线 · 橡皮擦 · 形状 · 文本 · 激光笔 · 撤销(折叠或关闭工具后可再次滑动翻页)",
+     "在 设置 › 版本信息 中新增前往 Thaniya.co.kr 的按钮(设置左下角版本号旁也有链接)"
+    ]
+   }
+  },
+  {
+   "v": "v1.1.2",
+   "d": "2026.10.23",
+   "items": {
+    "ko": [
+     "그리기 도구에 획 보정 추가 (기본: 켜짐) — 손을 떼면 ‘ㅇ’처럼 닫힌 고리는 반듯한 원으로, ㅁ · ㄷ · ㄹ처럼 꺾인 획은 곧은 선과 뾰족한 모서리로, 그 밖의 곡선은 부드럽게 다듬음 (영문 ‘e’는 원으로 바꾸지 않음), 옵션바의 ‘획 보정 / 끄기’로 켜고 끄기 · 노트 그림판의 펜에도 ‘보정’ 단추 추가",
+     "옵션바의 색상 · 채우기를 작은 색 단추로 변경 — 누르면 색 선택 창이 열리고 추천 색 · 기본 색 96가지 · 최근 사용 10개 · 사용자 지정 · HEX 입력 · 스포이드 사용 가능 (스포이드로 찍는 동안에는 창이 잠깐 숨음), 옵션바가 차지하는 너비가 크게 줄어듦",
+     "도형 도구의 도형 고르기를 모양만 있는 4×2 단추 표로 변경, 왼쪽 · 오른쪽 · 위쪽 · 아래쪽 화살표 도형 추가 (색상 · 채우기 · 선 굵기 · 불투명도 · 회전 그대로 사용)",
+     "헤더 접기 변경 — 탭바 오른쪽 끝 버튼(Ctrl+Shift+H)이 헤더만 접고 탭바는 그대로 남김, 같은 버튼으로 다시 펼침",
+     "노트 위쪽 번호 탭에 노트 종류 아이콘 추가 — 번호 앞 아이콘으로 마크다운 · 텍스트 · 그림판 구분"
+    ],
+    "en": [
+     "Added stroke correction to the Pen tool (on by default) — when you lift the pen, closed loops like ‘ㅇ’ become clean circles, angular strokes like ㅁ · ㄷ · ㄹ become straight lines with sharp corners, and other curves are smoothed (a handwritten ‘e’ is never turned into a circle); toggle it with ‘Stroke correction / Off’ in the options bar · also added a ‘Correct’ button to the Paint note’s pen",
+     "Color and fill in the options bar are now a small color button — it opens a color window with suggested colors · 96 basic colors · 10 recent colors · custom color · HEX input · eyedropper (the window hides briefly while you pick with the eyedropper), so the options bar takes up much less width",
+     "The shape picker in the Shape tool is now a 4×2 grid of icon-only buttons, and left · right · up · down arrow shapes were added (color · fill · line width · opacity · rotation all work as usual)",
+     "Changed header folding — the button at the right end of the tab bar (Ctrl+Shift+H) now folds only the header and keeps the tab bar; press the same button to unfold",
+     "Added note-type icons to the numbered note tabs — an icon before each number shows Markdown · Text · Paint"
+    ],
+    "ja": [
+     "描画ツールにストローク補正を追加(既定: オン)— ペンを離すと「ㅇ」のような閉じた輪はきれいな円に、ㅁ · ㄷ · ㄹ のように折れる線はまっすぐな線と鋭い角に、その他の曲線はなめらかに整える(英字「e」は円にしない)、オプションバーの「ストローク補正 / オフ」で切り替え · ノートのペイントのペンにも「補正」ボタンを追加",
+     "オプションバーの色 · 塗りつぶしを小さな色ボタンに変更 — 押すと色選択ウィンドウが開き、おすすめの色 · 基本色96色 · 最近使った色10個 · ユーザー設定 · HEX入力 · スポイトが使える(スポイトで取る間はウィンドウが一時的に隠れる)、オプションバーの幅が大きく縮小",
+     "図形ツールの図形選択を形だけの 4×2 ボタン表に変更、左 · 右 · 上 · 下 矢印の図形を追加(色 · 塗りつぶし · 線の太さ · 不透明度 · 回転もそのまま使用可能)",
+     "ヘッダーの折りたたみを変更 — タブバー右端のボタン(Ctrl+Shift+H)はヘッダーだけを折りたたみ、タブバーはそのまま、同じボタンで再び展開",
+     "ノート上部の番号タブにノートの種類アイコンを追加 — 番号の前のアイコンでマークダウン · テキスト · ペイントを区別"
+    ],
+    "zh": [
+     "绘图工具新增笔画校正(默认: 开启)— 抬笔时,像「ㅇ」这样的闭合圈会变成标准的圆,像 ㅁ · ㄷ · ㄹ 这样有转折的笔画会变成直线和尖角,其他曲线会变得平滑(英文「e」不会变成圆),可用选项栏的「笔画校正 / 关闭」切换 · 笔记画板的笔也新增「校正」按钮",
+     "选项栏的颜色 · 填充改为小的颜色按钮 — 点击后打开颜色选择窗口,可使用推荐颜色 · 96 种基本颜色 · 最近使用的 10 种 · 自定义 · HEX 输入 · 吸管(用吸管取色时窗口会暂时隐藏),选项栏占用的宽度大幅减少",
+     "形状工具的形状选择改为只有图形的 4×2 按钮表,新增左 · 右 · 上 · 下箭头形状(颜色 · 填充 · 线宽 · 不透明度 · 旋转照常可用)",
+     "更改页眉折叠 — 标签栏右端的按钮(Ctrl+Shift+H)只折叠页眉,保留标签栏,再按同一按钮即可展开",
+     "笔记上方的编号标签新增笔记类型图标 — 用编号前的图标区分 Markdown · 文本 · 画板"
+    ]
+   }
+  }
+ ]
+}

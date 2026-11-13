@@ -1,6 +1,6 @@
 {
  "name": "Meow-PDF",
- "version": "v1.2.1",
+ "version": "v1.2.2",
  "date": "2026.11.13",
  "site": "https://www.meow-pdf.com/",
  "download": {
@@ -10,6 +10,60 @@
   "page": "https://www.meow-pdf.com/#download"
  },
  "history": [
+  {
+   "v": "v1.2.2",
+   "d": "2026.11.13",
+   "items": {
+    "ko": [
+     "탭 여러 개 고르기 — Ctrl+클릭으로 하나씩 · Shift+클릭으로 범위를 골라, 우클릭 › ‘고른 탭 병합’으로 순서를 정해 새 탭 하나로 합치기 (원래 탭은 그대로)",
+     "페이지 패널 아래쪽 배치 추가 — 설정 › 화면 배치 › 페이지 패널 위치에서 ‘아래쪽’을 고르면 썸네일이 문서 아래에 가로로 늘어서고, 경계를 끌어 높이 조절",
+     "설정 › 테마 · 글자 › UI 글자 크기 추가 — 작게 · 보통 · 조금 크게 · 크게 · 아주 크게 (문서 글자는 그대로)",
+     "이미지 · 도형 자르기 — 옵션바의 자르기 아이콘으로 손잡이를 끌어 자르고(Shift: 비율 유지), ‘도형으로 자르기’로 원 · 둥근 사각형 · 삼각형 · 마름모 · 육각형 · 별 · 하트 · 말풍선 모양으로 자르기",
+     "야외 · 하늘 배경 테마(여름 휴양지 · 놀이동산 · 동화 · 안개 온천 · 밤의 수영장 · 안개 숲 · 겨울)에 시간대 옵션 — 테마 스토어의 사용 중 카드 또는 설정에서 낮 · 노을 · 밤 고르기",
+     "무료 테마 ‘겨울’ 추가 — 눈 덮인 언덕과 소나무, 맑은 겨울 하늘에 조용히 눈이 내리는 깔끔한 화면 (눈 내리기 끄기 가능)",
+     "상단 헤더 정돈 — 버튼을 살짝 작게, 묶음 사이에 구분선을 넣어 한눈에 보기 쉽게",
+     "설정 창을 화면 배치 · 테마 · 글자 · 편집 · 저장으로 나누고, 항목을 주제별 묶음 상자로 정리",
+     "PPTX 애니메이션 가져오기 개선 — 한 개체에 나타내기 · 끝내기가 여러 번 겹친 깜빡임 연출, 그룹 · 글자 있는 도형이 흩어지지 않고 한 덩어리로 움직이도록, 슬라이드 소리(효과음) 재생, 화면 전환(페이드 · 밀어내기 · 닦아내기 · 확대 · 플래시 등) 그대로 가져오기",
+     "그룹으로 묶은 개체에 애니메이션을 넣으면 효과 하나로 함께 움직임"
+    ],
+    "en": [
+     "Select multiple tabs — Ctrl+click one by one or Shift+click a range, then right-click › ‘Merge selected tabs’ to set the order and combine them into one new tab (the original tabs stay)",
+     "Page panel can now sit at the bottom — choose ‘Bottom’ in Settings › Layout › Page panel position to line thumbnails up horizontally under the document; drag the edge to change its height",
+     "Added Settings › Theme · Text › UI text size — Small · Normal · Slightly larger · Large · Extra large (document text is unchanged)",
+     "Crop images and shapes — use the crop icon in the options bar and drag the handles (Shift: keep ratio), or ‘Crop to shape’ for circle · rounded rectangle · triangle · diamond · hexagon · star · heart · speech bubble",
+     "Time-of-day option for outdoor/sky themes (Summer Resort · Theme Park · Fairy Tale · Misty Hot Spring · Night Pool · Misty Forest · Winter) — pick Day · Sunset · Night on the in-use card in the Theme Store or in Settings",
+     "New free theme ‘Winter’ — snowy hills and pine trees with snow falling quietly from a clear winter sky (snowfall can be turned off)",
+     "Tidied the top header — slightly smaller buttons with dividers between groups so it's easier to scan",
+     "Split Settings into Layout · Theme · Text · Editing · Saving, with items grouped into boxes by topic",
+     "Better PPTX animation import — flicker effects with many overlapping entrances/exits on one object, groups and shapes with text now move as one piece instead of falling apart, slide sounds (sound effects) play, and slide transitions (fade · push · wipe · zoom · flash, etc.) carry over",
+     "Adding an animation to grouped objects now moves them together as one effect"
+    ],
+    "ja": [
+     "複数タブの選択 — Ctrl+クリックで一つずつ、Shift+クリックで範囲を選び、右クリック › 「選んだタブを結合」で順番を決めて一つの新しいタブにまとめる（元のタブはそのまま）",
+     "ページパネルを下に配置できるように — 設定 › 画面配置 › ページパネルの位置で「下」を選ぶと、サムネイルが文書の下に横並びになり、境界をドラッグして高さを調整",
+     "設定 › テーマ・文字 › UIの文字サイズを追加 — 小さく・標準・少し大きく・大きく・とても大きく（文書の文字はそのまま）",
+     "画像・図形のトリミング — オプションバーのトリミングアイコンでハンドルをドラッグして切り取り（Shift: 比率を維持）、「図形に合わせてトリミング」で円・角丸四角形・三角形・ひし形・六角形・星・ハート・吹き出しの形に",
+     "屋外・空の背景のテーマ（夏のリゾート・遊園地・童話・霧の温泉・夜のプール・霧の森・冬）に時間帯オプション — テーマストアの使用中カードまたは設定で昼・夕焼け・夜を選択",
+     "無料テーマ「冬」を追加 — 雪の丘と松の木、澄んだ冬空から静かに雪が降るすっきりした画面（雪はオフにできます）",
+     "上部ヘッダーを整理 — ボタンを少し小さくし、グループの間に区切り線を入れて見やすく",
+     "設定を画面配置・テーマ・文字・編集・保存に分け、項目をテーマごとのボックスにまとめました",
+     "PPTXアニメーションの読み込みを改善 — 一つのオブジェクトに開始・終了が何度も重なる点滅演出、グループや文字入り図形がばらけず一つにまとまって動くように、スライドのサウンド（効果音）の再生、画面切り替え（フェード・プッシュ・ワイプ・ズーム・フラッシュなど）をそのまま読み込み",
+     "グループ化したオブジェクトにアニメーションを付けると、一つの効果としてまとめて動きます"
+    ],
+    "zh": [
+     "可选择多个标签页 — Ctrl+单击逐个选择、Shift+单击选择范围，右键 › “合并所选标签页”即可设定顺序合并为一个新标签页（原标签页保留）",
+     "页面面板可放在底部 — 在 设置 › 布局 › 页面面板位置 中选择“底部”，缩略图会横向排列在文档下方，拖动边界可调整高度",
+     "新增 设置 › 主题 · 文字 › 界面文字大小 — 小 · 标准 · 稍大 · 大 · 特大（文档文字不变）",
+     "裁剪图片和形状 — 用选项栏的裁剪图标拖动控制点裁剪（Shift：保持比例），或用“裁剪为形状”裁成圆形 · 圆角矩形 · 三角形 · 菱形 · 六边形 · 星形 · 心形 · 对话框形状",
+     "户外 · 天空背景主题（夏日度假地 · 游乐园 · 童话 · 雾中温泉 · 夜晚泳池 · 雾之森 · 冬天）新增时段选项 — 在主题商店的使用中卡片或设置中选择白天 · 晚霞 · 夜晚",
+     "新增免费主题“冬天” — 积雪的山丘和松树，晴朗冬空中静静飘雪的简洁界面（可关闭下雪）",
+     "整理顶部标题栏 — 按钮略微缩小，并在各组之间加入分隔线，更易浏览",
+     "将设置拆分为 布局 · 主题 · 文字 · 编辑 · 保存，并按主题将项目分组到框中",
+     "改进 PPTX 动画导入 — 同一对象多次叠加的进入 · 退出闪烁效果、组合和带文字的形状整体移动不再散开、播放幻灯片声音（音效）、原样导入切换效果（淡入 · 推入 · 擦除 · 缩放 · 闪光等）",
+     "给组合对象添加动画时，作为一个效果整体移动"
+    ]
+   }
+  },
   {
    "v": "v1.2.1",
    "d": "2026.11.13",
@@ -545,92 +599,6 @@
      "形状工具的形状选择改为只有图形的 4×2 按钮表,新增左 · 右 · 上 · 下箭头形状(颜色 · 填充 · 线宽 · 不透明度 · 旋转照常可用)",
      "更改页眉折叠 — 标签栏右端的按钮(Ctrl+Shift+H)只折叠页眉,保留标签栏,再按同一按钮即可展开",
      "笔记上方的编号标签新增笔记类型图标 — 用编号前的图标区分 Markdown · 文本 · 画板"
-    ]
-   }
-  },
-  {
-   "v": "v1.1.1",
-   "d": "2026.10.22",
-   "items": {
-    "ko": [
-     "프리미엄 1개월 무료 체험 추가 — 계정당 한 번 · 카드 등록 없이 · 끝나도 자동으로 결제되지 않음, 헤더의 ‘1개월 무료’ 버튼 · 시작 화면 · 계정 창 · 소개 페이지 요금 안내에서 바로 시작",
-     "Google 계정으로 로그인 · 네이버 계정으로 로그인 추가 — 계정 창의 로그인 · 회원가입 탭에서 작은 창으로 로그인, 처음이면 그 계정으로 바로 가입",
-     "노트에 그림판 추가 (MD · TXT 옆) — 펜 · 형광펜 · 직선 · 지우개 · 도형(사각형 · 원 · 채우기) · 텍스트 상자 · 표, 색 · 굵기 · 실행 취소 · 크게 그리기, 아래쪽 버튼으로 PNG로 내보내기 · 현재 탭에 붙여넣기 · 새 탭으로 열기 (그림은 MPDF에 함께 저장)",
-     "그림판 확대 · 축소 추가 — Ctrl+휠(터치패드 두 손가락 벌리기 포함) · Ctrl+= / Ctrl+- 로 마우스가 있는 자리를 기준으로 100%~400%, 확대 비율 버튼 · Ctrl+0으로 100%",
-     "자동 저장 추가 (기본: 꺼짐) — 설정 › 화면 · 레이아웃 › 자동 저장에서 1 · 3 · 5 · 10분 간격 선택, 열었거나 저장한 파일은 그 파일에 바로 덮어쓰고 저장할 파일이 없으면 이 기기에 복구용으로 보관했다가 다음에 열 때 되살리기, 헤더에 자동 저장 상태 표시",
-     "형광펜 투명도 조절 추가 — 형광펜 도구와 선택한 형광펜의 옵션바에 ‘불투명’(10~100%) 추가, 형광펜마다 다른 투명도로 칠해도 겹친 곳은 진해지지 않음",
-     "새 테마 ‘놀이동산’ 추가 (프리미엄) — 맑은 하늘 아래 천천히 돌아가는 관람차 · 달리는 롤러코스터 · 회전목마 천막 · 떠오르는 풍선 · 알록달록 깃발 줄이 있는 밝은 화면 (테마 스토어에서 관람차 · 풍선 움직임 끄기 가능)",
-     "놀이동산 테마 이스터에그 — 빈 배경을 누르면 색종이가 팡, 빠르게 일곱 번 누르면 불꽃놀이와 풍선 퍼레이드",
-     "새 테마 ‘밤의 수영장’ 추가 (프리미엄) — 파란 네온 전구 줄 · 네온 간판 · 일렁이는 물결에 번지는 불빛 · 옅은 안개가 있는 고요한 밤 (테마 스토어에서 물결 · 안개 움직임 끄기 가능)",
-     "밤의 수영장 테마 이스터에그 — 빈 배경을 누르면 물결이 번지고, 빠르게 일곱 번 누르면 전구가 깜빡인 뒤 간판에 불이 켜지고 오리 튜브가 지나감",
-     "테마 스토어에 즐겨찾기 추가 — 테마 카드의 ☆ 버튼으로 담고, 왼쪽 메뉴의 ‘즐겨찾기’에서 모아 보기",
-     "테마 스토어 왼쪽 메뉴에 ‘최근 사용’ 추가 — 최근에 적용한 테마 6개를 조금 작은 카드로 모아 보기",
-     "PC: 문서 탭이 많아지면 왼쪽 탭이 사라지던 문제 수정 — 한 줄에 다 들어가지 않으면 좌우 화살표(또는 탭 위에서 마우스 휠)로 탭 줄 전체를 이동",
-     "모든 문서 탭의 너비를 똑같이 맞춤 — 탭이 많아지면 다 같이 좁아짐",
-     "모바일: 확대한 상태에서도 화면 왼쪽 · 오른쪽 끝에서 한 번 더 밀면 이전 · 다음 페이지로 이동 (끄는 동안 가장자리에 화살표로 안내)",
-     "도구 모음 기본 위치를 다시 상단 정렬로 변경 (설정 › 화면 · 레이아웃에서 좌측 정렬로 바꿀 수 있음)",
-     "업데이트 내역에서 1.0.x · 1.1.x 버전 묶음에도 오른쪽에 업데이트 요약 표시",
-     "PC 프로그램: Google · 네이버 로그인 창을 앱 안의 작은 창으로 열기"
-    ],
-    "en": [
-     "Added a 1-month free Premium trial — once per account · no card needed · no automatic payment when it ends; start it right away from the header’s “1 month free” button, the start screen, the account window or the pricing section of the intro page",
-     "Added Sign in with Google · Sign in with Naver — sign in through a small window from the Login · Sign up tabs of the account window; first-time users are signed up with that account right away",
-     "Added Paint to notes (next to MD · TXT) — pen · highlighter · line · eraser · shapes (rectangle · ellipse · fill) · text box · table, with color · width · undo · draw large; buttons below to export as PNG · paste into the current tab · open in a new tab (drawings are saved inside MPDF)",
-     "Added zoom to Paint — Ctrl+wheel (including trackpad pinch) · Ctrl+= / Ctrl+- zooms 100%–400% around the mouse pointer; the zoom button or Ctrl+0 returns to 100%",
-     "Added auto-save (off by default) — choose a 1 · 3 · 5 · 10-minute interval in Settings › Display · Layout › Auto-save; files you opened or saved are overwritten directly, otherwise a recovery copy is kept on this device and can be restored next time; auto-save status shown in the header",
-     "Added highlighter transparency — “Opacity” (10–100%) in the option bar of the highlighter tool and of a selected highlight; overlapping strokes don’t get darker even with different opacities",
-     "Added the new “Theme Park” theme (Premium) — a bright screen with a slowly turning Ferris wheel, a racing roller coaster, a carousel tent, rising balloons and colorful bunting under a clear sky (Ferris wheel · balloon motion can be turned off in the theme store)",
-     "Theme Park easter egg — tap the empty background for a confetti pop; tap seven times quickly for fireworks and a balloon parade",
-     "Added the new “Night Pool” theme (Premium) — a quiet night with strings of blue neon bulbs, a neon sign, light spreading over rippling water and a thin mist (ripple · mist motion can be turned off in the theme store)",
-     "Night Pool easter egg — tap the empty background to send out ripples; tap seven times quickly and the bulbs flicker, the sign lights up and a duck float drifts by",
-     "Added favorites to the theme store — add with the ☆ button on a theme card and view them together under “Favorites” in the left menu",
-     "Added “Recent” to the theme store’s left menu — your 6 most recently applied themes shown as slightly smaller cards",
-     "PC: fixed tabs on the left disappearing when there are many document tabs — when they don’t fit on one line, move the whole tab row with the left/right arrows (or the mouse wheel over the tabs)",
-     "All document tabs now have the same width — they all narrow together as more tabs open",
-     "Mobile: even while zoomed in, swiping once more at the left · right edge goes to the previous · next page (an arrow at the edge guides you while dragging)",
-     "Changed the default toolbar position back to the top (you can switch to the left in Settings › Display · Layout)",
-     "The update history now shows a short summary on the right for the 1.0.x · 1.1.x groups too",
-     "Desktop app: Google · Naver sign-in opens in a small window inside the app"
-    ],
-    "ja": [
-     "プレミアム1か月無料体験を追加 — アカウントごとに1回・カード登録不要・終了後も自動決済なし。ヘッダーの「1か月無料」ボタン・スタート画面・アカウント画面・紹介ページの料金案内からすぐに開始",
-     "Googleアカウントでログイン・NAVERアカウントでログインを追加 — アカウント画面のログイン・会員登録タブから小さなウィンドウでログイン、初めての場合はそのアカウントですぐ登録",
-     "ノートにペイントを追加 (MD・TXTの隣) — ペン・蛍光ペン・直線・消しゴム・図形(四角形・円・塗りつぶし)・テキストボックス・表、色・太さ・元に戻す・大きく描く、下のボタンでPNG書き出し・現在のタブに貼り付け・新しいタブで開く (絵はMPDFに一緒に保存)",
-     "ペイントの拡大・縮小を追加 — Ctrl+ホイール(タッチパッドのピンチを含む)・Ctrl+= / Ctrl+- でマウスの位置を基準に100%~400%、倍率ボタン・Ctrl+0で100%",
-     "自動保存を追加 (初期設定: オフ) — 設定 › 画面・レイアウト › 自動保存で1・3・5・10分間隔を選択、開いた・保存したファイルにはそのまま上書きし、保存先がない場合はこの端末に復元用として保管して次回開くときに復元、ヘッダーに自動保存の状態を表示",
-     "蛍光ペンの透明度調整を追加 — 蛍光ペンツールと選択した蛍光ペンのオプションバーに「不透明度」(10~100%) を追加、蛍光ペンごとに透明度が違っても重なった部分は濃くならない",
-     "新テーマ「遊園地」を追加 (プレミアム) — 青空の下でゆっくり回る観覧車・走るジェットコースター・メリーゴーラウンドのテント・浮かぶ風船・カラフルな旗が並ぶ明るい画面 (テーマストアで観覧車・風船の動きをオフにできる)",
-     "遊園地テーマのイースターエッグ — 空いた背景を押すと紙吹雪がポン、素早く7回押すと花火と風船パレード",
-     "新テーマ「夜のプール」を追加 (プレミアム) — 青いネオン電球の列・ネオン看板・揺れる水面ににじむ光・うっすらとした霧のある静かな夜 (テーマストアで水面・霧の動きをオフにできる)",
-     "夜のプールテーマのイースターエッグ — 空いた背景を押すと波紋が広がり、素早く7回押すと電球が点滅した後に看板が灯り、アヒルの浮き輪が通り過ぎる",
-     "テーマストアにお気に入りを追加 — テーマカードの☆ボタンで追加し、左メニューの「お気に入り」でまとめて表示",
-     "テーマストアの左メニューに「最近使用」を追加 — 最近適用したテーマ6個を少し小さなカードでまとめて表示",
-     "PC: 文書タブが多くなると左のタブが消える問題を修正 — 1行に収まらない場合は左右の矢印(またはタブ上のマウスホイール)でタブ列全体を移動",
-     "すべての文書タブの幅を揃えた — タブが増えるとすべて一緒に狭くなる",
-     "モバイル: 拡大した状態でも画面の左・右端でもう一度スワイプすると前・次のページへ移動 (ドラッグ中は端に矢印で案内)",
-     "ツールバーの初期位置を上揃えに戻した (設定 › 画面・レイアウトで左揃えに変更可能)",
-     "更新履歴で1.0.x・1.1.xのバージョングループにも右側に更新の要約を表示",
-     "PCアプリ: Google・NAVERのログイン画面をアプリ内の小さなウィンドウで開く"
-    ],
-    "zh": [
-     "新增高级版 1 个月免费试用 — 每个账号一次 · 无需绑卡 · 结束后不会自动扣款,可从标题栏的“1 个月免费”按钮、开始界面、账号窗口和介绍页的价格说明直接开始",
-     "新增使用 Google 账号登录 · 使用 Naver 账号登录 — 在账号窗口的登录 · 注册标签中通过小窗口登录,首次使用会直接用该账号注册",
-     "笔记新增画板 (位于 MD · TXT 旁) — 钢笔 · 荧光笔 · 直线 · 橡皮擦 · 形状(矩形 · 椭圆 · 填充)· 文本框 · 表格,支持颜色 · 粗细 · 撤销 · 放大绘制,下方按钮可导出为 PNG · 粘贴到当前标签 · 在新标签中打开 (图画随 MPDF 一起保存)",
-     "画板新增放大 · 缩小 — Ctrl+滚轮(含触控板双指缩放)· Ctrl+= / Ctrl+- 以鼠标位置为中心在 100%~400% 间缩放,缩放比例按钮 · Ctrl+0 恢复 100%",
-     "新增自动保存 (默认关闭) — 在 设置 › 画面 · 布局 › 自动保存 中选择 1 · 3 · 5 · 10 分钟间隔,已打开或保存过的文件直接覆盖保存,没有保存位置时在本设备保留恢复副本并可在下次打开时恢复,标题栏显示自动保存状态",
-     "新增荧光笔透明度调节 — 在荧光笔工具和所选荧光笔的选项栏中新增“不透明度”(10~100%),每条荧光笔透明度不同时重叠处也不会变深",
-     "新增主题“游乐园”(高级版)— 晴朗天空下缓缓转动的摩天轮 · 飞驰的过山车 · 旋转木马帐篷 · 升起的气球 · 彩色彩旗的明亮界面 (可在主题商店关闭摩天轮 · 气球动画)",
-     "游乐园主题彩蛋 — 点击空白背景会砰出彩纸,快速点击七次会出现烟花和气球巡游",
-     "新增主题“夜晚泳池”(高级版)— 蓝色霓虹灯串 · 霓虹招牌 · 荡漾水面上晕开的灯光 · 薄雾笼罩的宁静夜晚 (可在主题商店关闭水波 · 雾气动画)",
-     "夜晚泳池主题彩蛋 — 点击空白背景会泛起涟漪,快速点击七次灯泡闪烁后招牌亮起,小黄鸭泳圈漂过",
-     "主题商店新增收藏 — 用主题卡片上的 ☆ 按钮收藏,在左侧菜单的“收藏”中集中查看",
-     "主题商店左侧菜单新增“最近使用” — 以稍小的卡片集中显示最近应用的 6 个主题",
-     "PC:修复文档标签过多时左侧标签消失的问题 — 一行放不下时可用左右箭头(或在标签上滚动鼠标滚轮)移动整排标签",
-     "所有文档标签宽度一致 — 标签增多时一起变窄",
-     "移动端:放大状态下在屏幕左 · 右边缘再滑动一次即可翻到上一页 · 下一页 (拖动时边缘会显示箭头提示)",
-     "工具栏默认位置改回顶部 (可在 设置 › 画面 · 布局 中改为左侧)",
-     "更新记录中 1.0.x · 1.1.x 版本组也在右侧显示更新摘要",
-     "桌面程序:Google · Naver 登录窗口在应用内的小窗口中打开"
     ]
    }
   }
