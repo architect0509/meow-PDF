@@ -34,7 +34,7 @@ if (miss.length) console.warn('번역이 없는 변경 내역:', miss.map(x => x
 
 const out = {
   name: 'Meow-PDF', version: ver, date: top.d, site: SITE + '/',
-  download: { win: SITE + '/download/windows', mac: SITE + '/download/mac', linux: SITE + '/download/linux', page: SITE + '/#download' },
+  download: { win: SITE + '/download/windows', mac: SITE + '/download/mac', linux: SITE + '/download/linux', page: SITE + '/apps' },
   history
 };
 fs.writeFileSync(OUT, JSON.stringify(out, null, 1) + '\n');

@@ -1,15 +1,53 @@
 {
  "name": "Meow-PDF",
- "version": "v1.2.2",
+ "version": "v1.2.3",
  "date": "2026.11.13",
  "site": "https://www.meow-pdf.com/",
  "download": {
   "win": "https://www.meow-pdf.com/download/windows",
   "mac": "https://www.meow-pdf.com/download/mac",
   "linux": "https://www.meow-pdf.com/download/linux",
-  "page": "https://www.meow-pdf.com/#download"
+  "page": "https://www.meow-pdf.com/apps"
  },
  "history": [
+  {
+   "v": "v1.2.3",
+   "d": "2026.11.13",
+   "items": {
+    "ko": [
+     "모바일 리모컨 추가 — 같은 계정으로 PC와 휴대폰에 함께 로그인하면 휴대폰(세로로 긴 화면)에서 ‘PC 리모컨’으로 전환해 큰 이전 · 다음 버튼으로 PC 발표 넘기기",
+     "리모컨 화면에 PC의 지금 페이지를 보여 주고, 누르고 있는 자리를 PC 화면에 연한 레이저로 실시간 표시 · 리모컨에서 발표 시작 · 끝내기",
+     "휴대폰 홈 화면에 설치한 앱에서도 새 버전이 나오면 알림 — ‘업데이트’를 누르면 새 버전으로 다시 열림",
+     "소개 페이지에 모바일 앱 설치 추가 — Android는 바로 설치, iPhone · iPad는 홈 화면에 추가하는 방법 안내",
+     "설정에 ‘PC 리모컨’ 추가 — 이 기기와 같은 계정으로 접속한 기기(PC · 휴대폰 · 발표 중 · 페이지)를 보여 주고, ‘리모컨 모드 열기’로 PC가 없어도 리모컨 화면을 열어 테스트",
+     "소개 페이지를 여러 페이지로 나눔 — 제품 · 사용법 · 다운로드 · 소식 펼침 메뉴(최신 업데이트 카드 포함), 주요 기능 · 사용법 · 다운로드 · 요금 · 자주 묻는 질문 · 업데이트 소식 페이지"
+    ],
+    "en": [
+     "Added a mobile remote — sign in to the same account on a PC and a phone, then switch the phone (a tall screen) to ‘PC remote’ and flip through the PC presentation with large Previous · Next buttons",
+     "The remote shows the PC's current page, and the spot you're pressing appears on the PC screen as a soft laser in real time · start and end the presentation from the remote",
+     "The app installed on a phone's home screen now also notifies you of new versions — tap ‘Update’ to reopen in the new version",
+     "Added mobile app install to the intro page — install directly on Android, with a guide for adding to the home screen on iPhone · iPad",
+     "Added ‘PC remote’ to Settings — shows this device and the devices signed in with the same account (PC · phone · presenting · page), and ‘Open remote mode’ opens the remote screen for testing even without a PC",
+     "Split the intro site into several pages — Product · Guide · Download · News drop-down menus (with latest update cards), plus Features · Guide · Download · Pricing · FAQ · Updates pages"
+    ],
+    "ja": [
+     "モバイルリモコンを追加 — PCとスマホに同じアカウントでログインすると、スマホ（縦長の画面）で「PCリモコン」に切り替え、大きな前へ · 次へボタンでPCの発表を進める",
+     "リモコン画面にPCの現在のページを表示し、押している場所をPC画面に淡いレーザーでリアルタイム表示 · リモコンから発表の開始 · 終了",
+     "スマホのホーム画面にインストールしたアプリでも新しいバージョンを通知 — 「アップデート」を押すと新しいバージョンで開き直す",
+     "紹介ページにモバイルアプリのインストールを追加 — Androidはそのままインストール、iPhone · iPadはホーム画面に追加する方法を案内",
+     "設定に「PCリモコン」を追加 — この端末と同じアカウントで接続している端末（PC · スマホ · 発表中 · ページ）を表示し、「リモコンモードを開く」でPCがなくてもリモコン画面を開いてテスト",
+     "紹介ページを複数のページに分割 — 製品 · 使い方 · ダウンロード · お知らせのドロップダウンメニュー（最新アップデートカード付き）と、主な機能 · 使い方 · ダウンロード · 料金 · よくある質問 · アップデート情報ページ"
+    ],
+    "zh": [
+     "新增手机遥控器 — 在电脑和手机上登录同一账号后，手机（竖长屏幕）可切换为“电脑遥控器”，用大号的上一页 · 下一页按钮翻动电脑上的演示",
+     "遥控器画面显示电脑当前页面，按住的位置会以淡淡的激光点实时显示在电脑屏幕上 · 可在遥控器上开始 · 结束演示",
+     "安装到手机主屏幕的应用也会提示新版本 — 点击“更新”即以新版本重新打开",
+     "介绍页新增手机应用安装 — Android 可直接安装，iPhone · iPad 提供添加到主屏幕的方法说明",
+     "设置中新增“电脑遥控器” — 显示本设备和使用同一账号连接的设备（电脑 · 手机 · 演示中 · 页码），点击“打开遥控模式”即使没有电脑也能打开遥控器界面进行测试",
+     "把介绍网站拆分为多个页面 — 产品 · 使用方法 · 下载 · 动态下拉菜单（含最新更新卡片），以及主要功能 · 使用方法 · 下载 · 价格 · 常见问题 · 更新动态页面"
+    ]
+   }
+  },
   {
    "v": "v1.2.2",
    "d": "2026.11.13",
@@ -565,40 +603,6 @@
      "便签新增标题 — 在标题栏直接输入(留空则以第一行为标题),折叠后只剩一个小圆点,点击展开 · 拖动移动 · 鼠标悬停显示便签标题",
      "移动端演示新增工具栏 — 用遥控器的 ▲ 按钮展开和折叠工具栏,可使用 高亮 · 绘图 · 直线 · 橡皮擦 · 形状 · 文本 · 激光笔 · 撤销(折叠或关闭工具后可再次滑动翻页)",
      "在 设置 › 版本信息 中新增前往 Thaniya.co.kr 的按钮(设置左下角版本号旁也有链接)"
-    ]
-   }
-  },
-  {
-   "v": "v1.1.2",
-   "d": "2026.10.23",
-   "items": {
-    "ko": [
-     "그리기 도구에 획 보정 추가 (기본: 켜짐) — 손을 떼면 ‘ㅇ’처럼 닫힌 고리는 반듯한 원으로, ㅁ · ㄷ · ㄹ처럼 꺾인 획은 곧은 선과 뾰족한 모서리로, 그 밖의 곡선은 부드럽게 다듬음 (영문 ‘e’는 원으로 바꾸지 않음), 옵션바의 ‘획 보정 / 끄기’로 켜고 끄기 · 노트 그림판의 펜에도 ‘보정’ 단추 추가",
-     "옵션바의 색상 · 채우기를 작은 색 단추로 변경 — 누르면 색 선택 창이 열리고 추천 색 · 기본 색 96가지 · 최근 사용 10개 · 사용자 지정 · HEX 입력 · 스포이드 사용 가능 (스포이드로 찍는 동안에는 창이 잠깐 숨음), 옵션바가 차지하는 너비가 크게 줄어듦",
-     "도형 도구의 도형 고르기를 모양만 있는 4×2 단추 표로 변경, 왼쪽 · 오른쪽 · 위쪽 · 아래쪽 화살표 도형 추가 (색상 · 채우기 · 선 굵기 · 불투명도 · 회전 그대로 사용)",
-     "헤더 접기 변경 — 탭바 오른쪽 끝 버튼(Ctrl+Shift+H)이 헤더만 접고 탭바는 그대로 남김, 같은 버튼으로 다시 펼침",
-     "노트 위쪽 번호 탭에 노트 종류 아이콘 추가 — 번호 앞 아이콘으로 마크다운 · 텍스트 · 그림판 구분"
-    ],
-    "en": [
-     "Added stroke correction to the Pen tool (on by default) — when you lift the pen, closed loops like ‘ㅇ’ become clean circles, angular strokes like ㅁ · ㄷ · ㄹ become straight lines with sharp corners, and other curves are smoothed (a handwritten ‘e’ is never turned into a circle); toggle it with ‘Stroke correction / Off’ in the options bar · also added a ‘Correct’ button to the Paint note’s pen",
-     "Color and fill in the options bar are now a small color button — it opens a color window with suggested colors · 96 basic colors · 10 recent colors · custom color · HEX input · eyedropper (the window hides briefly while you pick with the eyedropper), so the options bar takes up much less width",
-     "The shape picker in the Shape tool is now a 4×2 grid of icon-only buttons, and left · right · up · down arrow shapes were added (color · fill · line width · opacity · rotation all work as usual)",
-     "Changed header folding — the button at the right end of the tab bar (Ctrl+Shift+H) now folds only the header and keeps the tab bar; press the same button to unfold",
-     "Added note-type icons to the numbered note tabs — an icon before each number shows Markdown · Text · Paint"
-    ],
-    "ja": [
-     "描画ツールにストローク補正を追加(既定: オン)— ペンを離すと「ㅇ」のような閉じた輪はきれいな円に、ㅁ · ㄷ · ㄹ のように折れる線はまっすぐな線と鋭い角に、その他の曲線はなめらかに整える(英字「e」は円にしない)、オプションバーの「ストローク補正 / オフ」で切り替え · ノートのペイントのペンにも「補正」ボタンを追加",
-     "オプションバーの色 · 塗りつぶしを小さな色ボタンに変更 — 押すと色選択ウィンドウが開き、おすすめの色 · 基本色96色 · 最近使った色10個 · ユーザー設定 · HEX入力 · スポイトが使える(スポイトで取る間はウィンドウが一時的に隠れる)、オプションバーの幅が大きく縮小",
-     "図形ツールの図形選択を形だけの 4×2 ボタン表に変更、左 · 右 · 上 · 下 矢印の図形を追加(色 · 塗りつぶし · 線の太さ · 不透明度 · 回転もそのまま使用可能)",
-     "ヘッダーの折りたたみを変更 — タブバー右端のボタン(Ctrl+Shift+H)はヘッダーだけを折りたたみ、タブバーはそのまま、同じボタンで再び展開",
-     "ノート上部の番号タブにノートの種類アイコンを追加 — 番号の前のアイコンでマークダウン · テキスト · ペイントを区別"
-    ],
-    "zh": [
-     "绘图工具新增笔画校正(默认: 开启)— 抬笔时,像「ㅇ」这样的闭合圈会变成标准的圆,像 ㅁ · ㄷ · ㄹ 这样有转折的笔画会变成直线和尖角,其他曲线会变得平滑(英文「e」不会变成圆),可用选项栏的「笔画校正 / 关闭」切换 · 笔记画板的笔也新增「校正」按钮",
-     "选项栏的颜色 · 填充改为小的颜色按钮 — 点击后打开颜色选择窗口,可使用推荐颜色 · 96 种基本颜色 · 最近使用的 10 种 · 自定义 · HEX 输入 · 吸管(用吸管取色时窗口会暂时隐藏),选项栏占用的宽度大幅减少",
-     "形状工具的形状选择改为只有图形的 4×2 按钮表,新增左 · 右 · 上 · 下箭头形状(颜色 · 填充 · 线宽 · 不透明度 · 旋转照常可用)",
-     "更改页眉折叠 — 标签栏右端的按钮(Ctrl+Shift+H)只折叠页眉,保留标签栏,再按同一按钮即可展开",
-     "笔记上方的编号标签新增笔记类型图标 — 用编号前的图标区分 Markdown · 文本 · 画板"
     ]
    }
   }
