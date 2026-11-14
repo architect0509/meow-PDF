@@ -1,7 +1,7 @@
 {
  "name": "Meow-PDF",
- "version": "v1.2.4",
- "date": "2026.11.13",
+ "version": "v1.2.5",
+ "date": "2026.11.14",
  "site": "https://www.meow-pdf.com/",
  "download": {
   "win": "https://www.meow-pdf.com/download/windows",
@@ -10,6 +10,84 @@
   "page": "https://www.meow-pdf.com/apps"
  },
  "history": [
+  {
+   "v": "v1.2.5",
+   "d": "2026.11.14",
+   "items": {
+    "ko": [
+     "페이지 패널 우클릭 메뉴에 ‘새 폴더 만들기’ 추가 — 고른 페이지를 (떨어져 있어도) 모아 새 폴더에 담고 바로 이름 정하기",
+     "페이지 패널에서 여러 장을 골라 끌면 함께 옮겨지기 — 폴더 머리에 놓으면 고른 페이지가 모두 폴더 안으로",
+     "페이지 패널 목록으로 보기에서 고른 페이지 위에 뜨던 번호 없앰 · 폴더 안 썸네일을 조금 더 크게",
+     "애니메이션 패널 위에 ‘애니메이션 | 전환’ 탭 — 전환 탭에서 페이지마다 화면 전환(페이드 · 밀어내기 · 닦아내기 · 나누기 · 원형 · 확대 · 섬광)과 방향 · 시간, 정한 시간 뒤 자동으로 다음 페이지, 모든 페이지에 적용",
+     "애니메이션 순서 목록에서 효과 이름을 개체 이름 옆 한 줄로 — 목록이 덜 길어져요",
+     "이동 경로의 출발점(초록) · 도착점(빨강)을 끌어서 옮기기 — 반대쪽 끝은 그대로 두고 경로를 늘리고 돌려요 (Shift: 45°씩 · Esc: 취소)",
+     "배경 테마의 낮 · 노을 · 밤에 따라 도구 모음 · 패널 · 메뉴 밝기도 함께 바뀜",
+     "도형 · 직선 · 화살표를 처음 그리는 동안에도 스마트 안내선으로 다른 개체 · 페이지 가장자리에 맞춤 (Alt: 끄기)",
+     "좌측 정렬 도구 모음: 버튼을 조금 더 작게, 캡처 · 발표 · 대본을 도구 모음에 바로 — 세로가 모자라면 버튼을 더 작게 줄이고, 그래도 모자라면 아래 도구부터 하나씩 ‘더보기’로",
+     "한 페이지씩 보기에서 마우스 휠 한 칸에 조금씩 · 부드럽게 움직이기",
+     "발표 중 Ctrl+휠로 확대하면 선택 도구로 끌어서 화면 옮기기 (끌지 않고 누르면 다음)",
+     "대본에서 일부 글자에 밑줄 — 글자를 골라 U 버튼 또는 Ctrl+U (다시 누르면 지워요)",
+     "모바일: 왼쪽 위 고양이 아이콘을 누르면 메인 화면으로 — 저장하지 않은 변경이 있으면 저장할지 먼저 물어봐요",
+     "리모컨 키 — PC의 설정 › PC 리모컨에서 숫자 4자리 키를 발급하면 로그인하지 않은 휴대폰도 키를 넣어 연결 (처음 연결한 휴대폰 1대만 등록 · 등록 해제 · 키 끄기)",
+     "모바일 메인 화면에 ‘리모컨 연결하기’ — 키로 연결 · 계정으로 연결 (같은 계정의 PC가 없으면 흐리게)",
+     "멀티작업 메인의 9개 버튼 바깥에 여백 · 버튼이 작아지면 아이콘과 글자도 함께 작게"
+    ],
+    "en": [
+     "Added ‘New folder’ to the page panel's right-click menu — gathers the selected pages (even if apart) into a new folder and lets you name it right away",
+     "Drag several selected pages at once in the page panel — drop them on a folder header to move them all into the folder",
+     "Removed the number shown over the selected page in list view · Thumbnails inside folders are a bit larger",
+     "‘Animation | Transition’ tabs at the top of the animation panel — set a transition for each page (fade, push, wipe, split, circle, zoom, flash) with direction and duration, auto-advance after a set time, and apply to all pages",
+     "In the animation order list, the effect name now sits next to the object name on one line — the list is shorter",
+     "Drag the start (green) and end (red) points of a motion path — the other end stays put while the path stretches and turns (Shift: 45° steps · Esc: cancel)",
+     "The toolbar, panels and menus now follow the theme's day · sunset · night brightness too",
+     "Smart guides now also appear while you first draw a shape, line or arrow, snapping to other objects and page edges (Alt: off)",
+     "Left toolbar: slightly smaller buttons, with Capture · Present · Script right on the toolbar — when height runs short the buttons shrink further, then tools move into ‘More’ one by one from the bottom",
+     "In single-page view, each mouse-wheel notch now scrolls a smaller, smoother step",
+     "While presenting, after zooming with Ctrl+wheel you can drag the view with the Select tool (a click without dragging still goes next)",
+     "Underline parts of your script — select text and press the U button or Ctrl+U (press again to remove)",
+     "Mobile: tapping the cat icon at the top left goes to the main screen — if there are unsaved changes, you're asked whether to save first",
+     "Remote key — issue a 4-digit key in Settings › PC remote on the PC, and even a phone that isn't signed in can connect by entering it (only the first phone to connect is registered · unregister · turn key off)",
+     "‘Connect remote’ on the mobile main screen — connect with a key or with your account (dimmed when no PC is signed in to the same account)",
+     "Added margin around the 9 buttons on the Multitask home · Icons and labels now shrink along with the buttons"
+    ],
+    "ja": [
+     "ページパネルの右クリックメニューに「新しいフォルダー」を追加 — 選んだページを（離れていても）集めて新しいフォルダーに入れ、すぐに名前を付けられます",
+     "ページパネルで複数のページを選んでまとめてドラッグ — フォルダーの見出しにドロップすると全部フォルダーに入ります",
+     "リスト表示で選択中のページに出ていた番号を削除 · フォルダー内のサムネイルを少し大きく",
+     "アニメーションパネル上部に「アニメーション | 画面切り替え」タブ — ページごとに画面切り替え（フェード・プッシュ・ワイプ・スプリット・円形・ズーム・フラッシュ）と方向・時間、指定時間後に自動で次のページ、全ページに適用",
+     "アニメーションの順序リストで効果名をオブジェクト名の横の1行に — リストが短くなります",
+     "モーションパスの始点（緑）・終点（赤）をドラッグで移動 — 反対側の端はそのままでパスを伸ばして回転（Shift: 45°刻み・Esc: キャンセル）",
+     "背景テーマの昼・夕焼け・夜に合わせてツールバー・パネル・メニューの明るさも変化",
+     "図形・直線・矢印を最初に描いている間もスマートガイドで他のオブジェクトやページの端に合わせます（Alt: オフ）",
+     "左揃えツールバー: ボタンを少し小さくし、キャプチャ・発表・台本をツールバーに直接配置 — 高さが足りないとボタンをさらに小さくし、それでも足りなければ下のツールから1つずつ「その他」へ",
+     "1ページずつ表示でマウスホイール1目盛りごとに少しずつ・なめらかに移動",
+     "発表中に Ctrl+ホイールで拡大したら選択ツールでドラッグして画面を移動（ドラッグせずにクリックすると次へ）",
+     "台本の一部に下線 — 文字を選んで U ボタンまたは Ctrl+U（もう一度押すと解除）",
+     "モバイル: 左上の猫アイコンでメイン画面へ — 未保存の変更があれば先に保存するか確認します",
+     "リモコンキー — PC の設定 › PC リモコンで4桁のキーを発行すると、ログインしていないスマホもキーを入力して接続（最初に接続した1台のみ登録・登録解除・キーをオフ）",
+     "モバイルのメイン画面に「リモコンを接続」 — キーで接続・アカウントで接続（同じアカウントの PC がなければグレー表示）",
+     "マルチタスクのメインにある9つのボタンの外側に余白 · ボタンが小さくなるとアイコンと文字も小さく"
+    ],
+    "zh": [
+     "页面面板右键菜单新增“新建文件夹” — 将所选页面（即使不相邻）集中放入新文件夹并立即命名",
+     "在页面面板中选中多页可一起拖动 — 拖到文件夹标题上即可全部移入该文件夹",
+     "列表视图中不再在所选页面上显示编号 · 文件夹内的缩略图稍微放大",
+     "动画面板顶部新增“动画 | 切换”选项卡 — 为每页设置切换效果（淡入、推入、擦除、分割、圆形、缩放、闪光）及方向和时长，可在指定时间后自动翻页，并可应用到所有页面",
+     "动画顺序列表中效果名称显示在对象名称旁的同一行 — 列表更紧凑",
+     "可拖动动作路径的起点（绿）和终点（红） — 另一端保持不动，路径随之拉伸和旋转（Shift：每 45° · Esc：取消）",
+     "工具栏、面板和菜单的亮度也会随主题的白天 · 黄昏 · 夜晚变化",
+     "首次绘制形状、直线和箭头时也会显示智能参考线，对齐其他对象和页面边缘（Alt：关闭）",
+     "左侧工具栏：按钮略微缩小，截图 · 演示 · 讲稿直接放在工具栏上 — 高度不足时按钮进一步缩小，仍不够则从下方工具开始逐个移入“更多”",
+     "单页视图中鼠标滚轮每格滚动更少、更平滑",
+     "演示时用 Ctrl+滚轮放大后，可用选择工具拖动画面（不拖动直接点击仍为下一步）",
+     "讲稿中可为部分文字加下划线 — 选中文字后按 U 按钮或 Ctrl+U（再按一次取消）",
+     "移动端：点击左上角的猫图标返回主界面 — 若有未保存的更改，会先询问是否保存",
+     "遥控器密钥 — 在电脑的设置 › 电脑遥控器中生成 4 位数字密钥，未登录的手机输入密钥也能连接（仅登记首次连接的一部手机 · 可取消登记 · 关闭密钥）",
+     "移动端主界面新增“连接遥控器” — 通过密钥连接或通过账号连接（同一账号下没有电脑时变灰）",
+     "多任务主页的 9 个按钮外侧增加留白 · 按钮变小时图标和文字也随之缩小"
+    ]
+   }
+  },
   {
    "v": "v1.2.4",
    "d": "2026.11.13",
@@ -541,76 +619,6 @@
      "将工具栏中的“接触选择”更名为“选择”",
      "展开的便签可拖动标题与按钮之间的空白处来移动（标题栏宽度随文字长度）",
      "数字化和全部数字化过程中可用“取消”按钮（或 Esc）中止 — 取消后文档保持不变"
-    ]
-   }
-  },
-  {
-   "v": "v1.1.4",
-   "d": "2026.10.24",
-   "items": {
-    "ko": [
-     "모바일: 확대한 채로 페이지를 넘기면 보던 위치 그대로 이전 · 다음 페이지로 넘어가게 개선 (예전: 다음 장은 위로, 이전 장은 아래로 화면이 튀었음)",
-     "발표 모드: 도형을 그릴 때 배경색(채우기)도 고를 수 있게 함 — 도형 도구의 ‘배경’ 줄에서 색 · 투명 · 다른 색 선택",
-     "발표를 마치고 나갈 때 발표 중 그리거나 적은 내용을 문서에 반영할지 물어봄 — 반영하지 않으면 발표 전 상태로 되돌리고, 실행 취소로 다시 살릴 수 있음",
-     "그리기 도구에 손떨림 보정 추가 (끔 · 약 · 중 · 강) — 펜 끝이 천천히 따라오며 잔떨림을 걸러 줌, 그림판 노트에도 추가",
-     "그리기 도구의 획 보정 기본값을 ‘끄기’로 변경",
-     "둥근 사각형 모서리를 PPT처럼 조절 — 도형을 고르면 위쪽 변에 생기는 노란 점을 좌우로 끌어 둥근 정도를 바꿈 (옵션바 슬라이더 대신)",
-     "페이지 패널 우클릭 메뉴에 ‘배경 색 바꾸기’ 추가 — 화면 · 썸네일 · 저장한 PDF · 인쇄에 모두 반영되고, 원래 글자와 그림은 그대로 보이게 칠함",
-     "페이지 패널 우클릭 메뉴에 ‘그룹에 넣기’(그룹을 골라 넣기) · ‘그룹에서 빼기’ 추가 — 여러 페이지를 골라 둔 상태면 한꺼번에",
-     "그룹 설정 추가 (그룹 머리의 톱니 · 우클릭) — 이름 바꾸기 · 폴더 색 바꾸기 · 페이지 패널 맨 위에 고정을 한곳에서 (고정은 패널에서만 위에 보이고 문서의 페이지 순서는 그대로)",
-     "그룹을 펼쳤을 때 그룹 안 페이지 썸네일을 작게 표시해 그룹과 나머지 페이지가 한눈에 구분되게 함",
-     "빈 페이지 추가 · 기존 파일 불러오기: 그룹이 닫혀 있으면 그룹 밖(그룹 바로 뒤)에 페이지를 추가",
-     "메인 탭에 ‘최근에 연 파일’ 추가 — 최근 파일을 다시 열고, 기록에서 삭제하고, PC 프로그램에서는 파일 위치(탐색기 · Finder)를 열 수 있음",
-     "모바일 시작 화면의 파일 열기 · 빈 문서로 시작 · 파일 병합 · 파일 압축 버튼을 조금 작게 줄임",
-     "검색 결과에 보일 정사각형 썸네일 추가"
-    ],
-    "en": [
-     "Mobile: flipping pages while zoomed in now keeps your current view position on the next or previous page (before, the next page jumped to the top and the previous page to the bottom)",
-     "Presentation mode: you can now pick a background (fill) color when drawing shapes — choose a color, transparent or a custom color in the shape tool’s ‘Fill’ row",
-     "When you leave a presentation, you’re asked whether to keep what you drew or wrote during it — if you don’t, the document goes back to how it was before the presentation (Undo brings it back)",
-     "Added a stabilizer to the Draw tool (Off · Low · Mid · High) — the pen tip follows smoothly and filters out hand jitter; also added to Paint notes",
-     "Stroke correction in the Draw tool is now off by default",
-     "Rounded rectangle corners now work like PowerPoint — select the shape and drag the yellow dot on its top edge left or right to change the roundness (replaces the options bar slider)",
-     "Added ‘Change background color’ to the page panel right-click menu — applied on screen, in thumbnails, saved PDFs and printouts, while the original text and images stay visible",
-     "Added ‘Add to group’ (choose a group) and ‘Remove from group’ to the page panel right-click menu — works on all selected pages at once",
-     "Added group settings (gear on the group header · right-click) — rename, change the folder color and pin the group to the top of the page panel (only the panel shows it on top; the page order in the document stays the same)",
-     "When a group is expanded, the page thumbnails inside it are shown smaller so groups stand out from the other pages",
-     "Add blank page · Import existing file: if the group is collapsed, the page is added outside the group (right after it)",
-     "Added ‘Recent files’ to the main tab — reopen recent files, remove them from the history, and in the desktop app open the file location (Explorer · Finder)",
-     "Made the Open file · Start blank · Merge files · Compress file buttons a bit smaller on the mobile start screen",
-     "Added a square thumbnail for search results"
-    ],
-    "ja": [
-     "モバイル：拡大したままページをめくると、見ていた位置のまま前後のページに移るよう改善（以前は次のページは上、前のページは下に画面が飛んでいました）",
-     "プレゼンモード：図形を描くときに背景色（塗りつぶし）も選べるように — 図形ツールの「背景」行で色・透明・その他の色を選択",
-     "プレゼンを終えて出るときに、発表中に描いたり書いたりした内容を文書に反映するか確認 — 反映しない場合は発表前の状態に戻し、元に戻すで復元できます",
-     "描画ツールに手ぶれ補正を追加（オフ・弱・中・強）— ペン先がゆっくり追従して細かな手ぶれを抑えます。ペイントノートにも追加",
-     "描画ツールのストローク補正の初期値を「オフ」に変更",
-     "角丸四角形の角をPPTのように調整 — 図形を選ぶと上辺に出る黄色い点を左右にドラッグして丸みを変更（オプションバーのスライダーの代わり）",
-     "ページパネルの右クリックメニューに「背景色を変更」を追加 — 画面・サムネイル・保存したPDF・印刷すべてに反映され、元の文字や画像はそのまま見えるように塗ります",
-     "ページパネルの右クリックメニューに「グループに入れる」（グループを選択）・「グループから出す」を追加 — 複数ページを選んでいればまとめて",
-     "グループ設定を追加（グループ見出しの歯車・右クリック）— 名前の変更・フォルダーの色の変更・ページパネルの一番上に固定（パネルでだけ上に表示され、文書のページ順はそのまま）",
-     "グループを開いたとき、グループ内のページのサムネイルを小さく表示して、ほかのページと一目で区別できるように",
-     "空白ページを追加・既存ファイルを読み込む：グループが閉じていれば、グループの外（グループの直後）にページを追加",
-     "メインタブに「最近開いたファイル」を追加 — 最近のファイルを再び開いたり、履歴から削除したり、PCアプリではファイルの場所（エクスプローラー・Finder）を開けます",
-     "モバイルのスタート画面の「ファイルを開く・空白から始める・ファイル結合・ファイル圧縮」ボタンを少し小さく",
-     "検索結果に表示される正方形のサムネイルを追加"
-    ],
-    "zh": [
-     "移动端：放大状态下翻页时，会保持当前查看位置切换到上一页或下一页（以前下一页会跳到顶部、上一页会跳到底部）",
-     "演示模式：绘制形状时也可以选择背景色（填充）— 在形状工具的“背景”一行中选择颜色、透明或其他颜色",
-     "结束演示退出时，会询问是否将演示中绘制或书写的内容保留到文档 — 不保留则恢复到演示前的状态，可用撤销找回",
-     "绘图工具新增防抖（关 · 弱 · 中 · 强）— 笔尖平滑跟随，过滤手部抖动；画板笔记也已加入",
-     "绘图工具的笔画校正默认改为“关闭”",
-     "圆角矩形的圆角可像 PPT 一样调整 — 选中形状后，左右拖动上边缘的黄色圆点即可改变圆角程度（取代选项栏滑块）",
-     "页面面板右键菜单新增“更改背景颜色”— 屏幕、缩略图、保存的 PDF 和打印均会生效，原有文字和图片仍清晰可见",
-     "页面面板右键菜单新增“加入分组”（选择分组）和“移出分组”— 选中多页时可一次处理",
-     "新增分组设置（分组标题上的齿轮 · 右键）— 重命名、更改文件夹颜色、固定到页面面板顶部（仅在面板中显示在顶部，文档页面顺序不变）",
-     "展开分组时，分组内的页面缩略图显示得更小，便于与其他页面区分",
-     "添加空白页 · 导入现有文件：分组折叠时，页面会添加到分组外（紧接分组之后）",
-     "主标签页新增“最近打开的文件”— 可重新打开最近的文件、从记录中删除，在桌面程序中还可打开文件位置（资源管理器 · Finder）",
-     "移动端开始界面的“打开文件 · 从空白文档开始 · 合并文件 · 压缩文件”按钮略微缩小",
-     "新增用于搜索结果的正方形缩略图"
     ]
    }
   }
