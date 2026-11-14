@@ -4,6 +4,7 @@
  *  - 토스페이먼츠 일반 결제로 1개월 1,200원 / 1년 10,500원 이용권 판매. 시크릿 키는 이 서버에만 존재
  *  - v1.0.3 구독(자동결제)에서 이용권(한 번 결제)으로 다시 바꿨어요 — 자동으로 다시 결제되지 않아요.
  *  - 결제가 승인되면 Supabase users_profile.premium_until 을 1개월/1년 연장 (남은 기간이 있으면 그 뒤에 이어 붙여요)
+ *  - v1.2.6 디지털화 글자 인식 POST /api/ocr — Google Cloud Vision(문서 글자 인식). 키: GOOGLE_VISION_API_KEY (없으면 GOOGLE_TRANSLATE_API_KEY)
  *  - v1.1.1 프리미엄 1개월 무료 체험(계정당 한 번, POST /api/trial/start) · 네이버 계정으로 로그인(/auth/naver/start → /auth/naver/callback)
  *
  * 흐름: POST /api/create-order {plan} → /pay 팝업(토스 결제창) → /payment/success → POST /api/confirm-payment
@@ -50,7 +51,8 @@ const ready = () => !!SUPABASE_SERVICE_KEY;
 /* ─────────── 유틸 ─────────── */
 const app = express();
 app.disable('x-powered-by');
-app.use(express.json({ limit: '20kb' }));
+const json20 = express.json({ limit: '20kb' });
+app.use((req, res, next) => (req.path === '/api/ocr' ? next() : json20(req, res, next)));   // v1.2.6 글자 인식은 그림을 받아서 따로 (아래 15MB)
 
 // CORS: 앱(HTML 파일 / 다른 주소)에서 호출할 수 있게. 쿠키를 쓰지 않고 Bearer 토큰만 쓰므로 안전해요.
 app.use((req, res, next) => {
@@ -398,6 +400,64 @@ async function myMemoryAll(texts, source, target) {
   await Promise.all(Array.from({ length: Math.min(4, jobs.length) }, worker));
   return res.map(r => r.join(glue));
 }
+
+/* ═══ v1.2.6 디지털화 글자 인식 (Google Cloud Vision · DOCUMENT_TEXT_DETECTION) ═══
+   편집기는 페이지 그림(JPEG)을 보내고, 낱말마다 글자 · 상자 · 확신도 · 줄바꿈 정보 · 문단 번호를 받아요.
+   - 키: GOOGLE_VISION_API_KEY (없으면 GOOGLE_TRANSLATE_API_KEY를 그대로 써요 — 같은 Google Cloud 프로젝트에서 Cloud Vision API를 ‘사용’으로 켜 주세요)
+   - 로그인한 계정만 · 계정당 하루 OCR_DAILY_LIMIT쪽(기본 300) · IP당 분당 20회
+   - 키가 없으면 enabled:false → 편집기는 기기 안 인식(Tesseract)으로 해요 */
+const GOOGLE_VISION_API_KEY = (process.env.GOOGLE_VISION_API_KEY || process.env.GOOGLE_TRANSLATE_API_KEY || '').trim();
+const OCR_DAILY = Math.max(1, Number(process.env.OCR_DAILY_LIMIT || 300));
+const ocrDay = new Map(), ocrHits = new Map();
+setInterval(() => ocrHits.clear(), 60 * 1000).unref();
+setInterval(() => { const d = new Date().toISOString().slice(0, 10); for (const k of ocrDay.keys()) if (!k.endsWith(d)) ocrDay.delete(k); }, 60 * 60 * 1000).unref();
+app.get('/api/ocr', (req, res) => res.json({ success: true, enabled: !!GOOGLE_VISION_API_KEY, engine: 'google-vision' }));
+app.post('/api/ocr', (req, res, next) => {
+  const ip = req.ip || 'x', n = (ocrHits.get(ip) || 0) + 1; ocrHits.set(ip, n);
+  if (n > 20) return res.status(429).json({ success: false, message: '글자 인식 요청이 너무 많아요. 잠시 후 다시 시도해 주세요.' });
+  next();
+}, express.json({ limit: '15mb' }), async (req, res) => {
+  if (!GOOGLE_VISION_API_KEY) return res.status(501).json({ success: false, disabled: true, message: '서버에 글자 인식 키가 없어요. (GOOGLE_VISION_API_KEY)' });
+  const user = await authed(req, res); if (!user) return;
+  const b = req.body || {}, img = String(b.image || '').replace(/^data:[^,]+,/, '');
+  if (!img || img.length < 100 || img.length > 14 * 1024 * 1024 || !/^[A-Za-z0-9+/=]+$/.test(img.slice(0, 200))) return res.status(400).json({ success: false, message: '그림이 올바르지 않아요.' });
+  const langs = (Array.isArray(b.langs) ? b.langs : ['ko', 'en']).map(String).filter(l => /^[a-z]{2}(-[A-Za-z]{2,4})?$/.test(l)).slice(0, 4);
+  const dk = user.id + ':' + new Date().toISOString().slice(0, 10), used = ocrDay.get(dk) || 0;
+  if (used >= OCR_DAILY) return res.status(429).json({ success: false, quota: true, message: `오늘의 정밀 글자 인식(${OCR_DAILY}쪽)을 다 썼어요. 내일 다시 쓰거나 기기 안 인식으로 해 주세요.` });
+  ocrDay.set(dk, used + 1);
+  try {
+    const r = await axios.post('https://vision.googleapis.com/v1/images:annotate?key=' + encodeURIComponent(GOOGLE_VISION_API_KEY),
+      { requests: [{ image: { content: img }, features: [{ type: 'DOCUMENT_TEXT_DETECTION' }], imageContext: { languageHints: langs.length ? langs : undefined } }] },
+      { timeout: 45000, maxBodyLength: 20 * 1024 * 1024 });
+    const R = (r.data.responses || [])[0] || {};
+    if (R.error) throw Object.assign(new Error(R.error.message || 'vision error'), { vision: R.error });
+    const fa = R.fullTextAnnotation, words = [];
+    const box = bp => { const v = (bp && (bp.vertices || [])) || []; const xs = v.map(q => q.x || 0), ys = v.map(q => q.y || 0); return xs.length ? [Math.min(...xs), Math.min(...ys), Math.max(...xs), Math.max(...ys)] : null; };
+    let W = 0, H = 0, pi = 0, bi = 0;
+    for (const pg of (fa && fa.pages) || []) {
+      W = pg.width || W; H = pg.height || H;
+      for (const bl of pg.blocks || []) {
+        bi++;
+        if (bl.blockType && bl.blockType !== 'TEXT' && bl.blockType !== 'TABLE') continue;
+        for (const pa of bl.paragraphs || []) {
+          pi++;
+          for (const w of pa.words || []) {
+            const sy = w.symbols || [], t = sy.map(q => q.text || '').join(''), bb = box(w.boundingBox); if (!t || !bb) continue;
+            const last = sy[sy.length - 1], br = last && last.property && last.property.detectedBreak ? last.property.detectedBreak.type : '';
+            words.push({ t, b: bb, c: Math.round((w.confidence == null ? 0.9 : w.confidence) * 100), br, p: pi, k: bi });
+          }
+        }
+      }
+    }
+    res.json({ success: true, w: W, h: H, words, text: fa ? String(fa.text || '').slice(0, 200000) : '' });
+  } catch (e) {
+    ocrDay.set(dk, Math.max(0, (ocrDay.get(dk) || 1) - 1));
+    const d = e.vision || (e.response && e.response.data && e.response.data.error) || null;
+    console.error('[글자 인식 실패]', e.response ? e.response.status : '', d ? JSON.stringify(d).slice(0, 300) : e.message);
+    const off = d && /has not been used|is disabled|PERMISSION_DENIED|API key not valid/i.test(JSON.stringify(d));
+    res.status(502).json({ success: false, disabled: !!off, message: off ? 'Google Cloud 프로젝트에서 Cloud Vision API를 켜 주세요. (키는 있지만 이 API가 꺼져 있어요)' : '글자 인식 엔진 호출에 실패했어요.' });
+  }
+});
 app.post('/api/translate', trLimiter, async (req, res) => {
   const b = req.body || {};
   const texts = Array.isArray(b.texts) ? b.texts.map(t => String(t == null ? '' : t)) : null;

@@ -1,7 +1,7 @@
 {
  "name": "Meow-PDF",
- "version": "v1.2.5",
- "date": "2026.11.14",
+ "version": "v1.2.6",
+ "date": "2026.11.15",
  "site": "https://www.meow-pdf.com/",
  "download": {
   "win": "https://www.meow-pdf.com/download/windows",
@@ -10,6 +10,72 @@
   "page": "https://www.meow-pdf.com/apps"
  },
  "history": [
+  {
+   "v": "v1.2.6",
+   "d": "2026.11.15",
+   "items": {
+    "ko": [
+     "디지털화 정밀 인식 — 구글 렌즈처럼 줄 · 문단 단위로 정확하게 읽어요 (Google Cloud Vision · 로그인 필요 · 디지털화 ▾에서 ‘기기 안에서 인식’도 고를 수 있어요)",
+     "기기 안 인식도 개선 — 더 높은 해상도로 읽고, 한 줄의 낱말을 덜 쪼개고, 같은 문단의 줄은 한 글자 개체로 묶어요",
+     "PDF에 이미 있는 글자를 한 번 클릭하면 바로 선택돼 고칠 수 있어요 (끌면 복사용 선택)",
+     "이미지 ▾의 스티커를 ‘스티커’ 하나로 — 누르면 스티커 고르기 창이 뜨고, 내 스티커를 여러 개 등록 · 삭제할 수 있어요",
+     "발표를 마칠 때 바뀐 내용: 설정 › 편집 · 저장에서 묻기 · 항상 저장하기 · 항상 저장하지 않기 — 묻는 창에도 설정 바로가기",
+     "자동 저장할 때 아래쪽 알림을 띄우지 않아요 (제목 줄의 자동 저장 표시로만)",
+     "좌측 정렬 도구 모음: 단축키 힌트를 숨기고 버튼을 살짝 크게",
+     "모바일: 글자를 입력하는 동안 옵션 창 위에 지금 쓰는 글을 크게 보여줘요 (가로 모드에서도)",
+     "모바일: 축소한 상태에서 페이지 바깥(배경)을 끌면 지금 페이지를 옮길 수 있어요",
+     "모바일: 오른쪽 패널에 레이어 탭을 다시 · 도구 더보기 › 삽입에 대본 추가",
+     "모바일: 아래 페이지 패널을 연 채 위로 쓸면 화면 전체가 밀려 올라가던 문제 해결",
+     "모바일 메인 화면: 가로 모드에서 ‘최근에 연 파일’ · ‘리모컨 연결하기’를 위 네 버튼과 같은 너비로 좌우에 나란히",
+     "앱 제목을 ‘Meow-PDF | PDF 및 발표자료 종합 편집기’로 · 메인 화면 안내를 ‘열 수 있는 파일 형식’으로"
+    ],
+    "en": [
+     "Precise digitize — reads text by line and paragraph like Google Lens (Google Cloud Vision · sign-in required · ‘On-device’ is still available under Digitize ▾)",
+     "On-device recognition improved too — reads at higher resolution, splits words in a line less, and groups lines of the same paragraph into one text object",
+     "Click existing PDF text once to select and edit it right away (drag to select for copying)",
+     "The stickers under Image ▾ are now a single ‘Sticker’ — it opens a sticker picker where you can add and remove multiple custom stickers",
+     "Changes made while presenting: choose Ask · Always save · Never save in Settings › Edit · Save — the prompt also has a shortcut to the setting",
+     "Autosave no longer shows a notice at the bottom (only the autosave badge in the title bar)",
+     "Left toolbar: shortcut hints hidden and buttons slightly larger",
+     "Mobile: while typing, the text you're entering is shown large above the options bar (landscape too)",
+     "Mobile: when zoomed out, drag the background to move the current page",
+     "Mobile: the Layers tab is back in the right panel · Script added to More tools › Insert",
+     "Mobile: fixed the whole screen sliding up when swiping with the bottom page panel open",
+     "Mobile home: in landscape, ‘Recent files’ and ‘Connect remote’ sit side by side, matching the width of the four buttons above",
+     "App title is now ‘Meow-PDF | All-in-one PDF & presentation editor’ · The home screen hint now lists the file types you can open"
+    ],
+    "ja": [
+     "デジタル化の高精度認識 — Google レンズのように行・段落単位で正確に読み取ります（Google Cloud Vision・ログインが必要・デジタル化 ▾ で「端末内で認識」も選べます）",
+     "端末内認識も改善 — より高い解像度で読み、1行の単語を分割しすぎず、同じ段落の行は1つのテキストにまとめます",
+     "PDF にある文字を1回クリックするとすぐに選択され編集できます（ドラッグするとコピー用に選択）",
+     "画像 ▾ のステッカーを「ステッカー」1つに — 押すとステッカー選択画面が開き、自分のステッカーを複数登録・削除できます",
+     "発表中の変更: 設定 › 編集・保存で「確認する・常に保存・常に保存しない」を選択 — 確認画面にも設定へのショートカット",
+     "自動保存時に下部の通知を表示しません（タイトルバーの自動保存表示のみ）",
+     "左揃えツールバー: ショートカットのヒントを非表示にし、ボタンを少し大きく",
+     "モバイル: 文字入力中、入力中のテキストをオプションバーの上に大きく表示（横向きでも）",
+     "モバイル: 縮小した状態で背景をドラッグすると現在のページを移動できます",
+     "モバイル: 右パネルにレイヤータブを復活 · ツールのその他 › 挿入に台本を追加",
+     "モバイル: 下部のページパネルを開いたままスワイプすると画面全体が上にずれる問題を修正",
+     "モバイルのメイン画面: 横向きで「最近開いたファイル」と「リモコンを接続」を上の4つのボタンと同じ幅で左右に並べて表示",
+     "アプリのタイトルを「Meow-PDF | PDF・発表資料の総合エディター」に · メイン画面の案内を「開けるファイル形式」に"
+    ],
+    "zh": [
+     "数字化精准识别 — 像 Google 智能镜头一样按行和段落准确识别（Google Cloud Vision · 需要登录 · 也可在数字化 ▾ 中选择“在设备上识别”）",
+     "设备端识别也得到改进 — 以更高分辨率识别，减少同一行内的拆分，并将同一段落的各行合并为一个文本对象",
+     "单击 PDF 中已有的文字即可直接选中并编辑（拖动可选择复制）",
+     "图片 ▾ 中的贴纸合并为一个“贴纸” — 点击后打开贴纸选择窗口，可添加和删除多个自定义贴纸",
+     "演示时所做的更改：在设置 › 编辑 · 保存中选择 询问 · 始终保存 · 始终不保存 — 询问窗口中也有设置快捷方式",
+     "自动保存时不再在底部显示通知（仅在标题栏显示自动保存标记）",
+     "左侧工具栏：隐藏快捷键提示，按钮略微放大",
+     "移动端：输入文字时，在选项栏上方大字显示正在输入的内容（横屏也可）",
+     "移动端：缩小时拖动背景可移动当前页面",
+     "移动端：右侧面板恢复图层选项卡 · 更多工具 › 插入中新增讲稿",
+     "移动端：修复打开底部页面面板时上滑会使整个界面上移的问题",
+     "移动端主界面：横屏时“最近打开的文件”和“连接遥控器”左右并排，宽度与上方四个按钮一致",
+     "应用标题改为“Meow-PDF | PDF 与演示文稿综合编辑器” · 主界面提示改为“可打开的文件格式”"
+    ]
+   }
+  },
   {
    "v": "v1.2.5",
    "d": "2026.11.14",
@@ -581,44 +647,6 @@
      "记住最后添加的文字样式（字体 · 字号 · 粗体 · 斜体 · 颜色 · 背景 · 对齐 · 字距 · 行距），下次添加文字时沿用",
      "桌面程序：更新后自定义主题和背景图片会保留 — 同时保存在应用数据文件夹中，并在安装前先保存设置",
      "多选后在选项栏中更改颜色 · 填充 · 粗细 · 不透明度 · 字体 · 粗体 · 对齐等，会一次性应用到所有选中对象"
-    ]
-   }
-  },
-  {
-   "v": "v1.1.5",
-   "d": "2026.10.24",
-   "items": {
-    "ko": [
-     "스크롤바를 더 두껍게 바꿈 — 페이지 패널의 크기 조절 경계를 패널 바깥으로 옮겨 페이지 패널 스크롤바를 잡기 쉬워짐",
-     "페이지 패널의 그룹 머리가 마우스를 올리지 않아도 늘 같은 모습(설정 · 해제/삭제 버튼과 페이지 수)으로 보이고, 패널 좌우로 넓게 펼쳐짐 — 그룹 해제(페이지 유지)와 그룹 · 페이지 삭제는 한 버튼에서 눌러 고름",
-     "우측 패널 설정에 ‘길게 보기’ 추가 — 탭 · 도구바 · 옵션바 옆까지 우측 패널을 위로 올려 따로 세움",
-     "도구 모음의 ‘닿은선택’ 이름을 ‘선택’으로 바꿈",
-     "펼친 메모의 제목과 버튼 사이 빈 곳을 끌어서 메모를 옮길 수 있게 함 (제목 칸은 글자 길이만큼)",
-     "디지털화 · 전체 디지털화 중에 ‘취소’ 버튼(또는 Esc)으로 멈출 수 있음 — 취소하면 문서는 그대로"
-    ],
-    "en": [
-     "Made scrollbars thicker — moved the page panel’s resize edge outside the panel so its scrollbar is easy to grab",
-     "Group headers in the page panel now always look the same without hovering (settings · ungroup/delete button and page count) and stretch across the panel — ungroup (keep pages) and delete group with pages are now chosen from one button",
-     "Added ‘Tall view’ to the right panel settings — the right panel extends up beside the tabs, toolbar and options bar as its own column",
-     "Renamed the ‘Touch select’ tool to ‘Select’",
-     "You can now drag an open memo by the empty space between its title and buttons (the title field is only as wide as its text)",
-     "Digitize and Digitize all pages can now be stopped with the ‘Cancel’ button (or Esc) — cancelling leaves the document unchanged"
-    ],
-    "ja": [
-     "スクロールバーを太く — ページパネルのサイズ調整の境界をパネルの外に移し、ページパネルのスクロールバーをつかみやすく",
-     "ページパネルのグループ見出しが、マウスを乗せなくても常に同じ表示（設定・解除/削除ボタンとページ数）になり、パネルの左右いっぱいに広がるように — グループ解除（ページは残す）とグループ・ページ削除は1つのボタンから選択",
-     "右パネルの設定に「縦長表示」を追加 — タブ・ツールバー・オプションバーの横まで右パネルを上に伸ばして独立させます",
-     "ツールバーの「接触選択」の名前を「選択」に変更",
-     "開いたメモは、タイトルとボタンの間の空いた部分をドラッグして移動できるように（タイトル欄は文字の長さだけ）",
-     "デジタル化・全ページのデジタル化の途中で「キャンセル」ボタン（またはEsc）で止められるように — キャンセルすると文書はそのまま"
-    ],
-    "zh": [
-     "滚动条加粗 — 将页面面板的调整大小边界移到面板外侧，更容易拖动页面面板的滚动条",
-     "页面面板的分组标题无需悬停也始终显示完整（设置 · 取消分组/删除按钮和页数），并横向铺满面板 — 取消分组（保留页面）与删除分组及页面合并为一个按钮，点击后选择",
-     "右侧面板设置新增“加长显示”— 右侧面板向上延伸到标签栏、工具栏和选项栏旁边，独立成一列",
-     "将工具栏中的“接触选择”更名为“选择”",
-     "展开的便签可拖动标题与按钮之间的空白处来移动（标题栏宽度随文字长度）",
-     "数字化和全部数字化过程中可用“取消”按钮（或 Esc）中止 — 取消后文档保持不变"
     ]
    }
   }
