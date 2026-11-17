@@ -1,7 +1,7 @@
 {
  "name": "Meow-PDF",
- "version": "v1.2.6",
- "date": "2026.11.15",
+ "version": "v1.2.7",
+ "date": "2026.11.17",
  "site": "https://www.meow-pdf.com/",
  "download": {
   "win": "https://www.meow-pdf.com/download/windows",
@@ -10,6 +10,44 @@
   "page": "https://www.meow-pdf.com/apps"
  },
  "history": [
+  {
+   "v": "v1.2.7",
+   "d": "2026.11.17",
+   "items": {
+    "ko": [
+     "페이지 패널 목록 보기에서 폴더 안 페이지 블록의 가로 길이를 늘렸어요",
+     "이미지 편집의 보정값을 이름 붙여 즐겨찾기로 저장 · 불러오기 · 삭제할 수 있어요 (다른 이미지에서도 사용)",
+     "삽입한 이미지 · 녹음 용량 줄이기 — 선택한 개체 또는 문서 전체에 3단계로 적용, 녹음 전에 음질(높음 · 보통 · 용량 절약) 선택",
+     "녹음 파일 버튼에서 마우스가 벗어나면 재생 막대가 바로 사라져요",
+     "녹음 파일 버튼에 제목을 표시해요 — 녹음을 마칠 때 또는 옵션바에서 입력",
+     "도형을 고르고 바로 타자를 치거나 두 번 클릭하면 도형 안에 글자를 입력해요 (글자 크기 · 색 조절 가능)"
+    ],
+    "en": [
+     "Wider page blocks inside folders in the page panel's list view",
+     "Save, load and delete image-edit adjustments as named favorites (reusable on other images)",
+     "Reduce the size of inserted images and recordings — 3 levels for the selected item or the whole document, plus a recording quality choice (High · Normal · Small) before you record",
+     "The playback bar now hides right away when the mouse leaves a recording button",
+     "Recording buttons can show a title — enter it when you finish recording or in the options bar",
+     "Select a shape and just start typing (or double-click it) to enter text inside the shape — text size and color can be adjusted"
+    ],
+    "ja": [
+     "ページパネルのリスト表示で、フォルダ内のページブロックの横幅を広げました",
+     "画像編集の補正値を名前を付けてお気に入りに保存・呼び出し・削除できます（他の画像でも使えます）",
+     "挿入した画像・録音の容量を削減 — 選択した項目または文書全体に3段階で適用、録音前に音質（高・標準・容量節約）を選択",
+     "録音ファイルのボタンからマウスが離れると、再生バーがすぐに消えます",
+     "録音ファイルのボタンにタイトルを表示 — 録音終了時またはオプションバーで入力",
+     "図形を選んでそのまま入力、またはダブルクリックすると図形の中に文字を入力できます（文字サイズ・色を調整可能）"
+    ],
+    "zh": [
+     "页面面板列表视图中，文件夹内的页面块更宽了",
+     "图片编辑的调整值可命名保存为收藏、载入和删除（可用于其他图片）",
+     "缩小已插入图片和录音的体积 — 对所选项目或整个文档分3档应用，录音前可选音质（高 · 标准 · 省空间）",
+     "鼠标移出录音按钮后，播放栏会立即隐藏",
+     "录音按钮可显示标题 — 在录音结束时或选项栏中输入",
+     "选中形状后直接打字（或双击）即可在形状内输入文字（可调整文字大小和颜色）"
+    ]
+   }
+  },
   {
    "v": "v1.2.6",
    "d": "2026.11.15",
