@@ -242,7 +242,7 @@ ipcMain.handle('meow:update-start', async () => {
 ipcMain.on('meow:update-install', async () => { const u = getUpdater(); try { await session.defaultSession.flushStorageData(); } catch (e) { /* 무시 */ } if (u) setImmediate(() => u.quitAndInstall(false, true)); });   // v1.1.6 설치하려고 끄기 전에 화면 설정(localStorage)을 디스크에 먼저 써요
 /* ── v1.1.6 나만의 테마 · 배경 이미지 같은 화면 설정을 앱 데이터 폴더의 파일에도 따로 보관해요 (업데이트 · 강제 종료로 브라우저 저장소가 비어도 되살려요) ── */
 const PREFS_FILE = () => path.join(app.getPath('userData'), 'meow-prefs.json');
-const PREF_KEYS = new Set(['meowCustomTheme', 'meowCustomBg', 'pdfEditorTheme']);
+const PREF_KEYS = new Set(['meowCustomTheme', 'meowCustomBg', 'pdfEditorTheme', 'meowIedFavs']);
 function prefsRead() { try { const o = JSON.parse(fs.readFileSync(PREFS_FILE(), 'utf8')); return o && typeof o === 'object' ? o : {}; } catch (e) { return {}; } }
 ipcMain.handle('meow:prefs-get', () => prefsRead());
 ipcMain.handle('meow:prefs-set', async (e, k, v) => {
