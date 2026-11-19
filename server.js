@@ -4,6 +4,7 @@
  *  - 토스페이먼츠 일반 결제로 1개월 1,200원 / 1년 10,500원 이용권 판매. 시크릿 키는 이 서버에만 존재
  *  - v1.0.3 구독(자동결제)에서 이용권(한 번 결제)으로 다시 바꿨어요 — 자동으로 다시 결제되지 않아요.
  *  - 결제가 승인되면 Supabase users_profile.premium_until 을 1개월/1년 연장 (남은 기간이 있으면 그 뒤에 이어 붙여요)
+ *  - v1.3.2 녹음 받아쓰기 POST /api/stt — Google Cloud Speech-to-Text. 키: GOOGLE_STT_API_KEY (없으면 GOOGLE_VISION_API_KEY → GOOGLE_TRANSLATE_API_KEY)
  *  - v1.2.6 디지털화 글자 인식 POST /api/ocr — Google Cloud Vision(문서 글자 인식). 키: GOOGLE_VISION_API_KEY (없으면 GOOGLE_TRANSLATE_API_KEY)
  *  - v1.1.1 프리미엄 1개월 무료 체험(계정당 한 번, POST /api/trial/start) · 네이버 계정으로 로그인(/auth/naver/start → /auth/naver/callback)
  *
@@ -52,7 +53,7 @@ const ready = () => !!SUPABASE_SERVICE_KEY;
 const app = express();
 app.disable('x-powered-by');
 const json20 = express.json({ limit: '20kb' });
-app.use((req, res, next) => (req.path === '/api/ocr' ? next() : json20(req, res, next)));   // v1.2.6 글자 인식은 그림을 받아서 따로 (아래 15MB)
+app.use((req, res, next) => (req.path === '/api/ocr' || req.path === '/api/stt' ? next() : json20(req, res, next)));   // v1.2.6 글자 인식은 그림을, v1.3.2 받아쓰기는 소리를 받아서 따로 (아래 15MB · 8MB)
 
 // CORS: 앱(HTML 파일 / 다른 주소)에서 호출할 수 있게. 쿠키를 쓰지 않고 Bearer 토큰만 쓰므로 안전해요.
 app.use((req, res, next) => {
@@ -456,6 +457,47 @@ app.post('/api/ocr', (req, res, next) => {
     console.error('[글자 인식 실패]', e.response ? e.response.status : '', d ? JSON.stringify(d).slice(0, 300) : e.message);
     const off = d && /has not been used|is disabled|PERMISSION_DENIED|API key not valid/i.test(JSON.stringify(d));
     res.status(502).json({ success: false, disabled: !!off, message: off ? 'Google Cloud 프로젝트에서 Cloud Vision API를 켜 주세요. (키는 있지만 이 API가 꺼져 있어요)' : '글자 인식 엔진 호출에 실패했어요.' });
+  }
+});
+/* ═══ v1.3.2 녹음 받아쓰기 (Google Cloud Speech-to-Text v1 · speech:recognize) ═══
+   편집기는 녹음을 16kHz 모노 LINEAR16(WAV 헤더 없음)으로 바꿔 1분 이하 조각으로 나눠 보내요. 조각마다 이 주소를 한 번 불러요.
+   - 키: GOOGLE_STT_API_KEY (없으면 GOOGLE_VISION_API_KEY → GOOGLE_TRANSLATE_API_KEY) — 같은 Google Cloud 프로젝트에서 Cloud Speech-to-Text API를 ‘사용’으로 켜 주세요
+   - 로그인한 계정만 · 계정당 하루 STT_DAILY_MINUTES분(기본 60) · IP당 분당 30회 */
+const GOOGLE_STT_API_KEY = (process.env.GOOGLE_STT_API_KEY || process.env.GOOGLE_VISION_API_KEY || process.env.GOOGLE_TRANSLATE_API_KEY || '').trim();
+const STT_DAILY_SEC = Math.max(60, Number(process.env.STT_DAILY_MINUTES || 60) * 60);
+const sttDay = new Map(), sttHits = new Map();
+setInterval(() => sttHits.clear(), 60 * 1000).unref();
+setInterval(() => { const d = new Date().toISOString().slice(0, 10); for (const k of sttDay.keys()) if (!k.endsWith(d)) sttDay.delete(k); }, 60 * 60 * 1000).unref();
+app.get('/api/stt', (req, res) => res.json({ success: true, enabled: !!GOOGLE_STT_API_KEY, engine: 'google-speech', maxSec: 58 }));
+app.post('/api/stt', (req, res, next) => {
+  const ip = req.ip || 'x', n = (sttHits.get(ip) || 0) + 1; sttHits.set(ip, n);
+  if (n > 30) return res.status(429).json({ success: false, message: '받아쓰기 요청이 너무 많아요. 잠시 후 다시 시도해 주세요.' });
+  next();
+}, express.json({ limit: '8mb' }), async (req, res) => {
+  if (!GOOGLE_STT_API_KEY) return res.status(501).json({ success: false, disabled: true, message: '서버에 받아쓰기 키가 없어요. (GOOGLE_STT_API_KEY)' });
+  const user = await authed(req, res); if (!user) return;
+  const b = req.body || {}, audio = String(b.audio || '');
+  if (!audio || audio.length < 100 || audio.length > 7 * 1024 * 1024 || !/^[A-Za-z0-9+/=]+$/.test(audio.slice(0, 200))) return res.status(400).json({ success: false, message: '소리 데이터가 올바르지 않아요.' });
+  const rate = [8000, 16000, 22050, 24000, 32000, 44100, 48000].includes(+b.rate) ? +b.rate : 16000;
+  const sec = Math.ceil(audio.length * 3 / 4 / 2 / rate);   // LINEAR16 모노: 1초 = rate × 2바이트
+  if (sec > 60) return res.status(400).json({ success: false, message: '한 번에 1분까지 보낼 수 있어요.' });
+  const lang = /^[a-z]{2,3}(-[A-Za-z]{2,4})?$/.test(String(b.lang || '')) ? String(b.lang) : 'ko-KR';
+  const alt = (Array.isArray(b.alt) ? b.alt : []).map(String).filter(l => /^[a-z]{2,3}(-[A-Za-z]{2,4})?$/.test(l) && l !== lang).slice(0, 3);
+  const dk = user.id + ':' + new Date().toISOString().slice(0, 10), used = sttDay.get(dk) || 0;
+  if (used + sec > STT_DAILY_SEC) return res.status(429).json({ success: false, quota: true, message: `오늘의 받아쓰기(${Math.round(STT_DAILY_SEC / 60)}분)를 다 썼어요. 내일 다시 써 주세요.` });
+  sttDay.set(dk, used + sec);
+  try {
+    const r = await axios.post('https://speech.googleapis.com/v1/speech:recognize?key=' + encodeURIComponent(GOOGLE_STT_API_KEY),
+      { config: { encoding: 'LINEAR16', sampleRateHertz: rate, audioChannelCount: 1, languageCode: lang, alternativeLanguageCodes: alt.length ? alt : undefined, enableAutomaticPunctuation: true, model: 'default', maxAlternatives: 1 }, audio: { content: audio } },
+      { timeout: 90000, maxBodyLength: 10 * 1024 * 1024 });
+    const text = (r.data.results || []).map(x => ((x.alternatives || [])[0] || {}).transcript || '').map(t => t.trim()).filter(Boolean).join(' ');
+    res.json({ success: true, text: text.slice(0, 100000), sec });
+  } catch (e) {
+    sttDay.set(dk, Math.max(0, (sttDay.get(dk) || sec) - sec));
+    const d = (e.response && e.response.data && e.response.data.error) || null;
+    console.error('[받아쓰기 실패]', e.response ? e.response.status : '', d ? JSON.stringify(d).slice(0, 300) : e.message);
+    const off = d && /has not been used|is disabled|PERMISSION_DENIED|API key not valid|blocked/i.test(JSON.stringify(d));
+    res.status(502).json({ success: false, disabled: !!off, message: off ? 'Google Cloud 프로젝트에서 Cloud Speech-to-Text API를 켜 주세요. (키는 있지만 이 API가 꺼져 있어요)' : '받아쓰기 엔진 호출에 실패했어요.' });
   }
 });
 app.post('/api/translate', trLimiter, async (req, res) => {

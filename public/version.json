@@ -1,7 +1,7 @@
 {
  "name": "Meow-PDF",
- "version": "v1.3.1",
- "date": "2026.11.19",
+ "version": "v1.3.2",
+ "date": "2026.11.20",
  "site": "https://www.meow-pdf.com/",
  "download": {
   "win": "https://www.meow-pdf.com/download/windows",
@@ -10,6 +10,56 @@
   "page": "https://www.meow-pdf.com/apps"
  },
  "history": [
+  {
+   "v": "v1.3.2",
+   "d": "2026.11.20",
+   "items": {
+    "ko": [
+     "녹음 → 텍스트 변환 — 녹음 파일을 고르고 옵션바의 ‘텍스트 변환’을 누르면 마침표마다 줄을 바꾼 글로 멀티작업 새 탭에 열려요 (바로 고칠 수 있고, 변환할 때마다 새 탭)",
+     "변환한 텍스트를 녹음 파일 버튼에 함께 저장 · 삭제 — ‘변환 텍스트 ▾’에서 내용 열기(멀티작업 새 탭으로 열고 포커스) · 삭제 · 인식 언어, MPDF로 저장하면 함께 저장되고 불러올 때 함께 불러와요",
+     "설정 › 화면 배치 › 화면 모드 — 자동 · PC 화면 · 모바일 화면 (휴대폰에서 PC 화면으로, PC에서 모바일 화면으로 볼 수 있어요)",
+     "이미지를 끌어 도형 위에 놓으면 도형 모양으로 넣기(마스크) — 페이지의 이미지를 도형 위에서 잠깐 멈췄다 놓거나, 밖에서 이미지 파일을 끌어 놓아도 돼요 (Alt: 그냥 옮기기 · Ctrl+Z로 되돌리기)",
+     "페이지 맨 위 고정 — 페이지 패널에서 우클릭 › ‘맨 위에 고정’, 고정한 페이지는 늘 페이지 패널 맨 위에 보여요 (문서의 페이지 순서 · 번호는 그대로)",
+     "편집기를 열 때 · 테마를 바꿀 때 · 파일을 불러오는 동안 고양이 로딩 화면이 부드럽게 나타나고 사라져요",
+     "문서를 끝까지 스크롤하면 그 페이지 맨 위로 다시 올라가던 문제 해결 · ‘페이지에 맞춤’은 페이지를 화면 가운데에 맞춰요",
+     "전체 페이지 관리: 다른 페이지를 누르면 함께 선택되고, 고른 페이지를 다시 누르면 선택 취소",
+     "새 글상자의 기본 가로 길이를 절반으로 · ‘PDF 전체에서 찾기’ 입력칸을 더 좁고 작게 · 화면 캡처 · 카메라 사진 크기를 줄임"
+    ],
+    "en": [
+     "Recording → text — select a recording and press ‘Convert to text’ in the option bar; the text opens in a new Multitask tab with a line break after every sentence (editable right away, a new tab for each conversion)",
+     "Save converted text with the recording button and delete it — open (in a focused new Multitask tab), delete or pick the language from ‘Converted text ▾’; saved in MPDF and loaded back with it",
+     "Settings › Layout › Screen mode — Auto · PC screen · Mobile screen (use the PC screen on a phone, or the mobile screen on a PC)",
+     "Drag an image onto a shape to put it inside the shape (mask) — pause over the shape and drop, or drop an image file from outside (Alt: just move · Ctrl+Z to undo)",
+     "Pin pages to the top — right-click in the page panel › ‘Pin to top’; pinned pages always stay at the top of the page panel (document order and numbers stay the same)",
+     "A cat loading screen now fades in and out smoothly when the editor opens, when you change themes and while files load",
+     "Fixed scrolling to the end jumping back to the top of the page · ‘Fit page’ now centers the page on screen",
+     "Page manager: clicking another page adds it to the selection; clicking a selected page again deselects it",
+     "New text boxes start at half the width · the ‘Search whole PDF’ box is narrower and smaller · screen captures and camera photos are smaller"
+    ],
+    "ja": [
+     "録音 → テキスト変換 — 録音ファイルを選んでオプションバーの「テキスト変換」を押すと、文ごとに改行したテキストがマルチタスクの新しいタブで開きます（すぐ編集でき、変換するたびに新しいタブ）",
+     "変換したテキストを録音ボタンに一緒に保存 · 削除 — 「変換テキスト ▾」から内容を開く（マルチタスクの新しいタブにフォーカス）· 削除 · 認識言語、MPDFに保存すると一緒に保存され、読み込み時も一緒に読み込まれます",
+     "設定 › 画面配置 › 画面モード — 自動 · PC画面 · モバイル画面（スマホでPC画面、PCでモバイル画面にできます）",
+     "画像を図形の上にドラッグすると図形の形で入れる（マスク）— 図形の上で少し止めてドロップ、または外から画像ファイルをドロップ（Alt: そのまま移動 · Ctrl+Zで元に戻す）",
+     "ページを先頭に固定 — ページパネルで右クリック ›「先頭に固定」、固定したページは常にページパネルの一番上に表示（文書のページ順 · 番号はそのまま）",
+     "エディターを開くとき · テーマを変えるとき · ファイル読み込み中に、猫のローディング画面がなめらかに表示されます",
+     "最後までスクロールするとそのページの先頭に戻ってしまう問題を修正 ·「ページに合わせる」はページを画面中央に",
+     "全ページ管理: 別のページを押すと一緒に選択、選択したページをもう一度押すと選択解除",
+     "新しいテキストボックスの既定の幅を半分に ·「PDF全体から検索」の入力欄を細く小さく · 画面キャプチャとカメラ写真のサイズを縮小"
+    ],
+    "zh": [
+     "录音 → 文字转换 — 选中录音并点击选项栏的“转为文字”，按句号换行的文字会在多任务的新标签中打开（可直接编辑，每次转换都开新标签）",
+     "转换后的文字可随录音按钮一起保存 · 删除 — 在“转换文字 ▾”中打开内容（在多任务新标签中打开并聚焦）· 删除 · 识别语言，保存为 MPDF 时一并保存，打开时一并载入",
+     "设置 › 界面布局 › 界面模式 — 自动 · 电脑界面 · 手机界面（手机上可用电脑界面，电脑上可用手机界面）",
+     "把图片拖到形状上即可按形状放入（蒙版）— 在形状上稍停后放下，或从外部拖入图片文件（Alt：仅移动 · Ctrl+Z 撤销）",
+     "页面置顶 — 在页面面板右键 ›“置顶”，置顶的页面始终显示在页面面板最上方（文档的页面顺序 · 页码不变）",
+     "打开编辑器 · 切换主题 · 载入文件时，猫咪加载画面会平滑地出现和消失",
+     "修复滚动到底部后跳回该页顶部的问题 ·“适合页面”改为将页面置于屏幕中央",
+     "全部页面管理：点击其他页面会一起选中，再次点击已选页面则取消选择",
+     "新文本框的默认宽度减半 ·“在整个 PDF 中查找”输入框更窄更小 · 屏幕截图和相机照片尺寸缩小"
+    ]
+   }
+  },
   {
    "v": "v1.3.1",
    "d": "2026.11.19",
@@ -61,36 +111,36 @@
    "d": "2026.11.17",
    "items": {
     "ko": [
-     "페이지 패널 목록 보기에서 폴더 안 페이지 블록의 가로 길이를 늘렸어요",
-     "이미지 편집의 보정값을 이름 붙여 즐겨찾기로 저장 · 불러오기 · 삭제할 수 있어요 (다른 이미지에서도 사용)",
-     "삽입한 이미지 · 녹음 용량 줄이기 — 선택한 개체 또는 문서 전체에 3단계로 적용, 녹음 전에 음질(높음 · 보통 · 용량 절약) 선택",
-     "녹음 파일 버튼에서 마우스가 벗어나면 재생 막대가 바로 사라져요",
-     "녹음 파일 버튼에 제목을 표시해요 — 녹음을 마칠 때 또는 옵션바에서 입력",
-     "도형을 고르고 바로 타자를 치거나 두 번 클릭하면 도형 안에 글자를 입력해요 (글자 크기 · 색 조절 가능)"
+     "페이지 패널 목록 보기에서 폴더 안 페이지 블록의 가로 길이 확대",
+     "이미지 편집의 보정값을 이름 붙여 즐겨찾기로 저장 · 불러오기 · 삭제 (다른 이미지에서도 사용)",
+     "삽입한 이미지 · 녹음 용량 줄이기 추가 — 선택한 개체 또는 문서 전체에 3단계로 적용, 녹음 시작 전 음질(높음 · 보통 · 용량 절약) 선택",
+     "녹음 파일 버튼에서 마우스가 벗어나면 재생 막대 즉시 숨김",
+     "녹음 파일 버튼에 제목 표시 — 녹음을 마칠 때 또는 옵션바에서 입력",
+     "도형을 고르고 바로 타자를 치거나 두 번 클릭하면 도형 안에 글자 입력 (글자 크기 · 색 조절 가능)"
     ],
     "en": [
-     "Wider page blocks inside folders in the page panel's list view",
-     "Save, load and delete image-edit adjustments as named favorites (reusable on other images)",
-     "Reduce the size of inserted images and recordings — 3 levels for the selected item or the whole document, plus a recording quality choice (High · Normal · Small) before you record",
-     "The playback bar now hides right away when the mouse leaves a recording button",
-     "Recording buttons can show a title — enter it when you finish recording or in the options bar",
-     "Select a shape and just start typing (or double-click it) to enter text inside the shape — text size and color can be adjusted"
+     "페이지 패널 목록 보기에서 폴더 안 페이지 블록의 가로 길이 확대",
+     "이미지 편집의 보정값을 이름 붙여 즐겨찾기로 저장 · 불러오기 · 삭제 (다른 이미지에서도 사용)",
+     "삽입한 이미지 · 녹음 용량 줄이기 추가 — 선택한 개체 또는 문서 전체에 3단계로 적용, 녹음 시작 전 음질(높음 · 보통 · 용량 절약) 선택",
+     "녹음 파일 버튼에서 마우스가 벗어나면 재생 막대 즉시 숨김",
+     "녹음 파일 버튼에 제목 표시 — 녹음을 마칠 때 또는 옵션바에서 입력",
+     "도형을 고르고 바로 타자를 치거나 두 번 클릭하면 도형 안에 글자 입력 (글자 크기 · 색 조절 가능)"
     ],
     "ja": [
-     "ページパネルのリスト表示で、フォルダ内のページブロックの横幅を広げました",
-     "画像編集の補正値を名前を付けてお気に入りに保存・呼び出し・削除できます（他の画像でも使えます）",
-     "挿入した画像・録音の容量を削減 — 選択した項目または文書全体に3段階で適用、録音前に音質（高・標準・容量節約）を選択",
-     "録音ファイルのボタンからマウスが離れると、再生バーがすぐに消えます",
-     "録音ファイルのボタンにタイトルを表示 — 録音終了時またはオプションバーで入力",
-     "図形を選んでそのまま入力、またはダブルクリックすると図形の中に文字を入力できます（文字サイズ・色を調整可能）"
+     "페이지 패널 목록 보기에서 폴더 안 페이지 블록의 가로 길이 확대",
+     "이미지 편집의 보정값을 이름 붙여 즐겨찾기로 저장 · 불러오기 · 삭제 (다른 이미지에서도 사용)",
+     "삽입한 이미지 · 녹음 용량 줄이기 추가 — 선택한 개체 또는 문서 전체에 3단계로 적용, 녹음 시작 전 음질(높음 · 보통 · 용량 절약) 선택",
+     "녹음 파일 버튼에서 마우스가 벗어나면 재생 막대 즉시 숨김",
+     "녹음 파일 버튼에 제목 표시 — 녹음을 마칠 때 또는 옵션바에서 입력",
+     "도형을 고르고 바로 타자를 치거나 두 번 클릭하면 도형 안에 글자 입력 (글자 크기 · 색 조절 가능)"
     ],
     "zh": [
-     "页面面板列表视图中，文件夹内的页面块更宽了",
-     "图片编辑的调整值可命名保存为收藏、载入和删除（可用于其他图片）",
-     "缩小已插入图片和录音的体积 — 对所选项目或整个文档分3档应用，录音前可选音质（高 · 标准 · 省空间）",
-     "鼠标移出录音按钮后，播放栏会立即隐藏",
-     "录音按钮可显示标题 — 在录音结束时或选项栏中输入",
-     "选中形状后直接打字（或双击）即可在形状内输入文字（可调整文字大小和颜色）"
+     "페이지 패널 목록 보기에서 폴더 안 페이지 블록의 가로 길이 확대",
+     "이미지 편집의 보정값을 이름 붙여 즐겨찾기로 저장 · 불러오기 · 삭제 (다른 이미지에서도 사용)",
+     "삽입한 이미지 · 녹음 용량 줄이기 추가 — 선택한 개체 또는 문서 전체에 3단계로 적용, 녹음 시작 전 음질(높음 · 보통 · 용량 절약) 선택",
+     "녹음 파일 버튼에서 마우스가 벗어나면 재생 막대 즉시 숨김",
+     "녹음 파일 버튼에 제목 표시 — 녹음을 마칠 때 또는 옵션바에서 입력",
+     "도형을 고르고 바로 타자를 치거나 두 번 클릭하면 도형 안에 글자 입력 (글자 크기 · 색 조절 가능)"
     ]
    }
   },
@@ -101,7 +151,7 @@
     "ko": [
      "디지털화 정밀 인식 — 구글 렌즈처럼 줄 · 문단 단위로 정확하게 읽어요 (Google Cloud Vision · 로그인 필요 · 디지털화 ▾에서 ‘기기 안에서 인식’도 고를 수 있어요)",
      "기기 안 인식도 개선 — 더 높은 해상도로 읽고, 한 줄의 낱말을 덜 쪼개고, 같은 문단의 줄은 한 글자 개체로 묶어요",
-     "PDF에 이미 있는 글자를 한 번 클릭하면 바로 선택돼 고칠 수 있어요 (끌면 복사용 선택)",
+     "PDF에 이미 있는 글자를 한 번 클릭하면 글자 개체로 선택돼요 — 옮기기 · 크기 · 회전, 두 번 클릭하면 고치기 (끌면 복사용 선택)",
      "이미지 ▾의 스티커를 ‘스티커’ 하나로 — 누르면 스티커 고르기 창이 뜨고, 내 스티커를 여러 개 등록 · 삭제할 수 있어요",
      "발표를 마칠 때 바뀐 내용: 설정 › 편집 · 저장에서 묻기 · 항상 저장하기 · 항상 저장하지 않기 — 묻는 창에도 설정 바로가기",
      "자동 저장할 때 아래쪽 알림을 띄우지 않아요 (제목 줄의 자동 저장 표시로만)",
@@ -116,7 +166,7 @@
     "en": [
      "Precise digitize — reads text by line and paragraph like Google Lens (Google Cloud Vision · sign-in required · ‘On-device’ is still available under Digitize ▾)",
      "On-device recognition improved too — reads at higher resolution, splits words in a line less, and groups lines of the same paragraph into one text object",
-     "Click existing PDF text once to select and edit it right away (drag to select for copying)",
+     "Click existing PDF text once to select it as a text object — move · resize · rotate, double-click to edit (drag to select for copying)",
      "The stickers under Image ▾ are now a single ‘Sticker’ — it opens a sticker picker where you can add and remove multiple custom stickers",
      "Changes made while presenting: choose Ask · Always save · Never save in Settings › Edit · Save — the prompt also has a shortcut to the setting",
      "Autosave no longer shows a notice at the bottom (only the autosave badge in the title bar)",
@@ -131,7 +181,7 @@
     "ja": [
      "デジタル化の高精度認識 — Google レンズのように行・段落単位で正確に読み取ります（Google Cloud Vision・ログインが必要・デジタル化 ▾ で「端末内で認識」も選べます）",
      "端末内認識も改善 — より高い解像度で読み、1行の単語を分割しすぎず、同じ段落の行は1つのテキストにまとめます",
-     "PDF にある文字を1回クリックするとすぐに選択され編集できます（ドラッグするとコピー用に選択）",
+     "PDF にある文字を1回クリックするとテキストオブジェクトとして選択 — 移動・サイズ・回転、ダブルクリックで編集（ドラッグするとコピー用に選択）",
      "画像 ▾ のステッカーを「ステッカー」1つに — 押すとステッカー選択画面が開き、自分のステッカーを複数登録・削除できます",
      "発表中の変更: 設定 › 編集・保存で「確認する・常に保存・常に保存しない」を選択 — 確認画面にも設定へのショートカット",
      "自動保存時に下部の通知を表示しません（タイトルバーの自動保存表示のみ）",
@@ -146,7 +196,7 @@
     "zh": [
      "数字化精准识别 — 像 Google 智能镜头一样按行和段落准确识别（Google Cloud Vision · 需要登录 · 也可在数字化 ▾ 中选择“在设备上识别”）",
      "设备端识别也得到改进 — 以更高分辨率识别，减少同一行内的拆分，并将同一段落的各行合并为一个文本对象",
-     "单击 PDF 中已有的文字即可直接选中并编辑（拖动可选择复制）",
+     "单击 PDF 中已有的文字即可作为文本对象选中 — 可移动 · 调整大小 · 旋转，双击可编辑（拖动可选择复制）",
      "图片 ▾ 中的贴纸合并为一个“贴纸” — 点击后打开贴纸选择窗口，可添加和删除多个自定义贴纸",
      "演示时所做的更改：在设置 › 编辑 · 保存中选择 询问 · 始终保存 · 始终不保存 — 询问窗口中也有设置快捷方式",
      "自动保存时不再在底部显示通知（仅在标题栏显示自动保存标记）",
@@ -569,168 +619,6 @@
      "文本框默认宽度加宽并固定 — 输入时框不动、文字在框内移动，居中 · 右对齐保持不变；单击选中后拖动左右手柄调整宽度（字号不变）",
      "新增高级主题“雾之温泉” — 云间透下的光 · 岩石温泉升起的热气 · 在朦胧椰树间低低飘动的雾",
      "新增免费主题“DOS” — 黑色屏幕 · 蓝色窗口 · 灰色菜单栏 · 等宽字体 · 闪烁光标的老式电脑画面"
-    ]
-   }
-  },
-  {
-   "v": "v1.1.8",
-   "d": "2026.10.31",
-   "items": {
-    "ko": [
-     "페이지 패널의 빈 곳을 우클릭해 새 페이지 추가 — 빈 페이지 · 기존 파일을 문서 맨 끝에",
-     "도형에 자유형 추가 — 자유형: 도형(클릭으로 점 잇기 · 누른 채 끌면 손그림 · 시작점을 누르면 닫힘)과 자유형: 자유 곡선, 파워포인트와 같은 방식",
-     "영역 도구에 ‘색 채우기’ 추가 — 지정한 영역을 고른 색 · 불투명도로 채우기 (자유 선택은 그린 모양 그대로)",
-     "Shift + 화살표 키로 고른 개체를 0.1pt씩 더 세밀하게 옮기기",
-     "텍스트 일부만 선택하고 크기를 바꾸면 그 글자만 크기가 바뀜",
-     "멀티작업의 + 버튼이 ‘메인’ 탭을 열고, 메인 탭에서 연 항목은 메인 탭 자리를 대신함",
-     "멀티작업을 누른 뒤 화살표 키 · PageUp/PageDown을 누르면 문서 대신 멀티작업의 페이지를 넘김",
-     "레이어 패널: 타블릿 화면에서 펜으로 끌어 레이어 순서 바꾸기 (터치 화면에는 줄 왼쪽에 손잡이 표시)",
-     "수동 레이어에서 Ctrl+Z를 누르면 모든 레이어가 하나로 합쳐지던 문제 수정",
-     "상단 도구 모음이 창 너비에 다 들어가지 않으면 오른쪽 도구부터 ‘더보기’ 안으로 — 좌우 스크롤 없이",
-     "그리기 도구에 펜 종류 추가 — 붓(기본, 필압 없음) · 펜(필압과 속도로 굵기) · 스프레이"
-    ],
-    "en": [
-     "Right-click an empty spot in the page panel to add a new page — a blank page or an existing file at the end of the document",
-     "Freeform added to Shapes — Freeform: Shape (click to connect points, drag to draw by hand, click the start point to close) and Freeform: Scribble, just like PowerPoint",
-     "‘Fill with color’ added to the Region tool — fill the selected area with a chosen color and opacity (Lasso keeps the shape you drew)",
-     "Shift + arrow keys now move the selected object in finer 0.1pt steps",
-     "Select part of a text and change the size to resize only those characters",
-     "The + button in Multitask now opens a ‘Main’ tab, and anything you open from it takes the Main tab’s place",
-     "After clicking Multitask, the arrow keys and PageUp/PageDown turn Multitask pages instead of the document",
-     "Layers panel: drag with a pen on a tablet screen to reorder layers (touch screens show a handle on the left of each row)",
-     "Fixed Ctrl+Z merging all layers into one in manual layer mode",
-     "When the top toolbar doesn’t fit the window, tools on the right move into ‘More’ — no sideways scrolling",
-     "Pen types added to the Draw tool — Brush (default, no pressure), Pen (width follows pressure and speed) and Spray"
-    ],
-    "ja": [
-     "ページパネルの空いた所を右クリックして新しいページを追加 — 空白ページ・既存ファイルを文書の最後に",
-     "図形にフリーフォームを追加 — フリーフォーム: 図形(クリックで点をつなぐ・押したままドラッグで手描き・始点を押すと閉じる)とフリーフォーム: 自由曲線、PowerPointと同じ操作",
-     "範囲ツールに「色で塗りつぶし」を追加 — 指定した範囲を選んだ色・不透明度で塗りつぶし (自由選択は描いた形のまま)",
-     "Shift + 矢印キーで選んだオブジェクトを0.1ptずつより細かく移動",
-     "テキストの一部だけを選んでサイズを変えると、その文字だけサイズが変わる",
-     "マルチタスクの + ボタンで「メイン」タブを開き、メインタブから開いた項目はメインタブの位置に入れ替わる",
-     "マルチタスクをクリックした後は、矢印キー・PageUp/PageDownで文書ではなくマルチタスクのページをめくる",
-     "レイヤーパネル: タブレット画面でペンでドラッグしてレイヤーの順序を変更 (タッチ画面では各行の左にハンドルを表示)",
-     "手動レイヤーでCtrl+Zを押すとすべてのレイヤーが1つにまとまってしまう問題を修正",
-     "上部のツールバーがウィンドウ幅に収まらないときは右側のツールから「その他」の中へ — 左右スクロール不要",
-     "描画ツールにペンの種類を追加 — 筆(既定・筆圧なし)・ペン(筆圧と速度で太さが変化)・スプレー"
-    ],
-    "zh": [
-     "在页面面板空白处右键添加新页面 — 在文档末尾添加空白页或现有文件",
-     "形状新增任意多边形 — 任意多边形：形状（点击连接各点・按住拖动手绘・点击起点闭合）和任意多边形：自由曲线，操作与 PowerPoint 相同",
-     "区域工具新增“填充颜色” — 用所选颜色和不透明度填充指定区域（自由选择保持所画形状）",
-     "Shift + 方向键以 0.1pt 为单位更精细地移动所选对象",
-     "选中部分文字后更改字号，只会改变所选文字的大小",
-     "多任务的 + 按钮会打开“主页”标签，从主页标签打开的项目会替换主页标签的位置",
-     "点击多任务后，方向键和 PageUp/PageDown 会翻动多任务中的页面而不是文档",
-     "图层面板：在平板屏幕上用笔拖动即可调整图层顺序（触摸屏会在每行左侧显示拖动手柄）",
-     "修复了手动图层模式下按 Ctrl+Z 会把所有图层合并为一个的问题",
-     "顶部工具栏放不下时，右侧工具会移入“更多” — 无需左右滚动",
-     "绘图工具新增笔类型 — 毛笔（默认，无压感）、钢笔（粗细随压力和速度变化）、喷枪"
-    ]
-   }
-  },
-  {
-   "v": "v1.1.7",
-   "d": "2026.10.25",
-   "items": {
-    "ko": [
-     "텍스트를 한 번 눌러 고른 채 바로 입력하면 원래 내용을 지우고 새로 입력 시작 — 한글도 첫 글자부터 그대로, Enter는 원래 내용 고치기",
-     "텍스트를 두 번 클릭하면 글자 전체가 선택된 채로 편집 시작",
-     "표 내용 편집에서 글자색 설정 (선택한 칸 · 행 · 열 · 표 전체) — 옵션바의 표 색상은 이제 선 색만 바꿈",
-     "둥근 사각형을 영역으로 잘라 선택하면 둥근 모서리가 사라지던 문제 수정",
-     "페이지 패널의 현재 페이지를 더 눈에 띄게 — 굵은 테두리 · 배경 카드 · 번호 배지",
-     "모자이크 도구를 프리미엄 기능으로 변경",
-     "도구 모음에 마우스를 올리면 나오는 설명에서 ‘~요’로 끝나는 설명 문장을 뺌",
-     "탭을 우클릭해 탭 색 바꾸기",
-     "스페이스 키를 누른 채 마우스로 끌면 화면 이동 — 확대했을 때 편하게",
-     "메일함에서 메일을 바로 삭제 — 줄마다 휴지통 버튼, 체크해서 여러 개 한꺼번에 삭제(전체 선택 지원)"
-    ],
-    "en": [
-     "Type right away on a text you selected with one click to replace its content — Korean input works from the first letter, and Enter edits the existing text",
-     "Double-clicking a text starts editing with all of its text selected",
-     "Set the text color in Edit table contents (selected cells · row · column · whole table) — the table color in the options bar now changes only the line color",
-     "Fixed rounded rectangles losing their rounded corners when cut with a region selection",
-     "The current page stands out more in the Pages panel — thicker outline · background card · number badge",
-     "The Mosaic tool is now a Premium feature",
-     "Removed the long explanatory sentences from the toolbar tooltips",
-     "Right-click a tab to change its color",
-     "Hold Space and drag with the mouse to pan the view — handy when zoomed in",
-     "Delete mails right from the mailbox — a trash button on each row, and check several to delete them at once (Select all supported)"
-    ],
-    "ja": [
-     "1回クリックで選んだテキストにそのまま入力すると、元の内容を消して新しく入力 — 韓国語も最初の文字からそのまま、Enterは元の内容を編集",
-     "テキストをダブルクリックすると、文字全体を選択した状態で編集開始",
-     "表の内容編集で文字色を設定（選択したセル・行・列・表全体） — オプションバーの表の色は線の色だけを変更",
-     "角丸四角形を範囲で切り取って選択すると角の丸みが消える問題を修正",
-     "ページパネルの現在のページをより目立つように — 太い枠・背景カード・番号バッジ",
-     "モザイクツールをプレミアム機能に変更",
-     "ツールバーにマウスを乗せると出る説明から長い説明文を削除",
-     "タブを右クリックしてタブの色を変更",
-     "スペースキーを押したままマウスでドラッグすると画面を移動 — 拡大時に便利",
-     "メールボックスからメールをすぐ削除 — 行ごとのゴミ箱ボタン、チェックして複数をまとめて削除（すべて選択に対応）"
-    ],
-    "zh": [
-     "单击选中文本后直接输入，会删除原内容并开始新输入 — 韩文从第一个字起正常输入，按 Enter 则编辑原内容",
-     "双击文本时以全选状态开始编辑",
-     "在编辑表格内容中设置文字颜色（所选单元格 · 行 · 列 · 整个表格）— 选项栏中的表格颜色现在只更改线条颜色",
-     "修复用区域裁切选择圆角矩形时圆角消失的问题",
-     "页面面板中的当前页面更醒目 — 粗边框 · 背景卡片 · 页码徽标",
-     "马赛克工具改为高级版功能",
-     "删除了工具栏悬停提示中的长说明句",
-     "右键单击标签页可更改标签颜色",
-     "按住空格键并用鼠标拖动即可移动画面 — 放大时更方便",
-     "可直接在邮箱中删除邮件 — 每行都有删除按钮，勾选后可批量删除（支持全选）"
-    ]
-   }
-  },
-  {
-   "v": "v1.1.6",
-   "d": "2026.10.25",
-   "items": {
-    "ko": [
-     "단축키 Z 도구 이름을 ‘영역지정’으로 바꿈",
-     "모바일에서 + 버튼을 누르면 나오는 버튼(발표 · 번역 · 찾기 · 보기·편집 · 북마크)을 키워 글자가 잘리지 않게 함",
-     "‘버전으로 업데이트했어요’ 알림에 ‘자세히 보기’ 버튼 추가 — 그 버전에서 바뀐 내용을 바로 보여 줌",
-     "도구 모음 기본 위치를 상단 정렬로 — 예전에 저장된 좌측 정렬도 한 번 상단 정렬로 되돌림 (설정 › 화면 · 레이아웃에서 다시 바꿀 수 있음)",
-     "개체를 고른 채 화살표 키로 1pt씩(Shift: 10pt) 옮기기 — 여러 개를 골랐으면 함께 움직이고, 손을 떼면 실행 취소 한 번으로 기록",
-     "확대했을 때 문서 화면의 상하 · 좌우 스크롤바를 더 잘 보이게 — 어두운 테마는 밝게, 밝은 테마는 어둡게",
-     "마지막으로 추가한 텍스트의 양식(글꼴 · 크기 · 굵게 · 기울임 · 색 · 배경 · 정렬 · 자간 · 줄간격)을 기억해 다음 텍스트에도 그대로 씀",
-     "PC 프로그램: 업데이트한 뒤에도 나만의 테마 · 배경 이미지가 그대로 남도록 앱 데이터 폴더에도 따로 보관하고, 설치 전에 설정을 먼저 저장",
-     "여러 개를 고른 채 옵션바에서 색 · 채우기 · 굵기 · 불투명도 · 글꼴 · 굵게 · 정렬 등을 바꾸면 고른 개체 모두에 한꺼번에 반영"
-    ],
-    "en": [
-     "Renamed the Z-key tool to ‘Region’",
-     "On mobile, the buttons that open from the + button (Present · Translate · Find · View/Edit · Bookmarks) are bigger so their labels aren’t cut off",
-     "Added a ‘View details’ button to the ‘Updated to version’ notification — shows what changed in that version",
-     "The toolbar now defaults to the top — a previously saved left layout is reset to the top once (you can change it again in Settings › Display · Layout)",
-     "Move selected objects with the arrow keys by 1 pt (Shift: 10 pt) — multiple selected objects move together, and each burst is one Undo step",
-     "The document view’s vertical and horizontal scrollbars stand out more when zoomed — light on dark themes, dark on light themes",
-     "Remembers the style of the last text you added (font · size · bold · italic · color · background · alignment · letter spacing · line spacing) for your next text",
-     "Desktop app: your custom theme and background image now survive updates — they’re also kept in the app data folder, and settings are saved before installing",
-     "With multiple objects selected, changing color · fill · width · opacity · font · bold · alignment and more in the options bar applies to all of them"
-    ],
-    "ja": [
-     "ショートカットZのツール名を「範囲指定」に変更",
-     "モバイルで＋ボタンを押すと出るボタン（発表・翻訳・検索・表示/編集・ブックマーク）を大きくして、文字が切れないように",
-     "「バージョンにアップデートしました」通知に「詳しく見る」ボタンを追加 — そのバージョンの変更内容をすぐに表示",
-     "ツールバーの既定位置を上部に — 以前保存された左側配置も一度だけ上部に戻します（設定 › 画面・レイアウトで変更できます）",
-     "オブジェクトを選んだまま矢印キーで1ptずつ（Shift：10pt）移動 — 複数選択時は一緒に動き、キーを離すと元に戻す1回分として記録",
-     "拡大時の文書画面の上下・左右スクロールバーを見やすく — 暗いテーマでは明るく、明るいテーマでは暗く",
-     "最後に追加したテキストの書式（フォント・サイズ・太字・斜体・色・背景・配置・字間・行間）を記憶して次のテキストにも使用",
-     "PCアプリ：アップデート後もマイテーマ・背景画像がそのまま残るよう、アプリのデータフォルダーにも保存し、インストール前に設定を先に保存",
-     "複数選択したままオプションバーで色・塗りつぶし・太さ・不透明度・フォント・太字・配置などを変えると、選んだオブジェクトすべてに一括反映"
-    ],
-    "zh": [
-     "将快捷键 Z 的工具名称改为“区域选择”",
-     "移动端点 + 按钮弹出的按钮（演示 · 翻译 · 查找 · 查看/编辑 · 书签）变大，文字不再被截断",
-     "“已更新到版本”通知中新增“查看详情”按钮 — 直接显示该版本的更新内容",
-     "工具栏默认位置改为顶部 — 以前保存的左侧布局也会恢复为顶部一次（可在 设置 › 界面 · 布局 中再次更改）",
-     "选中对象后可用方向键每次移动 1pt（Shift：10pt）— 多选时一起移动，松开按键后记录为一次撤销",
-     "放大时文档区域的上下、左右滚动条更醒目 — 深色主题为浅色，浅色主题为深色",
-     "记住最后添加的文字样式（字体 · 字号 · 粗体 · 斜体 · 颜色 · 背景 · 对齐 · 字距 · 行距），下次添加文字时沿用",
-     "桌面程序：更新后自定义主题和背景图片会保留 — 同时保存在应用数据文件夹中，并在安装前先保存设置",
-     "多选后在选项栏中更改颜色 · 填充 · 粗细 · 不透明度 · 字体 · 粗体 · 对齐等，会一次性应用到所有选中对象"
     ]
    }
   }
