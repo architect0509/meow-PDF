@@ -670,6 +670,7 @@ async function adminUserByEmail(email) {
 }
 const signupHits = new Map();   // 한 IP에서 하루 10개까지만 가입할 수 있어요 (무더기 가입 방지)
 setInterval(() => signupHits.clear(), 24 * 60 * 60 * 1000).unref();
+const TERMS_VER = '2026-11-23';   // v1.3.3 이용약관 · 개인정보처리방침 판 (public/terms.html · privacy.html 시행일과 같게)
 app.post('/api/auth/signup', authLimiter(5), async (req, res) => {
   if (needAdmin(res)) return;
   const b = req.body || {}, email = String(b.email || '').trim().toLowerCase(), pw = String(b.password || '');
@@ -678,13 +679,16 @@ app.post('/api/auth/signup', authLimiter(5), async (req, res) => {
   if (!USER_RE.test(un)) return res.status(400).json({ success: false, message: '아이디는 영문 소문자 · 숫자 · 밑줄(_) 4~20자로 입력해 주세요.' });
   if (!EMAIL_RE.test(email) || email.length > 200) return res.status(400).json({ success: false, message: '올바른 이메일 주소를 입력해 주세요.' });
   if (pw.length < 8 || pw.length > 200) return res.status(400).json({ success: false, message: '비밀번호는 8자 이상으로 입력해 주세요.' });
+  /* v1.3.3 만 14세 이상 확인 · 이용약관 · 개인정보 수집 · 이용 동의 (필수) — 동의한 판과 시각을 계정에 남겨요 */
+  const ag = (b.agree && typeof b.agree === 'object') ? b.agree : {};
+  if (!(ag.age14 === true && ag.terms === true && ag.privacy === true)) return res.status(400).json({ success: false, code: 'AGREE_REQUIRED', message: '만 14세 이상 확인과 이용약관 · 개인정보 수집 · 이용 동의가 필요해요. 페이지를 새로 고친 뒤 다시 가입해 주세요.' });
   const ipk = req.ip || 'x', n = (signupHits.get(ipk) || 0) + 1;
   if (n > 10) return res.status(429).json({ success: false, message: '오늘은 이 네트워크에서 더 가입할 수 없어요. 내일 다시 시도해 주세요.' });
   try {
     if (await profileByUsername(un)) return res.status(409).json({ success: false, code: 'USERNAME_TAKEN', message: '이미 사용 중인 아이디예요.' });
     let user;
     try {
-      const r = await axios.post(`${SUPABASE_URL}/auth/v1/admin/users`, { email, password: pw, email_confirm: true, user_metadata: { username: un, nickname: nick } },
+      const r = await axios.post(`${SUPABASE_URL}/auth/v1/admin/users`, { email, password: pw, email_confirm: true, user_metadata: { username: un, nickname: nick, terms_ver: TERMS_VER, agreed_at: new Date().toISOString(), age14: true } },
         { headers: { ...sbAdmin, 'Content-Type': 'application/json' }, timeout: 15000 });
       user = r.data && (r.data.user || r.data);
     } catch (e) {
@@ -762,7 +766,7 @@ app.post('/api/auth/reset-confirm', authLimiter(8), async (req, res) => {
 /* ─────────── 회원탈퇴 ───────────
  * 로그인 토큰으로 본인을 확인하고, 확인 문구("확인했습니다")가 맞으면 계정을 지워요.
  * users_profile · key_redemptions 는 계정에 연결돼 함께 지워지고, 프로필 사진도 지워요.
- * 프리미엄(결제) 계정이어도 탈퇴하면 환불되지 않아요. (결제 기록은 토스페이먼츠에 남아요) */
+ * 탈퇴는 환불과 별개예요 — 남은 기간은 탈퇴 전후와 관계없이 환불정책(7일 이내 전액 · 이후 일할)대로 환불해요. (결제 기록은 토스페이먼츠에 남아요) */
 app.post('/api/account/delete', authLimiter(5), async (req, res) => {
   const user = await authed(req, res, false); if (!user) return;
   if (String((req.body && req.body.confirm) || '').trim() !== '확인했습니다') return res.status(400).json({ success: false, message: '확인 문구를 정확히 입력해 주세요.' });

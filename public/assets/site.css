@@ -146,6 +146,9 @@ footer .refund a{text-decoration:underline}
 @media (max-width:760px){.buysteps{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
 @media (max-width:420px){.buysteps{grid-template-columns:minmax(0,1fr)}}
 .lnkbtn{background:none;border:0;padding:0;font:inherit;color:inherit;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+footer .legal{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;margin-top:22px;font-size:13.5px}
+footer .legal a{color:var(--text);text-decoration:underline;text-underline-offset:3px}
+footer .legal a:hover{color:var(--accent)}
 footer .copy{margin-top:28px;padding-top:20px;border-top:1px solid var(--line);font-size:13px}
 .pdd{width:min(560px,calc(100% - 28px));max-height:86vh;padding:0;border:1px solid var(--line);border-radius:16px;background:var(--bg);color:var(--text)}
 .pdd::backdrop{background:rgba(0,0,0,.5)}

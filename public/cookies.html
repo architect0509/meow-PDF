@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>쿠키정책 — Meow-PDF</title>
+<meta name="description" content="Meow-PDF가 사용하는 쿠키와 브라우저 저장소의 종류, 목적, 선택 · 거부 방법을 안내합니다.">
+<link rel="canonical" href="https://www.meow-pdf.com/cookies">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Meow-PDF">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:url" content="https://www.meow-pdf.com/cookies">
+<meta property="og:title" content="쿠키정책 — Meow-PDF">
+<meta property="og:description" content="Meow-PDF가 사용하는 쿠키와 브라우저 저장소의 종류, 목적, 선택 · 거부 방법을 안내합니다.">
+<meta property="og:image" content="https://www.meow-pdf.com/assets/og-image.png?v=1.0.6">
+<meta property="og:image:alt" content="Meow-PDF — 설치 없이 바로 쓰는 무료 PDF 편집기">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>
+:root{--bg:#0e0e11;--bg2:#15151a;--line:rgba(255,255,255,.12);--text:#f4f4f5;--muted:#a1a1aa;--accent:#dbbe43;--card:rgba(255,255,255,.04)}
+@media (prefers-color-scheme:light){:root{--bg:#fbfaf6;--bg2:#f2f0e8;--line:rgba(0,0,0,.14);--text:#18181b;--muted:#55555e;--accent:#7a6409;--card:rgba(0,0,0,.03)}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Pretendard","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;line-height:1.75;word-break:keep-all}
+a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.skip{position:absolute;left:-9999px;top:8px;padding:8px 14px;border-radius:8px;background:var(--text);color:var(--bg)}
+.skip:focus{left:12px}
+.wrap{width:min(820px,100% - 32px);margin:0 auto}
+header{padding:22px 0}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--muted);text-decoration:none;font-size:14px}
+.back:hover{color:var(--text)}
+h1{margin:28px 0 6px;font-size:clamp(26px,5vw,36px);letter-spacing:-.01em}
+.lead{margin:0 0 8px;color:var(--muted)}
+.meta{margin:0 0 28px;color:var(--muted);font-size:14px}
+nav.toc{border:1px solid var(--line);border-radius:16px;background:var(--card);padding:16px 22px;margin:0 0 32px}
+nav.toc b{display:block;margin-bottom:6px;font-size:14px;color:var(--muted)}
+nav.toc ol{margin:0;padding-left:22px;columns:2;column-gap:28px;font-size:14.5px}
+nav.toc li{break-inside:avoid}
+h2{margin:40px 0 10px;font-size:20px;scroll-margin-top:16px}
+h3{margin:22px 0 6px;font-size:16px}
+p,li{font-size:15.5px}
+ul,ol{padding-left:22px}
+.tbl{overflow-x:auto;margin:12px 0;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:14.5px}
+caption{text-align:left;padding:10px 14px;color:var(--muted);font-size:13.5px}
+th,td{border-top:1px solid var(--line);padding:10px 14px;text-align:left;vertical-align:top}
+thead th{background:var(--bg2);border-top:0;font-weight:700}
+.box{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:14px 18px;margin:14px 0}
+mark.todo{background:#fde68a;color:#18181b;padding:0 4px;border-radius:4px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 22px;border-radius:999px;border:1px solid var(--text);background:var(--text);color:var(--bg);text-decoration:none;font-weight:600;font-size:15px;cursor:pointer;font-family:inherit}
+footer{margin:56px 0 0;padding:24px 0 40px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:13px}
+footer nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 16px;margin-bottom:10px}
+@media (max-width:560px){nav.toc ol{columns:1}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+<header><div class="wrap"><a class="back" href="/">← Meow-PDF 홈으로</a></div></header>
+<main class="wrap" id="main">
+  <h1>쿠키정책</h1>
+  <p class="lead">Meow-PDF가 사용하는 쿠키와 브라우저 저장소의 종류, 목적, 선택 · 거부 방법을 안내합니다.</p>
+  <p class="meta">시행일: 2026년 11월 23일</p>
+  <nav class="toc" aria-label="목차"><b>목차</b><ol><li><a href="#c1">쿠키와 브라우저 저장소란</a></li><li><a href="#c2">사용하는 종류</a></li><li><a href="#c3">선택과 거부 방법</a></li><li><a href="#c4">문의</a></li></ol></nav>
+
+  <h2 id="c1">1. 쿠키와 브라우저 저장소란</h2>
+  <p>쿠키는 웹사이트가 브라우저에 남기는 작은 텍스트 파일이고, 브라우저 저장소(localStorage · IndexedDB)는 설정이나 작업 상태를 이용자 기기에 저장하는 공간입니다. Meow-PDF 서버는 로그인에 쿠키를 쓰지 않으며, 로그인 정보는 이용자 기기의 브라우저 저장소에 보관됩니다.</p>
+
+  <h2 id="c2">2. 사용하는 종류</h2>
+  <div class="tbl"><table><caption>표 1. 쿠키 · 저장소 종류</caption><thead><tr><th scope="col">종류</th><th scope="col">제공자</th><th scope="col">이름(예)</th><th scope="col">목적</th><th scope="col">보관 기간</th><th scope="col">동의 필요</th></tr></thead><tbody><tr><td>필수 (브라우저 저장소)</td><td>Meow-PDF</td><td>meowLang, meowPlan, pdfEditorTheme, meowRecent, meowCookie 등</td><td>언어 · 테마 · 도구 설정, 최근 파일 목록, 로그인 유지, 쿠키 선택 기억, 오프라인 작업</td><td>이용자가 지울 때까지</td><td>아니요 (서비스 제공에 꼭 필요)</td></tr><tr><td>필수 (로그인)</td><td>Supabase</td><td>sb-*-auth-token</td><td>회원 로그인 상태 유지</td><td>로그아웃 · 만료 시까지</td><td>아니요</td></tr><tr><td>광고</td><td>Google AdSense</td><td>__gads, __gpi, IDE, NID 등</td><td>광고 표시 · 빈도 제한 · 부정 클릭 방지. <b>‘모두 허용’을 고른 경우에만</b> 관심 기반 맞춤형 광고에 사용</td><td>최대 13개월 (Google 정책)</td><td>맞춤형 광고는 예</td></tr></tbody></table></div>
+  <p>프리미엄 이용권이 있는 동안에는 광고가 표시되지 않습니다. 이 밖에 글꼴(Google Fonts)과 라이브러리(jsDelivr · cdnjs) 파일을 내려받는 과정에서 해당 제공자에게 IP 주소와 브라우저 정보가 전달될 수 있으나, 이들은 Meow-PDF를 위한 쿠키를 설정하지 않습니다.</p>
+
+  <h2 id="c3">3. 선택과 거부 방법</h2>
+  <ul>
+    <li><b>쿠키 배너</b>: 처음 방문하면 화면 아래에 배너가 나타납니다. <b>‘필수만 허용’</b>을 고르면 맞춤형 광고에 쿠키를 쓰지 않고, <b>‘모두 허용’</b>을 고르면 맞춤형 광고를 표시합니다. 두 버튼은 같은 크기로 제공되며, 어느 쪽을 골라도 서비스 이용에는 차이가 없습니다.</li>
+    <li><b>선택 바꾸기</b>: 각 페이지 아래의 ‘쿠키 설정’이나 아래 버튼을 누르면 언제든지 다시 고를 수 있습니다.</li>
+    <li><b>Google 광고 설정</b>: <a href="https://adssettings.google.com" rel="noopener">adssettings.google.com</a>에서 맞춤 광고를 끌 수 있습니다.</li>
+    <li><b>브라우저 설정</b>: Chrome › 설정 › 개인정보 및 보안 › 서드 파티 쿠키, Edge › 설정 › 쿠키 및 사이트 권한, Safari › 설정 › 개인정보 보호 등에서 쿠키를 차단하거나 지울 수 있습니다. 브라우저 저장소를 지우면 저장된 설정과 로그인 상태가 초기화됩니다.</li>
+  </ul>
+  <p><button type="button" class="btn" data-cookie-settings>쿠키 설정 다시 고르기</button></p>
+
+  <h2 id="c4">4. 문의</h2>
+  <p>쿠키와 개인정보 처리에 관한 문의는 <a href="mailto:contact@meow-pdf.com">contact@meow-pdf.com</a>으로 보내 주세요. 개인정보 처리 전반은 <a href="/privacy">개인정보처리방침</a>을 참고해 주세요.</p>
+
+</main>
+<footer><div class="wrap"><nav aria-label="약관 및 정책"><a href="/terms">이용약관</a><a href="/privacy"><b>개인정보처리방침</b></a><a href="/cookies">쿠키정책</a><a href="/#refund">환불정책</a><a href="/business">사업자 정보</a><a href="#" data-cookie-settings>쿠키 설정</a></nav>© 2026 Thaniya project. All rights reserved.</div></footer>
+<script src="/assets/consent.js?v=1" defer></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Thaniya Intro 데모</title>
+<!-- ① 이 한 줄이면 끝: <head> 맨 위에 둘수록 화면보다 먼저 떠요 -->
+<script src="thaniya-intro.js" data-text="THANIYA PROJECT"></script>
+<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#111;color:#eee;font-family:system-ui,sans-serif}button{padding:12px 20px;border-radius:999px;border:0;font-weight:700;cursor:pointer}</style>
+</head>
+<body>
+<main>
+  <h1>내 프로그램 첫 화면</h1>
+  <p><button type="button" id="again">인트로 다시 보기</button></p>
+</main>
+<script>
+  // ② 원할 때 직접 다시 재생 (Promise 로 끝을 기다릴 수 있어요)
+  document.getElementById('again').onclick = () => ThaniyaIntro.play({ text: 'THANIYA PROJECT' }).then(() => console.log('인트로 끝'));
+  // ③ 끝나는 순간에 할 일 (쿠키 배너 · 공지 창 등)
+  document.addEventListener('thaniyaintroend', () => console.log('thaniyaintroend'));
+</script>
+</body>
+</html>
