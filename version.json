@@ -1,7 +1,7 @@
 {
  "name": "Meow-PDF",
- "version": "v1.3.2",
- "date": "2026.11.20",
+ "version": "v1.3.3",
+ "date": "2026.11.23",
  "site": "https://www.meow-pdf.com/",
  "download": {
   "win": "https://www.meow-pdf.com/download/windows",
@@ -10,6 +10,56 @@
   "page": "https://www.meow-pdf.com/apps"
  },
  "history": [
+  {
+   "v": "v1.3.3",
+   "d": "2026.11.23",
+   "items": {
+    "ko": [
+     "도형을 20가지 넘게 — 삼각형 · 직각 삼각형 · 마름모 · 오각형 · 육각형 · 팔각형 · 평행사변형 · 사다리꼴 · 원통 · 양쪽 화살표 · 갈매기형 화살표 · 육각별 · 하트 · 십자 · 달 · 번개 · 구름 · 말풍선 · 둥근 말풍선 추가",
+     "논리 게이트 도형 추가 — AND · OR · NOT · XOR · NAND · NOR (입출력 선까지 함께 그려져요)",
+     "도형 모양은 옵션바의 ‘모양’ 단추를 누르면 뜨는 고르기 창에서 — 기본 도형 · 화살표 · 기호 · 말풍선 · 논리 게이트 · 자유형으로 나눠 큼직하게",
+     "직선 · 화살표 · 그리기 · 형광펜도 만든 뒤에 골라서 굵기 조절",
+     "선택 도구에서 오른쪽 단추를 누른 채 끌면 화면 이동 (끌지 않으면 평소처럼 우클릭 메뉴)",
+     "실행 취소 · 다시 실행 알림 — 무엇이 되돌려졌는지와 남은 횟수를 작게 표시 (설정 › 편집에서 끄기)",
+     "새 글상자의 기본 가로 길이를 더 짧게 · 워드 양식에서는 워드처럼 입력칸 테두리와 이동 · 삭제 단추를 숨김",
+     "헤더의 현재 페이지 / 전체 페이지를 더 작게 · 시계를 헤더 가운데로 · 오른쪽 작업 패널을 더 넓게 시작",
+     "회원가입할 때 이용약관 · 개인정보 수집 · 이용 동의 단계 추가"
+    ],
+    "en": [
+     "Over 20 shapes — added triangle · right triangle · diamond · pentagon · hexagon · octagon · parallelogram · trapezoid · cylinder · double arrow · chevron · six-point star · heart · cross · moon · lightning · cloud · speech bubble · round speech bubble",
+     "Logic gate shapes — AND · OR · NOT · XOR · NAND · NOR (drawn with input / output leads)",
+     "Pick shapes in a new picker window from the option bar's shape button — large tiles grouped into basic shapes · arrows · symbols · bubbles · logic gates · freeform",
+     "Lines · arrows · drawings · highlights can have their thickness changed after you make them",
+     "With the select tool, drag with the right mouse button to scroll the view (a plain right-click still opens the menu)",
+     "Undo / redo notice — shows what was undone and how many steps are left (turn off in Settings › Editing)",
+     "New text boxes start even narrower · in Word layout the input outline and move · delete buttons are hidden, like Word",
+     "Smaller current / total page box in the header · clock moved to the header center · right work panel starts wider",
+     "Sign-up now includes a Terms of Service · personal information consent step"
+    ],
+    "ja": [
+     "図形が20種類以上に — 三角形 · 直角三角形 · ひし形 · 五角形 · 六角形 · 八角形 · 平行四辺形 · 台形 · 円柱 · 両方向矢印 · 山形矢印 · 六芒星 · ハート · 十字 · 月 · 稲妻 · 雲 · 吹き出し · 丸い吹き出しを追加",
+     "論理ゲートの図形を追加 — AND · OR · NOT · XOR · NAND · NOR(入出力線も一緒に描画)",
+     "図形の形はオプションバーの「形」ボタンから開く選択ウィンドウで — 基本図形 · 矢印 · 記号 · 吹き出し · 論理ゲート · フリーフォームに分けて大きく表示",
+     "直線 · 矢印 · 手描き · 蛍光ペンも作成後に選んで太さを調整",
+     "選択ツールで右ボタンを押したままドラッグすると画面移動(ドラッグしなければ通常の右クリックメニュー)",
+     "元に戻す · やり直しの通知 — 何が戻されたかと残り回数を小さく表示(設定 › 編集でオフ)",
+     "新しいテキストボックスの既定の幅をさらに短く · Wordレイアウトでは Word のように入力枠と移動 · 削除ボタンを非表示",
+     "ヘッダーの現在ページ / 総ページを小さく · 時計をヘッダー中央へ · 右の作業パネルを広めに開始",
+     "会員登録時に利用規約 · 個人情報の収集 · 利用への同意ステップを追加"
+    ],
+    "zh": [
+     "形状增加到 20 多种 — 新增三角形 · 直角三角形 · 菱形 · 五边形 · 六边形 · 八边形 · 平行四边形 · 梯形 · 圆柱 · 双向箭头 · V 形箭头 · 六角星 · 爱心 · 十字 · 月亮 · 闪电 · 云朵 · 对话气泡 · 圆形对话气泡",
+     "新增逻辑门形状 — AND · OR · NOT · XOR · NAND · NOR(连同输入 / 输出线一起绘制)",
+     "形状改为在选项栏的“形状”按钮打开的选择窗口中挑选 — 按基本形状 · 箭头 · 符号 · 气泡 · 逻辑门 · 自由形状分组大图显示",
+     "直线 · 箭头 · 绘图 · 荧光笔在绘制后也可选中调整粗细",
+     "使用选择工具时按住右键拖动即可移动画面(不拖动则照常打开右键菜单)",
+     "撤销 · 重做提示 — 小窗显示撤销了什么以及剩余次数(可在设置 › 编辑中关闭)",
+     "新文本框的默认宽度更短 · Word 版式中像 Word 一样隐藏输入框边框和移动 · 删除按钮",
+     "标题栏的当前页 / 总页数更小 · 时钟移到标题栏中央 · 右侧工作面板默认更宽",
+     "注册时新增服务条款 · 个人信息收集 · 使用同意步骤"
+    ]
+   }
+  },
   {
    "v": "v1.3.2",
    "d": "2026.11.20",
@@ -549,76 +599,6 @@
      "双击正在编辑的文字 (已有文本) 也可以直接添加动画",
      "按住“持续时间 (秒)” · “延迟 (秒)”文字左右拖动即可调整数值 (类似 Unity，Shift: 微调)",
      "修复预览中途中断的问题 — 现在会播放到结束，播放时预览按钮像进度条一样显示进度，单击即可停止"
-    ]
-   }
-  },
-  {
-   "v": "v1.1.9",
-   "d": "2026.11.10",
-   "items": {
-    "ko": [
-     "도형 채우기에 ‘이미지로 채우기’ 추가 — 채우기 옆 이미지 버튼으로 도형 안을 고른 이미지로 꽉 채움 (채우기 색을 고르면 해제)",
-     "Ctrl+X로 고른 이미지 · 개체 잘라내기 — Ctrl+V로 잘라낸 자리에 다시 붙여넣기",
-     "이미지를 고르면 모서리 둥글기 조절 — 옵션바의 ‘모서리’ 또는 위쪽의 노란 점을 끌어 조절",
-     "이미지 편집 창 추가 — 옵션바의 ‘이미지 편집’ 또는 이미지를 두 번 클릭: 색조 · 색온도 · 채도 · 밝기 · 대비 · 하이라이트 · 그림자 · 선명도를 조절해 원래 이미지에 덮어쓰기",
-     "이미지 편집 창에 빠른 보정 14가지 추가 — 지금 이미지로 만든 둥근 정사각형 미리보기를 옆으로 넘기며 고르기 (휠 · 끌기 · 화살표 버튼)",
-     "이미지 편집 창에 원근 보정 자르기 추가 — 네 모서리 점을 비스듬히 찍힌 문서 · 화면의 모서리에 맞추면 반듯한 직사각형으로 펴서 자름",
-     "새 문서 만들기에 ‘워드 양식’ 추가 — 여백(2.54 cm)이 있는 A4에서 바로 입력, 오른쪽 여백에 닿으면 자동 줄바꿈",
-     "워드 양식에서 빈 곳을 누르면 마지막 글의 끝에 이어서 입력, 글상자는 늘 왼쪽 여백부터 오른쪽 여백까지 꽉 찬 너비로 유지",
-     "페이지 패널의 페이지 추가 · 새 페이지 메뉴를 ‘빈 양식’과 ‘워드 양식’으로 분리",
-     "왼쪽 페이지 패널의 너비에 따라 썸네일이 간혹 깜빡이던 문제 해결",
-     "그룹을 누른 뒤 F2를 누르면 그 자리에서 그룹 이름 변경",
-     "글상자 기본 폭을 넓히고 폭을 고정 — 입력하면 상자는 그대로 두고 글자가 그 안에서 움직이며 가운데 · 오른쪽 정렬이 유지됨, 한 번 눌러 고른 뒤 좌우 손잡이로 폭 조절 (글자 크기는 그대로)",
-     "프리미엄 테마 ‘안개 온천’ 추가 — 구름 사이로 비치는 빛 · 바위 온천에서 피어오르는 김 · 흐릿한 야자수 사이로 낮게 흐르는 안개",
-     "무료 테마 ‘도스’ 추가 — 까만 화면 · 파란 창 · 회색 메뉴줄 · 고정폭 글꼴 · 깜빡이는 커서가 있는 옛날 컴퓨터 화면"
-    ],
-    "en": [
-     "‘Fill with image’ added to shape fill — use the image button next to Fill to fill a shape with a picture (choosing a fill color removes it)",
-     "Cut the selected image or object with Ctrl+X — paste it back in the same spot with Ctrl+V",
-     "Adjust corner rounding when an image is selected — use ‘Corners’ in the option bar or drag the yellow dot on top",
-     "Image editor added — ‘Edit image’ in the option bar or double-click an image: adjust hue, temperature, saturation, brightness, contrast, highlights, shadows and sharpness and overwrite the original",
-     "14 quick filters added to the image editor — pick from rounded-square previews made from your image, scrolling sideways (wheel, drag or arrow buttons)",
-     "Perspective crop added to the image editor — match the four corner points to the corners of a document or screen shot at an angle to flatten it into a straight rectangle",
-     "‘Word template’ added to New document — type right away on an A4 page with 2.54 cm margins, with automatic line wrapping at the right margin",
-     "In a Word template, clicking an empty spot continues typing at the end of the last text, and text boxes always keep the full width from the left margin to the right margin",
-     "The page panel’s Add page and New page menus are now split into ‘Blank template’ and ‘Word template’",
-     "Fixed thumbnails sometimes flickering depending on the width of the left page panel",
-     "Click a group and press F2 to rename it in place",
-     "Wider default text boxes with a fixed width — the box stays put while you type and the text moves inside it, keeping center and right alignment; click once to select and drag the left or right handle to change the width (font size stays the same)",
-     "Premium theme ‘Misty Hot Spring’ added — light through the clouds, steam rising from a rocky hot spring and low fog drifting among hazy palm trees",
-     "Free theme ‘DOS’ added — a classic computer screen with a black background, blue windows, a gray menu bar, monospaced type and a blinking cursor"
-    ],
-    "ja": [
-     "図形の塗りつぶしに「画像で塗りつぶし」を追加 — 塗りつぶしの横の画像ボタンで図形の中を選んだ画像で埋める (塗りつぶしの色を選ぶと解除)",
-     "Ctrl+Xで選んだ画像・オブジェクトを切り取り — Ctrl+Vで切り取った位置に貼り付け",
-     "画像を選ぶと角の丸みを調整 — オプションバーの「角」または上の黄色い点をドラッグ",
-     "画像編集ウィンドウを追加 — オプションバーの「画像編集」または画像をダブルクリック: 色相・色温度・彩度・明るさ・コントラスト・ハイライト・シャドウ・シャープネスを調整して元の画像に上書き",
-     "画像編集ウィンドウにクイック補正14種を追加 — 今の画像で作った角の丸い正方形のプレビューを横にスクロールして選ぶ (ホイール・ドラッグ・矢印ボタン)",
-     "画像編集ウィンドウに遠近補正切り抜きを追加 — 4つの角の点を斜めに撮った文書・画面の角に合わせると、まっすぐな長方形に補正して切り抜く",
-     "新規文書に「Word様式」を追加 — 余白(2.54 cm)のあるA4ですぐに入力、右の余白で自動改行",
-     "Word様式で空いた所を押すと最後の文の末尾から続けて入力、テキストボックスは常に左の余白から右の余白までの幅いっぱいに",
-     "ページパネルのページ追加・新しいページメニューを「空白の様式」と「Word様式」に分割",
-     "左のページパネルの幅によってサムネイルがときどきちらつく問題を解決",
-     "グループを押してからF2を押すと、その場でグループ名を変更",
-     "テキストボックスの既定の幅を広げて固定 — 入力してもボックスはそのままで文字が中で動き、中央・右揃えが保たれる。一度押して選んだ後、左右のハンドルで幅を調整 (文字サイズはそのまま)",
-     "プレミアムテーマ「霧の温泉」を追加 — 雲間から差す光・岩の温泉から立ちのぼる湯気・かすんだヤシの木の間を低く流れる霧",
-     "無料テーマ「DOS」を追加 — 黒い画面・青いウィンドウ・灰色のメニューバー・等幅フォント・点滅するカーソルの昔のコンピューター画面"
-    ],
-    "zh": [
-     "形状填充新增“用图片填充” — 用填充旁的图片按钮以所选图片填满形状（选择填充颜色即取消）",
-     "可用 Ctrl+X 剪切所选图片 · 对象 — 用 Ctrl+V 粘贴回原位置",
-     "选中图片时可调整圆角 — 使用选项栏的“圆角”或拖动上方的黄色圆点",
-     "新增图片编辑窗口 — 选项栏的“编辑图片”或双击图片：调整色相 · 色温 · 饱和度 · 亮度 · 对比度 · 高光 · 阴影 · 锐度并覆盖原图",
-     "图片编辑窗口新增 14 种快速滤镜 — 用当前图片生成的圆角方形预览横向滑动选择（滚轮 · 拖动 · 箭头按钮）",
-     "图片编辑窗口新增透视校正裁剪 — 将四个角点对准斜拍的文档 · 屏幕的四角，即可拉正为规整的矩形并裁剪",
-     "新建文档新增“Word 模板” — 在带边距（2.54 cm）的 A4 上直接输入，到右边距自动换行",
-     "在 Word 模板中点击空白处会接着最后一段文字的末尾继续输入，文本框始终保持从左边距到右边距的全宽",
-     "页面面板的添加页面 · 新建页面菜单拆分为“空白模板”和“Word 模板”",
-     "修复了左侧页面面板在某些宽度下缩略图偶尔闪烁的问题",
-     "点击分组后按 F2 即可就地重命名分组",
-     "文本框默认宽度加宽并固定 — 输入时框不动、文字在框内移动，居中 · 右对齐保持不变；单击选中后拖动左右手柄调整宽度（字号不变）",
-     "新增高级主题“雾之温泉” — 云间透下的光 · 岩石温泉升起的热气 · 在朦胧椰树间低低飘动的雾",
-     "新增免费主题“DOS” — 黑色屏幕 · 蓝色窗口 · 灰色菜单栏 · 等宽字体 · 闪烁光标的老式电脑画面"
     ]
    }
   }
