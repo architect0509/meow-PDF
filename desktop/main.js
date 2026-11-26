@@ -57,6 +57,18 @@ ipcMain.handle('meow:show-in-folder', async (e, p) => {
   try { if (!fs.existsSync(p)) { const d = path.dirname(p); if (fs.existsSync(d)) { await shell.openPath(d); return 'dir'; } return false; } shell.showItemInFolder(p); return true; } catch (er) { return false; }
 });
 ipcMain.handle('meow:paths-exist', async (e, list) => (Array.isArray(list) ? list.slice(0, 200) : []).map(p => { try { return fs.statSync(String(p)).isFile(); } catch (er) { return false; } }));
+/* v1.3.4 최근에 연 파일: 파일 이름 바꾸기 — 같은 폴더 안에서 이름만 바꿔요 (이미 같은 이름이 있으면 바꾸지 않아요) */
+ipcMain.handle('meow:rename-path', async (e, p, name) => {
+  p = String(p || ''); name = String(name || '').trim();
+  if (!p || !path.isAbsolute(p) || !OPEN_EXT.test(p)) return { ok: false, err: 'bad' };
+  if (!name || /[\\/:*?"<>|\x00-\x1f]/.test(name) || name === '.' || name === '..' || name.length > 200) return { ok: false, err: 'name' };
+  if (!OPEN_EXT.test(name)) return { ok: false, err: 'ext' };
+  const to = path.join(path.dirname(p), name);
+  if (to === p) return { ok: true, path: to };
+  try { if (!(await fs.promises.stat(p)).isFile()) return { ok: false, err: 'missing' }; } catch (er) { return { ok: false, err: 'missing' }; }
+  try { await fs.promises.access(to); if (to.toLowerCase() !== p.toLowerCase()) return { ok: false, err: 'exists' }; } catch (er) { /* 없으면 좋아요 */ }
+  try { await fs.promises.rename(p, to); return { ok: true, path: to }; } catch (er) { return { ok: false, err: 'fail' }; }
+});
 
 /* ── v1.0.2 기본 연결 프로그램: 지금 PDF를 Meow-PDF가 여는지 확인하고, 설정 화면을 열어요 ── */
 const run = (cmd, args, ms) => new Promise(res => { try { execFile(cmd, args, { timeout: ms || 4000, windowsHide: true }, (err, out) => res(err ? '' : String(out || ''))); } catch (e) { res(''); } });
@@ -154,7 +166,7 @@ function makeWindow(url) {
   const st = loadBounds();
   const win = new BrowserWindow({
     width: (st && st.width) || 1400, height: (st && st.height) || 900, x: st ? st.x : undefined, y: st ? st.y : undefined,
-    minWidth: 760, minHeight: 520, backgroundColor: '#0e0e11', title: 'Meow-PDF', show: false, autoHideMenuBar: true,
+    minWidth: 360, minHeight: 420, backgroundColor: '#0e0e11', title: 'Meow-PDF', show: false, autoHideMenuBar: true,
     icon: fs.existsSync(ICON) ? nativeImage.createFromPath(ICON) : undefined,
     webPreferences: { preload: path.join(__dirname, 'preload.js'), contextIsolation: true, nodeIntegration: false, sandbox: true, spellcheck: false }
   });

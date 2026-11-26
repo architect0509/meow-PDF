@@ -22,7 +22,8 @@ contextBridge.exposeInMainWorld('meowDesktop', {
     pathOf: f => { try { return (webUtils && webUtils.getPathForFile && webUtils.getPathForFile(f)) || ''; } catch (e) { return ''; } },
     read: p => ipcRenderer.invoke('meow:read-path', String(p || '')),
     reveal: p => ipcRenderer.invoke('meow:show-in-folder', String(p || '')),
-    exists: list => ipcRenderer.invoke('meow:paths-exist', Array.isArray(list) ? list.map(String) : [])
+    exists: list => ipcRenderer.invoke('meow:paths-exist', Array.isArray(list) ? list.map(String) : []),
+    rename: (p, name) => ipcRenderer.invoke('meow:rename-path', String(p || ''), String(name || ''))   // v1.3.4
   },
   prefs: {   // v1.1.6 화면 설정(나만의 테마 · 배경 이미지) 보관
     get: () => ipcRenderer.invoke('meow:prefs-get'),
